@@ -1,0 +1,94 @@
+:root {
+  --brand:        #741515;
+  --brand-dark:   #5a0f0f;
+  --cream:        #FAF7F0;
+  --cream-dark:   #F0EBE0;
+  --cream-border: #E8E0D0;
+  --text:         #1A1209;
+  --text-muted:   #6B5E4E;
+  --green:        #2D7A3A;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-serif { font-family: 'Playfair Display', Georgia, serif !important; }
+
+.btn-brand {
+  background: var(--brand);
+  color: white;
+  font-weight: 500;
+  padding: 0.75rem 1.75rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 0.9375rem;
+}
+.btn-brand:hover { background: var(--brand-dark); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--brand);
+  font-weight: 500;
+  padding: 0.75rem 1.75rem;
+  border-radius: 8px;
+  border: 2px solid var(--brand);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 0.9375rem;
+}
+.btn-outline:hover { background: var(--brand); color: white; }
+
+.card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1.5px solid var(--cream-border);
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  background: white;
+  color: var(--text);
+  transition: border-color 0.2s;
+  outline: none;
+  font-family: inherit;
+}
+.input:focus { border-color: var(--brand); }
+.input::placeholder { color: #B0A090; }
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--cream-border);
+  background: white;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+  user-select: none;
+}
+.chip:hover { border-color: var(--brand); color: var(--brand); }
+.chip.active { border-color: var(--brand); background: var(--brand); color: white; }
