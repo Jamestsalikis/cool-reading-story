@@ -118,30 +118,45 @@ async function generateImage(prompt: string): Promise<string | null> {
       }
     );
 
+    console.log('Replicate HTTP status:', createRes.status);
     const prediction = await createRes.json();
+    console.log('Replicate response:', JSON.stringify(prediction).slice(0, 300));
 
     // If Prefer: wait returned a completed result
     if (prediction.status === 'succeeded' && prediction.output?.[0]) {
-      console.log('Image generated (immediate):', prediction.output[0].slice(0, 60));
+      console.log('Image generated (immediate)');
       return prediction.output[0];
+    }
+
+    if (prediction.error) {
+      console.error('Replicate error:', prediction.error);
+      return null;
     }
 
     console.log('Prediction status:', prediction.status, '— polling...');
 
     // Otherwise poll
     const pollUrl = prediction.urls?.get;
-    if (!pollUrl) return null;
+    if (!pollUrl) {
+      console.error('No poll URL in response');
+      return null;
+    }
 
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 25; i++) {
       await new Promise((r) => setTimeout(r, 1500));
       const pollRes = await fetch(pollUrl, {
         headers: { Authorization: `Bearer ${REPLICATE_API_TOKEN}` },
       });
       const polled = await pollRes.json();
+      console.log(`Poll ${i + 1}: status=${polled.status}`);
       if (polled.status === 'succeeded' && polled.output?.[0]) {
+        console.log('Image generated after polling');
         return polled.output[0];
       }
-      if (polled.status === 'failed') break;
+      if (polled.status === 'failed') {
+        console.error('Prediction failed:', polled.error);
+        break;
+      }
     }
   } catch (err) {
     console.error('Image generation error:', err);
