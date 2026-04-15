@@ -6,13 +6,7 @@ const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
 });
 
-// Generation limits per subscription tier
-const TIER_LIMITS: Record<string, number> = {
-  free: 1,       // 1 story ever (trial)
-  trialing: 1,   // 1 story during trial
-  digital: 4,    // 4/month
-  heirloom: 999, // unlimited
-};
+const REPLICATE_API_TOKEN = process.env.REPLICATE_API_TOKEN;
 
 function buildPrompt(child: {
   name: string;
@@ -50,7 +44,7 @@ function buildPrompt(child: {
     ? `siblings named ${appearance.siblingNames}`
     : null;
 
-  return `You are a master children's story writer creating a personalised bedtime story.
+  return `You are a master children's story writer creating a personalised bedtime picture book.
 
 Child profile:
 - Name: ${name}
@@ -60,7 +54,7 @@ Child profile:
 ${appearanceDesc ? `- Appearance: ${appearanceDesc}` : ''}
 ${petDesc ? `- Pet: ${petDesc}` : ''}
 ${siblingDesc ? `- Siblings: ${siblingDesc}` : ''}
-- Reading level: ${reading_level} → target ${wordTarget} words
+- Reading level: ${reading_level} → target ${wordTarget} words total
 
 Requirements:
 1. ${name} is the hero — describe ${pronouns.them} with their actual appearance
@@ -70,15 +64,79 @@ Requirements:
 5. End on a cosy, bedtime-appropriate note — winding down, not exciting
 6. Use language appropriate for age ${age}: ${reading_level === 'beginner' ? 'short sentences, simple words, lots of repetition' : reading_level === 'intermediate' ? 'flowing sentences, rich descriptions, some new vocabulary' : 'complex narrative, vivid imagery, sophisticated vocabulary'}
 7. Make it feel uniquely written FOR ${name} — not a generic story with a name swapped in
+8. Split the story into exactly 5 pages. Each page should have 2-4 paragraphs of text.
+9. For each page, write a short image prompt (1-2 sentences) describing a scene to illustrate it — children's picture book watercolor style, warm and cosy, featuring ${name}${appearanceDesc ? ` with ${appearanceDesc}` : ''}.
 
 Return ONLY valid JSON, no markdown, no explanation:
 {
   "title": "A creative, specific story title (not generic)",
-  "content": "The full story — paragraphs separated by \\n\\n",
   "moral": "The gentle lesson in one sentence",
   "theme_emoji": "One emoji representing the story theme",
-  "word_count": estimated_word_count_as_number
+  "word_count": estimated_total_word_count_as_number,
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "Page text here — 2-4 paragraphs",
+      "image_prompt": "Children's watercolor picture book illustration, [specific scene description], warm soft colors, cosy and magical, no text"
+    }
+  ]
 }`;
+}
+
+async function generateImage(prompt: string): Promise<string | null> {
+  if (!REPLICATE_API_TOKEN) return null;
+
+  try {
+    // Create prediction
+    const createRes = await fetch(
+      'https://api.replicate.com/v1/models/black-forest-labs/flux-schnell/predictions',
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${REPLICATE_API_TOKEN}`,
+          'Content-Type': 'application/json',
+          Prefer: 'wait=30',
+        },
+        body: JSON.stringify({
+          input: {
+            prompt,
+            go_fast: true,
+            num_outputs: 1,
+            aspect_ratio: '4:3',
+            output_format: 'webp',
+            output_quality: 80,
+          },
+        }),
+      }
+    );
+
+    const prediction = await createRes.json();
+
+    // If Prefer: wait returned a completed result
+    if (prediction.status === 'succeeded' && prediction.output?.[0]) {
+      return prediction.output[0];
+    }
+
+    // Otherwise poll
+    const pollUrl = prediction.urls?.get;
+    if (!pollUrl) return null;
+
+    for (let i = 0; i < 20; i++) {
+      await new Promise((r) => setTimeout(r, 1500));
+      const pollRes = await fetch(pollUrl, {
+        headers: { Authorization: `Bearer ${REPLICATE_API_TOKEN}` },
+      });
+      const polled = await pollRes.json();
+      if (polled.status === 'succeeded' && polled.output?.[0]) {
+        return polled.output[0];
+      }
+      if (polled.status === 'failed') break;
+    }
+  } catch (err) {
+    console.error('Image generation error:', err);
+  }
+
+  return null;
 }
 
 export async function POST(request: Request) {
@@ -113,7 +171,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Child not found' }, { status: 404 });
     }
 
-    // Generate story via Claude Sonnet (cost-efficient, high quality)
+    // Generate story + page breakdown via Claude
     const prompt = buildPrompt({
       name: child.name,
       age: child.age,
@@ -125,7 +183,7 @@ export async function POST(request: Request) {
 
     const message = await anthropic.messages.create({
       model: 'claude-sonnet-4-6',
-      max_tokens: 2048,
+      max_tokens: 4096,
       messages: [{ role: 'user', content: prompt }],
     });
 
@@ -134,10 +192,10 @@ export async function POST(request: Request) {
     // Parse JSON response
     let storyData: {
       title: string;
-      content: string;
       moral: string;
       theme_emoji: string;
       word_count: number;
+      pages: { page_number: number; content: string; image_prompt: string }[];
     };
 
     try {
@@ -147,6 +205,17 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Failed to parse story from AI' }, { status: 500 });
     }
 
+    // Generate images in parallel for all pages
+    const pagesWithImages = await Promise.all(
+      storyData.pages.map(async (page) => {
+        const imageUrl = await generateImage(page.image_prompt);
+        return { ...page, image_url: imageUrl };
+      })
+    );
+
+    // Combine content for full story text
+    const fullContent = pagesWithImages.map((p) => p.content).join('\n\n');
+
     // Save story to DB
     const { data: story, error: storyError } = await supabase
       .from('stories')
@@ -154,16 +223,18 @@ export async function POST(request: Request) {
         child_id,
         parent_id: user.id,
         title: storyData.title,
-        content: storyData.content,
+        content: fullContent,
         moral: storyData.moral,
         theme: storyData.theme_emoji,
         word_count: storyData.word_count,
         reading_time_minutes: Math.ceil((storyData.word_count || 500) / 150),
+        pages: pagesWithImages,
       })
       .select()
       .single();
 
     if (storyError) {
+      console.error('Story save error:', storyError);
       return NextResponse.json({ error: 'Failed to save story' }, { status: 500 });
     }
 
