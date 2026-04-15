@@ -48,6 +48,7 @@ export default function StoryPage() {
   const [currentPage, setCurrentPage] = useState(0);
   const [direction, setDirection] = useState<'forward' | 'back'>('forward');
   const [animKey, setAnimKey] = useState(0);
+  const [generatingImages, setGeneratingImages] = useState(false);
   const supabase = createClient();
 
   useEffect(() => {
@@ -61,6 +62,25 @@ export default function StoryPage() {
       if (data) {
         setStory(data);
         setFavourite(data.is_favourite);
+
+        // If pages exist but have no images, trigger image generation
+        const pages = data.pages || [];
+        const needsImages = pages.length > 0 && pages.some((p: Page) => p.image_prompt && !p.image_url);
+        if (needsImages) {
+          setGeneratingImages(true);
+          fetch('/api/generate-images', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ story_id: data.id }),
+          })
+            .then((res) => res.json())
+            .then((result) => {
+              if (result.pages) {
+                setStory((prev) => prev ? { ...prev, pages: result.pages } : prev);
+              }
+            })
+            .finally(() => setGeneratingImages(false));
+        }
       }
       setLoading(false);
     }
@@ -171,11 +191,18 @@ export default function StoryPage() {
               width: '100%',
               height: '100%',
               display: 'flex',
+              flexDirection: 'column',
               alignItems: 'center',
               justifyContent: 'center',
               background: 'linear-gradient(135deg, #1a3a3a 0%, #2d6a5c 100%)',
+              gap: '16px',
             }}>
-              <span style={{ fontSize: '5rem' }}>{story.theme || '📖'}</span>
+              <span style={{ fontSize: '4rem' }}>{story.theme || '📖'}</span>
+              {generatingImages && (
+                <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.8rem', margin: 0 }}>
+                  Painting illustration…
+                </p>
+              )}
             </div>
           )}
 

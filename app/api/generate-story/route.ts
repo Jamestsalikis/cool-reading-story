@@ -231,13 +231,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Failed to parse story from AI' }, { status: 500 });
     }
 
-    // Generate images in parallel for all pages
-    const pagesWithImages = await Promise.all(
-      storyData.pages.map(async (page) => {
-        const imageUrl = await generateImage(page.image_prompt);
-        return { ...page, image_url: imageUrl };
-      })
-    );
+    // Save story immediately without images — images generated separately via /api/generate-images
+    const pagesWithImages = storyData.pages.map((page) => ({ ...page, image_url: null }));
 
     // Combine content for full story text
     const fullContent = pagesWithImages.map((p) => p.content).join('\n\n');
