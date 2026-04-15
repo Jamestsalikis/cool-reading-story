@@ -98,48 +98,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'child_id required' }, { status: 400 });
     }
 
-    // Fetch user profile to check tier + usage
-    const { data: profile } = await supabase
-      .from('profiles')
-      .select('subscription_tier, subscription_status, stories_generated_this_month')
-      .eq('id', user.id)
-      .single();
-
-    if (!profile) {
-      return NextResponse.json({ error: 'Profile not found' }, { status: 404 });
-    }
-
-    // Determine effective tier
-    const tier = profile.subscription_tier || 'free';
-    const status = profile.subscription_status || 'trialing';
-    const effectiveTier = status === 'active' ? tier : 'trialing';
-    const limit = TIER_LIMITS[effectiveTier] ?? 1;
-    const usedThisMonth = profile.stories_generated_this_month || 0;
-
-    // For free/trialing: check total stories ever (not just this month)
-    if (effectiveTier === 'free' || effectiveTier === 'trialing') {
-      const { count } = await supabase
-        .from('stories')
-        .select('*', { count: 'exact', head: true })
-        .eq('parent_id', user.id);
-
-      if ((count || 0) >= limit) {
-        return NextResponse.json({
-          error: 'limit_reached',
-          message: `Your free trial includes ${limit} story. Upgrade to Digital or Heirloom to generate more.`,
-          upgrade_required: true,
-        }, { status: 403 });
-      }
-    } else {
-      // For paid tiers: check monthly usage
-      if (usedThisMonth >= limit) {
-        return NextResponse.json({
-          error: 'limit_reached',
-          message: `You've used all ${limit} stories for this month. Your limit resets on your next billing date.`,
-          upgrade_required: tier === 'digital',
-        }, { status: 403 });
-      }
-    }
+    // TODO: Re-enable generation limits before go-live
+    // Limits temporarily disabled during development/testing
 
     // Fetch child profile
     const { data: child, error: childError } = await supabase
@@ -206,12 +166,6 @@ export async function POST(request: Request) {
     if (storyError) {
       return NextResponse.json({ error: 'Failed to save story' }, { status: 500 });
     }
-
-    // Increment monthly usage counter
-    await supabase
-      .from('profiles')
-      .update({ stories_generated_this_month: usedThisMonth + 1 })
-      .eq('id', user.id);
 
     return NextResponse.json({ story });
   } catch (error) {
