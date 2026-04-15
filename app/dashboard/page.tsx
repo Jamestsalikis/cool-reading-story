@@ -187,7 +187,7 @@ export default function DashboardPage() {
               textAlign: 'center',
             }}
           >
-            This usually takes about 10 seconds
+            This usually takes about 30&ndash;45 seconds
           </p>
         </div>
       )}
