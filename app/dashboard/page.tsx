@@ -1,12 +1,37 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
-import { BookOpen, Users, Settings, CreditCard, ArrowRight, Download } from 'lucide-react';
+import { BookOpen, Users, Settings, CreditCard, Download, Plus, RefreshCw } from 'lucide-react';
+import { createClient } from '@/lib/supabase/client';
+
+type Child = {
+  id: string;
+  name: string;
+  age: number;
+  interests: string[];
+};
+
+type Story = {
+  id: string;
+  title: string;
+  theme: string;
+  created_at: string;
+  word_count: number;
+  is_favourite: boolean;
+  children: { name: string; age: number };
+};
 
 export default function DashboardPage() {
   const [activeNav, setActiveNav] = useState('stories');
   const [isMobile, setIsMobile] = useState(false);
+  const [children, setChildren] = useState<Child[]>([]);
+  const [stories, setStories] = useState<Story[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [generating, setGenerating] = useState<string | null>(null); // child_id being generated for
+  const [generateError, setGenerateError] = useState('');
+  const [userName, setUserName] = useState('');
+  const supabase = createClient();
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
@@ -15,6 +40,52 @@ export default function DashboardPage() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  const fetchData = useCallback(async () => {
+    setLoading(true);
+    const { data: { user } } = await supabase.auth.getUser();
+    if (user) {
+      setUserName(user.user_metadata?.full_name?.split(' ')[0] || user.email?.split('@')[0] || 'there');
+    }
+
+    const { data: childrenData } = await supabase
+      .from('children')
+      .select('*')
+      .order('created_at', { ascending: true });
+
+    const { data: storiesData } = await supabase
+      .from('stories')
+      .select('*, children(name, age)')
+      .order('created_at', { ascending: false });
+
+    setChildren(childrenData || []);
+    setStories(storiesData || []);
+    setLoading(false);
+  }, [supabase]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  const handleGenerateStory = async (childId: string) => {
+    setGenerating(childId);
+    setGenerateError('');
+    try {
+      const res = await fetch('/api/generate-story', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ child_id: childId }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        await fetchData();
+      } else {
+        setGenerateError(data.message || 'Failed to generate story. Please try again.');
+      }
+    } finally {
+      setGenerating(null);
+    }
+  };
+
   const navItems = [
     { id: 'stories', label: 'Stories', icon: BookOpen },
     { id: 'children', label: 'Children', icon: Users },
@@ -22,41 +93,12 @@ export default function DashboardPage() {
     { id: 'subscription', label: 'Subscription', icon: CreditCard },
   ];
 
-  const storyCards = [
-    {
-      id: 1,
-      title: 'The Secret of the Whispering Woods',
-      theme: '🌲',
-      gradient: 'linear-gradient(135deg, #1a3a3a 0%, #2d6a5c 100%)',
-      child: 'Leo',
-      month: 'March 2026',
-    },
-    {
-      id: 2,
-      title: "Leo's Journey to the Glass Ocean",
-      theme: '🐋',
-      gradient: 'linear-gradient(135deg, #0a2540 0%, #1a5a7a 100%)',
-      child: 'Leo',
-      month: 'March 2026',
-    },
-    {
-      id: 3,
-      title: 'The Clockwork Dragon',
-      theme: '🐉',
-      gradient: 'linear-gradient(135deg, #2a1a3a 0%, #5a3a6a 100%)',
-      child: 'Leo',
-      month: 'February 2026',
-      locked: true,
-    },
-    {
-      id: 4,
-      title: 'Coming next',
-      theme: '✨',
-      gradient: 'linear-gradient(135deg, #5a4a3a 0%, #8a6a5a 100%)',
-      child: 'Leo',
-      month: 'Your next chapter begins soon...',
-      placeholder: true,
-    },
+  const gradients = [
+    'linear-gradient(135deg, #1a3a3a 0%, #2d6a5c 100%)',
+    'linear-gradient(135deg, #0a2540 0%, #1a5a7a 100%)',
+    'linear-gradient(135deg, #2a1a3a 0%, #5a3a6a 100%)',
+    'linear-gradient(135deg, #3a1a1a 0%, #741515 100%)',
+    'linear-gradient(135deg, #1a2a3a 0%, #2a5a7a 100%)',
   ];
 
   return (
@@ -122,175 +164,189 @@ export default function DashboardPage() {
           marginBottom: isMobile ? '80px' : 0,
         }}
       >
-        {/* Greeting Section */}
-        <div style={{ marginBottom: '48px' }}>
-          <h2 className="font-serif" style={{ fontSize: '1.75rem', marginBottom: '12px', color: '#1A1209' }}>
-            Welcome back, Sarah
+        {/* Greeting */}
+        <div style={{ marginBottom: '40px' }}>
+          <h2 className="font-serif" style={{ fontSize: '1.75rem', marginBottom: '8px', color: '#1A1209' }}>
+            Welcome back{userName ? `, ${userName}` : ''}
           </h2>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px', maxWidth: '600px' }}>
-            <div style={{ flex: 1 }}>
-              <p style={{ color: '#6B5E4E', marginBottom: '8px', fontSize: '0.95rem' }}>
-                Next story for Leo: 14 days away
-              </p>
-              <div
-                style={{
-                  height: '6px',
-                  backgroundColor: '#E8E0D0',
-                  borderRadius: '3px',
-                  overflow: 'hidden',
-                }}
-              >
-                <div
-                  style={{
-                    height: '100%',
-                    width: '65%',
-                    backgroundColor: '#D4A574',
-                    borderRadius: '3px',
-                  }}
-                />
-              </div>
-            </div>
-          </div>
+          <p style={{ color: '#6B5E4E', fontSize: '0.95rem' }}>
+            {stories.length > 0
+              ? `${stories.length} ${stories.length === 1 ? 'story' : 'stories'} in your library`
+              : 'Your story library is ready — generate your first story below'}
+          </p>
         </div>
 
-        {/* Stories Library */}
+        {/* Stories Tab */}
         {activeNav === 'stories' && (
           <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '24px' }}>
-              <h3 className="font-serif" style={{ fontSize: '1.5rem', color: '#1A1209' }}>
-                Leo's Story Library
-              </h3>
-              <Link
-                href="#"
-                style={{
-                  color: '#741515',
-                  textDecoration: 'none',
-                  fontSize: '0.95rem',
-                  fontWeight: '500',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                }}
-              >
-                View all stories <ArrowRight size={16} />
-              </Link>
-            </div>
+            {loading ? (
+              <div style={{ textAlign: 'center', padding: '60px', color: '#6B5E4E' }}>
+                Loading your stories...
+              </div>
+            ) : children.length === 0 ? (
+              /* No children yet */
+              <div className="card" style={{ padding: '48px', textAlign: 'center' }}>
+                <div style={{ fontSize: '3rem', marginBottom: '16px' }}>📖</div>
+                <h3 className="font-serif" style={{ fontSize: '1.5rem', marginBottom: '12px', color: '#1A1209' }}>
+                  Add your first child
+                </h3>
+                <p style={{ color: '#6B5E4E', marginBottom: '24px' }}>
+                  Complete the onboarding to create a child profile and generate their first personalised story.
+                </p>
+                <Link href="/onboarding" className="btn-brand" style={{ display: 'inline-flex' }}>
+                  Get started
+                </Link>
+              </div>
+            ) : (
+              <>
+                {/* Generation error */}
+                {generateError && (
+                  <div style={{ background: '#FEE2E2', border: '1px solid #FECACA', borderRadius: '8px', padding: '12px 16px', marginBottom: '20px', fontSize: '0.875rem', color: '#991B1B' }}>
+                    {generateError}
+                  </div>
+                )}
 
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)',
-                gap: '24px',
-                marginBottom: '40px',
-              }}
-            >
-              {storyCards.map((card) => (
-                <div key={card.id} className="card" style={{ overflow: 'hidden' }}>
+                {/* Generate story buttons per child */}
+                <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginBottom: '32px' }}>
+                  {children.map((child) => (
+                    <button
+                      key={child.id}
+                      onClick={() => handleGenerateStory(child.id)}
+                      disabled={generating === child.id}
+                      className="btn-brand"
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        opacity: generating === child.id ? 0.7 : 1,
+                        cursor: generating === child.id ? 'not-allowed' : 'pointer',
+                      }}
+                    >
+                      {generating === child.id ? (
+                        <><RefreshCw size={16} /> Generating for {child.name}...</>
+                      ) : (
+                        <><Plus size={16} /> New story for {child.name}</>
+                      )}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Story grid */}
+                {stories.length === 0 ? (
+                  <div className="card" style={{ padding: '48px', textAlign: 'center' }}>
+                    <div style={{ fontSize: '3rem', marginBottom: '16px' }}>✨</div>
+                    <h3 className="font-serif" style={{ fontSize: '1.5rem', marginBottom: '12px', color: '#1A1209' }}>
+                      Your first story is being written
+                    </h3>
+                    <p style={{ color: '#6B5E4E', marginBottom: '24px' }}>
+                      Claude is crafting a personalised story right now. Refresh in a moment.
+                    </p>
+                    <button onClick={fetchData} className="btn-outline" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                      <RefreshCw size={16} /> Check for stories
+                    </button>
+                  </div>
+                ) : (
                   <div
                     style={{
-                      background: card.gradient,
-                      height: '200px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      position: 'relative',
+                      display: 'grid',
+                      gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)',
+                      gap: '24px',
                     }}
                   >
-                    <div style={{ textAlign: 'center' }}>
-                      <div style={{ fontSize: '4rem', marginBottom: '16px' }}>{card.theme}</div>
-                      {!card.placeholder && !card.locked && (
-                        <h4 className="font-serif" style={{ color: 'white', fontSize: '1.1rem', maxWidth: '80%', margin: '0 auto' }}>
-                          {card.title}
-                        </h4>
-                      )}
-                      {card.locked && (
-                        <div style={{ color: 'white', fontSize: '0.9rem', fontWeight: '500' }}>Coming soon</div>
-                      )}
-                      {card.placeholder && (
-                        <div style={{ color: 'white', fontSize: '1rem', fontWeight: '500' }}>Coming next...</div>
-                      )}
-                    </div>
-                  </div>
-                  <div style={{ padding: '20px' }}>
-                    <h4 className="font-serif" style={{ fontSize: '1.05rem', marginBottom: '4px', color: '#1A1209' }}>
-                      {card.title}
-                    </h4>
-                    <p style={{ color: '#6B5E4E', fontSize: '0.85rem', marginBottom: '16px' }}>
-                      {card.child} • {card.month}
-                    </p>
-                    {!card.locked && !card.placeholder && (
-                      <div style={{ display: 'flex', gap: '8px' }}>
-                        <Link href={`/stories/${card.id}`} className="btn-outline" style={{ flex: 1, textAlign: 'center' }}>
-                          Preview
-                        </Link>
-                        <button
+                    {stories.map((story, index) => (
+                      <div key={story.id} className="card" style={{ overflow: 'hidden' }}>
+                        <div
                           style={{
-                            padding: '0.75rem',
-                            border: '2px solid #741515',
-                            borderRadius: '8px',
-                            backgroundColor: 'transparent',
-                            cursor: 'pointer',
+                            background: gradients[index % gradients.length],
+                            height: '180px',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
                           }}
                         >
-                          <Download size={18} color="#741515" />
-                        </button>
+                          <div style={{ textAlign: 'center' }}>
+                            <div style={{ fontSize: '3.5rem', marginBottom: '12px' }}>{story.theme || '📖'}</div>
+                            <h4 className="font-serif" style={{ color: 'white', fontSize: '1rem', maxWidth: '80%', margin: '0 auto', lineHeight: 1.3 }}>
+                              {story.title}
+                            </h4>
+                          </div>
+                        </div>
+                        <div style={{ padding: '20px' }}>
+                          <h4 className="font-serif" style={{ fontSize: '1rem', marginBottom: '4px', color: '#1A1209' }}>
+                            {story.title}
+                          </h4>
+                          <p style={{ color: '#6B5E4E', fontSize: '0.85rem', marginBottom: '16px' }}>
+                            {story.children?.name} • {story.word_count ? `${story.word_count} words` : ''} • {new Date(story.created_at).toLocaleDateString('en-AU', { month: 'short', year: 'numeric' })}
+                          </p>
+                          <div style={{ display: 'flex', gap: '8px' }}>
+                            <Link href={`/stories/${story.id}`} className="btn-outline" style={{ flex: 1, textAlign: 'center' }}>
+                              Read
+                            </Link>
+                            <button
+                              style={{
+                                padding: '0.75rem',
+                                border: '2px solid #741515',
+                                borderRadius: '8px',
+                                backgroundColor: 'transparent',
+                                cursor: 'pointer',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                              }}
+                            >
+                              <Download size={18} color="#741515" />
+                            </button>
+                          </div>
+                        </div>
                       </div>
-                    )}
-                    {(card.locked || card.placeholder) && (
-                      <div style={{ padding: '0.75rem', textAlign: 'center', color: '#6B5E4E', fontSize: '0.9rem' }}>
-                        {card.locked ? 'Upcoming' : 'Check back soon'}
-                      </div>
-                    )}
+                    ))}
                   </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Subscription Card */}
-            <div className="card" style={{ padding: '24px', backgroundColor: '#FFF8F0' }}>
-              <h3 className="font-serif" style={{ fontSize: '1.25rem', marginBottom: '12px', color: '#1A1209' }}>
-                Heirloom Membership
-              </h3>
-              <p style={{ color: '#6B5E4E', marginBottom: '4px', fontSize: '0.95rem' }}>
-                Your premium plan for unlimited personalized stories
-              </p>
-              <p style={{ color: '#6B5E4E', fontSize: '0.85rem', marginBottom: '20px' }}>
-                Active since April 2026
-              </p>
-              <button className="btn-outline" style={{ padding: '0.75rem 1.75rem' }}>
-                Manage Plan
-              </button>
-            </div>
+                )}
+              </>
+            )}
           </div>
         )}
 
-        {/* Other nav content placeholders */}
         {activeNav === 'children' && (
           <div>
-            <h3 className="font-serif" style={{ fontSize: '1.5rem', color: '#1A1209' }}>
-              Children
-            </h3>
-            <p style={{ color: '#6B5E4E' }}>Manage your children's profiles</p>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '24px' }}>
+              <h3 className="font-serif" style={{ fontSize: '1.5rem', color: '#1A1209' }}>Children</h3>
+              <Link href="/onboarding" className="btn-brand" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', fontSize: '0.875rem' }}>
+                <Plus size={16} /> Add child
+              </Link>
+            </div>
+            {children.length === 0 ? (
+              <p style={{ color: '#6B5E4E' }}>No children added yet.</p>
+            ) : (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                {children.map((child) => (
+                  <div key={child.id} className="card" style={{ padding: '20px' }}>
+                    <h4 className="font-serif" style={{ fontSize: '1.1rem', marginBottom: '4px', color: '#1A1209' }}>{child.name}</h4>
+                    <p style={{ color: '#6B5E4E', fontSize: '0.875rem', marginBottom: '8px' }}>Age {child.age}</p>
+                    {child.interests?.length > 0 && (
+                      <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                        {child.interests.map((interest) => (
+                          <span key={interest} className="chip" style={{ fontSize: '0.8rem', padding: '4px 10px' }}>{interest}</span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         )}
 
         {activeNav === 'account' && (
           <div>
-            <h3 className="font-serif" style={{ fontSize: '1.5rem', color: '#1A1209' }}>
-              Account Settings
-            </h3>
+            <h3 className="font-serif" style={{ fontSize: '1.5rem', color: '#1A1209', marginBottom: '8px' }}>Account Settings</h3>
             <p style={{ color: '#6B5E4E' }}>Manage your account preferences</p>
           </div>
         )}
 
         {activeNav === 'subscription' && (
           <div>
-            <h3 className="font-serif" style={{ fontSize: '1.5rem', color: '#1A1209' }}>
-              Subscription
-            </h3>
+            <h3 className="font-serif" style={{ fontSize: '1.5rem', color: '#1A1209', marginBottom: '8px' }}>Subscription</h3>
             <p style={{ color: '#6B5E4E' }}>Manage your subscription plan</p>
           </div>
         )}
@@ -309,7 +365,6 @@ export default function DashboardPage() {
             display: 'flex',
             justifyContent: 'space-around',
             alignItems: 'center',
-            borderTop: '1px solid #E8E0D0',
             paddingTop: '8px',
           }}
         >
@@ -330,7 +385,6 @@ export default function DashboardPage() {
                   cursor: 'pointer',
                   color: isActive ? 'white' : 'rgba(255, 255, 255, 0.6)',
                   padding: '8px 12px',
-                  transition: 'color 0.2s',
                 }}
               >
                 <Icon size={24} />

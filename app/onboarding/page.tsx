@@ -1,7 +1,9 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { createChild } from '@/lib/supabase/child-actions';
 
 type OnboardingState = {
   step: number;
@@ -34,6 +36,7 @@ const INTEREST_OPTIONS = [
 ];
 
 export default function OnboardingPage() {
+  const router = useRouter();
   const [state, setState] = useState<OnboardingState>({
     step: 2,
     name: '',
@@ -50,13 +53,49 @@ export default function OnboardingPage() {
   });
 
   const [showCustomInterest, setShowCustomInterest] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (state.step < 4) {
       setState({ ...state, step: state.step + 1 });
     } else {
-      // Submit profile - in production, send to API
-      console.log('Profile created:', state);
+      // Save child profile + generate first story
+      setSubmitting(true);
+      setSubmitError('');
+      try {
+        const result = await createChild({
+          name: state.name,
+          age: state.age,
+          gender: state.gender,
+          interests: state.interests,
+          hairColour: state.hairColour,
+          eyeColour: state.eyeColour,
+          siblingNames: state.siblingNames,
+          petName: state.petName,
+          petType: state.petType,
+          readingLevel: state.readingLevel || 'medium',
+        });
+
+        if (result.error || !result.child) {
+          setSubmitError(result.error || 'Failed to save profile');
+          setSubmitting(false);
+          return;
+        }
+
+        // Generate first story in the background
+        fetch('/api/generate-story', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ child_id: result.child.id }),
+        });
+
+        // Redirect to dashboard immediately — story will be there shortly
+        router.push('/dashboard');
+      } catch {
+        setSubmitError('Something went wrong. Please try again.');
+        setSubmitting(false);
+      }
     }
   };
 
@@ -440,16 +479,24 @@ export default function OnboardingPage() {
               </div>
             </div>
 
+            {submitError && (
+              <div style={{ color: '#991B1B', fontSize: '0.875rem', marginBottom: '16px', padding: '12px', background: '#FEE2E2', borderRadius: '8px' }}>
+                {submitError}
+              </div>
+            )}
+
             <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
               <button
                 onClick={handleNext}
+                disabled={submitting}
                 className="btn-brand"
-                style={{ flex: 1, padding: '0.75rem 1.75rem' }}
+                style={{ flex: 1, padding: '0.75rem 1.75rem', opacity: submitting ? 0.7 : 1, cursor: submitting ? 'not-allowed' : 'pointer' }}
               >
-                Create {state.name || 'profile'}
+                {submitting ? 'Creating profile...' : `Create ${state.name || 'profile'}`}
               </button>
               <button
                 onClick={handleBack}
+                disabled={submitting}
                 style={{
                   background: 'none',
                   border: 'none',
