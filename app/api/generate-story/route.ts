@@ -2,6 +2,9 @@ import { NextResponse } from 'next/server';
 import Anthropic from '@anthropic-ai/sdk';
 import { createClient } from '@/lib/supabase/server';
 
+// Extend Vercel function timeout to 60s (Pro plan) to allow time for image generation
+export const maxDuration = 60;
+
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
 });
@@ -84,7 +87,12 @@ Return ONLY valid JSON, no markdown, no explanation:
 }
 
 async function generateImage(prompt: string): Promise<string | null> {
-  if (!REPLICATE_API_TOKEN) return null;
+  if (!REPLICATE_API_TOKEN) {
+    console.error('REPLICATE_API_TOKEN not set');
+    return null;
+  }
+
+  console.log('Generating image for prompt:', prompt.slice(0, 80));
 
   try {
     // Create prediction
@@ -114,8 +122,11 @@ async function generateImage(prompt: string): Promise<string | null> {
 
     // If Prefer: wait returned a completed result
     if (prediction.status === 'succeeded' && prediction.output?.[0]) {
+      console.log('Image generated (immediate):', prediction.output[0].slice(0, 60));
       return prediction.output[0];
     }
+
+    console.log('Prediction status:', prediction.status, '— polling...');
 
     // Otherwise poll
     const pollUrl = prediction.urls?.get;
