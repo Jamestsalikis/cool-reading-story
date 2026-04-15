@@ -5,6 +5,33 @@ import Link from 'next/link';
 import { BookOpen, Users, Settings, CreditCard, Download, Plus, RefreshCw } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 
+const generatingStyles = `
+  @keyframes floatUp {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-120px) scale(0.4); opacity: 0; }
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.12); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes shimmer {
+    0% { opacity: 0.4; }
+    50% { opacity: 1; }
+    100% { opacity: 0.4; }
+  }
+  .spark { position: absolute; font-size: 1.4rem; animation: floatUp 2.4s ease-in infinite; }
+  .spark:nth-child(1) { left: 15%; animation-delay: 0s; }
+  .spark:nth-child(2) { left: 30%; animation-delay: 0.4s; }
+  .spark:nth-child(3) { left: 50%; animation-delay: 0.8s; }
+  .spark:nth-child(4) { left: 68%; animation-delay: 0.2s; }
+  .spark:nth-child(5) { left: 82%; animation-delay: 1.1s; }
+  .spark:nth-child(6) { left: 42%; animation-delay: 1.6s; }
+`;
+
 type Child = {
   id: string;
   name: string;
@@ -29,6 +56,7 @@ export default function DashboardPage() {
   const [stories, setStories] = useState<Story[]>([]);
   const [loading, setLoading] = useState(true);
   const [generating, setGenerating] = useState<string | null>(null); // child_id being generated for
+  const [generatingChildName, setGeneratingChildName] = useState('');
   const [generateError, setGenerateError] = useState('');
   const [userName, setUserName] = useState('');
   const supabase = createClient();
@@ -67,6 +95,8 @@ export default function DashboardPage() {
   }, [fetchData]);
 
   const handleGenerateStory = async (childId: string) => {
+    const child = children.find(c => c.id === childId);
+    setGeneratingChildName(child?.name || '');
     setGenerating(childId);
     setGenerateError('');
     try {
@@ -103,6 +133,64 @@ export default function DashboardPage() {
 
   return (
     <div style={{ minHeight: '100vh', backgroundColor: '#FAF7F0', display: 'flex', flexDirection: isMobile ? 'column' : 'row' }}>
+      <style>{generatingStyles}</style>
+
+      {/* Story Generation Overlay */}
+      {generating && (
+        <div
+          style={{
+            position: 'fixed',
+            inset: 0,
+            backgroundColor: 'rgba(26, 18, 9, 0.88)',
+            zIndex: 100,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            animation: 'fadeIn 0.4s ease',
+          }}
+        >
+          {/* Floating sparks */}
+          <div style={{ position: 'relative', width: '280px', height: '80px', marginBottom: '8px' }}>
+            <span className="spark">✨</span>
+            <span className="spark">⭐</span>
+            <span className="spark">🌟</span>
+            <span className="spark">✨</span>
+            <span className="spark">⭐</span>
+            <span className="spark">✨</span>
+          </div>
+
+          {/* Book pulse */}
+          <div style={{ fontSize: '5rem', animation: 'pulse 1.6s ease-in-out infinite', marginBottom: '28px' }}>
+            📖
+          </div>
+
+          {/* Text */}
+          <p
+            style={{
+              color: 'white',
+              fontSize: '1.4rem',
+              fontFamily: 'Georgia, serif',
+              marginBottom: '12px',
+              animation: 'fadeIn 0.6s ease',
+              textAlign: 'center',
+              padding: '0 24px',
+            }}
+          >
+            Writing {generatingChildName}&apos;s story&hellip;
+          </p>
+          <p
+            style={{
+              color: 'rgba(255,255,255,0.55)',
+              fontSize: '0.9rem',
+              animation: 'shimmer 2s ease infinite',
+              textAlign: 'center',
+            }}
+          >
+            This usually takes about 10 seconds
+          </p>
+        </div>
+      )}
       {/* Sidebar - Desktop */}
       {!isMobile && (
         <div
