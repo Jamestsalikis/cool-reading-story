@@ -261,70 +261,66 @@ export default function StoryPage() {
         const pagesNeedingImages = pages.filter((p) => p.image_prompt && !p.image_url);
 
         if (pagesNeedingImages.length > 0) {
-          // Mark all pages as loading upfront
           setLoadingPages(new Set(pagesNeedingImages.map((p) => p.page_number)));
 
-          const generateForPage = async (p: Page) => {
+          (async () => {
             try {
-              // Step 1: Fire prediction — returns in <2s
-              const startRes = await fetch('/api/generate-image', {
+              // One API call creates ALL predictions — avoids concurrent Vercel function bursts
+              const startRes = await fetch('/api/start-images', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ story_id: data.id, page_number: p.page_number }),
+                body: JSON.stringify({ story_id: data.id }),
               });
               const startData = await startRes.json();
+              const predictions: { page_number: number; poll_url: string }[] = startData.predictions ?? [];
 
-              if (startData.status === 'succeeded' && startData.image_url) {
-                // Fast path — Replicate completed within the 8s wait window
-                setStory((prev) => prev ? {
-                  ...prev, pages: prev.pages.map((pg) =>
-                    pg.page_number === p.page_number ? { ...pg, image_url: startData.image_url } : pg
-                  )
-                } : prev);
-              } else if (startData.poll_url) {
-                // Slow path — poll every 3s until done (max ~2 min)
-                for (let i = 0; i < 40; i++) {
-                  await new Promise((r) => setTimeout(r, 3000));
-                  try {
+              if (predictions.length === 0) {
+                setLoadingPages(new Set());
+                return;
+              }
+
+              // Poll all predictions in parallel — each poll call is <1s
+              const pollForPage = async (pred: { page_number: number; poll_url: string }) => {
+                try {
+                  for (let i = 0; i < 40; i++) {
+                    await new Promise((r) => setTimeout(r, 3000));
                     const pollRes = await fetch('/api/poll-image', {
                       method: 'POST',
                       headers: { 'Content-Type': 'application/json' },
                       body: JSON.stringify({
                         story_id: data.id,
-                        page_number: p.page_number,
-                        poll_url: startData.poll_url,
+                        page_number: pred.page_number,
+                        poll_url: pred.poll_url,
                       }),
                     });
                     const pollData = await pollRes.json();
                     if (pollData.status === 'succeeded' && pollData.image_url) {
                       setStory((prev) => prev ? {
                         ...prev, pages: prev.pages.map((pg) =>
-                          pg.page_number === p.page_number ? { ...pg, image_url: pollData.image_url } : pg
+                          pg.page_number === pred.page_number ? { ...pg, image_url: pollData.image_url } : pg
                         )
                       } : prev);
                       break;
                     }
                     if (pollData.status === 'failed') break;
-                  } catch (pollErr) {
-                    console.error(`Poll error page ${p.page_number}:`, pollErr);
                   }
+                } catch (err) {
+                  console.error(`Poll failed for page ${pred.page_number}:`, err);
+                } finally {
+                  setLoadingPages((prev) => {
+                    const next = new Set(prev);
+                    next.delete(pred.page_number);
+                    return next;
+                  });
                 }
-              } else {
-                console.error(`No poll_url for page ${p.page_number}`, startData);
-              }
-            } catch (err) {
-              console.error(`Image generation failed for page ${p.page_number}:`, err);
-            } finally {
-              setLoadingPages((prev) => {
-                const next = new Set(prev);
-                next.delete(p.page_number);
-                return next;
-              });
-            }
-          };
+              };
 
-          // Fire all pages in parallel — images pop in as each one finishes
-          Promise.all(pagesNeedingImages.map(generateForPage));
+              await Promise.all(predictions.map(pollForPage));
+            } catch (err) {
+              console.error('start-images failed:', err);
+              setLoadingPages(new Set());
+            }
+          })();
         }
       }
       setLoading(false);
