@@ -42,47 +42,61 @@ export async function POST(request: Request) {
     const page = pages[pageIndex];
     if (!page.image_prompt) return NextResponse.json({ error: 'No image prompt' }, { status: 400 });
 
-    // Fire prediction immediately — no Prefer: wait header so this returns in <1s
-    // Frontend handles all polling via /api/poll-image
-    const createRes = await fetch(
-      'https://api.replicate.com/v1/models/black-forest-labs/flux-schnell/predictions',
-      {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${REPLICATE_API_TOKEN}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          input: {
-            prompt: page.image_prompt,
-            go_fast: true,
-            num_outputs: 1,
-            aspect_ratio: '4:3',
-            output_format: 'webp',
-            output_quality: 80,
-          },
-        }),
-      }
-    );
+    // Create prediction — retry once on 429 (rate limit) with a 5s backoff.
+    // Two attempts × ~500ms each + 5s wait = ~6s worst case, within Hobby's 10s limit.
+    let prediction: { id?: string; urls?: { get: string }; error?: string } | null = null;
 
-    if (!createRes.ok) {
-      const text = await createRes.text();
-      console.error('Replicate error:', createRes.status, text.slice(0, 200));
-      return NextResponse.json({ error: 'Replicate request failed', detail: text.slice(0, 200) }, { status: 500 });
+    for (let attempt = 0; attempt < 2; attempt++) {
+      if (attempt > 0) {
+        await new Promise(r => setTimeout(r, 5000)); // wait 5s before retry
+      }
+
+      const createRes = await fetch(
+        'https://api.replicate.com/v1/models/black-forest-labs/flux-schnell/predictions',
+        {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${REPLICATE_API_TOKEN}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            input: {
+              prompt: page.image_prompt,
+              go_fast: true,
+              num_outputs: 1,
+              aspect_ratio: '4:3',
+              output_format: 'webp',
+              output_quality: 80,
+            },
+          }),
+        }
+      );
+
+      if (createRes.status === 429) {
+        console.log(`Replicate 429 on attempt ${attempt + 1}, ${attempt === 0 ? 'retrying in 5s' : 'giving up'}`);
+        continue; // retry
+      }
+
+      if (!createRes.ok) {
+        const text = await createRes.text();
+        console.error('Replicate error:', createRes.status, text.slice(0, 200));
+        return NextResponse.json({ error: 'Replicate request failed' }, { status: 500 });
+      }
+
+      prediction = await createRes.json();
+      break;
     }
 
-    const prediction = await createRes.json();
-
-    if (prediction.error) {
-      console.error('Prediction error:', prediction.error);
-      return NextResponse.json({ error: prediction.error }, { status: 500 });
+    if (!prediction || prediction.error || !prediction.urls?.get) {
+      console.error('Prediction failed or rate limited:', prediction?.error);
+      return NextResponse.json({ error: 'rate_limited' }, { status: 429 });
     }
 
     // Return poll URL — frontend polls /api/poll-image every 3s
     return NextResponse.json({
       status: 'processing',
       prediction_id: prediction.id,
-      poll_url: prediction.urls?.get,
+      poll_url: prediction.urls.get,
       page_number,
     });
 

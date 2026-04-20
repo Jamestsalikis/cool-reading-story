@@ -271,7 +271,7 @@ export default function StoryPage() {
           // Only one Replicate prediction runs at a time — no 429 rate limits.
           (async () => {
             for (const page of pagesNeedingImages) {
-              // Step 1: create the prediction (~300ms Vercel call)
+              // Step 1: create prediction — retries on 429 are handled inside the API route
               let pollUrl: string | null = null;
               try {
                 const res = await fetch('/api/generate-image', {
@@ -279,8 +279,13 @@ export default function StoryPage() {
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify({ story_id: data.id, page_number: page.page_number }),
                 });
-                const result = await res.json();
-                pollUrl = result.poll_url ?? null;
+                if (res.ok) {
+                  const result = await res.json();
+                  pollUrl = result.poll_url ?? null;
+                } else if (res.status === 429) {
+                  // Still rate-limited after retry — wait 10s then try next page
+                  await new Promise((r) => setTimeout(r, 10000));
+                }
               } catch {}
 
               if (!pollUrl) continue;
@@ -315,6 +320,9 @@ export default function StoryPage() {
                   if (result.status === 'failed') break;
                 } catch {}
               }
+
+              // Short pause between images — gives Replicate rate limiter breathing room
+              await new Promise((r) => setTimeout(r, 2000));
             }
           })();
         }
