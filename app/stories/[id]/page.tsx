@@ -27,14 +27,14 @@ type Story = {
   children: { name: string; age: number };
 };
 
-// Layout per page index — varies image position for visual interest
-// 'top' = image above text, 'bottom' = text above image, 'left' = side-by-side (desktop)
-const PAGE_LAYOUTS: Array<'top' | 'bottom' | 'split-left' | 'split-right'> = [
-  'top',         // Page 1: classic — big image at top
-  'bottom',      // Page 2: text first, image below
-  'split-right', // Page 3: text left, image right panel
-  'top',         // Page 4: back to top
-  'split-left',  // Page 5: image left, text right
+// Layout per page index — alternates image position for visual interest
+// 'top' = image above text, 'bottom' = text above image
+const PAGE_LAYOUTS: Array<'top' | 'bottom'> = [
+  'top',    // Page 1: big image at top
+  'bottom', // Page 2: text first, image below
+  'top',    // Page 3
+  'bottom', // Page 4
+  'top',    // Page 5
 ];
 
 const bookStyles = `
@@ -126,33 +126,6 @@ const bookStyles = `
     border: 1.5px solid rgba(255,255,255,0.55);
     border-radius: 2px;
     pointer-events: none;
-  }
-
-  /* Split layout: side-by-side image + text */
-  .split-container {
-    display: flex;
-    flex-direction: row;
-    min-height: 280px;
-  }
-  .split-container.split-right .split-text { order: 1; }
-  .split-container.split-right .split-image { order: 2; }
-  .split-container.split-left .split-image { order: 1; }
-  .split-container.split-left .split-text { order: 2; }
-  .split-image {
-    flex: 0 0 45%;
-    position: relative;
-    overflow: hidden;
-  }
-  .split-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .split-text {
-    flex: 1;
-    padding: 20px 20px 20px 12px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .split-container.split-left .split-text {
-    padding: 20px 12px 20px 20px;
   }
 
   /* ---- Print styles ---- */
@@ -268,8 +241,8 @@ export default function StoryPage() {
   const [currentPage, setCurrentPage] = useState(0);
   const [direction, setDirection] = useState<'forward' | 'back'>('forward');
   const [animKey, setAnimKey] = useState(0);
-  // Track which page number is currently having its image generated (null = none)
-  const [imageLoadingPage, setImageLoadingPage] = useState<number | null>(null);
+  // Set of page numbers currently having their image generated
+  const [loadingPages, setLoadingPages] = useState<Set<number>>(new Set());
   const supabase = createClient();
 
   useEffect(() => {
@@ -288,40 +261,29 @@ export default function StoryPage() {
         const pagesNeedingImages = pages.filter((p) => p.image_prompt && !p.image_url);
 
         if (pagesNeedingImages.length > 0) {
-          // Start + poll approach: /api/generate-image fires the prediction (<2s),
-          // then /api/poll-image is called every 3s until the image is ready.
-          // Each API call is fast, so it works on Vercel Hobby (10s limit).
-          (async () => {
-            for (const p of pagesNeedingImages) {
-              setImageLoadingPage(p.page_number);
-              try {
-                // Step 1: Start prediction
-                const startRes = await fetch('/api/generate-image', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ story_id: data.id, page_number: p.page_number }),
-                });
-                const startData = await startRes.json();
+          // Mark all pages as loading upfront
+          setLoadingPages(new Set(pagesNeedingImages.map((p) => p.page_number)));
 
-                if (startData.status === 'succeeded' && startData.image_url) {
-                  // Fast path — Replicate finished immediately
-                  setStory((prev) => {
-                    if (!prev) return prev;
-                    return { ...prev, pages: prev.pages.map((pg) =>
-                      pg.page_number === p.page_number ? { ...pg, image_url: startData.image_url } : pg
-                    )};
-                  });
-                  continue;
-                }
+          const generateForPage = async (p: Page) => {
+            try {
+              // Step 1: Fire prediction — returns in <2s
+              const startRes = await fetch('/api/generate-image', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ story_id: data.id, page_number: p.page_number }),
+              });
+              const startData = await startRes.json();
 
-                if (!startData.poll_url) {
-                  console.error(`No poll_url for page ${p.page_number}`, startData);
-                  continue;
-                }
-
-                // Step 2: Poll until done (max 40 polls = ~2 minutes)
-                let done = false;
-                for (let i = 0; i < 40 && !done; i++) {
+              if (startData.status === 'succeeded' && startData.image_url) {
+                // Fast path — Replicate completed within the 8s wait window
+                setStory((prev) => prev ? {
+                  ...prev, pages: prev.pages.map((pg) =>
+                    pg.page_number === p.page_number ? { ...pg, image_url: startData.image_url } : pg
+                  )
+                } : prev);
+              } else if (startData.poll_url) {
+                // Slow path — poll every 3s until done (max ~2 min)
+                for (let i = 0; i < 40; i++) {
                   await new Promise((r) => setTimeout(r, 3000));
                   try {
                     const pollRes = await fetch('/api/poll-image', {
@@ -334,29 +296,35 @@ export default function StoryPage() {
                       }),
                     });
                     const pollData = await pollRes.json();
-
                     if (pollData.status === 'succeeded' && pollData.image_url) {
-                      setStory((prev) => {
-                        if (!prev) return prev;
-                        return { ...prev, pages: prev.pages.map((pg) =>
+                      setStory((prev) => prev ? {
+                        ...prev, pages: prev.pages.map((pg) =>
                           pg.page_number === p.page_number ? { ...pg, image_url: pollData.image_url } : pg
-                        )};
-                      });
-                      done = true;
-                    } else if (pollData.status === 'failed') {
-                      console.error(`Image failed for page ${p.page_number}`);
-                      done = true;
+                        )
+                      } : prev);
+                      break;
                     }
+                    if (pollData.status === 'failed') break;
                   } catch (pollErr) {
-                    console.error(`Poll error for page ${p.page_number}:`, pollErr);
+                    console.error(`Poll error page ${p.page_number}:`, pollErr);
                   }
                 }
-              } catch (err) {
-                console.error(`Image generation failed for page ${p.page_number}:`, err);
+              } else {
+                console.error(`No poll_url for page ${p.page_number}`, startData);
               }
+            } catch (err) {
+              console.error(`Image generation failed for page ${p.page_number}:`, err);
+            } finally {
+              setLoadingPages((prev) => {
+                const next = new Set(prev);
+                next.delete(p.page_number);
+                return next;
+              });
             }
-            setImageLoadingPage(null);
-          })();
+          };
+
+          // Fire all pages in parallel — images pop in as each one finishes
+          Promise.all(pagesNeedingImages.map(generateForPage));
         }
       }
       setLoading(false);
@@ -408,7 +376,7 @@ export default function StoryPage() {
   const isLastPage = currentPage === totalPages - 1;
   const paragraphs = page.content.split('\n\n').filter(Boolean);
   const layout = PAGE_LAYOUTS[currentPage] ?? 'top';
-  const isThisPageGenerating = imageLoadingPage === page.page_number;
+  const isThisPageGenerating = loadingPages.has(page.page_number);
 
   // ---- Illustration element ----
   const illustrationEl = page.image_url ? (
@@ -442,57 +410,28 @@ export default function StoryPage() {
 
   // ---- Render layout variant ----
   function renderPageContent() {
-    if (layout === 'split-left' || layout === 'split-right') {
-      return (
-        <div className={`split-container ${layout}`} style={{ marginLeft: '28px' }}>
-          <div className="split-image illus-wrap">
-            {illustrationEl}
-            <CornerOrnaments />
-          </div>
-          <div className="split-text" style={{ paddingLeft: layout === 'split-left' ? '16px' : undefined, paddingRight: layout === 'split-right' ? '16px' : undefined }}>
-            <DecorativeRule />
-            {currentPage === 0 && (
-              <h2 style={{ fontFamily: 'Lora, Georgia, serif', fontSize: '1.2rem', color: '#2C1A0E', marginBottom: '14px', lineHeight: 1.3, fontWeight: 600 }}>
-                {story.title}
-              </h2>
-            )}
-            <div className="story-text" style={{ fontSize: '0.9rem' }}>
-              {paragraphs.map((para, i) => <p key={i}>{para}</p>)}
-            </div>
-            {isLastPage && story.moral && (
-              <div style={{ borderLeft: '3px solid #741515', paddingLeft: '12px', marginTop: '14px', color: '#5a3a2a', fontStyle: 'italic', fontFamily: 'Lora, Georgia, serif', fontSize: '0.82rem', lineHeight: 1.7 }}>
-                {story.moral}
-              </div>
-            )}
-            <div style={{ textAlign: 'center', marginTop: '14px', color: 'rgba(116,21,21,0.3)', fontSize: '0.75rem', fontFamily: 'Georgia, serif' }}>
-              — {currentPage + 1} —
-            </div>
-          </div>
-        </div>
-      );
-    }
+    const illustWrap = (
+      <div className="illus-wrap" style={{ width: 'calc(100% - 28px)', marginLeft: '28px', aspectRatio: '4/3' }}>
+        {illustrationEl}
+        <CornerOrnaments />
+      </div>
+    );
 
     if (layout === 'bottom') {
-      // Text first, then image below
+      // Text first, image below
       return (
         <>
           {textContentEl}
-          <div className="illus-wrap" style={{ width: 'calc(100% - 28px)', marginLeft: '28px', aspectRatio: '4/3' }}>
-            {illustrationEl}
-            <CornerOrnaments />
-          </div>
+          {illustWrap}
           <div style={{ height: '16px' }} />
         </>
       );
     }
 
-    // Default: 'top' — image above text
+    // 'top' — image above text (default)
     return (
       <>
-        <div className="illus-wrap" style={{ width: 'calc(100% - 28px)', marginLeft: '28px', aspectRatio: '4/3' }}>
-          {illustrationEl}
-          <CornerOrnaments />
-        </div>
+        {illustWrap}
         {textContentEl}
       </>
     );
@@ -551,9 +490,9 @@ export default function StoryPage() {
             {story.title}
           </span>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            {imageLoadingPage !== null && (
+            {loadingPages.size > 0 && (
               <span style={{ fontSize: '0.7rem', color: 'rgba(255,200,100,0.7)', fontFamily: 'Georgia, serif' }}>
-                🎨 p{imageLoadingPage}
+                🎨 {loadingPages.size} painting…
               </span>
             )}
             <button onClick={toggleFavourite} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '6px', display: 'flex' }}>
