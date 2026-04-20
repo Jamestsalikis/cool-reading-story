@@ -42,7 +42,8 @@ export async function POST(request: Request) {
     const page = pages[pageIndex];
     if (!page.image_prompt) return NextResponse.json({ error: 'No image prompt' }, { status: 400 });
 
-    // Ask Replicate to hold for up to 8s — fast path for quick generations
+    // Fire prediction immediately — no Prefer: wait header so this returns in <1s
+    // Frontend handles all polling via /api/poll-image
     const createRes = await fetch(
       'https://api.replicate.com/v1/models/black-forest-labs/flux-schnell/predictions',
       {
@@ -50,7 +51,6 @@ export async function POST(request: Request) {
         headers: {
           Authorization: `Bearer ${REPLICATE_API_TOKEN}`,
           'Content-Type': 'application/json',
-          Prefer: 'wait=8',
         },
         body: JSON.stringify({
           input: {
@@ -68,26 +68,17 @@ export async function POST(request: Request) {
     if (!createRes.ok) {
       const text = await createRes.text();
       console.error('Replicate error:', createRes.status, text.slice(0, 200));
-      return NextResponse.json({ error: 'Replicate request failed' }, { status: 500 });
+      return NextResponse.json({ error: 'Replicate request failed', detail: text.slice(0, 200) }, { status: 500 });
     }
 
     const prediction = await createRes.json();
-
-    // Fast path: Replicate finished within the wait window
-    if (prediction.status === 'succeeded' && prediction.output?.[0]) {
-      const imageUrl = prediction.output[0];
-      const updatedPages = [...pages];
-      updatedPages[pageIndex] = { ...page, image_url: imageUrl };
-      await supabase.from('stories').update({ pages: updatedPages }).eq('id', story_id);
-      return NextResponse.json({ status: 'succeeded', image_url: imageUrl, page_number });
-    }
 
     if (prediction.error) {
       console.error('Prediction error:', prediction.error);
       return NextResponse.json({ error: prediction.error }, { status: 500 });
     }
 
-    // Slow path: return prediction details — frontend will poll /api/poll-image
+    // Return poll URL — frontend polls /api/poll-image every 3s
     return NextResponse.json({
       status: 'processing',
       prediction_id: prediction.id,
