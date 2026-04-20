@@ -244,7 +244,7 @@ export default function StoryPage() {
   const [animKey, setAnimKey] = useState(0);
   // Set of page numbers currently having their image generated
   const [loadingPages, setLoadingPages] = useState<Set<number>>(new Set());
-  const imageGenStarted = useRef(false); // prevent duplicate effect invocations
+  const imageGenStarted = useRef(false);
   const supabase = createClient();
 
   useEffect(() => {
@@ -266,63 +266,33 @@ export default function StoryPage() {
           imageGenStarted.current = true;
           setLoadingPages(new Set(pagesNeedingImages.map((p) => p.page_number)));
 
-          const pollForPage = async (pageNum: number, pollUrl: string) => {
-            try {
-              for (let i = 0; i < 40; i++) {
-                await new Promise((r) => setTimeout(r, 3000));
-                const pollRes = await fetch('/api/poll-image', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ story_id: data.id, page_number: pageNum, poll_url: pollUrl }),
-                });
-                const pollData = await pollRes.json();
-                if (pollData.status === 'succeeded' && pollData.image_url) {
-                  setStory((prev) => prev ? {
-                    ...prev, pages: prev.pages.map((pg) =>
-                      pg.page_number === pageNum ? { ...pg, image_url: pollData.image_url } : pg
-                    )
-                  } : prev);
-                  break;
-                }
-                if (pollData.status === 'failed') break;
-              }
-            } catch (err) {
-              console.error(`Poll failed page ${pageNum}:`, err);
-            } finally {
-              setLoadingPages((prev) => { const n = new Set(prev); n.delete(pageNum); return n; });
+          // Kick off server-side image generation (saves to DB as each image completes)
+          fetch('/api/generate-all-images', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ story_id: data.id }),
+          });
+
+          // Poll Supabase every 4s — images appear as the server saves them
+          const interval = setInterval(async () => {
+            const { data: fresh } = await supabase
+              .from('stories')
+              .select('pages')
+              .eq('id', data.id)
+              .single();
+            if (fresh?.pages) {
+              setStory((prev) => prev ? { ...prev, pages: fresh.pages } : prev);
+              setLoadingPages(
+                new Set(
+                  (fresh.pages as Page[])
+                    .filter((p) => p.image_prompt && !p.image_url)
+                    .map((p) => p.page_number)
+                )
+              );
+              const allDone = (fresh.pages as Page[]).every((p) => !p.image_prompt || p.image_url);
+              if (allDone) clearInterval(interval);
             }
-          };
-
-          (async () => {
-            // New stories have poll_url already set from story generation — use them directly
-            const pagesWithPollUrl = pagesNeedingImages.filter((p) => p.poll_url);
-            const pagesWithoutPollUrl = pagesNeedingImages.filter((p) => !p.poll_url);
-
-            const pollJobs: Promise<void>[] = pagesWithPollUrl.map((p) =>
-              pollForPage(p.page_number, p.poll_url!)
-            );
-
-            // Fallback for older stories: get poll URLs from /api/start-images
-            if (pagesWithoutPollUrl.length > 0) {
-              try {
-                const startRes = await fetch('/api/start-images', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ story_id: data.id }),
-                });
-                const startData = await startRes.json();
-                const predictions: { page_number: number; poll_url: string }[] = startData.predictions ?? [];
-                predictions.forEach((pred) => pollJobs.push(pollForPage(pred.page_number, pred.poll_url)));
-              } catch (err) {
-                console.error('start-images fallback failed:', err);
-                pagesWithoutPollUrl.forEach((p) =>
-                  setLoadingPages((prev) => { const n = new Set(prev); n.delete(p.page_number); return n; })
-                );
-              }
-            }
-
-            await Promise.all(pollJobs);
-          })();
+          }, 4000);
         }
       }
       setLoading(false);
