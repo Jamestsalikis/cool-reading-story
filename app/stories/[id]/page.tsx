@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Heart, ChevronLeft, ChevronRight, Printer } from 'lucide-react';
@@ -244,6 +244,7 @@ export default function StoryPage() {
   const [animKey, setAnimKey] = useState(0);
   // Set of page numbers currently having their image generated
   const [loadingPages, setLoadingPages] = useState<Set<number>>(new Set());
+  const imageGenStarted = useRef(false); // prevent duplicate effect invocations
   const supabase = createClient();
 
   useEffect(() => {
@@ -261,7 +262,8 @@ export default function StoryPage() {
         const pages: Page[] = data.pages || [];
         const pagesNeedingImages = pages.filter((p) => p.image_prompt && !p.image_url);
 
-        if (pagesNeedingImages.length > 0) {
+        if (pagesNeedingImages.length > 0 && !imageGenStarted.current) {
+          imageGenStarted.current = true;
           setLoadingPages(new Set(pagesNeedingImages.map((p) => p.page_number)));
 
           const pollForPage = async (pageNum: number, pollUrl: string) => {

@@ -77,16 +77,17 @@ export async function POST(request: Request) {
       return NextResponse.json({ predictions: [] });
     }
 
-    // Create all predictions inside one function — sequential to be safe with Replicate
-    const predictions: { page_number: number; poll_url: string }[] = [];
-    for (const page of pagesNeedingImages) {
-      const result = await createPrediction(page.image_prompt);
-      if (result) {
-        predictions.push({ page_number: page.page_number, poll_url: result.poll_url });
-      } else {
-        console.error(`Failed to create prediction for page ${page.page_number}`);
-      }
-    }
+    // Create all predictions in parallel — each Replicate call takes ~300-500ms,
+    // so 5 in parallel = ~500ms total, well within any timeout limit.
+    const results = await Promise.all(
+      pagesNeedingImages.map(async (page) => {
+        const result = await createPrediction(page.image_prompt);
+        if (!result) console.error(`Failed prediction for page ${page.page_number}`);
+        return result ? { page_number: page.page_number, poll_url: result.poll_url } : null;
+      })
+    );
+
+    const predictions = results.filter(Boolean) as { page_number: number; poll_url: string }[];
 
     return NextResponse.json({ predictions });
 
