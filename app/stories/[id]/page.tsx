@@ -266,25 +266,21 @@ export default function StoryPage() {
           imageGenStarted.current = true;
           setLoadingPages(new Set(pagesNeedingImages.map((p) => p.page_number)));
 
-          // Fire all predictions in parallel — each call takes ~300ms, all 5 start simultaneously
-          const predictions = await Promise.all(
-            pagesNeedingImages.map(async (page) => {
-              try {
-                const res = await fetch('/api/generate-image', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ story_id: data.id, page_number: page.page_number }),
-                });
-                const result = await res.json();
-                if (result.poll_url) return { page_number: page.page_number, poll_url: result.poll_url };
-              } catch {}
-              return null;
-            })
-          );
+          // ONE call to start-images creates all predictions inside a single Vercel function —
+          // avoids burst 500s from firing 5 simultaneous function invocations
+          let predictions: { page_number: number; poll_url: string }[] = [];
+          try {
+            const res = await fetch('/api/start-images', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ story_id: data.id }),
+            });
+            const result = await res.json();
+            predictions = result.predictions || [];
+          } catch {}
 
-          // Poll all predictions simultaneously — each resolves independently as images finish
-          predictions.filter(Boolean).forEach(async (pred) => {
-            const { page_number, poll_url } = pred!;
+          // Poll all predictions simultaneously from the browser — no server timeout risk
+          predictions.forEach(async ({ page_number, poll_url }) => {
             for (let i = 0; i < 40; i++) {
               await new Promise((r) => setTimeout(r, 3000));
               try {
@@ -295,7 +291,6 @@ export default function StoryPage() {
                 });
                 const result = await res.json();
                 if (result.status === 'succeeded' && result.image_url) {
-                  // Update this page's image immediately without waiting for a DB poll
                   setStory((prev) => {
                     if (!prev) return prev;
                     return {
