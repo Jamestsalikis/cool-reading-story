@@ -14,7 +14,7 @@ async function generateImage(prompt: string): Promise<string | null> {
         headers: {
           Authorization: `Bearer ${REPLICATE_API_TOKEN}`,
           'Content-Type': 'application/json',
-          Prefer: 'wait=25',
+          Prefer: 'wait=20',
         },
         body: JSON.stringify({
           input: { prompt, go_fast: true, num_outputs: 1, aspect_ratio: '4:3', output_format: 'webp', output_quality: 80 },
@@ -26,8 +26,8 @@ async function generateImage(prompt: string): Promise<string | null> {
     if (prediction.status === 'succeeded' && prediction.output?.[0]) return prediction.output[0];
     if (prediction.error || !prediction.urls?.get) return null;
 
-    // Poll a few times if not immediate
-    for (let i = 0; i < 8; i++) {
+    // Poll up to 5 times (15s) if not immediate
+    for (let i = 0; i < 5; i++) {
       await new Promise(r => setTimeout(r, 3000));
       const poll = await fetch(prediction.urls.get, { headers: { Authorization: `Bearer ${REPLICATE_API_TOKEN}` } });
       const p = await poll.json();
@@ -45,23 +45,44 @@ export async function POST(request: Request) {
 
   const { story_id } = await request.json();
 
-  const { data: story } = await supabase.from('stories').select('pages').eq('id', story_id).eq('parent_id', user.id).single();
+  const { data: story } = await supabase
+    .from('stories')
+    .select('pages')
+    .eq('id', story_id)
+    .eq('parent_id', user.id)
+    .single();
   if (!story) return NextResponse.json({ error: 'Not found' }, { status: 404 });
 
   const pages = story.pages || [];
-  const updatedPages = [...pages];
+  const pagesNeedingImages = pages.filter(
+    (p: { image_prompt?: string; image_url?: string }) => p.image_prompt && !p.image_url
+  );
 
-  for (let i = 0; i < pages.length; i++) {
-    const page = pages[i];
-    if (!page.image_prompt || page.image_url) continue;
+  if (pagesNeedingImages.length === 0) return NextResponse.json({ done: true });
 
-    const imageUrl = await generateImage(page.image_prompt);
-    if (imageUrl) {
-      updatedPages[i] = { ...page, image_url: imageUrl };
-      // Save after each image so frontend sees them appear progressively
+  // Generate ALL images in parallel — each saves to DB independently as soon as it's done.
+  // Re-fetches pages before each save to avoid race conditions overwriting each other.
+  await Promise.all(
+    pagesNeedingImages.map(async (page: { page_number: number; image_prompt: string }) => {
+      const imageUrl = await generateImage(page.image_prompt);
+      if (!imageUrl) return;
+
+      // Re-fetch current pages so concurrent saves don't overwrite each other
+      const { data: current } = await supabase
+        .from('stories')
+        .select('pages')
+        .eq('id', story_id)
+        .single();
+
+      if (!current?.pages) return;
+
+      const updatedPages = current.pages.map((p: { page_number: number }) =>
+        p.page_number === page.page_number ? { ...p, image_url: imageUrl } : p
+      );
+
       await supabase.from('stories').update({ pages: updatedPages }).eq('id', story_id);
-    }
-  }
+    })
+  );
 
   return NextResponse.json({ done: true });
 }

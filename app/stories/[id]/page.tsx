@@ -266,51 +266,34 @@ export default function StoryPage() {
           imageGenStarted.current = true;
           setLoadingPages(new Set(pagesNeedingImages.map((p) => p.page_number)));
 
-          // ONE call to start-images creates all predictions inside a single Vercel function —
-          // avoids burst 500s from firing 5 simultaneous function invocations
-          let predictions: { page_number: number; poll_url: string }[] = [];
-          try {
-            const res = await fetch('/api/start-images', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ story_id: data.id }),
-            });
-            const result = await res.json();
-            predictions = result.predictions || [];
-          } catch {}
-
-          // Poll all predictions simultaneously from the browser — no server timeout risk
-          predictions.forEach(async ({ page_number, poll_url }) => {
-            for (let i = 0; i < 40; i++) {
-              await new Promise((r) => setTimeout(r, 3000));
-              try {
-                const res = await fetch('/api/poll-image', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ story_id: data.id, page_number, poll_url }),
-                });
-                const result = await res.json();
-                if (result.status === 'succeeded' && result.image_url) {
-                  setStory((prev) => {
-                    if (!prev) return prev;
-                    return {
-                      ...prev,
-                      pages: prev.pages.map((p) =>
-                        p.page_number === page_number ? { ...p, image_url: result.image_url } : p
-                      ),
-                    };
-                  });
-                  setLoadingPages((prev) => {
-                    const next = new Set(prev);
-                    next.delete(page_number);
-                    return next;
-                  });
-                  break;
-                }
-                if (result.status === 'failed') break;
-              } catch {}
-            }
+          // Fire server-side generation — runs all images in parallel, saves each to DB as done.
+          // Browser just polls Supabase every 4s. Works even if user closes the tab.
+          fetch('/api/generate-all-images', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ story_id: data.id }),
           });
+
+          // Poll Supabase every 4s — images pop in as the server saves them
+          const interval = setInterval(async () => {
+            const { data: fresh } = await supabase
+              .from('stories')
+              .select('pages')
+              .eq('id', data.id)
+              .single();
+            if (fresh?.pages) {
+              setStory((prev) => prev ? { ...prev, pages: fresh.pages } : prev);
+              setLoadingPages(
+                new Set(
+                  (fresh.pages as Page[])
+                    .filter((p) => p.image_prompt && !p.image_url)
+                    .map((p) => p.page_number)
+                )
+              );
+              const allDone = (fresh.pages as Page[]).every((p) => !p.image_prompt || p.image_url);
+              if (allDone) clearInterval(interval);
+            }
+          }, 4000);
         }
       }
       setLoading(false);
