@@ -11,6 +11,7 @@ type Page = {
   content: string;
   image_prompt: string;
   image_url: string | null;
+  poll_url?: string | null;
 };
 
 type Story = {
@@ -263,63 +264,62 @@ export default function StoryPage() {
         if (pagesNeedingImages.length > 0) {
           setLoadingPages(new Set(pagesNeedingImages.map((p) => p.page_number)));
 
-          (async () => {
+          const pollForPage = async (pageNum: number, pollUrl: string) => {
             try {
-              // One API call creates ALL predictions — avoids concurrent Vercel function bursts
-              const startRes = await fetch('/api/start-images', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ story_id: data.id }),
-              });
-              const startData = await startRes.json();
-              const predictions: { page_number: number; poll_url: string }[] = startData.predictions ?? [];
-
-              if (predictions.length === 0) {
-                setLoadingPages(new Set());
-                return;
-              }
-
-              // Poll all predictions in parallel — each poll call is <1s
-              const pollForPage = async (pred: { page_number: number; poll_url: string }) => {
-                try {
-                  for (let i = 0; i < 40; i++) {
-                    await new Promise((r) => setTimeout(r, 3000));
-                    const pollRes = await fetch('/api/poll-image', {
-                      method: 'POST',
-                      headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify({
-                        story_id: data.id,
-                        page_number: pred.page_number,
-                        poll_url: pred.poll_url,
-                      }),
-                    });
-                    const pollData = await pollRes.json();
-                    if (pollData.status === 'succeeded' && pollData.image_url) {
-                      setStory((prev) => prev ? {
-                        ...prev, pages: prev.pages.map((pg) =>
-                          pg.page_number === pred.page_number ? { ...pg, image_url: pollData.image_url } : pg
-                        )
-                      } : prev);
-                      break;
-                    }
-                    if (pollData.status === 'failed') break;
-                  }
-                } catch (err) {
-                  console.error(`Poll failed for page ${pred.page_number}:`, err);
-                } finally {
-                  setLoadingPages((prev) => {
-                    const next = new Set(prev);
-                    next.delete(pred.page_number);
-                    return next;
-                  });
+              for (let i = 0; i < 40; i++) {
+                await new Promise((r) => setTimeout(r, 3000));
+                const pollRes = await fetch('/api/poll-image', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ story_id: data.id, page_number: pageNum, poll_url: pollUrl }),
+                });
+                const pollData = await pollRes.json();
+                if (pollData.status === 'succeeded' && pollData.image_url) {
+                  setStory((prev) => prev ? {
+                    ...prev, pages: prev.pages.map((pg) =>
+                      pg.page_number === pageNum ? { ...pg, image_url: pollData.image_url } : pg
+                    )
+                  } : prev);
+                  break;
                 }
-              };
-
-              await Promise.all(predictions.map(pollForPage));
+                if (pollData.status === 'failed') break;
+              }
             } catch (err) {
-              console.error('start-images failed:', err);
-              setLoadingPages(new Set());
+              console.error(`Poll failed page ${pageNum}:`, err);
+            } finally {
+              setLoadingPages((prev) => { const n = new Set(prev); n.delete(pageNum); return n; });
             }
+          };
+
+          (async () => {
+            // New stories have poll_url already set from story generation — use them directly
+            const pagesWithPollUrl = pagesNeedingImages.filter((p) => p.poll_url);
+            const pagesWithoutPollUrl = pagesNeedingImages.filter((p) => !p.poll_url);
+
+            const pollJobs: Promise<void>[] = pagesWithPollUrl.map((p) =>
+              pollForPage(p.page_number, p.poll_url!)
+            );
+
+            // Fallback for older stories: get poll URLs from /api/start-images
+            if (pagesWithoutPollUrl.length > 0) {
+              try {
+                const startRes = await fetch('/api/start-images', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ story_id: data.id }),
+                });
+                const startData = await startRes.json();
+                const predictions: { page_number: number; poll_url: string }[] = startData.predictions ?? [];
+                predictions.forEach((pred) => pollJobs.push(pollForPage(pred.page_number, pred.poll_url)));
+              } catch (err) {
+                console.error('start-images fallback failed:', err);
+                pagesWithoutPollUrl.forEach((p) =>
+                  setLoadingPages((prev) => { const n = new Set(prev); n.delete(p.page_number); return n; })
+                );
+              }
+            }
+
+            await Promise.all(pollJobs);
           })();
         }
       }

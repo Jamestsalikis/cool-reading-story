@@ -231,11 +231,50 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Failed to parse story from AI' }, { status: 500 });
     }
 
-    // Save story immediately without images — images generated separately via /api/generate-images
-    const pagesWithImages = storyData.pages.map((page) => ({ ...page, image_url: null }));
+    // Create Replicate predictions for all pages while still in this function.
+    // Takes ~2.5s extra but means images are already queued by the time the user
+    // lands on the story page — they can start polling immediately with no extra API call.
+    const pagesWithPredictions = await Promise.all(
+      storyData.pages.map(async (page) => {
+        if (!page.image_prompt || !REPLICATE_API_TOKEN) {
+          return { ...page, image_url: null, poll_url: null };
+        }
+        try {
+          const res = await fetch(
+            'https://api.replicate.com/v1/models/black-forest-labs/flux-schnell/predictions',
+            {
+              method: 'POST',
+              headers: {
+                Authorization: `Bearer ${REPLICATE_API_TOKEN}`,
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                input: {
+                  prompt: page.image_prompt,
+                  go_fast: true,
+                  num_outputs: 1,
+                  aspect_ratio: '4:3',
+                  output_format: 'webp',
+                  output_quality: 80,
+                },
+              }),
+            }
+          );
+          if (!res.ok) return { ...page, image_url: null, poll_url: null };
+          const prediction = await res.json();
+          return {
+            ...page,
+            image_url: null,
+            poll_url: prediction.urls?.get ?? null,
+          };
+        } catch {
+          return { ...page, image_url: null, poll_url: null };
+        }
+      })
+    );
 
     // Combine content for full story text
-    const fullContent = pagesWithImages.map((p) => p.content).join('\n\n');
+    const fullContent = pagesWithPredictions.map((p) => p.content).join('\n\n');
 
     // Save story to DB
     const { data: story, error: storyError } = await supabase
@@ -249,7 +288,7 @@ export async function POST(request: Request) {
         theme: storyData.theme_emoji,
         word_count: storyData.word_count,
         reading_time_minutes: Math.ceil((storyData.word_count || 500) / 150),
-        pages: pagesWithImages,
+        pages: pagesWithPredictions,
       })
       .select()
       .single();
