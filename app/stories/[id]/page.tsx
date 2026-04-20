@@ -288,27 +288,68 @@ export default function StoryPage() {
         const pagesNeedingImages = pages.filter((p) => p.image_prompt && !p.image_url);
 
         if (pagesNeedingImages.length > 0) {
-          // Generate images one page at a time — each call returns fast, state updates progressively
+          // Start + poll approach: /api/generate-image fires the prediction (<2s),
+          // then /api/poll-image is called every 3s until the image is ready.
+          // Each API call is fast, so it works on Vercel Hobby (10s limit).
           (async () => {
             for (const p of pagesNeedingImages) {
               setImageLoadingPage(p.page_number);
               try {
-                const res = await fetch('/api/generate-image', {
+                // Step 1: Start prediction
+                const startRes = await fetch('/api/generate-image', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify({ story_id: data.id, page_number: p.page_number }),
                 });
-                const result = await res.json();
-                if (result.image_url) {
+                const startData = await startRes.json();
+
+                if (startData.status === 'succeeded' && startData.image_url) {
+                  // Fast path — Replicate finished immediately
                   setStory((prev) => {
                     if (!prev) return prev;
-                    const updatedPages = prev.pages.map((pg) =>
-                      pg.page_number === result.page_number
-                        ? { ...pg, image_url: result.image_url }
-                        : pg
-                    );
-                    return { ...prev, pages: updatedPages };
+                    return { ...prev, pages: prev.pages.map((pg) =>
+                      pg.page_number === p.page_number ? { ...pg, image_url: startData.image_url } : pg
+                    )};
                   });
+                  continue;
+                }
+
+                if (!startData.poll_url) {
+                  console.error(`No poll_url for page ${p.page_number}`, startData);
+                  continue;
+                }
+
+                // Step 2: Poll until done (max 40 polls = ~2 minutes)
+                let done = false;
+                for (let i = 0; i < 40 && !done; i++) {
+                  await new Promise((r) => setTimeout(r, 3000));
+                  try {
+                    const pollRes = await fetch('/api/poll-image', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({
+                        story_id: data.id,
+                        page_number: p.page_number,
+                        poll_url: startData.poll_url,
+                      }),
+                    });
+                    const pollData = await pollRes.json();
+
+                    if (pollData.status === 'succeeded' && pollData.image_url) {
+                      setStory((prev) => {
+                        if (!prev) return prev;
+                        return { ...prev, pages: prev.pages.map((pg) =>
+                          pg.page_number === p.page_number ? { ...pg, image_url: pollData.image_url } : pg
+                        )};
+                      });
+                      done = true;
+                    } else if (pollData.status === 'failed') {
+                      console.error(`Image failed for page ${p.page_number}`);
+                      done = true;
+                    }
+                  } catch (pollErr) {
+                    console.error(`Poll error for page ${p.page_number}:`, pollErr);
+                  }
                 }
               } catch (err) {
                 console.error(`Image generation failed for page ${p.page_number}:`, err);
