@@ -27,6 +27,16 @@ type Story = {
   children: { name: string; age: number };
 };
 
+// Layout per page index — varies image position for visual interest
+// 'top' = image above text, 'bottom' = text above image, 'left' = side-by-side (desktop)
+const PAGE_LAYOUTS: Array<'top' | 'bottom' | 'split-left' | 'split-right'> = [
+  'top',         // Page 1: classic — big image at top
+  'bottom',      // Page 2: text first, image below
+  'split-right', // Page 3: text left, image right panel
+  'top',         // Page 4: back to top
+  'split-left',  // Page 5: image left, text right
+];
+
 const bookStyles = `
   @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
 
@@ -39,12 +49,19 @@ const bookStyles = `
     to   { opacity: 1; transform: translateX(0) scale(1); }
   }
   @keyframes shimmer {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 1; }
+    0%, 100% { opacity: 0.45; }
+    50% { opacity: 0.95; }
+  }
+  @keyframes paintDot {
+    0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+    40% { opacity: 1; transform: scale(1); }
   }
   .page-forward { animation: pageForward 0.4s cubic-bezier(0.25,0.46,0.45,0.94); }
   .page-back    { animation: pageBack 0.4s cubic-bezier(0.25,0.46,0.45,0.94); }
   .shimmer { animation: shimmer 1.8s ease infinite; }
+  .paint-dot-1 { animation: paintDot 1.4s ease infinite 0s; }
+  .paint-dot-2 { animation: paintDot 1.4s ease infinite 0.2s; }
+  .paint-dot-3 { animation: paintDot 1.4s ease infinite 0.4s; }
 
   .book-page {
     background: #FFFEF9;
@@ -80,7 +97,7 @@ const bookStyles = `
 
   .story-text {
     font-family: 'Lora', Georgia, serif;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     line-height: 1.9;
     color: #2C1A0E;
     letter-spacing: 0.01em;
@@ -90,16 +107,59 @@ const bookStyles = `
   .page-border {
     position: absolute;
     inset: 36px 16px 16px 36px;
-    border: 1.5px solid rgba(116,21,21,0.12);
+    border: 1.5px solid rgba(116,21,21,0.10);
     border-radius: 4px;
     pointer-events: none;
     z-index: 0;
+  }
+
+  .illus-wrap {
+    position: relative;
+    overflow: hidden;
+  }
+  .illus-wrap img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  .corner-ornament {
+    position: absolute;
+    width: 18px; height: 18px;
+    border: 1.5px solid rgba(255,255,255,0.55);
+    border-radius: 2px;
+    pointer-events: none;
+  }
+
+  /* Split layout: side-by-side image + text */
+  .split-container {
+    display: flex;
+    flex-direction: row;
+    min-height: 280px;
+  }
+  .split-container.split-right .split-text { order: 1; }
+  .split-container.split-right .split-image { order: 2; }
+  .split-container.split-left .split-image { order: 1; }
+  .split-container.split-left .split-text { order: 2; }
+  .split-image {
+    flex: 0 0 45%;
+    position: relative;
+    overflow: hidden;
+  }
+  .split-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .split-text {
+    flex: 1;
+    padding: 20px 20px 20px 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .split-container.split-left .split-text {
+    padding: 20px 12px 20px 20px;
   }
 
   /* ---- Print styles ---- */
   @media print {
     body { background: white !important; }
     .no-print { display: none !important; }
+    .print-only { display: block !important; }
     .print-page {
       page-break-after: always;
       break-after: page;
@@ -142,7 +202,63 @@ const bookStyles = `
     }
     .book-page, .book-page::before, .book-page::after { box-shadow: none !important; }
   }
+  @media screen {
+    .print-only { display: none !important; }
+  }
 `;
+
+function IllustrationPlaceholder({ generating, theme }: { generating: boolean; theme: string }) {
+  return (
+    <div style={{
+      width: '100%', height: '100%',
+      background: 'linear-gradient(135deg, #d4e8d4 0%, #b8d4c8 50%, #c8d4e8 100%)',
+      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '10px',
+    }}>
+      <span style={{ fontSize: '3.5rem' }}>{theme || '📖'}</span>
+      {generating && (
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
+          <p className="shimmer" style={{ color: '#5a7a6a', fontSize: '0.75rem', margin: 0, fontFamily: 'Georgia, serif', fontStyle: 'italic' }}>
+            Painting your illustration
+          </p>
+          <div style={{ display: 'flex', gap: '5px' }}>
+            <span className="paint-dot-1" style={{ fontSize: '0.6rem', color: '#5a7a6a' }}>●</span>
+            <span className="paint-dot-2" style={{ fontSize: '0.6rem', color: '#5a7a6a' }}>●</span>
+            <span className="paint-dot-3" style={{ fontSize: '0.6rem', color: '#5a7a6a' }}>●</span>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function CornerOrnaments() {
+  return (
+    <>
+      {(['topLeft','topRight','bottomLeft','bottomRight'] as const).map((pos) => (
+        <div key={pos} className="corner-ornament" style={{
+          top: pos.startsWith('top') ? '7px' : 'auto',
+          bottom: pos.startsWith('bottom') ? '7px' : 'auto',
+          left: pos.endsWith('Left') ? '7px' : 'auto',
+          right: pos.endsWith('Right') ? '7px' : 'auto',
+          borderRightColor: pos.endsWith('Left') ? 'transparent' : undefined,
+          borderLeftColor: pos.endsWith('Right') ? 'transparent' : undefined,
+          borderBottomColor: pos.startsWith('top') ? 'transparent' : undefined,
+          borderTopColor: pos.startsWith('bottom') ? 'transparent' : undefined,
+        }} />
+      ))}
+    </>
+  );
+}
+
+function DecorativeRule() {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
+      <div style={{ flex: 1, height: '1px', background: 'linear-gradient(to right, rgba(116,21,21,0.15), transparent)' }} />
+      <span style={{ fontSize: '0.7rem', color: 'rgba(116,21,21,0.4)' }}>✦</span>
+      <div style={{ flex: 1, height: '1px', background: 'linear-gradient(to left, rgba(116,21,21,0.15), transparent)' }} />
+    </div>
+  );
+}
 
 export default function StoryPage() {
   const { id } = useParams<{ id: string }>();
@@ -152,7 +268,8 @@ export default function StoryPage() {
   const [currentPage, setCurrentPage] = useState(0);
   const [direction, setDirection] = useState<'forward' | 'back'>('forward');
   const [animKey, setAnimKey] = useState(0);
-  const [generatingImages, setGeneratingImages] = useState(false);
+  // Track which page number is currently having its image generated (null = none)
+  const [imageLoadingPage, setImageLoadingPage] = useState<number | null>(null);
   const supabase = createClient();
 
   useEffect(() => {
@@ -167,28 +284,45 @@ export default function StoryPage() {
         setStory(data);
         setFavourite(data.is_favourite);
 
-        const pages = data.pages || [];
-        const needsImages = pages.length > 0 && pages.some((p: Page) => p.image_prompt && !p.image_url);
-        if (needsImages) {
-          setGeneratingImages(true);
-          fetch('/api/generate-images', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ story_id: data.id }),
-          })
-            .then((res) => res.json())
-            .then((result) => {
-              if (result.pages) {
-                setStory((prev) => prev ? { ...prev, pages: result.pages } : prev);
+        const pages: Page[] = data.pages || [];
+        const pagesNeedingImages = pages.filter((p) => p.image_prompt && !p.image_url);
+
+        if (pagesNeedingImages.length > 0) {
+          // Generate images one page at a time — each call returns fast, state updates progressively
+          (async () => {
+            for (const p of pagesNeedingImages) {
+              setImageLoadingPage(p.page_number);
+              try {
+                const res = await fetch('/api/generate-image', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ story_id: data.id, page_number: p.page_number }),
+                });
+                const result = await res.json();
+                if (result.image_url) {
+                  setStory((prev) => {
+                    if (!prev) return prev;
+                    const updatedPages = prev.pages.map((pg) =>
+                      pg.page_number === result.page_number
+                        ? { ...pg, image_url: result.image_url }
+                        : pg
+                    );
+                    return { ...prev, pages: updatedPages };
+                  });
+                }
+              } catch (err) {
+                console.error(`Image generation failed for page ${p.page_number}:`, err);
               }
-            })
-            .finally(() => setGeneratingImages(false));
+            }
+            setImageLoadingPage(null);
+          })();
         }
       }
       setLoading(false);
     }
     fetchStory();
-  }, [id, supabase]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
 
   const toggleFavourite = async () => {
     const newVal = !favourite;
@@ -232,17 +366,109 @@ export default function StoryPage() {
   const page = pages[currentPage];
   const isLastPage = currentPage === totalPages - 1;
   const paragraphs = page.content.split('\n\n').filter(Boolean);
+  const layout = PAGE_LAYOUTS[currentPage] ?? 'top';
+  const isThisPageGenerating = imageLoadingPage === page.page_number;
 
-  // ---- Screen reading view ----
+  // ---- Illustration element ----
+  const illustrationEl = page.image_url ? (
+    <img src={page.image_url} alt={`Page ${currentPage + 1} illustration`} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+  ) : (
+    <IllustrationPlaceholder generating={isThisPageGenerating} theme={story.theme} />
+  );
+
+  // ---- Text content element ----
+  const textContentEl = (
+    <div style={{ padding: '22px 24px 28px 48px', position: 'relative', zIndex: 2 }}>
+      <DecorativeRule />
+      {currentPage === 0 && (
+        <h2 style={{ fontFamily: 'Lora, Georgia, serif', fontSize: '1.45rem', color: '#2C1A0E', marginBottom: '18px', lineHeight: 1.3, fontWeight: 600 }}>
+          {story.title}
+        </h2>
+      )}
+      <div className="story-text">
+        {paragraphs.map((para, i) => <p key={i}>{para}</p>)}
+      </div>
+      {isLastPage && story.moral && (
+        <div style={{ borderLeft: '3px solid #741515', paddingLeft: '16px', marginTop: '18px', color: '#5a3a2a', fontStyle: 'italic', fontFamily: 'Lora, Georgia, serif', fontSize: '0.9rem', lineHeight: 1.7 }}>
+          {story.moral}
+        </div>
+      )}
+      <div style={{ textAlign: 'center', marginTop: '18px', color: 'rgba(116,21,21,0.3)', fontSize: '0.78rem', fontFamily: 'Georgia, serif' }}>
+        — {currentPage + 1} —
+      </div>
+    </div>
+  );
+
+  // ---- Render layout variant ----
+  function renderPageContent() {
+    if (layout === 'split-left' || layout === 'split-right') {
+      return (
+        <div className={`split-container ${layout}`} style={{ marginLeft: '28px' }}>
+          <div className="split-image illus-wrap">
+            {illustrationEl}
+            <CornerOrnaments />
+          </div>
+          <div className="split-text" style={{ paddingLeft: layout === 'split-left' ? '16px' : undefined, paddingRight: layout === 'split-right' ? '16px' : undefined }}>
+            <DecorativeRule />
+            {currentPage === 0 && (
+              <h2 style={{ fontFamily: 'Lora, Georgia, serif', fontSize: '1.2rem', color: '#2C1A0E', marginBottom: '14px', lineHeight: 1.3, fontWeight: 600 }}>
+                {story.title}
+              </h2>
+            )}
+            <div className="story-text" style={{ fontSize: '0.9rem' }}>
+              {paragraphs.map((para, i) => <p key={i}>{para}</p>)}
+            </div>
+            {isLastPage && story.moral && (
+              <div style={{ borderLeft: '3px solid #741515', paddingLeft: '12px', marginTop: '14px', color: '#5a3a2a', fontStyle: 'italic', fontFamily: 'Lora, Georgia, serif', fontSize: '0.82rem', lineHeight: 1.7 }}>
+                {story.moral}
+              </div>
+            )}
+            <div style={{ textAlign: 'center', marginTop: '14px', color: 'rgba(116,21,21,0.3)', fontSize: '0.75rem', fontFamily: 'Georgia, serif' }}>
+              — {currentPage + 1} —
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    if (layout === 'bottom') {
+      // Text first, then image below
+      return (
+        <>
+          {textContentEl}
+          <div className="illus-wrap" style={{ width: 'calc(100% - 28px)', marginLeft: '28px', aspectRatio: '4/3' }}>
+            {illustrationEl}
+            <CornerOrnaments />
+          </div>
+          <div style={{ height: '16px' }} />
+        </>
+      );
+    }
+
+    // Default: 'top' — image above text
+    return (
+      <>
+        <div className="illus-wrap" style={{ width: 'calc(100% - 28px)', marginLeft: '28px', aspectRatio: '4/3' }}>
+          {illustrationEl}
+          <CornerOrnaments />
+        </div>
+        {textContentEl}
+      </>
+    );
+  }
+
   return (
     <>
       {/* Print-only layout: all pages rendered for printing */}
-      <div style={{ display: 'none' }} className="print-only">
+      <div className="print-only">
+        <div className="print-page">
+          <h1 className="print-title">{story.title}</h1>
+          {pages[0]?.image_url && (
+            <img src={pages[0].image_url} alt="Cover" className="print-image" />
+          )}
+        </div>
         {pages.map((p, i) => (
           <div key={p.page_number} className="print-page">
-            {i === 0 && (
-              <h1 className="print-title">{story.title}</h1>
-            )}
             {p.image_url && (
               <img src={p.image_url} alt={`Page ${i + 1}`} className="print-image" />
             )}
@@ -283,94 +509,26 @@ export default function StoryPage() {
           <span style={{ fontFamily: 'Georgia, serif', fontSize: '0.9rem', color: 'rgba(255,255,255,0.8)', textAlign: 'center', flex: 1, padding: '0 12px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
             {story.title}
           </span>
-          <button onClick={toggleFavourite} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '6px', display: 'flex' }}>
-            <Heart size={19} color="#c4784a" fill={favourite ? '#c4784a' : 'none'} />
-          </button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            {imageLoadingPage !== null && (
+              <span style={{ fontSize: '0.7rem', color: 'rgba(255,200,100,0.7)', fontFamily: 'Georgia, serif' }}>
+                🎨 p{imageLoadingPage}
+              </span>
+            )}
+            <button onClick={toggleFavourite} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '6px', display: 'flex' }}>
+              <Heart size={19} color="#c4784a" fill={favourite ? '#c4784a' : 'none'} />
+            </button>
+          </div>
         </div>
 
         {/* Book */}
         <div
           key={animKey}
           className={`book-page ${direction === 'forward' ? 'page-forward' : 'page-back'}`}
-          style={{ width: '100%', maxWidth: '620px', margin: '24px 16px 0', flex: 1 }}
+          style={{ width: '100%', maxWidth: '640px', margin: '24px 16px 0', flex: 1 }}
         >
           <div className="page-border" />
-
-          {/* Illustration */}
-          <div style={{ width: '100%', aspectRatio: '4/3', overflow: 'hidden', position: 'relative', marginLeft: '28px', width: 'calc(100% - 28px)' }}>
-            {page.image_url ? (
-              <img
-                src={page.image_url}
-                alt={`Page ${currentPage + 1}`}
-                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-              />
-            ) : (
-              <div style={{
-                width: '100%', height: '100%',
-                background: 'linear-gradient(135deg, #d4e8d4 0%, #b8d4c8 50%, #c8d4e8 100%)',
-                display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '12px',
-              }}>
-                <span style={{ fontSize: '4.5rem' }}>{story.theme || '📖'}</span>
-                {generatingImages && (
-                  <p className="shimmer" style={{ color: '#5a7a6a', fontSize: '0.8rem', margin: 0, fontFamily: 'Georgia, serif', fontStyle: 'italic' }}>
-                    Painting your illustration...
-                  </p>
-                )}
-              </div>
-            )}
-
-            {/* Decorative corner ornaments on image */}
-            {['topLeft','topRight','bottomLeft','bottomRight'].map((pos) => (
-              <div key={pos} style={{
-                position: 'absolute',
-                width: '20px', height: '20px',
-                top: pos.startsWith('top') ? '8px' : 'auto',
-                bottom: pos.startsWith('bottom') ? '8px' : 'auto',
-                left: pos.endsWith('Left') ? '8px' : 'auto',
-                right: pos.endsWith('Right') ? '8px' : 'auto',
-                border: '1.5px solid rgba(255,255,255,0.5)',
-                borderRadius: '2px',
-                borderRightColor: pos.endsWith('Left') ? 'transparent' : undefined,
-                borderLeftColor: pos.endsWith('Right') ? 'transparent' : undefined,
-                borderBottomColor: pos.startsWith('top') ? 'transparent' : undefined,
-                borderTopColor: pos.startsWith('bottom') ? 'transparent' : undefined,
-              }} />
-            ))}
-          </div>
-
-          {/* Text area */}
-          <div style={{ padding: '24px 28px 32px 52px', position: 'relative', zIndex: 2 }}>
-
-            {/* Decorative rule */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '18px' }}>
-              <div style={{ flex: 1, height: '1px', background: 'linear-gradient(to right, rgba(116,21,21,0.15), transparent)' }} />
-              <span style={{ fontSize: '0.75rem', color: 'rgba(116,21,21,0.4)' }}>✦</span>
-              <div style={{ flex: 1, height: '1px', background: 'linear-gradient(to left, rgba(116,21,21,0.15), transparent)' }} />
-            </div>
-
-            {/* Title on first page */}
-            {currentPage === 0 && (
-              <h2 style={{ fontFamily: 'Lora, Georgia, serif', fontSize: '1.5rem', color: '#2C1A0E', marginBottom: '20px', lineHeight: 1.3, fontWeight: 600 }}>
-                {story.title}
-              </h2>
-            )}
-
-            <div className="story-text">
-              {paragraphs.map((para, i) => <p key={i}>{para}</p>)}
-            </div>
-
-            {/* Moral on last page */}
-            {isLastPage && story.moral && (
-              <div style={{ borderLeft: '3px solid #741515', paddingLeft: '16px', marginTop: '20px', color: '#5a3a2a', fontStyle: 'italic', fontFamily: 'Lora, Georgia, serif', fontSize: '0.95rem', lineHeight: 1.7 }}>
-                {story.moral}
-              </div>
-            )}
-
-            {/* Page number */}
-            <div style={{ textAlign: 'center', marginTop: '20px', color: 'rgba(116,21,21,0.35)', fontSize: '0.8rem', fontFamily: 'Georgia, serif' }}>
-              — {currentPage + 1} —
-            </div>
-          </div>
+          {renderPageContent()}
         </div>
 
         {/* Navigation */}
@@ -397,17 +555,18 @@ export default function StoryPage() {
 
           {/* Dots */}
           <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
-            {pages.map((_, i) => (
+            {pages.map((p, i) => (
               <button
                 key={i}
                 onClick={() => goToPage(i)}
                 style={{
                   width: i === currentPage ? '22px' : '7px',
                   height: '7px', borderRadius: '4px',
-                  background: i === currentPage ? '#c4784a' : 'rgba(255,255,255,0.25)',
+                  background: i === currentPage ? '#c4784a' : (p.image_url ? 'rgba(255,255,255,0.4)' : 'rgba(255,255,255,0.18)'),
                   border: 'none', cursor: 'pointer',
                   transition: 'all 0.25s', padding: 0,
                 }}
+                title={p.image_url ? `Page ${i + 1}` : `Page ${i + 1} — painting...`}
               />
             ))}
           </div>
