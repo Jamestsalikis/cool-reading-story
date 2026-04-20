@@ -5,6 +5,9 @@ export const maxDuration = 60;
 
 const REPLICATE_API_TOKEN = process.env.REPLICATE_API_TOKEN;
 
+// Generates one image. Uses Prefer: wait=10 so Replicate holds the connection
+// until the image is done (Flux Schnell typically finishes in 2-5s).
+// No extra polling — keeps each call predictably short so all 5 fit in 60s.
 async function generateImage(prompt: string): Promise<string | null> {
   try {
     const res = await fetch(
@@ -14,28 +17,29 @@ async function generateImage(prompt: string): Promise<string | null> {
         headers: {
           Authorization: `Bearer ${REPLICATE_API_TOKEN}`,
           'Content-Type': 'application/json',
-          Prefer: 'wait=20',
+          Prefer: 'wait=10',
         },
         body: JSON.stringify({
-          input: { prompt, go_fast: true, num_outputs: 1, aspect_ratio: '4:3', output_format: 'webp', output_quality: 80 },
+          input: {
+            prompt,
+            go_fast: true,
+            num_outputs: 1,
+            aspect_ratio: '4:3',
+            output_format: 'webp',
+            output_quality: 80,
+          },
         }),
       }
     );
     if (!res.ok) return null;
     const prediction = await res.json();
-    if (prediction.status === 'succeeded' && prediction.output?.[0]) return prediction.output[0];
-    if (prediction.error || !prediction.urls?.get) return null;
-
-    // Poll up to 5 times (15s) if not immediate
-    for (let i = 0; i < 5; i++) {
-      await new Promise(r => setTimeout(r, 3000));
-      const poll = await fetch(prediction.urls.get, { headers: { Authorization: `Bearer ${REPLICATE_API_TOKEN}` } });
-      const p = await poll.json();
-      if (p.status === 'succeeded' && p.output?.[0]) return p.output[0];
-      if (p.status === 'failed') return null;
+    if (prediction.status === 'succeeded' && prediction.output?.[0]) {
+      return prediction.output[0];
     }
-  } catch { return null; }
-  return null;
+    return null;
+  } catch {
+    return null;
+  }
 }
 
 export async function POST(request: Request) {
@@ -53,36 +57,32 @@ export async function POST(request: Request) {
     .single();
   if (!story) return NextResponse.json({ error: 'Not found' }, { status: 404 });
 
-  const pages = story.pages || [];
-  const pagesNeedingImages = pages.filter(
-    (p: { image_prompt?: string; image_url?: string }) => p.image_prompt && !p.image_url
-  );
+  const pages: Array<{ page_number: number; image_prompt?: string; image_url?: string }> =
+    story.pages || [];
 
-  if (pagesNeedingImages.length === 0) return NextResponse.json({ done: true });
+  // Sequential — Replicate 429s on concurrent requests. Each image typically
+  // takes 2-5s with Prefer: wait=10, so 5 images = ~15-25s total, well within 60s.
+  for (const page of pages) {
+    if (!page.image_prompt || page.image_url) continue;
 
-  // Generate ALL images in parallel — each saves to DB independently as soon as it's done.
-  // Re-fetches pages before each save to avoid race conditions overwriting each other.
-  await Promise.all(
-    pagesNeedingImages.map(async (page: { page_number: number; image_prompt: string }) => {
-      const imageUrl = await generateImage(page.image_prompt);
-      if (!imageUrl) return;
+    const imageUrl = await generateImage(page.image_prompt);
+    if (!imageUrl) continue;
 
-      // Re-fetch current pages so concurrent saves don't overwrite each other
-      const { data: current } = await supabase
-        .from('stories')
-        .select('pages')
-        .eq('id', story_id)
-        .single();
+    // Re-fetch before each save so concurrent page opens don't overwrite each other
+    const { data: current } = await supabase
+      .from('stories')
+      .select('pages')
+      .eq('id', story_id)
+      .single();
 
-      if (!current?.pages) return;
+    if (!current?.pages) continue;
 
-      const updatedPages = current.pages.map((p: { page_number: number }) =>
-        p.page_number === page.page_number ? { ...p, image_url: imageUrl } : p
-      );
+    const updatedPages = current.pages.map((p: { page_number: number }) =>
+      p.page_number === page.page_number ? { ...p, image_url: imageUrl } : p
+    );
 
-      await supabase.from('stories').update({ pages: updatedPages }).eq('id', story_id);
-    })
-  );
+    await supabase.from('stories').update({ pages: updatedPages }).eq('id', story_id);
+  }
 
   return NextResponse.json({ done: true });
 }
