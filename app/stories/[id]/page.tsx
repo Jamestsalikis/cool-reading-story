@@ -266,34 +266,57 @@ export default function StoryPage() {
           imageGenStarted.current = true;
           setLoadingPages(new Set(pagesNeedingImages.map((p) => p.page_number)));
 
-          // Fire server-side generation — runs all images in parallel, saves each to DB as done.
-          // Browser just polls Supabase every 4s. Works even if user closes the tab.
-          fetch('/api/generate-all-images', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ story_id: data.id }),
-          });
+          // Sequential browser-driven generation — one image at a time.
+          // Each Vercel call is <1s (well within Hobby 10s limit).
+          // Only one Replicate prediction runs at a time — no 429 rate limits.
+          (async () => {
+            for (const page of pagesNeedingImages) {
+              // Step 1: create the prediction (~300ms Vercel call)
+              let pollUrl: string | null = null;
+              try {
+                const res = await fetch('/api/generate-image', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ story_id: data.id, page_number: page.page_number }),
+                });
+                const result = await res.json();
+                pollUrl = result.poll_url ?? null;
+              } catch {}
 
-          // Poll Supabase every 4s — images pop in as the server saves them
-          const interval = setInterval(async () => {
-            const { data: fresh } = await supabase
-              .from('stories')
-              .select('pages')
-              .eq('id', data.id)
-              .single();
-            if (fresh?.pages) {
-              setStory((prev) => prev ? { ...prev, pages: fresh.pages } : prev);
-              setLoadingPages(
-                new Set(
-                  (fresh.pages as Page[])
-                    .filter((p) => p.image_prompt && !p.image_url)
-                    .map((p) => p.page_number)
-                )
-              );
-              const allDone = (fresh.pages as Page[]).every((p) => !p.image_prompt || p.image_url);
-              if (allDone) clearInterval(interval);
+              if (!pollUrl) continue;
+
+              // Step 2: poll until image is ready, then move to next page
+              for (let i = 0; i < 30; i++) {
+                await new Promise((r) => setTimeout(r, 3000));
+                try {
+                  const res = await fetch('/api/poll-image', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ story_id: data.id, page_number: page.page_number, poll_url: pollUrl }),
+                  });
+                  const result = await res.json();
+                  if (result.status === 'succeeded' && result.image_url) {
+                    setStory((prev) => {
+                      if (!prev) return prev;
+                      return {
+                        ...prev,
+                        pages: prev.pages.map((p) =>
+                          p.page_number === page.page_number ? { ...p, image_url: result.image_url } : p
+                        ),
+                      };
+                    });
+                    setLoadingPages((prev) => {
+                      const next = new Set(prev);
+                      next.delete(page.page_number);
+                      return next;
+                    });
+                    break;
+                  }
+                  if (result.status === 'failed') break;
+                } catch {}
+              }
             }
-          }, 4000);
+          })();
         }
       }
       setLoading(false);
