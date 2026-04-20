@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, ArrowRight, Heart, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowLeft, Heart, ChevronLeft, ChevronRight, Printer } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 
 type Page = {
@@ -27,17 +27,121 @@ type Story = {
   children: { name: string; age: number };
 };
 
-const pageStyles = `
-  @keyframes fadeSlideIn {
-    from { opacity: 0; transform: translateX(30px); }
-    to { opacity: 1; transform: translateX(0); }
+const bookStyles = `
+  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
+
+  @keyframes pageForward {
+    from { opacity: 0; transform: translateX(40px) scale(0.98); }
+    to   { opacity: 1; transform: translateX(0) scale(1); }
   }
-  @keyframes fadeSlideInLeft {
-    from { opacity: 0; transform: translateX(-30px); }
-    to { opacity: 1; transform: translateX(0); }
+  @keyframes pageBack {
+    from { opacity: 0; transform: translateX(-40px) scale(0.98); }
+    to   { opacity: 1; transform: translateX(0) scale(1); }
   }
-  .page-enter { animation: fadeSlideIn 0.35s ease; }
-  .page-enter-left { animation: fadeSlideInLeft 0.35s ease; }
+  @keyframes shimmer {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+  .page-forward { animation: pageForward 0.4s cubic-bezier(0.25,0.46,0.45,0.94); }
+  .page-back    { animation: pageBack 0.4s cubic-bezier(0.25,0.46,0.45,0.94); }
+  .shimmer { animation: shimmer 1.8s ease infinite; }
+
+  .book-page {
+    background: #FFFEF9;
+    box-shadow:
+      0 2px 4px rgba(0,0,0,0.08),
+      0 8px 24px rgba(0,0,0,0.12),
+      inset 0 0 0 1px rgba(0,0,0,0.04);
+    border-radius: 4px 12px 12px 4px;
+    position: relative;
+    overflow: hidden;
+  }
+  .book-page::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 28px;
+    background: linear-gradient(to right, #E8DDD0, #F5F0E8);
+    border-right: 1px solid rgba(0,0,0,0.06);
+    z-index: 1;
+  }
+  .book-page::after {
+    content: '';
+    position: absolute;
+    left: 12px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgba(0,0,0,0.04);
+    z-index: 1;
+  }
+
+  .story-text {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1.1rem;
+    line-height: 1.9;
+    color: #2C1A0E;
+    letter-spacing: 0.01em;
+  }
+  .story-text p { margin-bottom: 1.2em; }
+
+  .page-border {
+    position: absolute;
+    inset: 36px 16px 16px 36px;
+    border: 1.5px solid rgba(116,21,21,0.12);
+    border-radius: 4px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ---- Print styles ---- */
+  @media print {
+    body { background: white !important; }
+    .no-print { display: none !important; }
+    .print-page {
+      page-break-after: always;
+      break-after: page;
+      width: 100%;
+      max-width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+    .print-page:last-child { page-break-after: avoid; }
+    .print-image {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+    }
+    .print-text {
+      padding: 24px 32px;
+      font-family: 'Lora', Georgia, serif;
+      font-size: 14pt;
+      line-height: 1.8;
+      color: #000;
+    }
+    .print-title {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 22pt;
+      text-align: center;
+      margin-bottom: 12pt;
+    }
+    .print-moral {
+      border-left: 3px solid #741515;
+      padding-left: 16px;
+      font-style: italic;
+      margin-top: 24pt;
+      font-size: 12pt;
+    }
+    .print-page-num {
+      text-align: center;
+      font-size: 10pt;
+      color: #666;
+      margin-top: 16pt;
+    }
+    .book-page, .book-page::before, .book-page::after { box-shadow: none !important; }
+  }
 `;
 
 export default function StoryPage() {
@@ -63,7 +167,6 @@ export default function StoryPage() {
         setStory(data);
         setFavourite(data.is_favourite);
 
-        // If pages exist but have no images, trigger image generation
         const pages = data.pages || [];
         const needsImages = pages.length > 0 && pages.some((p: Page) => p.image_prompt && !p.image_url);
         if (needsImages) {
@@ -101,8 +204,8 @@ export default function StoryPage() {
 
   if (loading) {
     return (
-      <div style={{ minHeight: '100vh', backgroundColor: '#FAF7F0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <p style={{ color: '#6B5E4E' }}>Loading story...</p>
+      <div style={{ minHeight: '100vh', background: '#2C1810', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <p style={{ color: 'rgba(255,255,255,0.6)', fontFamily: 'Georgia, serif' }}>Opening your book...</p>
       </div>
     );
   }
@@ -130,219 +233,212 @@ export default function StoryPage() {
   const isLastPage = currentPage === totalPages - 1;
   const paragraphs = page.content.split('\n\n').filter(Boolean);
 
+  // ---- Screen reading view ----
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#1A1209', display: 'flex', flexDirection: 'column' }}>
-      <style>{pageStyles}</style>
-
-      {/* Top Bar */}
-      <div style={{
-        backgroundColor: 'rgba(26,18,9,0.95)',
-        backdropFilter: 'blur(8px)',
-        borderBottom: '1px solid rgba(255,255,255,0.08)',
-        padding: '14px 20px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        position: 'sticky',
-        top: 0,
-        zIndex: 10,
-      }}>
-        <Link
-          href="/dashboard"
-          style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'rgba(255,255,255,0.7)', textDecoration: 'none', fontSize: '0.9rem' }}
-        >
-          <ArrowLeft size={16} />
-          Library
-        </Link>
-        <h1 className="font-serif" style={{ fontSize: '1rem', color: 'white', margin: 0, textAlign: 'center', flex: 1, padding: '0 16px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-          {story.title}
-        </h1>
-        <button
-          onClick={toggleFavourite}
-          style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '8px', display: 'flex', alignItems: 'center' }}
-        >
-          <Heart size={20} color="#741515" fill={favourite ? '#741515' : 'none'} />
-        </button>
-      </div>
-
-      {/* Book Page */}
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', maxWidth: '680px', width: '100%', margin: '0 auto' }}>
-
-        {/* Page Image */}
-        <div
-          key={`img-${animKey}`}
-          className={direction === 'forward' ? 'page-enter' : 'page-enter-left'}
-          style={{
-            width: '100%',
-            aspectRatio: '4/3',
-            backgroundColor: '#2a1f14',
-            overflow: 'hidden',
-            position: 'relative',
-          }}
-        >
-          {page.image_url ? (
-            <img
-              src={page.image_url}
-              alt={`Page ${currentPage + 1} illustration`}
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            />
-          ) : (
-            <div style={{
-              width: '100%',
-              height: '100%',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              background: 'linear-gradient(135deg, #1a3a3a 0%, #2d6a5c 100%)',
-              gap: '16px',
-            }}>
-              <span style={{ fontSize: '4rem' }}>{story.theme || '📖'}</span>
-              {generatingImages && (
-                <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.8rem', margin: 0 }}>
-                  Painting illustration…
-                </p>
+    <>
+      {/* Print-only layout: all pages rendered for printing */}
+      <div style={{ display: 'none' }} className="print-only">
+        {pages.map((p, i) => (
+          <div key={p.page_number} className="print-page">
+            {i === 0 && (
+              <h1 className="print-title">{story.title}</h1>
+            )}
+            {p.image_url && (
+              <img src={p.image_url} alt={`Page ${i + 1}`} className="print-image" />
+            )}
+            <div className="print-text">
+              {p.content.split('\n\n').filter(Boolean).map((para, j) => (
+                <p key={j}>{para}</p>
+              ))}
+              {i === totalPages - 1 && story.moral && (
+                <div className="print-moral">{story.moral}</div>
               )}
             </div>
-          )}
-
-          <div style={{
-            position: 'absolute',
-            bottom: '12px',
-            right: '12px',
-            backgroundColor: 'rgba(0,0,0,0.55)',
-            backdropFilter: 'blur(4px)',
-            color: 'white',
-            fontSize: '0.75rem',
-            padding: '4px 10px',
-            borderRadius: '20px',
-          }}>
-            {currentPage + 1} / {totalPages}
+            <div className="print-page-num">{i + 1}</div>
           </div>
+        ))}
+      </div>
+
+      <style>{bookStyles}</style>
+
+      {/* Screen layout */}
+      <div className="no-print" style={{ minHeight: '100vh', background: 'linear-gradient(160deg, #2C1810 0%, #1a0f08 100%)', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '0 0 100px' }}>
+
+        {/* Top Bar */}
+        <div style={{
+          width: '100%',
+          padding: '14px 20px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          position: 'sticky',
+          top: 0,
+          zIndex: 10,
+          background: 'rgba(44,24,16,0.9)',
+          backdropFilter: 'blur(8px)',
+        }}>
+          <Link href="/dashboard" style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'rgba(255,255,255,0.65)', textDecoration: 'none', fontSize: '0.875rem' }}>
+            <ArrowLeft size={15} /> Library
+          </Link>
+          <span style={{ fontFamily: 'Georgia, serif', fontSize: '0.9rem', color: 'rgba(255,255,255,0.8)', textAlign: 'center', flex: 1, padding: '0 12px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+            {story.title}
+          </span>
+          <button onClick={toggleFavourite} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '6px', display: 'flex' }}>
+            <Heart size={19} color="#c4784a" fill={favourite ? '#c4784a' : 'none'} />
+          </button>
         </div>
 
-        {/* Page Text */}
+        {/* Book */}
         <div
-          key={`text-${animKey}`}
-          className={direction === 'forward' ? 'page-enter' : 'page-enter-left'}
-          style={{
-            backgroundColor: '#FAF7F0',
-            flex: 1,
-            padding: '28px 24px 120px',
-          }}
+          key={animKey}
+          className={`book-page ${direction === 'forward' ? 'page-forward' : 'page-back'}`}
+          style={{ width: '100%', maxWidth: '620px', margin: '24px 16px 0', flex: 1 }}
         >
-          {currentPage === 0 && (
-            <h2 className="font-serif" style={{ fontSize: '1.4rem', color: '#1A1209', marginBottom: '20px', lineHeight: 1.3 }}>
-              {story.title}
-            </h2>
-          )}
+          <div className="page-border" />
 
-          <div style={{ lineHeight: 1.85, color: '#1A1209', fontSize: '1.05rem' }}>
-            {paragraphs.map((para, i) => (
-              <p key={i} style={{ marginBottom: '1.25rem' }}>{para}</p>
+          {/* Illustration */}
+          <div style={{ width: '100%', aspectRatio: '4/3', overflow: 'hidden', position: 'relative', marginLeft: '28px', width: 'calc(100% - 28px)' }}>
+            {page.image_url ? (
+              <img
+                src={page.image_url}
+                alt={`Page ${currentPage + 1}`}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              />
+            ) : (
+              <div style={{
+                width: '100%', height: '100%',
+                background: 'linear-gradient(135deg, #d4e8d4 0%, #b8d4c8 50%, #c8d4e8 100%)',
+                display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '12px',
+              }}>
+                <span style={{ fontSize: '4.5rem' }}>{story.theme || '📖'}</span>
+                {generatingImages && (
+                  <p className="shimmer" style={{ color: '#5a7a6a', fontSize: '0.8rem', margin: 0, fontFamily: 'Georgia, serif', fontStyle: 'italic' }}>
+                    Painting your illustration...
+                  </p>
+                )}
+              </div>
+            )}
+
+            {/* Decorative corner ornaments on image */}
+            {['topLeft','topRight','bottomLeft','bottomRight'].map((pos) => (
+              <div key={pos} style={{
+                position: 'absolute',
+                width: '20px', height: '20px',
+                top: pos.startsWith('top') ? '8px' : 'auto',
+                bottom: pos.startsWith('bottom') ? '8px' : 'auto',
+                left: pos.endsWith('Left') ? '8px' : 'auto',
+                right: pos.endsWith('Right') ? '8px' : 'auto',
+                border: '1.5px solid rgba(255,255,255,0.5)',
+                borderRadius: '2px',
+                borderRightColor: pos.endsWith('Left') ? 'transparent' : undefined,
+                borderLeftColor: pos.endsWith('Right') ? 'transparent' : undefined,
+                borderBottomColor: pos.startsWith('top') ? 'transparent' : undefined,
+                borderTopColor: pos.startsWith('bottom') ? 'transparent' : undefined,
+              }} />
             ))}
           </div>
 
-          {isLastPage && story.moral && (
-            <div style={{
-              borderLeft: '3px solid #741515',
-              paddingLeft: '16px',
-              margin: '24px 0 0',
-              color: '#6B5E4E',
-              fontStyle: 'italic',
-              fontSize: '0.95rem',
-              lineHeight: 1.6,
-            }}>
-              {story.moral}
+          {/* Text area */}
+          <div style={{ padding: '24px 28px 32px 52px', position: 'relative', zIndex: 2 }}>
+
+            {/* Decorative rule */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '18px' }}>
+              <div style={{ flex: 1, height: '1px', background: 'linear-gradient(to right, rgba(116,21,21,0.15), transparent)' }} />
+              <span style={{ fontSize: '0.75rem', color: 'rgba(116,21,21,0.4)' }}>✦</span>
+              <div style={{ flex: 1, height: '1px', background: 'linear-gradient(to left, rgba(116,21,21,0.15), transparent)' }} />
             </div>
+
+            {/* Title on first page */}
+            {currentPage === 0 && (
+              <h2 style={{ fontFamily: 'Lora, Georgia, serif', fontSize: '1.5rem', color: '#2C1A0E', marginBottom: '20px', lineHeight: 1.3, fontWeight: 600 }}>
+                {story.title}
+              </h2>
+            )}
+
+            <div className="story-text">
+              {paragraphs.map((para, i) => <p key={i}>{para}</p>)}
+            </div>
+
+            {/* Moral on last page */}
+            {isLastPage && story.moral && (
+              <div style={{ borderLeft: '3px solid #741515', paddingLeft: '16px', marginTop: '20px', color: '#5a3a2a', fontStyle: 'italic', fontFamily: 'Lora, Georgia, serif', fontSize: '0.95rem', lineHeight: 1.7 }}>
+                {story.moral}
+              </div>
+            )}
+
+            {/* Page number */}
+            <div style={{ textAlign: 'center', marginTop: '20px', color: 'rgba(116,21,21,0.35)', fontSize: '0.8rem', fontFamily: 'Georgia, serif' }}>
+              — {currentPage + 1} —
+            </div>
+          </div>
+        </div>
+
+        {/* Navigation */}
+        <div style={{
+          position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 20,
+          background: 'rgba(44,24,16,0.95)', backdropFilter: 'blur(8px)',
+          borderTop: '1px solid rgba(255,255,255,0.08)',
+          padding: '12px 20px',
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px',
+        }}>
+          <button
+            onClick={() => goToPage(currentPage - 1)}
+            disabled={currentPage === 0}
+            style={{
+              display: 'flex', alignItems: 'center', gap: '4px',
+              background: 'none', border: '1.5px solid rgba(255,255,255,0.2)',
+              borderRadius: '8px', color: 'rgba(255,255,255,0.7)',
+              padding: '0.6rem 1rem', cursor: currentPage === 0 ? 'not-allowed' : 'pointer',
+              opacity: currentPage === 0 ? 0.3 : 1, fontSize: '0.875rem',
+            }}
+          >
+            <ChevronLeft size={16} /> Prev
+          </button>
+
+          {/* Dots */}
+          <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+            {pages.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goToPage(i)}
+                style={{
+                  width: i === currentPage ? '22px' : '7px',
+                  height: '7px', borderRadius: '4px',
+                  background: i === currentPage ? '#c4784a' : 'rgba(255,255,255,0.25)',
+                  border: 'none', cursor: 'pointer',
+                  transition: 'all 0.25s', padding: 0,
+                }}
+              />
+            ))}
+          </div>
+
+          {isLastPage ? (
+            <button
+              onClick={() => window.print()}
+              style={{
+                display: 'flex', alignItems: 'center', gap: '6px',
+                background: '#c4784a', border: 'none', borderRadius: '8px',
+                color: 'white', padding: '0.6rem 1rem',
+                cursor: 'pointer', fontSize: '0.875rem', fontWeight: 600,
+              }}
+            >
+              <Printer size={15} /> Print book
+            </button>
+          ) : (
+            <button
+              onClick={() => goToPage(currentPage + 1)}
+              style={{
+                display: 'flex', alignItems: 'center', gap: '4px',
+                background: '#741515', border: 'none', borderRadius: '8px',
+                color: 'white', padding: '0.6rem 1rem',
+                cursor: 'pointer', fontSize: '0.875rem', fontWeight: 600,
+              }}
+            >
+              Next <ChevronRight size={16} />
+            </button>
           )}
         </div>
       </div>
-
-      {/* Navigation Bar */}
-      <div style={{
-        position: 'fixed',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        backgroundColor: '#FAF7F0',
-        borderTop: '1px solid #E8E0D0',
-        padding: '12px 20px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        gap: '12px',
-        zIndex: 10,
-      }}>
-        <button
-          onClick={() => goToPage(currentPage - 1)}
-          disabled={currentPage === 0}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '6px',
-            padding: '0.7rem 1.2rem',
-            border: '2px solid #741515',
-            borderRadius: '8px',
-            backgroundColor: 'transparent',
-            color: '#741515',
-            cursor: currentPage === 0 ? 'not-allowed' : 'pointer',
-            opacity: currentPage === 0 ? 0.3 : 1,
-            fontSize: '0.9rem',
-            fontWeight: '600',
-          }}
-        >
-          <ChevronLeft size={18} /> Prev
-        </button>
-
-        <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
-          {pages.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => goToPage(i)}
-              style={{
-                width: i === currentPage ? '20px' : '8px',
-                height: '8px',
-                borderRadius: '4px',
-                backgroundColor: i === currentPage ? '#741515' : '#D4C4B0',
-                border: 'none',
-                cursor: 'pointer',
-                transition: 'all 0.2s',
-                padding: 0,
-              }}
-            />
-          ))}
-        </div>
-
-        {isLastPage ? (
-          <Link
-            href="/dashboard"
-            className="btn-brand"
-            style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '0.7rem 1.2rem', fontSize: '0.9rem' }}
-          >
-            Done <ArrowRight size={16} />
-          </Link>
-        ) : (
-          <button
-            onClick={() => goToPage(currentPage + 1)}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              padding: '0.7rem 1.2rem',
-              border: 'none',
-              borderRadius: '8px',
-              backgroundColor: '#741515',
-              color: 'white',
-              cursor: 'pointer',
-              fontSize: '0.9rem',
-              fontWeight: '600',
-            }}
-          >
-            Next <ChevronRight size={18} />
-          </button>
-        )}
-      </div>
-    </div>
+    </>
   );
 }
