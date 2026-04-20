@@ -266,33 +266,56 @@ export default function StoryPage() {
           imageGenStarted.current = true;
           setLoadingPages(new Set(pagesNeedingImages.map((p) => p.page_number)));
 
-          // Kick off server-side image generation (saves to DB as each image completes)
-          fetch('/api/generate-all-images', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ story_id: data.id }),
-          });
+          // Fire all predictions in parallel — each call takes ~300ms, all 5 start simultaneously
+          const predictions = await Promise.all(
+            pagesNeedingImages.map(async (page) => {
+              try {
+                const res = await fetch('/api/generate-image', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ story_id: data.id, page_number: page.page_number }),
+                });
+                const result = await res.json();
+                if (result.poll_url) return { page_number: page.page_number, poll_url: result.poll_url };
+              } catch {}
+              return null;
+            })
+          );
 
-          // Poll Supabase every 4s — images appear as the server saves them
-          const interval = setInterval(async () => {
-            const { data: fresh } = await supabase
-              .from('stories')
-              .select('pages')
-              .eq('id', data.id)
-              .single();
-            if (fresh?.pages) {
-              setStory((prev) => prev ? { ...prev, pages: fresh.pages } : prev);
-              setLoadingPages(
-                new Set(
-                  (fresh.pages as Page[])
-                    .filter((p) => p.image_prompt && !p.image_url)
-                    .map((p) => p.page_number)
-                )
-              );
-              const allDone = (fresh.pages as Page[]).every((p) => !p.image_prompt || p.image_url);
-              if (allDone) clearInterval(interval);
+          // Poll all predictions simultaneously — each resolves independently as images finish
+          predictions.filter(Boolean).forEach(async (pred) => {
+            const { page_number, poll_url } = pred!;
+            for (let i = 0; i < 40; i++) {
+              await new Promise((r) => setTimeout(r, 3000));
+              try {
+                const res = await fetch('/api/poll-image', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ story_id: data.id, page_number, poll_url }),
+                });
+                const result = await res.json();
+                if (result.status === 'succeeded' && result.image_url) {
+                  // Update this page's image immediately without waiting for a DB poll
+                  setStory((prev) => {
+                    if (!prev) return prev;
+                    return {
+                      ...prev,
+                      pages: prev.pages.map((p) =>
+                        p.page_number === page_number ? { ...p, image_url: result.image_url } : p
+                      ),
+                    };
+                  });
+                  setLoadingPages((prev) => {
+                    const next = new Set(prev);
+                    next.delete(page_number);
+                    return next;
+                  });
+                  break;
+                }
+                if (result.status === 'failed') break;
+              } catch {}
             }
-          }, 4000);
+          });
         }
       }
       setLoading(false);
