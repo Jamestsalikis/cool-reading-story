@@ -213,6 +213,11 @@ export async function POST(request: Request) {
       messages: [{ role: 'user', content: prompt }],
     });
 
+    // Capture real token usage from the API response
+    const inputTokens  = message.usage.input_tokens;
+    const outputTokens = message.usage.output_tokens;
+    console.log(`Token usage — input: ${inputTokens}, output: ${outputTokens}, total: ${inputTokens + outputTokens}`);
+
     const rawContent = message.content[0].type === 'text' ? message.content[0].text : '';
 
     // Parse JSON response
@@ -243,7 +248,7 @@ export async function POST(request: Request) {
     // Combine content for full story text
     const fullContent = pagesForDB.map((p) => p.content).join('\n\n');
 
-    // Save story to DB
+    // Save story to DB including real token counts
     const { data: story, error: storyError } = await supabase
       .from('stories')
       .insert({
@@ -256,6 +261,8 @@ export async function POST(request: Request) {
         word_count: storyData.word_count,
         reading_time_minutes: Math.ceil((storyData.word_count || 500) / 150),
         pages: pagesForDB,
+        input_tokens: inputTokens,
+        output_tokens: outputTokens,
       })
       .select()
       .single();
