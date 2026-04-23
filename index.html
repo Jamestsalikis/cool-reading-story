@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Cool Reading Story Cost Calculator",
+  "schemaVersion": 1,
+  "description": "Interactive cost-per-book calculator for Cool Reading Story — shows token usage, API costs in AUD, and gross profit scenarios by adjusting stories/user, price, and user count."
+}
+</script>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cool Reading Story — Cost & Pricing Model</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f4f0; color: #1a1a1a; padding: 24px; min-height: 100vh; }
+
+  h1 { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+  .subtitle { font-size: 13px; color: #666; margin-bottom: 24px; }
+
+  .metric-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
+  .metric-card { background: #fff; border-radius: 10px; border: 1px solid #e8e6e0; padding: 14px 16px; }
+  .metric-card .label { font-size: 12px; color: #888; margin-bottom: 6px; }
+  .metric-card .value { font-size: 22px; font-weight: 600; }
+  .metric-card .value.green { color: #1a7a4a; }
+
+  .real-badge { display: inline-block; background: #e6f4ec; color: #1a7a4a; font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 10px; margin-left: 6px; vertical-align: middle; }
+
+  .card { background: #fff; border-radius: 10px; border: 1px solid #e8e6e0; padding: 20px; margin-bottom: 16px; }
+  .card-title { font-size: 13px; font-weight: 600; color: #555; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.04em; }
+
+  .section-label { font-size: 11px; font-weight: 600; color: #aaa; text-transform: uppercase; letter-spacing: 0.06em; margin: 14px 0 6px; }
+
+  .breakdown-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid #f0ede8; font-size: 13px; }
+  .breakdown-row .row-label { color: #555; }
+  .breakdown-row .row-val { font-weight: 500; }
+  .breakdown-total { display: flex; justify-content: space-between; align-items: center; padding: 10px 0 0; font-size: 14px; font-weight: 600; border-top: 1.5px solid #e8e6e0; margin-top: 6px; }
+
+  .slider-group { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .slider-group label { font-size: 13px; color: #555; width: 200px; flex-shrink: 0; }
+  .slider-group input[type=range] { flex: 1; accent-color: #c47a3a; }
+  .slider-group .slider-val { font-size: 13px; font-weight: 600; min-width: 64px; text-align: right; }
+
+  .slider-section { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #f0ede8; }
+  .slider-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .slider-section-title { font-size: 11px; font-weight: 600; color: #aaa; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px; }
+
+  .revenue-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+  .rev-card { background: #f9f8f5; border-radius: 8px; padding: 12px 14px; }
+  .rev-card .rc-label { font-size: 11px; color: #888; margin-bottom: 3px; }
+  .rev-card .rc-val { font-size: 17px; font-weight: 600; }
+
+  .result-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px; margin-top: 16px; padding-top: 16px; border-top: 1px solid #f0ede8; }
+  .result-item .ri-label { font-size: 11px; color: #888; margin-bottom: 3px; }
+  .result-item .ri-val { font-size: 18px; font-weight: 600; }
+  .ri-val.green { color: #1a7a4a; }
+  .ri-val.red { color: #c0392b; }
+
+  .savings-row { display: flex; justify-content: space-between; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid #f0ede8; }
+  .savings-row:last-child { border-bottom: none; }
+  .savings-row .s-title { font-size: 13px; font-weight: 500; margin-bottom: 2px; }
+  .savings-row .s-note { font-size: 12px; color: #888; }
+  .savings-row .s-save { font-size: 13px; font-weight: 600; color: #1a7a4a; white-space: nowrap; margin-left: 16px; flex-shrink: 0; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .note { font-size: 11px; color: #999; margin-top: 10px; line-height: 1.6; }
+  .data-source { font-size: 11px; color: #1a7a4a; margin-top: 8px; line-height: 1.5; }
+
+  .not-included { background: #fffbf0; border: 1px solid #f0e0b0; border-radius: 8px; padding: 12px 14px; margin-top: 16px; }
+  .not-included .ni-title { font-size: 12px; font-weight: 600; color: #a07030; margin-bottom: 6px; }
+  .not-included ul { font-size: 12px; color: #888; padding-left: 16px; line-height: 1.8; }
+
+  .pill { display: inline-block; background: #f5f4f0; border: 1px solid #e0ddd8; border-radius: 20px; padding: 5px 12px; font-size: 12px; margin: 0 6px 8px 0; }
+  .pill strong { font-weight: 600; }
+
+  .scenario-note { font-size: 12px; color: #888; background: #f9f8f5; border-radius: 8px; padding: 10px 14px; margin-bottom: 16px; line-height: 1.6; }
+
+  @media (max-width: 640px) {
+    .metric-grid { grid-template-columns: 1fr 1fr; }
+    .two-col { grid-template-columns: 1fr; }
+    .result-grid { grid-template-columns: 1fr 1fr; }
+    .revenue-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Cool Reading Story — Cost & Pricing Model</h1>
+<p class="subtitle">API cost breakdown + revenue scenario modeller · AUD (USD × 1.58) · Token counts from live data</p>
+
+<div class="metric-grid">
+  <div class="metric-card">
+    <div class="label">Input tokens / book <span class="real-badge">REAL</span></div>
+    <div class="value">463</div>
+  </div>
+  <div class="metric-card">
+    <div class="label">Output tokens / book <span class="real-badge">REAL</span></div>
+    <div class="value">1,522</div>
+  </div>
+  <div class="metric-card">
+    <div class="label">Variable cost / book</div>
+    <div class="value" id="m-cost">—</div>
+  </div>
+  <div class="metric-card">
+    <div class="label">Fixed infra / month</div>
+    <div class="value">A$71</div>
+  </div>
+</div>
+
+<div class="two-col">
+  <div class="card">
+    <div class="card-title">Cost breakdown</div>
+    <div class="section-label">Variable — per book generated</div>
+    <div class="pill">Anthropic API: <strong>$3 / $15 per 1M tokens</strong></div>
+    <div class="pill">Flux Schnell: <strong>$0.003 / image</strong></div>
+    <div id="variable-rows"></div>
+    <div class="section-label" style="margin-top:16px;">Fixed — monthly regardless of users</div>
+    <div id="fixed-rows"></div>
+    <p class="data-source">Token counts from live story (23 Apr 2026, n=1). Accuracy improves as more stories are generated.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Cost reduction options</div>
+    <div id="savings"></div>
+    <div class="not-included">
+      <div class="ni-title">Not included in this model</div>
+      <ul>
+        <li>Your personal Claude.ai subscription (separate from the app's Anthropic API)</li>
+        <li>Domain name (~A$20/yr)</li>
+        <li>Development time</li>
+        <li>Marketing / customer acquisition</li>
+        <li>Payment processing (~1.5% Stripe)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Scenario modeller</div>
+
+  <div class="scenario-note">
+    Fixed infra (A$71/mo) dominates at low user counts — unit economics only look healthy at 50+ paying users. At scale, variable API cost per book (A$0.039) is the key lever.
+  </div>
+
+  <div class="slider-section">
+    <div class="slider-section-title">Subscription revenue</div>
+    <div class="slider-group">
+      <label>Active paying users</label>
+      <input type="range" min="1000" max="1000000" value="10000" step="1000" id="s-users" oninput="update()">
+      <span class="slider-val" id="o-users">10,000</span>
+    </div>
+    <div class="slider-group">
+      <label>Subscription price (A$/month)</label>
+      <input type="range" min="2" max="30" value="9" step="1" id="s-price" oninput="update()">
+      <span class="slider-val" id="o-price">A$9</span>
+    </div>
+    <div class="slider-group">
+      <label>Included stories per month</label>
+      <input type="range" min="1" max="20" value="4" step="1" id="s-stories" oninput="update()">
+      <span class="slider-val" id="o-stories">4</span>
+    </div>
+  </div>
+
+  <div class="slider-section">
+    <div class="slider-section-title">Additional story purchases (top-up)</div>
+    <div class="slider-group">
+      <label>Price per extra story (A$)</label>
+      <input type="range" min="0.20" max="3.00" value="0.99" step="0.01" id="s-extra-price" oninput="update()">
+      <span class="slider-val" id="o-extra-price">A$0.99</span>
+    </div>
+    <div class="slider-group">
+      <label>Extra purchases per user / month</label>
+      <input type="range" min="0" max="20" value="2" step="1" id="s-extra-qty" oninput="update()">
+      <span class="slider-val" id="o-extra-qty">2</span>
+    </div>
+    <div class="slider-group">
+      <label>% of users who buy extras</label>
+      <input type="range" min="1" max="100" value="15" step="1" id="s-extra-pct" oninput="update()">
+      <span class="slider-val" id="o-extra-pct">15%</span>
+    </div>
+  </div>
+
+  <div class="revenue-grid">
+    <div class="rev-card">
+      <div class="rc-label">Subscription revenue</div>
+      <div class="rc-val" id="r-sub">—</div>
+    </div>
+    <div class="rev-card">
+      <div class="rc-label">Top-up revenue</div>
+      <div class="rc-val" id="r-topup">—</div>
+    </div>
+  </div>
+
+  <div id="scenario-detail" style="font-size:12px;color:#888;line-height:1.8;padding:10px 14px;background:#f9f8f5;border-radius:8px;"></div>
+
+  <div class="result-grid">
+    <div class="result-item">
+      <div class="ri-label">Total revenue</div>
+      <div class="ri-val" id="r-revenue">—</div>
+    </div>
+    <div class="result-item">
+      <div class="ri-label">Total costs</div>
+      <div class="ri-val" id="r-costs">—</div>
+    </div>
+    <div class="result-item">
+      <div class="ri-label">Gross profit</div>
+      <div class="ri-val green" id="r-profit">—</div>
+    </div>
+    <div class="result-item">
+      <div class="ri-label">Gross margin</div>
+      <div class="ri-val green" id="r-margin">—</div>
+    </div>
+  </div>
+</div>
+
+<script>
+const FX = 1.58;
+const INPUT_TOKENS  = 463;
+const OUTPUT_TOKENS = 1522;
+
+const variableCosts = [
+  { label: `Anthropic API — input (${INPUT_TOKENS} tokens)`,   usd: (INPUT_TOKENS/1e6)*3   },
+  { label: `Anthropic API — output (${OUTPUT_TOKENS} tokens)`, usd: (OUTPUT_TOKENS/1e6)*15 },
+  { label: '5 images × Replicate Flux Schnell ($0.003)',        usd: 5*0.003               },
+];
+const fixedCosts = [
+  { label: 'Vercel Pro',   usd: 20 },
+  { label: 'Supabase Pro', usd: 25 },
+];
+
+const savingsData = [
+  { title: 'Switch story text to Claude Haiku', note: '~85% cheaper Claude API cost. A/B test story quality first.', save: (((INPUT_TOKENS/1e6)*3 + (OUTPUT_TOKENS/1e6)*15)*0.85)*FX },
+  { title: 'Reduce to 3 images per book',       note: 'Drop pages 2 & 4. Still visually rich, saves 40% image cost.', save: 2*0.003*FX },
+  { title: 'Shorten prompt (~200 fewer input tokens)', note: 'Condense requirements section. Negligible quality impact.', save: (200/1e6)*3*FX },
+  { title: 'Image CDN caching on re-reads',     note: 'No re-generation on re-open. Already implemented.', save: 0 },
+];
+
+function fmt(n, dp=3)  { return 'A$' + n.toFixed(dp); }
+function fmtBig(n)     {
+  if (n >= 1e6) return 'A$' + (n/1e6).toFixed(2) + 'M';
+  if (n >= 1e3) return 'A$' + (n/1e3).toFixed(1) + 'K';
+  return 'A$' + Math.round(n).toLocaleString();
+}
+function fmtNum(n) {
+  if (n >= 1e6) return (n/1e6).toFixed(2) + 'M';
+  if (n >= 1e3) return (n/1e3).toFixed(0) + 'K';
+  return n.toLocaleString();
+}
+function fmtPct(n) { return Math.round(n) + '%'; }
+
+function renderStatic() {
+  const varTotal = variableCosts.reduce((s,r) => s + r.usd*FX, 0);
+  document.getElementById('variable-rows').innerHTML =
+    variableCosts.map(r => `<div class="breakdown-row"><span class="row-label">${r.label}</span><span class="row-val">${fmt(r.usd*FX)}</span></div>`).join('') +
+    `<div class="breakdown-total"><span>Total per book</span><span>${fmt(varTotal)}</span></div>`;
+
+  const fixedTotal = fixedCosts.reduce((s,r) => s + r.usd*FX, 0);
+  document.getElementById('fixed-rows').innerHTML =
+    fixedCosts.map(r => `<div class="breakdown-row"><span class="row-label">${r.label}</span><span class="row-val">A$${Math.round(r.usd*FX)}/mo</span></div>`).join('') +
+    `<div class="breakdown-total"><span>Total fixed</span><span>A$${Math.round(fixedTotal)}/mo</span></div>`;
+
+  document.getElementById('savings').innerHTML = savingsData.map(s => `
+    <div class="savings-row">
+      <div><div class="s-title">${s.title}</div><div class="s-note">${s.note}</div></div>
+      <div class="s-save">${s.save > 0 ? '-' + fmt(s.save) : '✓ Done'}</div>
+    </div>`).join('');
+
+  document.getElementById('m-cost').textContent = fmt(varTotal);
+}
+
+function update() {
+  const users      = parseInt(document.getElementById('s-users').value);
+  const price      = parseInt(document.getElementById('s-price').value);
+  const stories    = parseInt(document.getElementById('s-stories').value);
+  const extraPrice = parseFloat(document.getElementById('s-extra-price').value);
+  const extraQty   = parseInt(document.getElementById('s-extra-qty').value);
+  const extraPct   = parseInt(document.getElementById('s-extra-pct').value);
+
+  document.getElementById('o-users').textContent      = fmtNum(users);
+  document.getElementById('o-price').textContent      = 'A$' + price;
+  document.getElementById('o-stories').textContent    = stories;
+  document.getElementById('o-extra-price').textContent = 'A$' + extraPrice.toFixed(2);
+  document.getElementById('o-extra-qty').textContent  = extraQty;
+  document.getElementById('o-extra-pct').textContent  = extraPct + '%';
+
+  const varPerBook    = variableCosts.reduce((s,r) => s + r.usd*FX, 0);
+  const fixedMonthly  = fixedCosts.reduce((s,r) => s + r.usd*FX, 0);
+
+  // Revenue
+  const subRevenue    = price * users;
+  const buyersCount   = Math.round(users * extraPct / 100);
+  const topupRevenue  = buyersCount * extraQty * extraPrice;
+  const totalRevenue  = subRevenue + topupRevenue;
+
+  // Costs — every story (included + purchased) costs to generate
+  const totalStories  = (stories * users) + (buyersCount * extraQty);
+  const apiCosts      = varPerBook * totalStories;
+  const totalCosts    = apiCosts + fixedMonthly;
+
+  const profit  = totalRevenue - totalCosts;
+  const margin  = totalRevenue > 0 ? (profit / totalRevenue) * 100 : 0;
+
+  document.getElementById('r-sub').textContent    = fmtBig(subRevenue);
+  document.getElementById('r-topup').textContent  = fmtBig(topupRevenue);
+  document.getElementById('r-revenue').textContent = fmtBig(totalRevenue);
+  document.getElementById('r-costs').textContent  = fmtBig(totalCosts);
+
+  const profitEl  = document.getElementById('r-profit');
+  const marginEl  = document.getElementById('r-margin');
+  profitEl.textContent = fmtBig(profit);
+  profitEl.className   = 'ri-val ' + (profit >= 0 ? 'green' : 'red');
+  marginEl.textContent = fmtPct(margin);
+  marginEl.className   = 'ri-val ' + (margin >= 0 ? 'green' : 'red');
+
+  document.getElementById('scenario-detail').innerHTML =
+    `Subscription: ${fmtNum(users)} users × A$${price} = ${fmtBig(subRevenue)} &nbsp;|&nbsp;
+     Included stories: ${fmtNum(users)} × ${stories} = ${fmtNum(users*stories)} books &nbsp;|&nbsp;
+     Top-up buyers: ${fmtNum(buyersCount)} (${extraPct}%) × ${extraQty} stories × A$${extraPrice.toFixed(2)} = ${fmtBig(topupRevenue)} &nbsp;|&nbsp;
+     Total books generated: ${fmtNum(totalStories)} × ${fmt(varPerBook)} = ${fmtBig(apiCosts)} API cost`;
+}
+
+renderStatic();
+update();
+</script>
+</body>
+</html>
