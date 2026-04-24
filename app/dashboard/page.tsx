@@ -206,7 +206,7 @@ export default function DashboardPage() {
         body: JSON.stringify({ child_id: childId }),
       });
       const data = await res.json();
-      if (res.ok) { await fetchData(); }
+      if (res.ok) { await fetchData(); setStoryTab('singles'); }
       else setGenerateError(data.message || 'Failed to generate story. Please try again.');
     } finally { setGenerating(null); }
   };
@@ -221,7 +221,7 @@ export default function DashboardPage() {
         body: JSON.stringify({ story_id: storyId }),
       });
       const data = await res.json();
-      if (res.ok) { await fetchData(); }
+      if (res.ok) { await fetchData(); setStoryTab('series'); }
       else setGenerateError(data.error || 'Failed to generate sequel.');
     } finally { setGenerating(null); }
   };
@@ -346,117 +346,125 @@ export default function DashboardPage() {
                   <div style={{ background: '#FEE2E2', border: '1px solid #FECACA', borderRadius: '8px', padding: '12px 16px', marginBottom: '20px', fontSize: '0.875rem', color: '#991B1B' }}>{generateError}</div>
                 )}
 
-                {/* Generate buttons — two options per child */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '36px' }}>
-                  {children.map((child) => {
-                    const latest = latestStoryByChild(child.id);
-                    const seriesComplete = isSeriesComplete(latest);
-                    const canContinue = !!latest && !seriesComplete;
-
-                    return (
-                      <div key={child.id} style={{ background: '#fff', border: '1.5px solid #E8E0D0', borderRadius: '12px', padding: '16px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
-                        <p style={{ fontWeight: '600', fontSize: '1rem', color: '#1A1209', fontFamily: 'Georgia, serif', margin: 0 }}>
-                          {child.name}
-                        </p>
-                        <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-                          {canContinue && (
-                            <button
-                              onClick={() => handleGenerateSequel(latest!.id, child.name)}
-                              disabled={!!generating}
-                              style={{
-                                padding: '0.6rem 1.25rem',
-                                borderRadius: '8px', border: 'none',
-                                background: '#741515', color: '#fff',
-                                cursor: generating ? 'not-allowed' : 'pointer',
-                                fontWeight: '600', fontSize: '0.875rem', opacity: generating ? 0.7 : 1,
-                                display: 'flex', alignItems: 'center', gap: '6px', whiteSpace: 'nowrap',
-                              }}
-                            >
-                              📖 Continue story
-                            </button>
-                          )}
-                          <button
-                            onClick={() => handleGenerateStory(child.id)}
-                            disabled={!!generating}
-                            style={{
-                              padding: '0.6rem 1.25rem',
-                              borderRadius: '8px', border: '1.5px solid #E8E0D0',
-                              background: '#fff', color: '#1A1209',
-                              cursor: generating ? 'not-allowed' : 'pointer',
-                              fontWeight: '600', fontSize: '0.875rem', opacity: generating ? 0.7 : 1,
-                              display: 'flex', alignItems: 'center', gap: '6px', whiteSpace: 'nowrap',
-                            }}
-                          >
-                            <Plus size={15} /> New story
-                          </button>
-                        </div>
-                        {seriesComplete && (
-                          <p style={{ fontSize: '0.78rem', color: '#9B8B7A', width: '100%', margin: 0 }}>
-                            Series complete — start a new story to begin a fresh adventure.
-                          </p>
-                        )}
-                      </div>
-                    );
-                  })}
+                {/* Tabs */}
+                <div style={{ display: 'flex', gap: '6px', background: '#F0EDE8', padding: '4px', borderRadius: '10px', width: 'fit-content', marginBottom: '28px' }}>
+                  <button style={storyTabStyle(storyTab === 'singles')} onClick={() => setStoryTab('singles')}>
+                    Single stories ({singleStories.length})
+                  </button>
+                  <button style={storyTabStyle(storyTab === 'series')} onClick={() => setStoryTab('series')}>
+                    Series ({seriesGroups.length})
+                  </button>
                 </div>
 
-                {/* Story tabs */}
-                {stories.length > 0 && (
-                  <>
-                    <div style={{ display: 'flex', gap: '6px', background: '#F0EDE8', padding: '4px', borderRadius: '10px', width: 'fit-content', marginBottom: '24px' }}>
-                      <button style={storyTabStyle(storyTab === 'singles')} onClick={() => setStoryTab('singles')}>
-                        Single stories ({singleStories.length})
-                      </button>
-                      <button style={storyTabStyle(storyTab === 'series')} onClick={() => setStoryTab('series')}>
-                        Series ({seriesGroups.length})
-                      </button>
+                {/* ── Singles tab ── */}
+                {storyTab === 'singles' && (
+                  <div>
+                    {/* Buttons — New story stays here, Continue story moves to Series */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '28px' }}>
+                      {children.map((child) => {
+                        const latest = latestStoryByChild(child.id);
+                        const seriesComplete = isSeriesComplete(latest);
+                        const canContinue = !!latest && !seriesComplete;
+                        return (
+                          <div key={child.id} style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+                            <span style={{ fontWeight: '600', fontSize: '0.9rem', color: '#6B5E4E', minWidth: '60px' }}>{child.name}</span>
+                            <button
+                              onClick={() => handleGenerateStory(child.id)}
+                              disabled={!!generating}
+                              style={{ padding: '0.55rem 1.1rem', borderRadius: '8px', border: '1.5px solid #E8E0D0', background: '#fff', color: '#1A1209', cursor: generating ? 'not-allowed' : 'pointer', fontWeight: '600', fontSize: '0.85rem', opacity: generating ? 0.7 : 1, display: 'flex', alignItems: 'center', gap: '5px' }}
+                            >
+                              <Plus size={14} /> New story
+                            </button>
+                            {canContinue && (
+                              <button
+                                onClick={() => handleGenerateSequel(latest!.id, child.name)}
+                                disabled={!!generating}
+                                style={{ padding: '0.55rem 1.1rem', borderRadius: '8px', border: 'none', background: '#741515', color: '#fff', cursor: generating ? 'not-allowed' : 'pointer', fontWeight: '600', fontSize: '0.85rem', opacity: generating ? 0.7 : 1, display: 'flex', alignItems: 'center', gap: '5px' }}
+                              >
+                                📖 Continue story → Series
+                              </button>
+                            )}
+                          </div>
+                        );
+                      })}
                     </div>
 
-                    {/* Singles */}
-                    {storyTab === 'singles' && (
-                      singleStories.length === 0 ? (
-                        <div style={{ textAlign: 'center', padding: '40px', color: '#9B8B7A' }}>
-                          <div style={{ fontSize: '2rem', marginBottom: '8px' }}>📚</div>
-                          <p>No standalone stories yet — start a new story above.</p>
-                        </div>
-                      ) : (
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '24px 20px', alignItems: 'flex-start' }}>
-                          {singleStories.map((story, i) => <BookCard key={story.id} story={story} index={i} />)}
-                        </div>
-                      )
+                    {singleStories.length === 0 ? (
+                      <div style={{ textAlign: 'center', padding: '40px', color: '#9B8B7A' }}>
+                        <div style={{ fontSize: '2rem', marginBottom: '8px' }}>📚</div>
+                        <p>No standalone stories yet — generate your first one above.</p>
+                      </div>
+                    ) : (
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '24px 20px', alignItems: 'flex-start' }}>
+                        {singleStories.map((story, i) => <BookCard key={story.id} story={story} index={i} />)}
+                      </div>
                     )}
+                  </div>
+                )}
 
-                    {/* Series */}
-                    {storyTab === 'series' && (
-                      seriesGroups.length === 0 ? (
-                        <div style={{ textAlign: 'center', padding: '40px', color: '#9B8B7A' }}>
-                          <div style={{ fontSize: '2rem', marginBottom: '8px' }}>📖</div>
-                          <p>No series yet — hit "Continue the story" to start one.</p>
-                        </div>
-                      ) : (
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-                          {seriesGroups.map((group) => (
-                            <div key={group.series_id} style={{ background: '#fff', border: '1.5px solid #E8E0D0', borderRadius: '14px', overflow: 'hidden' }}>
-                              <div style={{ padding: '16px 20px', borderBottom: '1px solid #F0EDE8', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                                <div>
-                                  <h4 style={{ fontFamily: 'Georgia, serif', fontWeight: '600', color: '#1A1209', marginBottom: '2px' }}>{group.series_title}</h4>
-                                  <p style={{ fontSize: '0.8rem', color: '#9B8B7A' }}>{group.child_name} · {group.volumes.length} of 4 volumes</p>
-                                </div>
-                                {group.is_complete && (
-                                  <span style={{ background: '#E6F4EC', color: '#1a7a4a', fontSize: '0.75rem', fontWeight: '700', padding: '4px 12px', borderRadius: '20px' }}>COMPLETE</span>
-                                )}
+                {/* ── Series tab ── */}
+                {storyTab === 'series' && (
+                  <div>
+                    {/* Buttons — Continue series stays here, New story moves to Singles */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '28px' }}>
+                      {children.map((child) => {
+                        const latest = latestStoryByChild(child.id);
+                        const seriesComplete = isSeriesComplete(latest);
+                        const canContinue = !!latest && !seriesComplete;
+                        return (
+                          <div key={child.id} style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+                            <span style={{ fontWeight: '600', fontSize: '0.9rem', color: '#6B5E4E', minWidth: '60px' }}>{child.name}</span>
+                            {canContinue ? (
+                              <button
+                                onClick={() => handleGenerateSequel(latest!.id, child.name)}
+                                disabled={!!generating}
+                                style={{ padding: '0.55rem 1.1rem', borderRadius: '8px', border: 'none', background: '#741515', color: '#fff', cursor: generating ? 'not-allowed' : 'pointer', fontWeight: '600', fontSize: '0.85rem', opacity: generating ? 0.7 : 1, display: 'flex', alignItems: 'center', gap: '5px' }}
+                              >
+                                📖 Continue series
+                              </button>
+                            ) : (
+                              <span style={{ fontSize: '0.8rem', color: '#9B8B7A' }}>Series complete</span>
+                            )}
+                            <button
+                              onClick={() => handleGenerateStory(child.id)}
+                              disabled={!!generating}
+                              style={{ padding: '0.55rem 1.1rem', borderRadius: '8px', border: '1.5px solid #E8E0D0', background: '#fff', color: '#1A1209', cursor: generating ? 'not-allowed' : 'pointer', fontWeight: '600', fontSize: '0.85rem', opacity: generating ? 0.7 : 1, display: 'flex', alignItems: 'center', gap: '5px' }}
+                            >
+                              <Plus size={14} /> New story → Singles
+                            </button>
+                          </div>
+                        );
+                      })}
+                    </div>
+
+                    {seriesGroups.length === 0 ? (
+                      <div style={{ textAlign: 'center', padding: '40px', color: '#9B8B7A' }}>
+                        <div style={{ fontSize: '2rem', marginBottom: '8px' }}>📖</div>
+                        <p>No series yet — click "Continue story" on the Singles tab to start one.</p>
+                      </div>
+                    ) : (
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                        {seriesGroups.map((group) => (
+                          <div key={group.series_id} style={{ background: '#fff', border: '1.5px solid #E8E0D0', borderRadius: '14px', overflow: 'hidden' }}>
+                            <div style={{ padding: '16px 20px', borderBottom: '1px solid #F0EDE8', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                              <div>
+                                <h4 style={{ fontFamily: 'Georgia, serif', fontWeight: '600', color: '#1A1209', marginBottom: '2px' }}>{group.series_title}</h4>
+                                <p style={{ fontSize: '0.8rem', color: '#9B8B7A' }}>{group.child_name} · {group.volumes.length} of 4 volumes</p>
                               </div>
-                              <div style={{ padding: '20px', display: 'flex', flexWrap: 'wrap', gap: '24px 20px', alignItems: 'flex-start' }}>
-                                {group.volumes.map((vol, i) => (
-                                  <BookCard key={vol.id} story={{ ...vol, theme: group.volumes[0].theme }} index={i} />
-                                ))}
-                              </div>
+                              {group.is_complete && (
+                                <span style={{ background: '#E6F4EC', color: '#1a7a4a', fontSize: '0.75rem', fontWeight: '700', padding: '4px 12px', borderRadius: '20px' }}>COMPLETE</span>
+                              )}
                             </div>
-                          ))}
-                        </div>
-                      )
+                            <div style={{ padding: '20px', display: 'flex', flexWrap: 'wrap', gap: '24px 20px', alignItems: 'flex-start' }}>
+                              {group.volumes.map((vol, i) => (
+                                <BookCard key={vol.id} story={{ ...vol, theme: group.volumes[0].theme }} index={i} />
+                              ))}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
                     )}
-                  </>
+                  </div>
                 )}
 
                 {stories.length === 0 && (
