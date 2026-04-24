@@ -2,8 +2,119 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { BookOpen, Users, Settings, CreditCard, Plus, RefreshCw } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
+
+const bookColors = [
+  { cover: '#741515', spine: '#4a0d0d' },
+  { cover: '#1a3a5a', spine: '#0d2035' },
+  { cover: '#2a4a1a', spine: '#162810' },
+  { cover: '#4a1a5a', spine: '#2d0f38' },
+  { cover: '#7a4a10', spine: '#4a2c08' },
+  { cover: '#1a4a4a', spine: '#0d2d2d' },
+];
+
+function BookCard({ story, index }: { story: Story; index: number }) {
+  const [open, setOpen] = useState(false);
+  const router = useRouter();
+  const c = bookColors[index % bookColors.length];
+
+  return (
+    <div
+      style={{ perspective: '900px', cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+      onClick={() => router.push(`/stories/${story.id}`)}
+    >
+      {/* Book body */}
+      <div style={{ position: 'relative', width: '140px', height: '190px', transformStyle: 'preserve-3d' }}>
+
+        {/* Spine */}
+        <div style={{
+          position: 'absolute', left: 0, top: 0, width: '18px', height: '100%',
+          background: `linear-gradient(90deg, ${c.spine} 0%, ${c.cover} 100%)`,
+          borderRadius: '3px 0 0 3px', zIndex: 3,
+          boxShadow: 'inset -3px 0 6px rgba(0,0,0,0.25)',
+        }} />
+
+        {/* Pages stack (depth illusion) */}
+        {[4, 2, 0].map((offset) => (
+          <div key={offset} style={{
+            position: 'absolute', left: `${18 + offset}px`, top: `${offset * 0.5}px`,
+            width: `calc(100% - ${18 + offset}px)`, height: `calc(100% - ${offset}px)`,
+            background: '#F5F0E8', borderRadius: '0 4px 4px 0',
+            boxShadow: '1px 0 3px rgba(0,0,0,0.08)',
+          }} />
+        ))}
+
+        {/* Interior (visible when open) */}
+        <div style={{
+          position: 'absolute', left: '18px', top: 0,
+          width: 'calc(100% - 18px)', height: '100%',
+          background: '#FFFEF9', borderRadius: '0 6px 6px 0',
+          display: 'flex', flexDirection: 'column',
+          alignItems: 'center', justifyContent: 'center',
+          padding: '14px 12px', gap: '8px',
+          boxShadow: 'inset 6px 0 16px rgba(0,0,0,0.06)',
+        }}>
+          <div style={{ fontSize: '2.4rem' }}>{story.theme || '📖'}</div>
+          <p style={{
+            fontSize: '0.72rem', fontFamily: 'Georgia, serif',
+            textAlign: 'center', color: '#2C1A0E', lineHeight: 1.4, fontWeight: '600',
+          }}>{story.title}</p>
+          <p style={{ fontSize: '0.65rem', color: '#9B8B7A' }}>{story.children?.name}</p>
+          <div style={{
+            marginTop: '6px', fontSize: '0.68rem', fontWeight: '700',
+            color: '#741515', opacity: open ? 1 : 0, transition: 'opacity 0.2s',
+          }}>
+            Open book →
+          </div>
+        </div>
+
+        {/* Cover — flips open on hover */}
+        <div style={{
+          position: 'absolute', left: '18px', top: 0,
+          width: 'calc(100% - 18px)', height: '100%',
+          background: `linear-gradient(160deg, ${c.cover} 0%, ${c.spine} 100%)`,
+          borderRadius: '0 6px 6px 0',
+          transformOrigin: 'left center',
+          transform: open ? 'rotateY(-162deg)' : 'rotateY(0deg)',
+          transition: 'transform 0.55s cubic-bezier(0.4, 0, 0.2, 1)',
+          backfaceVisibility: 'hidden',
+          zIndex: 2,
+          display: 'flex', flexDirection: 'column',
+          alignItems: 'center', justifyContent: 'center',
+          padding: '14px 12px', gap: '8px',
+          boxShadow: open
+            ? '-10px 6px 24px rgba(0,0,0,0.35)'
+            : '3px 3px 10px rgba(0,0,0,0.2)',
+        }}>
+          <div style={{ fontSize: '2.8rem' }}>{story.theme || '📖'}</div>
+          <p style={{
+            fontSize: '0.75rem', fontFamily: 'Georgia, serif',
+            textAlign: 'center', color: 'rgba(255,255,255,0.95)',
+            lineHeight: 1.4, fontWeight: '600',
+          }}>{story.title}</p>
+          <p style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.55)' }}>
+            {story.children?.name} · {story.word_count ? `${story.word_count} words` : ''}
+          </p>
+          {/* Decorative lines */}
+          <div style={{ position: 'absolute', bottom: '14px', left: '12px', right: '12px', height: '1px', background: 'rgba(255,255,255,0.15)' }} />
+          <div style={{ position: 'absolute', bottom: '20px', left: '12px', right: '12px', height: '1px', background: 'rgba(255,255,255,0.08)' }} />
+        </div>
+      </div>
+
+      {/* Label below */}
+      <p style={{
+        fontSize: '0.72rem', color: '#6B5E4E', textAlign: 'center',
+        maxWidth: '130px', lineHeight: 1.3, fontFamily: 'Georgia, serif',
+      }}>
+        {new Date(story.created_at).toLocaleDateString('en-AU', { month: 'short', year: 'numeric' })}
+      </p>
+    </div>
+  );
+}
 
 const generatingStyles = `
   @keyframes floatUp {
@@ -45,13 +156,6 @@ type SeriesGroup = {
   is_complete: boolean;
 };
 
-const gradients = [
-  'linear-gradient(135deg, #1a3a3a 0%, #2d6a5c 100%)',
-  'linear-gradient(135deg, #0a2540 0%, #1a5a7a 100%)',
-  'linear-gradient(135deg, #2a1a3a 0%, #5a3a6a 100%)',
-  'linear-gradient(135deg, #3a1a1a 0%, #741515 100%)',
-  'linear-gradient(135deg, #1a2a3a 0%, #2a5a7a 100%)',
-];
 
 export default function DashboardPage() {
   const [activeNav, setActiveNav] = useState('stories');
@@ -174,29 +278,7 @@ export default function DashboardPage() {
     color: active ? '#fff' : '#6B5E4E', transition: 'all 0.2s',
   });
 
-  const StoryCard = ({ story, index }: { story: Story; index: number }) => (
-    <div className="card" style={{ overflow: 'hidden', borderRadius: '12px' }}>
-      <div style={{ background: gradients[index % gradients.length], height: '160px', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
-        {story.volume_number && story.volume_number > 1 && (
-          <div style={{ position: 'absolute', top: '10px', right: '10px', background: 'rgba(255,255,255,0.25)', color: '#fff', borderRadius: '20px', padding: '3px 10px', fontSize: '0.72rem', fontWeight: '700' }}>
-            VOL {story.volume_number}
-          </div>
-        )}
-        <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: '3rem', marginBottom: '8px' }}>{story.theme || '📖'}</div>
-          <h4 style={{ color: 'white', fontSize: '0.9rem', maxWidth: '80%', margin: '0 auto', lineHeight: 1.3, fontFamily: 'Georgia, serif' }}>{story.title}</h4>
-        </div>
-      </div>
-      <div style={{ padding: '16px' }}>
-        <p style={{ color: '#6B5E4E', fontSize: '0.8rem', marginBottom: '12px' }}>
-          {story.children?.name} · {story.word_count ? `${story.word_count} words` : ''} · {new Date(story.created_at).toLocaleDateString('en-AU', { month: 'short', year: 'numeric' })}
-        </p>
-        <Link href={`/stories/${story.id}`} className="btn-brand" style={{ display: 'block', textAlign: 'center', fontSize: '0.9rem', padding: '0.65rem' }}>
-          Read
-        </Link>
-      </div>
-    </div>
-  );
+  // BookCard is defined above the component
 
   return (
     <div style={{ minHeight: '100vh', backgroundColor: '#FAF7F0', display: 'flex', flexDirection: isMobile ? 'column' : 'row' }}>
@@ -338,8 +420,8 @@ export default function DashboardPage() {
                           <p>No standalone stories yet — start a new story above.</p>
                         </div>
                       ) : (
-                        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)', gap: '20px' }}>
-                          {singleStories.map((story, i) => <StoryCard key={story.id} story={story} index={i} />)}
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '24px 20px', alignItems: 'flex-start' }}>
+                          {singleStories.map((story, i) => <BookCard key={story.id} story={story} index={i} />)}
                         </div>
                       )
                     )}
@@ -364,13 +446,9 @@ export default function DashboardPage() {
                                   <span style={{ background: '#E6F4EC', color: '#1a7a4a', fontSize: '0.75rem', fontWeight: '700', padding: '4px 12px', borderRadius: '20px' }}>COMPLETE</span>
                                 )}
                               </div>
-                              <div style={{ display: 'grid', gridTemplateColumns: `repeat(4, 1fr)`, gap: '1px', background: '#F0EDE8' }}>
-                                {group.volumes.map((vol) => (
-                                  <Link key={vol.id} href={`/stories/${vol.id}`} style={{ textDecoration: 'none', background: '#fff', padding: '16px', display: 'block' }}>
-                                    <div style={{ fontSize: '1.8rem', marginBottom: '6px', textAlign: 'center' }}>{group.volumes[0].theme || '📖'}</div>
-                                    <p style={{ fontSize: '0.72rem', fontWeight: '700', color: '#741515', marginBottom: '4px', textAlign: 'center' }}>Vol {vol.volume_number}</p>
-                                    <p style={{ fontSize: '0.78rem', color: '#1A1209', textAlign: 'center', lineHeight: 1.3, fontFamily: 'Georgia, serif' }}>{vol.title}</p>
-                                  </Link>
+                              <div style={{ padding: '20px', display: 'flex', flexWrap: 'wrap', gap: '24px 20px', alignItems: 'flex-start' }}>
+                                {group.volumes.map((vol, i) => (
+                                  <BookCard key={vol.id} story={{ ...vol, theme: group.volumes[0].theme }} index={i} />
                                 ))}
                               </div>
                             </div>
