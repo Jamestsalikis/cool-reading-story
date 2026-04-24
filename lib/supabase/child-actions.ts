@@ -9,6 +9,7 @@ export async function createChild(data: {
   age: number;
   gender: string;
   interests: string[];
+  followUpAnswers: { question: string; answer: string }[];
   hairColour: string;
   eyeColour: string;
   siblings: Person[];
@@ -44,6 +45,7 @@ export async function createChild(data: {
         eyeColour: data.eyeColour,
         siblings: data.siblings.filter(s => s.name.trim()),
         friends: data.friends.filter(f => f.name.trim()),
+        followUpAnswers: data.followUpAnswers,
         petName: data.petName,
         petType: data.petType,
         city: data.city,

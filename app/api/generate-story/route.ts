@@ -58,6 +58,12 @@ function buildPrompt(child: {
     appearance.country,
   ].filter(Boolean).join(', ');
 
+  const followUpAnswers: { question: string; answer: string }[] =
+    Array.isArray(appearance.followUpAnswers) ? appearance.followUpAnswers : [];
+  const followUpDesc = followUpAnswers.length > 0
+    ? followUpAnswers.map(({ question, answer }) => `  - ${question} → ${answer}`).join('\n')
+    : null;
+
   return `You are a master children's story writer creating a personalised bedtime picture book.
 
 Child profile:
@@ -70,6 +76,7 @@ ${locationDesc ? `- Lives in: ${locationDesc}` : ''}
 ${petDesc ? `- Pet: ${petDesc}` : ''}
 ${siblingDesc ? `- Siblings: ${siblingDesc}` : ''}
 ${bestFriendDesc ? `- Best friend: ${bestFriendDesc}` : ''}
+${followUpDesc ? `- Personal details from ${name}:\n${followUpDesc}` : ''}
 - Reading level: ${reading_level} → target ${wordTarget} words total
 
 Requirements:
