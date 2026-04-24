@@ -265,16 +265,16 @@ export default function DashboardPage() {
                 )}
 
                 {/* Generate buttons — two options per child */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '36px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '36px' }}>
                   {children.map((child) => {
                     const latest = latestStoryByChild(child.id);
                     const seriesComplete = isSeriesComplete(latest);
                     const canContinue = !!latest && !seriesComplete;
 
                     return (
-                      <div key={child.id} style={{ background: '#fff', border: '1.5px solid #E8E0D0', borderRadius: '14px', padding: '18px 20px' }}>
-                        <p style={{ fontWeight: '600', fontSize: '1rem', color: '#1A1209', marginBottom: '12px', fontFamily: 'Georgia, serif' }}>
-                          {child.name}&apos;s stories
+                      <div key={child.id} style={{ background: '#fff', border: '1.5px solid #E8E0D0', borderRadius: '12px', padding: '16px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
+                        <p style={{ fontWeight: '600', fontSize: '1rem', color: '#1A1209', fontFamily: 'Georgia, serif', margin: 0 }}>
+                          {child.name}
                         </p>
                         <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
                           {canContinue && (
@@ -282,35 +282,35 @@ export default function DashboardPage() {
                               onClick={() => handleGenerateSequel(latest!.id, child.name)}
                               disabled={!!generating}
                               style={{
-                                flex: 1, minWidth: '160px', padding: '0.75rem 1rem',
-                                borderRadius: '10px', border: '2px solid #741515',
+                                padding: '0.6rem 1.25rem',
+                                borderRadius: '8px', border: 'none',
                                 background: '#741515', color: '#fff',
                                 cursor: generating ? 'not-allowed' : 'pointer',
-                                fontWeight: '600', fontSize: '0.9rem', opacity: generating ? 0.7 : 1,
-                                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
+                                fontWeight: '600', fontSize: '0.875rem', opacity: generating ? 0.7 : 1,
+                                display: 'flex', alignItems: 'center', gap: '6px', whiteSpace: 'nowrap',
                               }}
                             >
-                              📖 Continue the story
+                              📖 Continue story
                             </button>
                           )}
                           <button
                             onClick={() => handleGenerateStory(child.id)}
                             disabled={!!generating}
                             style={{
-                              flex: 1, minWidth: '160px', padding: '0.75rem 1rem',
-                              borderRadius: '10px', border: '2px solid #E8E0D0',
+                              padding: '0.6rem 1.25rem',
+                              borderRadius: '8px', border: '1.5px solid #E8E0D0',
                               background: '#fff', color: '#1A1209',
                               cursor: generating ? 'not-allowed' : 'pointer',
-                              fontWeight: '600', fontSize: '0.9rem', opacity: generating ? 0.7 : 1,
-                              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
+                              fontWeight: '600', fontSize: '0.875rem', opacity: generating ? 0.7 : 1,
+                              display: 'flex', alignItems: 'center', gap: '6px', whiteSpace: 'nowrap',
                             }}
                           >
-                            <Plus size={16} /> Start a new story
+                            <Plus size={15} /> New story
                           </button>
                         </div>
                         {seriesComplete && (
-                          <p style={{ fontSize: '0.78rem', color: '#9B8B7A', marginTop: '8px' }}>
-                            Series complete! Start a new story to begin a fresh adventure.
+                          <p style={{ fontSize: '0.78rem', color: '#9B8B7A', width: '100%', margin: 0 }}>
+                            Series complete — start a new story to begin a fresh adventure.
                           </p>
                         )}
                       </div>
@@ -364,22 +364,13 @@ export default function DashboardPage() {
                                   <span style={{ background: '#E6F4EC', color: '#1a7a4a', fontSize: '0.75rem', fontWeight: '700', padding: '4px 12px', borderRadius: '20px' }}>COMPLETE</span>
                                 )}
                               </div>
-                              <div style={{ display: 'grid', gridTemplateColumns: `repeat(${Math.min(group.volumes.length, isMobile ? 2 : 4)}, 1fr)`, gap: '1px', background: '#F0EDE8' }}>
+                              <div style={{ display: 'grid', gridTemplateColumns: `repeat(4, 1fr)`, gap: '1px', background: '#F0EDE8' }}>
                                 {group.volumes.map((vol) => (
                                   <Link key={vol.id} href={`/stories/${vol.id}`} style={{ textDecoration: 'none', background: '#fff', padding: '16px', display: 'block' }}>
-                                    <div style={{ fontSize: '1.8rem', marginBottom: '6px', textAlign: 'center' }}>{vol.theme || '📖'}</div>
-                                    <p style={{ fontSize: '0.72rem', fontWeight: '700', color: '#741515', marginBottom: '2px', textAlign: 'center' }}>VOL {vol.volume_number}</p>
+                                    <div style={{ fontSize: '1.8rem', marginBottom: '6px', textAlign: 'center' }}>{group.volumes[0].theme || '📖'}</div>
+                                    <p style={{ fontSize: '0.72rem', fontWeight: '700', color: '#741515', marginBottom: '4px', textAlign: 'center' }}>Vol {vol.volume_number}</p>
                                     <p style={{ fontSize: '0.78rem', color: '#1A1209', textAlign: 'center', lineHeight: 1.3, fontFamily: 'Georgia, serif' }}>{vol.title}</p>
                                   </Link>
-                                ))}
-                                {/* Empty slots up to 4 */}
-                                {!group.is_complete && Array.from({ length: 4 - group.volumes.length }).map((_, i) => (
-                                  <div key={`empty-${i}`} style={{ background: '#F9F8F5', padding: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                    <div style={{ textAlign: 'center' }}>
-                                      <div style={{ fontSize: '1.5rem', opacity: 0.3, marginBottom: '4px' }}>📖</div>
-                                      <p style={{ fontSize: '0.7rem', color: '#C8BEAA' }}>Coming soon</p>
-                                    </div>
-                                  </div>
                                 ))}
                               </div>
                             </div>
