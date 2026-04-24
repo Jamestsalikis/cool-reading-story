@@ -16,7 +16,7 @@ function buildPrompt(child: {
   age: number;
   gender: string;
   interests: string[];
-  appearance: Record<string, string | undefined>;
+  appearance: Record<string, unknown>;
   reading_level: string;
 }) {
   const { name, age, gender, interests, appearance, reading_level } = child;
@@ -43,17 +43,15 @@ function buildPrompt(child: {
       ? `${name}'s beloved pet ${appearance.petType} named ${appearance.petName}`
       : null;
 
-  const siblingDesc = (() => {
-    if (!appearance.siblingNames) return null;
-    if (appearance.siblingNicknames) return `siblings named ${appearance.siblingNames} (nicknames: ${appearance.siblingNicknames})`;
-    return `siblings named ${appearance.siblingNames}`;
-  })();
+  const siblings: { name: string; nickname: string }[] = Array.isArray(appearance.siblings) ? appearance.siblings : [];
+  const siblingDesc = siblings.length > 0
+    ? siblings.map(s => s.nickname ? `${s.name} (nickname: ${s.nickname})` : s.name).join(', ')
+    : null;
 
-  const bestFriendDesc = (() => {
-    if (!appearance.bestFriendName) return null;
-    if (appearance.bestFriendNickname) return `best friend ${appearance.bestFriendName} (nickname: ${appearance.bestFriendNickname})`;
-    return `best friend named ${appearance.bestFriendName}`;
-  })();
+  const friends: { name: string; nickname: string }[] = Array.isArray(appearance.friends) ? appearance.friends : [];
+  const bestFriendDesc = friends.length > 0
+    ? friends.map(f => f.nickname ? `${f.name} (nickname: ${f.nickname})` : f.name).join(', ')
+    : null;
 
   const locationDesc = [
     appearance.city,

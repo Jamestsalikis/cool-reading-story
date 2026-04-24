@@ -2,6 +2,8 @@
 
 import { createClient } from './server';
 
+type Person = { name: string; nickname: string };
+
 export async function createChild(data: {
   name: string;
   age: number;
@@ -9,10 +11,8 @@ export async function createChild(data: {
   interests: string[];
   hairColour: string;
   eyeColour: string;
-  siblingNames: string;
-  siblingNicknames: string;
-  bestFriendName: string;
-  bestFriendNickname: string;
+  siblings: Person[];
+  friends: Person[];
   petName: string;
   petType: string;
   city: string;
@@ -42,10 +42,8 @@ export async function createChild(data: {
       appearance: {
         hairColour: data.hairColour,
         eyeColour: data.eyeColour,
-        siblingNames: data.siblingNames,
-        siblingNicknames: data.siblingNicknames,
-        bestFriendName: data.bestFriendName,
-        bestFriendNickname: data.bestFriendNickname,
+        siblings: data.siblings.filter(s => s.name.trim()),
+        friends: data.friends.filter(f => f.name.trim()),
         petName: data.petName,
         petType: data.petType,
         city: data.city,

@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { createChild } from '@/lib/supabase/child-actions';
 
+type Person = { name: string; nickname: string };
+
 type OnboardingState = {
   step: number;
   name: string;
@@ -14,10 +16,8 @@ type OnboardingState = {
   customInterest: string;
   hairColour: string;
   eyeColour: string;
-  siblingNames: string;
-  siblingNicknames: string;
-  bestFriendName: string;
-  bestFriendNickname: string;
+  siblings: Person[];
+  friends: Person[];
   petName: string;
   petType: string;
   city: string;
@@ -72,10 +72,8 @@ export default function OnboardingPage() {
     customInterest: '',
     hairColour: '',
     eyeColour: '',
-    siblingNames: '',
-    siblingNicknames: '',
-    bestFriendName: '',
-    bestFriendNickname: '',
+    siblings: [],
+    friends: [],
     petName: '',
     petType: '',
     city: '',
@@ -109,10 +107,8 @@ export default function OnboardingPage() {
           interests: state.interests,
           hairColour: state.hairColour,
           eyeColour: state.eyeColour,
-          siblingNames: state.siblingNames,
-          siblingNicknames: state.siblingNicknames,
-          bestFriendName: state.bestFriendName,
-          bestFriendNickname: state.bestFriendNickname,
+          siblings: state.siblings,
+          friends: state.friends,
           petName: state.petName,
           petType: state.petType,
           city: state.city,
@@ -343,31 +339,95 @@ export default function OnboardingPage() {
             {/* Siblings */}
             <div style={{ marginBottom: '24px' }}>
               <p style={{ ...labelStyle, marginBottom: '12px' }}>Siblings <span style={{ color: '#9B8B7A', fontWeight: '400', fontSize: '0.8rem' }}>(optional)</span></p>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-                <div>
-                  <label style={optionalLabel}>Sibling names</label>
-                  <input type="text" style={inputStyle} placeholder="e.g. Marcus, Sophie" value={state.siblingNames} onChange={(e) => setState({ ...state, siblingNames: e.target.value })} />
+              {state.siblings.length > 0 && (
+                <div style={{ display: 'flex', flexDirection: 'column' as const, gap: '8px', marginBottom: '10px' }}>
+                  {state.siblings.map((s, i) => (
+                    <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr auto', gap: '8px', alignItems: 'center' }}>
+                      <input
+                        type="text"
+                        style={inputStyle}
+                        placeholder="Name"
+                        value={s.name}
+                        onChange={(e) => {
+                          const updated = [...state.siblings];
+                          updated[i] = { ...updated[i], name: e.target.value };
+                          setState({ ...state, siblings: updated });
+                        }}
+                      />
+                      <input
+                        type="text"
+                        style={inputStyle}
+                        placeholder="Nickname (optional)"
+                        value={s.nickname}
+                        onChange={(e) => {
+                          const updated = [...state.siblings];
+                          updated[i] = { ...updated[i], nickname: e.target.value };
+                          setState({ ...state, siblings: updated });
+                        }}
+                      />
+                      <button
+                        onClick={() => setState({ ...state, siblings: state.siblings.filter((_, idx) => idx !== i) })}
+                        style={{ background: 'none', border: '1.5px solid #E8E0D0', borderRadius: '8px', width: '36px', height: '36px', cursor: 'pointer', color: '#9B8B7A', fontSize: '1rem', flexShrink: 0 }}
+                      >
+                        ×
+                      </button>
+                    </div>
+                  ))}
                 </div>
-                <div>
-                  <label style={optionalLabel}>Sibling nicknames</label>
-                  <input type="text" style={inputStyle} placeholder="e.g. Marc, Soph" value={state.siblingNicknames} onChange={(e) => setState({ ...state, siblingNicknames: e.target.value })} />
-                </div>
-              </div>
+              )}
+              <button
+                onClick={() => setState({ ...state, siblings: [...state.siblings, { name: '', nickname: '' }] })}
+                style={{ ...chipBase, border: '1.5px dashed #C8BEAA', backgroundColor: 'transparent', color: '#6B5E4E', width: '100%', justifyContent: 'center' }}
+              >
+                + Add sibling
+              </button>
             </div>
 
-            {/* Best friend */}
+            {/* Best friends */}
             <div style={{ marginBottom: '24px' }}>
-              <p style={{ ...labelStyle, marginBottom: '12px' }}>Best friend <span style={{ color: '#9B8B7A', fontWeight: '400', fontSize: '0.8rem' }}>(optional)</span></p>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-                <div>
-                  <label style={optionalLabel}>Name</label>
-                  <input type="text" style={inputStyle} placeholder="e.g. Olivia" value={state.bestFriendName} onChange={(e) => setState({ ...state, bestFriendName: e.target.value })} />
+              <p style={{ ...labelStyle, marginBottom: '12px' }}>Best friends <span style={{ color: '#9B8B7A', fontWeight: '400', fontSize: '0.8rem' }}>(optional)</span></p>
+              {state.friends.length > 0 && (
+                <div style={{ display: 'flex', flexDirection: 'column' as const, gap: '8px', marginBottom: '10px' }}>
+                  {state.friends.map((f, i) => (
+                    <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr auto', gap: '8px', alignItems: 'center' }}>
+                      <input
+                        type="text"
+                        style={inputStyle}
+                        placeholder="Name"
+                        value={f.name}
+                        onChange={(e) => {
+                          const updated = [...state.friends];
+                          updated[i] = { ...updated[i], name: e.target.value };
+                          setState({ ...state, friends: updated });
+                        }}
+                      />
+                      <input
+                        type="text"
+                        style={inputStyle}
+                        placeholder="Nickname (optional)"
+                        value={f.nickname}
+                        onChange={(e) => {
+                          const updated = [...state.friends];
+                          updated[i] = { ...updated[i], nickname: e.target.value };
+                          setState({ ...state, friends: updated });
+                        }}
+                      />
+                      <button
+                        onClick={() => setState({ ...state, friends: state.friends.filter((_, idx) => idx !== i) })}
+                        style={{ background: 'none', border: '1.5px solid #E8E0D0', borderRadius: '8px', width: '36px', height: '36px', cursor: 'pointer', color: '#9B8B7A', fontSize: '1rem', flexShrink: 0 }}
+                      >
+                        ×
+                      </button>
+                    </div>
+                  ))}
                 </div>
-                <div>
-                  <label style={optionalLabel}>Nickname</label>
-                  <input type="text" style={inputStyle} placeholder="e.g. Livvy" value={state.bestFriendNickname} onChange={(e) => setState({ ...state, bestFriendNickname: e.target.value })} />
-                </div>
-              </div>
+              )}
+              <button
+                onClick={() => setState({ ...state, friends: [...state.friends, { name: '', nickname: '' }] })}
+                style={{ ...chipBase, border: '1.5px dashed #C8BEAA', backgroundColor: 'transparent', color: '#6B5E4E', width: '100%', justifyContent: 'center' }}
+              >
+                + Add friend
+              </button>
             </div>
 
             {/* Pet */}
