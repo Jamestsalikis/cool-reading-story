@@ -10,8 +10,13 @@ export async function createChild(data: {
   hairColour: string;
   eyeColour: string;
   siblingNames: string;
+  siblingNicknames: string;
+  bestFriendName: string;
+  bestFriendNickname: string;
   petName: string;
   petType: string;
+  city: string;
+  country: string;
   readingLevel: string;
 }) {
   const supabase = await createClient();
@@ -38,8 +43,13 @@ export async function createChild(data: {
         hairColour: data.hairColour,
         eyeColour: data.eyeColour,
         siblingNames: data.siblingNames,
+        siblingNicknames: data.siblingNicknames,
+        bestFriendName: data.bestFriendName,
+        bestFriendNickname: data.bestFriendNickname,
         petName: data.petName,
         petType: data.petType,
+        city: data.city,
+        country: data.country,
       },
     })
     .select()

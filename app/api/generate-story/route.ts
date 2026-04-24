@@ -16,7 +16,7 @@ function buildPrompt(child: {
   age: number;
   gender: string;
   interests: string[];
-  appearance: Record<string, string>;
+  appearance: Record<string, string | undefined>;
   reading_level: string;
 }) {
   const { name, age, gender, interests, appearance, reading_level } = child;
@@ -43,9 +43,22 @@ function buildPrompt(child: {
       ? `${name}'s beloved pet ${appearance.petType} named ${appearance.petName}`
       : null;
 
-  const siblingDesc = appearance.siblingNames
-    ? `siblings named ${appearance.siblingNames}`
-    : null;
+  const siblingDesc = (() => {
+    if (!appearance.siblingNames) return null;
+    if (appearance.siblingNicknames) return `siblings named ${appearance.siblingNames} (nicknames: ${appearance.siblingNicknames})`;
+    return `siblings named ${appearance.siblingNames}`;
+  })();
+
+  const bestFriendDesc = (() => {
+    if (!appearance.bestFriendName) return null;
+    if (appearance.bestFriendNickname) return `best friend ${appearance.bestFriendName} (nickname: ${appearance.bestFriendNickname})`;
+    return `best friend named ${appearance.bestFriendName}`;
+  })();
+
+  const locationDesc = [
+    appearance.city,
+    appearance.country,
+  ].filter(Boolean).join(', ');
 
   return `You are a master children's story writer creating a personalised bedtime picture book.
 
@@ -55,20 +68,23 @@ Child profile:
 - Gender: ${gender} (use pronouns: ${pronouns.they}/${pronouns.them}/${pronouns.their})
 - Interests: ${interests.join(', ')}
 ${appearanceDesc ? `- Appearance: ${appearanceDesc}` : ''}
+${locationDesc ? `- Lives in: ${locationDesc}` : ''}
 ${petDesc ? `- Pet: ${petDesc}` : ''}
 ${siblingDesc ? `- Siblings: ${siblingDesc}` : ''}
+${bestFriendDesc ? `- Best friend: ${bestFriendDesc}` : ''}
 - Reading level: ${reading_level} → target ${wordTarget} words total
 
 Requirements:
 1. ${name} is the hero — describe ${pronouns.them} with their actual appearance
 2. Weave their interests naturally into the plot — they drive the adventure
-3. Include their pet or siblings if provided — give them real roles
-4. Include a warm, gentle moral lesson that emerges naturally from the story
-5. End on a cosy, bedtime-appropriate note — winding down, not exciting
-6. Use language appropriate for age ${age}: ${reading_level === 'beginner' ? 'short sentences, simple words, lots of repetition' : reading_level === 'intermediate' ? 'flowing sentences, rich descriptions, some new vocabulary' : 'complex narrative, vivid imagery, sophisticated vocabulary'}
-7. Make it feel uniquely written FOR ${name} — not a generic story with a name swapped in
-8. Split the story into exactly 5 pages. Each page should have 2-4 paragraphs of text.
-9. For each page, write a short image prompt (1-2 sentences) describing a scene to illustrate it — children's picture book watercolor style, warm and cosy, featuring ${name}${appearanceDesc ? ` with ${appearanceDesc}` : ''}.
+3. Include their pet, siblings, or best friend if provided — give them real roles using their actual names/nicknames
+4. If a location is provided, set the story there or reference it naturally
+5. Include a warm, gentle moral lesson that emerges naturally from the story
+6. End on a cosy, bedtime-appropriate note — winding down, not exciting
+7. Use language appropriate for age ${age}: ${reading_level === 'beginner' ? 'short sentences, simple words, lots of repetition' : reading_level === 'intermediate' ? 'flowing sentences, rich descriptions, some new vocabulary' : 'complex narrative, vivid imagery, sophisticated vocabulary'}
+8. Make it feel uniquely written FOR ${name} — not a generic story with a name swapped in
+9. Split the story into exactly 5 pages. Each page should have 2-4 paragraphs of text.
+10. For each page, write a short image prompt (1-2 sentences) describing a scene to illustrate it — children's picture book watercolor style, warm and cosy, featuring ${name}${appearanceDesc ? ` with ${appearanceDesc}` : ''}.
 
 Return ONLY valid JSON, no markdown, no explanation:
 {
