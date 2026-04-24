@@ -274,26 +274,31 @@ export default function StoryPage() {
           // Only one Replicate prediction runs at a time — no 429 rate limits.
           (async () => {
             for (const page of pagesNeedingImages) {
-              // Step 1: create prediction — retries on 429 are handled inside the API route
-              let pollUrl: string | null = null;
-              try {
-                const res = await fetch('/api/generate-image', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ story_id: data.id, page_number: page.page_number }),
-                });
-                if (res.ok) {
-                  const result = await res.json();
-                  pollUrl = result.poll_url ?? null;
-                } else if (res.status === 429) {
-                  // Still rate-limited after retry — wait 10s then try next page
-                  await new Promise((r) => setTimeout(r, 10000));
-                }
-              } catch {}
+              // If a poll_url already exists in DB (from a previous session that was interrupted),
+              // resume polling it instead of creating a brand new prediction.
+              // This prevents generating a different image on every page refresh.
+              let pollUrl: string | null = page.poll_url ?? null;
+
+              if (!pollUrl) {
+                // No existing prediction — create one
+                try {
+                  const res = await fetch('/api/generate-image', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ story_id: data.id, page_number: page.page_number }),
+                  });
+                  if (res.ok) {
+                    const result = await res.json();
+                    pollUrl = result.poll_url ?? null;
+                  } else if (res.status === 429) {
+                    await new Promise((r) => setTimeout(r, 10000));
+                  }
+                } catch {}
+              }
 
               if (!pollUrl) continue;
 
-              // Step 2: poll until image is ready, then move to next page
+              // Poll until the image is ready
               for (let i = 0; i < 30; i++) {
                 await new Promise((r) => setTimeout(r, 3000));
                 try {
@@ -324,7 +329,7 @@ export default function StoryPage() {
                 } catch {}
               }
 
-              // Short pause between images — gives Replicate rate limiter breathing room
+              // Short pause between images — Replicate rate limit breathing room
               await new Promise((r) => setTimeout(r, 2000));
             }
           })();

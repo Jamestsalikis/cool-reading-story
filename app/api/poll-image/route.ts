@@ -36,9 +36,31 @@ export async function POST(request: Request) {
     const polled = await pollRes.json();
 
     if (polled.status === 'succeeded' && polled.output?.[0]) {
-      const imageUrl = polled.output[0];
+      const replicateUrl = polled.output[0];
 
-      // Fetch story to update pages
+      // Upload image to Supabase Storage for a permanent URL.
+      // Replicate CDN URLs expire after ~1 hour — Storage URLs never expire.
+      let permanentUrl = replicateUrl; // fallback if upload fails
+      try {
+        const imgRes = await fetch(replicateUrl);
+        if (imgRes.ok) {
+          const imgBuffer = await imgRes.arrayBuffer();
+          const filePath = `${story_id}/page-${page_number}.webp`;
+          const { error: uploadError } = await supabase.storage
+            .from('story-images')
+            .upload(filePath, imgBuffer, { contentType: 'image/webp', upsert: true });
+          if (!uploadError) {
+            const { data: { publicUrl } } = supabase.storage.from('story-images').getPublicUrl(filePath);
+            permanentUrl = publicUrl;
+          } else {
+            console.error('Storage upload error:', uploadError.message);
+          }
+        }
+      } catch (uploadErr) {
+        console.error('Image upload failed, using Replicate URL:', uploadErr);
+      }
+
+      // Fetch story and save permanent URL, clearing poll_url
       const { data: story } = await supabase
         .from('stories')
         .select('pages')
@@ -49,12 +71,12 @@ export async function POST(request: Request) {
       if (story) {
         const pages = story.pages || [];
         const updatedPages = pages.map((p: { page_number: number }) =>
-          p.page_number === page_number ? { ...p, image_url: imageUrl } : p
+          p.page_number === page_number ? { ...p, image_url: permanentUrl, poll_url: null } : p
         );
         await supabase.from('stories').update({ pages: updatedPages }).eq('id', story_id);
       }
 
-      return NextResponse.json({ status: 'succeeded', image_url: imageUrl, page_number });
+      return NextResponse.json({ status: 'succeeded', image_url: permanentUrl, page_number });
     }
 
     if (polled.status === 'failed') {

@@ -92,11 +92,19 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'rate_limited' }, { status: 429 });
     }
 
-    // Return poll URL — frontend polls /api/poll-image every 3s
+    const pollUrl = prediction.urls.get;
+
+    // Save poll_url to DB immediately so page refreshes can resume this prediction
+    // instead of creating a new one (which would generate a different image)
+    const updatedPages = pages.map((p: { page_number: number }) =>
+      p.page_number === page_number ? { ...p, poll_url: pollUrl } : p
+    );
+    await supabase.from('stories').update({ pages: updatedPages }).eq('id', story_id);
+
     return NextResponse.json({
       status: 'processing',
       prediction_id: prediction.id,
-      poll_url: prediction.urls.get,
+      poll_url: pollUrl,
       page_number,
     });
 
