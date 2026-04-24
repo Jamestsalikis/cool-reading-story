@@ -538,14 +538,15 @@ export default function StoryPage() {
             onClick={() => goToPage(currentPage - 1)}
             disabled={currentPage === 0}
             style={{
-              display: 'flex', alignItems: 'center', gap: '4px',
-              background: 'none', border: '1.5px solid rgba(255,255,255,0.2)',
-              borderRadius: '8px', color: 'rgba(255,255,255,0.7)',
-              padding: '0.6rem 1rem', cursor: currentPage === 0 ? 'not-allowed' : 'pointer',
-              opacity: currentPage === 0 ? 0.3 : 1, fontSize: '0.875rem',
+              display: 'flex', alignItems: 'center', gap: '6px',
+              background: 'none', border: '2px solid rgba(255,255,255,0.25)',
+              borderRadius: '12px', color: 'rgba(255,255,255,0.85)',
+              padding: '0.75rem 1.25rem', cursor: currentPage === 0 ? 'not-allowed' : 'pointer',
+              opacity: currentPage === 0 ? 0.25 : 1, fontSize: '1rem', fontWeight: '600',
+              minWidth: '90px', justifyContent: 'center',
             }}
           >
-            <ChevronLeft size={16} /> Prev
+            <ChevronLeft size={20} /> Back
           </button>
 
           {/* Dots */}
@@ -571,24 +572,26 @@ export default function StoryPage() {
               onClick={() => window.print()}
               style={{
                 display: 'flex', alignItems: 'center', gap: '6px',
-                background: '#c4784a', border: 'none', borderRadius: '8px',
-                color: 'white', padding: '0.6rem 1rem',
-                cursor: 'pointer', fontSize: '0.875rem', fontWeight: 600,
+                background: '#c4784a', border: 'none', borderRadius: '12px',
+                color: 'white', padding: '0.75rem 1.25rem',
+                cursor: 'pointer', fontSize: '1rem', fontWeight: 700,
+                minWidth: '90px', justifyContent: 'center',
               }}
             >
-              <Printer size={15} /> Print book
+              <Printer size={18} /> Print
             </button>
           ) : (
             <button
               onClick={() => goToPage(currentPage + 1)}
               style={{
-                display: 'flex', alignItems: 'center', gap: '4px',
-                background: '#741515', border: 'none', borderRadius: '8px',
-                color: 'white', padding: '0.6rem 1rem',
-                cursor: 'pointer', fontSize: '0.875rem', fontWeight: 600,
+                display: 'flex', alignItems: 'center', gap: '6px',
+                background: '#741515', border: 'none', borderRadius: '12px',
+                color: 'white', padding: '0.75rem 1.25rem',
+                cursor: 'pointer', fontSize: '1rem', fontWeight: 700,
+                minWidth: '90px', justifyContent: 'center',
               }}
             >
-              Next <ChevronRight size={16} />
+              Next <ChevronRight size={20} />
             </button>
           )}
         </div>
