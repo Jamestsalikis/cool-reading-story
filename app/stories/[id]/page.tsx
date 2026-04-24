@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Heart, ChevronLeft, ChevronRight, Printer } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
+import FeedbackModal from '@/components/FeedbackModal';
 
 type Page = {
   page_number: number;
@@ -244,7 +245,9 @@ export default function StoryPage() {
   const [animKey, setAnimKey] = useState(0);
   // Set of page numbers currently having their image generated
   const [loadingPages, setLoadingPages] = useState<Set<number>>(new Set());
+  const [showFeedback, setShowFeedback] = useState(false);
   const imageGenStarted = useRef(false);
+  const feedbackShown = useRef(false);
   const supabase = createClient();
 
   useEffect(() => {
@@ -343,6 +346,16 @@ export default function StoryPage() {
     setDirection(index > currentPage ? 'forward' : 'back');
     setAnimKey((k) => k + 1);
     setCurrentPage(index);
+
+    // Show feedback modal when reaching the last page, once per week
+    if (story && index === story.pages.length - 1 && !feedbackShown.current) {
+      const last = localStorage.getItem('last_feedback_at');
+      const sevenDaysAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
+      if (!last || new Date(last).getTime() < sevenDaysAgo) {
+        feedbackShown.current = true;
+        setTimeout(() => setShowFeedback(true), 2000); // small delay after landing on last page
+      }
+    }
   };
 
   if (loading) {
@@ -439,6 +452,8 @@ export default function StoryPage() {
 
   return (
     <>
+      {showFeedback && <FeedbackModal onClose={() => setShowFeedback(false)} />}
+
       {/* Print-only layout: all pages rendered for printing */}
       <div className="print-only">
         <div className="print-page">
