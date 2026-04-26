@@ -82,7 +82,7 @@ Requirements:
 6. End on a cosy, bedtime-appropriate note
 7. Use language appropriate for age ${child.age}: ${child.reading_level === 'beginner' ? 'short sentences, simple words' : child.reading_level === 'intermediate' ? 'flowing sentences, rich descriptions' : 'complex narrative, vivid imagery'}
 8. Split into exactly 5 pages, 2-4 paragraphs each
-9. For each page, write a short image prompt (1-2 sentences) — children's picture book watercolor style, warm and cosy, featuring ${child.name}${appearanceDesc ? ` with ${appearanceDesc}` : ''}
+9. For each page, write a short image prompt (1-2 sentences) — bright children's book cartoon illustration style, bold outlines, vivid flat colours, expressive friendly characters, clean and joyful, featuring ${child.name}${appearanceDesc ? ` with ${appearanceDesc}` : ''}. No text in the image
 
 Return ONLY valid JSON:
 {
@@ -94,7 +94,7 @@ Return ONLY valid JSON:
     {
       "page_number": 1,
       "content": "Page text — 2-4 paragraphs",
-      "image_prompt": "Children's watercolor picture book illustration, [scene], warm soft colors, no text"
+      "image_prompt": "Bright children's book cartoon illustration, [scene], bold outlines, vivid flat colours, expressive characters, no text"
     }
   ]
 }`;

@@ -374,13 +374,12 @@ export default function OnboardingPage() {
             <h1 className="font-serif" style={{ fontSize: '2rem', marginBottom: '8px', color: '#1A1209' }}>What does {state.name || 'your child'} love?</h1>
             <p style={{ color: '#6B5E4E', marginBottom: '32px', fontSize: '0.95rem' }}>Select at least 2 — these shape every story</p>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(110px, 1fr))', gap: '10px', marginBottom: '16px' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '16px' }}>
               {INTEREST_OPTIONS.map((option) => {
                 const active = state.interests.includes(option.label);
                 return (
                   <button key={option.label} onClick={() => handleInterestToggle(option.label)}
-                    style={{ ...chip(active), display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px', padding: '12px 8px', fontSize: '0.78rem' }}>
-                    <span style={{ fontSize: '1.4rem' }}>{option.emoji}</span>
+                    style={{ ...chip(active), padding: '0.5rem 1rem', fontSize: '0.85rem' }}>
                     {option.label}
                   </button>
                 );

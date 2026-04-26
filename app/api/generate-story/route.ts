@@ -89,7 +89,7 @@ Requirements:
 7. Use language appropriate for age ${age}: ${reading_level === 'beginner' ? 'short sentences, simple words, lots of repetition' : reading_level === 'intermediate' ? 'flowing sentences, rich descriptions, some new vocabulary' : 'complex narrative, vivid imagery, sophisticated vocabulary'}
 8. Make it feel uniquely written FOR ${name} — not a generic story with a name swapped in
 9. Split the story into exactly 5 pages. Each page should have 2-4 paragraphs of text.
-10. For each page, write a short image prompt (1-2 sentences) describing a scene to illustrate it — children's picture book watercolor style, warm and cosy, featuring ${name}${appearanceDesc ? ` with ${appearanceDesc}` : ''}.
+10. For each page, write a short image prompt (1-2 sentences) describing a scene to illustrate it — bright children's book cartoon illustration style, bold outlines, vivid flat colours, expressive friendly characters, clean and joyful, featuring ${name}${appearanceDesc ? ` with ${appearanceDesc}` : ''}. No text in the image.
 
 Return ONLY valid JSON, no markdown, no explanation:
 {
