@@ -83,7 +83,7 @@ function SeriesFan({ volumes, palette }: { volumes: Story[]; palette: Palette })
 
   // Container must be wide enough to hold the fanned books
   const containerW = 140 + (n - 1) * 22 + 40;
-  const containerH = 230;
+  const containerH = 210;
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
@@ -101,8 +101,8 @@ function SeriesFan({ volumes, palette }: { volumes: Story[]; palette: Palette })
                 position: 'absolute',
                 bottom: '0px',
                 left: '50%',
-                width: '110px',
-                height: '154px',
+                width: '120px',
+                height: '168px',
                 cursor: 'pointer',
                 transformOrigin: 'center bottom',
                 transform: `translateX(-50%) rotate(${angle}deg) translateY(${isHovered ? -20 : 0}px)`,
@@ -381,7 +381,7 @@ export default function DashboardPage() {
                       {shelf.length === 0 ? (
                         <p style={{ color: '#9B8B7A', fontSize: '0.875rem', fontStyle: 'italic' }}>No stories yet — generate the first one above.</p>
                       ) : (
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '32px 24px', alignItems: 'flex-end' }}>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '32px 24px', alignItems: 'flex-start' }}>
                           {shelf.map(item =>
                             item.type === 'single' ? (
                               <BookCard key={item.story.id} story={item.story} palette={palette} />
