@@ -327,8 +327,15 @@ export default function OnboardingPage() {
   return (
     <div style={{ minHeight: '100vh', backgroundColor: '#FAF7F0', padding: '40px 20px' }}>
       <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-        <div className="font-serif" style={{ fontSize: '1.25rem', fontWeight: 600, color: '#741515', marginBottom: '40px', textAlign: 'center' }}>
-          Cool Reading Story
+        {/* Logo mark */}
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', marginBottom: '40px' }}>
+          <svg width="40" height="32" viewBox="0 0 40 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 6C15 2 6 2 2 4v22c4-2 13-2 18 2 5-4 14-4 18-2V4c-4-2-13-2-18 2z" stroke="#741515" strokeWidth="2" strokeLinejoin="round" fill="rgba(116,21,21,0.08)"/>
+            <line x1="20" y1="6" x2="20" y2="28" stroke="#741515" strokeWidth="1.5"/>
+          </svg>
+          <div className="font-serif" style={{ fontSize: '1rem', fontWeight: 600, color: '#741515', letterSpacing: '0.04em' }}>
+            Cool Reading Story
+          </div>
         </div>
 
         {/* ── Step 2: Name / Age / Gender ── */}

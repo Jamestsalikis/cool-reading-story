@@ -55,7 +55,6 @@ function BookCard({ story, palette }: { story: Story; palette: Palette }) {
         <div style={{ position: 'absolute', left: '18px', top: 0, width: 'calc(100% - 18px)', height: '100%', background: palette.light, borderRadius: '0 6px 6px 0', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '16px 12px', gap: '8px', boxShadow: 'inset 6px 0 14px rgba(0,0,0,0.05)' }}>
           <div style={{ width: '40px', height: '2px', background: palette.cover, borderRadius: '1px', opacity: 0.4 }} />
           <p style={{ fontSize: '0.72rem', fontFamily: 'Georgia, serif', fontWeight: '600', textAlign: 'center', color: '#1C1614', lineHeight: 1.45 }}>{story.title}</p>
-          <p style={{ fontSize: '0.62rem', color: '#9B8B7A', letterSpacing: '0.04em' }}>{story.title}</p>
           <div className="book-read-hint" style={{ fontSize: '0.68rem', fontWeight: '700', color: palette.cover, letterSpacing: '0.06em', textTransform: 'uppercase' }}>Read</div>
         </div>
         {/* Cover */}
