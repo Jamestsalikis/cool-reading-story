@@ -15,161 +15,176 @@ const CHILD_PALETTES = [
 ];
 
 const pageStyles = `
-  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  @keyframes spin { from { transform:rotate(0deg); } to { transform:rotate(360deg); } }
   @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.5; } }
-  @keyframes fadeUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+  .book-cover-panel {
+    transition: transform 0.55s cubic-bezier(0.4,0,0.2,1), box-shadow 0.55s ease;
+  }
+  .book-wrap:hover .book-cover-panel {
+    transform: rotateY(-162deg);
+    box-shadow: -10px 6px 28px rgba(0,0,0,0.3);
+  }
+  .book-read-hint { opacity:0; transition: opacity 0.2s ease 0.3s; }
+  .book-wrap:hover .book-read-hint { opacity:1; }
 `;
 
 type Child = { id: string; name: string; age: number; interests: string[] };
-
 type Story = {
-  id: string;
-  title: string;
-  created_at: string;
-  word_count: number;
-  series_id: string | null;
-  series_title: string | null;
-  volume_number: number | null;
+  id: string; title: string; created_at: string; word_count: number;
+  series_id: string | null; series_title: string | null; volume_number: number | null;
   children: { name: string; age: number };
 };
+type Palette = typeof CHILD_PALETTES[0];
 
-// A single fan-card (simplified flat cover, no 3D flip — hover lifts)
-function FanBook({
-  story, palette, angle, zIndex, offset,
-}: {
-  story: Story;
-  palette: typeof CHILD_PALETTES[0];
-  angle: number;
-  zIndex: number;
-  offset: number; // horizontal offset from centre
-}) {
-  const [hovered, setHovered] = useState(false);
+// ── Individual book card (3D flip on hover) ──────────────────────────────────
+function BookCard({ story, palette }: { story: Story; palette: Palette }) {
   const router = useRouter();
+  const pattern = `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 20 L20 0 L40 20 L20 40Z' fill='rgba(255,255,255,0.05)'/%3E%3C/svg%3E")`;
   const vol = story.volume_number;
-  const pattern = `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 20 L20 0 L40 20 L20 40Z' fill='rgba(255,255,255,0.06)'/%3E%3C/svg%3E")`;
 
   return (
-    <div
-      onClick={() => router.push(`/stories/${story.id}`)}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        position: 'absolute',
-        bottom: 0,
-        left: '50%',
-        width: '110px',
-        height: '154px',
-        cursor: 'pointer',
-        transformOrigin: 'center bottom',
-        transform: `translateX(calc(-50% + ${offset}px)) rotate(${angle}deg) translateY(${hovered ? -18 : 0}px)`,
-        transition: 'transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)',
-        zIndex: hovered ? 100 : zIndex,
-        borderRadius: '3px 6px 6px 3px',
-        boxShadow: hovered
-          ? '0 16px 40px rgba(0,0,0,0.35)'
-          : '2px 4px 12px rgba(0,0,0,0.2)',
-      }}
-    >
-      {/* Spine */}
-      <div style={{
-        position: 'absolute', left: 0, top: 0, width: '14px', height: '100%',
-        background: palette.spine, borderRadius: '3px 0 0 3px',
-        boxShadow: 'inset -2px 0 4px rgba(0,0,0,0.25)',
-      }} />
-
-      {/* Cover */}
-      <div style={{
-        position: 'absolute', left: '14px', top: 0,
-        width: 'calc(100% - 14px)', height: '100%',
-        background: palette.cover, backgroundImage: pattern,
-        borderRadius: '0 6px 6px 0',
-        display: 'flex', flexDirection: 'column',
-        alignItems: 'center', justifyContent: 'center',
-        padding: '10px 8px', gap: '6px',
-      }}>
-        {/* Vol badge */}
-        {vol && vol > 1 && (
-          <div style={{
-            position: 'absolute', top: '7px', right: '6px',
-            background: 'rgba(255,255,255,0.2)', color: 'rgba(255,255,255,0.9)',
-            fontSize: '0.52rem', fontWeight: '800', letterSpacing: '0.08em',
-            padding: '1px 5px', borderRadius: '8px',
-          }}>
-            VOL {vol}
-          </div>
-        )}
-        {/* Diamond ornament */}
-        <div style={{
-          width: '18px', height: '18px',
-          border: '1px solid rgba(255,255,255,0.3)',
-          borderRadius: '2px', transform: 'rotate(45deg)',
-        }} />
-        <p style={{
-          fontSize: '0.6rem', fontFamily: 'Georgia, serif', fontWeight: '600',
-          color: 'rgba(255,255,255,0.95)', textAlign: 'center', lineHeight: 1.35,
-        }}>
-          {story.title.length > 40 ? story.title.slice(0, 38) + '…' : story.title}
-        </p>
-        {hovered && (
-          <p style={{
-            fontSize: '0.55rem', color: 'rgba(255,255,255,0.6)',
-            fontWeight: '700', letterSpacing: '0.08em', textTransform: 'uppercase',
-            marginTop: '2px',
-          }}>
-            Read
-          </p>
-        )}
+    <div className="book-wrap" onClick={() => router.push(`/stories/${story.id}`)}
+      style={{ perspective: '900px', cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
+      <div style={{ position: 'relative', width: '140px', height: '196px', transformStyle: 'preserve-3d' }}>
+        {/* Spine */}
+        <div style={{ position: 'absolute', left: 0, top: 0, width: '18px', height: '100%', background: `linear-gradient(90deg, ${palette.spine} 0%, ${palette.cover} 100%)`, borderRadius: '3px 0 0 3px', zIndex: 3, boxShadow: 'inset -2px 0 5px rgba(0,0,0,0.3)' }} />
+        {/* Pages */}
+        {[4, 2].map(o => <div key={o} style={{ position: 'absolute', left: `${18+o}px`, top: `${o*.4}px`, width: `calc(100% - ${18+o}px)`, height: `calc(100% - ${o*.8}px)`, background: '#F5F0E8', borderRadius: '0 3px 3px 0' }} />)}
+        {/* Interior */}
+        <div style={{ position: 'absolute', left: '18px', top: 0, width: 'calc(100% - 18px)', height: '100%', background: palette.light, borderRadius: '0 6px 6px 0', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '16px 12px', gap: '8px', boxShadow: 'inset 6px 0 14px rgba(0,0,0,0.05)' }}>
+          <div style={{ width: '40px', height: '2px', background: palette.cover, borderRadius: '1px', opacity: 0.4 }} />
+          <p style={{ fontSize: '0.72rem', fontFamily: 'Georgia, serif', fontWeight: '600', textAlign: 'center', color: '#1C1614', lineHeight: 1.45 }}>{story.title}</p>
+          <p style={{ fontSize: '0.62rem', color: '#9B8B7A', letterSpacing: '0.04em' }}>{story.children?.name}</p>
+          <div className="book-read-hint" style={{ fontSize: '0.68rem', fontWeight: '700', color: palette.cover, letterSpacing: '0.06em', textTransform: 'uppercase' }}>Read</div>
+        </div>
+        {/* Cover */}
+        <div className="book-cover-panel" style={{ position: 'absolute', left: '18px', top: 0, width: 'calc(100% - 18px)', height: '100%', background: palette.cover, backgroundImage: pattern, borderRadius: '0 6px 6px 0', transformOrigin: 'left center', backfaceVisibility: 'hidden', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '16px 12px', gap: '8px', boxShadow: '3px 3px 12px rgba(0,0,0,0.2)' }}>
+          {vol && vol > 1 && <div style={{ position: 'absolute', top: '10px', right: '8px', background: 'rgba(255,255,255,0.2)', color: 'rgba(255,255,255,0.9)', fontSize: '0.6rem', fontWeight: '800', letterSpacing: '0.08em', padding: '2px 7px', borderRadius: '10px' }}>VOL {vol}</div>}
+          <div style={{ width: '28px', height: '28px', border: '1.5px solid rgba(255,255,255,0.3)', borderRadius: '3px', transform: 'rotate(45deg)', marginBottom: '4px' }} />
+          <p style={{ fontSize: '0.75rem', fontFamily: 'Georgia, serif', fontWeight: '600', textAlign: 'center', color: 'rgba(255,255,255,0.95)', lineHeight: 1.4 }}>{story.title}</p>
+          <div style={{ width: '30px', height: '1px', background: 'rgba(255,255,255,0.25)' }} />
+          <p style={{ fontSize: '0.6rem', color: 'rgba(255,255,255,0.55)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>{story.children?.name}</p>
+        </div>
       </div>
+      <p style={{ fontSize: '0.68rem', color: '#9B8B7A', letterSpacing: '0.02em' }}>
+        {new Date(story.created_at).toLocaleDateString('en-AU', { month: 'short', year: 'numeric' })}
+      </p>
     </div>
   );
 }
 
-// Fan container — lays books out in a playing-card arc
-function BookFan({ stories, palette }: { stories: Story[]; palette: typeof CHILD_PALETTES[0] }) {
-  if (stories.length === 0) return null;
-
-  const MAX_VISIBLE = 10;
-  const visible = stories.slice(0, MAX_VISIBLE);
-  const n = visible.length;
-
-  // Angle spread: wider for more books, capped at ±40°
-  const totalSpread = Math.min(70, n * 9);
-  const angles = visible.map((_, i) =>
-    n === 1 ? 0 : -totalSpread / 2 + (totalSpread / (n - 1)) * i
+// ── Series fan — volumes fanned like playing cards ────────────────────────────
+function SeriesFan({ volumes, palette }: { volumes: Story[]; palette: Palette }) {
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const router = useRouter();
+  const n = volumes.length;
+  const spread = n === 1 ? 0 : n === 2 ? 20 : n === 3 ? 28 : 34;
+  const angles = volumes.map((_, i) =>
+    n === 1 ? 0 : -spread / 2 + (spread / (n - 1)) * i
   );
+  const pattern = `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 20 L20 0 L40 20 L20 40Z' fill='rgba(255,255,255,0.05)'/%3E%3C/svg%3E")`;
 
-  // Horizontal nudge so books don't all sit exactly on top of each other
-  const totalWidth = Math.min(320, n * 36);
-  const offsets = visible.map((_, i) =>
-    n === 1 ? 0 : -totalWidth / 2 + (totalWidth / (n - 1)) * i
-  );
-
-  const containerHeight = 200 + Math.abs(angles[0]) * 1.2;
+  // Container must be wide enough to hold the fanned books
+  const containerW = 140 + (n - 1) * 22 + 40;
+  const containerH = 230;
 
   return (
-    <div style={{ position: 'relative', height: `${containerHeight}px`, width: '100%', minWidth: '200px' }}>
-      {visible.map((story, i) => (
-        <FanBook
-          key={story.id}
-          story={story}
-          palette={palette}
-          angle={angles[i]}
-          zIndex={i + 1}
-          offset={offsets[i]}
-        />
-      ))}
-      {stories.length > MAX_VISIBLE && (
-        <p style={{
-          position: 'absolute', bottom: '-24px', right: 0,
-          fontSize: '0.72rem', color: '#9B8B7A',
-        }}>
-          +{stories.length - MAX_VISIBLE} more
-        </p>
-      )}
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
+      <div style={{ position: 'relative', width: `${containerW}px`, height: `${containerH}px` }}>
+        {volumes.map((vol, i) => {
+          const isHovered = hoveredId === vol.id;
+          const angle = angles[i];
+          return (
+            <div
+              key={vol.id}
+              onClick={() => router.push(`/stories/${vol.id}`)}
+              onMouseEnter={() => setHoveredId(vol.id)}
+              onMouseLeave={() => setHoveredId(null)}
+              style={{
+                position: 'absolute',
+                bottom: '0px',
+                left: '50%',
+                width: '110px',
+                height: '154px',
+                cursor: 'pointer',
+                transformOrigin: 'center bottom',
+                transform: `translateX(-50%) rotate(${angle}deg) translateY(${isHovered ? -20 : 0}px)`,
+                transition: 'transform 0.25s cubic-bezier(0.34,1.56,0.64,1)',
+                zIndex: isHovered ? 50 : i + 1,
+                borderRadius: '3px 6px 6px 3px',
+                boxShadow: isHovered
+                  ? '0 16px 36px rgba(0,0,0,0.35)'
+                  : '2px 4px 10px rgba(0,0,0,0.2)',
+              }}
+            >
+              {/* Spine */}
+              <div style={{ position: 'absolute', left: 0, top: 0, width: '13px', height: '100%', background: palette.spine, borderRadius: '3px 0 0 3px', boxShadow: 'inset -2px 0 4px rgba(0,0,0,0.25)' }} />
+              {/* Cover */}
+              <div style={{ position: 'absolute', left: '13px', top: 0, width: 'calc(100% - 13px)', height: '100%', background: palette.cover, backgroundImage: pattern, borderRadius: '0 6px 6px 0', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '10px 8px', gap: '5px' }}>
+                {/* Vol badge */}
+                <div style={{ position: 'absolute', top: '7px', right: '6px', background: 'rgba(255,255,255,0.2)', color: 'rgba(255,255,255,0.9)', fontSize: '0.52rem', fontWeight: '800', letterSpacing: '0.08em', padding: '1px 5px', borderRadius: '8px' }}>
+                  VOL {vol.volume_number}
+                </div>
+                <div style={{ width: '16px', height: '16px', border: '1px solid rgba(255,255,255,0.3)', borderRadius: '2px', transform: 'rotate(45deg)' }} />
+                <p style={{ fontSize: '0.58rem', fontFamily: 'Georgia, serif', fontWeight: '600', color: 'rgba(255,255,255,0.95)', textAlign: 'center', lineHeight: 1.3 }}>
+                  {vol.title.length > 36 ? vol.title.slice(0, 34) + '…' : vol.title}
+                </p>
+                {isHovered && (
+                  <p style={{ fontSize: '0.52rem', color: 'rgba(255,255,255,0.6)', fontWeight: '700', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Read</p>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      {/* Label */}
+      <p style={{ fontSize: '0.68rem', color: '#9B8B7A', letterSpacing: '0.02em', textAlign: 'center' }}>
+        {volumes[0].series_title || 'Series'} · {n} {n === 1 ? 'volume' : 'volumes'}
+      </p>
     </div>
   );
 }
 
+// ── Shelf items: group series into fans, keep singles as BookCards ─────────────
+type ShelfItem =
+  | { type: 'single'; story: Story }
+  | { type: 'series'; seriesId: string; volumes: Story[] };
+
+function buildShelf(stories: Story[], childName: string): ShelfItem[] {
+  const mine = stories.filter(s => s.children?.name === childName);
+  const seriesMap = new Map<string, Story[]>();
+  const singles: Story[] = [];
+
+  mine.forEach(s => {
+    if (s.series_id) {
+      if (!seriesMap.has(s.series_id)) seriesMap.set(s.series_id, []);
+      seriesMap.get(s.series_id)!.push(s);
+    } else {
+      singles.push(s);
+    }
+  });
+
+  const items: ShelfItem[] = [];
+  singles.forEach(story => items.push({ type: 'single', story }));
+  seriesMap.forEach((vols, seriesId) => {
+    const sorted = [...vols].sort((a, b) => (a.volume_number ?? 1) - (b.volume_number ?? 1));
+    items.push({ type: 'series', seriesId, volumes: sorted });
+  });
+
+  items.sort((a, b) => {
+    const aDate = a.type === 'single'
+      ? new Date(a.story.created_at).getTime()
+      : Math.max(...a.volumes.map(v => new Date(v.created_at).getTime()));
+    const bDate = b.type === 'single'
+      ? new Date(b.story.created_at).getTime()
+      : Math.max(...b.volumes.map(v => new Date(v.created_at).getTime()));
+    return bDate - aDate;
+  });
+
+  return items;
+}
+
+// ── Dashboard ─────────────────────────────────────────────────────────────────
 export default function DashboardPage() {
   const [activeNav, setActiveNav] = useState('stories');
   const [isMobile, setIsMobile] = useState(false);
@@ -184,8 +199,7 @@ export default function DashboardPage() {
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
-    check();
-    window.addEventListener('resize', check);
+    check(); window.addEventListener('resize', check);
     return () => window.removeEventListener('resize', check);
   }, []);
 
@@ -205,16 +219,25 @@ export default function DashboardPage() {
 
   useEffect(() => { fetchData(); }, [fetchData]);
 
+  const storiesByChild = (childId: string) => {
+    const child = children.find(c => c.id === childId);
+    if (!child) return [];
+    return stories.filter(s => s.children?.name === child.name);
+  };
+
+  const isSeriesComplete = (childId: string) => {
+    const latest = storiesByChild(childId)[0];
+    if (!latest?.series_id) return false;
+    return stories.filter(s => s.series_id === latest.series_id).some(s => s.volume_number === 4);
+  };
+
   const handleGenerateStory = async (childId: string) => {
     const child = children.find(c => c.id === childId);
     setGeneratingName(child?.name || '');
     setGenerating(`new-${childId}`);
     setGenerateError('');
     try {
-      const res = await fetch('/api/generate-story', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ child_id: childId }),
-      });
+      const res = await fetch('/api/generate-story', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ child_id: childId }) });
       const data = await res.json();
       if (!res.ok) setGenerateError(data.message || 'Something went wrong.');
       else await fetchData();
@@ -229,26 +252,11 @@ export default function DashboardPage() {
     setGenerating(`sequel-${latest.id}`);
     setGenerateError('');
     try {
-      const res = await fetch('/api/generate-sequel', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ story_id: latest.id }),
-      });
+      const res = await fetch('/api/generate-sequel', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ story_id: latest.id }) });
       const data = await res.json();
       if (!res.ok) setGenerateError(data.error || 'Something went wrong.');
       else await fetchData();
     } finally { setGenerating(null); }
-  };
-
-  const storiesByChild = (childId: string) => {
-    const child = children.find(c => c.id === childId);
-    if (!child) return [];
-    return stories.filter(s => s.children?.name === child.name);
-  };
-
-  const isSeriesComplete = (childId: string) => {
-    const latest = storiesByChild(childId)[0];
-    if (!latest?.series_id) return false;
-    return stories.filter(s => s.series_id === latest.series_id).some(s => s.volume_number === 4);
   };
 
   const navItems = [
@@ -262,9 +270,8 @@ export default function DashboardPage() {
     <div style={{ minHeight: '100vh', background: '#FAF9F6', display: 'flex', flexDirection: isMobile ? 'column' : 'row' }}>
       <style>{pageStyles}</style>
 
-      {/* Generating overlay */}
       {generating && (
-        <div style={{ position: 'fixed', inset: 0, background: 'rgba(28,22,20,0.88)', zIndex: 100, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '24px', animation: 'fadeUp 0.3s ease' }}>
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(28,22,20,0.88)', zIndex: 100, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '24px' }}>
           <div style={{ width: '52px', height: '52px', borderRadius: '50%', border: '3px solid rgba(255,255,255,0.12)', borderTopColor: '#C4784A', animation: 'spin 1s linear infinite' }} />
           <div style={{ textAlign: 'center' }}>
             <p style={{ color: '#fff', fontSize: '1.3rem', fontFamily: 'Georgia, serif', marginBottom: '8px' }}>Writing {generatingName}&apos;s story</p>
@@ -273,7 +280,6 @@ export default function DashboardPage() {
         </div>
       )}
 
-      {/* Sidebar */}
       {!isMobile && (
         <div style={{ width: '210px', background: '#1C1614', padding: '32px 20px', display: 'flex', flexDirection: 'column', position: 'fixed', height: '100vh', left: 0, top: 0, overflowY: 'auto' }}>
           <h1 style={{ fontFamily: 'Georgia, serif', fontSize: '1.1rem', marginBottom: '40px', color: '#E8DDD0', lineHeight: 1.3 }}>Cool Reading<br />Story</h1>
@@ -290,9 +296,7 @@ export default function DashboardPage() {
         </div>
       )}
 
-      {/* Main */}
       <div style={{ flex: 1, marginLeft: isMobile ? 0 : '210px', padding: isMobile ? '28px 16px 100px' : '48px 48px 60px' }}>
-
         <div style={{ marginBottom: '48px' }}>
           <h2 style={{ fontFamily: 'Georgia, serif', fontSize: '2rem', color: '#1C1614', marginBottom: '6px', fontWeight: '400' }}>
             Welcome back{userName ? `, ${userName}` : ''}
@@ -304,9 +308,7 @@ export default function DashboardPage() {
 
         {activeNav === 'stories' && (
           <>
-            {generateError && (
-              <div style={{ background: '#FEE2E2', borderRadius: '8px', padding: '12px 16px', marginBottom: '24px', fontSize: '0.875rem', color: '#991B1B' }}>{generateError}</div>
-            )}
+            {generateError && <div style={{ background: '#FEE2E2', borderRadius: '8px', padding: '12px 16px', marginBottom: '24px', fontSize: '0.875rem', color: '#991B1B' }}>{generateError}</div>}
 
             {loading ? (
               <p style={{ color: '#9B8B7A', animation: 'pulse 2s ease infinite' }}>Loading your library...</p>
@@ -317,114 +319,55 @@ export default function DashboardPage() {
                 <Link href="/onboarding" style={{ display: 'inline-block', padding: '0.75rem 1.75rem', background: '#1C1614', color: '#fff', borderRadius: '8px', textDecoration: 'none', fontWeight: '600', fontSize: '0.9rem' }}>Get started</Link>
               </div>
             ) : (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '72px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '64px' }}>
                 {children.map((child, childIndex) => {
                   const palette = CHILD_PALETTES[childIndex % CHILD_PALETTES.length];
-                  const childStories = storiesByChild(child.id);
-                  const seriesComplete = isSeriesComplete(child.id);
-                  const canContinue = childStories.length > 0 && !seriesComplete;
+                  const shelf = buildShelf(stories, child.name);
+                  const canContinue = storiesByChild(child.id).length > 0 && !isSeriesComplete(child.id);
 
                   return (
                     <div key={child.id}>
-                      {/* Child heading */}
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
-                        <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: palette.cover }} />
-                        <h3 style={{ fontFamily: 'Georgia, serif', fontSize: '1.2rem', color: '#1C1614', fontWeight: '400' }}>
-                          {child.name}&apos;s books
-                        </h3>
-                        <span style={{ fontSize: '0.8rem', color: '#C8BEAA', fontWeight: '400' }}>
-                          {childStories.length} {childStories.length === 1 ? 'book' : 'books'}
-                        </span>
-                      </div>
-                      <div style={{ height: '2px', background: `linear-gradient(90deg, ${palette.cover}50, transparent)`, marginBottom: '32px', borderRadius: '1px' }} />
-
-                      {/* Two-panel: fan on left, create on right */}
-                      <div style={{
-                        display: 'grid',
-                        gridTemplateColumns: isMobile ? '1fr' : '1fr 240px',
-                        gap: '40px',
-                        alignItems: 'end',
-                      }}>
-
-                        {/* Left: book fan */}
-                        {childStories.length === 0 ? (
-                          <p style={{ color: '#9B8B7A', fontSize: '0.875rem', fontStyle: 'italic', paddingBottom: '24px' }}>
-                            No stories yet — create the first one.
-                          </p>
-                        ) : (
-                          <div>
-                            <BookFan stories={childStories} palette={palette} />
-                            <p style={{ fontSize: '0.72rem', color: '#C8BEAA', marginTop: '12px', letterSpacing: '0.03em' }}>
-                              Hover a book to lift it · Click to read
-                            </p>
-                          </div>
-                        )}
-
-                        {/* Right: create panel */}
-                        <div style={{
-                          background: '#fff',
-                          border: `1.5px solid ${palette.cover}25`,
-                          borderLeft: `3px solid ${palette.cover}`,
-                          borderRadius: '10px',
-                          padding: '24px 20px',
-                          display: 'flex',
-                          flexDirection: 'column',
-                          gap: '12px',
-                        }}>
-                          <p style={{ fontFamily: 'Georgia, serif', fontSize: '1rem', color: '#1C1614', marginBottom: '4px' }}>
-                            {canContinue ? 'What\'s next?' : 'Start an adventure'}
-                          </p>
-
+                      {/* Child header + actions */}
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px', flexWrap: 'wrap', gap: '12px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                          <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: palette.cover }} />
+                          <h3 style={{ fontFamily: 'Georgia, serif', fontSize: '1.2rem', color: '#1C1614', fontWeight: '400' }}>
+                            {child.name}&apos;s books
+                          </h3>
+                          <span style={{ fontSize: '0.8rem', color: '#C8BEAA' }}>
+                            {storiesByChild(child.id).length} {storiesByChild(child.id).length === 1 ? 'book' : 'books'}
+                          </span>
+                        </div>
+                        <div style={{ display: 'flex', gap: '10px' }}>
                           {canContinue && (
-                            <button
-                              onClick={() => handleContinueStory(child.id)}
-                              disabled={!!generating}
-                              style={{
-                                padding: '0.7rem 1rem', borderRadius: '8px', border: 'none',
-                                background: palette.cover, color: '#fff',
-                                cursor: generating ? 'not-allowed' : 'pointer',
-                                fontWeight: '600', fontSize: '0.875rem',
-                                opacity: generating ? 0.6 : 1, textAlign: 'left',
-                                lineHeight: 1.4,
-                              }}
-                            >
+                            <button onClick={() => handleContinueStory(child.id)} disabled={!!generating}
+                              style={{ padding: '0.55rem 1.1rem', borderRadius: '8px', border: 'none', background: palette.cover, color: '#fff', cursor: generating ? 'not-allowed' : 'pointer', fontWeight: '600', fontSize: '0.8rem', opacity: generating ? 0.6 : 1 }}>
                               Continue the story
-                              <p style={{ fontWeight: '400', fontSize: '0.75rem', opacity: 0.75, margin: '2px 0 0' }}>
-                                Pick up where you left off
-                              </p>
                             </button>
                           )}
-
-                          <button
-                            onClick={() => handleGenerateStory(child.id)}
-                            disabled={!!generating}
-                            style={{
-                              padding: '0.7rem 1rem', borderRadius: '8px',
-                              border: `1.5px solid ${palette.cover}40`,
-                              background: palette.light, color: palette.cover,
-                              cursor: generating ? 'not-allowed' : 'pointer',
-                              fontWeight: '600', fontSize: '0.875rem',
-                              opacity: generating ? 0.6 : 1, textAlign: 'left',
-                              display: 'flex', alignItems: 'center', gap: '8px',
-                              lineHeight: 1.4,
-                            }}
-                          >
-                            <Plus size={15} />
-                            <span>
-                              New story
-                              <p style={{ fontWeight: '400', fontSize: '0.75rem', color: '#6B5E4E', margin: '2px 0 0' }}>
-                                A brand new adventure
-                              </p>
-                            </span>
+                          <button onClick={() => handleGenerateStory(child.id)} disabled={!!generating}
+                            style={{ padding: '0.55rem 1.1rem', borderRadius: '8px', border: `1.5px solid ${palette.cover}`, background: 'transparent', color: palette.cover, cursor: generating ? 'not-allowed' : 'pointer', fontWeight: '600', fontSize: '0.8rem', opacity: generating ? 0.6 : 1, display: 'flex', alignItems: 'center', gap: '5px' }}>
+                            <Plus size={14} /> New story
                           </button>
-
-                          {seriesComplete && (
-                            <p style={{ fontSize: '0.75rem', color: '#9B8B7A', marginTop: '4px' }}>
-                              Series complete — start a new adventure above.
-                            </p>
-                          )}
                         </div>
                       </div>
+
+                      <div style={{ height: '2px', background: `linear-gradient(90deg, ${palette.cover}50, transparent)`, marginBottom: '32px', borderRadius: '1px' }} />
+
+                      {/* Shelf: singles as BookCards, series as SeriesFan */}
+                      {shelf.length === 0 ? (
+                        <p style={{ color: '#9B8B7A', fontSize: '0.875rem', fontStyle: 'italic' }}>No stories yet — generate the first one above.</p>
+                      ) : (
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '32px 24px', alignItems: 'flex-end' }}>
+                          {shelf.map(item =>
+                            item.type === 'single' ? (
+                              <BookCard key={item.story.id} story={item.story} palette={palette} />
+                            ) : (
+                              <SeriesFan key={item.seriesId} volumes={item.volumes} palette={palette} />
+                            )
+                          )}
+                        </div>
+                      )}
                     </div>
                   );
                 })}
@@ -441,9 +384,7 @@ export default function DashboardPage() {
                 <Plus size={14} /> Add child
               </Link>
             </div>
-            {children.length === 0 ? (
-              <p style={{ color: '#9B8B7A' }}>No children added yet.</p>
-            ) : (
+            {children.length === 0 ? <p style={{ color: '#9B8B7A' }}>No children added yet.</p> : (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 {children.map((child, i) => {
                   const palette = CHILD_PALETTES[i % CHILD_PALETTES.length];
@@ -454,9 +395,7 @@ export default function DashboardPage() {
                       {child.interests?.length > 0 && (
                         <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
                           {child.interests.slice(0, 6).map(interest => (
-                            <span key={interest} style={{ fontSize: '0.75rem', padding: '3px 10px', borderRadius: '20px', background: palette.light, color: palette.cover, fontWeight: '500' }}>
-                              {interest}
-                            </span>
+                            <span key={interest} style={{ fontSize: '0.75rem', padding: '3px 10px', borderRadius: '20px', background: palette.light, color: palette.cover, fontWeight: '500' }}>{interest}</span>
                           ))}
                         </div>
                       )}
@@ -483,7 +422,6 @@ export default function DashboardPage() {
         )}
       </div>
 
-      {/* Bottom nav — Mobile */}
       {isMobile && (
         <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, height: '72px', background: '#1C1614', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
           {navItems.map(({ id, label, icon: Icon }) => {
