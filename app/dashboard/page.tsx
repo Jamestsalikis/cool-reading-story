@@ -66,9 +66,6 @@ function BookCard({ story, palette }: { story: Story; palette: Palette }) {
           <p style={{ fontSize: '0.6rem', color: 'rgba(255,255,255,0.55)', letterSpacing: '0.06em' }}>{new Date(story.created_at).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })}</p>
         </div>
       </div>
-      <p style={{ fontSize: '0.68rem', color: '#9B8B7A', letterSpacing: '0.02em' }}>
-        {new Date(story.created_at).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })}
-      </p>
     </div>
   );
 }
@@ -140,6 +137,9 @@ function SeriesFan({ volumes, palette }: { volumes: Story[]; palette: Palette })
       {/* Label */}
       <p style={{ fontSize: '0.68rem', color: '#9B8B7A', letterSpacing: '0.02em', textAlign: 'center' }}>
         {volumes[0].series_title || 'Series'} · {n} {n === 1 ? 'volume' : 'volumes'}
+      </p>
+      <p style={{ fontSize: '0.65rem', color: '#C8BEAA', letterSpacing: '0.02em', textAlign: 'center' }}>
+        {new Date(volumes[volumes.length - 1].created_at).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })}
       </p>
     </div>
   );
