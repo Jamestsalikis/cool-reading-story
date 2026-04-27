@@ -3,9 +3,10 @@
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { BookOpen, Users, Settings, CreditCard, Plus } from 'lucide-react';
+import { BookOpen, Users, Settings, CreditCard, Plus, X } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import PaywallModal from '@/components/PaywallModal';
+import { updateChild } from '@/lib/supabase/child-actions';
 
 const CHILD_PALETTES = [
   { cover: '#741515', spine: '#4d0e0e', light: '#FBF0F0' },
@@ -134,8 +135,8 @@ function SeriesFan({ volumes, palette }: { volumes: Story[]; palette: Palette })
           );
         })}
       </div>
-      <p style={{ fontSize: '0.68rem', color: '#9B8B7A', letterSpacing: '0.02em', textAlign: 'center' }}>
-        {volumes[0].series_title || 'Series'} · {n} {n === 1 ? 'volume' : 'volumes'}
+      <p style={{ fontSize: '0.68rem', color: '#9B8B7A', letterSpacing: '0.02em', textAlign: 'center', maxWidth: `${containerW}px` }}>
+        {(() => { const t = volumes[0].series_title || 'Series'; return t.length > 30 ? t.slice(0, 28) + '…' : t; })()} · {n} {n === 1 ? 'vol' : 'vols'}
       </p>
       <p style={{ fontSize: '0.65rem', color: '#C8BEAA', letterSpacing: '0.02em', textAlign: 'center' }}>
         {new Date(volumes[volumes.length - 1].created_at).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })}
@@ -183,6 +184,118 @@ function buildShelf(stories: Story[], childName: string): ShelfItem[] {
   return items;
 }
 
+// ── Edit Child Modal ──────────────────────────────────────────────────────────
+const INTERESTS = [
+  'Superheroes','Fantasy','Fairies','Unicorns','Princesses','Pirates','Magic','Aliens',
+  'Dinosaurs','Animals','Ocean','Nature','Space','Robots','Science','Gaming',
+  'Soccer','Football','Gymnastics','Dancing','Karate','Swimming',
+  'Art','Music','Cooking','Dolls','Cars & Trucks',
+];
+
+type ChildRecord = { id: string; name: string; age: number; gender: string | null; interests: string[]; reading_level: string; appearance: Record<string, unknown> };
+
+function EditChildModal({ child, palette, onClose, onSaved }: {
+  child: ChildRecord;
+  palette: typeof CHILD_PALETTES[0];
+  onClose: () => void;
+  onSaved: () => void;
+}) {
+  const app = child.appearance || {};
+  const [name, setName] = useState(child.name);
+  const [age, setAge] = useState(child.age);
+  const [gender, setGender] = useState(child.gender || 'Skip');
+  const [interests, setInterests] = useState<string[]>(child.interests || []);
+  const [hairColour, setHairColour] = useState((app.hairColour as string) || '');
+  const [eyeColour, setEyeColour] = useState((app.eyeColour as string) || '');
+  const [city, setCity] = useState((app.city as string) || '');
+  const [country, setCountry] = useState((app.country as string) || '');
+  const [readingLevel, setReadingLevel] = useState(() => {
+    const m: Record<string, string> = { beginner: 'simple', intermediate: 'medium', advanced: 'imaginative' };
+    return m[child.reading_level] || 'medium';
+  });
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState('');
+
+  const toggleInterest = (i: string) => setInterests(prev =>
+    prev.includes(i) ? prev.filter(x => x !== i) : [...prev, i]
+  );
+
+  const handleSave = async () => {
+    if (!name.trim()) { setError('Name is required'); return; }
+    setSaving(true);
+    const result = await updateChild(child.id, { name, age, gender, interests, hairColour, eyeColour, city, country, readingLevel });
+    if (result.error) { setError(result.error); setSaving(false); return; }
+    onSaved();
+    onClose();
+  };
+
+  const inp: React.CSSProperties = { width: '100%', padding: '0.6rem 0.875rem', border: '1.5px solid #E8E0D0', borderRadius: '8px', fontSize: '0.9rem', outline: 'none', background: '#fff' };
+  const chip = (active: boolean): React.CSSProperties => ({ cursor: 'pointer', borderRadius: '8px', fontWeight: '500', fontSize: '0.8rem', padding: '0.4rem 0.8rem', border: `1.5px solid ${active ? palette.cover : '#E8E0D0'}`, background: active ? palette.cover : '#fff', color: active ? '#fff' : '#1C1614' });
+
+  return (
+    <div style={{ position: 'fixed', inset: 0, zIndex: 200, background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(3px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
+      <div style={{ background: '#FFFEF9', borderRadius: '16px', padding: '28px', maxWidth: '560px', width: '100%', maxHeight: '85vh', overflowY: 'auto', boxShadow: '0 24px 60px rgba(0,0,0,0.2)' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+          <h2 style={{ fontFamily: 'Georgia, serif', fontSize: '1.3rem', color: '#1C1614' }}>Edit {child.name}&apos;s profile</h2>
+          <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#9B8B7A' }}><X size={20} /></button>
+        </div>
+
+        {error && <div style={{ background: '#FEE2E2', borderRadius: '8px', padding: '10px', marginBottom: '16px', fontSize: '0.85rem', color: '#991B1B' }}>{error}</div>}
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div>
+            <label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#6B5E4E', display: 'block', marginBottom: '6px' }}>Name</label>
+            <input style={inp} value={name} onChange={e => setName(e.target.value)} />
+          </div>
+          <div>
+            <label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#6B5E4E', display: 'block', marginBottom: '6px' }}>Age</label>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <button onClick={() => setAge(a => Math.max(3, a - 1))} style={{ width: '36px', height: '36px', border: '1.5px solid #E8E0D0', borderRadius: '8px', background: '#fff', cursor: 'pointer', fontSize: '1.1rem' }}>−</button>
+              <span style={{ fontSize: '1.2rem', fontWeight: '600', minWidth: '30px', textAlign: 'center' }}>{age}</span>
+              <button onClick={() => setAge(a => Math.min(12, a + 1))} style={{ width: '36px', height: '36px', border: '1.5px solid #E8E0D0', borderRadius: '8px', background: '#fff', cursor: 'pointer', fontSize: '1.1rem' }}>+</button>
+            </div>
+          </div>
+          <div>
+            <label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#6B5E4E', display: 'block', marginBottom: '6px' }}>Gender</label>
+            <div style={{ display: 'flex', gap: '8px' }}>
+              {['Boy', 'Girl', 'Skip'].map(g => <button key={g} onClick={() => setGender(g)} style={chip(gender === g)}>{g}</button>)}
+            </div>
+          </div>
+          <div>
+            <label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#6B5E4E', display: 'block', marginBottom: '8px' }}>Interests</label>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+              {INTERESTS.map(i => <button key={i} onClick={() => toggleInterest(i)} style={chip(interests.includes(i))}>{i}</button>)}
+            </div>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+            <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#6B5E4E', display: 'block', marginBottom: '6px' }}>Hair colour</label><input style={inp} value={hairColour} onChange={e => setHairColour(e.target.value)} placeholder="e.g. Brown" /></div>
+            <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#6B5E4E', display: 'block', marginBottom: '6px' }}>Eye colour</label><input style={inp} value={eyeColour} onChange={e => setEyeColour(e.target.value)} placeholder="e.g. Blue" /></div>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+            <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#6B5E4E', display: 'block', marginBottom: '6px' }}>City</label><input style={inp} value={city} onChange={e => setCity(e.target.value)} placeholder="e.g. Sydney" /></div>
+            <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#6B5E4E', display: 'block', marginBottom: '6px' }}>Country</label><input style={inp} value={country} onChange={e => setCountry(e.target.value)} placeholder="e.g. Australia" /></div>
+          </div>
+          <div>
+            <label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#6B5E4E', display: 'block', marginBottom: '8px' }}>Reading level</label>
+            <div style={{ display: 'flex', gap: '8px' }}>
+              {[{ id: 'simple', label: 'Simple', sub: '3–5' }, { id: 'medium', label: 'Medium', sub: '6–8' }, { id: 'imaginative', label: 'Imaginative', sub: '9–12' }].map(o => (
+                <button key={o.id} onClick={() => setReadingLevel(o.id)} style={{ ...chip(readingLevel === o.id), display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1px', padding: '8px 14px' }}>
+                  <span>{o.label}</span><span style={{ fontSize: '0.68rem', opacity: 0.75 }}>{o.sub}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div style={{ display: 'flex', gap: '10px', marginTop: '24px' }}>
+          <button onClick={onClose} style={{ flex: 1, padding: '0.7rem', border: '1.5px solid #E8E0D0', borderRadius: '8px', background: '#fff', color: '#6B5E4E', cursor: 'pointer', fontWeight: '600' }}>Cancel</button>
+          <button onClick={handleSave} disabled={saving} style={{ flex: 2, padding: '0.7rem', border: 'none', borderRadius: '8px', background: palette.cover, color: '#fff', cursor: saving ? 'not-allowed' : 'pointer', fontWeight: '600', opacity: saving ? 0.7 : 1 }}>{saving ? 'Saving...' : 'Save changes'}</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ── Dashboard ─────────────────────────────────────────────────────────────────
 export default function DashboardPage() {
   const [activeNav, setActiveNav] = useState('stories');
@@ -195,6 +308,7 @@ export default function DashboardPage() {
   const [generateError, setGenerateError] = useState('');
   const [userName, setUserName] = useState('');
   const [paywallReason, setPaywallReason] = useState<'free_exhausted' | 'monthly_limit' | 'no_subscription' | null>(null);
+  const [editingChild, setEditingChild] = useState<ChildRecord | null>(null);
   const [sub, setSub] = useState<{ status: string; free_stories_remaining: number; stories_this_month: number } | null>(null);
   const supabase = createClient();
 
@@ -277,6 +391,14 @@ export default function DashboardPage() {
 
       {paywallReason && (
         <PaywallModal reason={paywallReason} onClose={() => setPaywallReason(null)} />
+      )}
+      {editingChild && (
+        <EditChildModal
+          child={editingChild}
+          palette={CHILD_PALETTES[children.findIndex(c => c.id === editingChild.id) % CHILD_PALETTES.length]}
+          onClose={() => setEditingChild(null)}
+          onSaved={fetchData}
+        />
       )}
 
       {generating && (
@@ -361,12 +483,17 @@ export default function DashboardPage() {
                           </span>
                         </div>
                         <div style={{ display: 'flex', gap: '10px' }}>
-                          {canContinue && (
-                            <button onClick={() => handleContinueStory(child.id)} disabled={!!generating}
-                              style={{ padding: '0.55rem 1.1rem', borderRadius: '8px', border: 'none', background: palette.cover, color: '#fff', cursor: generating ? 'not-allowed' : 'pointer', fontWeight: '600', fontSize: '0.8rem', opacity: generating ? 0.6 : 1 }}>
-                              Continue the story
-                            </button>
-                          )}
+                          {canContinue && (() => {
+                            const latest = storiesByChild(child.id)[0];
+                            const name = latest?.series_title || latest?.title || 'the story';
+                            const shortName = name.length > 26 ? name.slice(0, 24) + '…' : name;
+                            return (
+                              <button onClick={() => handleContinueStory(child.id)} disabled={!!generating}
+                                style={{ padding: '0.55rem 1.1rem', borderRadius: '8px', border: 'none', background: palette.cover, color: '#fff', cursor: generating ? 'not-allowed' : 'pointer', fontWeight: '600', fontSize: '0.8rem', opacity: generating ? 0.6 : 1 }}>
+                                Continue: {shortName}
+                              </button>
+                            );
+                          })()}
                           <button onClick={() => handleGenerateStory(child.id)} disabled={!!generating}
                             style={{ padding: '0.55rem 1.1rem', borderRadius: '8px', border: `1.5px solid ${palette.cover}`, background: 'transparent', color: palette.cover, cursor: generating ? 'not-allowed' : 'pointer', fontWeight: '600', fontSize: '0.8rem', opacity: generating ? 0.6 : 1, display: 'flex', alignItems: 'center', gap: '5px' }}>
                             <Plus size={14} /> New story
@@ -412,7 +539,10 @@ export default function DashboardPage() {
                   const palette = CHILD_PALETTES[i % CHILD_PALETTES.length];
                   return (
                     <div key={child.id} style={{ background: '#fff', border: '1px solid #E8E3DC', borderRadius: '12px', padding: '20px', borderLeft: `4px solid ${palette.cover}` }}>
-                      <h4 style={{ fontFamily: 'Georgia, serif', fontWeight: '600', color: '#1C1614', marginBottom: '4px' }}>{child.name}</h4>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '4px' }}>
+                        <h4 style={{ fontFamily: 'Georgia, serif', fontWeight: '600', color: '#1C1614' }}>{child.name}</h4>
+                        <button onClick={() => setEditingChild(child as ChildRecord)} style={{ fontSize: '0.75rem', fontWeight: '600', color: palette.cover, background: palette.light, border: 'none', borderRadius: '6px', padding: '4px 12px', cursor: 'pointer' }}>Edit</button>
+                      </div>
                       <p style={{ color: '#9B8B7A', fontSize: '0.875rem', marginBottom: child.interests?.length ? '12px' : 0 }}>Age {child.age}</p>
                       {child.interests?.length > 0 && (
                         <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>

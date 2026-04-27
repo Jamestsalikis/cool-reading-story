@@ -59,6 +59,58 @@ export async function createChild(data: {
   return { child };
 }
 
+export async function updateChild(childId: string, data: {
+  name: string;
+  age: number;
+  gender: string;
+  interests: string[];
+  hairColour: string;
+  eyeColour: string;
+  city: string;
+  country: string;
+  readingLevel: string;
+}) {
+  const supabase = await createClient();
+  const { data: { user }, error: authError } = await supabase.auth.getUser();
+  if (authError || !user) return { error: 'Not authenticated' };
+
+  const readingLevelMap: Record<string, string> = {
+    simple: 'beginner',
+    medium: 'intermediate',
+    imaginative: 'advanced',
+  };
+
+  // Fetch current appearance to preserve fields we're not editing
+  const { data: current } = await supabase
+    .from('children')
+    .select('appearance')
+    .eq('id', childId)
+    .eq('parent_id', user.id)
+    .single();
+
+  const { error } = await supabase
+    .from('children')
+    .update({
+      name: data.name,
+      age: data.age,
+      gender: data.gender === 'Skip' ? null : data.gender,
+      interests: data.interests,
+      reading_level: readingLevelMap[data.readingLevel] || 'intermediate',
+      appearance: {
+        ...(current?.appearance || {}),
+        hairColour: data.hairColour,
+        eyeColour: data.eyeColour,
+        city: data.city,
+        country: data.country,
+      },
+    })
+    .eq('id', childId)
+    .eq('parent_id', user.id);
+
+  if (error) return { error: error.message };
+  return { success: true };
+}
+
 export async function getChildren() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
