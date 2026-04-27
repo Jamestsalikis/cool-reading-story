@@ -42,6 +42,15 @@ const pageStyles = `
   .book-wrap:hover .book-read-hint {
     opacity: 1;
   }
+  .series-stack-books {
+    display: flex;
+    gap: 0px;
+    align-items: flex-start;
+    transition: gap 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .series-stack-books.expanded {
+    gap: 16px;
+  }
 `;
 
 type Child = { id: string; name: string; age: number; interests: string[] };
@@ -177,6 +186,148 @@ function BookCard({ story, palette, index }: { story: Story; palette: typeof CHI
   );
 }
 
+// Stacked series — books layered behind each other, spreads on hover
+function SeriesStack({ volumes, palette }: { volumes: Story[]; palette: typeof CHILD_PALETTES[0] }) {
+  const [expanded, setExpanded] = useState(false);
+  const OFFSET = 11; // px per depth level (right + down)
+  const depth = volumes.length;
+
+  return (
+    <div
+      style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '10px' }}
+      onMouseEnter={() => setExpanded(true)}
+      onMouseLeave={() => setExpanded(false)}
+    >
+      {/* The stack / spread */}
+      <div
+        className={`series-stack-books${expanded ? ' expanded' : ''}`}
+        style={{ alignItems: 'flex-end', position: 'relative' }}
+      >
+        {volumes.map((vol, i) => {
+          const isLast = i === volumes.length - 1;
+          const booksBelow = volumes.length - 1 - i; // how many books are in front
+
+          if (expanded) {
+            // All books visible side by side with their full 3D card
+            return <BookCard key={vol.id} story={vol} palette={palette} index={i} />;
+          }
+
+          // Collapsed: stack effect
+          // Books behind are shifted right + down; front (last) book sits at base position
+          const rightOffset = booksBelow * OFFSET;
+          const downOffset = booksBelow * (OFFSET * 0.4);
+
+          return (
+            <div
+              key={vol.id}
+              style={{
+                position: 'absolute',
+                left: `${rightOffset}px`,
+                top: `${downOffset}px`,
+                zIndex: i + 1,
+                // Only show full BookCard for the FRONT (first) book
+                // Background books are simplified coloured blocks
+                ...(i === 0 && !expanded ? {} : {}),
+              }}
+            >
+              {i === 0 ? (
+                // Front book — full interactive card
+                <BookCard story={vol} palette={palette} index={i} />
+              ) : (
+                // Background book — simple block showing depth
+                <div style={{ position: 'relative', width: '140px', height: '196px' }}>
+                  <div style={{
+                    position: 'absolute', left: 0, top: 0, width: '18px', height: '100%',
+                    background: palette.spine, borderRadius: '3px 0 0 3px',
+                    opacity: 0.7 + i * 0.05,
+                  }} />
+                  {[4, 2].map((o) => (
+                    <div key={o} style={{
+                      position: 'absolute', left: `${18 + o}px`, top: `${o * 0.4}px`,
+                      width: `calc(100% - ${18 + o}px)`, height: `calc(100% - ${o * 0.8}px)`,
+                      background: '#F5F0E8', borderRadius: '0 3px 3px 0',
+                    }} />
+                  ))}
+                  <div style={{
+                    position: 'absolute', left: '18px', top: 0,
+                    width: 'calc(100% - 18px)', height: '100%',
+                    background: palette.cover,
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 20 L20 0 L40 20 L20 40Z' fill='rgba(255,255,255,0.05)'/%3E%3C/svg%3E")`,
+                    borderRadius: '0 6px 6px 0',
+                    opacity: 0.85 - (volumes.length - 1 - i) * 0.12,
+                    boxShadow: '3px 3px 10px rgba(0,0,0,0.18)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  }}>
+                    <span style={{ fontSize: '0.6rem', fontWeight: '800', color: 'rgba(255,255,255,0.5)', letterSpacing: '0.1em' }}>
+                      VOL {vol.volume_number}
+                    </span>
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        })}
+
+        {/* Invisible spacer so the wrapper has the right width when collapsed */}
+        {!expanded && (
+          <div style={{
+            width: `${140 + (depth - 1) * OFFSET}px`,
+            height: `${196 + (depth - 1) * (OFFSET * 0.4)}px`,
+            visibility: 'hidden', pointerEvents: 'none', flexShrink: 0,
+          }} />
+        )}
+      </div>
+
+      {/* Label */}
+      <p style={{ fontSize: '0.68rem', color: '#9B8B7A', letterSpacing: '0.02em', paddingLeft: '2px' }}>
+        {expanded
+          ? `${depth}-book series — hover any to read`
+          : `${depth}-book series — hover to expand`}
+      </p>
+    </div>
+  );
+}
+
+// Build shelf items: group series into stacks, standalone as individuals, sort newest first
+type ShelfItem =
+  | { type: 'single'; story: Story }
+  | { type: 'series'; seriesId: string; volumes: Story[] };
+
+function buildShelf(stories: Story[], childName: string): ShelfItem[] {
+  const mine = stories.filter(s => s.children?.name === childName);
+  const seriesMap = new Map<string, Story[]>();
+  const singles: Story[] = [];
+
+  mine.forEach(s => {
+    if (s.series_id) {
+      if (!seriesMap.has(s.series_id)) seriesMap.set(s.series_id, []);
+      seriesMap.get(s.series_id)!.push(s);
+    } else {
+      singles.push(s);
+    }
+  });
+
+  const items: ShelfItem[] = [];
+  singles.forEach(story => items.push({ type: 'single', story }));
+  seriesMap.forEach((vols, seriesId) => {
+    const sorted = [...vols].sort((a, b) => (a.volume_number ?? 1) - (b.volume_number ?? 1));
+    items.push({ type: 'series', seriesId, volumes: sorted });
+  });
+
+  // Sort by most recent story in each group
+  items.sort((a, b) => {
+    const aDate = a.type === 'single'
+      ? new Date(a.story.created_at).getTime()
+      : Math.max(...a.volumes.map(v => new Date(v.created_at).getTime()));
+    const bDate = b.type === 'single'
+      ? new Date(b.story.created_at).getTime()
+      : Math.max(...b.volumes.map(v => new Date(v.created_at).getTime()));
+    return bDate - aDate;
+  });
+
+  return items;
+}
+
 export default function DashboardPage() {
   const [activeNav, setActiveNav] = useState('stories');
   const [isMobile, setIsMobile] = useState(false);
@@ -266,10 +417,10 @@ export default function DashboardPage() {
     { id: 'subscription', label: 'Subscription', icon: CreditCard },
   ];
 
-  const storiesByChild = (childId: string) => {
+  const shelfByChild = (childId: string): ShelfItem[] => {
     const child = children.find(c => c.id === childId);
     if (!child) return [];
-    return stories.filter(s => s.children?.name === child.name);
+    return buildShelf(stories, child.name);
   };
 
   return (
@@ -374,7 +525,6 @@ export default function DashboardPage() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '56px' }}>
                 {children.map((child, childIndex) => {
                   const palette = CHILD_PALETTES[childIndex % CHILD_PALETTES.length];
-                  const childStories = storiesByChild(child.id);
                   const latest = latestStoryByChild(child.id);
                   const seriesComplete = isSeriesComplete(latest);
                   const canContinue = !!latest && !seriesComplete;
@@ -430,17 +580,25 @@ export default function DashboardPage() {
                       <div style={{ height: '2px', background: `linear-gradient(90deg, ${palette.cover}40, transparent)`, marginBottom: '28px', borderRadius: '1px' }} />
 
                       {/* Book shelf */}
-                      {childStories.length === 0 ? (
-                        <p style={{ color: '#9B8B7A', fontSize: '0.875rem', fontStyle: 'italic' }}>
-                          No stories yet — generate the first one above.
-                        </p>
-                      ) : (
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '28px 20px', alignItems: 'flex-start' }}>
-                          {childStories.map((story, i) => (
-                            <BookCard key={story.id} story={story} palette={palette} index={i} />
-                          ))}
-                        </div>
-                      )}
+                      {(() => {
+                        const shelf = shelfByChild(child.id);
+                        if (shelf.length === 0) return (
+                          <p style={{ color: '#9B8B7A', fontSize: '0.875rem', fontStyle: 'italic' }}>
+                            No stories yet — generate the first one above.
+                          </p>
+                        );
+                        return (
+                          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '32px 24px', alignItems: 'flex-end' }}>
+                            {shelf.map((item, i) =>
+                              item.type === 'single' ? (
+                                <BookCard key={item.story.id} story={item.story} palette={palette} index={i} />
+                              ) : (
+                                <SeriesStack key={item.seriesId} volumes={item.volumes} palette={palette} />
+                              )
+                            )}
+                          </div>
+                        );
+                      })()}
                     </div>
                   );
                 })}
