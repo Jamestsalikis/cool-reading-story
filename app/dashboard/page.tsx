@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation';
 import { BookOpen, Users, Settings, CreditCard, Plus } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 
-// One palette per child — all their books share the same colour
 const CHILD_PALETTES = [
   { cover: '#741515', spine: '#4d0e0e', light: '#FBF0F0' },
   { cover: '#1A3A5A', spine: '#0d2035', light: '#EEF3F8' },
@@ -16,41 +15,9 @@ const CHILD_PALETTES = [
 ];
 
 const pageStyles = `
-  @keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-  }
-  .book-cover-panel {
-    transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.55s ease;
-  }
-  .book-wrap:hover .book-cover-panel {
-    transform: rotateY(-162deg);
-    box-shadow: -10px 6px 28px rgba(0,0,0,0.3);
-  }
-  .book-read-hint {
-    opacity: 0;
-    transition: opacity 0.2s ease 0.3s;
-  }
-  .book-wrap:hover .book-read-hint {
-    opacity: 1;
-  }
-  .series-stack-books {
-    display: flex;
-    gap: 0px;
-    align-items: flex-start;
-    transition: gap 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .series-stack-books.expanded {
-    gap: 16px;
-  }
+  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.5; } }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
 `;
 
 type Child = { id: string; name: string; age: number; interests: string[] };
@@ -66,266 +33,141 @@ type Story = {
   children: { name: string; age: number };
 };
 
-function BookCard({ story, palette, index }: { story: Story; palette: typeof CHILD_PALETTES[0]; index: number }) {
+// A single fan-card (simplified flat cover, no 3D flip — hover lifts)
+function FanBook({
+  story, palette, angle, zIndex, offset,
+}: {
+  story: Story;
+  palette: typeof CHILD_PALETTES[0];
+  angle: number;
+  zIndex: number;
+  offset: number; // horizontal offset from centre
+}) {
+  const [hovered, setHovered] = useState(false);
   const router = useRouter();
-  const volNum = story.volume_number;
-  const isSequel = volNum && volNum > 1;
-
-  // Decorative cover pattern — SVG encoded inline
-  const pattern = `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M0 20 L20 0 L40 20 L20 40Z' fill='rgba(255,255,255,0.05)'/%3E%3C/g%3E%3C/svg%3E")`;
+  const vol = story.volume_number;
+  const pattern = `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 20 L20 0 L40 20 L20 40Z' fill='rgba(255,255,255,0.06)'/%3E%3C/svg%3E")`;
 
   return (
     <div
-      className="book-wrap"
       onClick={() => router.push(`/stories/${story.id}`)}
-      style={{ perspective: '900px', cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        position: 'absolute',
+        bottom: 0,
+        left: '50%',
+        width: '110px',
+        height: '154px',
+        cursor: 'pointer',
+        transformOrigin: 'center bottom',
+        transform: `translateX(calc(-50% + ${offset}px)) rotate(${angle}deg) translateY(${hovered ? -18 : 0}px)`,
+        transition: 'transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)',
+        zIndex: hovered ? 100 : zIndex,
+        borderRadius: '3px 6px 6px 3px',
+        boxShadow: hovered
+          ? '0 16px 40px rgba(0,0,0,0.35)'
+          : '2px 4px 12px rgba(0,0,0,0.2)',
+      }}
     >
-      <div style={{ position: 'relative', width: '140px', height: '196px', transformStyle: 'preserve-3d' }}>
+      {/* Spine */}
+      <div style={{
+        position: 'absolute', left: 0, top: 0, width: '14px', height: '100%',
+        background: palette.spine, borderRadius: '3px 0 0 3px',
+        boxShadow: 'inset -2px 0 4px rgba(0,0,0,0.25)',
+      }} />
 
-        {/* Spine */}
+      {/* Cover */}
+      <div style={{
+        position: 'absolute', left: '14px', top: 0,
+        width: 'calc(100% - 14px)', height: '100%',
+        background: palette.cover, backgroundImage: pattern,
+        borderRadius: '0 6px 6px 0',
+        display: 'flex', flexDirection: 'column',
+        alignItems: 'center', justifyContent: 'center',
+        padding: '10px 8px', gap: '6px',
+      }}>
+        {/* Vol badge */}
+        {vol && vol > 1 && (
+          <div style={{
+            position: 'absolute', top: '7px', right: '6px',
+            background: 'rgba(255,255,255,0.2)', color: 'rgba(255,255,255,0.9)',
+            fontSize: '0.52rem', fontWeight: '800', letterSpacing: '0.08em',
+            padding: '1px 5px', borderRadius: '8px',
+          }}>
+            VOL {vol}
+          </div>
+        )}
+        {/* Diamond ornament */}
         <div style={{
-          position: 'absolute', left: 0, top: 0, width: '18px', height: '100%',
-          background: `linear-gradient(90deg, ${palette.spine} 0%, ${palette.cover} 100%)`,
-          borderRadius: '3px 0 0 3px', zIndex: 3,
-          boxShadow: 'inset -2px 0 5px rgba(0,0,0,0.3)',
+          width: '18px', height: '18px',
+          border: '1px solid rgba(255,255,255,0.3)',
+          borderRadius: '2px', transform: 'rotate(45deg)',
         }} />
-
-        {/* Stacked pages */}
-        {[4, 2].map((o) => (
-          <div key={o} style={{
-            position: 'absolute', left: `${18 + o}px`, top: `${o * 0.4}px`,
-            width: `calc(100% - ${18 + o}px)`, height: `calc(100% - ${o * 0.8}px)`,
-            background: '#F5F0E8', borderRadius: '0 3px 3px 0',
-          }} />
-        ))}
-
-        {/* Interior */}
-        <div style={{
-          position: 'absolute', left: '18px', top: 0,
-          width: 'calc(100% - 18px)', height: '100%',
-          background: palette.light, borderRadius: '0 6px 6px 0',
-          display: 'flex', flexDirection: 'column',
-          alignItems: 'center', justifyContent: 'center',
-          padding: '16px 12px', gap: '10px',
-          boxShadow: 'inset 6px 0 14px rgba(0,0,0,0.05)',
+        <p style={{
+          fontSize: '0.6rem', fontFamily: 'Georgia, serif', fontWeight: '600',
+          color: 'rgba(255,255,255,0.95)', textAlign: 'center', lineHeight: 1.35,
         }}>
-          {/* Decorative rule */}
-          <div style={{ width: '40px', height: '2px', background: palette.cover, borderRadius: '1px', opacity: 0.4 }} />
+          {story.title.length > 40 ? story.title.slice(0, 38) + '…' : story.title}
+        </p>
+        {hovered && (
           <p style={{
-            fontSize: '0.72rem', fontFamily: 'Georgia, serif', fontWeight: '600',
-            textAlign: 'center', color: '#1C1614', lineHeight: 1.45,
-          }}>{story.title}</p>
-          <p style={{ fontSize: '0.62rem', color: '#9B8B7A', letterSpacing: '0.04em' }}>
-            {story.children?.name}
-          </p>
-          <div className="book-read-hint" style={{
-            fontSize: '0.68rem', fontWeight: '700', color: palette.cover,
-            letterSpacing: '0.06em', textTransform: 'uppercase',
+            fontSize: '0.55rem', color: 'rgba(255,255,255,0.6)',
+            fontWeight: '700', letterSpacing: '0.08em', textTransform: 'uppercase',
+            marginTop: '2px',
           }}>
             Read
-          </div>
-        </div>
-
-        {/* Cover */}
-        <div
-          className="book-cover-panel"
-          style={{
-            position: 'absolute', left: '18px', top: 0,
-            width: 'calc(100% - 18px)', height: '100%',
-            background: palette.cover,
-            backgroundImage: pattern,
-            borderRadius: '0 6px 6px 0',
-            transformOrigin: 'left center',
-            backfaceVisibility: 'hidden',
-            zIndex: 2,
-            display: 'flex', flexDirection: 'column',
-            alignItems: 'center', justifyContent: 'center',
-            padding: '16px 12px', gap: '8px',
-            boxShadow: '3px 3px 12px rgba(0,0,0,0.2)',
-          }}
-        >
-          {/* Vol badge */}
-          {isSequel && (
-            <div style={{
-              position: 'absolute', top: '10px', right: '8px',
-              background: 'rgba(255,255,255,0.2)', color: 'rgba(255,255,255,0.9)',
-              fontSize: '0.6rem', fontWeight: '800', letterSpacing: '0.08em',
-              padding: '2px 7px', borderRadius: '10px',
-            }}>
-              VOL {volNum}
-            </div>
-          )}
-
-          {/* Decorative diamond */}
-          <div style={{
-            width: '28px', height: '28px',
-            border: '1.5px solid rgba(255,255,255,0.3)',
-            borderRadius: '3px', transform: 'rotate(45deg)',
-            marginBottom: '4px',
-          }} />
-
-          <p style={{
-            fontSize: '0.75rem', fontFamily: 'Georgia, serif', fontWeight: '600',
-            textAlign: 'center', color: 'rgba(255,255,255,0.95)',
-            lineHeight: 1.4,
-          }}>{story.title}</p>
-
-          <div style={{ width: '30px', height: '1px', background: 'rgba(255,255,255,0.25)' }} />
-
-          <p style={{ fontSize: '0.6rem', color: 'rgba(255,255,255,0.55)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
-            {story.children?.name}
           </p>
-        </div>
-      </div>
-
-      {/* Date label */}
-      <p style={{ fontSize: '0.68rem', color: '#9B8B7A', letterSpacing: '0.02em' }}>
-        {new Date(story.created_at).toLocaleDateString('en-AU', { month: 'short', year: 'numeric' })}
-      </p>
-    </div>
-  );
-}
-
-// Stacked series — books layered behind each other, spreads on hover
-function SeriesStack({ volumes, palette }: { volumes: Story[]; palette: typeof CHILD_PALETTES[0] }) {
-  const [expanded, setExpanded] = useState(false);
-  const OFFSET = 11; // px per depth level (right + down)
-  const depth = volumes.length;
-
-  return (
-    <div
-      style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '10px' }}
-      onMouseEnter={() => setExpanded(true)}
-      onMouseLeave={() => setExpanded(false)}
-    >
-      {/* The stack / spread */}
-      <div
-        className={`series-stack-books${expanded ? ' expanded' : ''}`}
-        style={{ alignItems: 'flex-end', position: 'relative' }}
-      >
-        {volumes.map((vol, i) => {
-          const isLast = i === volumes.length - 1;
-          const booksBelow = volumes.length - 1 - i; // how many books are in front
-
-          if (expanded) {
-            // All books visible side by side with their full 3D card
-            return <BookCard key={vol.id} story={vol} palette={palette} index={i} />;
-          }
-
-          // Collapsed: stack effect
-          // Books behind are shifted right + down; front (last) book sits at base position
-          const rightOffset = booksBelow * OFFSET;
-          const downOffset = booksBelow * (OFFSET * 0.4);
-
-          return (
-            <div
-              key={vol.id}
-              style={{
-                position: 'absolute',
-                left: `${rightOffset}px`,
-                top: `${downOffset}px`,
-                zIndex: i + 1,
-                // Only show full BookCard for the FRONT (first) book
-                // Background books are simplified coloured blocks
-                ...(i === 0 && !expanded ? {} : {}),
-              }}
-            >
-              {i === 0 ? (
-                // Front book — full interactive card
-                <BookCard story={vol} palette={palette} index={i} />
-              ) : (
-                // Background book — simple block showing depth
-                <div style={{ position: 'relative', width: '140px', height: '196px' }}>
-                  <div style={{
-                    position: 'absolute', left: 0, top: 0, width: '18px', height: '100%',
-                    background: palette.spine, borderRadius: '3px 0 0 3px',
-                    opacity: 0.7 + i * 0.05,
-                  }} />
-                  {[4, 2].map((o) => (
-                    <div key={o} style={{
-                      position: 'absolute', left: `${18 + o}px`, top: `${o * 0.4}px`,
-                      width: `calc(100% - ${18 + o}px)`, height: `calc(100% - ${o * 0.8}px)`,
-                      background: '#F5F0E8', borderRadius: '0 3px 3px 0',
-                    }} />
-                  ))}
-                  <div style={{
-                    position: 'absolute', left: '18px', top: 0,
-                    width: 'calc(100% - 18px)', height: '100%',
-                    background: palette.cover,
-                    backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 20 L20 0 L40 20 L20 40Z' fill='rgba(255,255,255,0.05)'/%3E%3C/svg%3E")`,
-                    borderRadius: '0 6px 6px 0',
-                    opacity: 0.85 - (volumes.length - 1 - i) * 0.12,
-                    boxShadow: '3px 3px 10px rgba(0,0,0,0.18)',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  }}>
-                    <span style={{ fontSize: '0.6rem', fontWeight: '800', color: 'rgba(255,255,255,0.5)', letterSpacing: '0.1em' }}>
-                      VOL {vol.volume_number}
-                    </span>
-                  </div>
-                </div>
-              )}
-            </div>
-          );
-        })}
-
-        {/* Invisible spacer so the wrapper has the right width when collapsed */}
-        {!expanded && (
-          <div style={{
-            width: `${140 + (depth - 1) * OFFSET}px`,
-            height: `${196 + (depth - 1) * (OFFSET * 0.4)}px`,
-            visibility: 'hidden', pointerEvents: 'none', flexShrink: 0,
-          }} />
         )}
       </div>
-
-      {/* Label */}
-      <p style={{ fontSize: '0.68rem', color: '#9B8B7A', letterSpacing: '0.02em', paddingLeft: '2px' }}>
-        {expanded
-          ? `${depth}-book series — hover any to read`
-          : `${depth}-book series — hover to expand`}
-      </p>
     </div>
   );
 }
 
-// Build shelf items: group series into stacks, standalone as individuals, sort newest first
-type ShelfItem =
-  | { type: 'single'; story: Story }
-  | { type: 'series'; seriesId: string; volumes: Story[] };
+// Fan container — lays books out in a playing-card arc
+function BookFan({ stories, palette }: { stories: Story[]; palette: typeof CHILD_PALETTES[0] }) {
+  if (stories.length === 0) return null;
 
-function buildShelf(stories: Story[], childName: string): ShelfItem[] {
-  const mine = stories.filter(s => s.children?.name === childName);
-  const seriesMap = new Map<string, Story[]>();
-  const singles: Story[] = [];
+  const MAX_VISIBLE = 10;
+  const visible = stories.slice(0, MAX_VISIBLE);
+  const n = visible.length;
 
-  mine.forEach(s => {
-    if (s.series_id) {
-      if (!seriesMap.has(s.series_id)) seriesMap.set(s.series_id, []);
-      seriesMap.get(s.series_id)!.push(s);
-    } else {
-      singles.push(s);
-    }
-  });
+  // Angle spread: wider for more books, capped at ±40°
+  const totalSpread = Math.min(70, n * 9);
+  const angles = visible.map((_, i) =>
+    n === 1 ? 0 : -totalSpread / 2 + (totalSpread / (n - 1)) * i
+  );
 
-  const items: ShelfItem[] = [];
-  singles.forEach(story => items.push({ type: 'single', story }));
-  seriesMap.forEach((vols, seriesId) => {
-    const sorted = [...vols].sort((a, b) => (a.volume_number ?? 1) - (b.volume_number ?? 1));
-    items.push({ type: 'series', seriesId, volumes: sorted });
-  });
+  // Horizontal nudge so books don't all sit exactly on top of each other
+  const totalWidth = Math.min(320, n * 36);
+  const offsets = visible.map((_, i) =>
+    n === 1 ? 0 : -totalWidth / 2 + (totalWidth / (n - 1)) * i
+  );
 
-  // Sort by most recent story in each group
-  items.sort((a, b) => {
-    const aDate = a.type === 'single'
-      ? new Date(a.story.created_at).getTime()
-      : Math.max(...a.volumes.map(v => new Date(v.created_at).getTime()));
-    const bDate = b.type === 'single'
-      ? new Date(b.story.created_at).getTime()
-      : Math.max(...b.volumes.map(v => new Date(v.created_at).getTime()));
-    return bDate - aDate;
-  });
+  const containerHeight = 200 + Math.abs(angles[0]) * 1.2;
 
-  return items;
+  return (
+    <div style={{ position: 'relative', height: `${containerHeight}px`, width: '100%', minWidth: '200px' }}>
+      {visible.map((story, i) => (
+        <FanBook
+          key={story.id}
+          story={story}
+          palette={palette}
+          angle={angles[i]}
+          zIndex={i + 1}
+          offset={offsets[i]}
+        />
+      ))}
+      {stories.length > MAX_VISIBLE && (
+        <p style={{
+          position: 'absolute', bottom: '-24px', right: 0,
+          fontSize: '0.72rem', color: '#9B8B7A',
+        }}>
+          +{stories.length - MAX_VISIBLE} more
+        </p>
+      )}
+    </div>
+  );
 }
 
 export default function DashboardPage() {
@@ -351,13 +193,11 @@ export default function DashboardPage() {
     setLoading(true);
     const { data: { user } } = await supabase.auth.getUser();
     if (user) setUserName(user.user_metadata?.full_name?.split(' ')[0] || user.email?.split('@')[0] || 'there');
-
     const { data: childrenData } = await supabase.from('children').select('*').order('created_at', { ascending: true });
     const { data: storiesData } = await supabase
       .from('stories')
       .select('id, title, created_at, word_count, series_id, series_title, volume_number, children(name, age)')
       .order('created_at', { ascending: false });
-
     setChildren(childrenData || []);
     setStories(storiesData || []);
     setLoading(false);
@@ -376,25 +216,14 @@ export default function DashboardPage() {
         body: JSON.stringify({ child_id: childId }),
       });
       const data = await res.json();
-      if (res.ok) await fetchData();
-      else setGenerateError(data.message || 'Something went wrong. Please try again.');
+      if (!res.ok) setGenerateError(data.message || 'Something went wrong.');
+      else await fetchData();
     } finally { setGenerating(null); }
   };
 
-  const latestStoryByChild = (childId: string): Story | null => {
-    const child = children.find(c => c.id === childId);
-    if (!child) return null;
-    return stories.find(s => s.children?.name === child.name) || null;
-  };
-
-  const isSeriesComplete = (story: Story | null): boolean => {
-    if (!story?.series_id) return false;
-    return stories.filter(s => s.series_id === story.series_id).some(s => s.volume_number === 4);
-  };
-
   const handleContinueStory = async (childId: string) => {
-    const latest = latestStoryByChild(childId);
     const child = children.find(c => c.id === childId);
+    const latest = storiesByChild(childId)[0];
     if (!latest) return;
     setGeneratingName(child?.name || '');
     setGenerating(`sequel-${latest.id}`);
@@ -405,9 +234,21 @@ export default function DashboardPage() {
         body: JSON.stringify({ story_id: latest.id }),
       });
       const data = await res.json();
-      if (res.ok) await fetchData();
-      else setGenerateError(data.error || 'Something went wrong. Please try again.');
+      if (!res.ok) setGenerateError(data.error || 'Something went wrong.');
+      else await fetchData();
     } finally { setGenerating(null); }
+  };
+
+  const storiesByChild = (childId: string) => {
+    const child = children.find(c => c.id === childId);
+    if (!child) return [];
+    return stories.filter(s => s.children?.name === child.name);
+  };
+
+  const isSeriesComplete = (childId: string) => {
+    const latest = storiesByChild(childId)[0];
+    if (!latest?.series_id) return false;
+    return stories.filter(s => s.series_id === latest.series_id).some(s => s.volume_number === 4);
   };
 
   const navItems = [
@@ -417,64 +258,30 @@ export default function DashboardPage() {
     { id: 'subscription', label: 'Subscription', icon: CreditCard },
   ];
 
-  const shelfByChild = (childId: string): ShelfItem[] => {
-    const child = children.find(c => c.id === childId);
-    if (!child) return [];
-    return buildShelf(stories, child.name);
-  };
-
   return (
     <div style={{ minHeight: '100vh', background: '#FAF9F6', display: 'flex', flexDirection: isMobile ? 'column' : 'row' }}>
       <style>{pageStyles}</style>
 
-      {/* Generating overlay — clean, no emojis */}
+      {/* Generating overlay */}
       {generating && (
-        <div style={{
-          position: 'fixed', inset: 0, background: 'rgba(28, 22, 20, 0.85)',
-          zIndex: 100, display: 'flex', flexDirection: 'column',
-          alignItems: 'center', justifyContent: 'center', gap: '24px',
-          animation: 'fadeUp 0.3s ease',
-        }}>
-          {/* Spinner */}
-          <div style={{
-            width: '56px', height: '56px', borderRadius: '50%',
-            border: '3px solid rgba(255,255,255,0.15)',
-            borderTopColor: '#C4784A',
-            animation: 'spin 1s linear infinite',
-          }} />
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(28,22,20,0.88)', zIndex: 100, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '24px', animation: 'fadeUp 0.3s ease' }}>
+          <div style={{ width: '52px', height: '52px', borderRadius: '50%', border: '3px solid rgba(255,255,255,0.12)', borderTopColor: '#C4784A', animation: 'spin 1s linear infinite' }} />
           <div style={{ textAlign: 'center' }}>
-            <p style={{ color: '#fff', fontSize: '1.35rem', fontFamily: 'Georgia, serif', marginBottom: '8px' }}>
-              Writing {generatingName}&apos;s story
-            </p>
-            <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: '0.875rem', animation: 'pulse 2s ease infinite' }}>
-              Usually takes about 30 seconds
-            </p>
+            <p style={{ color: '#fff', fontSize: '1.3rem', fontFamily: 'Georgia, serif', marginBottom: '8px' }}>Writing {generatingName}&apos;s story</p>
+            <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.875rem', animation: 'pulse 2s ease infinite' }}>Usually takes about 30 seconds</p>
           </div>
         </div>
       )}
 
-      {/* Sidebar — Desktop */}
+      {/* Sidebar */}
       {!isMobile && (
-        <div style={{
-          width: '210px', background: '#1C1614', padding: '32px 20px',
-          display: 'flex', flexDirection: 'column', position: 'fixed',
-          height: '100vh', left: 0, top: 0, overflowY: 'auto',
-        }}>
-          <h1 style={{ fontFamily: 'Georgia, serif', fontSize: '1.1rem', marginBottom: '40px', color: '#E8DDD0', lineHeight: 1.3 }}>
-            Cool Reading<br />Story
-          </h1>
+        <div style={{ width: '210px', background: '#1C1614', padding: '32px 20px', display: 'flex', flexDirection: 'column', position: 'fixed', height: '100vh', left: 0, top: 0, overflowY: 'auto' }}>
+          <h1 style={{ fontFamily: 'Georgia, serif', fontSize: '1.1rem', marginBottom: '40px', color: '#E8DDD0', lineHeight: 1.3 }}>Cool Reading<br />Story</h1>
           <nav style={{ display: 'flex', flexDirection: 'column', gap: '4px', flex: 1 }}>
             {navItems.map(({ id, label, icon: Icon }) => {
               const active = activeNav === id;
               return (
-                <button key={id} onClick={() => setActiveNav(id)} style={{
-                  display: 'flex', alignItems: 'center', gap: '10px',
-                  padding: '11px 14px', borderRadius: '8px', border: 'none',
-                  background: active ? 'rgba(255,255,255,0.1)' : 'transparent',
-                  color: active ? '#fff' : 'rgba(255,255,255,0.5)',
-                  cursor: 'pointer', fontSize: '0.875rem', fontWeight: active ? '600' : '400',
-                  transition: 'all 0.15s', textAlign: 'left',
-                }}>
+                <button key={id} onClick={() => setActiveNav(id)} style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '11px 14px', borderRadius: '8px', border: 'none', background: active ? 'rgba(255,255,255,0.1)' : 'transparent', color: active ? '#fff' : 'rgba(255,255,255,0.45)', cursor: 'pointer', fontSize: '0.875rem', fontWeight: active ? '600' : '400', transition: 'all 0.15s', textAlign: 'left' }}>
                   <Icon size={17} />{label}
                 </button>
               );
@@ -484,12 +291,8 @@ export default function DashboardPage() {
       )}
 
       {/* Main */}
-      <div style={{
-        flex: 1, marginLeft: isMobile ? 0 : '210px',
-        padding: isMobile ? '28px 16px 100px' : '48px 48px 60px',
-      }}>
+      <div style={{ flex: 1, marginLeft: isMobile ? 0 : '210px', padding: isMobile ? '28px 16px 100px' : '48px 48px 60px' }}>
 
-        {/* Header */}
         <div style={{ marginBottom: '48px' }}>
           <h2 style={{ fontFamily: 'Georgia, serif', fontSize: '2rem', color: '#1C1614', marginBottom: '6px', fontWeight: '400' }}>
             Welcome back{userName ? `, ${userName}` : ''}
@@ -499,7 +302,6 @@ export default function DashboardPage() {
           </p>
         </div>
 
-        {/* Stories */}
         {activeNav === 'stories' && (
           <>
             {generateError && (
@@ -509,96 +311,120 @@ export default function DashboardPage() {
             {loading ? (
               <p style={{ color: '#9B8B7A', animation: 'pulse 2s ease infinite' }}>Loading your library...</p>
             ) : children.length === 0 ? (
-              <div style={{ maxWidth: '440px' }}>
-                <div style={{ fontFamily: 'Georgia, serif', fontSize: '1.4rem', color: '#1C1614', marginBottom: '12px' }}>
-                  Your library is empty
-                </div>
-                <p style={{ color: '#6B5E4E', marginBottom: '28px', lineHeight: 1.6 }}>
-                  Add a child profile to start generating personalised bedtime stories.
-                </p>
-                <Link href="/onboarding" style={{ display: 'inline-block', padding: '0.75rem 1.75rem', background: '#1C1614', color: '#fff', borderRadius: '8px', textDecoration: 'none', fontWeight: '600', fontSize: '0.9rem' }}>
-                  Get started
-                </Link>
+              <div style={{ maxWidth: '420px' }}>
+                <p style={{ fontFamily: 'Georgia, serif', fontSize: '1.4rem', color: '#1C1614', marginBottom: '12px' }}>Your library is empty</p>
+                <p style={{ color: '#6B5E4E', marginBottom: '28px', lineHeight: 1.6 }}>Add a child profile to start generating personalised bedtime stories.</p>
+                <Link href="/onboarding" style={{ display: 'inline-block', padding: '0.75rem 1.75rem', background: '#1C1614', color: '#fff', borderRadius: '8px', textDecoration: 'none', fontWeight: '600', fontSize: '0.9rem' }}>Get started</Link>
               </div>
             ) : (
-              // One shelf per child
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '56px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '72px' }}>
                 {children.map((child, childIndex) => {
                   const palette = CHILD_PALETTES[childIndex % CHILD_PALETTES.length];
-                  const latest = latestStoryByChild(child.id);
-                  const seriesComplete = isSeriesComplete(latest);
-                  const canContinue = !!latest && !seriesComplete;
+                  const childStories = storiesByChild(child.id);
+                  const seriesComplete = isSeriesComplete(child.id);
+                  const canContinue = childStories.length > 0 && !seriesComplete;
 
                   return (
                     <div key={child.id}>
-                      {/* Child header */}
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px', flexWrap: 'wrap', gap: '12px' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                          {/* Colour dot */}
-                          <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: palette.cover, flexShrink: 0 }} />
-                          <h3 style={{ fontFamily: 'Georgia, serif', fontSize: '1.25rem', color: '#1C1614', fontWeight: '400' }}>
-                            {child.name}&apos;s books
-                          </h3>
-                        </div>
+                      {/* Child heading */}
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                        <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: palette.cover }} />
+                        <h3 style={{ fontFamily: 'Georgia, serif', fontSize: '1.2rem', color: '#1C1614', fontWeight: '400' }}>
+                          {child.name}&apos;s books
+                        </h3>
+                        <span style={{ fontSize: '0.8rem', color: '#C8BEAA', fontWeight: '400' }}>
+                          {childStories.length} {childStories.length === 1 ? 'book' : 'books'}
+                        </span>
+                      </div>
+                      <div style={{ height: '2px', background: `linear-gradient(90deg, ${palette.cover}50, transparent)`, marginBottom: '32px', borderRadius: '1px' }} />
 
-                        {/* Action buttons */}
-                        <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                      {/* Two-panel: fan on left, create on right */}
+                      <div style={{
+                        display: 'grid',
+                        gridTemplateColumns: isMobile ? '1fr' : '1fr 240px',
+                        gap: '40px',
+                        alignItems: 'end',
+                      }}>
+
+                        {/* Left: book fan */}
+                        {childStories.length === 0 ? (
+                          <p style={{ color: '#9B8B7A', fontSize: '0.875rem', fontStyle: 'italic', paddingBottom: '24px' }}>
+                            No stories yet — create the first one.
+                          </p>
+                        ) : (
+                          <div>
+                            <BookFan stories={childStories} palette={palette} />
+                            <p style={{ fontSize: '0.72rem', color: '#C8BEAA', marginTop: '12px', letterSpacing: '0.03em' }}>
+                              Hover a book to lift it · Click to read
+                            </p>
+                          </div>
+                        )}
+
+                        {/* Right: create panel */}
+                        <div style={{
+                          background: '#fff',
+                          border: `1.5px solid ${palette.cover}25`,
+                          borderLeft: `3px solid ${palette.cover}`,
+                          borderRadius: '10px',
+                          padding: '24px 20px',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          gap: '12px',
+                        }}>
+                          <p style={{ fontFamily: 'Georgia, serif', fontSize: '1rem', color: '#1C1614', marginBottom: '4px' }}>
+                            {canContinue ? 'What\'s next?' : 'Start an adventure'}
+                          </p>
+
                           {canContinue && (
                             <button
                               onClick={() => handleContinueStory(child.id)}
                               disabled={!!generating}
                               style={{
-                                padding: '0.55rem 1.1rem', borderRadius: '8px', border: 'none',
+                                padding: '0.7rem 1rem', borderRadius: '8px', border: 'none',
                                 background: palette.cover, color: '#fff',
                                 cursor: generating ? 'not-allowed' : 'pointer',
-                                fontWeight: '600', fontSize: '0.8rem',
-                                opacity: generating ? 0.6 : 1, letterSpacing: '0.02em',
+                                fontWeight: '600', fontSize: '0.875rem',
+                                opacity: generating ? 0.6 : 1, textAlign: 'left',
+                                lineHeight: 1.4,
                               }}
                             >
                               Continue the story
+                              <p style={{ fontWeight: '400', fontSize: '0.75rem', opacity: 0.75, margin: '2px 0 0' }}>
+                                Pick up where you left off
+                              </p>
                             </button>
                           )}
+
                           <button
                             onClick={() => handleGenerateStory(child.id)}
                             disabled={!!generating}
                             style={{
-                              padding: '0.55rem 1.1rem', borderRadius: '8px',
-                              border: `1.5px solid ${palette.cover}`,
-                              background: 'transparent', color: palette.cover,
+                              padding: '0.7rem 1rem', borderRadius: '8px',
+                              border: `1.5px solid ${palette.cover}40`,
+                              background: palette.light, color: palette.cover,
                               cursor: generating ? 'not-allowed' : 'pointer',
-                              fontWeight: '600', fontSize: '0.8rem',
-                              opacity: generating ? 0.6 : 1, letterSpacing: '0.02em',
-                              display: 'flex', alignItems: 'center', gap: '5px',
+                              fontWeight: '600', fontSize: '0.875rem',
+                              opacity: generating ? 0.6 : 1, textAlign: 'left',
+                              display: 'flex', alignItems: 'center', gap: '8px',
+                              lineHeight: 1.4,
                             }}
                           >
-                            <Plus size={14} /> New story
+                            <Plus size={15} />
+                            <span>
+                              New story
+                              <p style={{ fontWeight: '400', fontSize: '0.75rem', color: '#6B5E4E', margin: '2px 0 0' }}>
+                                A brand new adventure
+                              </p>
+                            </span>
                           </button>
+
+                          {seriesComplete && (
+                            <p style={{ fontSize: '0.75rem', color: '#9B8B7A', marginTop: '4px' }}>
+                              Series complete — start a new adventure above.
+                            </p>
+                          )}
                         </div>
                       </div>
-
-                      {/* Divider in child's colour */}
-                      <div style={{ height: '2px', background: `linear-gradient(90deg, ${palette.cover}40, transparent)`, marginBottom: '28px', borderRadius: '1px' }} />
-
-                      {/* Book shelf */}
-                      {(() => {
-                        const shelf = shelfByChild(child.id);
-                        if (shelf.length === 0) return (
-                          <p style={{ color: '#9B8B7A', fontSize: '0.875rem', fontStyle: 'italic' }}>
-                            No stories yet — generate the first one above.
-                          </p>
-                        );
-                        return (
-                          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '32px 24px', alignItems: 'flex-end' }}>
-                            {shelf.map((item, i) =>
-                              item.type === 'single' ? (
-                                <BookCard key={item.story.id} story={item.story} palette={palette} index={i} />
-                              ) : (
-                                <SeriesStack key={item.seriesId} volumes={item.volumes} palette={palette} />
-                              )
-                            )}
-                          </div>
-                        );
-                      })()}
                     </div>
                   );
                 })}
@@ -607,7 +433,6 @@ export default function DashboardPage() {
           </>
         )}
 
-        {/* Children */}
         {activeNav === 'children' && (
           <div style={{ maxWidth: '560px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '28px' }}>
@@ -628,7 +453,7 @@ export default function DashboardPage() {
                       <p style={{ color: '#9B8B7A', fontSize: '0.875rem', marginBottom: child.interests?.length ? '12px' : 0 }}>Age {child.age}</p>
                       {child.interests?.length > 0 && (
                         <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
-                          {child.interests.slice(0, 6).map((interest) => (
+                          {child.interests.slice(0, 6).map(interest => (
                             <span key={interest} style={{ fontSize: '0.75rem', padding: '3px 10px', borderRadius: '20px', background: palette.light, color: palette.cover, fontWeight: '500' }}>
                               {interest}
                             </span>
@@ -664,7 +489,7 @@ export default function DashboardPage() {
           {navItems.map(({ id, label, icon: Icon }) => {
             const active = activeNav === id;
             return (
-              <button key={id} onClick={() => setActiveNav(id)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '3px', border: 'none', background: 'none', cursor: 'pointer', color: active ? '#fff' : 'rgba(255,255,255,0.4)', padding: '8px 12px' }}>
+              <button key={id} onClick={() => setActiveNav(id)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '3px', border: 'none', background: 'none', cursor: 'pointer', color: active ? '#fff' : 'rgba(255,255,255,0.35)', padding: '8px 12px' }}>
                 <Icon size={22} />
                 <span style={{ fontSize: '0.6rem', fontWeight: '500', letterSpacing: '0.04em' }}>{label.toUpperCase()}</span>
               </button>
