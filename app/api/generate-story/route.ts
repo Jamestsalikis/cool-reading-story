@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import Anthropic from '@anthropic-ai/sdk';
 import { createClient } from '@/lib/supabase/server';
+import { checkGenerationAllowed, decrementStoryCount } from '@/lib/subscription';
 
 // Extend Vercel function timeout to 60s (Pro plan) to allow time for image generation
 export const maxDuration = 60;
@@ -203,8 +204,14 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'child_id required' }, { status: 400 });
     }
 
-    // TODO: Re-enable generation limits before go-live
-    // Limits temporarily disabled during development/testing
+    // Paywall check
+    const paywallResult = await checkGenerationAllowed(supabase, user.id, user.email);
+    if (!paywallResult.allowed) {
+      return NextResponse.json(
+        { error: 'paywall', reason: paywallResult.reason },
+        { status: 402 }
+      );
+    }
 
     // Fetch child profile
     const { data: child, error: childError } = await supabase
@@ -292,6 +299,9 @@ export async function POST(request: Request) {
       console.error('Story save error:', storyError);
       return NextResponse.json({ error: 'Failed to save story' }, { status: 500 });
     }
+
+    // Decrement story count now that story is confirmed saved
+    await decrementStoryCount(supabase, user.id, paywallResult.reason);
 
     return NextResponse.json({ story });
   } catch (error) {

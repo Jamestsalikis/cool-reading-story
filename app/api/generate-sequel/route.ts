@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import Anthropic from '@anthropic-ai/sdk';
 import { createClient } from '@/lib/supabase/server';
+import { checkGenerationAllowed, decrementStoryCount } from '@/lib/subscription';
 
 export const maxDuration = 60;
 
@@ -14,6 +15,12 @@ export async function POST(request: Request) {
 
     const { story_id } = await request.json();
     if (!story_id) return NextResponse.json({ error: 'story_id required' }, { status: 400 });
+
+    // Paywall check
+    const paywallResult = await checkGenerationAllowed(supabase, user.id, user.email);
+    if (!paywallResult.allowed) {
+      return NextResponse.json({ error: 'paywall', reason: paywallResult.reason }, { status: 402 });
+    }
 
     // Fetch the source story + child profile
     const { data: sourceStory } = await supabase
@@ -155,6 +162,8 @@ Return ONLY valid JSON:
       console.error('Sequel save error:', storyError);
       return NextResponse.json({ error: 'Failed to save story' }, { status: 500 });
     }
+
+    await decrementStoryCount(supabase, user.id, paywallResult.reason);
 
     return NextResponse.json({ story: newStory });
   } catch (error) {

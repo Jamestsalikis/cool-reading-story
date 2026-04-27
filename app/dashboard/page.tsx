@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { BookOpen, Users, Settings, CreditCard, Plus } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
+import PaywallModal from '@/components/PaywallModal';
 
 const CHILD_PALETTES = [
   { cover: '#741515', spine: '#4d0e0e', light: '#FBF0F0' },
@@ -195,6 +196,8 @@ export default function DashboardPage() {
   const [generatingName, setGeneratingName] = useState('');
   const [generateError, setGenerateError] = useState('');
   const [userName, setUserName] = useState('');
+  const [paywallReason, setPaywallReason] = useState<'free_exhausted' | 'monthly_limit' | 'no_subscription' | null>(null);
+  const [sub, setSub] = useState<{ status: string; free_stories_remaining: number; stories_this_month: number } | null>(null);
   const supabase = createClient();
 
   useEffect(() => {
@@ -212,6 +215,8 @@ export default function DashboardPage() {
       .from('stories')
       .select('id, title, created_at, word_count, series_id, series_title, volume_number, children(name, age)')
       .order('created_at', { ascending: false });
+    const { data: subData } = await supabase.from('user_subscriptions').select('status, free_stories_remaining, stories_this_month').eq('user_id', user?.id ?? '').single();
+    setSub(subData);
     setChildren(childrenData || []);
     setStories(storiesData || []);
     setLoading(false);
@@ -239,7 +244,8 @@ export default function DashboardPage() {
     try {
       const res = await fetch('/api/generate-story', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ child_id: childId }) });
       const data = await res.json();
-      if (!res.ok) setGenerateError(data.message || 'Something went wrong.');
+      if (res.status === 402) { setPaywallReason(data.reason); }
+      else if (!res.ok) setGenerateError(data.message || 'Something went wrong.');
       else await fetchData();
     } finally { setGenerating(null); }
   };
@@ -254,7 +260,8 @@ export default function DashboardPage() {
     try {
       const res = await fetch('/api/generate-sequel', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ story_id: latest.id }) });
       const data = await res.json();
-      if (!res.ok) setGenerateError(data.error || 'Something went wrong.');
+      if (res.status === 402) { setPaywallReason(data.reason); }
+      else if (!res.ok) setGenerateError(data.error || 'Something went wrong.');
       else await fetchData();
     } finally { setGenerating(null); }
   };
@@ -269,6 +276,10 @@ export default function DashboardPage() {
   return (
     <div style={{ minHeight: '100vh', background: '#FAF9F6', display: 'flex', flexDirection: isMobile ? 'column' : 'row' }}>
       <style>{pageStyles}</style>
+
+      {paywallReason && (
+        <PaywallModal reason={paywallReason} onClose={() => setPaywallReason(null)} />
+      )}
 
       {generating && (
         <div style={{ position: 'fixed', inset: 0, background: 'rgba(28,22,20,0.88)', zIndex: 100, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '24px' }}>
@@ -301,9 +312,22 @@ export default function DashboardPage() {
           <h2 style={{ fontFamily: 'Georgia, serif', fontSize: '2rem', color: '#1C1614', marginBottom: '6px', fontWeight: '400' }}>
             Welcome back{userName ? `, ${userName}` : ''}
           </h2>
-          <p style={{ color: '#9B8B7A', fontSize: '0.9rem' }}>
-            {stories.length > 0 ? `${stories.length} ${stories.length === 1 ? 'book' : 'books'} in your library` : 'Your library is ready'}
-          </p>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+            <p style={{ color: '#9B8B7A', fontSize: '0.9rem' }}>
+              {stories.length > 0 ? `${stories.length} ${stories.length === 1 ? 'book' : 'books'} in your library` : 'Your library is ready'}
+            </p>
+            {sub && (
+              sub.status === 'subscribed' ? (
+                <span style={{ fontSize: '0.75rem', fontWeight: '600', color: '#1a7a4a', background: '#E6F4EC', padding: '3px 10px', borderRadius: '20px' }}>
+                  {15 - sub.stories_this_month} of 15 stories left this month
+                </span>
+              ) : (
+                <span style={{ fontSize: '0.75rem', fontWeight: '600', color: '#741515', background: '#FBF0F0', padding: '3px 10px', borderRadius: '20px' }}>
+                  {sub.free_stories_remaining} free {sub.free_stories_remaining === 1 ? 'story' : 'stories'} remaining
+                </span>
+              )
+            )}
+          </div>
         </div>
 
         {activeNav === 'stories' && (
