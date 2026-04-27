@@ -485,12 +485,15 @@ export default function DashboardPage() {
                         <div style={{ display: 'flex', gap: '10px' }}>
                           {canContinue && (() => {
                             const latest = storiesByChild(child.id)[0];
-                            const name = latest?.series_title || latest?.title || 'the story';
-                            const shortName = name.length > 26 ? name.slice(0, 24) + '…' : name;
+                            const seriesName = latest?.series_title || latest?.title || 'the story';
+                            // Find how many volumes exist in this series
+                            const seriesStories = storiesByChild(child.id).filter(s => s.series_id && s.series_id === latest?.series_id);
+                            const nextVol = latest?.series_id ? (seriesStories.length + 1) : null;
+                            const shortName = seriesName.length > 22 ? seriesName.slice(0, 20) + '…' : seriesName;
                             return (
                               <button onClick={() => handleContinueStory(child.id)} disabled={!!generating}
                                 style={{ padding: '0.55rem 1.1rem', borderRadius: '8px', border: 'none', background: palette.cover, color: '#fff', cursor: generating ? 'not-allowed' : 'pointer', fontWeight: '600', fontSize: '0.8rem', opacity: generating ? 0.6 : 1 }}>
-                                Continue: {shortName}
+                                {nextVol ? `Continue: ${shortName} · Vol ${nextVol}` : `Continue: ${shortName}`}
                               </button>
                             );
                           })()}

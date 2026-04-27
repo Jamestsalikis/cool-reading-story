@@ -96,9 +96,11 @@ CHARACTER ANCHOR (copy this exactly at the start of every image prompt):
 
 Then add 1-2 sentences describing what is happening in this specific page's scene. End with: "No text in the image."
 
+IMPORTANT: The series is called "${seriesTitle}". Every volume title MUST start with "${seriesTitle}: " followed by a short subtitle (2-5 words) describing this chapter's specific adventure. Example: "${seriesTitle}: The Enchanted Map".
+
 Return ONLY valid JSON:
 {
-  "title": "Volume ${volumeNumber} title (specific to this chapter's adventure)",
+  "title": "${seriesTitle}: [short subtitle for this chapter, e.g. '${seriesTitle}: The Lost Map']",
   "moral": "The gentle lesson in one sentence",
   "theme_emoji": "One emoji",
   "word_count": estimated_total_as_number,
