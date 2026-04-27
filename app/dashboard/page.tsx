@@ -86,7 +86,14 @@ function SeriesFan({ volumes, palette }: { volumes: Story[]; palette: Palette })
   const containerH = 210;
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
+      {/* Labels above so books bottom-align with single cards */}
+      <p style={{ fontSize: '0.68rem', color: '#9B8B7A', letterSpacing: '0.02em', textAlign: 'center' }}>
+        {volumes[0].series_title || 'Series'} · {n} {n === 1 ? 'volume' : 'volumes'}
+      </p>
+      <p style={{ fontSize: '0.65rem', color: '#C8BEAA', letterSpacing: '0.02em', textAlign: 'center', marginBottom: '4px' }}>
+        {new Date(volumes[volumes.length - 1].created_at).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })}
+      </p>
       <div style={{ position: 'relative', width: `${containerW}px`, height: `${containerH}px` }}>
         {volumes.map((vol, i) => {
           const isHovered = hoveredId === vol.id;
@@ -134,13 +141,6 @@ function SeriesFan({ volumes, palette }: { volumes: Story[]; palette: Palette })
           );
         })}
       </div>
-      {/* Label */}
-      <p style={{ fontSize: '0.68rem', color: '#9B8B7A', letterSpacing: '0.02em', textAlign: 'center' }}>
-        {volumes[0].series_title || 'Series'} · {n} {n === 1 ? 'volume' : 'volumes'}
-      </p>
-      <p style={{ fontSize: '0.65rem', color: '#C8BEAA', letterSpacing: '0.02em', textAlign: 'center' }}>
-        {new Date(volumes[volumes.length - 1].created_at).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })}
-      </p>
     </div>
   );
 }
@@ -381,7 +381,7 @@ export default function DashboardPage() {
                       {shelf.length === 0 ? (
                         <p style={{ color: '#9B8B7A', fontSize: '0.875rem', fontStyle: 'italic' }}>No stories yet — generate the first one above.</p>
                       ) : (
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '32px 24px', alignItems: 'flex-start' }}>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '32px 24px', alignItems: 'flex-end' }}>
                           {shelf.map(item =>
                             item.type === 'single' ? (
                               <BookCard key={item.story.id} story={item.story} palette={palette} />
