@@ -2,7 +2,11 @@ import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { createClient } from '@/lib/supabase/server';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2025-01-27.acacia' });
+export const dynamic = 'force-dynamic';
+
+function getStripe() {
+  return new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2025-01-27.acacia' });
+}
 
 // Price IDs — set these after creating products in Stripe dashboard
 // STRIPE_PRICE_MONTHLY and STRIPE_PRICE_ANNUAL must be set in env vars
@@ -17,7 +21,11 @@ export async function POST(request: Request) {
       ? process.env.STRIPE_PRICE_ANNUAL!
       : process.env.STRIPE_PRICE_MONTHLY!;
 
-    if (!priceId) return NextResponse.json({ error: 'Stripe not configured' }, { status: 500 });
+    if (!priceId || !process.env.STRIPE_SECRET_KEY) {
+      return NextResponse.json({ error: 'Stripe not configured' }, { status: 500 });
+    }
+
+    const stripe = getStripe();
 
     // Get or create Stripe customer
     const { data: sub } = await supabase

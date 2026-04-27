@@ -55,7 +55,7 @@ function BookCard({ story, palette }: { story: Story; palette: Palette }) {
         <div style={{ position: 'absolute', left: '18px', top: 0, width: 'calc(100% - 18px)', height: '100%', background: palette.light, borderRadius: '0 6px 6px 0', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '16px 12px', gap: '8px', boxShadow: 'inset 6px 0 14px rgba(0,0,0,0.05)' }}>
           <div style={{ width: '40px', height: '2px', background: palette.cover, borderRadius: '1px', opacity: 0.4 }} />
           <p style={{ fontSize: '0.72rem', fontFamily: 'Georgia, serif', fontWeight: '600', textAlign: 'center', color: '#1C1614', lineHeight: 1.45 }}>{story.title}</p>
-          <p style={{ fontSize: '0.62rem', color: '#9B8B7A', letterSpacing: '0.04em' }}>{story.children?.name}</p>
+          <p style={{ fontSize: '0.62rem', color: '#9B8B7A', letterSpacing: '0.04em' }}>{story.title}</p>
           <div className="book-read-hint" style={{ fontSize: '0.68rem', fontWeight: '700', color: palette.cover, letterSpacing: '0.06em', textTransform: 'uppercase' }}>Read</div>
         </div>
         {/* Cover */}
@@ -64,11 +64,11 @@ function BookCard({ story, palette }: { story: Story; palette: Palette }) {
           <div style={{ width: '28px', height: '28px', border: '1.5px solid rgba(255,255,255,0.3)', borderRadius: '3px', transform: 'rotate(45deg)', marginBottom: '4px' }} />
           <p style={{ fontSize: '0.75rem', fontFamily: 'Georgia, serif', fontWeight: '600', textAlign: 'center', color: 'rgba(255,255,255,0.95)', lineHeight: 1.4 }}>{story.title}</p>
           <div style={{ width: '30px', height: '1px', background: 'rgba(255,255,255,0.25)' }} />
-          <p style={{ fontSize: '0.6rem', color: 'rgba(255,255,255,0.55)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>{story.children?.name}</p>
+          <p style={{ fontSize: '0.6rem', color: 'rgba(255,255,255,0.55)', letterSpacing: '0.06em' }}>{new Date(story.created_at).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })}</p>
         </div>
       </div>
       <p style={{ fontSize: '0.68rem', color: '#9B8B7A', letterSpacing: '0.02em' }}>
-        {new Date(story.created_at).toLocaleDateString('en-AU', { month: 'short', year: 'numeric' })}
+        {new Date(story.created_at).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })}
       </p>
     </div>
   );
@@ -432,16 +432,64 @@ export default function DashboardPage() {
         )}
 
         {activeNav === 'account' && (
-          <div>
-            <h3 style={{ fontFamily: 'Georgia, serif', fontSize: '1.4rem', color: '#1C1614', fontWeight: '400', marginBottom: '8px' }}>Account</h3>
-            <p style={{ color: '#9B8B7A' }}>Manage your account preferences</p>
+          <div style={{ maxWidth: '480px' }}>
+            <h3 style={{ fontFamily: 'Georgia, serif', fontSize: '1.4rem', color: '#1C1614', fontWeight: '400', marginBottom: '28px' }}>Account</h3>
+            <div style={{ background: '#fff', border: '1px solid #E8E3DC', borderRadius: '12px', padding: '24px', marginBottom: '16px' }}>
+              <p style={{ fontSize: '0.75rem', color: '#9B8B7A', marginBottom: '4px', letterSpacing: '0.04em', textTransform: 'uppercase' }}>Signed in as</p>
+              <p style={{ fontWeight: '600', color: '#1C1614', fontSize: '0.95rem' }}>{userName}</p>
+            </div>
+            <button
+              onClick={async () => { await supabase.auth.signOut(); window.location.href = '/'; }}
+              style={{ width: '100%', padding: '0.75rem', borderRadius: '10px', border: '1.5px solid #E8E3DC', background: '#fff', color: '#741515', cursor: 'pointer', fontWeight: '600', fontSize: '0.9rem', textAlign: 'center' }}
+            >
+              Sign out
+            </button>
           </div>
         )}
 
         {activeNav === 'subscription' && (
-          <div>
-            <h3 style={{ fontFamily: 'Georgia, serif', fontSize: '1.4rem', color: '#1C1614', fontWeight: '400', marginBottom: '8px' }}>Subscription</h3>
-            <p style={{ color: '#9B8B7A' }}>Manage your subscription plan</p>
+          <div style={{ maxWidth: '480px' }}>
+            <h3 style={{ fontFamily: 'Georgia, serif', fontSize: '1.4rem', color: '#1C1614', fontWeight: '400', marginBottom: '28px' }}>Subscription</h3>
+            <div style={{ background: '#fff', border: '1px solid #E8E3DC', borderRadius: '12px', padding: '24px', marginBottom: '16px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                <p style={{ fontWeight: '600', color: '#1C1614', fontSize: '0.95rem' }}>Current plan</p>
+                <span style={{
+                  fontSize: '0.75rem', fontWeight: '700', padding: '3px 10px', borderRadius: '20px',
+                  background: sub?.status === 'subscribed' ? '#E6F4EC' : '#FBF0F0',
+                  color: sub?.status === 'subscribed' ? '#1a7a4a' : '#741515',
+                }}>
+                  {sub?.status === 'subscribed' ? 'Active' : 'Free'}
+                </span>
+              </div>
+              {sub?.status === 'subscribed' ? (
+                <p style={{ color: '#6B5E4E', fontSize: '0.875rem' }}>
+                  {15 - (sub?.stories_this_month ?? 0)} of 15 stories remaining this month.
+                </p>
+              ) : (
+                <p style={{ color: '#6B5E4E', fontSize: '0.875rem' }}>
+                  {sub?.free_stories_remaining ?? 0} free {(sub?.free_stories_remaining ?? 0) === 1 ? 'story' : 'stories'} remaining. Subscribe for unlimited access.
+                </p>
+              )}
+            </div>
+            {sub?.status === 'subscribed' ? (
+              <button
+                onClick={async () => {
+                  const res = await fetch('/api/stripe/portal', { method: 'POST' });
+                  const data = await res.json();
+                  if (data.url) window.location.href = data.url;
+                }}
+                style={{ width: '100%', padding: '0.75rem', borderRadius: '10px', border: '1.5px solid #741515', background: '#fff', color: '#741515', cursor: 'pointer', fontWeight: '600', fontSize: '0.9rem' }}
+              >
+                Manage billing
+              </button>
+            ) : (
+              <button
+                onClick={() => setPaywallReason('free_exhausted')}
+                style={{ width: '100%', padding: '0.75rem', borderRadius: '10px', border: 'none', background: '#741515', color: '#fff', cursor: 'pointer', fontWeight: '600', fontSize: '0.9rem' }}
+              >
+                Subscribe — from A$9.99/month
+              </button>
+            )}
           </div>
         )}
       </div>

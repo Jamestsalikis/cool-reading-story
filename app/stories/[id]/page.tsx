@@ -587,7 +587,18 @@ export default function StoryPage() {
             </button>
           )}
           {isLastPage && (
-            <div style={{ minWidth: '90px' }} />
+            <Link
+              href="/dashboard"
+              style={{
+                display: 'flex', alignItems: 'center', gap: '6px',
+                background: '#c4784a', border: 'none', borderRadius: '12px',
+                color: 'white', padding: '0.75rem 1.25rem',
+                textDecoration: 'none', fontSize: '1rem', fontWeight: 700,
+                minWidth: '90px', justifyContent: 'center',
+              }}
+            >
+              Library
+            </Link>
           )}
         </div>
       </div>

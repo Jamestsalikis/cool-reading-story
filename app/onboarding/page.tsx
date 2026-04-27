@@ -327,6 +327,9 @@ export default function OnboardingPage() {
   return (
     <div style={{ minHeight: '100vh', backgroundColor: '#FAF7F0', padding: '40px 20px' }}>
       <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+        <div className="font-serif" style={{ fontSize: '1.25rem', fontWeight: 600, color: '#741515', marginBottom: '40px', textAlign: 'center' }}>
+          Cool Reading Story
+        </div>
 
         {/* ── Step 2: Name / Age / Gender ── */}
         {state.step === 2 && (
