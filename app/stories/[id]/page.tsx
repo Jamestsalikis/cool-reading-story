@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, Heart, ChevronLeft, ChevronRight, Printer } from 'lucide-react';
+import { ArrowLeft, Heart, ChevronLeft, ChevronRight } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import FeedbackModal from '@/components/FeedbackModal';
 
@@ -572,20 +572,7 @@ export default function StoryPage() {
             ))}
           </div>
 
-          {isLastPage ? (
-            <button
-              onClick={() => window.print()}
-              style={{
-                display: 'flex', alignItems: 'center', gap: '6px',
-                background: '#c4784a', border: 'none', borderRadius: '12px',
-                color: 'white', padding: '0.75rem 1.25rem',
-                cursor: 'pointer', fontSize: '1rem', fontWeight: 700,
-                minWidth: '90px', justifyContent: 'center',
-              }}
-            >
-              <Printer size={18} /> Print
-            </button>
-          ) : (
+          {!isLastPage && (
             <button
               onClick={() => goToPage(currentPage + 1)}
               style={{
@@ -598,6 +585,9 @@ export default function StoryPage() {
             >
               Next <ChevronRight size={20} />
             </button>
+          )}
+          {isLastPage && (
+            <div style={{ minWidth: '90px' }} />
           )}
         </div>
       </div>

@@ -89,7 +89,12 @@ Requirements:
 6. End on a cosy, bedtime-appropriate note
 7. Use language appropriate for age ${child.age}: ${child.reading_level === 'beginner' ? 'short sentences, simple words' : child.reading_level === 'intermediate' ? 'flowing sentences, rich descriptions' : 'complex narrative, vivid imagery'}
 8. Split into exactly 5 pages, 2-4 paragraphs each
-9. For each page, write a short image prompt (1-2 sentences) — bright children's book cartoon illustration style, bold outlines, vivid flat colours, expressive friendly characters, clean and joyful, featuring ${child.name}${appearanceDesc ? ` with ${appearanceDesc}` : ''}. No text in the image
+9. For each page, write an image prompt describing the scene. The prompt MUST begin with the exact character anchor below, then describe the scene. This keeps the child looking consistent across all illustrations.
+
+CHARACTER ANCHOR (copy this exactly at the start of every image prompt):
+"Bright children's book cartoon illustration, bold outlines, vivid flat colours. Main character: ${child.name}, a ${child.age}-year-old ${child.gender === 'Boy' ? 'boy' : child.gender === 'Girl' ? 'girl' : 'child'}${appearanceDesc ? ` with ${appearanceDesc}` : ''}, consistent design throughout."
+
+Then add 1-2 sentences describing what is happening in this specific page's scene. End with: "No text in the image."
 
 Return ONLY valid JSON:
 {
@@ -101,7 +106,7 @@ Return ONLY valid JSON:
     {
       "page_number": 1,
       "content": "Page text — 2-4 paragraphs",
-      "image_prompt": "Bright children's book cartoon illustration, [scene], bold outlines, vivid flat colours, expressive characters, no text"
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. Main character: [name], a [age]-year-old [boy/girl] with [appearance], consistent design throughout. [Scene description]. No text in the image."
     }
   ]
 }`;
