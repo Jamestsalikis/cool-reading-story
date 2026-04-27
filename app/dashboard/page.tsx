@@ -281,7 +281,7 @@ export default function DashboardPage() {
       )}
 
       {!isMobile && (
-        <div style={{ width: '210px', background: '#1C1614', padding: '32px 20px', display: 'flex', flexDirection: 'column', position: 'fixed', height: '100vh', left: 0, top: 0, overflowY: 'auto' }}>
+        <div style={{ width: '210px', background: '#741515', padding: '32px 20px', display: 'flex', flexDirection: 'column', position: 'fixed', height: '100vh', left: 0, top: 0, overflowY: 'auto' }}>
           <h1 style={{ fontFamily: 'Georgia, serif', fontSize: '1.1rem', marginBottom: '40px', color: '#E8DDD0', lineHeight: 1.3 }}>Cool Reading<br />Story</h1>
           <nav style={{ display: 'flex', flexDirection: 'column', gap: '4px', flex: 1 }}>
             {navItems.map(({ id, label, icon: Icon }) => {
@@ -423,7 +423,7 @@ export default function DashboardPage() {
       </div>
 
       {isMobile && (
-        <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, height: '72px', background: '#1C1614', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
+        <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, height: '72px', background: '#741515', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
           {navItems.map(({ id, label, icon: Icon }) => {
             const active = activeNav === id;
             return (
