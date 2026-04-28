@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Heart, ChevronLeft, ChevronRight } from 'lucide-react';
+import Fable from '@/components/Fable';
 import { createClient } from '@/lib/supabase/client';
 import FeedbackModal from '@/components/FeedbackModal';
 
@@ -186,27 +187,16 @@ function IllustrationPlaceholder({ generating }: { generating: boolean; theme?: 
   return (
     <div style={{
       width: '100%', height: '100%',
-      background: generating
-        ? 'linear-gradient(135deg, #e8e0d8 0%, #d4c8c0 50%, #c8d0d8 100%)'
-        : '#F0EDE8',
-      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '12px',
+      background: '#F5F0E8',
+      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '4px',
     }}>
-      {/* Book SVG icon */}
-      <svg width="48" height="38" viewBox="0 0 48 38" fill="none" opacity={generating ? 0.5 : 0.25}>
-        <path d="M24 7C18 3 7 3 2 5v26c5-2 16-2 22 2 6-4 17-4 22-2V5C44 3 30 3 24 7z" stroke="#741515" strokeWidth="2" strokeLinejoin="round" fill="rgba(116,21,21,0.08)"/>
-        <line x1="24" y1="7" x2="24" y2="33" stroke="#741515" strokeWidth="1.5"/>
-      </svg>
-      {generating && (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-          <p className="shimmer" style={{ color: '#8a7a6a', fontSize: '0.78rem', margin: 0, fontFamily: 'Georgia, serif', fontStyle: 'italic' }}>
-            Painting your illustration
-          </p>
-          <div style={{ display: 'flex', gap: '5px' }}>
-            <span className="paint-dot-1" style={{ fontSize: '0.55rem', color: '#8a7a6a' }}>●</span>
-            <span className="paint-dot-2" style={{ fontSize: '0.55rem', color: '#8a7a6a' }}>●</span>
-            <span className="paint-dot-3" style={{ fontSize: '0.55rem', color: '#8a7a6a' }}>●</span>
-          </div>
-        </div>
+      {generating ? (
+        <Fable pose="painting" dialogue="Painting your illustration..." size={110} />
+      ) : (
+        <svg width="48" height="38" viewBox="0 0 48 38" fill="none" opacity="0.2">
+          <path d="M24 7C18 3 7 3 2 5v26c5-2 16-2 22 2 6-4 17-4 22-2V5C44 3 30 3 24 7z" stroke="#741515" strokeWidth="2" strokeLinejoin="round" fill="rgba(116,21,21,0.08)"/>
+          <line x1="24" y1="7" x2="24" y2="33" stroke="#741515" strokeWidth="1.5"/>
+        </svg>
       )}
     </div>
   );

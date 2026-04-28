@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { BookOpen, Users, Settings, CreditCard, Plus, X } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import PaywallModal from '@/components/PaywallModal';
+import Fable from '@/components/Fable';
 import { updateChild } from '@/lib/supabase/child-actions';
 
 const CHILD_PALETTES = [
@@ -402,12 +403,15 @@ export default function DashboardPage() {
       )}
 
       {generating && (
-        <div style={{ position: 'fixed', inset: 0, background: 'rgba(28,22,20,0.88)', zIndex: 100, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '24px' }}>
-          <div style={{ width: '52px', height: '52px', borderRadius: '50%', border: '3px solid rgba(255,255,255,0.12)', borderTopColor: '#C4784A', animation: 'spin 1s linear infinite' }} />
-          <div style={{ textAlign: 'center' }}>
-            <p style={{ color: '#fff', fontSize: '1.3rem', fontFamily: 'Georgia, serif', marginBottom: '8px' }}>Writing {generatingName}&apos;s story</p>
-            <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.875rem', animation: 'pulse 2s ease infinite' }}>Usually takes about 30 seconds</p>
-          </div>
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(28,22,20,0.92)', zIndex: 100, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+          <Fable
+            pose="writing"
+            dialogue={generating.startsWith('sequel') ? `Writing the next chapter for ${generatingName}...` : `Writing ${generatingName}'s story...`}
+            size={180}
+          />
+          <p style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.8rem', marginTop: '8px', animation: 'pulse 2s ease infinite' }}>
+            Usually takes about 30 seconds
+          </p>
         </div>
       )}
 
@@ -457,10 +461,11 @@ export default function DashboardPage() {
             {loading ? (
               <p style={{ color: '#9B8B7A', animation: 'pulse 2s ease infinite' }}>Loading your library...</p>
             ) : children.length === 0 ? (
-              <div style={{ maxWidth: '420px' }}>
-                <p style={{ fontFamily: 'Georgia, serif', fontSize: '1.4rem', color: '#1C1614', marginBottom: '12px' }}>Your library is empty</p>
-                <p style={{ color: '#6B5E4E', marginBottom: '28px', lineHeight: 1.6 }}>Add a child profile to start generating personalised bedtime stories.</p>
-                <Link href="/onboarding" style={{ display: 'inline-block', padding: '0.75rem 1.75rem', background: '#1C1614', color: '#fff', borderRadius: '8px', textDecoration: 'none', fontWeight: '600', fontSize: '0.9rem' }}>Get started</Link>
+              <div style={{ maxWidth: '420px', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+                <Fable pose="excited" dialogue="Your library is empty — shall we write the first story?" size={150} />
+                <div style={{ marginTop: '16px' }}>
+                  <Link href="/onboarding" style={{ display: 'inline-block', padding: '0.75rem 1.75rem', background: '#741515', color: '#fff', borderRadius: '8px', textDecoration: 'none', fontWeight: '600', fontSize: '0.9rem' }}>Get started</Link>
+                </div>
               </div>
             ) : (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '64px' }}>
