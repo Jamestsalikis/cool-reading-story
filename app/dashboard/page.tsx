@@ -355,11 +355,41 @@ export default function DashboardPage() {
     setGenerating(`new-${childId}`);
     setGenerateError('');
     try {
+      // Phase 1: Generate story text
       const res = await fetch('/api/generate-story', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ child_id: childId }) });
       const data = await res.json();
-      if (res.status === 402) { setPaywallReason(data.reason); }
-      else if (!res.ok) setGenerateError(data.message || 'Something went wrong.');
-      else await fetchData();
+      if (res.status === 402) { setPaywallReason(data.reason); return; }
+      if (!res.ok) { setGenerateError(data.message || 'Something went wrong.'); return; }
+
+      const storyId = data.story?.id;
+      if (!storyId) { await fetchData(); return; }
+
+      // Phase 2: Start image generation for page 1 immediately, Fable paints while we wait
+      setGenerating(`painting-${childId}`);
+      try {
+        const imgRes = await fetch('/api/generate-image', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ story_id: storyId, page_number: 1 }),
+        });
+        const imgData = await imgRes.json();
+        const pollUrl = imgData.poll_url;
+        if (pollUrl) {
+          // Poll up to 15s for page 1 image
+          for (let i = 0; i < 5; i++) {
+            await new Promise(r => setTimeout(r, 3000));
+            const pollRes = await fetch('/api/poll-image', {
+              method: 'POST', headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ story_id: storyId, page_number: 1, poll_url: pollUrl }),
+            });
+            const pollData = await pollRes.json();
+            if (pollData.status === 'succeeded') break;
+            if (pollData.status === 'failed') break;
+          }
+        }
+      } catch { /* Image pre-gen failed gracefully — story still navigates */ }
+
+      // Navigate to story — images 2-5 continue generating on the story page
+      router.push(`/stories/${storyId}`);
     } finally { setGenerating(null); }
   };
 
@@ -405,9 +435,14 @@ export default function DashboardPage() {
       {generating && (
         <div style={{ position: 'fixed', inset: 0, background: 'rgba(28,22,20,0.92)', zIndex: 100, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
           <Fable
-            pose="writing"
-            dialogue={generating.startsWith('sequel') ? `Writing the next chapter for ${generatingName}...` : `Writing ${generatingName}'s story...`}
+            pose={generating.startsWith('painting') ? 'painting' : 'writing'}
+            dialogue={
+              generating.startsWith('painting') ? `Almost ready! Painting the first illustration...` :
+              generating.startsWith('sequel') ? `Writing the next chapter for ${generatingName}...` :
+              `Writing ${generatingName}'s story...`
+            }
             size={180}
+            darkBackground
           />
           <p style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.8rem', marginTop: '8px', animation: 'pulse 2s ease infinite' }}>
             Usually takes about 30 seconds
@@ -462,7 +497,7 @@ export default function DashboardPage() {
               <p style={{ color: '#9B8B7A', animation: 'pulse 2s ease infinite' }}>Loading your library...</p>
             ) : children.length === 0 ? (
               <div style={{ maxWidth: '420px', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-                <Fable pose="excited" dialogue="Your library is empty — shall we write the first story?" size={150} />
+                <Fable pose="welcome" dialogue="Your library is empty — shall we write the first story?" size={150} />
                 <div style={{ marginTop: '16px' }}>
                   <Link href="/onboarding" style={{ display: 'inline-block', padding: '0.75rem 1.75rem', background: '#741515', color: '#fff', borderRadius: '8px', textDecoration: 'none', fontWeight: '600', fontSize: '0.9rem' }}>Get started</Link>
                 </div>

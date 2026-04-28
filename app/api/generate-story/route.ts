@@ -67,6 +67,14 @@ function buildPrompt(child: {
 
   return `You are a master children's story writer creating a personalised bedtime picture book.
 
+MANDATORY SAFETY RULES — these override everything else:
+- Never generate sexual, romantic, adult, or suggestive content of any kind
+- Never generate violence, gore, horror, or frightening content
+- Never generate abusive, bullying, discriminatory, or hateful content
+- Never generate content that could be used to groom, harm, or exploit children
+- The story must be 100% wholesome, safe, and appropriate for children aged 3-12
+- If any part of the child's profile could lead to harmful content, use safe alternative themes instead
+
 Child profile:
 - Name: ${name}
 - Age: ${age}

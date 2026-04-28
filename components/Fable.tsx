@@ -9,6 +9,7 @@ interface FableProps {
   pose?: FablePose;
   dialogue?: string;
   size?: number;
+  darkBackground?: boolean; // disables mix-blend-mode for dark overlays
 }
 
 // Supabase public URL for Fable images
@@ -20,24 +21,29 @@ function fableImageUrl(pose: FablePose): string {
 
 const fableStyles = `
   @keyframes fableFloat {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-8px); }
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    30% { transform: translateY(-5px) rotate(-1deg); }
+    60% { transform: translateY(-8px) rotate(1deg); }
+  }
+  @keyframes fableWave {
+    0%, 60%, 100% { transform: translateY(0px) rotate(0deg); }
+    15% { transform: translateY(-6px) rotate(-3deg); }
+    30% { transform: translateY(-8px) rotate(3deg); }
+    45% { transform: translateY(-5px) rotate(-2deg); }
   }
   @keyframes bubbleIn {
     from { opacity: 0; transform: translateY(8px) scale(0.94); }
     to { opacity: 1; transform: translateY(0) scale(1); }
   }
-  @keyframes fablePulse {
-    0%, 100% { opacity: 0.3; transform: scale(0.8); }
-    50% { opacity: 1; transform: scale(1.1); }
-  }
   .fable-img {
-    animation: fableFloat 3.5s ease-in-out infinite;
+    animation: fableWave 3s ease-in-out infinite;
     filter: drop-shadow(0 8px 20px rgba(116,21,21,0.15));
+    mix-blend-mode: multiply;
   }
-  .fable-dot-1 { animation: fablePulse 1.4s ease infinite 0s; }
-  .fable-dot-2 { animation: fablePulse 1.4s ease infinite 0.25s; }
-  .fable-dot-3 { animation: fablePulse 1.4s ease infinite 0.5s; }
+  .fable-img-dark {
+    animation: fableFloat 3.5s ease-in-out infinite;
+    filter: drop-shadow(0 8px 20px rgba(116,21,21,0.3));
+  }
 `;
 
 function DialogueBubble({ text }: { text: string }) {
@@ -107,7 +113,7 @@ function FableSVGFallback({ size }: { size: number }) {
   );
 }
 
-export default function Fable({ pose = 'welcome', dialogue, size = 160 }: FableProps) {
+export default function Fable({ pose = 'welcome', dialogue, size = 160, darkBackground = false }: FableProps) {
   const [displayText, setDisplayText] = useState('');
   const [showBubble, setShowBubble] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -151,7 +157,7 @@ export default function Fable({ pose = 'welcome', dialogue, size = 160 }: FableP
             key={pose}
             src={imgSrc}
             alt={`Fable — ${pose}`}
-            className="fable-img"
+            className={darkBackground ? 'fable-img-dark' : 'fable-img'}
             style={{
               width: '100%',
               height: '100%',

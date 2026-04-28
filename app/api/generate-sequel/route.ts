@@ -67,6 +67,12 @@ export async function POST(request: Request) {
 
     const prompt = `You are a master children's story writer. You are writing Volume ${volumeNumber} of a personalised bedtime picture book series.
 
+MANDATORY SAFETY RULES — these override everything else:
+- Never generate sexual, romantic, adult, or suggestive content of any kind
+- Never generate violence, gore, horror, or frightening content
+- Never generate abusive, bullying, discriminatory, or hateful content
+- The story must be 100% wholesome, safe, and appropriate for children aged 3-12
+
 Child profile:
 - Name: ${child.name}
 - Age: ${child.age}

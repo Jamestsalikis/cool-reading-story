@@ -332,7 +332,7 @@ export default function OnboardingPage() {
         {(() => {
           const fableConfig: Record<number, { pose: FablePose; dialogue: string }> = {
             2: { pose: 'welcome',  dialogue: "Hi, I'm Fable! I write personalised stories. Tell me about your child." },
-            3: { pose: 'excited',  dialogue: "Ooh, what do they love? The more I know, the better the story!" },
+            3: { pose: 'writing',  dialogue: "Ooh, what do they love? The more I know, the better the story!" },
             4: { pose: 'thinking', dialogue: "Perfect. I'm already getting ideas..." },
             5: { pose: 'thinking', dialogue: "Almost ready. Just a few final details..." },
           };
@@ -402,18 +402,31 @@ export default function OnboardingPage() {
               })}
             </div>
 
-            {!showCustomInterest ? (
-              <button onClick={() => setShowCustomInterest(true)} style={{ ...chipBase, border: '1.5px solid #E8E0D0', backgroundColor: '#fff', color: '#1A1209', width: '100%', marginBottom: '16px' }}>
-                + Add your own
-              </button>
-            ) : (
-              <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
-                <input type="text" style={inputStyle} placeholder="e.g. Ballet" value={state.customInterest}
-                  onChange={(e) => setState({ ...state, customInterest: e.target.value })}
-                  onKeyPress={(e) => e.key === 'Enter' && handleAddCustomInterest()} />
+            {/* Custom interests added — shown above the input with X to remove */}
+            {(() => {
+              const builtInLabels = INTEREST_OPTIONS.map(o => o.label);
+              const customAdded = state.interests.filter(i => !builtInLabels.includes(i));
+              return customAdded.length > 0 ? (
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '12px' }}>
+                  {customAdded.map(interest => (
+                    <span key={interest} style={{ display: 'flex', alignItems: 'center', gap: '6px', background: '#FBF0F0', border: '1.5px solid #741515', borderRadius: '8px', padding: '0.4rem 0.8rem', fontSize: '0.85rem', color: '#741515', fontWeight: '600' }}>
+                      {interest}
+                      <button onClick={() => handleInterestToggle(interest)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#741515', padding: 0, fontSize: '1rem', lineHeight: 1, display: 'flex', alignItems: 'center' }}>×</button>
+                    </span>
+                  ))}
+                </div>
+              ) : null;
+            })()}
+
+            {/* Add custom interest input */}
+            <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
+              <input type="text" style={{ ...inputStyle, flex: 1 }} placeholder="+ Add your own interest (e.g. Ballet)" value={state.customInterest}
+                onChange={(e) => setState({ ...state, customInterest: e.target.value })}
+                onKeyPress={(e) => e.key === 'Enter' && handleAddCustomInterest()} />
+              {state.customInterest.trim() && (
                 <button onClick={handleAddCustomInterest} className="btn-brand" style={{ padding: '0.65rem 1.25rem', whiteSpace: 'nowrap' }}>Add</button>
-              </div>
-            )}
+              )}
+            </div>
 
             {state.interests.length > 0 && state.interests.length < 2 && (
               <p style={{ color: '#741515', marginBottom: '12px', fontSize: '0.875rem', fontWeight: '500' }}>Select at least 2 interests</p>
