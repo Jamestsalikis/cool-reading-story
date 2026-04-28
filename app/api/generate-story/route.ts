@@ -90,12 +90,14 @@ Requirements:
 7. Use language appropriate for age ${age}: ${reading_level === 'beginner' ? 'short sentences, simple words, lots of repetition' : reading_level === 'intermediate' ? 'flowing sentences, rich descriptions, some new vocabulary' : 'complex narrative, vivid imagery, sophisticated vocabulary'}
 8. Make it feel uniquely written FOR ${name} — not a generic story with a name swapped in
 9. Split the story into exactly 5 pages. Each page should have 2-4 paragraphs of text.
-10. For each page, write an image prompt describing the scene. The prompt MUST begin with the exact character anchor below, then describe the scene. This ensures the child looks the same across all 5 illustrations.
+10. For each page, write an image prompt. You MUST copy the CHARACTER ANCHOR below word-for-word at the start, then describe only the scene action. The anchor keeps the character identical across all 5 illustrations.
 
-CHARACTER ANCHOR (copy this exactly at the start of every image prompt):
-"Bright children's book cartoon illustration, bold outlines, vivid flat colours. Main character: ${name}, a ${age}-year-old ${gender === 'Boy' ? 'boy' : gender === 'Girl' ? 'girl' : 'child'}${appearanceDesc ? ` with ${appearanceDesc}` : ''}, consistent design throughout."
+CHARACTER ANCHOR (copy verbatim at the start of every image prompt):
+"Bright children's book cartoon illustration, bold outlines, vivid flat colours. Main character: ${name}, a ${age}-year-old ${gender === 'Boy' ? 'boy' : gender === 'Girl' ? 'girl' : 'child'}${appearanceDesc ? ` with ${appearanceDesc}` : ''}, wearing ${gender === 'Girl' ? 'a bright colourful dress' : 'a blue t-shirt and dark jeans'}, same face and outfit in every scene, consistent cartoon character design."
 
-Then add 1-2 sentences describing what is happening in this specific page's scene. End with: "No text in the image."
+Then in 1-2 sentences describe only the scene action (what is happening, where, with whom).
+
+CRITICAL RULE: End every image prompt with exactly this phrase: "No text, no words, no letters anywhere in the image."
 
 Return ONLY valid JSON, no markdown, no explanation:
 {
