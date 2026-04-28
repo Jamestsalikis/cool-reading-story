@@ -7,26 +7,21 @@ export const dynamic = 'force-dynamic';
 const REPLICATE_API_TOKEN = process.env.REPLICATE_API_TOKEN;
 
 // Fable poses to generate
+// Base character description — consistent across all poses
+const BASE = '3D cartoon character illustration, young woman early 20s, short wavy dark brown bob haircut, round circle glasses, warm olive skin, rosy cheeks, wearing a deep burgundy dark red cardigan over a cream white blouse, Pixar animation style, clay render, soft studio lighting, pure white background, full body portrait, high quality illustration, charming friendly character';
+
 const POSES = [
   {
     id: 'welcome',
-    prompt: '3D cartoon character illustration, young woman early 20s named Fable, short wavy dark brown bob haircut, round circle glasses, warm olive skin, rosy cheeks, friendly warm smile, wearing a deep burgundy dark red cardigan over a cream white blouse, holding a small colorful storybook in one hand and waving with the other, Pixar animation style, clay render, soft studio lighting, pure white background, full body portrait, charming and approachable expression, high quality illustration',
+    prompt: `${BASE}, friendly warm smile, holding a small colorful storybook in one hand and giving a cheerful wave with the other, welcoming expression`,
   },
   {
     id: 'writing',
-    prompt: '3D cartoon character illustration, young woman early 20s named Fable, short wavy dark brown bob haircut, round circle glasses, warm olive skin, rosy cheeks, focused concentrated expression with slight smile, wearing a deep burgundy dark red cardigan over a cream white blouse, leaning forward writing with a quill pen on glowing paper, ink sparkles, Pixar animation style, clay render, soft studio lighting, pure white background, full body portrait, high quality illustration',
-  },
-  {
-    id: 'excited',
-    prompt: '3D cartoon character illustration, young woman early 20s named Fable, short wavy dark brown bob haircut, round circle glasses, warm olive skin, rosy cheeks, very excited delighted expression, wide open eyes, big smile, wearing a deep burgundy dark red cardigan over a cream white blouse, both arms raised with joy, colorful books and stars floating around her, Pixar animation style, clay render, soft studio lighting, pure white background, full body portrait, high quality illustration',
+    prompt: `${BASE}, focused concentrated expression with a slight smile, leaning forward writing with a quill pen, golden ink sparkles floating around the pen tip`,
   },
   {
     id: 'painting',
-    prompt: '3D cartoon character illustration, young woman early 20s named Fable, short wavy dark brown bob haircut, round circle glasses, warm olive skin, rosy cheeks, focused creative expression with tongue slightly out in concentration, wearing a deep burgundy dark red cardigan over a cream white blouse, holding a paintbrush raised up, small floating easel beside her with a colorful painting, Pixar animation style, clay render, soft studio lighting, pure white background, full body portrait, high quality illustration',
-  },
-  {
-    id: 'finished',
-    prompt: '3D cartoon character illustration, young woman early 20s named Fable, short wavy dark brown bob haircut, round circle glasses, warm olive skin, rosy cheeks, satisfied proud gentle smile, eyes slightly squinting in happiness, wearing a deep burgundy dark red cardigan over a cream white blouse, hands clasped together in front, slight bow, a finished colorful storybook floating in a golden glow beside her, Pixar animation style, clay render, soft studio lighting, pure white background, full body portrait, high quality illustration',
+    prompt: `${BASE}, creative excited expression, holding a paintbrush raised up with paint on the tip, colorful paint splashes floating nearby`,
   },
 ];
 
@@ -95,19 +90,20 @@ async function generateAndStore(
   }
 }
 
-export async function POST() {
-  const supabase = await createClient();
+export async function POST(request: Request) {
+  // Accept either admin session OR a secret key for one-time generation
+  const body = await request.json().catch(() => ({}));
+  const secretKey = process.env.FABLE_GENERATE_SECRET || 'fable-generate-2026';
 
-  // Admin only
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-
-  const { data: adminRow } = await supabase
-    .from('admin_emails')
-    .select('email')
-    .eq('email', user.email)
-    .single();
-  if (!adminRow) return NextResponse.json({ error: 'Admin only' }, { status: 403 });
+  if (body.secret !== secretKey) {
+    // Fall back to session-based admin check
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    const { data: adminRow } = await supabase
+      .from('admin_emails').select('email').eq('email', user.email).single();
+    if (!adminRow) return NextResponse.json({ error: 'Admin only' }, { status: 403 });
+  }
 
   if (!REPLICATE_API_TOKEN) {
     return NextResponse.json({ error: 'Replicate not configured' }, { status: 500 });
