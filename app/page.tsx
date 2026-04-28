@@ -119,7 +119,7 @@ export default function Home() {
               </a>
             </div>
             <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
-              {['No credit card required', 'Unlimited stories', 'Cancel anytime'].map(t => (
+              {['Up to 15 stories/month', 'Multiple children', 'Cancel anytime'].map(t => (
                 <div key={t} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                   <Check size={15} color="#2D7A3A" />
                   <span style={{ fontSize: '0.85rem', color: '#6B5E4E', fontWeight: 500 }}>{t}</span>
