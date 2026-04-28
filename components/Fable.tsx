@@ -20,29 +20,45 @@ function fableImageUrl(pose: FablePose): string {
 }
 
 const fableStyles = `
-  @keyframes fableFloat {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    30% { transform: translateY(-5px) rotate(-1deg); }
-    60% { transform: translateY(-8px) rotate(1deg); }
+  @keyframes fableAlive {
+    0%   { transform: translateY(0px)   rotate(0deg)   scale(1);    }
+    12%  { transform: translateY(-5px)  rotate(-2deg)  scale(1.01); }
+    25%  { transform: translateY(-9px)  rotate(2.5deg) scale(1.02); }
+    38%  { transform: translateY(-6px)  rotate(-1.5deg)scale(1.01); }
+    50%  { transform: translateY(-10px) rotate(1deg)   scale(1.02); }
+    63%  { transform: translateY(-7px)  rotate(-2deg)  scale(1.01); }
+    75%  { transform: translateY(-4px)  rotate(1.5deg) scale(1);    }
+    88%  { transform: translateY(-2px)  rotate(-0.5deg)scale(1);    }
+    100% { transform: translateY(0px)   rotate(0deg)   scale(1);    }
   }
-  @keyframes fableWave {
-    0%, 60%, 100% { transform: translateY(0px) rotate(0deg); }
-    15% { transform: translateY(-6px) rotate(-3deg); }
-    30% { transform: translateY(-8px) rotate(3deg); }
-    45% { transform: translateY(-5px) rotate(-2deg); }
+  @keyframes fableGlow {
+    0%, 100% { filter: drop-shadow(0 8px 20px rgba(116,21,21,0.12)) brightness(1);    }
+    50%       { filter: drop-shadow(0 14px 28px rgba(116,21,21,0.22)) brightness(1.04); }
+  }
+  @keyframes fableAliveDark {
+    0%   { transform: translateY(0px)   rotate(0deg)   scale(1);    }
+    12%  { transform: translateY(-5px)  rotate(-2deg)  scale(1.01); }
+    25%  { transform: translateY(-9px)  rotate(2.5deg) scale(1.02); }
+    38%  { transform: translateY(-6px)  rotate(-1.5deg)scale(1.01); }
+    50%  { transform: translateY(-10px) rotate(1deg)   scale(1.02); }
+    63%  { transform: translateY(-7px)  rotate(-2deg)  scale(1.01); }
+    75%  { transform: translateY(-4px)  rotate(1.5deg) scale(1);    }
+    88%  { transform: translateY(-2px)  rotate(-0.5deg)scale(1);    }
+    100% { transform: translateY(0px)   rotate(0deg)   scale(1);    }
   }
   @keyframes bubbleIn {
     from { opacity: 0; transform: translateY(8px) scale(0.94); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
+    to   { opacity: 1; transform: translateY(0)   scale(1);    }
   }
   .fable-img {
-    animation: fableWave 3s ease-in-out infinite;
-    filter: drop-shadow(0 8px 20px rgba(116,21,21,0.15));
+    animation: fableAlive 4s ease-in-out infinite, fableGlow 4s ease-in-out infinite;
     mix-blend-mode: multiply;
+    transform-origin: center bottom;
   }
   .fable-img-dark {
-    animation: fableFloat 3.5s ease-in-out infinite;
-    filter: drop-shadow(0 8px 20px rgba(116,21,21,0.3));
+    animation: fableAliveDark 4s ease-in-out infinite;
+    filter: drop-shadow(0 10px 24px rgba(116,21,21,0.35));
+    transform-origin: center bottom;
   }
 `;
 
@@ -75,7 +91,7 @@ function DialogueBubble({ text }: { text: string }) {
 function FableSVGFallback({ size }: { size: number }) {
   const s = size / 160;
   return (
-    <svg width={size} height={size * 1.55} viewBox="0 0 160 248" style={{ animation: 'fableFloat 3.5s ease-in-out infinite', filter: 'drop-shadow(0 8px 20px rgba(116,21,21,0.15))' }}>
+    <svg width={size} height={size * 1.55} viewBox="0 0 160 248" style={{ animation: 'fableAlive 4s ease-in-out infinite', transformOrigin: 'center bottom', filter: 'drop-shadow(0 8px 20px rgba(116,21,21,0.15))' }}>
       {/* Simple silhouette placeholder while real image loads */}
       <ellipse cx="80" cy="230" rx="38" ry="6" fill="rgba(0,0,0,0.06)" />
       <rect x="62" y="185" width="14" height="45" rx="7" fill="#741515" />
