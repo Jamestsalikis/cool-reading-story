@@ -22,7 +22,13 @@ export async function POST(request: Request) {
   }
 
   const pose = body.pose as string;
-  if (!pose || !PROMPTS[pose]) {
+  const customPrompt = body.prompt as string | undefined;
+  if (!pose) {
+    return NextResponse.json({ error: 'pose required' }, { status: 400 });
+  }
+  // Use custom prompt if provided, otherwise fall back to built-in
+  const prompt = customPrompt || PROMPTS[pose];
+  if (!prompt) {
     return NextResponse.json({ error: 'Invalid pose. Use: welcome, writing, or painting' }, { status: 400 });
   }
 
@@ -42,7 +48,7 @@ export async function POST(request: Request) {
         },
         body: JSON.stringify({
           input: {
-            prompt: PROMPTS[pose],
+            prompt: prompt,
             go_fast: true,
             num_outputs: 1,
             aspect_ratio: '2:3',
