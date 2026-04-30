@@ -213,17 +213,16 @@ export default function Fable({ pose = 'welcome', dialogue, size = 180 }: FableP
       <div style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:'10px' }}>
         {showBubble && displayText && <DialogueBubble text={displayText} />}
 
-        <div style={{ width:size, height:h, flexShrink:0 }}>
+        {/* bg matches onboarding page — avoids black WebGL canvas */}
+        <div style={{ width:size, height:h, flexShrink:0, background:'#FAF7F0', borderRadius:12 }}>
           <Canvas
-            camera={{ position:[0, -0.5, 7.5], fov:25 }}
-            style={{ background:'transparent' }}
-            gl={{ alpha:true, antialias:true }}
-            onCreated={({ gl, scene }) => {
+            camera={{ position:[0, -1.2, 8], fov:24 }}
+            style={{ width:'100%', height:'100%' }}
+            gl={{ antialias:true }}
+            onCreated={({ gl }) => {
               gl.outputColorSpace = THREE.SRGBColorSpace;
               gl.toneMapping = THREE.ACESFilmicToneMapping;
-              gl.toneMappingExposure = 1.1;
-              gl.setClearColor(0xFAF7F0, 0); // transparent — page bg colour
-              scene.background = null;
+              gl.toneMappingExposure = 1.2;
             }}
           >
             <ambientLight intensity={1.5} />
