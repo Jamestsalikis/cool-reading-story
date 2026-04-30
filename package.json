@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.88.0",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
     "@rive-app/react-canvas": "^4.28.3",
     "@stripe/stripe-js": "^9.2.0",
     "@supabase/ssr": "^0.10.2",
@@ -19,7 +21,8 @@
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "resend": "^6.11.0",
-    "stripe": "^22.0.1"
+    "stripe": "^22.0.1",
+    "three": "^0.184.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

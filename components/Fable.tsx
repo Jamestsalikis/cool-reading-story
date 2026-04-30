@@ -1,6 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useRef, useEffect, useState, Suspense } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { useGLTF, useAnimations, OrbitControls, Environment } from '@react-three/drei';
+import * as THREE from 'three';
 
 export type FablePose = 'welcome' | 'excited' | 'thinking' | 'writing' | 'painting' | 'finished';
 
@@ -11,45 +14,73 @@ interface FableProps {
   darkBackground?: boolean;
 }
 
-const BASE = process.env.NEXT_PUBLIC_SUPABASE_URL + '/storage/v1/object/public/story-images';
-
-// Images stored in Supabase — one per pose/state
-const IMGS = {
-  welcome:     `${BASE}/fable-welcome.webp`,
-  wave:        `${BASE}/fable-welcome-wave.webp`,
-  eyesClosed:  `${BASE}/fable-eyes-closed.webp`,
-  writing:     `${BASE}/fable-writing.webp`,
-  painting:    `${BASE}/fable-painting.webp`,
+// Map our pose names to Aurora's animation names (adjust once you see what's in the file)
+// Run with ?debug=1 to print available animations in the console
+const ANIMATION_MAP: Record<FablePose, string[]> = {
+  welcome:  ['Idle', 'idle', 'TPose', 'Stand'],
+  excited:  ['Wave', 'wave', 'Hello', 'Greet'],
+  thinking: ['Think', 'think', 'Idle', 'idle'],
+  writing:  ['Write', 'write', 'Idle', 'idle'],
+  painting: ['Paint', 'point', 'Idle', 'idle'],
+  finished: ['Bow', 'bow', 'Idle', 'idle'],
 };
 
-const POSE_BASE: Record<FablePose, string> = {
-  welcome:  IMGS.welcome,
-  excited:  IMGS.wave,
-  thinking: IMGS.writing,
-  writing:  IMGS.writing,
-  painting: IMGS.painting,
-  finished: IMGS.welcome,
-};
+function findAnimation(clips: THREE.AnimationClip[], candidates: string[]): THREE.AnimationClip | null {
+  for (const name of candidates) {
+    const clip = clips.find(c => c.name.toLowerCase().includes(name.toLowerCase()));
+    if (clip) return clip;
+  }
+  return clips[0] || null; // fallback to first animation
+}
 
-const styles = `
-  @keyframes bubbleIn {
-    from { opacity:0; transform:translateY(6px) scale(0.95); }
-    to   { opacity:1; transform:translateY(0)   scale(1);    }
-  }
-  @keyframes fabFloat {
-    0%,100% { transform: translateY(0px); }
-    50%     { transform: translateY(-8px); }
-  }
-  @keyframes fabSpark {
-    0%,100% { opacity:0; transform:scale(0.5) rotate(0deg);   }
-    50%     { opacity:1; transform:scale(1.3) rotate(180deg); }
-  }
-  .fab-float { animation: fabFloat 3.8s ease-in-out infinite; }
-  .fab-sp1   { animation: fabSpark 2.6s ease-in-out infinite 0s;   }
-  .fab-sp2   { animation: fabSpark 2.6s ease-in-out infinite 0.9s; }
-  .fab-sp3   { animation: fabSpark 2.6s ease-in-out infinite 1.8s; }
-`;
+interface AuroraModelProps {
+  pose: FablePose;
+}
 
+function AuroraModel({ pose }: AuroraModelProps) {
+  const group = useRef<THREE.Group>(null);
+  const { scene, animations } = useGLTF('/fable/aurora.glb');
+  const { actions, mixer } = useAnimations(animations, group);
+  const currentAction = useRef<THREE.AnimationAction | null>(null);
+
+  // Log available animations once (helps identify names)
+  useEffect(() => {
+    console.log('Fable animations available:', animations.map(a => a.name));
+  }, [animations]);
+
+  // Switch animation when pose changes
+  useEffect(() => {
+    const candidates = ANIMATION_MAP[pose];
+    const clip = findAnimation(animations, candidates);
+    if (!clip) return;
+
+    const action = actions[clip.name];
+    if (!action) return;
+
+    if (currentAction.current && currentAction.current !== action) {
+      currentAction.current.fadeOut(0.4);
+    }
+
+    action.reset().fadeIn(0.4).play();
+    currentAction.current = action;
+  }, [pose, actions, animations]);
+
+  // Gentle idle breathing when no specific animation
+  useFrame((_, delta) => {
+    if (group.current) {
+      group.current.rotation.y = Math.sin(Date.now() * 0.0004) * 0.05;
+    }
+    mixer.update(delta);
+  });
+
+  return (
+    <group ref={group}>
+      <primitive object={scene} scale={1.8} position={[0, -1.8, 0]} />
+    </group>
+  );
+}
+
+// Dialogue bubble (outside the Canvas — regular HTML)
 function DialogueBubble({ text }: { text: string }) {
   return (
     <div style={{
@@ -62,50 +93,37 @@ function DialogueBubble({ text }: { text: string }) {
     }}>
       {text}
       <div style={{ position:'absolute', bottom:-11, left:'50%', transform:'translateX(-50%)', width:0, height:0, borderLeft:'9px solid transparent', borderRight:'9px solid transparent', borderTop:'11px solid #E8E0D0' }} />
-      <div style={{ position:'absolute', bottom:-8,  left:'50%', transform:'translateX(-50%)', width:0, height:0, borderLeft:'7px solid transparent', borderRight:'7px solid transparent', borderTop:'9px solid #FFFEF9' }} />
+      <div style={{ position:'absolute', bottom:-8, left:'50%', transform:'translateX(-50%)', width:0, height:0, borderLeft:'7px solid transparent', borderRight:'7px solid transparent', borderTop:'9px solid #FFFEF9' }} />
+      <style>{`@keyframes bubbleIn{from{opacity:0;transform:translateY(6px) scale(0.95)}to{opacity:1;transform:translateY(0) scale(1)}}`}</style>
     </div>
   );
 }
 
-export default function Fable({ pose = 'welcome', dialogue, size = 160, darkBackground = false }: FableProps) {
+// Fallback while GLB loads
+function FableFallback({ size }: { size: number }) {
+  const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  return (
+    <img
+      src={`${SUPABASE_URL}/storage/v1/object/public/story-images/fable-welcome.webp`}
+      alt="Fable"
+      style={{ width: size, height: size * 1.55, objectFit: 'contain', mixBlendMode: 'multiply', animation: 'fabFloat 3.5s ease-in-out infinite' }}
+    />
+  );
+}
+
+export default function Fable({ pose = 'welcome', dialogue, size = 180, darkBackground = false }: FableProps) {
   const [displayText, setDisplayText] = useState('');
   const [showBubble, setShowBubble] = useState(false);
+  const [glbReady, setGlbReady] = useState(false);
 
-  // Waving: alternates between base and wave image
-  const [waving, setWaving] = useState(false);
-  // Blinking: briefly shows eyes-closed image
-  const [blinking, setBlinking] = useState(false);
-
-  // Wave animation: arm up for 0.6s, down for 0.8s, repeat
+  // Check if the GLB file exists
   useEffect(() => {
-    if (pose !== 'welcome' && pose !== 'excited') return;
-    let t: ReturnType<typeof setTimeout>;
-    const doWave = () => {
-      setWaving(true);
-      t = setTimeout(() => {
-        setWaving(false);
-        t = setTimeout(doWave, 900 + Math.random() * 600);
-      }, 600);
-    };
-    t = setTimeout(doWave, 1200);
-    return () => clearTimeout(t);
-  }, [pose]);
-
-  // Blink: eyes shut for 120ms every 3-5 seconds
-  useEffect(() => {
-    let t: ReturnType<typeof setTimeout>;
-    const doBlink = () => {
-      setBlinking(true);
-      t = setTimeout(() => {
-        setBlinking(false);
-        t = setTimeout(doBlink, 3000 + Math.random() * 2000);
-      }, 140);
-    };
-    t = setTimeout(doBlink, 2000);
-    return () => clearTimeout(t);
+    fetch('/fable/aurora.glb', { method: 'HEAD' })
+      .then(r => { if (r.ok) setGlbReady(true); })
+      .catch(() => {});
   }, []);
 
-  // Dialogue typewriter
+  // Typewriter dialogue
   useEffect(() => {
     setShowBubble(false);
     setDisplayText('');
@@ -119,56 +137,36 @@ export default function Fable({ pose = 'welcome', dialogue, size = 160, darkBack
     return () => clearTimeout(t);
   }, [dialogue, pose]);
 
-  const h = size * 1.55;
-  const blend: React.CSSProperties['mixBlendMode'] = darkBackground ? 'normal' : 'multiply';
-
-  // Which image is on top at any moment
-  const baseImg  = POSE_BASE[pose];
-  const waveImg  = IMGS.wave;
-  const blinkImg = IMGS.eyesClosed;
-
-  const isWaving = waving && (pose === 'welcome' || pose === 'excited');
-
   return (
     <>
-      <style>{styles}</style>
-      <div style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:'10px' }}>
+      <style>{`@keyframes fabFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}`}</style>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
         {showBubble && displayText && <DialogueBubble text={displayText} />}
 
-        <div className="fab-float" style={{ position:'relative', width:size, height:h, flexShrink:0 }}>
+        <div style={{ width: size, height: size * 1.55, flexShrink: 0 }}>
+          {glbReady ? (
+            <Canvas
+              camera={{ position: [0, 0.5, 3.5], fov: 35 }}
+              style={{ background: 'transparent' }}
+              gl={{ alpha: true, antialias: true }}
+            >
+              <ambientLight intensity={1.2} />
+              <directionalLight position={[2, 4, 3]} intensity={1.5} castShadow />
+              <directionalLight position={[-2, 2, -1]} intensity={0.4} color="#ffd4a8" />
 
-          {/* Base image — always present */}
-          <img
-            src={baseImg}
-            alt="Fable"
-            style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'contain', mixBlendMode: blend,
-              opacity: (isWaving || blinking) ? 0 : 1, transition: 'opacity 0.08s ease' }}
-          />
-
-          {/* Wave image — arm raised */}
-          <img
-            src={waveImg}
-            alt=""
-            aria-hidden
-            style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'contain', mixBlendMode: blend,
-              opacity: isWaving && !blinking ? 1 : 0, transition: 'opacity 0.1s ease' }}
-          />
-
-          {/* Blink image — eyes shut, brief flash */}
-          <img
-            src={blinkImg}
-            alt=""
-            aria-hidden
-            style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'contain', mixBlendMode: blend,
-              opacity: blinking ? 1 : 0, transition: 'opacity 0.06s ease' }}
-          />
-
-          {/* Sparkles */}
-          <span className="fab-sp1" style={{ position:'absolute', top:'5%',  left:'-10%', fontSize: size > 120 ? '1.1rem' : '0.85rem', color:'#F4C542', pointerEvents:'none' }}>✦</span>
-          <span className="fab-sp2" style={{ position:'absolute', top:'3%',  right:'-6%', fontSize: size > 120 ? '0.85rem' : '0.65rem', color:'#F4C542', pointerEvents:'none' }}>✦</span>
-          <span className="fab-sp3" style={{ position:'absolute', top:'18%', right:'-12%', fontSize: size > 120 ? '0.65rem' : '0.5rem', color:'#F4C542', pointerEvents:'none' }}>✦</span>
+              <Suspense fallback={null}>
+                <AuroraModel pose={pose} />
+                <Environment preset="studio" />
+              </Suspense>
+            </Canvas>
+          ) : (
+            <FableFallback size={size} />
+          )}
         </div>
       </div>
     </>
   );
 }
+
+// Preload the model
+useGLTF.preload('/fable/aurora.glb');
