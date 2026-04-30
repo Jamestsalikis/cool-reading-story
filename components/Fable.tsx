@@ -42,6 +42,24 @@ function AuroraCharacter({ pose }: { pose: FablePose }) {
   const { scene, animations } = useGLTF('/fable/aurora.glb');
   const { actions } = useAnimations(animations, group);
 
+  // Fix colour space and material issues on load
+  useEffect(() => {
+    scene.traverse((child: THREE.Object3D) => {
+      if ((child as THREE.Mesh).isMesh) {
+        const mesh = child as THREE.Mesh;
+        const materials = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+        materials.forEach((mat: THREE.Material) => {
+          const m = mat as THREE.MeshStandardMaterial;
+          m.needsUpdate = true;
+          if (m.map) { m.map.colorSpace = THREE.SRGBColorSpace; m.map.needsUpdate = true; }
+          if (m.normalMap) { m.normalMap.colorSpace = THREE.LinearSRGBColorSpace; }
+          if (m.roughnessMap) { m.roughnessMap.colorSpace = THREE.LinearSRGBColorSpace; }
+        });
+        mesh.castShadow = true;
+      }
+    });
+  }, [scene]);
+
   const blinkTimer    = useRef<ReturnType<typeof setTimeout>>();
   const breathStarted = useRef(false);
   const armWaving     = useRef(false);
@@ -188,19 +206,22 @@ export default function Fable({ pose = 'welcome', dialogue, size = 180 }: FableP
 
         <div style={{ width:size, height:h, flexShrink:0, borderRadius:'12px', overflow:'hidden' }}>
           <Canvas
-            camera={{ position:[0, 0.4, 3.8], fov:32 }}
+            camera={{ position:[0, 0.8, 4.5], fov:30 }}
             style={{ background:'transparent' }}
             gl={{ alpha:true, antialias:true }}
+            onCreated={({ gl }) => {
+              gl.outputColorSpace = THREE.SRGBColorSpace;
+              gl.toneMapping = THREE.ACESFilmicToneMapping;
+              gl.toneMappingExposure = 1.1;
+            }}
           >
-            {/* Lighting — warm studio feel */}
-            <ambientLight intensity={0.8} />
-            <directionalLight position={[3, 5, 4]} intensity={1.8} castShadow color="#fff8f0" />
-            <directionalLight position={[-3, 2, -2]} intensity={0.5} color="#c8d4ff" />
-            <pointLight position={[0, 3, 2]} intensity={0.4} color="#ffd4a8" />
+            <ambientLight intensity={1.5} />
+            <directionalLight position={[2, 4, 3]} intensity={2} color="#fff8f0" />
+            <directionalLight position={[-2, 2, -1]} intensity={0.6} color="#d4e0ff" />
+            <pointLight position={[0, 2, 3]} intensity={0.8} color="#ffe8d0" />
 
             <Suspense fallback={null}>
               <AuroraCharacter pose={pose} />
-              <Environment preset="studio" />
             </Suspense>
           </Canvas>
         </div>
