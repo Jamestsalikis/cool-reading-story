@@ -215,13 +215,15 @@ export default function Fable({ pose = 'welcome', dialogue, size = 180 }: FableP
 
         <div style={{ width:size, height:h, flexShrink:0, borderRadius:'12px', overflow:'hidden' }}>
           <Canvas
-            camera={{ position:[0, 0.8, 4.5], fov:30 }}
+            camera={{ position:[0, -0.2, 6.5], fov:28 }}
             style={{ background:'transparent' }}
-            gl={{ alpha:true, antialias:true }}
-            onCreated={({ gl }) => {
+            gl={{ alpha:true, antialias:true, clearColor: [0,0,0,0] }}
+            onCreated={({ gl, scene }) => {
               gl.outputColorSpace = THREE.SRGBColorSpace;
               gl.toneMapping = THREE.ACESFilmicToneMapping;
               gl.toneMappingExposure = 1.1;
+              gl.setClearColor(0x000000, 0); // fully transparent clear
+              scene.background = null;
             }}
           >
             <ambientLight intensity={1.5} />
