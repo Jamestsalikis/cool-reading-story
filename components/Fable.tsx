@@ -213,16 +213,16 @@ export default function Fable({ pose = 'welcome', dialogue, size = 180 }: FableP
       <div style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:'10px' }}>
         {showBubble && displayText && <DialogueBubble text={displayText} />}
 
-        {/* bg matches onboarding page — avoids black WebGL canvas */}
-        <div style={{ width:size, height:h, flexShrink:0, background:'#FAF7F0', borderRadius:12 }}>
+        {/* Warm dark portrait frame — intentional, not a bug */}
+        <div style={{ width:size, height:h, flexShrink:0, background:'#1C1614', borderRadius:16, overflow:'hidden', boxShadow:'0 8px 32px rgba(116,21,21,0.15)' }}>
           <Canvas
-            camera={{ position:[0, -1.2, 8], fov:24 }}
+            camera={{ position:[0, -0.8, 7], fov:26 }}
             style={{ width:'100%', height:'100%' }}
             gl={{ antialias:true }}
             onCreated={({ gl }) => {
               gl.outputColorSpace = THREE.SRGBColorSpace;
               gl.toneMapping = THREE.ACESFilmicToneMapping;
-              gl.toneMappingExposure = 1.2;
+              gl.toneMappingExposure = 1.3;
             }}
           >
             <ambientLight intensity={1.5} />
