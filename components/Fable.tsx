@@ -42,21 +42,30 @@ function AuroraCharacter({ pose }: { pose: FablePose }) {
   const { scene, animations } = useGLTF('/fable/aurora.glb');
   const { actions } = useAnimations(animations, group);
 
-  // Fix colour space and material issues on load
+  // Fix on load — hide rig cages, fix colour space
   useEffect(() => {
     scene.traverse((child: THREE.Object3D) => {
-      if ((child as THREE.Mesh).isMesh) {
-        const mesh = child as THREE.Mesh;
-        const materials = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
-        materials.forEach((mat: THREE.Material) => {
-          const m = mat as THREE.MeshStandardMaterial;
-          m.needsUpdate = true;
-          if (m.map) { m.map.colorSpace = THREE.SRGBColorSpace; m.map.needsUpdate = true; }
-          if (m.normalMap) { m.normalMap.colorSpace = THREE.LinearSRGBColorSpace; }
-          if (m.roughnessMap) { m.roughnessMap.colorSpace = THREE.LinearSRGBColorSpace; }
-        });
-        mesh.castShadow = true;
-      }
+      const mesh = child as THREE.Mesh;
+      if (!mesh.isMesh) return;
+
+      const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+      const names = mats.map((m: THREE.Material) => m.name || '');
+
+      // Hide rig deformation cages & control shapes — they're brightly coloured internals
+      const isCage = names.some(n =>
+        n.includes('BlenRig') || n.startsWith('cs_') || n.includes('Cage')
+      );
+      if (isCage) { mesh.visible = false; return; }
+
+      // Fix colour space on real character materials
+      mats.forEach((mat: THREE.Material) => {
+        const m = mat as THREE.MeshStandardMaterial;
+        m.needsUpdate = true;
+        if (m.map)          { m.map.colorSpace          = THREE.SRGBColorSpace;       m.map.needsUpdate = true; }
+        if (m.normalMap)    { m.normalMap.colorSpace     = THREE.LinearSRGBColorSpace; }
+        if (m.roughnessMap) { m.roughnessMap.colorSpace  = THREE.LinearSRGBColorSpace; }
+      });
+      mesh.castShadow = true;
     });
   }, [scene]);
 
