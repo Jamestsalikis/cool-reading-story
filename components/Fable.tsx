@@ -11,52 +11,43 @@ interface FableProps {
   darkBackground?: boolean;
 }
 
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const POSE_MAP: Record<FablePose, string> = {
-  welcome: 'welcome', excited: 'welcome', thinking: 'writing',
-  writing: 'writing', painting: 'painting', finished: 'welcome',
+const BASE = process.env.NEXT_PUBLIC_SUPABASE_URL + '/storage/v1/object/public/story-images';
+
+// Images stored in Supabase — one per pose/state
+const IMGS = {
+  welcome:     `${BASE}/fable-welcome.webp`,
+  wave:        `${BASE}/fable-welcome-wave.webp`,
+  eyesClosed:  `${BASE}/fable-eyes-closed.webp`,
+  writing:     `${BASE}/fable-writing.webp`,
+  painting:    `${BASE}/fable-painting.webp`,
 };
-const fableUrl = (pose: FablePose) =>
-  `${SUPABASE_URL}/storage/v1/object/public/story-images/fable-${POSE_MAP[pose]}.webp`;
+
+const POSE_BASE: Record<FablePose, string> = {
+  welcome:  IMGS.welcome,
+  excited:  IMGS.wave,
+  thinking: IMGS.writing,
+  writing:  IMGS.writing,
+  painting: IMGS.painting,
+  finished: IMGS.welcome,
+};
 
 const styles = `
-  /* Breathing — chest gently rises, overall subtle scale, slight tilt */
-  @keyframes fabBreathe {
-    0%,100% { transform: scale(1)     translateY(0px)  rotate(0deg);    }
-    15%     { transform: scale(1.008) translateY(-3px) rotate(0.4deg);  }
-    30%     { transform: scale(1.014) translateY(-6px) rotate(0.6deg);  }
-    50%     { transform: scale(1.010) translateY(-5px) rotate(0deg);    }
-    70%     { transform: scale(1.014) translateY(-7px) rotate(-0.5deg); }
-    85%     { transform: scale(1.008) translateY(-4px) rotate(-0.3deg); }
-  }
-
-  /* Blink — eyelid drops down from top of eye, very fast */
-  @keyframes fabBlink {
-    0%,89%,100% { transform: scaleY(0);   opacity: 0; }
-    91%,97%     { transform: scaleY(1);   opacity: 1; }
-  }
-
-  /* Sparkles pulse */
-  @keyframes fabSpark {
-    0%,100% { opacity:0; transform:scale(0.5) rotate(0deg);   }
-    50%     { opacity:1; transform:scale(1.3) rotate(180deg); }
-  }
-
-  /* Dialogue bubble */
   @keyframes bubbleIn {
     from { opacity:0; transform:translateY(6px) scale(0.95); }
     to   { opacity:1; transform:translateY(0)   scale(1);    }
   }
-
-  .fab-body  {
-    animation: fabBreathe 4.2s ease-in-out infinite;
-    transform-origin: center 60%; /* pivot from chest, not top */
+  @keyframes fabFloat {
+    0%,100% { transform: translateY(0px); }
+    50%     { transform: translateY(-8px); }
   }
-  .fab-sp1 { animation: fabSpark 2.6s ease-in-out infinite 0s;   }
-  .fab-sp2 { animation: fabSpark 2.6s ease-in-out infinite 0.9s; }
-  .fab-sp3 { animation: fabSpark 2.6s ease-in-out infinite 1.8s; }
-  .fab-lid { animation: fabBlink 5s ease-in-out infinite;        }
-  .fab-lid2{ animation: fabBlink 5s ease-in-out infinite 0.06s;  }
+  @keyframes fabSpark {
+    0%,100% { opacity:0; transform:scale(0.5) rotate(0deg);   }
+    50%     { opacity:1; transform:scale(1.3) rotate(180deg); }
+  }
+  .fab-float { animation: fabFloat 3.8s ease-in-out infinite; }
+  .fab-sp1   { animation: fabSpark 2.6s ease-in-out infinite 0s;   }
+  .fab-sp2   { animation: fabSpark 2.6s ease-in-out infinite 0.9s; }
+  .fab-sp3   { animation: fabSpark 2.6s ease-in-out infinite 1.8s; }
 `;
 
 function DialogueBubble({ text }: { text: string }) {
@@ -80,6 +71,41 @@ export default function Fable({ pose = 'welcome', dialogue, size = 160, darkBack
   const [displayText, setDisplayText] = useState('');
   const [showBubble, setShowBubble] = useState(false);
 
+  // Waving: alternates between base and wave image
+  const [waving, setWaving] = useState(false);
+  // Blinking: briefly shows eyes-closed image
+  const [blinking, setBlinking] = useState(false);
+
+  // Wave animation: arm up for 0.6s, down for 0.8s, repeat
+  useEffect(() => {
+    if (pose !== 'welcome' && pose !== 'excited') return;
+    let t: ReturnType<typeof setTimeout>;
+    const doWave = () => {
+      setWaving(true);
+      t = setTimeout(() => {
+        setWaving(false);
+        t = setTimeout(doWave, 900 + Math.random() * 600);
+      }, 600);
+    };
+    t = setTimeout(doWave, 1200);
+    return () => clearTimeout(t);
+  }, [pose]);
+
+  // Blink: eyes shut for 120ms every 3-5 seconds
+  useEffect(() => {
+    let t: ReturnType<typeof setTimeout>;
+    const doBlink = () => {
+      setBlinking(true);
+      t = setTimeout(() => {
+        setBlinking(false);
+        t = setTimeout(doBlink, 3000 + Math.random() * 2000);
+      }, 140);
+    };
+    t = setTimeout(doBlink, 2000);
+    return () => clearTimeout(t);
+  }, []);
+
+  // Dialogue typewriter
   useEffect(() => {
     setShowBubble(false);
     setDisplayText('');
@@ -94,73 +120,50 @@ export default function Fable({ pose = 'welcome', dialogue, size = 160, darkBack
   }, [dialogue, pose]);
 
   const h = size * 1.55;
+  const blend: React.CSSProperties['mixBlendMode'] = darkBackground ? 'normal' : 'multiply';
 
-  // Eye positions as % of image — calibrated from the welcome.webp render
-  // Eyes sit at ~24% from top, left eye ~43% from left, right eye ~56% from left
-  // Each eyelid covers ~9% width, ~4.5% height of the image
-  const eyeTop  = '23%';
-  const lidW    = `${size * 0.09}px`;
-  const lidH    = `${h * 0.048}px`;
-  const skinTop = '#C8855A';
-  const skinBot = '#B87040';
+  // Which image is on top at any moment
+  const baseImg  = POSE_BASE[pose];
+  const waveImg  = IMGS.wave;
+  const blinkImg = IMGS.eyesClosed;
+
+  const isWaving = waving && (pose === 'welcome' || pose === 'excited');
 
   return (
     <>
       <style>{styles}</style>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
-
+      <div style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:'10px' }}>
         {showBubble && displayText && <DialogueBubble text={displayText} />}
 
-        {/* Outer wrapper — no background, lets mix-blend-mode reach the page */}
-        <div style={{ position: 'relative', width: size, height: h, flexShrink: 0 }}>
+        <div className="fab-float" style={{ position:'relative', width:size, height:h, flexShrink:0 }}>
 
-          {/* The real Fable — breathing + floating */}
+          {/* Base image — always present */}
           <img
-            src={fableUrl(pose)}
+            src={baseImg}
             alt="Fable"
-            className="fab-body"
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'contain',
-              display: 'block',
-              mixBlendMode: darkBackground ? 'normal' : 'multiply',
-            }}
+            style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'contain', mixBlendMode: blend,
+              opacity: (isWaving || blinking) ? 0 : 1, transition: 'opacity 0.08s ease' }}
           />
 
-          {/* ── Blinking eyelids — positioned over her eyes ── */}
-          {/* Left eyelid (viewer's left = her right) */}
-          <div
-            className="fab-lid"
-            style={{
-              position: 'absolute',
-              top: eyeTop,
-              left: '41%',
-              width: lidW,
-              height: lidH,
-              background: `linear-gradient(to bottom, ${skinTop}, ${skinBot})`,
-              borderRadius: '0 0 60% 60%',
-              transformOrigin: 'top center',
-              pointerEvents: 'none',
-            }}
-          />
-          {/* Right eyelid (viewer's right = her left) */}
-          <div
-            className="fab-lid2"
-            style={{
-              position: 'absolute',
-              top: eyeTop,
-              left: '53%',
-              width: lidW,
-              height: lidH,
-              background: `linear-gradient(to bottom, ${skinTop}, ${skinBot})`,
-              borderRadius: '0 0 60% 60%',
-              transformOrigin: 'top center',
-              pointerEvents: 'none',
-            }}
+          {/* Wave image — arm raised */}
+          <img
+            src={waveImg}
+            alt=""
+            aria-hidden
+            style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'contain', mixBlendMode: blend,
+              opacity: isWaving && !blinking ? 1 : 0, transition: 'opacity 0.1s ease' }}
           />
 
-          {/* ── Sparkles ── */}
+          {/* Blink image — eyes shut, brief flash */}
+          <img
+            src={blinkImg}
+            alt=""
+            aria-hidden
+            style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'contain', mixBlendMode: blend,
+              opacity: blinking ? 1 : 0, transition: 'opacity 0.06s ease' }}
+          />
+
+          {/* Sparkles */}
           <span className="fab-sp1" style={{ position:'absolute', top:'5%',  left:'-10%', fontSize: size > 120 ? '1.1rem' : '0.85rem', color:'#F4C542', pointerEvents:'none' }}>✦</span>
           <span className="fab-sp2" style={{ position:'absolute', top:'3%',  right:'-6%', fontSize: size > 120 ? '0.85rem' : '0.65rem', color:'#F4C542', pointerEvents:'none' }}>✦</span>
           <span className="fab-sp3" style={{ position:'absolute', top:'18%', right:'-12%', fontSize: size > 120 ? '0.65rem' : '0.5rem', color:'#F4C542', pointerEvents:'none' }}>✦</span>
