@@ -149,12 +149,12 @@ function AuroraCharacter({ pose }: { pose: FablePose }) {
     return () => { if (waveTimer.current) clearTimeout(waveTimer.current); };
   }, [pose, actions, playAction, stopAction]);
 
-  // Subtle idle sway
+  // Subtle idle sway — group handles rotation only; y offset lives on the primitive
   useFrame(({ clock }) => {
     if (group.current) {
       const t = clock.getElapsedTime();
       group.current.rotation.y = Math.sin(t * 0.3) * 0.04;
-      group.current.position.y = Math.sin(t * 0.6) * 0.02 - 1.8;
+      group.current.position.y = Math.sin(t * 0.6) * 0.015; // tiny float, no -1.8 here
     }
   });
 
@@ -162,6 +162,16 @@ function AuroraCharacter({ pose }: { pose: FablePose }) {
     <group ref={group}>
       <primitive object={scene} scale={1.9} position={[0, -1.8, 0]} />
     </group>
+  );
+}
+
+// ── Loading placeholder (shown while 33MB GLB streams in) ────────────────────
+function LoadingFallback() {
+  return (
+    <mesh position={[0, 0, 0]}>
+      <sphereGeometry args={[0.08, 16, 16]} />
+      <meshBasicMaterial color="#E8D5B0" />
+    </mesh>
   );
 }
 
@@ -216,7 +226,7 @@ export default function Fable({ pose = 'welcome', dialogue, size = 180 }: FableP
         {/* Warm dark portrait frame — intentional, not a bug */}
         <div style={{ width:size, height:h, flexShrink:0, background:'#1C1614', borderRadius:16, overflow:'hidden', boxShadow:'0 8px 32px rgba(116,21,21,0.15)' }}>
           <Canvas
-            camera={{ position:[0, -0.8, 7], fov:26 }}
+            camera={{ position:[0, 0.4, 6], fov:30 }}
             style={{ width:'100%', height:'100%' }}
             gl={{ antialias:true }}
             onCreated={({ gl }) => {
@@ -230,7 +240,7 @@ export default function Fable({ pose = 'welcome', dialogue, size = 180 }: FableP
             <directionalLight position={[-2, 2, -1]} intensity={0.6} color="#d4e0ff" />
             <pointLight position={[0, 2, 3]} intensity={0.8} color="#ffe8d0" />
 
-            <Suspense fallback={null}>
+            <Suspense fallback={<LoadingFallback />}>
               <AuroraCharacter pose={pose} />
             </Suspense>
           </Canvas>
