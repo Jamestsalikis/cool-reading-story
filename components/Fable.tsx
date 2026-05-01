@@ -19,37 +19,47 @@ const styles = `
     from { opacity:0; transform:translateY(6px) scale(0.95); }
     to   { opacity:1; transform:translateY(0)   scale(1);    }
   }
-  @keyframes fablePulse {
-    0%,100% { opacity:0.5; }
-    50% { opacity:1; }
-  }
 `;
 
-// ── Animation names from the GLB ──────────────────────────────────────────────
+// ── Only show known character meshes — everything else is a rig cage or IK handle ──
+// Blacklisting was missing unnamed materials (Material.010, .013, .015, .017)
+// Whitelist is safer and explicit.
+const CHARACTER_MATERIALS = new Set([
+  'HairBase_S1', 'HairDetail_S1',
+  'Skin_Body', 'Skin_Face_2',
+  'SHIRTS', 'PANTS',
+  'Lips.003', 'Teeth.003', 'Tongue.003',
+  'FABRIC 1_FRONT_3426.003', 'Material3413',
+]);
+const isCharMaterial = (name: string) =>
+  CHARACTER_MATERIALS.has(name) ||
+  name.startsWith('Tiny Iris') ||
+  name.startsWith('Tiny Sclera');
+
+// ── Safe animations (zrig_* shape-key driven — no test/limb animations) ──────
 const ANIM = {
   breathing:    'zrig_breathing',
   eyelidsUpper: 'zrig_eyelids_upper',
   eyelidsLower: 'zrig_eyelids_lower',
   cheeks:       'zrig_cheeks',
-  armTest:      'ARM-TEST',
 };
 
-// ── Aim camera at the character's upper body ──────────────────────────────────
+// ── Aim camera at character's upper body ──────────────────────────────────────
 function CameraRig() {
   const { camera } = useThree();
-  useEffect(() => {
-    camera.lookAt(0, -0.4, 0);
-  }, [camera]);
+  useEffect(() => { camera.lookAt(0, -0.4, 0); }, [camera]);
   return null;
 }
 
 // ── 3D Character ──────────────────────────────────────────────────────────────
 function AuroraCharacter({ pose }: { pose: FablePose }) {
-  const group = useRef<THREE.Group>(null);
+  const group    = useRef<THREE.Group>(null);
+  const headBone = useRef<THREE.Object3D | null>(null);
+
   const { scene, animations } = useGLTF('/fable/aurora.glb');
   const { actions } = useAnimations(animations, group);
 
-  // Fix on load — hide rig cages, fix colour space
+  // Whitelist — hide every mesh whose material is not a known character material
   useEffect(() => {
     scene.traverse((child: THREE.Object3D) => {
       const mesh = child as THREE.Mesh;
@@ -58,13 +68,13 @@ function AuroraCharacter({ pose }: { pose: FablePose }) {
       const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
       const names = mats.map((m: THREE.Material) => m.name || '');
 
-      // Hide BlenRig deformation cages and control shapes
-      const isCage = names.some(n =>
-        n.includes('BlenRig') || n.startsWith('cs_') || n.includes('Cage')
-      );
-      if (isCage) { mesh.visible = false; return; }
+      // Hide anything that isn't a known character material
+      if (!names.some(isCharMaterial)) {
+        mesh.visible = false;
+        return;
+      }
 
-      // Fix colour space on character materials
+      // Fix colour space on visible character materials
       mats.forEach((mat: THREE.Material) => {
         const m = mat as THREE.MeshStandardMaterial;
         m.needsUpdate = true;
@@ -74,12 +84,17 @@ function AuroraCharacter({ pose }: { pose: FablePose }) {
       });
       mesh.castShadow = true;
     });
+
+    // Find head bone for subtle nod
+    scene.traverse((child: THREE.Object3D) => {
+      if (!headBone.current && child.name.toLowerCase().includes('head') && !(child as THREE.Mesh).isMesh) {
+        headBone.current = child;
+      }
+    });
   }, [scene]);
 
   const blinkTimer    = useRef<ReturnType<typeof setTimeout>>();
   const breathStarted = useRef(false);
-  const armWaving     = useRef(false);
-  const waveTimer     = useRef<ReturnType<typeof setTimeout>>();
 
   const playAction = useCallback((name: string, loop = true, weight = 1) => {
     const action = actions[name];
@@ -87,24 +102,24 @@ function AuroraCharacter({ pose }: { pose: FablePose }) {
     action.setLoop(loop ? THREE.LoopRepeat : THREE.LoopOnce, Infinity);
     action.clampWhenFinished = !loop;
     action.setEffectiveWeight(weight);
-    action.fadeIn(0.3).play();
+    action.fadeIn(0.4).play();
     return action;
   }, [actions]);
 
-  const stopAction = useCallback((name: string, fadeTime = 0.3) => {
-    actions[name]?.fadeOut(fadeTime);
+  const stopAction = useCallback((name: string) => {
+    actions[name]?.fadeOut(0.3);
   }, [actions]);
 
-  // Start breathing on mount
+  // Breathing — always on
   useEffect(() => {
     if (breathStarted.current) return;
     breathStarted.current = true;
-    playAction(ANIM.breathing, true, 0.6);
+    playAction(ANIM.breathing, true, 0.7);
     playAction(ANIM.eyelidsLower, true, 0.3);
     return () => { stopAction(ANIM.breathing); };
   }, [playAction, stopAction]);
 
-  // Random blinking every 3–5 seconds
+  // Random blink every 3–6 seconds
   useEffect(() => {
     const scheduleBlink = () => {
       blinkTimer.current = setTimeout(() => {
@@ -115,57 +130,36 @@ function AuroraCharacter({ pose }: { pose: FablePose }) {
           a.reset().setEffectiveWeight(1).play();
         }
         scheduleBlink();
-      }, 3000 + Math.random() * 2000);
+      }, 3000 + Math.random() * 3000);
     };
     scheduleBlink();
     return () => { if (blinkTimer.current) clearTimeout(blinkTimer.current); };
   }, [actions]);
 
-  // Arm wave on welcome/excited poses
+  // Cheek flush on excited
   useEffect(() => {
-    if (waveTimer.current) clearTimeout(waveTimer.current);
-
-    if (pose === 'welcome' || pose === 'excited') {
-      const doWave = () => {
-        if (!armWaving.current) {
-          armWaving.current = true;
-          const a = actions[ANIM.armTest];
-          if (a) {
-            a.setLoop(THREE.LoopOnce, 1);
-            a.clampWhenFinished = true;
-            a.reset().setEffectiveWeight(1).fadeIn(0.2).play();
-            setTimeout(() => {
-              a.fadeOut(0.3);
-              armWaving.current = false;
-            }, (a.getClip().duration * 1000) - 100);
-          }
-        }
-        waveTimer.current = setTimeout(doWave, 4000 + Math.random() * 2000);
-      };
-      doWave();
-    }
-
     if (pose === 'excited') {
       playAction(ANIM.cheeks, true, 0.5);
     } else {
       stopAction(ANIM.cheeks);
     }
+  }, [pose, playAction, stopAction]);
 
-    return () => { if (waveTimer.current) clearTimeout(waveTimer.current); };
-  }, [pose, actions, playAction, stopAction]);
-
-  // Subtle idle sway — only rotation, no y-offset stacking
+  // Idle sway + subtle head nod via useFrame
   useFrame(({ clock }) => {
-    if (group.current) {
-      const t = clock.getElapsedTime();
-      group.current.rotation.y = Math.sin(t * 0.3) * 0.04;
-      group.current.position.y = Math.sin(t * 0.6) * 0.015;
+    if (!group.current) return;
+    const t = clock.getElapsedTime();
+    // Whole-body gentle sway
+    group.current.rotation.y = Math.sin(t * 0.28) * 0.035;
+    group.current.position.y = Math.sin(t * 0.55) * 0.012;
+    // Head nod on the bone (if found)
+    if (headBone.current) {
+      headBone.current.rotation.z = Math.sin(t * 0.4) * 0.015;
     }
   });
 
   return (
     <group ref={group}>
-      {/* position.y = -1.8 drops model so head sits in upper-third of frame */}
       <primitive object={scene} scale={1.9} position={[0, -1.8, 0]} />
     </group>
   );
@@ -233,7 +227,7 @@ export default function Fable({ pose = 'welcome', dialogue, size = 180, darkBack
             style={{ width:'100%', height:'100%' }}
             gl={{ antialias:true, alpha:true }}
             onCreated={({ gl }) => {
-              gl.setClearColor(0x000000, 0);  // fully transparent background
+              gl.setClearColor(0x000000, 0);
               gl.outputColorSpace = THREE.SRGBColorSpace;
               gl.toneMapping = THREE.ACESFilmicToneMapping;
               gl.toneMappingExposure = 1.3;
