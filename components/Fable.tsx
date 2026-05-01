@@ -17,11 +17,11 @@ interface FableProps {
 const styles = `
   @keyframes bubbleIn {
     from { opacity:0; transform:translateY(6px) scale(0.95); }
-    to   { opacity:1; transform:translateY(0)   scale(1); }
+    to   { opacity:1; transform:translateY(0) scale(1); }
   }
 `;
 
-// ── Whitelisted character materials only ──────────────────────────────────────
+// ── Whitelist: only known character materials ─────────────────────────────────
 const CHAR_MATS = new Set([
   'HairBase_S1','HairDetail_S1','Skin_Body','Skin_Face_2',
   'SHIRTS','PANTS','Lips.003','Teeth.003','Tongue.003',
@@ -30,52 +30,36 @@ const CHAR_MATS = new Set([
 const isCharMat = (n: string) =>
   CHAR_MATS.has(n) || n.startsWith('Tiny Iris') || n.startsWith('Tiny Sclera');
 
-// ── Shape-key animations (the only safe ones) ─────────────────────────────────
-const ANIM = {
-  breathing:    'zrig_breathing',
-  eyelidsUpper: 'zrig_eyelids_upper',
-  eyelidsLower: 'zrig_eyelids_lower',
-  cheeks:       'zrig_cheeks',
-  eyebrow:      'Eyebrow',
-  mouthUp:      'zrig_mouth_corner_up',
-  mouthNose:    'zrig_nose_frown',
+// ── Bone names confirmed as skin joints that deform the mesh ─────────────────
+const B = {
+  armR:     'arm.r',
+  forearmR: 'forearm.r',
+  shoulderR:'shoulder.r',
+  headX:    'head.x',
+  neckX:    'neck.x',
+  spine02:  'spine_02.x',
 };
 
-// ── Bone names that ACTUALLY deform the mesh (skin joints) ────────────────────
-const BONES = {
-  armR:      'arm.r',
-  armL:      'arm.l',
-  forearmR:  'forearm.r',
-  shoulderR: 'shoulder.r',
-  shoulderL: 'shoulder.l',
-  headX:     'head.x',
-  neckX:     'neck.x',
-  spine02:   'spine_02.x',
-  spine03:   'spine_03.x',
-};
-
-// ── Aim camera at face/chest ──────────────────────────────────────────────────
 function CameraRig() {
   const { camera } = useThree();
-  useEffect(() => { camera.lookAt(0, 0.3, 0); }, [camera]);
+  useEffect(() => { camera.lookAt(0, 0.2, 0); }, [camera]);
   return null;
 }
 
-// ── 3D Character ──────────────────────────────────────────────────────────────
+// ── 3D character ──────────────────────────────────────────────────────────────
 function AuroraCharacter({ pose }: { pose: FablePose }) {
   const group = useRef<THREE.Group>(null);
-  const b     = useRef<Record<string, THREE.Object3D>>({});
-
+  const bones = useRef<Record<string, THREE.Object3D>>({});
   const { scene, animations } = useGLTF('/fable/aurora.glb');
-  const { actions }           = useAnimations(animations, group);
+  const { actions, mixer }    = useAnimations(animations, group);
 
-  // ── Scene setup ───────────────────────────────────────────────────────────
+  // ── One-time scene setup ─────────────────────────────────────────────────
   useEffect(() => {
-    const boneTargets = new Set(Object.values(BONES));
+    const boneSet = new Set(Object.values(B));
 
     scene.traverse((child: THREE.Object3D) => {
-      // Build bone map
-      if (boneTargets.has(child.name)) b.current[child.name] = child;
+      // Collect deformation bones
+      if (boneSet.has(child.name)) bones.current[child.name] = child;
 
       const mesh = child as THREE.Mesh;
       if (!mesh.isMesh) return;
@@ -83,156 +67,148 @@ function AuroraCharacter({ pose }: { pose: FablePose }) {
       const mats  = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
       const names = mats.map((m: THREE.Material) => m.name || '');
 
-      // Hide non-character meshes (cages, IK handles, etc.)
+      // Hide non-character meshes
       if (!names.some(isCharMat)) { mesh.visible = false; return; }
 
       mats.forEach((mat: THREE.Material) => {
         const m = mat as THREE.MeshStandardMaterial;
-        m.needsUpdate = true;
 
-        // Fix colour space
-        if (m.map)          { m.map.colorSpace         = THREE.SRGBColorSpace;       m.map.needsUpdate = true; }
+        // Colour space fixes
+        if (m.map)          { m.map.colorSpace         = THREE.SRGBColorSpace; m.map.needsUpdate = true; }
         if (m.normalMap)    { m.normalMap.colorSpace    = THREE.LinearSRGBColorSpace; }
         if (m.roughnessMap) { m.roughnessMap.colorSpace = THREE.LinearSRGBColorSpace; }
 
-        // ── Clothing colours ──────────────────────────────────────────────
+        // Clothes colours
         if (m.name === 'SHIRTS' || m.name === 'FABRIC 1_FRONT_3426.003') {
-          m.color.set('#F4EFE8');   // crisp white/cream top
-          m.map = null;
-          m.roughness = 0.7; m.metalness = 0;
+          m.map = null; m.color.set('#EDEAE4'); m.roughness = 0.65; m.metalness = 0;
         }
         if (m.name === 'PANTS' || m.name === 'Material3413') {
-          m.color.set('#1E4FA3');   // vibrant blue bottoms
-          m.map = null;
-          m.roughness = 0.75; m.metalness = 0;
+          m.map = null; m.color.set('#1A4FA8'); m.roughness = 0.7; m.metalness = 0;
         }
 
-        // ── Eyes: force visible iris so it's not all-white ───────────────
+        // Iris: force visible dark pupil
+        // depthTest=false + renderOrder so iris renders on top of sclera
         if (m.name.startsWith('Tiny Iris')) {
           m.map = null;
-          m.color.set('#2C1810');   // dark brown iris
-          m.roughness = 0.1; m.metalness = 0;
-          m.emissive.set('#0A0602');
-          m.emissiveIntensity = 0.2;
+          m.color.set('#1A0E05');
+          m.roughness = 0.05; m.metalness = 0;
+          m.depthTest = false;
+          m.depthWrite = false;
+          mesh.renderOrder = 10;
         }
         if (m.name.startsWith('Tiny Sclera')) {
-          m.color.set('#FFFAFA');
-          m.roughness = 0.25; m.metalness = 0;
+          m.color.set('#F8F4F0'); m.roughness = 0.2; m.metalness = 0;
         }
 
+        m.needsUpdate = true;
         mesh.castShadow = true;
       });
     });
   }, [scene]);
 
-  // ── Animation helpers ─────────────────────────────────────────────────────
-  const started = useRef(false);
-  const blinkT  = useRef<ReturnType<typeof setTimeout>>();
-  const smileT  = useRef<ReturnType<typeof setTimeout>>();
+  // ── Animations ───────────────────────────────────────────────────────────
+  const started  = useRef(false);
+  const blinkT   = useRef<ReturnType<typeof setTimeout>>();
+  const browT    = useRef<ReturnType<typeof setTimeout>>();
 
-  const loop = useCallback((name: string, w = 1) => {
+  const playLoop = useCallback((name: string, w = 1) => {
     const a = actions[name]; if (!a) return;
-    a.setLoop(THREE.LoopRepeat, Infinity).setEffectiveWeight(w).fadeIn(0.4).play();
+    a.setLoop(THREE.LoopRepeat, Infinity).setEffectiveWeight(w).fadeIn(0.3).play();
   }, [actions]);
 
-  const once = useCallback((name: string, w = 1) => {
+  const playOnce = useCallback((name: string, w = 1) => {
     const a = actions[name]; if (!a) return;
     a.setLoop(THREE.LoopOnce, 1); a.clampWhenFinished = true;
-    a.reset().setEffectiveWeight(w).fadeIn(0.25).play();
+    a.reset().setEffectiveWeight(w).fadeIn(0.2).play();
   }, [actions]);
 
-  const stop = useCallback((name: string) => { actions[name]?.fadeOut(0.35); }, [actions]);
+  const stopAnim = useCallback((name: string) => {
+    actions[name]?.fadeOut(0.3);
+  }, [actions]);
 
-  // Breathing — always
+  // Breathing always on
   useEffect(() => {
     if (started.current) return; started.current = true;
-    loop(ANIM.breathing, 0.8);
-    loop(ANIM.eyelidsLower, 0.35);
-    return () => stop(ANIM.breathing);
-  }, [loop, stop]);
+    playLoop('zrig_breathing', 0.8);
+    playLoop('zrig_eyelids_lower', 0.4);
+  }, [playLoop]);
 
   // Blink every 3–5 s
   useEffect(() => {
     const next = () => {
-      blinkT.current = setTimeout(() => { once(ANIM.eyelidsUpper, 1); next(); }, 3000 + Math.random() * 2000);
+      blinkT.current = setTimeout(() => { playOnce('zrig_eyelids_upper', 1); next(); }, 3000 + Math.random() * 2000);
     };
     next();
     return () => { if (blinkT.current) clearTimeout(blinkT.current); };
-  }, [once]);
+  }, [playOnce]);
 
-  // ── Pose-driven expressions ───────────────────────────────────────────────
+  // Eyebrow — the ONE animation confirmed to work visually
+  // Use it heavily for enthusiasm
   useEffect(() => {
-    if (smileT.current) clearTimeout(smileT.current);
-    [ANIM.cheeks, ANIM.mouthUp, ANIM.mouthNose, ANIM.eyebrow].forEach(stop);
+    if (browT.current) clearTimeout(browT.current);
+    stopAnim('Eyebrow');
 
-    // All poses get a baseline warmth
-    loop(ANIM.cheeks,   pose === 'excited' || pose === 'finished' ? 1 : 0.5);
-    loop(ANIM.mouthUp,  pose === 'thinking' ? 0.1 : 0.85);  // big smile unless thinking
+    const isEnergetic = pose === 'welcome' || pose === 'excited' || pose === 'finished';
+    const interval    = isEnergetic ? 1800 : 5000;
 
-    if (pose === 'welcome' || pose === 'excited' || pose === 'finished') {
-      loop(ANIM.eyebrow, 0.6);   // raised brows = surprise/joy
-    }
-    if (pose === 'thinking') {
-      loop(ANIM.mouthNose, 0.35); // slight furrow
+    if (isEnergetic) {
+      // Play immediately then keep repeating for continuous enthusiasm
+      playOnce('Eyebrow', 1);
     }
 
-    // Periodic joyful eyebrow raises
-    const pulseEyebrow = () => {
-      once(ANIM.eyebrow, 1);
-      smileT.current = setTimeout(pulseEyebrow, 4000 + Math.random() * 3000);
+    const pulse = () => {
+      playOnce('Eyebrow', isEnergetic ? 1 : 0.5);
+      browT.current = setTimeout(pulse, interval + Math.random() * 1000);
     };
-    smileT.current = setTimeout(pulseEyebrow, 1500);
+    browT.current = setTimeout(pulse, isEnergetic ? 800 : 2000);
 
-    return () => { if (smileT.current) clearTimeout(smileT.current); };
-  }, [pose, loop, once, stop]);
+    return () => { if (browT.current) clearTimeout(browT.current); };
+  }, [pose, playOnce, stopAnim]);
 
-  // ── Bone-driven motion ────────────────────────────────────────────────────
+  // ── Bone-driven motion — priority 1 runs AFTER the AnimationMixer ────────
+  // This is critical: at priority 0 the mixer overwrites our rotations.
   useFrame(({ clock }) => {
     if (!group.current) return;
     const t = clock.getElapsedTime();
 
-    // Whole-body bob — energetic on welcome/excited
-    const bobAmp = (pose === 'excited') ? 0.025 : 0.01;
-    group.current.rotation.y = Math.sin(t * 0.3) * 0.04;
-    group.current.position.y = Math.sin(t * (pose === 'excited' ? 1.8 : 1.1)) * bobAmp;
+    // Body sway
+    const bobSpeed = pose === 'excited' ? 2.2 : 1.2;
+    group.current.rotation.y  = Math.sin(t * 0.3)       * 0.04;
+    group.current.position.y  = Math.sin(t * bobSpeed)  * (pose === 'excited' ? 0.022 : 0.01);
 
-    // HEAD: slight nod + tilt
-    if (b.current[BONES.headX]) {
-      const tilt = pose === 'thinking' ? 0.12 : 0;
-      b.current[BONES.headX].rotation.z = Math.sin(t * 0.38) * 0.02 + tilt;
-      b.current[BONES.headX].rotation.x = Math.sin(t * 0.45) * 0.015;
-    }
-    if (b.current[BONES.neckX]) {
-      b.current[BONES.neckX].rotation.z = Math.sin(t * 0.32) * 0.012;
+    // Head tilt
+    const h = bones.current[B.headX];
+    if (h) {
+      h.rotation.z = Math.sin(t * 0.4) * 0.025 + (pose === 'thinking' ? 0.14 : 0);
+      h.rotation.x = Math.sin(t * 0.5) * 0.015;
     }
 
-    // ── ARM WAVE (deformation bones) ─────────────────────────────────────
-    const armR = b.current[BONES.armR];
-    const faR  = b.current[BONES.forearmR];
-    const shR  = b.current[BONES.shoulderR];
+    // ARM WAVE — right arm (confirmed deformation bone)
+    const sR = bones.current[B.shoulderR];
+    const aR = bones.current[B.armR];
+    const fR = bones.current[B.forearmR];
 
     if (pose === 'welcome' || pose === 'excited') {
-      const speed = pose === 'excited' ? 3.5 : 2.6;
-      const amp   = pose === 'excited' ? 0.5  : 0.38;
-      // Shoulder lifts arm up
-      if (shR) { shR.rotation.z = 0.4 + Math.sin(t * speed * 0.5) * 0.1; shR.rotation.x = -0.2; }
-      // Upper arm waves
-      if (armR) { armR.rotation.z = -(1.1 + Math.sin(t * speed) * amp); armR.rotation.x = -0.15; }
-      // Forearm follows
-      if (faR)  { faR.rotation.z  = -(0.5 + Math.sin(t * speed + 0.8) * 0.25); }
+      const spd = pose === 'excited' ? 3.8 : 2.8;
+      const amp = pose === 'excited' ? 0.55 : 0.4;
+      // Try rotating on Y axis (different from Z which didn't work)
+      if (sR) { sR.rotation.y = 0.5 + Math.sin(t * spd * 0.4) * 0.15; sR.rotation.x = -0.3; }
+      if (aR) { aR.rotation.y = -(0.9 + Math.sin(t * spd) * amp); aR.rotation.x = 0.2; }
+      if (fR) { fR.rotation.x = 0.6 + Math.sin(t * spd + 1) * 0.3; }
     } else {
-      // Ease arm back to rest
-      if (shR)  { shR.rotation.z  += (0 - shR.rotation.z)  * 0.06; shR.rotation.x  += (0 - shR.rotation.x)  * 0.06; }
-      if (armR) { armR.rotation.z += (0 - armR.rotation.z) * 0.06; armR.rotation.x += (0 - armR.rotation.x) * 0.06; }
-      if (faR)  { faR.rotation.z  += (0 - faR.rotation.z)  * 0.06; }
+      // Ease back
+      if (sR) { sR.rotation.y *= 0.93; sR.rotation.x *= 0.93; }
+      if (aR) { aR.rotation.y *= 0.93; aR.rotation.x *= 0.93; }
+      if (fR) { fR.rotation.x *= 0.93; }
     }
 
-    // SPINE: slight forward lean for focused poses
-    if (b.current[BONES.spine02]) {
-      const lean = (pose === 'writing' || pose === 'painting') ? 0.07 : 0;
-      b.current[BONES.spine02].rotation.x += (lean - b.current[BONES.spine02].rotation.x) * 0.05;
+    // Spine lean for writing/painting
+    const sp = bones.current[B.spine02];
+    if (sp) {
+      const lean = (pose === 'writing' || pose === 'painting') ? 0.08 : 0;
+      sp.rotation.x += (lean - sp.rotation.x) * 0.05;
     }
-  });
+  }, 1); // <-- priority 1: runs AFTER mixer's priority-0 update
 
   return (
     <group ref={group}>
@@ -262,7 +238,7 @@ function DialogueBubble({ text }: { text: string }) {
 // ── Main export ───────────────────────────────────────────────────────────────
 export default function Fable({ pose = 'welcome', dialogue, size = 180, darkBackground = false }: FableProps) {
   const [displayText, setDisplayText] = useState('');
-  const [showBubble, setShowBubble]   = useState(false);
+  const [showBubble,  setShowBubble]  = useState(false);
 
   useEffect(() => {
     setShowBubble(false); setDisplayText('');
@@ -270,14 +246,17 @@ export default function Fable({ pose = 'welcome', dialogue, size = 180, darkBack
     const t = setTimeout(() => {
       setShowBubble(true);
       let i = 0;
-      const iv = setInterval(() => { i++; setDisplayText(dialogue.slice(0, i)); if (i >= dialogue.length) clearInterval(iv); }, 25);
+      const iv = setInterval(() => {
+        i++; setDisplayText(dialogue.slice(0, i));
+        if (i >= dialogue.length) clearInterval(iv);
+      }, 25);
       return () => clearInterval(iv);
     }, 250);
     return () => clearTimeout(t);
   }, [dialogue, pose]);
 
-  // Slightly wider aspect to fit raised arm
-  const h = size * 1.4;
+  // Wide enough to fit waving arm
+  const h = size * 1.45;
 
   return (
     <>
@@ -285,28 +264,27 @@ export default function Fable({ pose = 'welcome', dialogue, size = 180, darkBack
       <div style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:'10px' }}>
         {showBubble && displayText && <DialogueBubble text={displayText} />}
         <div style={{
-          width:size, height:h, flexShrink:0,
+          width: size, height: h, flexShrink: 0,
           background: darkBackground ? '#1C1614' : 'transparent',
-          borderRadius:16, overflow:'hidden',
+          borderRadius: 16, overflow: 'hidden',
           boxShadow: darkBackground ? '0 8px 32px rgba(116,21,21,0.15)' : 'none',
         }}>
           <Canvas
-            camera={{ position:[0, 0.8, 4.5], fov:46 }}
+            camera={{ position:[0, 0.6, 4.2], fov:50 }}
             style={{ width:'100%', height:'100%' }}
             gl={{ antialias:true, alpha:true }}
             onCreated={({ gl }) => {
               gl.setClearColor(0x000000, 0);
               gl.outputColorSpace = THREE.SRGBColorSpace;
               gl.toneMapping = THREE.ACESFilmicToneMapping;
-              gl.toneMappingExposure = 1.25;
+              gl.toneMappingExposure = 1.2;
             }}
           >
             <CameraRig />
-            <ambientLight intensity={1.7} />
-            <directionalLight position={[2, 5, 4]} intensity={2.4} color="#fff9f0" />
-            <directionalLight position={[-3, 2, -1]} intensity={0.8} color="#c8d8ff" />
-            <pointLight position={[0, 3, 3]} intensity={1.0} color="#ffe0c0" />
-
+            <ambientLight intensity={1.8} />
+            <directionalLight position={[2, 5, 4]} intensity={2.5} color="#fff9f2" />
+            <directionalLight position={[-3, 2, -1]} intensity={0.9} color="#c0d0ff" />
+            <pointLight position={[0, 3, 3]} intensity={1.1} color="#ffd8b0" />
             <Suspense fallback={null}>
               <AuroraCharacter pose={pose} />
             </Suspense>
