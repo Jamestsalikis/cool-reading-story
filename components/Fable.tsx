@@ -86,6 +86,9 @@ function AuroraCharacter({ pose }: { pose: FablePose }) {
       // Hide non-character meshes (cages, IK handles, etc.)
       if (!names.some(isCharMat)) { mesh.visible = false; return; }
 
+      // Explicitly restore — previous broken renders may have hidden these in cache
+      mesh.visible = true;
+
       mats.forEach((mat: THREE.Material) => {
         const m = mat as THREE.MeshStandardMaterial;
         m.needsUpdate = true;

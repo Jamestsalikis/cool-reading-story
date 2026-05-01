@@ -1,17 +1,13 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { BookOpen, Users, Settings, CreditCard, Plus, X } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import PaywallModal from '@/components/PaywallModal';
+import Fable from '@/components/Fable';
 import { updateChild } from '@/lib/supabase/child-actions';
-
-// Lazy-load Fable — defers the entire Three.js + @react-three bundle (~890KB)
-// until after the dashboard shell has painted
-const Fable = dynamic(() => import('@/components/Fable'), { ssr: false });
 
 const CHILD_PALETTES = [
   { cover: '#741515', spine: '#4d0e0e', light: '#FBF0F0' },
