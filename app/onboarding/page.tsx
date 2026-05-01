@@ -1,10 +1,13 @@
 'use client';
 
 import { useState } from 'react';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { createChild } from '@/lib/supabase/child-actions';
-import Fable, { type FablePose } from '@/components/Fable';
+import type { FablePose } from '@/components/Fable';
+
+const Fable = dynamic(() => import('@/components/Fable'), { ssr: false });
 
 type Person = { name: string; nickname: string };
 

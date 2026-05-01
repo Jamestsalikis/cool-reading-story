@@ -1,13 +1,17 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { BookOpen, Users, Settings, CreditCard, Plus, X } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import PaywallModal from '@/components/PaywallModal';
-import Fable from '@/components/Fable';
 import { updateChild } from '@/lib/supabase/child-actions';
+
+// Lazy-load Fable — defers the entire Three.js + @react-three bundle (~890KB)
+// until after the dashboard shell has painted
+const Fable = dynamic(() => import('@/components/Fable'), { ssr: false });
 
 const CHILD_PALETTES = [
   { cover: '#741515', spine: '#4d0e0e', light: '#FBF0F0' },
@@ -17,9 +21,8 @@ const CHILD_PALETTES = [
   { cover: '#5A3A0A', spine: '#352005', light: '#FAF3E8' },
 ];
 
+// keyframes (spin, pulse) are now in globals.css — no runtime injection needed
 const pageStyles = `
-  @keyframes spin { from { transform:rotate(0deg); } to { transform:rotate(360deg); } }
-  @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.5; } }
   .book-cover-panel {
     transition: transform 0.55s cubic-bezier(0.4,0,0.2,1), box-shadow 0.55s ease;
   }
