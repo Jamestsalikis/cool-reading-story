@@ -86,9 +86,6 @@ function AuroraCharacter({ pose }: { pose: FablePose }) {
       // Hide non-character meshes (cages, IK handles, etc.)
       if (!names.some(isCharMat)) { mesh.visible = false; return; }
 
-      // Explicitly restore — previous broken renders may have hidden these in cache
-      mesh.visible = true;
-
       mats.forEach((mat: THREE.Material) => {
         const m = mat as THREE.MeshStandardMaterial;
         m.needsUpdate = true;
@@ -132,7 +129,6 @@ function AuroraCharacter({ pose }: { pose: FablePose }) {
   const started = useRef(false);
   const blinkT  = useRef<ReturnType<typeof setTimeout>>();
   const smileT  = useRef<ReturnType<typeof setTimeout>>();
-  const waveT   = useRef<ReturnType<typeof setTimeout>>();
 
   const loop = useCallback((name: string, w = 1) => {
     const a = actions[name]; if (!a) return;
@@ -180,32 +176,15 @@ function AuroraCharacter({ pose }: { pose: FablePose }) {
       loop(ANIM.mouthNose, 0.35); // slight furrow
     }
 
-    // Periodic eyebrow raises
+    // Periodic joyful eyebrow raises
     const pulseEyebrow = () => {
       once(ANIM.eyebrow, 1);
       smileT.current = setTimeout(pulseEyebrow, 4000 + Math.random() * 3000);
     };
     smileT.current = setTimeout(pulseEyebrow, 1500);
 
-    // ARM-TEST wave — we know this actually moves the arm in the GLB
-    if (waveT.current) clearTimeout(waveT.current);
-    const waveAnim = actions['ARM-TEST'];
-    if ((pose === 'welcome' || pose === 'excited') && waveAnim) {
-      const doWave = () => {
-        waveAnim.setLoop(THREE.LoopOnce, 1);
-        waveAnim.clampWhenFinished = true;
-        waveAnim.reset().setEffectiveWeight(1).fadeIn(0.2).play();
-        waveT.current = setTimeout(doWave, (waveAnim.getClip().duration * 1000) + 2000 + Math.random() * 1500);
-      };
-      doWave();
-    }
-
-    return () => {
-      if (smileT.current) clearTimeout(smileT.current);
-      if (waveT.current)  clearTimeout(waveT.current);
-      actions['ARM-TEST']?.fadeOut(0.3);
-    };
-  }, [pose, actions, loop, once, stop]);
+    return () => { if (smileT.current) clearTimeout(smileT.current); };
+  }, [pose, loop, once, stop]);
 
   // ── Bone-driven motion ────────────────────────────────────────────────────
   useFrame(({ clock }) => {
@@ -253,7 +232,7 @@ function AuroraCharacter({ pose }: { pose: FablePose }) {
       const lean = (pose === 'writing' || pose === 'painting') ? 0.07 : 0;
       b.current[BONES.spine02].rotation.x += (lean - b.current[BONES.spine02].rotation.x) * 0.05;
     }
-  }, 1); // priority 1 — runs after AnimationMixer so rotations aren't overwritten
+  });
 
   return (
     <group ref={group}>
@@ -307,16 +286,16 @@ export default function Fable({ pose = 'welcome', dialogue, size = 180, darkBack
         {showBubble && displayText && <DialogueBubble text={displayText} />}
         <div style={{
           width:size, height:h, flexShrink:0,
-          background: '#1C1614',
+          background: darkBackground ? '#1C1614' : 'transparent',
           borderRadius:16, overflow:'hidden',
-          boxShadow: '0 8px 32px rgba(116,21,21,0.15)',
+          boxShadow: darkBackground ? '0 8px 32px rgba(116,21,21,0.15)' : 'none',
         }}>
           <Canvas
             camera={{ position:[0, 0.8, 4.5], fov:46 }}
             style={{ width:'100%', height:'100%' }}
-            gl={{ antialias:true }}
+            gl={{ antialias:true, alpha:true }}
             onCreated={({ gl }) => {
-              gl.setClearColor(0x1C1614, 1);
+              gl.setClearColor(0x000000, 0);
               gl.outputColorSpace = THREE.SRGBColorSpace;
               gl.toneMapping = THREE.ACESFilmicToneMapping;
               gl.toneMappingExposure = 1.25;
