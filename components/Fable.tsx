@@ -1,8 +1,8 @@
 'use client';
 
 import { useRef, useEffect, useState, Suspense, useCallback } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { useGLTF, useAnimations, Environment } from '@react-three/drei';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { useGLTF, useAnimations } from '@react-three/drei';
 import * as THREE from 'three';
 
 export type FablePose = 'welcome' | 'excited' | 'thinking' | 'writing' | 'painting' | 'finished';
@@ -19,24 +19,31 @@ const styles = `
     from { opacity:0; transform:translateY(6px) scale(0.95); }
     to   { opacity:1; transform:translateY(0)   scale(1);    }
   }
+  @keyframes fablePulse {
+    0%,100% { opacity:0.5; }
+    50% { opacity:1; }
+  }
 `;
 
 // ── Animation names from the GLB ──────────────────────────────────────────────
 const ANIM = {
-  breathing:     'zrig_breathing',
-  eyelidsUpper:  'zrig_eyelids_upper',
-  eyelidsLower:  'zrig_eyelids_lower',
-  cheeks:        'zrig_cheeks',
-  eyes:          'EYES',
-  facial:        'Facial_Expression',
-  armTest:       'ARM-TEST',
-  headTest:      'HEAD-TEST',
-  pose:          'Aurora_Pose',
-  handClose:     'zrig_hand_close',
-  mouthU:        'zrig_U',
+  breathing:    'zrig_breathing',
+  eyelidsUpper: 'zrig_eyelids_upper',
+  eyelidsLower: 'zrig_eyelids_lower',
+  cheeks:       'zrig_cheeks',
+  armTest:      'ARM-TEST',
 };
 
-// ── 3D Character ─────────────────────────────────────────────────────────────
+// ── Aim camera at the character's upper body ──────────────────────────────────
+function CameraRig() {
+  const { camera } = useThree();
+  useEffect(() => {
+    camera.lookAt(0, -0.4, 0);
+  }, [camera]);
+  return null;
+}
+
+// ── 3D Character ──────────────────────────────────────────────────────────────
 function AuroraCharacter({ pose }: { pose: FablePose }) {
   const group = useRef<THREE.Group>(null);
   const { scene, animations } = useGLTF('/fable/aurora.glb');
@@ -51,13 +58,13 @@ function AuroraCharacter({ pose }: { pose: FablePose }) {
       const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
       const names = mats.map((m: THREE.Material) => m.name || '');
 
-      // Hide rig deformation cages & control shapes — they're brightly coloured internals
+      // Hide BlenRig deformation cages and control shapes
       const isCage = names.some(n =>
         n.includes('BlenRig') || n.startsWith('cs_') || n.includes('Cage')
       );
       if (isCage) { mesh.visible = false; return; }
 
-      // Fix colour space on real character materials
+      // Fix colour space on character materials
       mats.forEach((mat: THREE.Material) => {
         const m = mat as THREE.MeshStandardMaterial;
         m.needsUpdate = true;
@@ -74,7 +81,6 @@ function AuroraCharacter({ pose }: { pose: FablePose }) {
   const armWaving     = useRef(false);
   const waveTimer     = useRef<ReturnType<typeof setTimeout>>();
 
-  // Helper — fade an action in
   const playAction = useCallback((name: string, loop = true, weight = 1) => {
     const action = actions[name];
     if (!action) return;
@@ -89,7 +95,7 @@ function AuroraCharacter({ pose }: { pose: FablePose }) {
     actions[name]?.fadeOut(fadeTime);
   }, [actions]);
 
-  // Start breathing on mount — plays forever
+  // Start breathing on mount
   useEffect(() => {
     if (breathStarted.current) return;
     breathStarted.current = true;
@@ -115,12 +121,11 @@ function AuroraCharacter({ pose }: { pose: FablePose }) {
     return () => { if (blinkTimer.current) clearTimeout(blinkTimer.current); };
   }, [actions]);
 
-  // Pose changes — arm wave for welcome/excited
+  // Arm wave on welcome/excited poses
   useEffect(() => {
     if (waveTimer.current) clearTimeout(waveTimer.current);
 
     if (pose === 'welcome' || pose === 'excited') {
-      // Trigger arm wave periodically
       const doWave = () => {
         if (!armWaving.current) {
           armWaving.current = true;
@@ -149,29 +154,20 @@ function AuroraCharacter({ pose }: { pose: FablePose }) {
     return () => { if (waveTimer.current) clearTimeout(waveTimer.current); };
   }, [pose, actions, playAction, stopAction]);
 
-  // Subtle idle sway — group handles rotation only; y offset lives on the primitive
+  // Subtle idle sway — only rotation, no y-offset stacking
   useFrame(({ clock }) => {
     if (group.current) {
       const t = clock.getElapsedTime();
       group.current.rotation.y = Math.sin(t * 0.3) * 0.04;
-      group.current.position.y = Math.sin(t * 0.6) * 0.015; // tiny float, no -1.8 here
+      group.current.position.y = Math.sin(t * 0.6) * 0.015;
     }
   });
 
   return (
     <group ref={group}>
+      {/* position.y = -1.8 drops model so head sits in upper-third of frame */}
       <primitive object={scene} scale={1.9} position={[0, -1.8, 0]} />
     </group>
-  );
-}
-
-// ── Loading placeholder (shown while 33MB GLB streams in) ────────────────────
-function LoadingFallback() {
-  return (
-    <mesh position={[0, 0, 0]}>
-      <sphereGeometry args={[0.08, 16, 16]} />
-      <meshBasicMaterial color="#E8D5B0" />
-    </mesh>
   );
 }
 
@@ -188,13 +184,13 @@ function DialogueBubble({ text }: { text: string }) {
     }}>
       {text}
       <div style={{ position:'absolute', bottom:-11, left:'50%', transform:'translateX(-50%)', width:0, height:0, borderLeft:'9px solid transparent', borderRight:'9px solid transparent', borderTop:'11px solid #E8E0D0' }} />
-      <div style={{ position:'absolute', bottom:-8, left:'50%', transform:'translateX(-50%)', width:0, height:0, borderLeft:'7px solid transparent', borderRight:'7px solid transparent', borderTop:'9px solid #FFFEF9' }} />
+      <div style={{ position:'absolute', bottom:-8,  left:'50%', transform:'translateX(-50%)', width:0, height:0, borderLeft:'7px solid transparent', borderRight:'7px solid transparent', borderTop:'9px solid #FFFEF9' }} />
     </div>
   );
 }
 
 // ── Main export ───────────────────────────────────────────────────────────────
-export default function Fable({ pose = 'welcome', dialogue, size = 180 }: FableProps) {
+export default function Fable({ pose = 'welcome', dialogue, size = 180, darkBackground = false }: FableProps) {
   const [displayText, setDisplayText] = useState('');
   const [showBubble, setShowBubble]   = useState(false);
 
@@ -223,24 +219,33 @@ export default function Fable({ pose = 'welcome', dialogue, size = 180 }: FableP
       <div style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:'10px' }}>
         {showBubble && displayText && <DialogueBubble text={displayText} />}
 
-        {/* Warm dark portrait frame — intentional, not a bug */}
-        <div style={{ width:size, height:h, flexShrink:0, background:'#1C1614', borderRadius:16, overflow:'hidden', boxShadow:'0 8px 32px rgba(116,21,21,0.15)' }}>
+        <div style={{
+          width: size,
+          height: h,
+          flexShrink: 0,
+          background: darkBackground ? '#1C1614' : 'transparent',
+          borderRadius: 16,
+          overflow: 'hidden',
+          boxShadow: darkBackground ? '0 8px 32px rgba(116,21,21,0.15)' : 'none',
+        }}>
           <Canvas
-            camera={{ position:[0, 0.4, 6], fov:30 }}
+            camera={{ position:[0, 0.5, 5.5], fov:28 }}
             style={{ width:'100%', height:'100%' }}
-            gl={{ antialias:true }}
+            gl={{ antialias:true, alpha:true }}
             onCreated={({ gl }) => {
+              gl.setClearColor(0x000000, 0);  // fully transparent background
               gl.outputColorSpace = THREE.SRGBColorSpace;
               gl.toneMapping = THREE.ACESFilmicToneMapping;
               gl.toneMappingExposure = 1.3;
             }}
           >
-            <ambientLight intensity={1.5} />
-            <directionalLight position={[2, 4, 3]} intensity={2} color="#fff8f0" />
-            <directionalLight position={[-2, 2, -1]} intensity={0.6} color="#d4e0ff" />
-            <pointLight position={[0, 2, 3]} intensity={0.8} color="#ffe8d0" />
+            <CameraRig />
+            <ambientLight intensity={1.6} />
+            <directionalLight position={[2, 4, 3]} intensity={2.2} color="#fff8f0" />
+            <directionalLight position={[-2, 2, -1]} intensity={0.7} color="#d4e0ff" />
+            <pointLight position={[0, 2, 3]} intensity={0.9} color="#ffe8d0" />
 
-            <Suspense fallback={<LoadingFallback />}>
+            <Suspense fallback={null}>
               <AuroraCharacter pose={pose} />
             </Suspense>
           </Canvas>
