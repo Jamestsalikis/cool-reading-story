@@ -307,16 +307,16 @@ export default function Fable({ pose = 'welcome', dialogue, size = 180, darkBack
         {showBubble && displayText && <DialogueBubble text={displayText} />}
         <div style={{
           width:size, height:h, flexShrink:0,
-          background: darkBackground ? '#1C1614' : 'transparent',
+          background: '#1C1614',
           borderRadius:16, overflow:'hidden',
-          boxShadow: darkBackground ? '0 8px 32px rgba(116,21,21,0.15)' : 'none',
+          boxShadow: '0 8px 32px rgba(116,21,21,0.15)',
         }}>
           <Canvas
             camera={{ position:[0, 0.8, 4.5], fov:46 }}
             style={{ width:'100%', height:'100%' }}
-            gl={{ antialias:true, alpha:true }}
+            gl={{ antialias:true }}
             onCreated={({ gl }) => {
-              gl.setClearColor(0x000000, 0);
+              gl.setClearColor(0x1C1614, 1);
               gl.outputColorSpace = THREE.SRGBColorSpace;
               gl.toneMapping = THREE.ACESFilmicToneMapping;
               gl.toneMappingExposure = 1.25;
