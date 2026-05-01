@@ -129,6 +129,7 @@ function AuroraCharacter({ pose }: { pose: FablePose }) {
   const started = useRef(false);
   const blinkT  = useRef<ReturnType<typeof setTimeout>>();
   const smileT  = useRef<ReturnType<typeof setTimeout>>();
+  const waveT   = useRef<ReturnType<typeof setTimeout>>();
 
   const loop = useCallback((name: string, w = 1) => {
     const a = actions[name]; if (!a) return;
@@ -176,15 +177,32 @@ function AuroraCharacter({ pose }: { pose: FablePose }) {
       loop(ANIM.mouthNose, 0.35); // slight furrow
     }
 
-    // Periodic joyful eyebrow raises
+    // Periodic eyebrow raises
     const pulseEyebrow = () => {
       once(ANIM.eyebrow, 1);
       smileT.current = setTimeout(pulseEyebrow, 4000 + Math.random() * 3000);
     };
     smileT.current = setTimeout(pulseEyebrow, 1500);
 
-    return () => { if (smileT.current) clearTimeout(smileT.current); };
-  }, [pose, loop, once, stop]);
+    // ARM-TEST wave — we know this actually moves the arm in the GLB
+    if (waveT.current) clearTimeout(waveT.current);
+    const waveAnim = actions['ARM-TEST'];
+    if ((pose === 'welcome' || pose === 'excited') && waveAnim) {
+      const doWave = () => {
+        waveAnim.setLoop(THREE.LoopOnce, 1);
+        waveAnim.clampWhenFinished = true;
+        waveAnim.reset().setEffectiveWeight(1).fadeIn(0.2).play();
+        waveT.current = setTimeout(doWave, (waveAnim.getClip().duration * 1000) + 2000 + Math.random() * 1500);
+      };
+      doWave();
+    }
+
+    return () => {
+      if (smileT.current) clearTimeout(smileT.current);
+      if (waveT.current)  clearTimeout(waveT.current);
+      actions['ARM-TEST']?.fadeOut(0.3);
+    };
+  }, [pose, actions, loop, once, stop]);
 
   // ── Bone-driven motion ────────────────────────────────────────────────────
   useFrame(({ clock }) => {
