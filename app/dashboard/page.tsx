@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { BookOpen, Users, Settings, CreditCard, Plus, X } from 'lucide-react';
@@ -304,6 +304,7 @@ export default function DashboardPage() {
   const [stories, setStories] = useState<Story[]>([]);
   const [loading, setLoading] = useState(true);
   const [generating, setGenerating] = useState<string | null>(null);
+  const generatingLock = useRef(false); // prevents double-clicks firing two API calls
   const [generatingName, setGeneratingName] = useState('');
   const [generateError, setGenerateError] = useState('');
   const [userName, setUserName] = useState('');
@@ -336,6 +337,13 @@ export default function DashboardPage() {
 
   useEffect(() => { fetchData(); }, [fetchData]);
 
+  // Refresh books when user navigates back to this tab (e.g. after reading a story)
+  useEffect(() => {
+    const onFocus = () => fetchData();
+    window.addEventListener('focus', onFocus);
+    return () => window.removeEventListener('focus', onFocus);
+  }, [fetchData]);
+
   const storiesByChild = (childId: string) => {
     const child = children.find(c => c.id === childId);
     if (!child) return [];
@@ -349,6 +357,8 @@ export default function DashboardPage() {
   };
 
   const handleGenerateStory = async (childId: string) => {
+    if (generatingLock.current) return; // prevent double-tap creating two books
+    generatingLock.current = true;
     const child = children.find(c => c.id === childId);
     setGeneratingName(child?.name || '');
     setGenerating(`new-${childId}`);
@@ -389,7 +399,7 @@ export default function DashboardPage() {
 
       // Navigate to story — images 2-5 continue generating on the story page
       router.push(`/stories/${storyId}`);
-    } finally { setGenerating(null); }
+    } finally { setGenerating(null); generatingLock.current = false; }
   };
 
   const handleContinueStory = async (childId: string) => {
@@ -524,15 +534,13 @@ export default function DashboardPage() {
                         <div style={{ display: 'flex', gap: '10px' }}>
                           {canContinue && (() => {
                             const latest = storiesByChild(child.id)[0];
-                            const seriesName = latest?.series_title || latest?.title || 'the story';
-                            // Find how many volumes exist in this series
                             const seriesStories = storiesByChild(child.id).filter(s => s.series_id && s.series_id === latest?.series_id);
-                            const nextVol = latest?.series_id ? (seriesStories.length + 1) : null;
-                            const shortName = seriesName.length > 22 ? seriesName.slice(0, 20) + '…' : seriesName;
+                            // nextVol: if in a series use length+1, if single story then writing Vol 2
+                            const nextVol = latest?.series_id ? (seriesStories.length + 1) : 2;
                             return (
                               <button onClick={() => handleContinueStory(child.id)} disabled={!!generating}
                                 style={{ padding: '0.55rem 1.1rem', borderRadius: '8px', border: 'none', background: palette.cover, color: '#fff', cursor: generating ? 'not-allowed' : 'pointer', fontWeight: '600', fontSize: '0.8rem', opacity: generating ? 0.6 : 1 }}>
-                                {nextVol ? `Continue: ${shortName} · Vol ${nextVol}` : `Continue: ${shortName}`}
+                                + Write Vol {nextVol}
                               </button>
                             );
                           })()}

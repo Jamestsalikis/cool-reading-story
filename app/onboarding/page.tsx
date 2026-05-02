@@ -395,7 +395,13 @@ export default function OnboardingPage() {
                 const active = state.interests.includes(option.label);
                 return (
                   <button key={option.label} onClick={() => handleInterestToggle(option.label)}
-                    style={{ ...chip(active), padding: '0.5rem 1rem', fontSize: '0.85rem' }}>
+                    style={{ ...chip(active), padding: '0.4rem 0.85rem', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <span style={{
+                      display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                      width: '26px', height: '26px', borderRadius: '6px',
+                      background: active ? 'rgba(255,255,255,0.2)' : '#F5F0E8',
+                      fontSize: '1rem', flexShrink: 0,
+                    }}>{option.emoji}</span>
                     {option.label}
                   </button>
                 );
@@ -454,9 +460,14 @@ export default function OnboardingPage() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
               {followUpSections.map(({ interest, emoji, questions }) => (
                 <div key={interest} style={{ borderLeft: '3px solid #E8E0D0', paddingLeft: '16px' }}>
-                  <p style={{ fontWeight: '600', color: '#1A1209', marginBottom: '14px', fontSize: '0.95rem' }}>
-                    {emoji} {interest}
-                  </p>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
+                    <span style={{
+                      display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                      width: '32px', height: '32px', borderRadius: '8px',
+                      background: '#F5F0E8', fontSize: '1.15rem', flexShrink: 0,
+                    }}>{emoji}</span>
+                    <p style={{ fontWeight: '600', color: '#1A1209', margin: 0, fontSize: '0.95rem' }}>{interest}</p>
+                  </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                     {questions.map(({ q, placeholder }) => (
                       <div key={q}>
@@ -477,7 +488,10 @@ export default function OnboardingPage() {
               {/* Custom interests (no questions defined) */}
               {state.interests.filter(i => !FOLLOW_UP_QUESTIONS[i]).length > 0 && (
                 <div style={{ borderLeft: '3px solid #E8E0D0', paddingLeft: '16px' }}>
-                  <p style={{ fontWeight: '600', color: '#1A1209', marginBottom: '14px', fontSize: '0.95rem' }}>⭐ Other interests</p>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
+                    <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '32px', height: '32px', borderRadius: '8px', background: '#F5F0E8', fontSize: '1.15rem', flexShrink: 0 }}>⭐</span>
+                    <p style={{ fontWeight: '600', color: '#1A1209', margin: 0, fontSize: '0.95rem' }}>Other interests</p>
+                  </div>
                   {state.interests.filter(i => !FOLLOW_UP_QUESTIONS[i]).map((interest) => (
                     <div key={interest} style={{ marginBottom: '12px' }}>
                       <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.875rem', color: '#4A3728' }}>

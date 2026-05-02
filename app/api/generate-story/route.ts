@@ -101,7 +101,7 @@ Requirements:
 10. For each page, write an image prompt. You MUST copy the CHARACTER ANCHOR below word-for-word at the start, then describe only the scene action. The anchor keeps the character identical across all 5 illustrations.
 
 CHARACTER ANCHOR (copy verbatim at the start of every image prompt):
-"Bright children's book cartoon illustration, bold outlines, vivid flat colours. Main character: ${name}, a ${age}-year-old ${gender === 'Boy' ? 'boy' : gender === 'Girl' ? 'girl' : 'child'}${appearanceDesc ? ` with ${appearanceDesc}` : ''}, wearing ${gender === 'Girl' ? 'a bright colourful dress' : 'a blue t-shirt and dark jeans'}, same face and outfit in every scene, consistent cartoon character design."
+"Bright children's book cartoon illustration, bold outlines, vivid flat colours. Main character: ${name}, a young ${age}-year-old child${appearanceDesc ? ` with ${appearanceDesc}` : ''}${gender === 'Boy' ? ', short hair, boyish features' : gender === 'Girl' ? ', long hair, girlish features' : ''}, wearing ${gender === 'Girl' ? 'a bright colourful dress' : 'a blue t-shirt and dark jeans'}, same young child face, same age, same outfit in every single scene — character must look exactly ${age} years old throughout, never older or taller."
 
 Then in 1-2 sentences describe only the scene action (what is happening, where, with whom).
 
