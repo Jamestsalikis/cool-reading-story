@@ -57,7 +57,7 @@ const BONES = {
 // ── Aim camera at upper body (waist to head) ─────────────────────────────────
 function CameraRig() {
   const { camera } = useThree();
-  useEffect(() => { camera.lookAt(0, -0.1, 0); }, [camera]);
+  useEffect(() => { camera.lookAt(0, 0.25, 0); }, [camera]);
   return null;
 }
 
@@ -294,8 +294,9 @@ export default function Fable({ pose = 'welcome', dialogue, size = 180, darkBack
     return () => clearTimeout(t);
   }, [dialogue, pose]);
 
-  // Slightly wider aspect to fit raised arm
-  const h = size * 1.4;
+  // Wider than tall so arms aren't clipped
+  const w = size * 1.4;
+  const h = size * 1.15;
 
   return (
     <>
@@ -303,13 +304,13 @@ export default function Fable({ pose = 'welcome', dialogue, size = 180, darkBack
       <div style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:'10px' }}>
         {showBubble && displayText && <DialogueBubble text={displayText} />}
         <div style={{
-          width:size, height:h, flexShrink:0,
+          width:w, height:h, flexShrink:0,
           background: darkBackground ? '#1C1614' : 'transparent',
           borderRadius:16, overflow:'hidden',
           boxShadow: darkBackground ? '0 8px 32px rgba(116,21,21,0.15)' : 'none',
         }}>
           <Canvas
-            camera={{ position:[0, 0.5, 2.8], fov:32 }}
+            camera={{ position:[0, 0.4, 3.2], fov:34 }}
             style={{ width:'100%', height:'100%' }}
             gl={{ antialias:true, alpha:true }}
             onCreated={({ gl }) => {
