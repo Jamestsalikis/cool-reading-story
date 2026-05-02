@@ -447,14 +447,17 @@ export default function OnboardingPage() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))', gap: '10px', marginBottom: '16px' }}>
               {INTEREST_OPTIONS.map((option) => {
                 const active = state.interests.includes(option.label);
-                const a = (o: number) => `rgba(255,255,255,${o})`;
-                const p = (o: number) => `rgba(0,0,0,${o})`;
-                const c  = (o: number) => active ? a(o) : p(o * 0.6);
+                // Parse primary gradient colour so inactive tiles show their theme colour (not grey)
+                const [r1,g1,b1] = [parseInt(option.g[0].slice(1,3),16), parseInt(option.g[0].slice(3,5),16), parseInt(option.g[0].slice(5,7),16)];
+                const [r2,g2,b2] = [parseInt(option.g[1].slice(1,3),16), parseInt(option.g[1].slice(3,5),16), parseInt(option.g[1].slice(5,7),16)];
+                const a = (o: number) => `rgba(255,255,255,${o})`;                // white on gradient
+                const c = (o: number) => active ? a(o) : `rgba(${r1},${g1},${b1},${o * 0.8})`;  // theme colour on white
+                const c2= (o: number) => active ? a(o * 0.7) : `rgba(${r2},${g2},${b2},${o * 0.65})`; // secondary colour
                 const scene: Record<string, React.ReactNode> = {
                   'Space': (<>
                     {[[8,8],[22,5],[45,10],[62,6],[72,30],[15,40],[55,45],[38,50]].map(([x,y],i)=><circle key={i} cx={x} cy={y} r={i%3===0?2:1.2} fill={c(0.7)} className="it-twinkle" style={{animationDelay:`${i*0.28}s`}}/>)}
                     <circle cx="68" cy="13" r="10" fill={c(0.2)}/>
-                    <circle cx="72" cy="11" r="9"  fill={active?'rgba(49,46,129,0.7)':'white'}/>
+                    <circle cx="72" cy="11" r="9"  fill={active?`rgba(${r1},${g1},${b1},0.7)`:'white'}/>
                     <g className="it-zoom" style={{transformOrigin:'20px 38px'}}>
                       <ellipse cx="20" cy="38" rx="4" ry="9" fill={c(0.9)} transform="rotate(-35,20,38)"/>
                       <polygon points="20,27 16,37 24,37" fill={c(0.6)} transform="rotate(-35,20,27)"/>
@@ -465,13 +468,13 @@ export default function OnboardingPage() {
                   'Art': (<>
                     <rect x="12" y="8" width="56" height="42" rx="3" fill="none" stroke={c(0.3)} strokeWidth="1.5"/>
                     <rect x="15" y="11" width="50" height="36" rx="2" fill={c(0.06)}/>
-                    <circle cx="30" cy="28" r="8"  fill={active?'rgba(255,200,0,0.35)':p(0.07)}/>
-                    <circle cx="46" cy="22" r="6"  fill={active?'rgba(255,80,80,0.35)':p(0.07)}/>
-                    <circle cx="42" cy="36" r="7"  fill={active?'rgba(60,180,60,0.35)':p(0.07)}/>
-                    <circle cx="58" cy="32" r="5"  fill={active?'rgba(80,120,255,0.35)':p(0.07)}/>
+                    <circle cx="30" cy="28" r="8"  fill={active?'rgba(255,200,0,0.45)':'rgba(255,200,0,0.35)'}/>
+                    <circle cx="46" cy="22" r="6"  fill={active?'rgba(255,80,80,0.5)':'rgba(255,80,80,0.35)'}/>
+                    <circle cx="42" cy="36" r="7"  fill={active?'rgba(60,180,60,0.5)':'rgba(60,200,60,0.35)'}/>
+                    <circle cx="58" cy="32" r="5"  fill={active?'rgba(80,120,255,0.5)':'rgba(80,120,255,0.35)'}/>
                     <g className="it-float" style={{transformOrigin:'65px 12px'}}>
                       <rect x="63" y="6" width="4" height="20" rx="2" fill={c(0.7)}/>
-                      <ellipse cx="65" cy="27" rx="3.5" ry="4" fill={active?'rgba(255,200,0,0.9)':p(0.25)}/>
+                      <ellipse cx="65" cy="27" rx="3.5" ry="4" fill={active?'rgba(255,200,0,0.9)':'rgba(234,88,12,0.5)'}/>
                     </g>
                     <path className="it-draw" d="M18,42 Q30,34 45,39 Q56,43 63,37" fill="none" stroke={active?'rgba(255,200,50,0.9)':p(0.2)} strokeWidth="2.5" strokeDasharray="60" strokeLinecap="round"/>
                   </>),
@@ -483,7 +486,7 @@ export default function OnboardingPage() {
                     <g className="it-swim" style={{transformOrigin:'15px 30px'}}>
                       <ellipse cx="15" cy="30" rx="10" ry="5" fill={c(0.8)}/>
                       <polygon points="25,30 32,25 32,35" fill={c(0.6)}/>
-                      <circle cx="12" cy="29" r="1.5" fill={active?'rgba(49,46,129,0.9)':'rgba(0,0,0,0.5)'}/>
+                      <circle cx="12" cy="29" r="1.5" fill={active?`rgba(${r1},${g1},${b1},0.9)`:c(0.6)}/>
                     </g>
                   </>),
                   'Nature': (<>
@@ -591,7 +594,7 @@ export default function OnboardingPage() {
                       <ellipse cx="15" cy="38" rx="8" ry="6" fill={c(0.7)}/>
                       <ellipse cx="22" cy="35" rx="5" ry="4" fill={c(0.6)}/>
                       <polygon points="27,33 33,28 29,35" fill={c(0.5)}/>
-                      <circle cx="24" cy="34" r="1.5" fill={active?'rgba(49,46,129,0.9)':'rgba(0,0,0,0.5)'}/>
+                      <circle cx="24" cy="34" r="1.5" fill={active?`rgba(${r1},${g1},${b1},0.9)`:c(0.6)}/>
                       <line x1="10" y1="43" x2="8"  y2="50" stroke={c(0.6)} strokeWidth="2"/>
                       <line x1="18" y1="43" x2="16" y2="50" stroke={c(0.6)} strokeWidth="2"/>
                     </g>
@@ -628,7 +631,7 @@ export default function OnboardingPage() {
                     <g className="it-float" style={{transformOrigin:'40px 30px'}}>
                       <path d="M32,15 L28,45 Q28,52 40,52 Q52,52 52,45 L48,15 Z" fill={c(0.15)} stroke={c(0.4)} strokeWidth="1.5"/>
                       <rect x="30" y="13" width="20" height="4" rx="2" fill={c(0.3)}/>
-                      <ellipse cx="40" cy="45" rx="9" ry="5" fill={active?'rgba(100,220,255,0.3)':p(0.08)}/>
+                      <ellipse cx="40" cy="45" rx="9" ry="5" fill={active?'rgba(100,220,255,0.4)':'rgba(8,145,178,0.25)'}/>
                     </g>
                     {[0,1,2,3].map(i=>(
                       <circle key={i} cx={33+i*5} cy={38-i*4} r="2.5" fill={c(0.6)} className="it-up" style={{animationDelay:`${i*0.4}s`}}/>
@@ -660,7 +663,7 @@ export default function OnboardingPage() {
                     {[[5,5],[5,55],[75,5],[75,55]].map(([x,y],i)=><line key={i} x1={i<2?5:75} y1={5} x2={i<2?5:75} y2={55} stroke={c(0.3)} strokeWidth="1.5"/>)}
                     <g className="it-bounce" style={{transformOrigin:'40px 30px'}}>
                       <circle cx="40" cy="30" r="9" fill={c(0.7)}/>
-                      {[0,1,2,3,4].map(i=><line key={i} x1="40" y1="30" x2={40+9*Math.cos(i*Math.PI*2/5)} y2={30+9*Math.sin(i*Math.PI*2/5)} stroke={active?'rgba(49,46,129,0.5)':'rgba(0,0,0,0.2)'} strokeWidth="1"/>)}
+                      {[0,1,2,3,4].map(i=><line key={i} x1="40" y1="30" x2={40+9*Math.cos(i*Math.PI*2/5)} y2={30+9*Math.sin(i*Math.PI*2/5)} stroke={active?`rgba(${r1},${g1},${b1},0.5)`:c(0.2)} strokeWidth="1"/>)}
                     </g>
                   </>),
                   'Football': (<>
