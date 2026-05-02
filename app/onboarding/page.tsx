@@ -456,14 +456,37 @@ export default function OnboardingPage() {
                 const p = c; // alias — all previously-grey elements now use theme colour
                 const scene: Record<string, React.ReactNode> = {
                   'Space': (<>
-                    {[[8,8],[22,5],[45,10],[62,6],[72,30],[15,40],[55,45],[38,50]].map(([x,y],i)=><circle key={i} cx={x} cy={y} r={i%3===0?2:1.2} fill={c(0.7)} className="it-twinkle" style={{animationDelay:`${i*0.28}s`}}/>)}
-                    <circle cx="68" cy="13" r="10" fill={c(0.2)}/>
-                    <circle cx="72" cy="11" r="9"  fill={active?`rgba(${r1},${g1},${b1},0.7)`:'white'}/>
-                    <g className="it-zoom" style={{transformOrigin:'20px 38px'}}>
-                      <ellipse cx="20" cy="38" rx="4" ry="9" fill={c(0.9)} transform="rotate(-35,20,38)"/>
-                      <polygon points="20,27 16,37 24,37" fill={c(0.6)} transform="rotate(-35,20,27)"/>
-                      <line x1="14" y1="44" x2="11" y2="50" stroke="#F97316" strokeWidth="2.5" className="it-flash"/>
-                      <line x1="26" y1="44" x2="29" y2="50" stroke="#F97316" strokeWidth="2.5" className="it-flash" style={{animationDelay:'0.1s'}}/>
+                    {/* Stars — 15 white dots at varying sizes, each on its own twinkle timing */}
+                    {[{x:6,y:5,r:1.8},{x:19,y:3,r:1.1},{x:33,y:8,r:2.3},{x:50,y:4,r:1.4},{x:63,y:7,r:1.9},{x:75,y:5,r:1.1},
+                      {x:10,y:22,r:1.3},{x:72,y:20,r:1.7},{x:4,y:40,r:1.5},{x:66,y:42,r:1.2},{x:40,y:52,r:1.7},{x:14,y:53,r:1.1},{x:78,y:48,r:1.4},{x:55,y:30,r:1.0},{x:27,y:32,r:0.9}
+                    ].map(({x,y,r},i)=>(
+                      <circle key={i} cx={x} cy={y} r={r} fill="rgba(255,250,220,0.95)" className="it-twinkle" style={{animationDelay:`${i*0.19}s`}}/>
+                    ))}
+                    {/* Hero star — larger, pulses */}
+                    <circle cx="34" cy="8" r="2.8" fill="rgba(255,255,200,1)" className="it-pulse"/>
+                    {/* Crescent moon — warm yellow with dark bite taken out */}
+                    <circle cx="62" cy="16" r="13" fill="rgba(255,235,140,0.97)" className="it-float"/>
+                    <circle cx="68" cy="13" r="10.5" fill={active ? `rgba(${r1},${g1},${b1},1)` : '#0C0A2E'}/>
+                    {/* Cartoon rocket — flies diagonally on hover */}
+                    <g className="it-zoom" style={{transformOrigin:'14px 50px'}}>
+                      <g transform="rotate(-42,14,44)">
+                        {/* Body */}
+                        <ellipse cx="14" cy="44" rx="6" ry="13" fill="#EF4444"/>
+                        {/* Nose */}
+                        <polygon points="14,29 9,41 19,41" fill="#F97316"/>
+                        {/* Porthole */}
+                        <circle cx="14" cy="44" r="4.5" fill="#BFDBFE"/>
+                        <circle cx="14" cy="44" r="3" fill="#60A5FA"/>
+                        <circle cx="12.5" cy="42.5" r="1" fill="rgba(255,255,255,0.7)"/>
+                        {/* Left fin */}
+                        <polygon points="8,53 5,62 14,57" fill="#B91C1C"/>
+                        {/* Right fin */}
+                        <polygon points="20,53 23,62 14,57" fill="#B91C1C"/>
+                        {/* Flame outer */}
+                        <ellipse cx="14" cy="60" rx="4.5" ry="7" fill="rgba(251,146,60,0.95)"/>
+                        {/* Flame inner */}
+                        <ellipse cx="14" cy="62" rx="2.5" ry="5" fill="rgba(253,224,71,0.95)"/>
+                      </g>
                     </g>
                   </>),
                   'Art': (<>
@@ -791,10 +814,12 @@ export default function OnboardingPage() {
                       overflow: 'hidden',
                       background: active
                         ? `linear-gradient(145deg, ${option.g[0]}, ${option.g[1]})`
-                        : 'white',
+                        : option.label === 'Space' ? '#0C0A2E' : 'white',
                       boxShadow: active
                         ? `0 8px 24px ${option.sh}, 0 2px 4px rgba(0,0,0,0.08)`
-                        : '0 2px 10px rgba(0,0,0,0.07), 0 0 0 1.5px #E8E0D0',
+                        : option.label === 'Space'
+                          ? '0 4px 20px rgba(12,10,46,0.5), 0 0 0 1.5px #1a1648'
+                          : '0 2px 10px rgba(0,0,0,0.07), 0 0 0 1.5px #E8E0D0',
                     }}
                   >
                     <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }} viewBox="0 0 80 60" preserveAspectRatio="xMidYMid slice">
@@ -809,7 +834,7 @@ export default function OnboardingPage() {
                         fontSize: '10px', color: 'white', fontWeight: '800', lineHeight: 1,
                       }}>✓</span>
                     )}
-                    <span style={{ position: 'relative', zIndex: 1, fontSize: '0.72rem', fontWeight: '700', lineHeight: 1.25, textAlign: 'center', color: active ? 'rgba(255,255,255,0.95)' : '#1A1209', letterSpacing: '0.01em' }}>
+                    <span style={{ position: 'relative', zIndex: 1, fontSize: '0.72rem', fontWeight: '700', lineHeight: 1.25, textAlign: 'center', color: (active || option.label === 'Space') ? 'rgba(255,255,255,0.95)' : '#1A1209', letterSpacing: '0.01em' }}>
                       {option.label}
                     </span>
                   </button>
