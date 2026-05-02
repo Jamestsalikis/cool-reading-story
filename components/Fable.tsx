@@ -54,10 +54,10 @@ const BONES = {
   spine03:   'spine_03.x',
 };
 
-// ── Aim camera at face/chest ──────────────────────────────────────────────────
+// ── Aim camera at upper body (waist to head) ─────────────────────────────────
 function CameraRig() {
   const { camera } = useThree();
-  useEffect(() => { camera.lookAt(0, 0.3, 0); }, [camera]);
+  useEffect(() => { camera.lookAt(0, -0.1, 0); }, [camera]);
   return null;
 }
 
@@ -129,6 +129,7 @@ function AuroraCharacter({ pose }: { pose: FablePose }) {
   const started = useRef(false);
   const blinkT  = useRef<ReturnType<typeof setTimeout>>();
   const smileT  = useRef<ReturnType<typeof setTimeout>>();
+  const waveT   = useRef<ReturnType<typeof setTimeout>>();
 
   const loop = useCallback((name: string, w = 1) => {
     const a = actions[name]; if (!a) return;
@@ -183,8 +184,25 @@ function AuroraCharacter({ pose }: { pose: FablePose }) {
     };
     smileT.current = setTimeout(pulseEyebrow, 1500);
 
-    return () => { if (smileT.current) clearTimeout(smileT.current); };
-  }, [pose, loop, once, stop]);
+    // ARM-TEST wave on welcome/excited — cages are hidden so it looks clean
+    if (waveT.current) clearTimeout(waveT.current);
+    const waveAnim = actions['ARM-TEST'];
+    if ((pose === 'welcome' || pose === 'excited') && waveAnim) {
+      const doWave = () => {
+        waveAnim.setLoop(THREE.LoopOnce, 1);
+        waveAnim.clampWhenFinished = true;
+        waveAnim.reset().setEffectiveWeight(1).fadeIn(0.15).play();
+        waveT.current = setTimeout(doWave, (waveAnim.getClip().duration * 1000) + 1500 + Math.random() * 1000);
+      };
+      doWave();
+    }
+
+    return () => {
+      if (smileT.current) clearTimeout(smileT.current);
+      if (waveT.current)  clearTimeout(waveT.current);
+      actions['ARM-TEST']?.stop();
+    };
+  }, [pose, actions, loop, once, stop]);
 
   // ── Bone-driven motion ────────────────────────────────────────────────────
   useFrame(({ clock }) => {
@@ -291,7 +309,7 @@ export default function Fable({ pose = 'welcome', dialogue, size = 180, darkBack
           boxShadow: darkBackground ? '0 8px 32px rgba(116,21,21,0.15)' : 'none',
         }}>
           <Canvas
-            camera={{ position:[0, 0.8, 4.5], fov:46 }}
+            camera={{ position:[0, 0.5, 2.8], fov:32 }}
             style={{ width:'100%', height:'100%' }}
             gl={{ antialias:true, alpha:true }}
             onCreated={({ gl }) => {
