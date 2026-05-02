@@ -57,7 +57,7 @@ const BONES = {
 // ── Aim camera at upper body (waist to head) ─────────────────────────────────
 function CameraRig() {
   const { camera } = useThree();
-  useEffect(() => { camera.lookAt(0, 0.5, 0); }, [camera]);
+  useEffect(() => { camera.lookAt(0, 1.0, 0); }, [camera]);
   return null;
 }
 
@@ -184,8 +184,25 @@ function AuroraCharacter({ pose }: { pose: FablePose }) {
     };
     smileT.current = setTimeout(pulseEyebrow, 1500);
 
-    return () => { if (smileT.current) clearTimeout(smileT.current); };
-  }, [pose, loop, once, stop]);
+    // ARM-TEST wave — mixer-driven so shirt follows correctly
+    if (waveT.current) clearTimeout(waveT.current);
+    const waveAnim = actions['ARM-TEST'];
+    if ((pose === 'welcome' || pose === 'excited') && waveAnim) {
+      const doWave = () => {
+        waveAnim.setLoop(THREE.LoopOnce, 1);
+        waveAnim.clampWhenFinished = true;
+        waveAnim.reset().setEffectiveWeight(1).fadeIn(0.15).play();
+        waveT.current = setTimeout(doWave, (waveAnim.getClip().duration * 1000) + 1500);
+      };
+      doWave();
+    }
+
+    return () => {
+      if (smileT.current) clearTimeout(smileT.current);
+      if (waveT.current) clearTimeout(waveT.current);
+      actions['ARM-TEST']?.stop();
+    };
+  }, [pose, actions, loop, once, stop]);
 
   // ── Bone-driven motion ────────────────────────────────────────────────────
   useFrame(({ clock }) => {
@@ -205,27 +222,6 @@ function AuroraCharacter({ pose }: { pose: FablePose }) {
     }
     if (b.current[BONES.neckX]) {
       b.current[BONES.neckX].rotation.z = Math.sin(t * 0.32) * 0.012;
-    }
-
-    // ── ARM WAVE (deformation bones) ─────────────────────────────────────
-    const armR = b.current[BONES.armR];
-    const faR  = b.current[BONES.forearmR];
-    const shR  = b.current[BONES.shoulderR];
-
-    if (pose === 'welcome' || pose === 'excited') {
-      const speed = pose === 'excited' ? 3.5 : 2.6;
-      const amp   = pose === 'excited' ? 0.5  : 0.38;
-      // Shoulder lifts arm up
-      if (shR) { shR.rotation.z = 0.4 + Math.sin(t * speed * 0.5) * 0.1; shR.rotation.x = -0.2; }
-      // Upper arm waves
-      if (armR) { armR.rotation.z = -(1.1 + Math.sin(t * speed) * amp); armR.rotation.x = -0.15; }
-      // Forearm follows
-      if (faR)  { faR.rotation.z  = -(0.5 + Math.sin(t * speed + 0.8) * 0.25); }
-    } else {
-      // Ease arm back to rest
-      if (shR)  { shR.rotation.z  += (0 - shR.rotation.z)  * 0.06; shR.rotation.x  += (0 - shR.rotation.x)  * 0.06; }
-      if (armR) { armR.rotation.z += (0 - armR.rotation.z) * 0.06; armR.rotation.x += (0 - armR.rotation.x) * 0.06; }
-      if (faR)  { faR.rotation.z  += (0 - faR.rotation.z)  * 0.06; }
     }
 
     // SPINE: slight forward lean for focused poses
@@ -293,7 +289,7 @@ export default function Fable({ pose = 'welcome', dialogue, size = 180, darkBack
           boxShadow: darkBackground ? '0 8px 32px rgba(116,21,21,0.15)' : 'none',
         }}>
           <Canvas
-            camera={{ position:[0, 0.4, 3.2], fov:34 }}
+            camera={{ position:[0, 0.5, 4.0], fov:40 }}
             style={{ width:'100%', height:'100%' }}
             gl={{ antialias:true, alpha:true }}
             onCreated={({ gl }) => {
