@@ -57,7 +57,7 @@ const BONES = {
 // ── Aim camera at upper body (waist to head) ─────────────────────────────────
 function CameraRig() {
   const { camera } = useThree();
-  useEffect(() => { camera.lookAt(0, 0.25, 0); }, [camera]);
+  useEffect(() => { camera.lookAt(0, 0.5, 0); }, [camera]);
   return null;
 }
 
@@ -184,25 +184,8 @@ function AuroraCharacter({ pose }: { pose: FablePose }) {
     };
     smileT.current = setTimeout(pulseEyebrow, 1500);
 
-    // ARM-TEST wave on welcome/excited — cages are hidden so it looks clean
-    if (waveT.current) clearTimeout(waveT.current);
-    const waveAnim = actions['ARM-TEST'];
-    if ((pose === 'welcome' || pose === 'excited') && waveAnim) {
-      const doWave = () => {
-        waveAnim.setLoop(THREE.LoopOnce, 1);
-        waveAnim.clampWhenFinished = true;
-        waveAnim.reset().setEffectiveWeight(1).fadeIn(0.15).play();
-        waveT.current = setTimeout(doWave, (waveAnim.getClip().duration * 1000) + 1500 + Math.random() * 1000);
-      };
-      doWave();
-    }
-
-    return () => {
-      if (smileT.current) clearTimeout(smileT.current);
-      if (waveT.current)  clearTimeout(waveT.current);
-      actions['ARM-TEST']?.stop();
-    };
-  }, [pose, actions, loop, once, stop]);
+    return () => { if (smileT.current) clearTimeout(smileT.current); };
+  }, [pose, loop, once, stop]);
 
   // ── Bone-driven motion ────────────────────────────────────────────────────
   useFrame(({ clock }) => {
@@ -250,7 +233,7 @@ function AuroraCharacter({ pose }: { pose: FablePose }) {
       const lean = (pose === 'writing' || pose === 'painting') ? 0.07 : 0;
       b.current[BONES.spine02].rotation.x += (lean - b.current[BONES.spine02].rotation.x) * 0.05;
     }
-  });
+  }, 1); // priority 1 — runs AFTER AnimationMixer so rotations aren't overwritten
 
   return (
     <group ref={group}>
