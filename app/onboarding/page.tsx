@@ -445,7 +445,9 @@ export default function OnboardingPage() {
               .int-tile:hover .it-leaf   { animation: it-leaf 2s ease-out infinite; }
 
               @keyframes it-rocket-fly { 0%{transform:translateX(-40px);opacity:0} 12%,88%{opacity:1} 100%{transform:translateX(125px);opacity:0} }
-              .int-tile:hover .it-rocket-h { animation: it-rocket-fly 1.8s ease-in-out infinite; }
+              .int-tile:hover .it-rocket-h { animation: it-rocket-fly 2.6s ease-in-out infinite; }
+              @keyframes it-star-blink { 0%,100%{opacity:0.9} 50%{opacity:0.08} }
+              .it-star { animation: it-star-blink 2s ease-in-out infinite; }
             `}</style>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))', gap: '10px', marginBottom: '16px' }}>
               {INTEREST_OPTIONS.map((option) => {
@@ -459,14 +461,14 @@ export default function OnboardingPage() {
                 const p = c; // alias — all previously-grey elements now use theme colour
                 const scene: Record<string, React.ReactNode> = {
                   'Space': (<>
-                    {/* Stars — fixed positions, only twinkle */}
+                    {/* Stars — opacity only (no scale/transform so they don't appear to move) */}
                     {[{x:6,y:5,r:1.8},{x:19,y:3,r:1.1},{x:33,y:8,r:2.3},{x:50,y:4,r:1.4},{x:63,y:7,r:1.9},{x:75,y:5,r:1.1},
                       {x:10,y:22,r:1.3},{x:72,y:20,r:1.7},{x:4,y:40,r:1.5},{x:66,y:42,r:1.2},{x:40,y:52,r:1.7},{x:14,y:53,r:1.1},{x:78,y:48,r:1.4},{x:55,y:30,r:1.0},{x:27,y:32,r:0.9}
                     ].map(({x,y,r},i)=>(
-                      <circle key={i} cx={x} cy={y} r={r} fill="rgba(255,250,220,0.95)" className="it-twinkle" style={{animationDelay:`${i*0.19}s`}}/>
+                      <circle key={i} cx={x} cy={y} r={r} fill="rgba(255,250,220,0.95)" className="it-star" style={{animationDelay:`${i*0.19}s`}}/>
                     ))}
-                    {/* Hero star — fixed, just pulses opacity */}
-                    <circle cx="34" cy="8" r="2.8" fill="rgba(255,255,200,1)" className="it-twinkle" style={{animationDelay:'0.7s'}}/>
+                    {/* Hero star — same pure opacity blink */}
+                    <circle cx="34" cy="8" r="2.8" fill="rgba(255,255,200,1)" className="it-star" style={{animationDelay:'0.7s'}}/>
                     {/* Crescent moon — fixed position, no movement */}
                     <circle cx="62" cy="16" r="13" fill="rgba(255,235,140,0.97)"/>
                     <circle cx="68" cy="13" r="10.5" fill={active ? `rgba(${r1},${g1},${b1},1)` : '#0C0A2E'}/>
