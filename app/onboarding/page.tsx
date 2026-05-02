@@ -443,6 +443,9 @@ export default function OnboardingPage() {
               .int-tile:hover .it-beam   { animation: it-beam 1.2s ease-in-out infinite; }
               .int-tile:hover .it-stir   { animation: it-stir 1s linear infinite; }
               .int-tile:hover .it-leaf   { animation: it-leaf 2s ease-out infinite; }
+
+              @keyframes it-rocket-fly { 0%{transform:translateX(-40px);opacity:0} 12%,88%{opacity:1} 100%{transform:translateX(125px);opacity:0} }
+              .int-tile:hover .it-rocket-h { animation: it-rocket-fly 1.8s ease-in-out infinite; }
             `}</style>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))', gap: '10px', marginBottom: '16px' }}>
               {INTEREST_OPTIONS.map((option) => {
@@ -456,37 +459,34 @@ export default function OnboardingPage() {
                 const p = c; // alias — all previously-grey elements now use theme colour
                 const scene: Record<string, React.ReactNode> = {
                   'Space': (<>
-                    {/* Stars — 15 white dots at varying sizes, each on its own twinkle timing */}
+                    {/* Stars — fixed positions, only twinkle */}
                     {[{x:6,y:5,r:1.8},{x:19,y:3,r:1.1},{x:33,y:8,r:2.3},{x:50,y:4,r:1.4},{x:63,y:7,r:1.9},{x:75,y:5,r:1.1},
                       {x:10,y:22,r:1.3},{x:72,y:20,r:1.7},{x:4,y:40,r:1.5},{x:66,y:42,r:1.2},{x:40,y:52,r:1.7},{x:14,y:53,r:1.1},{x:78,y:48,r:1.4},{x:55,y:30,r:1.0},{x:27,y:32,r:0.9}
                     ].map(({x,y,r},i)=>(
                       <circle key={i} cx={x} cy={y} r={r} fill="rgba(255,250,220,0.95)" className="it-twinkle" style={{animationDelay:`${i*0.19}s`}}/>
                     ))}
-                    {/* Hero star — larger, pulses */}
-                    <circle cx="34" cy="8" r="2.8" fill="rgba(255,255,200,1)" className="it-pulse"/>
-                    {/* Crescent moon — warm yellow with dark bite taken out */}
-                    <circle cx="62" cy="16" r="13" fill="rgba(255,235,140,0.97)" className="it-float"/>
+                    {/* Hero star — fixed, just pulses opacity */}
+                    <circle cx="34" cy="8" r="2.8" fill="rgba(255,255,200,1)" className="it-twinkle" style={{animationDelay:'0.7s'}}/>
+                    {/* Crescent moon — fixed position, no movement */}
+                    <circle cx="62" cy="16" r="13" fill="rgba(255,235,140,0.97)"/>
                     <circle cx="68" cy="13" r="10.5" fill={active ? `rgba(${r1},${g1},${b1},1)` : '#0C0A2E'}/>
-                    {/* Cartoon rocket — flies diagonally on hover */}
-                    <g className="it-zoom" style={{transformOrigin:'14px 50px'}}>
-                      <g transform="rotate(-42,14,44)">
-                        {/* Body */}
-                        <ellipse cx="14" cy="44" rx="6" ry="13" fill="#EF4444"/>
-                        {/* Nose */}
-                        <polygon points="14,29 9,41 19,41" fill="#F97316"/>
-                        {/* Porthole */}
-                        <circle cx="14" cy="44" r="4.5" fill="#BFDBFE"/>
-                        <circle cx="14" cy="44" r="3" fill="#60A5FA"/>
-                        <circle cx="12.5" cy="42.5" r="1" fill="rgba(255,255,255,0.7)"/>
-                        {/* Left fin */}
-                        <polygon points="8,53 5,62 14,57" fill="#B91C1C"/>
-                        {/* Right fin */}
-                        <polygon points="20,53 23,62 14,57" fill="#B91C1C"/>
-                        {/* Flame outer */}
-                        <ellipse cx="14" cy="60" rx="4.5" ry="7" fill="rgba(251,146,60,0.95)"/>
-                        {/* Flame inner */}
-                        <ellipse cx="14" cy="62" rx="2.5" ry="5" fill="rgba(253,224,71,0.95)"/>
-                      </g>
+                    {/* Rocket — flies straight left-to-right on hover */}
+                    <g className="it-rocket-h">
+                      {/* Body - horizontal ellipse */}
+                      <ellipse cx="0" cy="32" rx="14" ry="6" fill="#EF4444"/>
+                      {/* Nose cone — points right */}
+                      <polygon points="14,32 8,26 8,38" fill="#F97316"/>
+                      {/* Porthole */}
+                      <circle cx="-3" cy="32" r="4.5" fill="#BFDBFE"/>
+                      <circle cx="-3" cy="32" r="3"   fill="#60A5FA"/>
+                      <circle cx="-4.5" cy="30.5" r="1" fill="rgba(255,255,255,0.7)"/>
+                      {/* Top fin */}
+                      <polygon points="-10,26 -16,18 -8,26" fill="#B91C1C"/>
+                      {/* Bottom fin */}
+                      <polygon points="-10,38 -16,46 -8,38" fill="#B91C1C"/>
+                      {/* Flame — at the back (left) */}
+                      <ellipse cx="-16" cy="32" rx="8"   ry="4.5" fill="rgba(251,146,60,0.95)"/>
+                      <ellipse cx="-18" cy="32" rx="5.5" ry="3"   fill="rgba(253,224,71,0.95)"/>
                     </g>
                   </>),
                   'Art': (<>
