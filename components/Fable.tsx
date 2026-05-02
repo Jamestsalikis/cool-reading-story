@@ -233,7 +233,7 @@ function AuroraCharacter({ pose }: { pose: FablePose }) {
       const lean = (pose === 'writing' || pose === 'painting') ? 0.07 : 0;
       b.current[BONES.spine02].rotation.x += (lean - b.current[BONES.spine02].rotation.x) * 0.05;
     }
-  }, 1); // priority 1 — runs AFTER AnimationMixer so rotations aren't overwritten
+  }); // default priority — breathing anim doesn't touch arm bones so rotations survive
 
   return (
     <group ref={group}>
