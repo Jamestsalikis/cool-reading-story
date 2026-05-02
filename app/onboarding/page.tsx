@@ -27,34 +27,35 @@ type OnboardingState = {
   readingLevel: string;
 };
 
+// Each interest has a gradient pair + shadow colour for the selected tile
 const INTEREST_OPTIONS = [
-  { emoji: '🦸', label: 'Superheroes' },
-  { emoji: '🧙', label: 'Fantasy' },
-  { emoji: '🧚', label: 'Fairies' },
-  { emoji: '🦄', label: 'Unicorns' },
-  { emoji: '👑', label: 'Princesses' },
-  { emoji: '🏴‍☠️', label: 'Pirates' },
-  { emoji: '🪄', label: 'Magic' },
-  { emoji: '👽', label: 'Aliens' },
-  { emoji: '🦕', label: 'Dinosaurs' },
-  { emoji: '🐾', label: 'Animals' },
-  { emoji: '🌊', label: 'Ocean' },
-  { emoji: '🌿', label: 'Nature' },
-  { emoji: '🚀', label: 'Space' },
-  { emoji: '🤖', label: 'Robots' },
-  { emoji: '🔬', label: 'Science' },
-  { emoji: '🎮', label: 'Gaming' },
-  { emoji: '⚽', label: 'Soccer' },
-  { emoji: '🏈', label: 'Football' },
-  { emoji: '🤸', label: 'Gymnastics' },
-  { emoji: '💃', label: 'Dancing' },
-  { emoji: '🥋', label: 'Karate' },
-  { emoji: '🏊', label: 'Swimming' },
-  { emoji: '🎨', label: 'Art' },
-  { emoji: '🎵', label: 'Music' },
-  { emoji: '🍳', label: 'Cooking' },
-  { emoji: '🪆', label: 'Dolls' },
-  { emoji: '🚗', label: 'Cars & Trucks' },
+  { emoji: '🦸', label: 'Superheroes',   g: ['#4F46E5','#7C3AED'], sh: 'rgba(79,70,229,0.40)' },
+  { emoji: '🧙', label: 'Fantasy',       g: ['#6D28D9','#9333EA'], sh: 'rgba(109,40,217,0.40)' },
+  { emoji: '🧚', label: 'Fairies',       g: ['#DB2777','#F472B6'], sh: 'rgba(219,39,119,0.40)' },
+  { emoji: '🦄', label: 'Unicorns',      g: ['#9333EA','#EC4899'], sh: 'rgba(147,51,234,0.40)' },
+  { emoji: '👑', label: 'Princesses',    g: ['#D97706','#F472B6'], sh: 'rgba(217,119,6,0.40)' },
+  { emoji: '🏴‍☠️', label: 'Pirates',   g: ['#1E3A5F','#374151'], sh: 'rgba(30,58,95,0.40)' },
+  { emoji: '🪄', label: 'Magic',         g: ['#7C3AED','#A855F7'], sh: 'rgba(124,58,237,0.40)' },
+  { emoji: '👽', label: 'Aliens',        g: ['#059669','#10B981'], sh: 'rgba(5,150,105,0.40)' },
+  { emoji: '🦕', label: 'Dinosaurs',     g: ['#15803D','#22C55E'], sh: 'rgba(21,128,61,0.40)' },
+  { emoji: '🐾', label: 'Animals',       g: ['#D97706','#F59E0B'], sh: 'rgba(217,119,6,0.40)' },
+  { emoji: '🌊', label: 'Ocean',         g: ['#0284C7','#38BDF8'], sh: 'rgba(2,132,199,0.40)' },
+  { emoji: '🌿', label: 'Nature',        g: ['#16A34A','#4ADE80'], sh: 'rgba(22,163,74,0.40)' },
+  { emoji: '🚀', label: 'Space',         g: ['#312E81','#4F46E5'], sh: 'rgba(49,46,129,0.40)' },
+  { emoji: '🤖', label: 'Robots',        g: ['#334155','#3B82F6'], sh: 'rgba(51,65,85,0.40)' },
+  { emoji: '🔬', label: 'Science',       g: ['#0891B2','#22D3EE'], sh: 'rgba(8,145,178,0.40)' },
+  { emoji: '🎮', label: 'Gaming',        g: ['#4F46E5','#7C3AED'], sh: 'rgba(79,70,229,0.40)' },
+  { emoji: '⚽', label: 'Soccer',        g: ['#15803D','#4ADE80'], sh: 'rgba(21,128,61,0.40)' },
+  { emoji: '🏈', label: 'Football',      g: ['#92400E','#D97706'], sh: 'rgba(146,64,14,0.40)' },
+  { emoji: '🤸', label: 'Gymnastics',    g: ['#BE185D','#F472B6'], sh: 'rgba(190,24,93,0.40)' },
+  { emoji: '💃', label: 'Dancing',       g: ['#DC2626','#F87171'], sh: 'rgba(220,38,38,0.40)' },
+  { emoji: '🥋', label: 'Karate',        g: ['#B45309','#EF4444'], sh: 'rgba(180,83,9,0.40)' },
+  { emoji: '🏊', label: 'Swimming',      g: ['#0284C7','#7DD3FC'], sh: 'rgba(2,132,199,0.40)' },
+  { emoji: '🎨', label: 'Art',           g: ['#EA580C','#FBBF24'], sh: 'rgba(234,88,12,0.40)' },
+  { emoji: '🎵', label: 'Music',         g: ['#7C3AED','#C084FC'], sh: 'rgba(124,58,237,0.40)' },
+  { emoji: '🍳', label: 'Cooking',       g: ['#D97706','#FB923C'], sh: 'rgba(217,119,6,0.40)' },
+  { emoji: '🪆', label: 'Dolls',         g: ['#DB2777','#FB7185'], sh: 'rgba(219,39,119,0.40)' },
+  { emoji: '🚗', label: 'Cars & Trucks', g: ['#DC2626','#F97316'], sh: 'rgba(220,38,38,0.40)' },
 ];
 
 // 2 questions per interest — specific enough to give Claude vivid details
@@ -390,19 +391,50 @@ export default function OnboardingPage() {
             <h1 className="font-serif" style={{ fontSize: '2rem', marginBottom: '8px', color: '#1A1209' }}>What does {state.name || 'your child'} love?</h1>
             <p style={{ color: '#6B5E4E', marginBottom: '32px', fontSize: '0.95rem' }}>Select at least 2 — these shape every story</p>
 
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '16px' }}>
+            <style>{`
+              .int-tile { transition: transform 0.15s ease, box-shadow 0.15s ease; }
+              .int-tile:hover { transform: translateY(-3px) scale(1.04); }
+              .int-tile:active { transform: scale(0.96); }
+            `}</style>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))', gap: '10px', marginBottom: '16px' }}>
               {INTEREST_OPTIONS.map((option) => {
                 const active = state.interests.includes(option.label);
                 return (
-                  <button key={option.label} onClick={() => handleInterestToggle(option.label)}
-                    style={{ ...chip(active), padding: '0.4rem 0.85rem', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <button
+                    key={option.label}
+                    className="int-tile"
+                    onClick={() => handleInterestToggle(option.label)}
+                    style={{
+                      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                      padding: '16px 8px 14px',
+                      borderRadius: '18px',
+                      minHeight: '96px',
+                      gap: '8px',
+                      cursor: 'pointer',
+                      border: 'none',
+                      position: 'relative',
+                      background: active
+                        ? `linear-gradient(145deg, ${option.g[0]}, ${option.g[1]})`
+                        : 'white',
+                      boxShadow: active
+                        ? `0 8px 24px ${option.sh}, 0 2px 4px rgba(0,0,0,0.08)`
+                        : '0 2px 10px rgba(0,0,0,0.07), 0 0 0 1.5px #E8E0D0',
+                    }}
+                  >
+                    {active && (
+                      <span style={{
+                        position: 'absolute', top: '8px', right: '9px',
+                        width: '18px', height: '18px', borderRadius: '50%',
+                        background: 'rgba(255,255,255,0.28)',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        fontSize: '10px', color: 'white', fontWeight: '800', lineHeight: 1,
+                      }}>✓</span>
+                    )}
+                    <span style={{ fontSize: '2.1rem', lineHeight: 1, display: 'block' }}>{option.emoji}</span>
                     <span style={{
-                      display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-                      width: '26px', height: '26px', borderRadius: '6px',
-                      background: active ? 'rgba(255,255,255,0.2)' : '#F5F0E8',
-                      fontSize: '1rem', flexShrink: 0,
-                    }}>{option.emoji}</span>
-                    {option.label}
+                      fontSize: '0.72rem', fontWeight: '600', lineHeight: 1.25, textAlign: 'center',
+                      color: active ? 'rgba(255,255,255,0.95)' : '#1A1209',
+                    }}>{option.label}</span>
                   </button>
                 );
               })}
