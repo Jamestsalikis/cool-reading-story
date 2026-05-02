@@ -450,9 +450,10 @@ export default function OnboardingPage() {
                 // Parse primary gradient colour so inactive tiles show their theme colour (not grey)
                 const [r1,g1,b1] = [parseInt(option.g[0].slice(1,3),16), parseInt(option.g[0].slice(3,5),16), parseInt(option.g[0].slice(5,7),16)];
                 const [r2,g2,b2] = [parseInt(option.g[1].slice(1,3),16), parseInt(option.g[1].slice(3,5),16), parseInt(option.g[1].slice(5,7),16)];
-                const a = (o: number) => `rgba(255,255,255,${o})`;                // white on gradient
-                const c = (o: number) => active ? a(o) : `rgba(${r1},${g1},${b1},${o * 0.8})`;  // theme colour on white
-                const c2= (o: number) => active ? a(o * 0.7) : `rgba(${r2},${g2},${b2},${o * 0.65})`; // secondary colour
+                const a = (o: number) => `rgba(255,255,255,${o})`;
+                const c = (o: number) => active ? a(o) : `rgba(${r1},${g1},${b1},${o * 0.8})`;
+                const c2= (o: number) => active ? a(o * 0.7) : `rgba(${r2},${g2},${b2},${o * 0.65})`;
+                const p = c; // alias — all previously-grey elements now use theme colour
                 const scene: Record<string, React.ReactNode> = {
                   'Space': (<>
                     {[[8,8],[22,5],[45,10],[62,6],[72,30],[15,40],[55,45],[38,50]].map(([x,y],i)=><circle key={i} cx={x} cy={y} r={i%3===0?2:1.2} fill={c(0.7)} className="it-twinkle" style={{animationDelay:`${i*0.28}s`}}/>)}
