@@ -452,6 +452,8 @@ export default function OnboardingPage() {
               @keyframes it-pirate-wave   { 0%{transform:rotate(-40deg)} 40%{transform:rotate(55deg)} 80%{transform:rotate(-35deg)} 100%{transform:rotate(-40deg)} }
               .int-tile:hover .it-pirate-appear { animation: it-pirate-appear 0.55s ease forwards; }
               .int-tile:hover .it-pirate-wave   { animation: it-pirate-wave 0.9s ease-in-out infinite 0.55s; }
+              @keyframes it-wand-swing { 0%{transform:rotate(-16deg)} 25%{transform:rotate(13deg)} 50%{transform:rotate(-12deg)} 75%{transform:rotate(15deg)} 100%{transform:rotate(-16deg)} }
+              .it-wand-swing { animation: it-wand-swing 2.4s ease-in-out infinite; }
               @keyframes it-star-blink { 0%,100%{opacity:0.9} 50%{opacity:0.08} }
               .it-star { animation: it-star-blink 2s ease-in-out infinite; }
             `}</style>
@@ -662,16 +664,37 @@ export default function OnboardingPage() {
                       </g>
                     </g>
                   </>),
-                  // ── MAGIC — wand & sparkles ─────────────────────────────────
+                  // ── MAGIC — wand waves with sparkles ────────────────────────
                   'Magic': (<>
-                    <line x1="30" y1="52" x2="56" y2="14" stroke={c(0.55)} strokeWidth="3" strokeLinecap="round"/>
-                    <rect x="28" y="48" width="6" height="8" rx="2" fill={c(0.4)}/>
-                    <circle cx="56" cy="12" r="7" fill={c(0.4)}/>
-                    <circle cx="56" cy="12" r="4.5" fill={c(0.75)} className="it-pulse"/>
-                    {[0,1,2,3,4,5].map(i=><circle key={i} r="2.5" fill={c(0.85)} className="it-orbit" style={{transformOrigin:'56px 12px',animationDelay:`${i*0.2}s`}}/>)}
-                    {[{x:12,y:12},{x:72,y:8},{x:8,y:38},{x:74,y:40},{x:40,y:54}].map(({x,y},i)=>(
-                      <circle key={i} cx={x} cy={y} r="1.8" fill={c(0.8)} className="it-star" style={{animationDelay:`${i*0.28}s`}}/>
+                    {/* Background sparkles — fixed positions, opacity blink only */}
+                    {[{x:8,y:7},{x:68,y:5},{x:74,y:22},{x:12,y:38},{x:72,y:45},{x:5,y:52},{x:38,y:56}].map(({x,y},i)=>(
+                      <circle key={i} cx={x} cy={y} r={i%2===0?1.8:1.2} fill={c(0.85)} className="it-star" style={{animationDelay:`${i*0.3}s`}}/>
                     ))}
+                    {/* Entire wand pivots from handle — always waving */}
+                    <g className="it-wand-swing" style={{transformOrigin:'34px 52px'}}>
+                      {/* Handle */}
+                      <rect x="29" y="48" width="10" height="13" rx="4" fill="rgba(90,50,15,0.97)"/>
+                      <rect x="27" y="44" width="14" height="6"  rx="3" fill="rgba(130,80,20,0.97)"/>
+                      {/* Wand stick */}
+                      <line x1="34" y1="44" x2="56" y2="10" stroke="rgba(210,175,95,0.95)" strokeWidth="3" strokeLinecap="round"/>
+                      {/* Tip glow halo */}
+                      <circle cx="56" cy="9" r="8" fill={c(0.18)}/>
+                      <circle cx="56" cy="9" r="5" fill={c(0.4)}/>
+                      {/* Bright star tip */}
+                      <circle cx="56" cy="9" r="3" fill={c(0.95)} className="it-pulse"/>
+                      {/* Star rays */}
+                      {[0,1,2,3,4,5,6,7].map(i=>(
+                        <line key={i} x1="56" y1="9" x2={56+8*Math.cos(i*45*Math.PI/180)} y2={9+8*Math.sin(i*45*Math.PI/180)} stroke={c(0.7)} strokeWidth="1.2" strokeLinecap="round"/>
+                      ))}
+                      {/* Orbiting sparkles around the star tip */}
+                      {[0,1,2,3,4,5].map(i=>(
+                        <circle key={i} r="2.2" fill={c(0.9)} className="it-orbit" style={{transformOrigin:'56px 9px',animationDelay:`${i*0.2}s`}}/>
+                      ))}
+                      {/* Sparkle trail along the wand stick */}
+                      {[{x:51,y:17},{x:47,y:24},{x:42,y:31},{x:38,y:38}].map(({x,y},i)=>(
+                        <circle key={i} cx={x} cy={y} r={2.2-i*0.4} fill={c(0.55-i*0.08)} className="it-star" style={{animationDelay:`${i*0.2}s`}}/>
+                      ))}
+                    </g>
                   </>),
                   // ── ALIENS — encounter ──────────────────────────────────────
                   'Aliens': (<>
