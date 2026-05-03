@@ -446,12 +446,12 @@ export default function OnboardingPage() {
 
               @keyframes it-rocket-fly { 0%{transform:translateX(-40px);opacity:0} 12%,88%{opacity:1} 100%{transform:translateX(125px);opacity:0} }
               .int-tile:hover .it-rocket-h { animation: it-rocket-fly 2.6s ease-in-out infinite; }
-              @keyframes it-hero { 0%{transform:translate(-90px,0);opacity:0} 20%{transform:translate(0,0);opacity:1} 30%{transform:translate(0,-4px);opacity:1} 40%{transform:translate(0,0);opacity:1} 50%{transform:translate(0,-3px);opacity:1} 60%{transform:translate(0,0);opacity:1} 70%{transform:translate(0,-2px);opacity:1} 80%{transform:translate(90px,-8px);opacity:1} 92%{transform:translate(90px,-8px);opacity:0} 100%{transform:translate(-90px,0);opacity:0} }
-              .int-tile:hover .it-hero { animation: it-hero 3.5s ease-in-out infinite; }
-              @keyframes it-pirate-appear { 0%{transform:translateY(6px);opacity:0} 40%{transform:translateY(0);opacity:1} 100%{transform:translateY(0);opacity:1} }
-              @keyframes it-pirate-wave   { 0%{transform:rotate(-40deg)} 40%{transform:rotate(55deg)} 80%{transform:rotate(-35deg)} 100%{transform:rotate(-40deg)} }
-              .int-tile:hover .it-pirate-appear { animation: it-pirate-appear 0.55s ease forwards; }
-              .int-tile:hover .it-pirate-wave   { animation: it-pirate-wave 0.9s ease-in-out infinite 0.55s; }
+              @keyframes it-hero { 0%{transform:translate(-100px,0);opacity:0} 18%{transform:translate(0,0);opacity:1} 28%{transform:translate(0,-5px);opacity:1} 38%{transform:translate(0,0);opacity:1} 48%{transform:translate(0,-4px);opacity:1} 58%{transform:translate(0,0);opacity:1} 68%{transform:translate(0,-3px);opacity:1} 78%{transform:translate(100px,-10px);opacity:1} 90%{transform:translate(100px,-10px);opacity:0} 100%{transform:translate(-100px,0);opacity:0} }
+              .int-tile:hover .it-hero { animation: it-hero 2.4s ease-in-out infinite; }
+              @keyframes it-pirate-appear { 0%{transform:translateY(8px) scale(0.7);opacity:0} 50%{transform:translateY(0) scale(1);opacity:1} 100%{transform:translateY(0) scale(1);opacity:1} }
+              @keyframes it-pirate-wave   { 0%{transform:rotate(-45deg)} 35%{transform:rotate(60deg)} 70%{transform:rotate(-40deg)} 100%{transform:rotate(-45deg)} }
+              .int-tile:hover .it-pirate-appear { animation: it-pirate-appear 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+              .int-tile:hover .it-pirate-wave   { animation: it-pirate-wave 1.4s ease-in-out infinite 0.5s; }
               @keyframes it-wand-swing { 0%{transform:rotate(-16deg)} 25%{transform:rotate(13deg)} 50%{transform:rotate(-12deg)} 75%{transform:rotate(15deg)} 100%{transform:rotate(-16deg)} }
               .it-wand-swing { animation: it-wand-swing 2.4s ease-in-out infinite; }
               @keyframes it-star-blink { 0%,100%{opacity:0.9} 50%{opacity:0.08} }
@@ -505,47 +505,46 @@ export default function OnboardingPage() {
                   </>),
                   // ── SUPERHEROES — dark city, hero flies in & hovers ───────────
                   'Superheroes': (<>
-                    {/* Sky gradient feel — subtle lighter band at horizon */}
-                    <rect x="0" y="30" width="80" height="8" fill="rgba(30,60,120,0.15)"/>
-                    {/* City buildings — solid silhouettes, no outlines */}
-                    <rect x="0"  y="44" width="11" height="16" fill="rgba(200,215,255,0.12)"/>
-                    <rect x="9"  y="32" width="10" height="28" fill="rgba(200,215,255,0.15)"/>
-                    <rect x="17" y="38" width="8"  height="22" fill="rgba(200,215,255,0.1)"/>
-                    <rect x="23" y="34" width="12" height="26" fill="rgba(200,215,255,0.13)"/>
-                    <rect x="33" y="40" width="7"  height="20" fill="rgba(200,215,255,0.1)"/>
-                    <rect x="48" y="36" width="9"  height="24" fill="rgba(200,215,255,0.12)"/>
-                    <rect x="55" y="28" width="13" height="32" fill="rgba(200,215,255,0.15)"/>
-                    <rect x="66" y="35" width="8"  height="25" fill="rgba(200,215,255,0.1)"/>
-                    <rect x="72" y="42" width="8"  height="18" fill="rgba(200,215,255,0.12)"/>
-                    {/* Window lights — gentle blink only */}
-                    {[[10,34],[10,40],[18,40],[24,36],[24,42],[49,38],[49,44],[56,30],[56,36],[56,42],[67,37],[67,43],[73,44]].map(([x,y],i)=>(
-                      <rect key={i} x={x} y={y} width="2" height="1.6" fill="rgba(255,220,100,0.85)" className="it-star" style={{animationDelay:`${i*0.2}s`}}/>
+                    {/* Subtle stars in sky */}
+                    <S cx={20} cy={6} r={1.2} d="0.1s"/><S cx={42} cy={4} r={1.5} d="0.5s"/><S cx={62} cy={7} r={1.0} d="0.9s"/>
+                    {/* City buildings */}
+                    <rect x="0"  y="44" width="11" height="16" fill="rgba(200,215,255,0.14)"/>
+                    <rect x="9"  y="32" width="11" height="28" fill="rgba(200,215,255,0.18)"/>
+                    <rect x="18" y="38" width="8"  height="22" fill="rgba(200,215,255,0.13)"/>
+                    <rect x="24" y="33" width="13" height="27" fill="rgba(200,215,255,0.17)"/>
+                    <rect x="35" y="40" width="7"  height="20" fill="rgba(200,215,255,0.13)"/>
+                    <rect x="48" y="35" width="10" height="25" fill="rgba(200,215,255,0.15)"/>
+                    <rect x="56" y="26" width="14" height="34" fill="rgba(200,215,255,0.18)"/>
+                    <rect x="68" y="34" width="9"  height="26" fill="rgba(200,215,255,0.13)"/>
+                    {/* Window lights — bright and visible */}
+                    {[[10,34],[10,40],[19,40],[25,35],[25,41],[49,37],[49,43],[57,28],[57,34],[57,40],[69,36],[69,42]].map(([x,y],i)=>(
+                      <rect key={i} x={x} y={y} width="2.5" height="2" fill="rgba(255,230,100,0.95)" className="it-star" style={{animationDelay:`${i*0.18}s`}}/>
                     ))}
-                    {/* Hero — flies in from left, hovers, flies away right */}
-                    <g className="it-hero" style={{transformOrigin:'40px 28px'}}>
-                      {/* Cape — streams behind (left when flying right) */}
-                      <path d="M36,24 Q22,28 20,38 Q28,32 35,36 Q33,30 36,24" fill="#DC2626"/>
+                    {/* HERO — bigger, bolder, 2.4s cycle */}
+                    <g className="it-hero" style={{transformOrigin:'40px 27px'}}>
+                      {/* Cape — large, dramatic */}
+                      <path d="M35,22 Q16,27 14,40 Q24,33 33,37 Q30,28 35,22" fill="#DC2626"/>
                       {/* Body */}
-                      <ellipse cx="40" cy="30" rx="6" ry="8" fill="#1D4ED8"/>
+                      <ellipse cx="41" cy="29" rx="7.5" ry="9.5" fill="#1D4ED8"/>
                       {/* Belt */}
-                      <rect x="34" y="33" width="12" height="2.5" rx="1" fill="#FBBF24"/>
-                      {/* S shield */}
-                      <circle cx="40" cy="28" r="3.5" fill="rgba(255,200,50,0.9)"/>
-                      <text x="38.2" y="30.5" fontSize="5" fill="#1D4ED8" fontWeight="900">S</text>
+                      <rect x="33.5" y="33" width="15" height="3" rx="1.5" fill="#FBBF24"/>
+                      {/* S shield — larger */}
+                      <circle cx="41" cy="27" r="4.5" fill="rgba(255,200,40,0.95)"/>
+                      <text x="38.8" y="29.8" fontSize="6.5" fill="#1D4ED8" fontWeight="900">S</text>
                       {/* Head */}
-                      <circle cx="40" cy="20" r="5.5" fill="rgba(230,185,140,0.95)"/>
+                      <circle cx="41" cy="17" r="6.5" fill="rgba(230,185,140,0.97)"/>
                       {/* Mask */}
-                      <path d="M34.5,19.5 Q37,17 40,18.5 Q43,17 45.5,19.5 L44,21 Q42,19.5 40,20.5 Q38,19.5 36,21 Z" fill="#1D4ED8"/>
+                      <path d="M34.5,16.5 Q37.5,13.5 41,15.5 Q44.5,13.5 47.5,16.5 L46,18.5 Q44,16.5 41,17.5 Q38,16.5 36,18.5 Z" fill="#1D4ED8"/>
                       {/* Hair */}
-                      <path d="M35,17 Q38,14 40,15 Q42,14 45,17 Q43,15 40,16 Q37,15 35,17" fill="rgba(80,40,10,0.9)"/>
-                      {/* Lead arm — stretched forward */}
-                      <line x1="40" y1="27" x2="52" y2="22" stroke="#1D4ED8" strokeWidth="4" strokeLinecap="round"/>
-                      <circle cx="52" cy="22" r="2.5" fill="rgba(230,185,140,0.95)"/>
+                      <path d="M35,13.5 Q38.5,10 41,11.5 Q43.5,10 47,13.5 Q44,11.5 41,12.5 Q38,11.5 35,13.5" fill="rgba(70,35,5,0.95)"/>
+                      {/* Lead arm outstretched forward */}
+                      <line x1="41" y1="25" x2="57" y2="18" stroke="#1D4ED8" strokeWidth="5" strokeLinecap="round"/>
+                      <circle cx="57" cy="18" r="3.5" fill="rgba(230,185,140,0.97)"/>
                       {/* Trailing arm */}
-                      <line x1="40" y1="27" x2="32" y2="32" stroke="#1D4ED8" strokeWidth="3.5" strokeLinecap="round"/>
+                      <line x1="41" y1="25" x2="30" y2="32" stroke="#1D4ED8" strokeWidth="4.5" strokeLinecap="round"/>
                       {/* Legs trailing */}
-                      <line x1="40" y1="38" x2="46" y2="46" stroke="#1D4ED8" strokeWidth="3.5" strokeLinecap="round"/>
-                      <line x1="40" y1="38" x2="36" y2="46" stroke="#1D4ED8" strokeWidth="3" strokeLinecap="round"/>
+                      <line x1="41" y1="38" x2="48" y2="48" stroke="#1D4ED8" strokeWidth="4.5" strokeLinecap="round"/>
+                      <line x1="41" y1="38" x2="36" y2="48" stroke="#1D4ED8" strokeWidth="4" strokeLinecap="round"/>
                     </g>
                   </>),
                   // ── FANTASY — magical castle ────────────────────────────────
@@ -646,21 +645,27 @@ export default function OnboardingPage() {
                       <circle cx="43" cy="3.5" r="1.6" fill="rgba(240,240,240,0.9)"/>
                       <line x1="41.4" y1="4.8" x2="43" y2="5.8" stroke="rgba(240,240,240,0.8)" strokeWidth="0.7"/>
                       <line x1="44.6" y1="4.8" x2="43" y2="5.8" stroke="rgba(240,240,240,0.8)" strokeWidth="0.7"/>
-                      {/* Pirate in crow's nest — appears + waves on hover */}
-                      <g className="it-pirate-appear" style={{transformOrigin:'40px 7px'}}>
+                      {/* Pirate idle — always faintly visible so hover "reveal" is satisfying */}
+                      <g opacity="0.25">
+                        <circle cx="40" cy="2.5" r="2.8" fill="rgba(215,168,112,1)"/>
+                        <rect x="37" y="0.2" width="6" height="2" rx="0.5" fill="rgba(18,18,18,1)"/>
+                        <rect x="37.5" y="4" width="5" height="5.5" rx="0.5" fill="rgba(25,25,80,1)"/>
+                      </g>
+                      {/* Pirate on hover — bounces in then waves dramatically */}
+                      <g className="it-pirate-appear" style={{transformOrigin:'40px 4px'}}>
                         {/* Body */}
                         <rect x="37.5" y="4" width="5" height="5.5" rx="0.5" fill="rgba(25,25,80,0.97)"/>
                         {/* Head */}
                         <circle cx="40" cy="2.5" r="2.8" fill="rgba(215,168,112,0.97)"/>
                         {/* Pirate hat */}
                         <rect x="37" y="0.2" width="6" height="2" rx="0.5" fill="rgba(18,18,18,0.97)"/>
-                        {/* Waving arm — rotates on hover */}
+                        {/* Waving arm — wide rotation */}
                         <g className="it-pirate-wave" style={{transformOrigin:'42.5px 5.5px'}}>
-                          <line x1="42.5" y1="5.5" x2="48" y2="2" stroke="rgba(25,25,80,0.97)" strokeWidth="1.8" strokeLinecap="round"/>
-                          <circle cx="48" cy="2" r="1.8" fill="rgba(215,168,112,0.97)"/>
+                          <line x1="42.5" y1="5.5" x2="49" y2="1.5" stroke="rgba(25,25,80,0.97)" strokeWidth="2" strokeLinecap="round"/>
+                          <circle cx="49" cy="1.5" r="2" fill="rgba(215,168,112,0.97)"/>
                         </g>
                         {/* Resting arm */}
-                        <line x1="37.5" y1="5.5" x2="33" y2="7" stroke="rgba(25,25,80,0.97)" strokeWidth="1.8" strokeLinecap="round"/>
+                        <line x1="37.5" y1="5.5" x2="33" y2="7.5" stroke="rgba(25,25,80,0.97)" strokeWidth="2" strokeLinecap="round"/>
                       </g>
                     </g>
                   </>),
