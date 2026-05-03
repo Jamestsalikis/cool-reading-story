@@ -468,7 +468,7 @@ export default function OnboardingPage() {
                 const c2= (o: number) => active ? a(o * 0.7) : `rgba(${r2},${g2},${b2},${o * 0.65})`;
                 const p = c;
                 // Tiles with dark atmospheric backgrounds (like Space)
-                const DARK_BG: Record<string,string> = { 'Space':'#0C0A2E', 'Superheroes':'#0B1120', 'Pirates':'#071422' };
+                const DARK_BG: Record<string,string> = { 'Space':'#0C0A2E', 'Superheroes':'#0B1120', 'Pirates':'#071422', 'Fantasy':'#1A0A3E' };
                 const darkBg = DARK_BG[option.label];
                 const S = (props:{cx:number;cy:number;r:number;d:string}) => <circle cx={props.cx} cy={props.cy} r={props.r} fill="rgba(255,248,200,0.92)" className="it-star" style={{animationDelay:props.d}}/>;
                 const scene: Record<string, React.ReactNode> = {
@@ -547,18 +547,41 @@ export default function OnboardingPage() {
                       <line x1="41" y1="38" x2="36" y2="48" stroke="#1D4ED8" strokeWidth="4" strokeLinecap="round"/>
                     </g>
                   </>),
-                  // ── FANTASY — magical castle ────────────────────────────────
+                  // ── FANTASY — twilight castle with magic orb ─────────────────
                   'Fantasy': (<>
-                    <rect x="14" y="30" width="10" height="30" fill={c(0.3)} rx="1"/>
-                    <rect x="56" y="30" width="10" height="30" fill={c(0.3)} rx="1"/>
-                    <rect x="28" y="20" width="24" height="40" fill={c(0.35)} rx="1"/>
-                    <polygon points="19,30 14,18 24,18" fill={c(0.5)}/><polygon points="61,30 56,18 66,18" fill={c(0.5)}/>
-                    <polygon points="40,20 28,10 52,10" fill={c(0.55)}/>
-                    {[29,32,35,38,41,44,47,50].map((x,i)=><rect key={i} x={x} y={i%2===0?17:20} width="2" height="4" fill={c(0.4)} rx="0.5"/>)}
-                    <rect x="35" y="44" width="10" height="16" rx="5" fill={c(0.2)}/>
-                    <circle cx="40" cy="9" r="7"  fill={c(0.2)}/>
-                    <circle cx="40" cy="9" r="4.5" fill={c(0.5)} className="it-pulse"/>
-                    {[0,1,2,3].map(i=><circle key={i} r="2" fill={c(0.9)} className="it-orbit" style={{transformOrigin:'40px 9px',animationDelay:`${i*0.25}s`}}/>)}
+                    {/* Stars in the sky */}
+                    <S cx={8}  cy={5}  r={1.2} d="0s"/><S cx={22} cy={3}  r={0.9} d="0.3s"/><S cx={52} cy={6}  r={1.4} d="0.6s"/>
+                    <S cx={65} cy={3}  r={1.0} d="0.9s"/><S cx={74} cy={12} r={1.3} d="0.4s"/><S cx={5}  cy={22} r={0.8} d="0.7s"/>
+                    {/* Moon — soft glow in corner */}
+                    <circle cx="72" cy="10" r="7"  fill="rgba(220,200,255,0.3)"/>
+                    <circle cx="72" cy="10" r="5"  fill="rgba(230,215,255,0.5)"/>
+                    <circle cx="72" cy="10" r="3"  fill="rgba(240,230,255,0.7)" className="it-pulse"/>
+                    {/* Castle — solid and detailed */}
+                    <rect x="12" y="34" width="11" height="26" fill="rgba(160,120,220,0.7)"/>
+                    <rect x="57" y="34" width="11" height="26" fill="rgba(160,120,220,0.7)"/>
+                    <rect x="26" y="24" width="28" height="36" fill="rgba(140,100,200,0.8)"/>
+                    {/* Battlements */}
+                    {[13,16,19,27,30,33,36,39,42,45,48,58,61,64].map((x,i)=>(
+                      <rect key={i} x={x} y={i<3?30:i<12?20:30} width="2.5" height="5" fill="rgba(180,140,240,0.8)" rx="0.5"/>
+                    ))}
+                    {/* Tower roofs */}
+                    <polygon points="17.5,30 12,22 23,22" fill="rgba(200,150,255,0.85)"/>
+                    <polygon points="62.5,30 57,22 68,22" fill="rgba(200,150,255,0.85)"/>
+                    <polygon points="40,24 26,14 54,14" fill="rgba(180,130,255,0.9)"/>
+                    {/* Door arch */}
+                    <rect x="35" y="46" width="10" height="14" rx="5" fill="rgba(0,0,0,0.4)"/>
+                    {/* Castle windows glowing */}
+                    {[[18,36],[62,36],[30,30],[40,30],[50,30]].map(([x,y],i)=>(
+                      <rect key={i} x={x-1.5} y={y} width="3" height="4" rx="1.5" fill="rgba(255,220,80,0.9)" className="it-star" style={{animationDelay:`${i*0.2}s`}}/>
+                    ))}
+                    {/* Magical orb — floating above castle */}
+                    <circle cx="40" cy="9" r="9"  fill="rgba(160,80,255,0.15)"/>
+                    <circle cx="40" cy="9" r="6"  fill="rgba(180,100,255,0.3)"/>
+                    <circle cx="40" cy="9" r="3.5" fill="rgba(210,150,255,0.9)" className="it-pulse"/>
+                    {/* Orbiting sparkles */}
+                    {[0,1,2,3,4].map(i=>(
+                      <circle key={i} r="2" fill="rgba(220,180,255,0.95)" className="it-orbit" style={{transformOrigin:'40px 9px',animationDelay:`${i*0.22}s`}}/>
+                    ))}
                   </>),
                   // ── FAIRIES — enchanted garden ──────────────────────────────
                   'Fairies': (<>
