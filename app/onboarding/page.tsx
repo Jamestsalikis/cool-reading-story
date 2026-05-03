@@ -468,7 +468,7 @@ export default function OnboardingPage() {
                 const c2= (o: number) => active ? a(o * 0.7) : `rgba(${r2},${g2},${b2},${o * 0.65})`;
                 const p = c;
                 // Tiles with dark atmospheric backgrounds (like Space)
-                const DARK_BG: Record<string,string> = { 'Space':'#0C0A2E', 'Superheroes':'#0B1120', 'Pirates':'#071422', 'Fantasy':'#1A0A3E' };
+                const DARK_BG: Record<string,string> = { 'Space':'#0C0A2E', 'Superheroes':'#0B1120', 'Pirates':'#071422', 'Fantasy':'#1A0A3E', 'Aliens':'#030A0F', 'Gaming':'#0D0A1E' };
                 const darkBg = DARK_BG[option.label];
                 const S = (props:{cx:number;cy:number;r:number;d:string}) => <circle cx={props.cx} cy={props.cy} r={props.r} fill="rgba(255,248,200,0.92)" className="it-star" style={{animationDelay:props.d}}/>;
                 const scene: Record<string, React.ReactNode> = {
@@ -724,20 +724,37 @@ export default function OnboardingPage() {
                       ))}
                     </g>
                   </>),
-                  // ── ALIENS — encounter ──────────────────────────────────────
+                  // ── ALIENS — dark space encounter ───────────────────────────
                   'Aliens': (<>
-                    {[{x:8,y:6,r:1.4},{x:22,y:4,r:1.0},{x:58,y:7,r:1.6},{x:72,y:5,r:1.1},{x:78,y:20,r:1.3},{x:5,y:28,r:1.0}].map(({x,y,r},i)=>(
-                      <circle key={i} cx={x} cy={y} r={r} fill={c(0.85)} className="it-star" style={{animationDelay:`${i*0.22}s`}}/>
+                    {/* Stars */}
+                    {[{x:6,y:4,r:1.3},{x:18,y:2,r:0.9},{x:38,y:5,r:1.6},{x:54,y:3,r:1.1},{x:66,y:6,r:1.4},{x:74,y:14,r:1.0},{x:4,y:18,r:1.2},{x:76,y:28,r:0.8}].map(({x,y,r},i)=>(
+                      <circle key={i} cx={x} cy={y} r={r} fill="rgba(200,255,200,0.85)" className="it-star" style={{animationDelay:`${i*0.22}s`}}/>
                     ))}
-                    <ellipse cx="40" cy="18" rx="18" ry="8" fill={c(0.3)}/>
-                    <ellipse cx="40" cy="20" rx="11" ry="5" fill={c(0.5)}/>
-                    <circle  cx="40" cy="17" r="3.5" fill={c(0.7)}/>
-                    <ellipse cx="34" cy="16" r="2" fill={c(0.4)}/>
-                    <ellipse cx="46" cy="16" r="2" fill={c(0.4)}/>
-                    <g className="it-beam" style={{transformOrigin:'40px 24px'}}>
-                      <polygon points="30,24 50,24 54,56 26,56" fill={c(0.12)}/>
-                      <line x1="40" y1="24" x2="40" y2="56" stroke={c(0.25)} strokeWidth="1.5" strokeDasharray="4,3"/>
-                      <ellipse cx="40" cy="50" rx="8" ry="3" fill={c(0.15)}/>
+                    {/* Planet in corner */}
+                    <circle cx="68" cy="10" r="9"  fill="rgba(0,180,80,0.25)"/>
+                    <circle cx="68" cy="10" r="7"  fill="rgba(0,200,100,0.35)"/>
+                    <ellipse cx="68" cy="10" rx="9" ry="3" fill="none" stroke="rgba(0,220,120,0.4)" strokeWidth="1.5" transform="rotate(-20,68,10)"/>
+                    {/* UFO — hovering */}
+                    <ellipse cx="40" cy="20" rx="20" ry="9"  fill="rgba(0,180,80,0.35)"/>
+                    <ellipse cx="40" cy="21" rx="14" ry="6"  fill="rgba(0,220,120,0.5)"/>
+                    <ellipse cx="40" cy="19" rx="7"  ry="6"  fill="rgba(0,240,140,0.4)"/>
+                    <circle  cx="40" cy="18" r="4"   fill="rgba(100,255,180,0.8)" className="it-pulse"/>
+                    {/* UFO lights */}
+                    {[28,34,40,46,52].map((x,i)=>(
+                      <circle key={i} cx={x} cy={24} r="1.8" fill="rgba(100,255,180,0.9)" className="it-star" style={{animationDelay:`${i*0.18}s`}}/>
+                    ))}
+                    {/* Abduction beam */}
+                    <g className="it-beam" style={{transformOrigin:'40px 27px'}}>
+                      <polygon points="30,27 50,27 55,58 25,58" fill="rgba(0,255,120,0.1)"/>
+                      <line x1="40" y1="27" x2="40" y2="58" stroke="rgba(0,255,120,0.3)" strokeWidth="2" strokeDasharray="4,3"/>
+                      <ellipse cx="40" cy="52" rx="10" ry="3.5" fill="rgba(0,255,120,0.15)"/>
+                    </g>
+                    {/* Small alien figure in beam */}
+                    <g className="it-float" style={{transformOrigin:'40px 46px'}}>
+                      <ellipse cx="40" cy="46" rx="4"  ry="5" fill="rgba(0,200,80,0.7)"/>
+                      <circle  cx="40" cy="40" r="4.5" fill="rgba(0,220,100,0.8)"/>
+                      <circle  cx="38" cy="39" r="1.5" fill="rgba(0,0,0,0.9)"/>
+                      <circle  cx="42" cy="39" r="1.5" fill="rgba(0,0,0,0.9)"/>
                     </g>
                   </>),
                   // ── DINOSAURS — prehistoric jungle ──────────────────────────
@@ -850,26 +867,44 @@ export default function OnboardingPage() {
                     </g>
                     <line x1="10" y1="18" x2="20" y2="18" stroke={c(0.3)} strokeWidth="1"/><line x1="10" y1="24" x2="20" y2="24" stroke={c(0.2)} strokeWidth="1"/>
                   </>),
-                  // ── GAMING — arcade ─────────────────────────────────────────
+                  // ── GAMING — dark arcade ─────────────────────────────────────
                   'Gaming': (<>
-                    <rect x="12" y="6"  width="56" height="46" rx="4" fill={c(0.25)} stroke={c(0.4)} strokeWidth="1.5"/>
-                    <rect x="16" y="10" width="48" height="34" rx="2" fill={c(0.12)}/>
-                    {[0,1,2,3].map(i=><rect key={i} x={17+i*12} y={48} width={8} height={3} rx="1" fill={c(0.3)}/>)}
-                    <g className="it-walk" style={{transformOrigin:'22px 28px'}}>
-                      <rect x="19" y="22" width="6" height="8" rx="1" fill={c(0.8)}/>
-                      <rect x="20" y="18" width="4" height="5" rx="1" fill={c(0.7)}/>
-                      <rect x="18" y="30" width="3" height="5" rx="1" fill={c(0.6)}/>
-                      <rect x="22" y="30" width="3" height="5" rx="1" fill={c(0.6)}/>
-                    </g>
-                    {[0,1,2].map(i=>(
-                      <g key={i} className="it-appear" style={{animationDelay:`${i*0.25}s`,transformOrigin:`${48+i*8}px 20px`}}>
-                        <circle cx={48+i*8} cy={20} r="3.5" fill={c(0.6)}/>
-                        <text x={45+i*8} y={23} fontSize="5" fill={active?'rgba(255,255,255,0.9)':c(0.3)} textAnchor="middle">★</text>
-                      </g>
+                    {/* Screen glow */}
+                    <rect x="10" y="4"  width="60" height="48" rx="5" fill="rgba(80,40,180,0.25)" stroke="rgba(120,80,220,0.6)" strokeWidth="1.5"/>
+                    <rect x="13" y="7"  width="54" height="38" rx="3" fill="rgba(40,20,100,0.8)"/>
+                    {/* Score display */}
+                    <text x="16" y="15" fontSize="5" fill="rgba(255,200,0,0.9)" fontFamily="monospace">SCORE: 9400</text>
+                    <text x="42" y="15" fontSize="5" fill="rgba(255,60,60,0.9)"  fontFamily="monospace">3 ♥</text>
+                    {/* Platform blocks */}
+                    {[[16,32,18,4],[38,28,14,4],[54,36,16,4]].map(([x,y,w,h],i)=>(
+                      <rect key={i} x={x} y={y} width={w} height={h} fill="rgba(100,200,100,0.7)" rx="1"/>
                     ))}
-                    <rect x="44" y="28" width="16" height="12" rx="2" fill={c(0.22)}/>
-                    <line x1="52" y1="28" x2="52" y2="40" stroke={c(0.4)} strokeWidth="1"/>
-                    <line x1="44" y1="34" x2="60" y2="34" stroke={c(0.4)} strokeWidth="1"/>
+                    {/* Coins on platforms */}
+                    {[[22,26],[45,22]].map(([x,y],i)=>(
+                      <circle key={i} cx={x} cy={y} r="3" fill="rgba(255,200,0,0.9)" className="it-star" style={{animationDelay:`${i*0.4}s`}}/>
+                    ))}
+                    {/* Pixel character */}
+                    <g className="it-walk" style={{transformOrigin:'24px 28px'}}>
+                      <rect x="21" y="20" width="6" height="6" rx="1" fill="rgba(255,160,80,0.95)"/>
+                      <rect x="22" y="16" width="5" height="5" rx="1" fill="rgba(255,100,50,0.95)"/>
+                      <rect x="20" y="26" width="3" height="5" rx="1" fill="rgba(60,120,255,0.9)"/>
+                      <rect x="24" y="26" width="3" height="5" rx="1" fill="rgba(60,120,255,0.9)"/>
+                      <rect x="20" y="31" width="2.5" height="3" rx="0.5" fill="rgba(200,160,100,0.9)"/>
+                      <rect x="24" y="31" width="2.5" height="3" rx="0.5" fill="rgba(200,160,100,0.9)"/>
+                    </g>
+                    {/* Enemy */}
+                    <g className="it-bob" style={{transformOrigin:'56px 24px'}}>
+                      <rect x="52" y="20" width="8" height="7" rx="1" fill="rgba(255,60,60,0.9)"/>
+                      <rect x="50" y="18" width="4" height="3" rx="0.5" fill="rgba(255,60,60,0.9)"/>
+                      <rect x="58" y="18" width="4" height="3" rx="0.5" fill="rgba(255,60,60,0.9)"/>
+                      <circle cx="54.5" cy="23" r="1.2" fill="rgba(0,0,0,0.9)"/>
+                      <circle cx="57.5" cy="23" r="1.2" fill="rgba(0,0,0,0.9)"/>
+                    </g>
+                    {/* Controller at bottom */}
+                    <rect x="13" y="48" width="54" height="8" rx="3" fill="rgba(60,40,120,0.7)"/>
+                    {[22,28,34,42,48].map((x,i)=><circle key={i} cx={x} cy={52} r="2.5" fill={['rgba(255,100,100,0.8)','rgba(100,100,255,0.8)','rgba(100,255,100,0.8)','rgba(0,0,0,0.5)','rgba(0,0,0,0.5)'][i]}/>)}
+                    <line x1="50" y1="50" x2="50" y2="54" stroke="rgba(150,120,200,0.6)" strokeWidth="1.2"/>
+                    <line x1="48" y1="52" x2="52" y2="52" stroke="rgba(150,120,200,0.6)" strokeWidth="1.2"/>
                   </>),
                   // ── SOCCER — match ──────────────────────────────────────────
                   'Soccer': (<>
