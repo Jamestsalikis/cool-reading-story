@@ -446,6 +446,8 @@ export default function OnboardingPage() {
 
               @keyframes it-rocket-fly { 0%{transform:translateX(-40px);opacity:0} 12%,88%{opacity:1} 100%{transform:translateX(125px);opacity:0} }
               .int-tile:hover .it-rocket-h { animation: it-rocket-fly 2.6s ease-in-out infinite; }
+              @keyframes it-hero { 0%{transform:translate(-90px,0);opacity:0} 20%{transform:translate(0,0);opacity:1} 30%{transform:translate(0,-4px);opacity:1} 40%{transform:translate(0,0);opacity:1} 50%{transform:translate(0,-3px);opacity:1} 60%{transform:translate(0,0);opacity:1} 70%{transform:translate(0,-2px);opacity:1} 80%{transform:translate(90px,-8px);opacity:1} 92%{transform:translate(90px,-8px);opacity:0} 100%{transform:translate(-90px,0);opacity:0} }
+              .int-tile:hover .it-hero { animation: it-hero 3.5s ease-in-out infinite; }
               @keyframes it-star-blink { 0%,100%{opacity:0.9} 50%{opacity:0.08} }
               .it-star { animation: it-star-blink 2s ease-in-out infinite; }
             `}</style>
@@ -495,23 +497,49 @@ export default function OnboardingPage() {
                       <ellipse cx="-18" cy="32" rx="5.5" ry="3"   fill="rgba(253,224,71,0.95)"/>
                     </g>
                   </>),
-                  // ── SUPERHEROES — dark city at night ─────────────────────────
+                  // ── SUPERHEROES — dark city, hero flies in & hovers ───────────
                   'Superheroes': (<>
-                    <S cx={10} cy={5} r={1.5} d="0s"/><S cx={30} cy={3} r={1.0} d="0.3s"/><S cx={55} cy={7} r={1.8} d="0.6s"/><S cx={70} cy={4} r={1.2} d="0.9s"/>
-                    <rect x="0"  y="36" width="13" height="24" fill="rgba(255,255,255,0.1)"/>
-                    <rect x="11" y="26" width="10" height="34" fill="rgba(255,255,255,0.13)"/>
-                    <rect x="20" y="31" width="9"  height="29" fill="rgba(255,255,255,0.1)"/>
-                    <rect x="55" y="28" width="11" height="32" fill="rgba(255,255,255,0.13)"/>
-                    <rect x="64" y="20" width="14" height="40" fill="rgba(255,255,255,0.1)"/>
-                    {[[1,38],[1,44],[12,28],[12,34],[21,33],[21,39],[56,30],[56,36],[65,22],[65,28],[65,34],[69,26]].map(([x,y],i)=>(
-                      <rect key={i} x={x} y={y} width="2.5" height="1.8" fill="rgba(255,220,80,0.8)" className="it-star" style={{animationDelay:`${i*0.15}s`}}/>
+                    {/* Sky gradient feel — subtle lighter band at horizon */}
+                    <rect x="0" y="30" width="80" height="8" fill="rgba(30,60,120,0.15)"/>
+                    {/* City buildings — solid silhouettes, no outlines */}
+                    <rect x="0"  y="44" width="11" height="16" fill="rgba(200,215,255,0.12)"/>
+                    <rect x="9"  y="32" width="10" height="28" fill="rgba(200,215,255,0.15)"/>
+                    <rect x="17" y="38" width="8"  height="22" fill="rgba(200,215,255,0.1)"/>
+                    <rect x="23" y="34" width="12" height="26" fill="rgba(200,215,255,0.13)"/>
+                    <rect x="33" y="40" width="7"  height="20" fill="rgba(200,215,255,0.1)"/>
+                    <rect x="48" y="36" width="9"  height="24" fill="rgba(200,215,255,0.12)"/>
+                    <rect x="55" y="28" width="13" height="32" fill="rgba(200,215,255,0.15)"/>
+                    <rect x="66" y="35" width="8"  height="25" fill="rgba(200,215,255,0.1)"/>
+                    <rect x="72" y="42" width="8"  height="18" fill="rgba(200,215,255,0.12)"/>
+                    {/* Window lights — gentle blink only */}
+                    {[[10,34],[10,40],[18,40],[24,36],[24,42],[49,38],[49,44],[56,30],[56,36],[56,42],[67,37],[67,43],[73,44]].map(([x,y],i)=>(
+                      <rect key={i} x={x} y={y} width="2" height="1.6" fill="rgba(255,220,100,0.85)" className="it-star" style={{animationDelay:`${i*0.2}s`}}/>
                     ))}
-                    <polygon points="40,5 36,21 41,21 36,38 48,19 43,19 47,5" fill="rgba(255,220,30,1)"/>
-                    <g className="it-rocket-h">
-                      <circle cx="0" cy="30" r="8" fill="#DC2626"/>
-                      <polygon points="8,30 17,24 15,30 17,36" fill="#F97316"/>
-                      <circle cx="0" cy="30" r="3.5" fill="#BFDBFE"/>
-                      <path d="M-8,24 Q-18,20 -14,30 Q-18,40 -8,36" fill="rgba(180,28,28,0.8)"/>
+                    {/* Hero — flies in from left, hovers, flies away right */}
+                    <g className="it-hero" style={{transformOrigin:'40px 28px'}}>
+                      {/* Cape — streams behind (left when flying right) */}
+                      <path d="M36,24 Q22,28 20,38 Q28,32 35,36 Q33,30 36,24" fill="#DC2626"/>
+                      {/* Body */}
+                      <ellipse cx="40" cy="30" rx="6" ry="8" fill="#1D4ED8"/>
+                      {/* Belt */}
+                      <rect x="34" y="33" width="12" height="2.5" rx="1" fill="#FBBF24"/>
+                      {/* S shield */}
+                      <circle cx="40" cy="28" r="3.5" fill="rgba(255,200,50,0.9)"/>
+                      <text x="38.2" y="30.5" fontSize="5" fill="#1D4ED8" fontWeight="900">S</text>
+                      {/* Head */}
+                      <circle cx="40" cy="20" r="5.5" fill="rgba(230,185,140,0.95)"/>
+                      {/* Mask */}
+                      <path d="M34.5,19.5 Q37,17 40,18.5 Q43,17 45.5,19.5 L44,21 Q42,19.5 40,20.5 Q38,19.5 36,21 Z" fill="#1D4ED8"/>
+                      {/* Hair */}
+                      <path d="M35,17 Q38,14 40,15 Q42,14 45,17 Q43,15 40,16 Q37,15 35,17" fill="rgba(80,40,10,0.9)"/>
+                      {/* Lead arm — stretched forward */}
+                      <line x1="40" y1="27" x2="52" y2="22" stroke="#1D4ED8" strokeWidth="4" strokeLinecap="round"/>
+                      <circle cx="52" cy="22" r="2.5" fill="rgba(230,185,140,0.95)"/>
+                      {/* Trailing arm */}
+                      <line x1="40" y1="27" x2="32" y2="32" stroke="#1D4ED8" strokeWidth="3.5" strokeLinecap="round"/>
+                      {/* Legs trailing */}
+                      <line x1="40" y1="38" x2="46" y2="46" stroke="#1D4ED8" strokeWidth="3.5" strokeLinecap="round"/>
+                      <line x1="40" y1="38" x2="36" y2="46" stroke="#1D4ED8" strokeWidth="3" strokeLinecap="round"/>
                     </g>
                   </>),
                   // ── FANTASY — magical castle ────────────────────────────────
