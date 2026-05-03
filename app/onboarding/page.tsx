@@ -448,6 +448,10 @@ export default function OnboardingPage() {
               .int-tile:hover .it-rocket-h { animation: it-rocket-fly 2.6s ease-in-out infinite; }
               @keyframes it-hero { 0%{transform:translate(-90px,0);opacity:0} 20%{transform:translate(0,0);opacity:1} 30%{transform:translate(0,-4px);opacity:1} 40%{transform:translate(0,0);opacity:1} 50%{transform:translate(0,-3px);opacity:1} 60%{transform:translate(0,0);opacity:1} 70%{transform:translate(0,-2px);opacity:1} 80%{transform:translate(90px,-8px);opacity:1} 92%{transform:translate(90px,-8px);opacity:0} 100%{transform:translate(-90px,0);opacity:0} }
               .int-tile:hover .it-hero { animation: it-hero 3.5s ease-in-out infinite; }
+              @keyframes it-pirate-appear { 0%{transform:translateY(6px);opacity:0} 40%{transform:translateY(0);opacity:1} 100%{transform:translateY(0);opacity:1} }
+              @keyframes it-pirate-wave   { 0%{transform:rotate(-40deg)} 40%{transform:rotate(55deg)} 80%{transform:rotate(-35deg)} 100%{transform:rotate(-40deg)} }
+              .int-tile:hover .it-pirate-appear { animation: it-pirate-appear 0.55s ease forwards; }
+              .int-tile:hover .it-pirate-wave   { animation: it-pirate-wave 0.9s ease-in-out infinite 0.55s; }
               @keyframes it-star-blink { 0%,100%{opacity:0.9} 50%{opacity:0.08} }
               .it-star { animation: it-star-blink 2s ease-in-out infinite; }
             `}</style>
@@ -599,22 +603,64 @@ export default function OnboardingPage() {
                       <circle key={i} cx={x as number} cy={y as number} r="3" fill={col as string} className="it-star" style={{animationDelay:`${i*0.18}s`}}/>
                     ))}
                   </>),
-                  // ── PIRATES — stormy sea ────────────────────────────────────
+                  // ── PIRATES — tall ship on the dark sea ─────────────────────
                   'Pirates': (<>
-                    <S cx={12} cy={6} r={1.4} d="0s"/><S cx={35} cy={4} r={1.0} d="0.35s"/><S cx={62} cy={8} r={1.6} d="0.7s"/>
-                    <circle cx="65" cy="14" r="10" fill="rgba(200,200,120,0.8)"/>
-                    <circle cx="70" cy="12" r="8"  fill="#071422"/>
-                    <path d="M0,42 Q10,35 20,42 Q30,49 40,42 Q50,35 60,42 Q70,49 80,42" fill="rgba(30,80,160,0.35)" className="it-wave-y"/>
-                    <path d="M0,50 Q10,43 20,50 Q30,57 40,50 Q50,43 60,50 Q70,57 80,50" fill="rgba(30,80,160,0.45)" className="it-wave-y" style={{animationDelay:'0.45s'}}/>
-                    <g className="it-bob" style={{transformOrigin:'40px 36px'}}>
-                      <rect x="32" y="36" width="16" height="9"  rx="2" fill="rgba(150,120,60,0.8)"/>
-                      <rect x="38" y="20" width="2.5" height="16" fill="rgba(200,180,100,0.8)"/>
-                      <polygon points="38,20 38,33 53,26" fill="rgba(200,50,50,0.7)"/>
+                    {/* Stars — fixed, opacity only */}
+                    <S cx={62} cy={4} r={1.3} d="0s"/><S cx={72} cy={10} r={1.0} d="0.4s"/><S cx={55} cy={2} r={1.5} d="0.8s"/><S cx={76} cy={18} r={0.9} d="0.6s"/>
+                    {/* Crescent moon */}
+                    <circle cx="10" cy="11" r="9" fill="rgba(255,235,145,0.92)"/>
+                    <circle cx="14" cy="9"  r="7.5" fill="#071422"/>
+                    {/* Waves — dark ocean */}
+                    <path d="M0,50 Q10,44 20,50 Q30,56 40,50 Q50,44 60,50 Q70,56 80,50" fill="rgba(20,50,130,0.45)" className="it-wave-y"/>
+                    <path d="M0,56 Q10,50 20,56 Q30,62 40,56 Q50,50 60,56 Q70,62 80,56" fill="rgba(20,50,130,0.55)" className="it-wave-y" style={{animationDelay:'0.5s'}}/>
+                    {/* Ship — gently bobs on the water */}
+                    <g className="it-bob" style={{transformOrigin:'40px 40px'}}>
+                      {/* Hull */}
+                      <polygon points="20,38 60,38 56,50 24,50" fill="rgba(90,48,12,0.97)"/>
+                      {/* Deck railing */}
+                      <rect x="20" y="36" width="40" height="3" rx="1" fill="rgba(120,65,18,0.95)"/>
+                      {/* Portholes */}
+                      <circle cx="30" cy="44" r="2.2" fill="rgba(0,0,0,0.5)"/><circle cx="30" cy="44" r="1.2" fill="rgba(255,200,80,0.3)"/>
+                      <circle cx="40" cy="44" r="2.2" fill="rgba(0,0,0,0.5)"/><circle cx="40" cy="44" r="1.2" fill="rgba(255,200,80,0.3)"/>
+                      <circle cx="50" cy="44" r="2.2" fill="rgba(0,0,0,0.5)"/><circle cx="50" cy="44" r="1.2" fill="rgba(255,200,80,0.3)"/>
+                      {/* Main mast */}
+                      <rect x="38.5" y="6" width="3" height="30" fill="rgba(140,80,18,0.97)"/>
+                      {/* Yard arm (horizontal cross) */}
+                      <rect x="27" y="14" width="26" height="2" rx="1" fill="rgba(140,80,18,0.95)"/>
+                      {/* Main square sail */}
+                      <polygon points="28,14 52,14 50,34 30,34" fill="rgba(215,195,148,0.92)"/>
+                      <line x1="40" y1="14" x2="40" y2="34" stroke="rgba(170,140,90,0.35)" strokeWidth="1"/>
+                      <line x1="28" y1="22" x2="52" y2="22" stroke="rgba(170,140,90,0.25)" strokeWidth="0.8"/>
+                      {/* Foresail (triangle from bow to mast) */}
+                      <polygon points="20,36 40,6 40,36" fill="rgba(195,175,125,0.65)"/>
+                      {/* Rigging lines */}
+                      <line x1="40" y1="6" x2="20" y2="36" stroke="rgba(160,110,40,0.45)" strokeWidth="1"/>
+                      <line x1="40" y1="6" x2="60" y2="36" stroke="rgba(160,110,40,0.45)" strokeWidth="1"/>
+                      {/* Crow's nest platform */}
+                      <rect x="35" y="4" width="10" height="5" rx="1" fill="rgba(90,48,12,0.97)" stroke="rgba(140,80,18,0.7)" strokeWidth="0.8"/>
+                      {/* Skull flag at very top */}
+                      <rect x="38.5" y="2" width="12" height="3" fill="#071422"/>
+                      <rect x="38.5" y="1" width="11" height="5" rx="0.5" fill="rgba(25,25,25,0.97)"/>
+                      <circle cx="43" cy="3.5" r="1.6" fill="rgba(240,240,240,0.9)"/>
+                      <line x1="41.4" y1="4.8" x2="43" y2="5.8" stroke="rgba(240,240,240,0.8)" strokeWidth="0.7"/>
+                      <line x1="44.6" y1="4.8" x2="43" y2="5.8" stroke="rgba(240,240,240,0.8)" strokeWidth="0.7"/>
+                      {/* Pirate in crow's nest — appears + waves on hover */}
+                      <g className="it-pirate-appear" style={{transformOrigin:'40px 7px'}}>
+                        {/* Body */}
+                        <rect x="37.5" y="4" width="5" height="5.5" rx="0.5" fill="rgba(25,25,80,0.97)"/>
+                        {/* Head */}
+                        <circle cx="40" cy="2.5" r="2.8" fill="rgba(215,168,112,0.97)"/>
+                        {/* Pirate hat */}
+                        <rect x="37" y="0.2" width="6" height="2" rx="0.5" fill="rgba(18,18,18,0.97)"/>
+                        {/* Waving arm — rotates on hover */}
+                        <g className="it-pirate-wave" style={{transformOrigin:'42.5px 5.5px'}}>
+                          <line x1="42.5" y1="5.5" x2="48" y2="2" stroke="rgba(25,25,80,0.97)" strokeWidth="1.8" strokeLinecap="round"/>
+                          <circle cx="48" cy="2" r="1.8" fill="rgba(215,168,112,0.97)"/>
+                        </g>
+                        {/* Resting arm */}
+                        <line x1="37.5" y1="5.5" x2="33" y2="7" stroke="rgba(25,25,80,0.97)" strokeWidth="1.8" strokeLinecap="round"/>
+                      </g>
                     </g>
-                    <circle cx="38" cy="15" r="9" fill="rgba(255,255,255,0.12)"/>
-                    <line x1="32" y1="9" x2="44" y2="21" stroke="rgba(255,255,255,0.6)" strokeWidth="2"/>
-                    <line x1="44" y1="9" x2="32" y2="21" stroke="rgba(255,255,255,0.6)" strokeWidth="2"/>
-                    <circle cx="38" cy="15" r="3.5" fill="rgba(255,255,255,0.4)"/>
                   </>),
                   // ── MAGIC — wand & sparkles ─────────────────────────────────
                   'Magic': (<>
