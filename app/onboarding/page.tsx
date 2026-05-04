@@ -890,83 +890,126 @@ export default function OnboardingPage() {
                       <circle  cx="42" cy="39" r="1.5" fill="rgba(0,0,0,0.9)"/>
                     </g>
                   </>),
-                  // ── DINOSAURS — prehistoric jungle night ────────────────────
+                  // ── DINOSAURS — triceratops + brachiosaurus ──────────────────
                   'Dinosaurs': (<>
-                    {/* Stars in the dark sky */}
-                    <S cx={10} cy={4}  r={1.2} d="0s"/><S cx={28} cy={2}  r={0.9} d="0.4s"/>
-                    <S cx={55} cy={5}  r={1.4} d="0.7s"/><S cx={72} cy={3}  r={1.0} d="0.2s"/>
-                    {/* Jungle ferns — left side */}
-                    {[0,1,2].map(i=>(
-                      <g key={i}><line x1={6+i*3} y1={60} x2={6+i*3} y2={35-i*4} stroke="rgba(20,120,40,0.8)" strokeWidth="2"/>
-                      {[-1,0,1].map(j=><ellipse key={j} cx={(6+i*3)+j*8} cy={35-i*4+j*4} rx="8" ry="4" fill="rgba(20,140,50,0.45)" transform={`rotate(${j*20},${(6+i*3)+j*8},${35-i*4+j*4})`}/>)}</g>
-                    ))}
-                    {/* Jungle ferns — right side */}
-                    {[0,1,2].map(i=>(
-                      <g key={i}><line x1={72-i*3} y1={60} x2={72-i*3} y2={32-i*4} stroke="rgba(20,120,40,0.8)" strokeWidth="2"/>
-                      {[-1,0,1].map(j=><ellipse key={j} cx={(72-i*3)+j*8} cy={32-i*4+j*4} rx="8" ry="4" fill="rgba(20,140,50,0.45)" transform={`rotate(${j*20},${(72-i*3)+j*8},${32-i*4+j*4})`}/>)}</g>
+                    <S cx={8} cy={3} r={1.1} d="0s"/><S cx={24} cy={2} r={0.8} d="0.4s"/>
+                    <S cx={58} cy={4} r={1.3} d="0.7s"/>
+                    {/* Prehistoric trees — palm-like with large round tops */}
+                    {[[4,60],[8,60],[72,60],[76,60]].map(([x,y],i)=>(
+                      <g key={i}>
+                        <rect x={x+1} y={38} width={4} height={22} fill="rgba(80,50,15,0.7)" rx="2"/>
+                        <circle cx={x+3} cy={30} r={12+i%2*3} fill="rgba(20,140,50,0.55)"/>
+                        <circle cx={x+3} cy={26} r={9+i%2*2}  fill="rgba(30,160,60,0.55)"/>
+                      </g>
                     ))}
                     {/* Ground */}
-                    <rect x="0" y="50" width="80" height="10" fill="rgba(20,80,20,0.4)"/>
-                    {/* Footprints */}
-                    {[16,30,46,60].map((x,i)=>(
-                      <ellipse key={i} cx={x} cy={54} rx="4" ry="2.5" fill="rgba(10,60,10,0.5)" transform={`rotate(${i%2===0?-15:15},${x},54)`}/>
-                    ))}
-                    {/* T-Rex walking across */}
-                    <g className="it-walk" style={{transformOrigin:'16px 34px'}}>
+                    <rect x="0" y="50" width="80" height="10" fill="rgba(20,80,20,0.45)"/>
+                    {/* Brachiosaurus (long neck) — background, eating from trees */}
+                    <g style={{opacity:0.75}}>
                       {/* Body */}
-                      <ellipse cx="16" cy="34" rx="11" ry="8" fill="rgba(80,160,60,0.9)"/>
-                      {/* Head + neck */}
-                      <ellipse cx="25" cy="27" rx="8" ry="6" fill="rgba(90,170,65,0.9)"/>
-                      {/* Snout */}
-                      <polygon points="33,25 40,22 38,30" fill="rgba(80,155,55,0.9)"/>
-                      {/* Eye */}
-                      <circle cx="29" cy="25" r="2.5" fill="rgba(0,0,0,0.8)"/>
-                      <circle cx="29.5" cy="24.5" r="1" fill="rgba(255,255,100,0.9)"/>
-                      {/* Tiny arms */}
-                      <line x1="20" y1="30" x2="25" y2="36" stroke="rgba(80,160,60,0.9)" strokeWidth="2.5" strokeLinecap="round"/>
-                      {/* Legs */}
-                      <line x1="12" y1="41" x2="8"  y2="52" stroke="rgba(70,140,50,0.9)" strokeWidth="3" strokeLinecap="round"/>
-                      <line x1="20" y1="41" x2="18" y2="52" stroke="rgba(70,140,50,0.9)" strokeWidth="3" strokeLinecap="round"/>
+                      <ellipse cx="62" cy="44" rx="12" ry="8" fill="rgba(100,180,80,0.8)"/>
+                      {/* Long neck */}
+                      <path d="M62,36 Q60,25 58,14 Q60,8 64,10" fill="none" stroke="rgba(100,180,80,0.85)" strokeWidth="7" strokeLinecap="round"/>
+                      {/* Head */}
+                      <ellipse cx="64" cy="10" rx="7" ry="4" fill="rgba(100,180,80,0.88)"/>
+                      <circle cx="69" cy="9" r="1.5" fill="rgba(0,0,0,0.85)"/>
+                      {/* Eating leaves */}
+                      <ellipse cx="74" cy="12" rx="5" ry="3" fill="rgba(20,160,50,0.65)"/>
                       {/* Tail */}
-                      <path d="M5,36 Q-4,38 -8,34" fill="none" stroke="rgba(80,160,60,0.9)" strokeWidth="3.5" strokeLinecap="round"/>
+                      <path d="M50,46 Q44,48 42,52" fill="none" stroke="rgba(100,180,80,0.8)" strokeWidth="5" strokeLinecap="round"/>
+                      {/* Legs (4) */}
+                      {[[56,50],[62,50],[68,50],[72,50]].map(([x,y],i)=>(
+                        <line key={i} x1={x} y1={y} x2={x+(i%2===0?-1:1)} y2={58} stroke="rgba(90,165,70,0.8)" strokeWidth="3.5" strokeLinecap="round"/>
+                      ))}
+                    </g>
+                    {/* Triceratops — foreground, walking left to right */}
+                    <g className="it-walk" style={{transformOrigin:'20px 38px'}}>
+                      {/* Body */}
+                      <ellipse cx="20" cy="40" rx="14" ry="9" fill="rgba(120,160,80,0.92)"/>
+                      {/* Head (big with frill) */}
+                      <ellipse cx="32" cy="34" rx="10" ry="8" fill="rgba(120,160,80,0.92)"/>
+                      {/* Frill (the iconic bony collar) */}
+                      <ellipse cx="32" cy="28" rx="12" ry="7" fill="rgba(160,100,60,0.75)"/>
+                      {/* Frill pattern */}
+                      {[-8,-4,0,4,8].map((dx,i)=><circle key={i} cx={32+dx} cy={22} r="2" fill="rgba(200,120,70,0.6)"/>)}
+                      {/* Snout */}
+                      <ellipse cx="42" cy="36" rx="6" ry="4" fill="rgba(110,150,75,0.9)"/>
+                      {/* 3 Horns */}
+                      <polygon points="44,32 45,24 46,32" fill="rgba(220,200,160,0.9)"/>
+                      <polygon points="39,29 40,22 41,29" fill="rgba(220,200,160,0.9)"/>
+                      <polygon points="35,30 36,26 37,30" fill="rgba(220,200,160,0.8)"/>
+                      {/* Eye */}
+                      <circle cx="36" cy="34" r="2.5" fill="rgba(0,0,0,0.85)"/>
+                      <circle cx="36.5" cy="33.5" r="1" fill="rgba(255,255,150,0.9)"/>
+                      {/* 4 legs */}
+                      <line x1="14" y1="48" x2="12" y2="58" stroke="rgba(100,145,65,0.9)" strokeWidth="4" strokeLinecap="round"/>
+                      <line x1="20" y1="49" x2="18" y2="58" stroke="rgba(100,145,65,0.9)" strokeWidth="4" strokeLinecap="round"/>
+                      <line x1="26" y1="49" x2="28" y2="58" stroke="rgba(100,145,65,0.9)" strokeWidth="4" strokeLinecap="round"/>
+                      <line x1="32" y1="48" x2="34" y2="58" stroke="rgba(100,145,65,0.9)" strokeWidth="4" strokeLinecap="round"/>
+                      {/* Tail */}
+                      <path d="M6,42 Q-2,44 -6,40" fill="none" stroke="rgba(120,160,80,0.88)" strokeWidth="4" strokeLinecap="round"/>
                     </g>
                   </>),
-                  // ── ANIMALS — safari at dusk ─────────────────────────────────
+                  // ── ANIMALS — safari with multiple animals ────────────────────
                   'Animals': (<>
-                    {/* Stars */}
-                    <S cx={6}  cy={4}  r={1.0} d="0s"/><S cx={20} cy={2}  r={0.8} d="0.4s"/>
-                    <S cx={70} cy={5}  r={1.2} d="0.7s"/>
-                    {/* Setting sun */}
-                    <circle cx="68" cy="14" r="10" fill="rgba(255,160,50,0.5)"/>
-                    <circle cx="68" cy="14" r="7"  fill="rgba(255,180,60,0.7)"/>
-                    {/* Grass */}
-                    <rect x="0" y="46" width="80" height="14" fill="rgba(30,100,20,0.5)"/>
-                    {[5,15,26,38,50,62,72].map((x,i)=>(
-                      <g key={i}><line x1={x} y1={46} x2={x-2} y2={38+i%3*2} stroke="rgba(40,130,30,0.7)" strokeWidth="1.5"/>
-                      <line x1={x+3} y1={46} x2={x+5} y2={39+i%2*3} stroke="rgba(40,130,30,0.7)" strokeWidth="1.5"/></g>
-                    ))}
-                    {/* Lion face — king of the animals */}
-                    <g className="it-bob" style={{transformOrigin:'40px 22px'}}>
+                    <S cx={6} cy={3} r={1.0} d="0s"/><S cx={20} cy={2} r={0.8} d="0.4s"/>
+                    {/* Sunset */}
+                    <circle cx="68" cy="12" r="10" fill="rgba(255,160,50,0.45)"/>
+                    <circle cx="68" cy="12" r="7"  fill="rgba(255,185,60,0.65)"/>
+                    {/* Savannah ground */}
+                    <rect x="0" y="48" width="80" height="12" fill="rgba(30,100,20,0.45)"/>
+                    {/* Giraffe (background, right) */}
+                    <g style={{opacity:0.88}}>
+                      {/* Long neck */}
+                      <rect x="60" y="6" width="6" height="30" rx="3" fill="rgba(220,180,80,0.9)"/>
+                      {/* Giraffe head */}
+                      <ellipse cx="63" cy="5" rx="5" ry="4" fill="rgba(220,180,80,0.9)"/>
+                      <rect x="66" y="3" width="5" height="2" rx="1" fill="rgba(200,160,60,0.85)"/>
+                      <circle cx="67.5" cy="4" r="1" fill="rgba(0,0,0,0.8)"/>
+                      {/* Horns */}
+                      <line x1="62" y1="2" x2="62" y2="-1" stroke="rgba(180,140,50,0.8)" strokeWidth="1.5"/>
+                      <line x1="65" y1="2" x2="65" y2="-1" stroke="rgba(180,140,50,0.8)" strokeWidth="1.5"/>
+                      {/* Giraffe body */}
+                      <ellipse cx="63" cy="40" rx="9" ry="6" fill="rgba(220,180,80,0.85)"/>
+                      {/* Giraffe spots */}
+                      {[[59,35],[66,37],[61,42],[68,40]].map(([x,y],i)=><ellipse key={i} cx={x} cy={y} rx="2.5" ry="2" fill="rgba(160,110,20,0.6)"/>)}
+                      {/* Giraffe legs */}
+                      {[[57,44],[61,44],[65,44],[69,44]].map(([x,y],i)=><line key={i} x1={x} y1={y} x2={x} y2={56} stroke="rgba(200,160,60,0.9)" strokeWidth="2.5" strokeLinecap="round"/>)}
+                    </g>
+                    {/* Elephant (background, left) */}
+                    <g style={{opacity:0.8}}>
+                      <ellipse cx="14" cy="40" rx="11" ry="8" fill="rgba(120,110,120,0.75)"/>
+                      <ellipse cx="14" cy="30" rx="8"  ry="7" fill="rgba(120,110,120,0.75)"/>
+                      {/* Ear */}
+                      <ellipse cx="7" cy="30" rx="5" ry="7" fill="rgba(140,125,140,0.65)"/>
+                      {/* Trunk */}
+                      <path d="M18,35 Q22,40 20,48" fill="none" stroke="rgba(120,110,120,0.8)" strokeWidth="4" strokeLinecap="round"/>
+                      {/* Eye */}
+                      <circle cx="18" cy="28" r="1.8" fill="rgba(0,0,0,0.9)"/>
+                      {/* Tusk */}
+                      <path d="M20,33 Q26,34 24,38" fill="none" stroke="rgba(240,230,200,0.75)" strokeWidth="2" strokeLinecap="round"/>
+                      {/* Legs */}
+                      {[[8,46],[12,46],[16,46],[20,46]].map(([x,y],i)=><rect key={i} x={x-2} y={y} width={4} height={10} rx="2" fill="rgba(115,105,115,0.8)"/>)}
+                    </g>
+                    {/* Zebra (foreground, center) */}
+                    <g className="it-bob" style={{transformOrigin:'40px 36px'}}>
+                      <ellipse cx="40" cy="40" rx="10" ry="7" fill="rgba(240,235,230,0.92)"/>
+                      <ellipse cx="40" cy="30" rx="7"  ry="6" fill="rgba(240,235,230,0.92)"/>
+                      {/* Zebra stripes */}
+                      {[-8,-4,0,4,8].map((dx,i)=><line key={i} x1={40+dx} y1={34} x2={40+dx+2} y2={47} stroke="rgba(20,20,20,0.6)" strokeWidth="1.8" strokeLinecap="round"/>)}
+                      {/* Head stripes */}
+                      {[-4,0,4].map((dx,i)=><line key={i} x1={40+dx} y1={25} x2={40+dx+1} y2={36} stroke="rgba(20,20,20,0.55)" strokeWidth="1.5" strokeLinecap="round"/>)}
+                      {/* Ear */}
+                      <ellipse cx="36" cy="25" rx="2.5" ry="4" fill="rgba(240,235,230,0.9)" transform="rotate(-15,36,25)"/>
+                      {/* Eye */}
+                      <circle cx="44" cy="30" r="2.5" fill="rgba(0,0,0,0.9)"/>
+                      <circle cx="44.5" cy="29.5" r="1" fill="rgba(255,255,255,0.9)"/>
+                      {/* Muzzle */}
+                      <ellipse cx="47" cy="33" rx="4" ry="3" fill="rgba(220,210,200,0.9)"/>
+                      {/* Legs */}
+                      {[[34,46],[38,46],[42,46],[46,46]].map(([x,y],i)=><line key={i} x1={x} y1={y} x2={x+(i%2===0?-1:1)} y2={56} stroke="rgba(200,195,190,0.9)" strokeWidth="3" strokeLinecap="round"/>)}
                       {/* Mane */}
-                      <circle cx="40" cy="22" r="16" fill="rgba(180,100,20,0.5)"/>
-                      <circle cx="40" cy="22" r="13" fill="rgba(200,120,30,0.4)"/>
-                      {/* Head */}
-                      <circle cx="40" cy="22" r="10" fill="rgba(230,170,70,0.97)"/>
-                      {/* Ears */}
-                      <circle cx="30" cy="13" r="5" fill="rgba(200,140,50,0.9)"/>
-                      <circle cx="50" cy="13" r="5" fill="rgba(200,140,50,0.9)"/>
-                      <circle cx="30" cy="13" r="2.5" fill="rgba(180,100,30,0.7)"/>
-                      <circle cx="50" cy="13" r="2.5" fill="rgba(180,100,30,0.7)"/>
-                      {/* Eyes */}
-                      <circle cx="36" cy="20" r="3.5" fill="rgba(255,200,50,0.9)"/>
-                      <circle cx="44" cy="20" r="3.5" fill="rgba(255,200,50,0.9)"/>
-                      <circle cx="36.5" cy="20" r="1.8" fill="rgba(0,0,0,0.95)"/>
-                      <circle cx="44.5" cy="20" r="1.8" fill="rgba(0,0,0,0.95)"/>
-                      {/* Nose/muzzle */}
-                      <ellipse cx="40" cy="26" rx="5" ry="3.5" fill="rgba(240,190,90,0.9)"/>
-                      <ellipse cx="40" cy="26" rx="2.5" ry="1.8" fill="rgba(200,120,50,0.8)"/>
-                      {/* Smile */}
-                      <path d="M36,29 Q40,33 44,29" fill="none" stroke="rgba(180,100,40,0.7)" strokeWidth="1.5" strokeLinecap="round"/>
+                      <path d="M36,25 Q38,18 40,22 Q40,16 42,20" fill="none" stroke="rgba(20,20,20,0.8)" strokeWidth="3" strokeLinecap="round"/>
                     </g>
                   </>),
                   // ── OCEAN — deep sea world ───────────────────────────────────
@@ -1316,62 +1359,84 @@ export default function OnboardingPage() {
                       {[0,1,2].map(i=><line key={i} x1="56" y1="28" x2={48-i*4} y2={22+i*6} stroke="rgba(255,200,50,0.85)" strokeWidth="1.5"/>)}
                     </g>
                   </>),
-                  // ── SWIMMING — olympic pool ──────────────────────────────────
+                  // ── SWIMMING — competition pool ───────────────────────────────
                   'Swimming': (<>
-                    {/* Pool water — deep blue */}
-                    <rect x="0" y="20" width="80" height="40" fill="rgba(0,80,180,0.6)"/>
-                    {/* Lane dividers */}
+                    {/* Scoreboard */}
+                    <rect x="18" y="1" width="44" height="16" rx="2" fill="rgba(15,15,35,0.85)"/>
+                    <text x="40" y="12" fontSize="8" fill="rgba(255,220,0,0.95)" textAnchor="middle" fontFamily="monospace" fontWeight="bold">01:24.5</text>
+                    {/* Pool edge / starting blocks */}
+                    <rect x="0" y="17" width="80" height="5" fill="rgba(180,180,200,0.85)"/>
+                    {[6,19,32,45,58,71].map((x,i)=>(
+                      <g key={i}><rect x={x} y={13} width={8} height={5} rx="1" fill="rgba(160,160,180,0.8)"/>
+                      <rect x={x+1} y={11} width={6} height={3} rx="1" fill="rgba(140,140,160,0.7)"/></g>
+                    ))}
+                    {/* Pool water */}
+                    <rect x="0" y="22" width="80" height="38" fill="rgba(0,90,200,0.65)"/>
+                    {/* Lane ropes — alternating orange/yellow */}
                     {[13,26,39,52,65].map((x,i)=>(
-                      <line key={i} x1={x} y1={20} x2={x} y2={60} stroke={i%2===0?'rgba(255,80,0,0.6)':'rgba(255,200,0,0.5)'} strokeWidth="2" strokeDasharray="4,4"/>
+                      <g key={i}>
+                        <line x1={x} y1={22} x2={x} y2={60} stroke={i%2===0?'rgba(255,100,20,0.7)':'rgba(255,210,0,0.65)'} strokeWidth="1.8" strokeDasharray="3.5,3.5"/>
+                        {[28,36,44,52].map((y,j)=><circle key={j} cx={x} cy={y} r="2.5" fill={i%2===0?'rgba(255,100,20,0.8)':'rgba(255,210,0,0.75)'}/>)}
+                      </g>
                     ))}
-                    {/* Pool edge */}
-                    <rect x="0" y="18" width="80" height="4" fill="rgba(200,200,200,0.8)"/>
-                    <line x1="0" y1="20" x2="80" y2="20" stroke="rgba(255,255,255,0.6)" strokeWidth="1"/>
-                    {/* Water ripples */}
-                    {[0,1,2,3].map(i=>(
-                      <ellipse key={i} cx="40" cy={35+i*5} rx={8+i*6} ry={3+i*2} fill="none" stroke="rgba(150,220,255,0.3)" strokeWidth="1" className="it-pulse" style={{animationDelay:`${i*0.35}s`}}/>
-                    ))}
-                    {/* Wave surface */}
-                    <path d="M0,26 Q10,22 20,26 Q30,30 40,26 Q50,22 60,26 Q70,30 80,26" fill="rgba(150,200,255,0.3)" className="it-wave-y"/>
-                    {/* Swimmer stroking across */}
+                    {/* Wave surface shimmer */}
+                    <path d="M0,28 Q10,24 20,28 Q30,32 40,28 Q50,24 60,28 Q70,32 80,28" fill="rgba(180,220,255,0.2)" className="it-wave-y"/>
+                    {/* Water line ripples */}
+                    <path d="M0,34 Q10,31 20,34 Q30,37 40,34 Q50,31 60,34 Q70,37 80,34" fill="rgba(100,180,255,0.12)" className="it-wave-y" style={{animationDelay:'0.4s'}}/>
+                    {/* Swimmer — full freestyle stroke */}
                     <g className="it-swim">
-                      {/* Head */}
-                      <circle cx="0" cy="22" r="5" fill="rgba(230,185,140,0.97)"/>
-                      {/* Cap */}
-                      <ellipse cx="0" cy="19" rx="5" ry="3" fill="rgba(255,50,50,0.9)"/>
-                      {/* Goggles */}
-                      <ellipse cx="-2" cy="22" rx="2" ry="1.5" fill="rgba(50,150,255,0.8)"/>
-                      <ellipse cx="2" cy="22" rx="2" ry="1.5" fill="rgba(50,150,255,0.8)"/>
-                      <line x1="-1" y1="22" x2="1" y2="22" stroke="rgba(50,150,255,0.6)" strokeWidth="0.8"/>
-                      {/* Body */}
-                      <rect x="-6" y="26" width="14" height="6" rx="3" fill="rgba(255,100,50,0.85)"/>
-                      {/* Lead arm forward */}
-                      <line x1="8"  y1="28" x2="18" y2="22" stroke="rgba(230,185,140,0.9)" strokeWidth="3" strokeLinecap="round"/>
-                      {/* Trailing arm in water */}
-                      <line x1="-6" y1="28" x2="-16" y2="24" stroke="rgba(230,185,140,0.8)" strokeWidth="3" strokeLinecap="round"/>
-                      {/* Splash */}
-                      <ellipse cx="16" cy="22" rx="5" ry="2.5" fill="rgba(200,230,255,0.4)"/>
+                      {/* Body streamlined */}
+                      <rect x="-8" y="28" width="20" height="7" rx="3.5" fill="rgba(20,80,200,0.9)"/>
+                      {/* Head with cap & goggles */}
+                      <circle cx="4" cy="26" r="6" fill="rgba(230,185,140,0.97)"/>
+                      <ellipse cx="4" cy="22" rx="6" ry="3.5" fill="rgba(220,30,30,0.92)"/>
+                      <ellipse cx="1.5" cy="26" rx="2.2" ry="1.6" fill="rgba(30,140,255,0.85)"/>
+                      <ellipse cx="6.5" cy="26" rx="2.2" ry="1.6" fill="rgba(30,140,255,0.85)"/>
+                      <line x1="3" y1="26" x2="5" y2="26" stroke="rgba(20,100,200,0.7)" strokeWidth="0.9"/>
+                      {/* Legs kicking */}
+                      <path d="M-8,32 Q-12,36 -16,32" fill="none" stroke="rgba(230,185,140,0.9)" strokeWidth="3.5" strokeLinecap="round"/>
+                      <path d="M-8,32 Q-12,28 -16,34" fill="none" stroke="rgba(230,185,140,0.85)" strokeWidth="3" strokeLinecap="round"/>
+                      {/* Lead arm — out of water forward */}
+                      <path d="M10,28 Q16,20 22,22" fill="none" stroke="rgba(230,185,140,0.92)" strokeWidth="4" strokeLinecap="round"/>
+                      <circle cx="22" cy="22" r="3.5" fill="rgba(230,185,140,0.92)"/>
+                      {/* Water splash from arm entry */}
+                      <ellipse cx="20" cy="24" rx="6" ry="3" fill="rgba(200,235,255,0.5)"/>
+                      {/* Trailing arm recovering */}
+                      <path d="M-2,30 Q-8,24 -12,28" fill="none" stroke="rgba(230,185,140,0.8)" strokeWidth="3.5" strokeLinecap="round"/>
                     </g>
-                    {/* Scoreboard at top */}
-                    <rect x="20" y="2" width="40" height="14" rx="2" fill="rgba(20,20,40,0.8)"/>
-                    <text x="40" y="12" fontSize="7" fill="rgba(255,220,0,0.9)" textAnchor="middle" fontFamily="monospace">01:24.5</text>
                   </>),
-                  // ── ART — studio canvas ─────────────────────────────────────
+                  // ── ART — painter at easel creating art ──────────────────────
                   'Art': (<>
-                    <rect x="10" y="5"  width="52" height="41" rx="3" fill="rgba(255,255,255,0.92)" stroke={c(0.5)} strokeWidth="2"/>
-                    <rect x="13" y="8"  width="46" height="35" rx="1" fill="rgba(255,255,255,0.98)"/>
-                    <circle cx="27" cy="22" r="7.5" fill="rgba(255,200,0,0.65)"/>
-                    <circle cx="40" cy="16" r="5.5" fill="rgba(255,80,80,0.65)"/>
-                    <circle cx="36" cy="30" r="7"   fill="rgba(60,200,60,0.6)"/>
-                    <circle cx="50" cy="24" r="5"   fill="rgba(80,120,255,0.6)"/>
-                    <circle cx="48" cy="35" r="4.5" fill="rgba(180,60,200,0.6)"/>
-                    <rect x="64" y="4"  width="3.5" height="22" rx="1.5" fill={c(0.8)}/>
-                    <ellipse cx="65.5" cy="27" rx="3.5" ry="4.5" fill="rgba(255,160,0,0.95)"/>
-                    <ellipse cx="24" cy="52" rx="12" ry="7" fill={c(0.2)}/>
-                    {['rgba(255,80,80,1)','rgba(255,200,0,1)','rgba(60,200,60,1)','rgba(80,120,255,1)','rgba(200,80,200,1)'].map((col,i)=>(
-                      <circle key={i} cx={16+i*6} cy={52} r="2.5" fill={col} opacity="0.9"/>
-                    ))}
-                    <path className="it-draw" d="M15,39 Q28,30 44,35 Q56,40 58,32" fill="none" stroke="rgba(234,88,12,0.9)" strokeWidth="3" strokeDasharray="62" strokeLinecap="round"/>
+                    {/* Easel legs */}
+                    <line x1="30" y1="8" x2="18" y2="58" stroke={c(0.6)} strokeWidth="2.5" strokeLinecap="round"/>
+                    <line x1="50" y1="8" x2="62" y2="58" stroke={c(0.6)} strokeWidth="2.5" strokeLinecap="round"/>
+                    <line x1="40" y1="46" x2="40" y2="58" stroke={c(0.55)} strokeWidth="2" strokeLinecap="round"/>
+                    <line x1="22" y1="44" x2="58" y2="44" stroke={c(0.5)} strokeWidth="1.5"/>
+                    {/* Canvas on easel */}
+                    <rect x="22" y="6" width="36" height="38" rx="2" fill="rgba(255,252,245,0.97)" stroke={c(0.6)} strokeWidth="1.5"/>
+                    {/* Painting on canvas — landscape scene */}
+                    <rect x="23" y="7" width="34" height="16" rx="1" fill="rgba(135,200,255,0.7)"/>  {/* sky */}
+                    <ellipse cx="30" cy="15" rx="5" ry="3" fill="rgba(255,255,255,0.6)"/>  {/* cloud */}
+                    <ellipse cx="44" cy="13" rx="6" ry="3.5" fill="rgba(255,255,255,0.55)"/>
+                    <rect x="23" y="23" width="34" height="20" rx="1" fill="rgba(40,160,50,0.65)"/>  {/* grass */}
+                    <ellipse cx="32" cy="22" rx="7" ry="5" fill="rgba(30,140,40,0.7)"/>  {/* tree */}
+                    <rect x="31" y="25" width="3" height="18" fill="rgba(100,60,20,0.7)"/> {/* trunk */}
+                    <ellipse cx="48" cy="24" rx="6" ry="4" fill="rgba(25,130,35,0.65)"/>
+                    <rect x="47" y="27" width="3" height="16" fill="rgba(100,60,20,0.65)"/>
+                    {/* Brush stroke being painted */}
+                    <path className="it-draw" d="M24,36 Q32,30 42,34 Q50,38 54,32" fill="none" stroke="rgba(255,100,20,0.85)" strokeWidth="2.5" strokeDasharray="50" strokeLinecap="round"/>
+                    {/* Palette — round with colour blobs */}
+                    <ellipse cx="68" cy="44" rx="10" ry="12" fill="rgba(230,210,180,0.8)"/>
+                    <circle cx="68" cy="38" r="3" fill="none"/> {/* thumb hole */}
+                    <circle cx="62" cy="36" r="3" fill="rgba(255,80,80,0.85)"/>
+                    <circle cx="68" cy="34" r="3" fill="rgba(255,200,0,0.85)"/>
+                    <circle cx="74" cy="36" r="3" fill="rgba(50,180,50,0.85)"/>
+                    <circle cx="76" cy="43" r="3" fill="rgba(60,100,255,0.85)"/>
+                    <circle cx="72" cy="50" r="3" fill="rgba(200,60,200,0.85)"/>
+                    <circle cx="64" cy="50" r="3" fill="rgba(255,130,20,0.85)"/>
+                    {/* Paintbrush in hand */}
+                    <rect x="3" y="3" width="3.5" height="22" rx="1.5" fill={c(0.85)}/>
+                    <ellipse cx="4.5" cy="26" rx="3.5" ry="4.5" fill="rgba(255,80,20,0.92)"/>
                   </>),
                   // ── MUSIC — dark concert hall ────────────────────────────────
                   'Music': (<>
@@ -1395,74 +1460,95 @@ export default function OnboardingPage() {
                       </g>
                     ))}
                   </>),
-                  // ── COOKING — warm kitchen night ─────────────────────────────
+                  // ── COOKING — busy kitchen with food ──────────────────────────
                   'Cooking': (<>
-                    {/* Stove top */}
-                    <rect x="8" y="42" width="64" height="5" rx="2" fill="rgba(60,40,20,0.7)"/>
-                    {/* Burner rings */}
-                    {[24,56].map((x,i)=>(
+                    {/* Kitchen counter */}
+                    <rect x="0"  y="46" width="80" height="14" fill="rgba(100,70,30,0.65)"/>
+                    <rect x="0"  y="44" width="80" height="4"  rx="1" fill="rgba(120,90,40,0.7)"/>
+                    {/* Stove / hob */}
+                    <rect x="8"  y="36" width="64" height="10" rx="3" fill="rgba(60,55,60,0.75)"/>
+                    {/* Burner flames */}
+                    {[22,42,62].map((x,i)=>(
                       <g key={i}>
-                        <circle cx={x} cy={44} r="7" fill="none" stroke="rgba(200,100,30,0.5)" strokeWidth="1.5"/>
-                        <circle cx={x} cy={44} r="4" fill="rgba(255,100,20,0.3)" className="it-star" style={{animationDelay:`${i*0.4}s`}}/>
+                        <circle cx={x} cy={39} r="5" fill="none" stroke="rgba(60,55,60,0.8)" strokeWidth="1.2"/>
+                        <circle cx={x} cy={39} r="4" fill="rgba(255,100,20,0.35)" className="it-star" style={{animationDelay:`${i*0.3}s`}}/>
+                        <circle cx={x} cy={39} r="2" fill="rgba(255,180,50,0.5)" className="it-star" style={{animationDelay:`${i*0.3+0.2}s`}}/>
                       </g>
                     ))}
-                    {/* Large pot bubbling */}
-                    <ellipse cx="40" cy="41" rx="20" ry="9" fill="rgba(80,50,20,0.8)"/>
-                    <rect x="20" y="28" width="40" height="15" rx="4" fill="rgba(90,55,20,0.85)"/>
-                    <rect x="56" y="30" width="16" height="4" rx="2" fill="rgba(80,50,20,0.7)" transform="rotate(10,56,30)"/>
-                    {/* Bubbling soup */}
-                    <ellipse cx="40" cy="28" rx="17" ry="6" fill="rgba(200,120,40,0.5)"/>
-                    {[28,36,44,52].map((x,i)=>(
-                      <circle key={i} cx={x} cy={26-i%2*3} r="2.5" fill="rgba(220,140,50,0.6)" className="it-up" style={{animationDelay:`${i*0.25}s`}}/>
+                    {/* Large cooking pot */}
+                    <ellipse cx="40" cy="38" rx="18" ry="8" fill="rgba(70,55,55,0.85)"/>
+                    <rect x="22" y="24" width="36" height="16" rx="4" fill="rgba(80,62,62,0.9)"/>
+                    {/* Pot handles */}
+                    <path d="M22,30 Q14,30 14,34 Q14,38 22,38" fill="none" stroke="rgba(80,62,62,0.9)" strokeWidth="3.5" strokeLinecap="round"/>
+                    <path d="M58,30 Q66,30 66,34 Q66,38 58,38" fill="none" stroke="rgba(80,62,62,0.9)" strokeWidth="3.5" strokeLinecap="round"/>
+                    {/* Soup / stew in pot */}
+                    <ellipse cx="40" cy="24" rx="15" ry="5.5" fill="rgba(200,100,40,0.6)"/>
+                    {/* Bubbles */}
+                    {[30,38,46,52].map((x,i)=>(
+                      <circle key={i} cx={x} cy={22-i%2*3} r="2.5" fill="rgba(230,130,50,0.65)" className="it-up" style={{animationDelay:`${i*0.28}s`}}/>
                     ))}
-                    {/* Ladle */}
-                    <line x1="40" y1="8" x2="40" y2="26" stroke="rgba(180,120,60,0.8)" strokeWidth="2.5" strokeLinecap="round"/>
-                    <circle cx="40" cy="26" r="4.5" fill="none" stroke="rgba(180,120,60,0.8)" strokeWidth="2"/>
-                    {/* Steam */}
-                    {[0,1,2].map(i=>(
-                      <path key={i} className="it-up" d={`M${28+i*10},20 Q${26+i*10},12 ${30+i*10},6`} fill="none" stroke="rgba(255,220,180,0.4)" strokeWidth="2" strokeLinecap="round" style={{animationDelay:`${i*0.35}s`}}/>
+                    {/* Ladle stirring */}
+                    <rect x="38.5" y="4" width="3" height="20" rx="1.5" fill="rgba(180,140,80,0.85)" className="it-stir" style={{transformOrigin:'40px 22px'}}/>
+                    <circle cx="40" cy="23" r="4" fill="none" stroke="rgba(180,140,80,0.85)" strokeWidth="2"/>
+                    {/* Steam rising */}
+                    {[0,1,2,3].map(i=>(
+                      <path key={i} className="it-up" d={`M${26+i*9},18 Q${24+i*9},10 ${28+i*9},4`} fill="none" stroke="rgba(255,230,200,0.45)" strokeWidth="2.2" strokeLinecap="round" style={{animationDelay:`${i*0.3}s`}}/>
                     ))}
+                    {/* Vegetables / ingredients on counter */}
+                    <circle cx="10" cy="50" r="5" fill="rgba(255,60,60,0.8)"/>  {/* tomato */}
+                    <circle cx="10" cy="46" r="2.5" fill="rgba(30,160,30,0.7)"/> {/* stalk */}
+                    <ellipse cx="24" cy="50" rx="4" ry="5.5" fill="rgba(255,180,0,0.8)"/> {/* onion */}
+                    <path d="M20,44 Q24,42 28,44" fill="none" stroke="rgba(220,140,0,0.65)" strokeWidth="1.2"/>
+                    <ellipse cx="60" cy="51" rx="7" ry="4" fill="rgba(100,180,50,0.8)"/> {/* zucchini */}
+                    <ellipse cx="74" cy="50" rx="5" ry="5.5" fill="rgba(180,80,200,0.75)"/> {/* eggplant */}
                   </>),
-                  // ── DOLLS — enchanted toy room at night ─────────────────────
+                  // ── DOLLS — Barbie-style dollhouse ────────────────────────────
                   'Dolls': (<>
-                    {/* Stars */}
-                    <S cx={6}  cy={4}  r={1.0} d="0s"/><S cx={18} cy={2}  r={0.8} d="0.4s"/>
-                    <S cx={70} cy={4}  r={1.2} d="0.7s"/><S cx={76} cy={14} r={0.9} d="0.5s"/>
-                    {/* Window with moonlight */}
-                    <rect x="52" y="4" width="20" height="18" rx="2" fill="rgba(150,180,255,0.15)" stroke="rgba(200,220,255,0.3)" strokeWidth="1"/>
-                    <line x1="62" y1="4" x2="62" y2="22" stroke="rgba(200,220,255,0.3)" strokeWidth="0.8"/>
-                    <line x1="52" y1="13" x2="72" y2="13" stroke="rgba(200,220,255,0.3)" strokeWidth="0.8"/>
-                    <circle cx="62" cy="13" r="5" fill="rgba(200,220,255,0.12)"/>
-                    {/* Shelf */}
-                    <rect x="0" y="38" width="80" height="3" rx="1" fill="rgba(180,130,80,0.5)"/>
-                    {/* Main doll figure */}
-                    <g className="it-bob" style={{transformOrigin:'30px 22px'}}>
-                      {/* Hair/head */}
-                      <circle cx="30" cy="10" r="8" fill="rgba(220,150,200,0.4)"/>
-                      <circle cx="30" cy="11" r="6.5" fill="rgba(255,200,180,0.97)"/>
-                      {/* Hair */}
-                      <path d="M24,9 Q27,3 30,5 Q33,3 36,9" fill="rgba(200,100,150,0.85)"/>
-                      {/* Eyes */}
-                      <circle cx="27.5" cy="11" r="1.8" fill="rgba(80,40,100,0.9)"/>
-                      <circle cx="32.5" cy="11" r="1.8" fill="rgba(80,40,100,0.9)"/>
-                      <circle cx="27.8" cy="10.5" r="0.8" fill="rgba(255,255,255,0.9)"/>
-                      <circle cx="32.8" cy="10.5" r="0.8" fill="rgba(255,255,255,0.9)"/>
-                      {/* Smile */}
-                      <path d="M27,14 Q30,17 33,14" fill="none" stroke="rgba(200,100,120,0.7)" strokeWidth="1.2" strokeLinecap="round"/>
-                      {/* Dress */}
-                      <polygon points="24,17 36,17 40,35 20,35" fill="rgba(255,120,180,0.8)"/>
-                      {/* Dress detail */}
-                      <line x1="30" y1="17" x2="30" y2="35" stroke="rgba(255,200,230,0.5)" strokeWidth="1"/>
-                      {/* Arms */}
-                      <line x1="24" y1="20" x2="15" y2="26" stroke="rgba(255,200,180,0.9)" strokeWidth="2.5" strokeLinecap="round"/>
-                      <line x1="36" y1="20" x2="45" y2="26" stroke="rgba(255,200,180,0.9)" strokeWidth="2.5" strokeLinecap="round"/>
+                    {/* Dollhouse structure */}
+                    {/* Roof */}
+                    <polygon points="8,22 40,4 72,22" fill="rgba(220,80,140,0.85)"/>
+                    <polygon points="8,22 40,4 40,22" fill="rgba(200,60,120,0.75)"/>
+                    {/* House walls */}
+                    <rect x="8"  y="22" width="64" height="38" fill="rgba(255,220,240,0.7)"/>
+                    {/* Center divider */}
+                    <line x1="40" y1="22" x2="40" y2="60" stroke="rgba(200,150,180,0.5)" strokeWidth="1"/>
+                    {/* Floor divider */}
+                    <line x1="8" y1="40" x2="72" y2="40" stroke="rgba(200,150,180,0.5)" strokeWidth="1"/>
+                    {/* Room windows / frames */}
+                    <rect x="10" y="24" width="28" height="15" rx="1" fill="rgba(255,240,250,0.4)" stroke="rgba(220,140,180,0.5)" strokeWidth="0.8"/>
+                    <rect x="42" y="24" width="28" height="15" rx="1" fill="rgba(255,240,250,0.4)" stroke="rgba(220,140,180,0.5)" strokeWidth="0.8"/>
+                    <rect x="10" y="42" width="28" height="16" rx="1" fill="rgba(255,240,250,0.4)" stroke="rgba(220,140,180,0.5)" strokeWidth="0.8"/>
+                    <rect x="42" y="42" width="28" height="16" rx="1" fill="rgba(255,240,250,0.4)" stroke="rgba(220,140,180,0.5)" strokeWidth="0.8"/>
+                    {/* Room contents */}
+                    {/* Top-left room: living room with sofa */}
+                    <ellipse cx="20" cy="36" rx="8" ry="3" fill="rgba(255,100,160,0.6)"/>  {/* sofa */}
+                    <rect x="12" y="32" width="16" height="5" rx="2" fill="rgba(255,120,170,0.7)"/>
+                    {/* Top-right room: bedroom with bed */}
+                    <rect x="44" y="32" width="24" height="6" rx="2" fill="rgba(140,180,255,0.65)"/>
+                    <rect x="44" y="30" width="8"  height="3" rx="1" fill="rgba(180,220,255,0.7)"/>  {/* pillow */}
+                    {/* Bottom-left room: dining */}
+                    <ellipse cx="24" cy="52" rx="8" ry="4" fill="rgba(220,180,100,0.6)"/>  {/* table */}
+                    {/* Bottom-right room: wardrobe */}
+                    <rect x="44" y="43" width="14" height="13" rx="1" fill="rgba(200,160,120,0.6)"/>
+                    <line x1="51" y1="43" x2="51" y2="56" stroke="rgba(180,140,100,0.5)" strokeWidth="0.8"/>
+                    {/* Front door */}
+                    <rect x="33" y="48" width="14" height="12" rx="2 2 0 0" fill="rgba(220,80,140,0.75)"/>
+                    <circle cx="44" cy="54" r="1.5" fill="rgba(255,220,50,0.9)"/>  {/* door handle */}
+                    {/* Barbie doll 1 — in living room */}
+                    <g style={{opacity:0.92}}>
+                      <circle cx="25" cy="28" r="3" fill="rgba(255,210,185,0.97)"/>
+                      <path d="M22,27 Q24,24 25,25 Q26,24 28,27" fill="rgba(255,200,50,0.9)"/>
+                      <polygon points="22,31 28,31 30,36 20,36" fill="rgba(255,80,160,0.85)"/>
                     </g>
-                    {/* Flowers blooming around doll */}
-                    {[{x:12,y:30},{x:50,y:28},{x:8,y:46},{x:68,y:44}].map(({x,y},i)=>(
-                      <g key={i} className="it-bloom" style={{transformOrigin:`${x}px ${y}px`,animationDelay:`${i*0.25}s`}}>
-                        {[0,1,2,3,4].map(j=><ellipse key={j} cx={x+Math.cos(j*72*Math.PI/180)*4} cy={y+Math.sin(j*72*Math.PI/180)*4} rx="3" ry="1.5" fill={['rgba(255,120,180,0.8)','rgba(255,200,50,0.8)','rgba(200,100,255,0.8)','rgba(100,200,255,0.8)','rgba(255,150,80,0.8)'][j]} transform={`rotate(${j*72},${x},${y})`}/>)}
-                        <circle cx={x} cy={y} r="2" fill="rgba(255,230,100,0.9)"/>
-                      </g>
+                    {/* Barbie doll 2 — in bedroom */}
+                    <g style={{opacity:0.88}}>
+                      <circle cx="62" cy="27" r="3" fill="rgba(255,210,185,0.97)"/>
+                      <path d="M59,26 Q61,23 62,24 Q63,23 65,26" fill="rgba(180,120,220,0.9)"/>
+                      <polygon points="59,30 65,30 67,36 57,36" fill="rgba(200,100,255,0.8)"/>
+                    </g>
+                    {/* Stars / sparkles on roof */}
+                    {[{x:20,y:12},{x:40,y:8},{x:60,y:12}].map(({x,y},i)=>(
+                      <circle key={i} cx={x} cy={y} r="1.8" fill="rgba(255,220,100,0.9)" className="it-star" style={{animationDelay:`${i*0.3}s`}}/>
                     ))}
                   </>),
                   // ── CARS & TRUCKS — night highway ────────────────────────────
