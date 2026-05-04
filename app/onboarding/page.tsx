@@ -475,6 +475,8 @@ export default function OnboardingPage() {
                   'Soccer':'#0A3A14', 'Cars & Trucks':'#1A1A1A',
                   'Unicorns':'#1A0A2E', 'Princesses':'#1A1008',
                   'Animals':'#0A1E06', 'Swimming':'#041428', 'Football':'#0A2006',
+                  'Robots':'#0A0E1A', 'Science':'#030E18', 'Music':'#0E0418',
+                  'Ocean':'#030C1E', 'Nature':'#040E04', 'Cooking':'#1A0A02', 'Dolls':'#1A0418',
                 };
                 const darkBg = DARK_BG[option.label];
                 const S = (props:{cx:number;cy:number;r:number;d:string}) => <circle cx={props.cx} cy={props.cy} r={props.r} fill="rgba(255,248,200,0.92)" className="it-star" style={{animationDelay:props.d}}/>;
@@ -893,77 +895,135 @@ export default function OnboardingPage() {
                       <path d="M36,29 Q40,33 44,29" fill="none" stroke="rgba(180,100,40,0.7)" strokeWidth="1.5" strokeLinecap="round"/>
                     </g>
                   </>),
-                  // ── OCEAN — underwater world ────────────────────────────────
+                  // ── OCEAN — deep sea world ───────────────────────────────────
                   'Ocean': (<>
-                    {[[6,56],[18,52],[62,54],[74,50]].map(([x,y],i)=>(
-                      <g key={i}><line x1={x+3} y1={60} x2={x+3} y2={y} stroke={c(0.3)} strokeWidth="2"/>
-                      <path d={`M${x},${y} Q${x+3},${y-7} ${x+6},${y} Q${x+3},${y-4} ${x},${y}`} fill={c(0.35)}/></g>
-                    ))}
-                    <path d="M0,38 Q10,32 20,38 Q30,44 40,38 Q50,32 60,38 Q70,44 80,38" fill={c(0.25)} className="it-wave-y"/>
-                    <path d="M0,46 Q10,40 20,46 Q30,52 40,46 Q50,40 60,46 Q70,52 80,46" fill={c(0.35)} className="it-wave-y" style={{animationDelay:'0.4s'}}/>
-                    {[14,30,48,65].map((cx,i)=>(
-                      <circle key={i} cx={cx} cy={20+i*4} r={2+i%2} fill={c(0.3)} className="it-up" style={{animationDelay:`${i*0.45}s`}}/>
-                    ))}
-                    <g className="it-swim">
-                      <ellipse cx="0" cy="28" rx="11" ry="6" fill="rgba(255,140,0,0.9)"/>
-                      <polygon points="11,28 19,22 19,34" fill="rgba(255,100,0,0.8)"/>
-                      <circle cx="-3" cy="27" r="2" fill="rgba(0,0,0,0.65)"/>
-                      <circle cx="-3.5" cy="26.5" r="0.8" fill="rgba(255,255,255,0.8)"/>
-                      <line x1="2" y1="22" x2="2" y2="34" stroke="rgba(220,80,0,0.4)" strokeWidth="1.5"/>
-                      <line x1="6" y1="22" x2="6" y2="34" stroke="rgba(220,80,0,0.4)" strokeWidth="1.5"/>
-                    </g>
-                  </>),
-                  // ── NATURE — garden ─────────────────────────────────────────
-                  'Nature': (<>
-                    <rect x="38" y="28" width="4" height="32" fill={c(0.5)}/>
-                    <circle cx="40" cy="18" r="16" fill={c(0.3)}/>
-                    <circle cx="40" cy="16" r="11" fill={c(0.5)}/>
-                    {[{cx:32,cy:52},{cx:40,cy:55},{cx:48,cy:52},{cx:25,cy:50},{cx:55,cy:50}].map(({cx,cy},i)=>(
-                      <g key={i}><line x1={cx} y1={cy} x2={cx} y2={59} stroke={c(0.35)} strokeWidth="1.5"/>
-                      {[0,1,2,3,4].map(j=><ellipse key={j} cx={cx+Math.cos(j*72*Math.PI/180)*3} cy={cy+Math.sin(j*72*Math.PI/180)*3} rx="2" ry="1.2" fill={c(0.5)} transform={`rotate(${j*72},${cx},${cy})`}/>)}
-                      <circle cx={cx} cy={cy} r="1.5" fill={c(0.7)}/></g>
-                    ))}
-                    {[[-14,8],[12,-14],[18,4],[-6,14]].map(([dx,dy],i)=>(
-                      <g key={i} className="it-leaf" style={{transformOrigin:`${40+dx}px ${16+dy}px`,animationDelay:`${i*0.55}s`}}>
-                        <ellipse cx={40+dx} cy={16+dy} rx="6" ry="3" fill={c(0.7)} transform={`rotate(${i*45},${40+dx},${16+dy})`}/>
+                    {/* Coral reef */}
+                    {[[5,58],[14,54],[60,56],[72,52]].map(([x,y],i)=>(
+                      <g key={i}>
+                        <line x1={x+3} y1={60} x2={x+3} y2={y} stroke={`rgba(${[255,80,100,200][i]},${[80,180,80,60][i]},${[80,100,200,200][i]},0.7)`} strokeWidth="2.5"/>
+                        <path d={`M${x},${y} Q${x+3},${y-8} ${x+6},${y} Q${x+3},${y-4} ${x},${y}`} fill={`rgba(${[255,80,100,200][i]},${[80,180,80,60][i]},${[80,100,200,200][i]},0.45)`}/>
                       </g>
                     ))}
+                    {/* Water surface shimmer */}
+                    <path d="M0,30 Q10,25 20,30 Q30,35 40,30 Q50,25 60,30 Q70,35 80,30" fill="rgba(50,150,255,0.15)" className="it-wave-y"/>
+                    <path d="M0,38 Q10,33 20,38 Q30,43 40,38 Q50,33 60,38 Q70,43 80,38" fill="rgba(30,120,220,0.2)" className="it-wave-y" style={{animationDelay:'0.5s'}}/>
+                    {/* Bubbles */}
+                    {[12,28,50,66].map((cx,i)=>(
+                      <circle key={i} cx={cx} cy={18+i*5} r={2.2+i%2*0.8} fill="rgba(150,220,255,0.4)" className="it-up" style={{animationDelay:`${i*0.5}s`}}/>
+                    ))}
+                    {/* Colourful tropical fish */}
+                    <g className="it-swim">
+                      <ellipse cx="0" cy="26" rx="12" ry="7" fill="rgba(255,120,0,0.95)"/>
+                      <polygon points="12,26 22,20 22,32" fill="rgba(255,80,0,0.9)"/>
+                      <ellipse cx="0" cy="26" rx="6"  ry="4" fill="rgba(255,200,0,0.6)"/>
+                      <circle cx="-4" cy="24" r="2.2" fill="rgba(0,0,0,0.8)"/>
+                      <circle cx="-3.5" cy="23.5" r="1" fill="rgba(255,255,255,0.9)"/>
+                      <line x1="3" y1="20" x2="3" y2="32" stroke="rgba(200,60,0,0.4)" strokeWidth="1.5"/>
+                      <line x1="7" y1="20" x2="7" y2="32" stroke="rgba(200,60,0,0.4)" strokeWidth="1.5"/>
+                    </g>
+                    {/* Small starfish */}
+                    <g style={{opacity:0.7}}>
+                      {[0,1,2,3,4].map(i=><line key={i} x1="66" y1="55" x2={66+8*Math.cos(i*72*Math.PI/180)} y2={55+8*Math.sin(i*72*Math.PI/180)} stroke="rgba(255,150,50,0.8)" strokeWidth="2.5" strokeLinecap="round"/>)}
+                    </g>
                   </>),
-                  // ── ROBOTS — robot workshop ──────────────────────────────────
+                  // ── NATURE — sunrise forest ──────────────────────────────────
+                  'Nature': (<>
+                    {/* Sunrise sky gradient effect */}
+                    <ellipse cx="40" cy="0" rx="35" ry="22" fill="rgba(255,160,50,0.15)"/>
+                    <circle cx="40" cy="2" r="10" fill="rgba(255,180,50,0.35)"/>
+                    <circle cx="40" cy="2" r="7"  fill="rgba(255,200,60,0.5)"/>
+                    {/* Sun rays */}
+                    {[0,1,2,3,4,5,6,7].map(i=>(
+                      <line key={i} x1="40" y1="2" x2={40+16*Math.cos(i*45*Math.PI/180)} y2={2+16*Math.sin(i*45*Math.PI/180)} stroke="rgba(255,200,60,0.25)" strokeWidth="1.5"/>
+                    ))}
+                    {/* Ground */}
+                    <rect x="0" y="46" width="80" height="14" fill="rgba(30,120,30,0.4)"/>
+                    {/* Flowers */}
+                    {[[8,47],[20,44],[42,47],[60,44],[72,47]].map(([x,y],i)=>(
+                      <g key={i}><line x1={x} y1={y} x2={x} y2={55} stroke="rgba(30,150,40,0.6)" strokeWidth="1.5"/>
+                      {[0,1,2,3,4].map(j=><ellipse key={j} cx={x+Math.cos(j*72*Math.PI/180)*3} cy={y+Math.sin(j*72*Math.PI/180)*3} rx="2.2" ry="1.4" fill={['rgba(255,100,100,0.7)','rgba(255,200,50,0.7)','rgba(200,100,255,0.7)','rgba(100,200,255,0.7)','rgba(255,150,50,0.7)'][j]} transform={`rotate(${j*72},${x},${y})`}/>)}
+                      <circle cx={x} cy={y} r="2" fill="rgba(255,220,50,0.9)"/></g>
+                    ))}
+                    {/* Large oak tree */}
+                    <rect x="37" y="24" width="6" height="22" fill="rgba(100,60,20,0.8)" rx="2"/>
+                    <circle cx="40" cy="18" r="16" fill="rgba(30,160,50,0.6)"/>
+                    <circle cx="40" cy="14" r="12" fill="rgba(40,180,60,0.7)"/>
+                    {/* Drifting leaves */}
+                    {[[-14,10],[12,-12],[18,6],[-6,16]].map(([dx,dy],i)=>(
+                      <g key={i} className="it-leaf" style={{transformOrigin:`${40+dx}px ${14+dy}px`,animationDelay:`${i*0.55}s`}}>
+                        <ellipse cx={40+dx} cy={14+dy} rx="6" ry="3" fill="rgba(50,200,70,0.8)" transform={`rotate(${i*45},${40+dx},${14+dy})`}/>
+                      </g>
+                    ))}
+                    {/* Birds */}
+                    {[[62,14],[70,10]].map(([x,y],i)=>(
+                      <path key={i} d={`M${x},${y} Q${x+4},${y-3} ${x+8},${y}`} fill="none" stroke="rgba(0,0,0,0.4)" strokeWidth="1.2" strokeLinecap="round"/>
+                    ))}
+                  </>),
+                  // ── ROBOTS — dark robot workshop ─────────────────────────────
                   'Robots': (<>
-                    {[[5,25],[5,35],[75,25],[75,35]].map(([x,y],i)=>(
-                      <line key={i} x1={x} y1={y} x2={i<2?25:55} y2={y} stroke={c(0.2)} strokeWidth="1" strokeDasharray="2,2"/>
+                    {/* Circuit board traces */}
+                    {[[5,20],[5,35],[75,22],[75,38]].map(([x,y],i)=>(
+                      <line key={i} x1={x} y1={y} x2={i<2?24:56} y2={y} stroke="rgba(0,200,120,0.3)" strokeWidth="1" strokeDasharray="3,2"/>
                     ))}
-                    <rect x="26" y="20" width="28" height="26" rx="4" fill={c(0.28)}/>
-                    <rect x="30" y="10" width="20" height="12" rx="2" fill={c(0.32)}/>
-                    <line x1="40" y1="8" x2="40" y2="10" stroke={c(0.5)} strokeWidth="1.5"/>
-                    <circle cx="40" cy="7" r="2" fill={c(0.6)}/>
-                    <circle cx="34" cy="28" r="4.5" fill={c(0.2)}/>
-                    <circle cx="34" cy="28" r="3" fill={c(0.7)} className="it-star" style={{animationDelay:'0s'}}/>
-                    <circle cx="46" cy="28" r="4.5" fill={c(0.2)}/>
-                    <circle cx="46" cy="28" r="3" fill={c(0.7)} className="it-star" style={{animationDelay:'0.6s'}}/>
-                    <rect x="33" y="36" width="14" height="4" rx="2" fill={c(0.4)}/>
-                    <rect x="26" y="46" width="6" height="14" rx="2" fill={c(0.25)}/>
-                    <rect x="48" y="46" width="6" height="14" rx="2" fill={c(0.25)}/>
-                    <g className="it-spin-f" style={{transformOrigin:'68px 22px'}}>
-                      <circle cx="68" cy="22" r="9" fill="none" stroke={c(0.35)} strokeWidth="1.5"/>
-                      <circle cx="68" cy="22" r="3" fill={c(0.4)}/>
-                      {[0,1,2,3,4,5].map(i=><line key={i} x1="68" y1="22" x2={68+9*Math.cos(i*60*Math.PI/180)} y2={22+9*Math.sin(i*60*Math.PI/180)} stroke={c(0.35)} strokeWidth="1.2"/>)}
+                    {[0,1,2,3].map(i=><circle key={i} cx={i<2?5:75} cy={i%2===0?20:35} r="2" fill="rgba(0,200,120,0.5)" className="it-star" style={{animationDelay:`${i*0.3}s`}}/>)}
+                    {/* Robot body */}
+                    <rect x="26" y="20" width="28" height="26" rx="4" fill="rgba(60,80,120,0.7)" stroke="rgba(100,150,220,0.5)" strokeWidth="1"/>
+                    {/* Head */}
+                    <rect x="30" y="9" width="20" height="13" rx="3" fill="rgba(50,70,110,0.8)" stroke="rgba(100,150,220,0.4)" strokeWidth="1"/>
+                    {/* Antenna */}
+                    <line x1="40" y1="7" x2="40" y2="9" stroke="rgba(100,200,255,0.8)" strokeWidth="2"/>
+                    <circle cx="40" cy="5.5" r="2.5" fill="rgba(100,200,255,0.9)" className="it-star" style={{animationDelay:'0s'}}/>
+                    {/* Eyes — glowing */}
+                    <circle cx="35" cy="14" r="4" fill="rgba(0,0,0,0.5)"/>
+                    <circle cx="35" cy="14" r="2.8" fill="rgba(0,220,180,0.9)" className="it-star" style={{animationDelay:'0s'}}/>
+                    <circle cx="45" cy="14" r="4" fill="rgba(0,0,0,0.5)"/>
+                    <circle cx="45" cy="14" r="2.8" fill="rgba(0,220,180,0.9)" className="it-star" style={{animationDelay:'0.5s'}}/>
+                    {/* Mouth display */}
+                    <rect x="33" y="19" width="14" height="4" rx="2" fill="rgba(0,0,0,0.4)"/>
+                    <rect x="34" y="20" width="3" height="2" rx="0.5" fill="rgba(0,220,100,0.8)"/>
+                    <rect x="38" y="20" width="5" height="2" rx="0.5" fill="rgba(0,220,100,0.8)"/>
+                    <rect x="44" y="20" width="2" height="2" rx="0.5" fill="rgba(0,220,100,0.8)"/>
+                    {/* Chest panel */}
+                    <rect x="30" y="26" width="20" height="12" rx="2" fill="rgba(30,50,90,0.6)"/>
+                    <rect x="33" y="29" width="6" height="3" rx="1" fill="rgba(0,180,255,0.7)"/>
+                    <circle cx="44" cy="30.5" r="2.5" fill="rgba(255,100,50,0.8)" className="it-star" style={{animationDelay:'0.3s'}}/>
+                    {/* Arms */}
+                    <rect x="17" y="22" width="10" height="5" rx="2" fill="rgba(50,70,110,0.7)"/>
+                    <rect x="53" y="22" width="10" height="5" rx="2" fill="rgba(50,70,110,0.7)"/>
+                    {/* Legs */}
+                    <rect x="28" y="46" width="8" height="14" rx="2" fill="rgba(50,70,110,0.7)"/>
+                    <rect x="44" y="46" width="8" height="14" rx="2" fill="rgba(50,70,110,0.7)"/>
+                    {/* Spinning gear */}
+                    <g className="it-spin-f" style={{transformOrigin:'68px 42px'}}>
+                      <circle cx="68" cy="42" r="9"  fill="none" stroke="rgba(100,150,220,0.45)" strokeWidth="1.5"/>
+                      <circle cx="68" cy="42" r="3.5" fill="rgba(100,150,220,0.5)"/>
+                      {[0,1,2,3,4,5].map(i=><line key={i} x1="68" y1="42" x2={68+9*Math.cos(i*60*Math.PI/180)} y2={42+9*Math.sin(i*60*Math.PI/180)} stroke="rgba(100,150,220,0.4)" strokeWidth="1.5"/>)}
                     </g>
                   </>),
-                  // ── SCIENCE — laboratory ────────────────────────────────────
+                  // ── SCIENCE — glowing dark lab ───────────────────────────────
                   'Science': (<>
-                    <path d="M32,14 L27,44 Q27,53 40,53 Q53,53 53,44 L48,14 Z" fill={c(0.18)} stroke={c(0.45)} strokeWidth="1.5"/>
-                    <rect x="30" y="12" width="20" height="4" rx="2" fill={c(0.35)}/>
-                    <ellipse cx="40" cy="46" rx="10" ry="5" fill={c(0.3)}/>
-                    <rect x="27" y="30" width="26" height="14" rx="0" fill={c(0.12)}/>
-                    {[0,1,2,3].map(i=>(
-                      <circle key={i} cx={32+i*5} cy={38-i*3} r="2.5" fill={c(0.65)} className="it-up" style={{animationDelay:`${i*0.38}s`}}/>
+                    {/* Lab shelf */}
+                    <line x1="0" y1="18" x2="80" y2="18" stroke="rgba(60,120,160,0.4)" strokeWidth="1.5"/>
+                    {/* Small test tubes on shelf */}
+                    {[8,18].map((x,i)=>(
+                      <g key={i}><rect x={x} y={8} width={5} height={10} rx="1" fill={`rgba(${i===0?'0,200,255':'200,100,255'},0.5)`}/><ellipse cx={x+2.5} cy={8} rx="2.5" ry="1" fill={`rgba(${i===0?'0,200,255':'200,100,255'},0.7)`}/></g>
                     ))}
+                    {/* Main flask */}
+                    <path d="M32,18 L27,46 Q27,55 40,55 Q53,55 53,46 L48,18 Z" fill="rgba(0,180,255,0.12)" stroke="rgba(0,200,255,0.5)" strokeWidth="1.5"/>
+                    <rect x="30" y="16" width="20" height="4" rx="2" fill="rgba(60,120,160,0.6)"/>
+                    {/* Glowing liquid */}
+                    <ellipse cx="40" cy="48" rx="11" ry="5.5" fill="rgba(0,220,180,0.35)"/>
+                    <rect x="27" y="34" width="26" height="14" rx="0" fill="rgba(0,180,255,0.15)"/>
+                    {/* Bubbles rising */}
+                    {[0,1,2,3].map(i=>(
+                      <circle key={i} cx={32+i*5} cy={38-i*3} r="2.5" fill="rgba(0,220,200,0.75)" className="it-up" style={{animationDelay:`${i*0.38}s`}}/>
+                    ))}
+                    {/* Lightning bolt */}
                     <g className="it-flash" style={{transformOrigin:'68px 28px'}}>
-                      <polygon points="68,10 64,24 69,24 64,42 74,22 69,22 73,10" fill={active?'rgba(255,220,0,0.95)':c(0.8)}/>
+                      <polygon points="68,8 63,24 69,24 63,44 75,20 69,20 74,8" fill="rgba(255,220,50,0.97)"/>
                     </g>
-                    <line x1="10" y1="18" x2="20" y2="18" stroke={c(0.3)} strokeWidth="1"/><line x1="10" y1="24" x2="20" y2="24" stroke={c(0.2)} strokeWidth="1"/>
+                    {/* Glow effect on flask */}
+                    <ellipse cx="40" cy="46" rx="14" ry="8" fill="rgba(0,220,180,0.08)" className="it-pulse"/>
                   </>),
                   // ── GAMING — dark arcade ─────────────────────────────────────
                   'Gaming': (<>
@@ -1197,47 +1257,95 @@ export default function OnboardingPage() {
                     ))}
                     <path className="it-draw" d="M15,39 Q28,30 44,35 Q56,40 58,32" fill="none" stroke="rgba(234,88,12,0.9)" strokeWidth="3" strokeDasharray="62" strokeLinecap="round"/>
                   </>),
-                  // ── MUSIC — concert ─────────────────────────────────────────
+                  // ── MUSIC — dark concert hall ────────────────────────────────
                   'Music': (<>
-                    {[15,25,35,45,55].map((y,i)=><line key={i} x1="5" y1={y} x2="65" y2={y} stroke={c(0.3)} strokeWidth="0.8"/>)}
-                    <text x="4" y="40" fontSize="28" fill={c(0.5)} fontFamily="serif">𝄞</text>
-                    <ellipse cx="46" cy="35" rx="5" ry="3.5" fill={c(0.7)}/><line x1="51" y1="35" x2="51" y2="15" stroke={c(0.7)} strokeWidth="1.5"/>
-                    <ellipse cx="56" cy="25" rx="5" ry="3.5" fill={c(0.6)}/><line x1="61" y1="25" x2="61" y2="5" stroke={c(0.6)} strokeWidth="1.5"/>
-                    {[0,1,2].map(i=>(
-                      <g key={i} className="it-up" style={{animationDelay:`${i*0.5}s`,transformOrigin:`${20+i*16}px 50px`}}>
-                        <text x={14+i*16} y="52" fontSize="14" fill={c(0.85)}>♪</text>
+                    {/* Spotlight */}
+                    <circle cx="40" cy="3" r="6" fill="rgba(255,200,100,0.6)" className="it-pulse"/>
+                    <polygon points="34,3 46,3 52,40 28,40" fill="rgba(255,200,100,0.06)"/>
+                    {/* Music staff lines */}
+                    {[20,26,32,38,44].map((y,i)=><line key={i} x1="8" y1={y} x2="72" y2={y} stroke="rgba(150,100,200,0.5)" strokeWidth="0.9"/>)}
+                    {/* Treble clef */}
+                    <text x="8" y="45" fontSize="30" fill="rgba(180,120,255,0.7)" fontFamily="serif">𝄞</text>
+                    {/* Notes on staff */}
+                    <ellipse cx="46" cy="38" rx="5.5" ry="3.5" fill="rgba(200,150,255,0.85)"/>
+                    <line x1="51.5" y1="38" x2="51.5" y2="16" stroke="rgba(200,150,255,0.85)" strokeWidth="1.5"/>
+                    <line x1="51.5" y1="16" x2="63"   y2="20" stroke="rgba(200,150,255,0.7)" strokeWidth="1.5"/>
+                    <ellipse cx="56" cy="26" rx="5.5" ry="3.5" fill="rgba(180,130,255,0.8)"/>
+                    <line x1="61.5" y1="26" x2="61.5" y2="5" stroke="rgba(180,130,255,0.8)" strokeWidth="1.5"/>
+                    {/* Floating notes */}
+                    {[0,1,2,3].map(i=>(
+                      <g key={i} className="it-up" style={{animationDelay:`${i*0.45}s`,transformOrigin:`${16+i*14}px 52px`}}>
+                        <text x={10+i*14} y="54" fontSize="15" fill="rgba(200,160,255,0.9)">♪</text>
                       </g>
                     ))}
                   </>),
-                  // ── COOKING — kitchen ───────────────────────────────────────
+                  // ── COOKING — warm kitchen night ─────────────────────────────
                   'Cooking': (<>
-                    <rect x="10" y="44" width="60" height="4" rx="1" fill={c(0.35)}/>
-                    {[22,44].map((x,i)=><ellipse key={i} cx={x} cy={46} rx="5" ry="2" fill={c(0.25)}/>)}
-                    <ellipse cx="40" cy="40" rx="20" ry="12" fill={c(0.22)}/>
-                    <rect x="20" y="28" width="40" height="14" rx="4" fill={c(0.32)}/>
-                    <rect x="57" y="30" width="14" height="4" rx="2" fill={c(0.28)} transform="rotate(8,57,30)"/>
-                    <rect x="38" y="10" width="4"  height="20" rx="2" fill={c(0.6)} strokeLinecap="round"/>
-                    <ellipse cx="40" cy="28" rx="7" ry="3.5" fill="none" stroke={c(0.5)} strokeWidth="1.5"/>
-                    {[0,1,2].map(i=>(
-                      <path key={i} className="it-up" d={`M${32+i*8},24 Q${30+i*8},17 ${34+i*8},12`} fill="none" stroke={c(0.45)} strokeWidth="1.8" strokeLinecap="round" style={{animationDelay:`${i*0.35}s`}}/>
-                    ))}
-                  </>),
-                  // ── DOLLS — toy room ────────────────────────────────────────
-                  'Dolls': (<>
-                    {[[8,55],[22,52],[40,56],[58,52],[72,55]].map(([x,y],i)=>(
+                    {/* Stove top */}
+                    <rect x="8" y="42" width="64" height="5" rx="2" fill="rgba(60,40,20,0.7)"/>
+                    {/* Burner rings */}
+                    {[24,56].map((x,i)=>(
                       <g key={i}>
-                        <line x1={x} y1={y} x2={x} y2={60} stroke={c(0.3)} strokeWidth="1.5"/>
-                        {[0,1,2,3,4].map(j=><ellipse key={j} cx={x+Math.cos(j*72*Math.PI/180)*3} cy={y+Math.sin(j*72*Math.PI/180)*3} rx="2" ry="1.2" fill={c(0.55)} transform={`rotate(${j*72},${x},${y})`}/>)}
-                        <circle cx={x} cy={y} r="1.5" fill={c(0.75)}/>
+                        <circle cx={x} cy={44} r="7" fill="none" stroke="rgba(200,100,30,0.5)" strokeWidth="1.5"/>
+                        <circle cx={x} cy={44} r="4" fill="rgba(255,100,20,0.3)" className="it-star" style={{animationDelay:`${i*0.4}s`}}/>
                       </g>
                     ))}
-                    <circle cx="40" cy="14" r="7" fill={c(0.55)}/>
-                    <ellipse cx="40" cy="28" rx="9" ry="11" fill={c(0.45)}/>
-                    <ellipse cx="40" cy="36" rx="14" ry="6" fill={c(0.35)}/>
-                    {[{x:20,y:22},{x:60,y:18},{x:14,y:38},{x:66,y:40}].map(({x,y},i)=>(
-                      <g key={i} className="it-bloom" style={{transformOrigin:`${x}px ${y}px`,animationDelay:`${i*0.2}s`}}>
-                        {[0,1,2,3,4].map(j=><ellipse key={j} cx={x+Math.cos(j*72*Math.PI/180)*4} cy={y+Math.sin(j*72*Math.PI/180)*4} rx="3" ry="1.5" fill={c(0.65)} transform={`rotate(${j*72},${x},${y})`}/>)}
-                        <circle cx={x} cy={y} r="2" fill={c(0.85)}/>
+                    {/* Large pot bubbling */}
+                    <ellipse cx="40" cy="41" rx="20" ry="9" fill="rgba(80,50,20,0.8)"/>
+                    <rect x="20" y="28" width="40" height="15" rx="4" fill="rgba(90,55,20,0.85)"/>
+                    <rect x="56" y="30" width="16" height="4" rx="2" fill="rgba(80,50,20,0.7)" transform="rotate(10,56,30)"/>
+                    {/* Bubbling soup */}
+                    <ellipse cx="40" cy="28" rx="17" ry="6" fill="rgba(200,120,40,0.5)"/>
+                    {[28,36,44,52].map((x,i)=>(
+                      <circle key={i} cx={x} cy={26-i%2*3} r="2.5" fill="rgba(220,140,50,0.6)" className="it-up" style={{animationDelay:`${i*0.25}s`}}/>
+                    ))}
+                    {/* Ladle */}
+                    <line x1="40" y1="8" x2="40" y2="26" stroke="rgba(180,120,60,0.8)" strokeWidth="2.5" strokeLinecap="round"/>
+                    <circle cx="40" cy="26" r="4.5" fill="none" stroke="rgba(180,120,60,0.8)" strokeWidth="2"/>
+                    {/* Steam */}
+                    {[0,1,2].map(i=>(
+                      <path key={i} className="it-up" d={`M${28+i*10},20 Q${26+i*10},12 ${30+i*10},6`} fill="none" stroke="rgba(255,220,180,0.4)" strokeWidth="2" strokeLinecap="round" style={{animationDelay:`${i*0.35}s`}}/>
+                    ))}
+                  </>),
+                  // ── DOLLS — enchanted toy room at night ─────────────────────
+                  'Dolls': (<>
+                    {/* Stars */}
+                    <S cx={6}  cy={4}  r={1.0} d="0s"/><S cx={18} cy={2}  r={0.8} d="0.4s"/>
+                    <S cx={70} cy={4}  r={1.2} d="0.7s"/><S cx={76} cy={14} r={0.9} d="0.5s"/>
+                    {/* Window with moonlight */}
+                    <rect x="52" y="4" width="20" height="18" rx="2" fill="rgba(150,180,255,0.15)" stroke="rgba(200,220,255,0.3)" strokeWidth="1"/>
+                    <line x1="62" y1="4" x2="62" y2="22" stroke="rgba(200,220,255,0.3)" strokeWidth="0.8"/>
+                    <line x1="52" y1="13" x2="72" y2="13" stroke="rgba(200,220,255,0.3)" strokeWidth="0.8"/>
+                    <circle cx="62" cy="13" r="5" fill="rgba(200,220,255,0.12)"/>
+                    {/* Shelf */}
+                    <rect x="0" y="38" width="80" height="3" rx="1" fill="rgba(180,130,80,0.5)"/>
+                    {/* Main doll figure */}
+                    <g className="it-bob" style={{transformOrigin:'30px 22px'}}>
+                      {/* Hair/head */}
+                      <circle cx="30" cy="10" r="8" fill="rgba(220,150,200,0.4)"/>
+                      <circle cx="30" cy="11" r="6.5" fill="rgba(255,200,180,0.97)"/>
+                      {/* Hair */}
+                      <path d="M24,9 Q27,3 30,5 Q33,3 36,9" fill="rgba(200,100,150,0.85)"/>
+                      {/* Eyes */}
+                      <circle cx="27.5" cy="11" r="1.8" fill="rgba(80,40,100,0.9)"/>
+                      <circle cx="32.5" cy="11" r="1.8" fill="rgba(80,40,100,0.9)"/>
+                      <circle cx="27.8" cy="10.5" r="0.8" fill="rgba(255,255,255,0.9)"/>
+                      <circle cx="32.8" cy="10.5" r="0.8" fill="rgba(255,255,255,0.9)"/>
+                      {/* Smile */}
+                      <path d="M27,14 Q30,17 33,14" fill="none" stroke="rgba(200,100,120,0.7)" strokeWidth="1.2" strokeLinecap="round"/>
+                      {/* Dress */}
+                      <polygon points="24,17 36,17 40,35 20,35" fill="rgba(255,120,180,0.8)"/>
+                      {/* Dress detail */}
+                      <line x1="30" y1="17" x2="30" y2="35" stroke="rgba(255,200,230,0.5)" strokeWidth="1"/>
+                      {/* Arms */}
+                      <line x1="24" y1="20" x2="15" y2="26" stroke="rgba(255,200,180,0.9)" strokeWidth="2.5" strokeLinecap="round"/>
+                      <line x1="36" y1="20" x2="45" y2="26" stroke="rgba(255,200,180,0.9)" strokeWidth="2.5" strokeLinecap="round"/>
+                    </g>
+                    {/* Flowers blooming around doll */}
+                    {[{x:12,y:30},{x:50,y:28},{x:8,y:46},{x:68,y:44}].map(({x,y},i)=>(
+                      <g key={i} className="it-bloom" style={{transformOrigin:`${x}px ${y}px`,animationDelay:`${i*0.25}s`}}>
+                        {[0,1,2,3,4].map(j=><ellipse key={j} cx={x+Math.cos(j*72*Math.PI/180)*4} cy={y+Math.sin(j*72*Math.PI/180)*4} rx="3" ry="1.5" fill={['rgba(255,120,180,0.8)','rgba(255,200,50,0.8)','rgba(200,100,255,0.8)','rgba(100,200,255,0.8)','rgba(255,150,80,0.8)'][j]} transform={`rotate(${j*72},${x},${y})`}/>)}
+                        <circle cx={x} cy={y} r="2" fill="rgba(255,230,100,0.9)"/>
                       </g>
                     ))}
                   </>),
