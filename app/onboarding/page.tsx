@@ -473,6 +473,8 @@ export default function OnboardingPage() {
                   'Fantasy':'#1A0A3E', 'Aliens':'#030A0F', 'Gaming':'#0D0A1E',
                   'Fairies':'#2A0A3A', 'Dinosaurs':'#0A1A08',
                   'Soccer':'#0A3A14', 'Cars & Trucks':'#1A1A1A',
+                  'Unicorns':'#1A0A2E', 'Princesses':'#1A1008',
+                  'Animals':'#0A1E06', 'Swimming':'#041428', 'Football':'#0A2006',
                 };
                 const darkBg = DARK_BG[option.label];
                 const S = (props:{cx:number;cy:number;r:number;d:string}) => <circle cx={props.cx} cy={props.cy} r={props.r} fill="rgba(255,248,200,0.92)" className="it-star" style={{animationDelay:props.d}}/>;
@@ -624,30 +626,62 @@ export default function OnboardingPage() {
                       <circle key={i} cx={x} cy={y} r={2-i*0.3} fill="rgba(255,220,100,0.85)" className="it-star" style={{animationDelay:`${i*0.2}s`}}/>
                     ))}
                   </>),
-                  // ── UNICORNS — rainbow meadow ───────────────────────────────
+                  // ── UNICORNS — magical night with rainbow ────────────────────
                   'Unicorns': (<>
-                    {[['#F87171',55],['#FB923C',50],['#FCD34D',45],['#86EFAC',40],['#67E8F9',35],['#A78BFA',30]].map(([col,y],i)=>(
-                      <path key={i} d={`M5,${y} Q20,${(y as number)-8} 40,${y} Q60,${(y as number)+8} 75,${y}`} fill="none" stroke={col as string} strokeWidth="3" opacity="0.55"/>
+                    {/* Stars */}
+                    <S cx={8}  cy={4}  r={1.2} d="0s"/><S cx={20} cy={2}  r={0.8} d="0.35s"/>
+                    <S cx={60} cy={5}  r={1.4} d="0.7s"/><S cx={74} cy={3}  r={1.0} d="0.4s"/>
+                    <S cx={78} cy={16} r={0.9} d="0.8s"/>
+                    {/* Rainbow arcs */}
+                    {[['#F87171',52],['#FB923C',47],['#FCD34D',42],['#86EFAC',37],['#67E8F9',32],['#A78BFA',27]].map(([col,y],i)=>(
+                      <path key={i} d={`M4,${y} Q20,${(y as number)-10} 40,${y} Q60,${(y as number)+10} 76,${y}`} fill="none" stroke={col as string} strokeWidth="3.5" opacity="0.75"/>
                     ))}
-                    <ellipse cx="40" cy="20" rx="12" ry="8" fill={c(0.2)}/>
-                    <polygon points="40,4 38,18 42,18" fill="rgba(255,200,50,0.9)"/>
-                    <circle cx="40" cy="20" r="2" fill={c(0.5)}/>
-                    {[{x:20,y:14},{x:58,y:12},{x:15,y:30},{x:65,y:28}].map(({x,y},i)=>(
-                      <circle key={i} cx={x} cy={y} r="1.8" fill={c(0.9)} className="it-star" style={{animationDelay:`${i*0.3}s`}}/>
-                    ))}
-                    <g className="it-bloom" style={{transformOrigin:'40px 15px'}}>
-                      {[0,1,2,3,4,5].map(i=><line key={i} x1="40" y1="15" x2={40+14*Math.cos(i*60*Math.PI/180)} y2={15+14*Math.sin(i*60*Math.PI/180)} stroke={c(0.7)} strokeWidth="1.5"/>)}
+                    {/* Unicorn head + horn */}
+                    <g className="it-bob" style={{transformOrigin:'38px 20px'}}>
+                      {/* Mane */}
+                      <path d="M28,18 Q32,8 38,12 Q44,6 48,15" fill="rgba(230,100,200,0.7)" strokeWidth="0"/>
+                      {/* Head */}
+                      <ellipse cx="38" cy="22" rx="11" ry="9" fill="rgba(240,220,255,0.95)"/>
+                      {/* Snout */}
+                      <ellipse cx="47" cy="24" rx="6" ry="4.5" fill="rgba(235,210,255,0.95)"/>
+                      {/* Nostril */}
+                      <circle cx="51" cy="25" r="1.2" fill="rgba(200,150,220,0.6)"/>
+                      {/* Eye */}
+                      <circle cx="40" cy="20" r="3" fill="rgba(80,40,120,0.9)"/>
+                      <circle cx="40.8" cy="19.2" r="1.2" fill="rgba(255,255,255,0.9)"/>
+                      {/* Horn */}
+                      <polygon points="34,13 36,0 38,13" fill="rgba(255,200,50,0.97)"/>
+                      <line x1="36" y1="11" x2="36.5" y2="5"  stroke="rgba(220,160,30,0.5)" strokeWidth="0.8"/>
+                      <line x1="36" y1="8"  x2="37"  y2="3"  stroke="rgba(220,160,30,0.5)" strokeWidth="0.8"/>
                     </g>
-                  </>),
-                  // ── PRINCESSES — royal palace ───────────────────────────────
-                  'Princesses': (<>
-                    {[[20,50],[35,44],[45,44],[60,50]].map(([x,y],i)=>(
-                      <g key={i}><rect x={x-4} y={y-14} width={8} height={14+10} fill={c(0.2)} rx="1"/><polygon points={`${x},${y-14} ${x-4},${y-6} ${x+4},${y-6}`} fill={c(0.3)}/></g>
+                    {/* Sparkles */}
+                    {[{x:60,y:18},{x:66,y:28},{x:14,y:20},{x:8,y:32}].map(({x,y},i)=>(
+                      <circle key={i} cx={x} cy={y} r="2" fill="rgba(255,220,255,0.9)" className="it-star" style={{animationDelay:`${i*0.3}s`}}/>
                     ))}
-                    <rect x="16" y="44" width="48" height="16" fill={c(0.15)}/>
-                    <polygon points="40,6 35,22 29,18 33,28 27,26 35,34 45,34 53,26 47,28 47,18 45,22" fill={c(0.65)}/>
-                    {[[32,16,`rgba(255,200,0,0.95)`],[40,11,`rgba(255,220,60,1)`],[48,16,`rgba(255,180,80,0.95)`],[36,21,`rgba(255,100,100,0.85)`],[44,21,`rgba(200,100,255,0.85)`]].map(([x,y,col],i)=>(
-                      <circle key={i} cx={x as number} cy={y as number} r="3" fill={col as string} className="it-star" style={{animationDelay:`${i*0.18}s`}}/>
+                  </>),
+                  // ── PRINCESSES — golden palace at dusk ──────────────────────
+                  'Princesses': (<>
+                    {/* Stars */}
+                    <S cx={8}  cy={4}  r={1.0} d="0s"/><S cx={68} cy={3}  r={1.2} d="0.5s"/>
+                    <S cx={76} cy={14} r={0.9} d="0.8s"/>
+                    {/* Palace towers */}
+                    {[[16,52],[28,46],[44,46],[60,52]].map(([x,y],i)=>(
+                      <g key={i}>
+                        <rect x={x-5} y={y-16} width={10} height={16+8} fill="rgba(180,130,40,0.7)" rx="1"/>
+                        <polygon points={`${x},${y-16} ${x-5},${y-8} ${x+5},${y-8}`} fill="rgba(220,160,50,0.8)"/>
+                        {/* Tower window */}
+                        <rect x={x-2} y={y-12} width={4} height={6} rx="2" fill="rgba(255,220,80,0.9)" className="it-star" style={{animationDelay:`${i*0.2}s`}}/>
+                      </g>
+                    ))}
+                    {/* Palace wall */}
+                    <rect x="11" y="46" width="58" height="14" fill="rgba(160,115,35,0.7)"/>
+                    {/* Gate */}
+                    <rect x="35" y="50" width="10" height="10" rx="5 5 0 0" fill="rgba(0,0,0,0.4)"/>
+                    {/* Crown — large and regal */}
+                    <polygon points="40,5 34,22 28,16 32,28 24,26 34,36 46,36 56,26 48,28 48,16 46,22" fill="rgba(255,200,30,0.97)"/>
+                    {/* Crown gems */}
+                    {[[32,15,'rgba(255,80,80,0.95)'],[40,9,'rgba(255,220,50,1)'],[48,15,'rgba(200,80,255,0.95)'],[35,22,'rgba(80,200,255,0.9)'],[45,22,'rgba(80,255,150,0.9)']].map(([x,y,col],i)=>(
+                      <circle key={i} cx={x as number} cy={y as number} r="3.2" fill={col as string} className="it-star" style={{animationDelay:`${i*0.18}s`}}/>
                     ))}
                   </>),
                   // ── PIRATES — tall ship on the dark sea ─────────────────────
@@ -821,23 +855,42 @@ export default function OnboardingPage() {
                       <path d="M5,36 Q-4,38 -8,34" fill="none" stroke="rgba(80,160,60,0.9)" strokeWidth="3.5" strokeLinecap="round"/>
                     </g>
                   </>),
-                  // ── ANIMALS — wildlife ──────────────────────────────────────
+                  // ── ANIMALS — safari at dusk ─────────────────────────────────
                   'Animals': (<>
-                    <rect x="0" y="50" width="80" height="10" fill={c(0.12)}/>
-                    {[8,24,40,56,72].map((x,i)=><line key={i} x1={x} y1={50} x2={x-2+i} y2={42} stroke={c(0.25)} strokeWidth="1.5"/>)}
-                    <circle cx="40" cy="24" r="15" fill={c(0.3)}/>
-                    <circle cx="30" cy="14" r="8"  fill={c(0.35)}/>
-                    <circle cx="50" cy="14" r="8"  fill={c(0.35)}/>
-                    <circle cx="40" cy="24" r="10" fill={c(0.5)}/>
-                    <circle cx="36" cy="21" r="3.5" fill={c(0.75)}/>
-                    <circle cx="44" cy="21" r="3.5" fill={c(0.75)}/>
-                    <circle cx="36.5" cy="20" r="1.5" fill={active?`rgba(${r1},${g1},${b1},1)`:c(0.55)}/>
-                    <circle cx="44.5" cy="20" r="1.5" fill={active?`rgba(${r1},${g1},${b1},1)`:c(0.55)}/>
-                    <ellipse cx="40" cy="26" rx="4" ry="3" fill={c(0.4)}/>
-                    <path d="M36,28 Q40,32 44,28" fill="none" stroke={c(0.6)} strokeWidth="1.5" strokeLinecap="round"/>
-                    <g className="it-swim" style={{transformOrigin:'15px 38px'}}>
-                      <line x1="15" y1="30" x2="22" y2="38" stroke={c(0.55)} strokeWidth="2" strokeLinecap="round"/>
-                      <ellipse cx="15" cy="29" rx="3" ry="2" fill={c(0.4)}/>
+                    {/* Stars */}
+                    <S cx={6}  cy={4}  r={1.0} d="0s"/><S cx={20} cy={2}  r={0.8} d="0.4s"/>
+                    <S cx={70} cy={5}  r={1.2} d="0.7s"/>
+                    {/* Setting sun */}
+                    <circle cx="68" cy="14" r="10" fill="rgba(255,160,50,0.5)"/>
+                    <circle cx="68" cy="14" r="7"  fill="rgba(255,180,60,0.7)"/>
+                    {/* Grass */}
+                    <rect x="0" y="46" width="80" height="14" fill="rgba(30,100,20,0.5)"/>
+                    {[5,15,26,38,50,62,72].map((x,i)=>(
+                      <g key={i}><line x1={x} y1={46} x2={x-2} y2={38+i%3*2} stroke="rgba(40,130,30,0.7)" strokeWidth="1.5"/>
+                      <line x1={x+3} y1={46} x2={x+5} y2={39+i%2*3} stroke="rgba(40,130,30,0.7)" strokeWidth="1.5"/></g>
+                    ))}
+                    {/* Lion face — king of the animals */}
+                    <g className="it-bob" style={{transformOrigin:'40px 22px'}}>
+                      {/* Mane */}
+                      <circle cx="40" cy="22" r="16" fill="rgba(180,100,20,0.5)"/>
+                      <circle cx="40" cy="22" r="13" fill="rgba(200,120,30,0.4)"/>
+                      {/* Head */}
+                      <circle cx="40" cy="22" r="10" fill="rgba(230,170,70,0.97)"/>
+                      {/* Ears */}
+                      <circle cx="30" cy="13" r="5" fill="rgba(200,140,50,0.9)"/>
+                      <circle cx="50" cy="13" r="5" fill="rgba(200,140,50,0.9)"/>
+                      <circle cx="30" cy="13" r="2.5" fill="rgba(180,100,30,0.7)"/>
+                      <circle cx="50" cy="13" r="2.5" fill="rgba(180,100,30,0.7)"/>
+                      {/* Eyes */}
+                      <circle cx="36" cy="20" r="3.5" fill="rgba(255,200,50,0.9)"/>
+                      <circle cx="44" cy="20" r="3.5" fill="rgba(255,200,50,0.9)"/>
+                      <circle cx="36.5" cy="20" r="1.8" fill="rgba(0,0,0,0.95)"/>
+                      <circle cx="44.5" cy="20" r="1.8" fill="rgba(0,0,0,0.95)"/>
+                      {/* Nose/muzzle */}
+                      <ellipse cx="40" cy="26" rx="5" ry="3.5" fill="rgba(240,190,90,0.9)"/>
+                      <ellipse cx="40" cy="26" rx="2.5" ry="1.8" fill="rgba(200,120,50,0.8)"/>
+                      {/* Smile */}
+                      <path d="M36,29 Q40,33 44,29" fill="none" stroke="rgba(180,100,40,0.7)" strokeWidth="1.5" strokeLinecap="round"/>
                     </g>
                   </>),
                   // ── OCEAN — underwater world ────────────────────────────────
@@ -978,17 +1031,25 @@ export default function OnboardingPage() {
                       <circle cx="50" cy="42" r="3.5" fill="rgba(0,0,0,0.15)"/>
                     </g>
                   </>),
-                  // ── FOOTBALL — field ────────────────────────────────────────
+                  // ── FOOTBALL — night game under lights ──────────────────────
                   'Football': (<>
-                    {[10,20,30,40,50,60,70].map((x,i)=><line key={i} x1={x} y1={5} x2={x} y2={55} stroke={c(0.1)} strokeWidth="1"/>)}
-                    <line x1="5"  y1="30" x2="75" y2="30" stroke={c(0.2)} strokeWidth="1"/>
-                    <line x1="5" y1="8"  x2="5" y2="52" stroke={c(0.55)} strokeWidth="2.5"/>
-                    <line x1="5" y1="8"  x2="18" y2="8"  stroke={c(0.55)} strokeWidth="2.5"/>
-                    <line x1="5" y1="52" x2="18" y2="52" stroke={c(0.55)} strokeWidth="2.5"/>
-                    <g className="it-bounce" style={{transformOrigin:'50px 30px'}}>
-                      <ellipse cx="50" cy="30" rx="11" ry="7" fill={c(0.75)} transform="rotate(-15,50,30)"/>
-                      <line x1="42" y1="27" x2="58" y2="33" stroke={c(0.35)} strokeWidth="2" transform="rotate(-15,50,30)"/>
-                      {[0,1,2].map(i=><line key={i} x1={45+i*5} y1="23" x2={43+i*5} y2="37" stroke={c(0.2)} strokeWidth="1" transform="rotate(-15,50,30)"/>)}
+                    {/* Field stripes */}
+                    {[0,1,2,3,4].map(i=><rect key={i} x={i*16} y={0} width={8} height={60} fill={i%2===0?'rgba(20,100,30,0.8)':'rgba(18,90,26,0.8)'}/>)}
+                    {/* Yard lines */}
+                    {[10,20,30,40,50,60,70].map((x,i)=><line key={i} x1={x} y1={5} x2={x} y2={55} stroke="rgba(255,255,255,0.3)" strokeWidth="1"/>)}
+                    <line x1="5" y1="30" x2="75" y2="30" stroke="rgba(255,255,255,0.25)" strokeWidth="1"/>
+                    {/* Goal posts */}
+                    <line x1="5" y1="8"  x2="5"  y2="52" stroke="rgba(255,220,0,0.9)" strokeWidth="2.5"/>
+                    <line x1="5" y1="8"  x2="18" y2="8"  stroke="rgba(255,220,0,0.9)" strokeWidth="2.5"/>
+                    <line x1="5" y1="52" x2="18" y2="52" stroke="rgba(255,220,0,0.9)" strokeWidth="2.5"/>
+                    {/* Stadium lights */}
+                    <circle cx="70" cy="5" r="4" fill="rgba(255,240,150,0.9)" className="it-pulse"/>
+                    <polygon points="62,5 78,5 75,20 65,20" fill="rgba(255,240,150,0.06)"/>
+                    {/* Football spiraling */}
+                    <g className="it-bounce" style={{transformOrigin:'48px 30px'}}>
+                      <ellipse cx="48" cy="30" rx="12" ry="8" fill="rgba(160,90,20,0.95)" transform="rotate(-20,48,30)"/>
+                      <line x1="39" y1="26" x2="57" y2="34" stroke="rgba(255,255,255,0.6)" strokeWidth="2" transform="rotate(-20,48,30)"/>
+                      {[0,1,2].map(i=><line key={i} x1={42+i*5} y1="21" x2={40+i*5} y2="39" stroke="rgba(255,255,255,0.35)" strokeWidth="1" transform="rotate(-20,48,30)"/>)}
                     </g>
                   </>),
                   // ── GYMNASTICS — cartwheel on bright floor ──────────────────
@@ -1079,18 +1140,45 @@ export default function OnboardingPage() {
                       {[0,1,2,3].map(i=><line key={i} x1="56" y1={18+i*6} x2={52+i*2} y2={22+i*5} stroke="rgba(255,200,0,0.9)" strokeWidth="1.5"/>)}
                     </g>
                   </>),
-                  // ── SWIMMING — pool ─────────────────────────────────────────
+                  // ── SWIMMING — olympic pool ──────────────────────────────────
                   'Swimming': (<>
-                    {[8,18,28,38,48,58,68].map((x,i)=><line key={i} x1={x} y1={5} x2={x} y2={55} stroke={c(0.1)} strokeWidth="1"/>)}
-                    {[0,1,2,3].map(i=>(
-                      <ellipse key={i} cx="40" cy="32" rx={10+i*9} ry={5+i*4} fill="none" stroke={c(0.18-i*0.03)} strokeWidth="1" className="it-pulse" style={{animationDelay:`${i*0.3}s`}}/>
+                    {/* Pool water — deep blue */}
+                    <rect x="0" y="20" width="80" height="40" fill="rgba(0,80,180,0.6)"/>
+                    {/* Lane dividers */}
+                    {[13,26,39,52,65].map((x,i)=>(
+                      <line key={i} x1={x} y1={20} x2={x} y2={60} stroke={i%2===0?'rgba(255,80,0,0.6)':'rgba(255,200,0,0.5)'} strokeWidth="2" strokeDasharray="4,4"/>
                     ))}
-                    <path d="M0,50 Q10,44 20,50 Q30,56 40,50 Q50,44 60,50 Q70,56 80,50" fill={c(0.25)} className="it-wave-y"/>
+                    {/* Pool edge */}
+                    <rect x="0" y="18" width="80" height="4" fill="rgba(200,200,200,0.8)"/>
+                    <line x1="0" y1="20" x2="80" y2="20" stroke="rgba(255,255,255,0.6)" strokeWidth="1"/>
+                    {/* Water ripples */}
+                    {[0,1,2,3].map(i=>(
+                      <ellipse key={i} cx="40" cy={35+i*5} rx={8+i*6} ry={3+i*2} fill="none" stroke="rgba(150,220,255,0.3)" strokeWidth="1" className="it-pulse" style={{animationDelay:`${i*0.35}s`}}/>
+                    ))}
+                    {/* Wave surface */}
+                    <path d="M0,26 Q10,22 20,26 Q30,30 40,26 Q50,22 60,26 Q70,30 80,26" fill="rgba(150,200,255,0.3)" className="it-wave-y"/>
+                    {/* Swimmer stroking across */}
                     <g className="it-swim">
-                      <circle cx="0" cy="22" r="5.5" fill={c(0.75)}/>
-                      <line x1="0" y1="27.5" x2="0" y2="40" stroke={c(0.65)} strokeWidth="2"/>
-                      <line x1="-11" y1="30" x2="11" y2="28" stroke={c(0.65)} strokeWidth="2"/>
+                      {/* Head */}
+                      <circle cx="0" cy="22" r="5" fill="rgba(230,185,140,0.97)"/>
+                      {/* Cap */}
+                      <ellipse cx="0" cy="19" rx="5" ry="3" fill="rgba(255,50,50,0.9)"/>
+                      {/* Goggles */}
+                      <ellipse cx="-2" cy="22" rx="2" ry="1.5" fill="rgba(50,150,255,0.8)"/>
+                      <ellipse cx="2" cy="22" rx="2" ry="1.5" fill="rgba(50,150,255,0.8)"/>
+                      <line x1="-1" y1="22" x2="1" y2="22" stroke="rgba(50,150,255,0.6)" strokeWidth="0.8"/>
+                      {/* Body */}
+                      <rect x="-6" y="26" width="14" height="6" rx="3" fill="rgba(255,100,50,0.85)"/>
+                      {/* Lead arm forward */}
+                      <line x1="8"  y1="28" x2="18" y2="22" stroke="rgba(230,185,140,0.9)" strokeWidth="3" strokeLinecap="round"/>
+                      {/* Trailing arm in water */}
+                      <line x1="-6" y1="28" x2="-16" y2="24" stroke="rgba(230,185,140,0.8)" strokeWidth="3" strokeLinecap="round"/>
+                      {/* Splash */}
+                      <ellipse cx="16" cy="22" rx="5" ry="2.5" fill="rgba(200,230,255,0.4)"/>
                     </g>
+                    {/* Scoreboard at top */}
+                    <rect x="20" y="2" width="40" height="14" rx="2" fill="rgba(20,20,40,0.8)"/>
+                    <text x="40" y="12" fontSize="7" fill="rgba(255,220,0,0.9)" textAnchor="middle" fontFamily="monospace">01:24.5</text>
                   </>),
                   // ── ART — studio canvas ─────────────────────────────────────
                   'Art': (<>
