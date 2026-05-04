@@ -556,40 +556,44 @@ export default function OnboardingPage() {
                       <line x1="41" y1="38" x2="36" y2="48" stroke="#1D4ED8" strokeWidth="4" strokeLinecap="round"/>
                     </g>
                   </>),
-                  // ── FANTASY — twilight castle with magic orb ─────────────────
+                  // ── FANTASY — Disney-style castle with spires ────────────────
                   'Fantasy': (<>
-                    {/* Stars in the sky */}
-                    <S cx={8}  cy={5}  r={1.2} d="0s"/><S cx={22} cy={3}  r={0.9} d="0.3s"/><S cx={52} cy={6}  r={1.4} d="0.6s"/>
-                    <S cx={65} cy={3}  r={1.0} d="0.9s"/><S cx={74} cy={12} r={1.3} d="0.4s"/><S cx={5}  cy={22} r={0.8} d="0.7s"/>
-                    {/* Moon — soft glow in corner */}
-                    <circle cx="72" cy="10" r="7"  fill="rgba(220,200,255,0.3)"/>
-                    <circle cx="72" cy="10" r="5"  fill="rgba(230,215,255,0.5)"/>
-                    <circle cx="72" cy="10" r="3"  fill="rgba(240,230,255,0.7)" className="it-pulse"/>
-                    {/* Castle — solid and detailed */}
-                    <rect x="12" y="34" width="11" height="26" fill="rgba(160,120,220,0.7)"/>
-                    <rect x="57" y="34" width="11" height="26" fill="rgba(160,120,220,0.7)"/>
-                    <rect x="26" y="24" width="28" height="36" fill="rgba(140,100,200,0.8)"/>
-                    {/* Battlements */}
-                    {[13,16,19,27,30,33,36,39,42,45,48,58,61,64].map((x,i)=>(
-                      <rect key={i} x={x} y={i<3?30:i<12?20:30} width="2.5" height="5" fill="rgba(180,140,240,0.8)" rx="0.5"/>
+                    <S cx={6} cy={3} r={1.1} d="0s"/><S cx={18} cy={2} r={0.8} d="0.35s"/>
+                    <S cx={55} cy={4} r={1.3} d="0.7s"/><S cx={76} cy={6} r={1.0} d="0.5s"/>
+                    {/* Crescent moon */}
+                    <circle cx="70" cy="12" r="8" fill="rgba(220,200,255,0.5)"/>
+                    <circle cx="74" cy="10" r="6.5" fill="#1A0A3E"/>
+                    {/* Far-left small tower */}
+                    <rect x="4"  y="40" width="8"  height="20" fill="rgba(145,112,205,0.65)" rx="1"/>
+                    <polygon points="8,26  4,40  12,40" fill="rgba(175,145,235,0.88)"/>
+                    {/* Left tower */}
+                    <rect x="15" y="33" width="13" height="27" fill="rgba(155,120,218,0.72)" rx="1"/>
+                    <polygon points="21.5,16 15,33 28,33" fill="rgba(188,158,242,0.92)"/>
+                    {/* Main center tower — tallest & grandest */}
+                    <rect x="31" y="23" width="18" height="37" fill="rgba(168,132,228,0.82)" rx="1"/>
+                    <polygon points="40,1 33,23 47,23" fill="rgba(198,168,250,0.97)"/>
+                    {/* Right tower */}
+                    <rect x="52" y="33" width="13" height="27" fill="rgba(155,120,218,0.72)" rx="1"/>
+                    <polygon points="58.5,16 52,33 65,33" fill="rgba(188,158,242,0.92)"/>
+                    {/* Far-right small tower */}
+                    <rect x="68" y="40" width="8"  height="20" fill="rgba(145,112,205,0.65)" rx="1"/>
+                    <polygon points="72,26 68,40 76,40" fill="rgba(175,145,235,0.88)"/>
+                    {/* Connecting wall */}
+                    <rect x="4" y="46" width="72" height="14" fill="rgba(128,98,185,0.55)"/>
+                    {/* Battlements on wall */}
+                    {[5,8,11,16,19,22,33,36,39,42,45,53,56,59,69,72,75].map((x,i)=>(
+                      <rect key={i} x={x} y={42} width="2.5" height="5" fill="rgba(168,138,228,0.72)" rx="0.5"/>
                     ))}
-                    {/* Tower roofs */}
-                    <polygon points="17.5,30 12,22 23,22" fill="rgba(200,150,255,0.85)"/>
-                    <polygon points="62.5,30 57,22 68,22" fill="rgba(200,150,255,0.85)"/>
-                    <polygon points="40,24 26,14 54,14" fill="rgba(180,130,255,0.9)"/>
-                    {/* Door arch */}
-                    <rect x="35" y="46" width="10" height="14" rx="5" fill="rgba(0,0,0,0.4)"/>
-                    {/* Castle windows glowing */}
-                    {[[18,36],[62,36],[30,30],[40,30],[50,30]].map(([x,y],i)=>(
-                      <rect key={i} x={x-1.5} y={y} width="3" height="4" rx="1.5" fill="rgba(255,220,80,0.9)" className="it-star" style={{animationDelay:`${i*0.2}s`}}/>
+                    {/* Grand arched gateway */}
+                    <rect x="35" y="49" width="10" height="11" rx="5 5 0 0" fill="rgba(0,0,0,0.45)"/>
+                    {/* Glowing windows — warm amber glow */}
+                    {[[8,36],[21.5,22],[40,10],[58.5,22],[72,36],[33,32],[40,32],[47,32],[21.5,40],[58.5,40]].map(([x,y],i)=>(
+                      <rect key={i} x={(x as number)-1.5} y={(y as number)} width="3" height="4.5" rx="1.5" fill="rgba(255,215,90,0.92)" className="it-star" style={{animationDelay:`${i*0.14}s`}}/>
                     ))}
-                    {/* Magical orb — floating above castle */}
-                    <circle cx="40" cy="9" r="9"  fill="rgba(160,80,255,0.15)"/>
-                    <circle cx="40" cy="9" r="6"  fill="rgba(180,100,255,0.3)"/>
-                    <circle cx="40" cy="9" r="3.5" fill="rgba(210,150,255,0.9)" className="it-pulse"/>
-                    {/* Orbiting sparkles */}
-                    {[0,1,2,3,4].map(i=>(
-                      <circle key={i} r="2" fill="rgba(220,180,255,0.95)" className="it-orbit" style={{transformOrigin:'40px 9px',animationDelay:`${i*0.22}s`}}/>
+                    {/* Star on tallest spire */}
+                    <circle cx="40" cy="1" r="3.5" fill="rgba(255,215,60,0.97)" className="it-pulse"/>
+                    {[0,1,2,3,4,5,6,7].map(i=>(
+                      <line key={i} x1="40" y1="1" x2={40+6*Math.cos(i*45*Math.PI/180)} y2={1+6*Math.sin(i*45*Math.PI/180)} stroke="rgba(255,215,60,0.55)" strokeWidth="1.1"/>
                     ))}
                   </>),
                   // ── FAIRIES — magical night garden ──────────────────────────
@@ -911,15 +915,22 @@ export default function OnboardingPage() {
                     {[12,28,50,66].map((cx,i)=>(
                       <circle key={i} cx={cx} cy={18+i*5} r={2.2+i%2*0.8} fill="rgba(150,220,255,0.4)" className="it-up" style={{animationDelay:`${i*0.5}s`}}/>
                     ))}
-                    {/* Colourful tropical fish */}
+                    {/* Tropical fish — eye on right = swims forward left-to-right */}
                     <g className="it-swim">
+                      {/* Body */}
                       <ellipse cx="0" cy="26" rx="12" ry="7" fill="rgba(255,120,0,0.95)"/>
-                      <polygon points="12,26 22,20 22,32" fill="rgba(255,80,0,0.9)"/>
-                      <ellipse cx="0" cy="26" rx="6"  ry="4" fill="rgba(255,200,0,0.6)"/>
-                      <circle cx="-4" cy="24" r="2.2" fill="rgba(0,0,0,0.8)"/>
-                      <circle cx="-3.5" cy="23.5" r="1" fill="rgba(255,255,255,0.9)"/>
-                      <line x1="3" y1="20" x2="3" y2="32" stroke="rgba(200,60,0,0.4)" strokeWidth="1.5"/>
-                      <line x1="7" y1="20" x2="7" y2="32" stroke="rgba(200,60,0,0.4)" strokeWidth="1.5"/>
+                      {/* Tail fin on the LEFT (trailing behind as it moves right) */}
+                      <polygon points="-12,26 -22,20 -22,32" fill="rgba(255,80,0,0.9)"/>
+                      {/* Yellow stripe */}
+                      <ellipse cx="0" cy="26" rx="5.5" ry="4" fill="rgba(255,200,0,0.55)"/>
+                      {/* Eye on the RIGHT (leading as it moves right) */}
+                      <circle cx="7" cy="24" r="2.4" fill="rgba(0,0,0,0.85)"/>
+                      <circle cx="7.6" cy="23.4" r="0.9" fill="rgba(255,255,255,0.95)"/>
+                      {/* Dorsal fin on top */}
+                      <polygon points="-3,19 3,19 1,26" fill="rgba(255,90,0,0.7)"/>
+                      {/* Vertical stripe details */}
+                      <line x1="-4" y1="19" x2="-4" y2="33" stroke="rgba(200,60,0,0.35)" strokeWidth="1.5"/>
+                      <line x1="2"  y1="19" x2="2"  y2="33" stroke="rgba(200,60,0,0.35)" strokeWidth="1.5"/>
                     </g>
                     {/* Small starfish */}
                     <g style={{opacity:0.7}}>
@@ -1420,7 +1431,7 @@ export default function OnboardingPage() {
                         fontSize: '10px', color: 'white', fontWeight: '800', lineHeight: 1,
                       }}>✓</span>
                     )}
-                    <span style={{ position: 'relative', zIndex: 1, fontSize: '0.72rem', fontWeight: '700', lineHeight: 1.25, textAlign: 'center', color: (active || !!darkBg) ? 'rgba(255,255,255,0.95)' : '#1A1209', letterSpacing: '0.01em' }}>
+                    <span style={{ position: 'relative', zIndex: 1, fontSize: '0.75rem', fontWeight: '800', lineHeight: 1.2, textAlign: 'center', color: (active || !!darkBg) ? 'rgba(255,255,255,1)' : '#1A1209', letterSpacing: '0.03em', textShadow: (active || !!darkBg) ? '0 1px 4px rgba(0,0,0,0.7), 0 0 8px rgba(0,0,0,0.4)' : '0 1px 3px rgba(255,255,255,0.9)' }}>
                       {option.label}
                     </span>
                   </button>
