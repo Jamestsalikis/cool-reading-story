@@ -188,7 +188,7 @@ export default function OnboardingPage() {
     petType: '',
     city: '',
     country: '',
-    readingLevel: '',
+    readingLevel: 'medium',
   });
 
   const [showCustomInterest, setShowCustomInterest] = useState(false);
@@ -379,7 +379,7 @@ export default function OnboardingPage() {
 
             <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
               <button onClick={handleNext} className="btn-brand" style={{ flex: 1, padding: '0.75rem 1.75rem' }}>Next step</button>
-              <Link href="/signup" style={{ color: '#741515', textDecoration: 'none', fontWeight: '500' }}>Back</Link>
+              <Link href="/dashboard" style={{ color: '#741515', textDecoration: 'none', fontWeight: '500' }}>Back</Link>
             </div>
           </div>
         )}
@@ -481,6 +481,8 @@ export default function OnboardingPage() {
                   'Animals':'#0A1E06', 'Swimming':'#041428', 'Football':'#0A2006',
                   'Robots':'#0A0E1A', 'Science':'#030E18', 'Music':'#0E0418',
                   'Ocean':'#030C1E', 'Nature':'#040E04', 'Cooking':'#1A0A02', 'Dolls':'#1A0418',
+                  'Magic':'#180A30', 'Gymnastics':'#1A0318', 'Dancing':'#180408',
+                  'Karate':'#160A04', 'Art':'#160A04',
                 };
                 const darkBg = DARK_BG[option.label];
                 const S = (props:{cx:number;cy:number;r:number;d:string}) => <circle cx={props.cx} cy={props.cy} r={props.r} fill="rgba(255,248,200,0.92)" className="it-star" style={{animationDelay:props.d}}/>;
