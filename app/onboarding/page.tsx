@@ -1301,7 +1301,7 @@ export default function OnboardingPage() {
                       <path d="M36,13 L37.5,10 L40,12 L42.5,10 L44,13" fill="none" stroke="rgba(255,215,40,0.9)" strokeWidth="1.8" strokeLinejoin="round"/>
                       {/* Raised arm — curved up */}
                       <path d="M40,32 Q28,26 24,18" fill="none" stroke={c(0.88)} strokeWidth="4" strokeLinecap="round"/>
-                      <circle cx="24" cy="18" r="3" fill={c(0.85)}"/>
+                      <circle cx="24" cy="18" r="3" fill={c(0.85)}/>
                       {/* Lower arm — out to side */}
                       <path d="M40,32 Q54,28 58,32" fill="none" stroke={c(0.88)} strokeWidth="4" strokeLinecap="round"/>
                       <circle cx="58" cy="32" r="3" fill={c(0.85)}/>
