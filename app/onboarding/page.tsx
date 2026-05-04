@@ -454,6 +454,10 @@ export default function OnboardingPage() {
               .int-tile:hover .it-pirate-wave   { animation: it-pirate-wave 1.4s ease-in-out infinite 0.5s; }
               @keyframes it-wand-swing { 0%{transform:rotate(-16deg)} 25%{transform:rotate(13deg)} 50%{transform:rotate(-12deg)} 75%{transform:rotate(15deg)} 100%{transform:rotate(-16deg)} }
               .it-wand-swing { animation: it-wand-swing 2.4s ease-in-out infinite; }
+              @keyframes it-fairy-flutter { 0%{transform:translate(-30px,5px);opacity:0} 15%,85%{opacity:1} 100%{transform:translate(35px,-8px);opacity:0} }
+              .int-tile:hover .it-fairy-flutter { animation: it-fairy-flutter 3.2s ease-in-out infinite; }
+              @keyframes it-wing-flap { 0%,100%{transform:scaleX(1)} 50%{transform:scaleX(0.3)} }
+              .it-wing { animation: it-wing-flap 0.25s ease-in-out infinite; }
               @keyframes it-star-blink { 0%,100%{opacity:0.9} 50%{opacity:0.08} }
               .it-star { animation: it-star-blink 2s ease-in-out infinite; }
             `}</style>
@@ -596,41 +600,64 @@ export default function OnboardingPage() {
                       <line key={i} x1="40" y1="1" x2={40+6*Math.cos(i*45*Math.PI/180)} y2={1+6*Math.sin(i*45*Math.PI/180)} stroke="rgba(255,215,60,0.55)" strokeWidth="1.1"/>
                     ))}
                   </>),
-                  // ── FAIRIES — magical night garden ──────────────────────────
+                  // ── FAIRIES — fairy garden, flutters on hover ────────────────
                   'Fairies': (<>
-                    {/* Stars */}
-                    <S cx={6}  cy={4}  r={1.1} d="0s"/><S cx={20} cy={2}  r={0.8} d="0.4s"/>
-                    <S cx={58} cy={5}  r={1.3} d="0.8s"/><S cx={72} cy={3}  r={0.9} d="0.3s"/>
-                    <S cx={78} cy={18} r={1.1} d="0.6s"/>
+                    <S cx={6} cy={4} r={1.1} d="0s"/><S cx={20} cy={2} r={0.8} d="0.4s"/>
+                    <S cx={58} cy={5} r={1.3} d="0.8s"/><S cx={72} cy={3} r={0.9} d="0.3s"/>
                     {/* Moon */}
-                    <circle cx="14" cy="12" r="9"  fill="rgba(255,220,255,0.85)"/>
+                    <circle cx="14" cy="12" r="9" fill="rgba(255,220,255,0.85)"/>
                     <circle cx="18" cy="10" r="7.5" fill="#2A0A3A"/>
-                    {/* Glowing flowers on ground */}
-                    {[[10,54],[24,50],[40,55],[56,50],[70,54]].map(([x,y],i)=>(
+                    {/* Enchanted flowers */}
+                    {[[8,54],[22,50],[40,55],[58,50],[72,54]].map(([x,y],i)=>(
                       <g key={i}>
-                        <line x1={x} y1={y} x2={x} y2={60} stroke="rgba(100,255,150,0.5)" strokeWidth="1.5"/>
-                        {[0,1,2,3,4].map(j=><ellipse key={j} cx={x+Math.cos(j*72*Math.PI/180)*3.5} cy={y+Math.sin(j*72*Math.PI/180)*3.5} rx="2.5" ry="1.5" fill={`rgba(${[255,180,255,200,255][j]},${[150,100,200,180,100][j]},${[200,255,100,255,220][j]},0.7)`} transform={`rotate(${j*72},${x},${y})`}/>)}
-                        <circle cx={x} cy={y} r="2" fill="rgba(255,255,150,0.95)" className="it-star" style={{animationDelay:`${i*0.3}s`}}/>
+                        <line x1={x} y1={y} x2={x} y2={60} stroke="rgba(80,220,120,0.55)" strokeWidth="1.5"/>
+                        {[0,1,2,3,4].map(j=><ellipse key={j} cx={x+Math.cos(j*72*Math.PI/180)*3.5} cy={y+Math.sin(j*72*Math.PI/180)*3.5} rx="2.5" ry="1.5" fill={['rgba(255,120,200,0.75)','rgba(255,200,80,0.75)','rgba(180,80,255,0.75)','rgba(80,200,255,0.75)','rgba(255,150,80,0.75)'][j]} transform={`rotate(${j*72},${x},${y})`}/>)}
+                        <circle cx={x} cy={y} r="1.8" fill="rgba(255,240,100,0.95)" className="it-star" style={{animationDelay:`${i*0.3}s`}}/>
                       </g>
                     ))}
-                    {/* Fairy — glowing body + wings */}
-                    <g className="it-bob" style={{transformOrigin:'40px 24px'}}>
-                      {/* Wings */}
-                      <ellipse cx="31" cy="22" rx="10" ry="6" fill="rgba(220,180,255,0.3)" transform="rotate(-25,31,22)"/>
-                      <ellipse cx="49" cy="22" rx="10" ry="6" fill="rgba(220,180,255,0.3)" transform="rotate(25,49,22)"/>
-                      {/* Glow */}
-                      <circle cx="40" cy="24" r="8" fill="rgba(255,180,255,0.12)"/>
-                      {/* Body */}
-                      <ellipse cx="40" cy="26" rx="3.5" ry="6" fill="rgba(255,160,220,0.9)"/>
+                    {/* Resting fairy — gently bobs in idle */}
+                    <g className="it-bob" style={{transformOrigin:'40px 26px'}}>
+                      {/* Upper wings — large teardrop shape */}
+                      <path d="M40,20 Q28,10 24,20 Q28,28 40,24 Z" fill="rgba(200,160,255,0.38)" stroke="rgba(200,160,255,0.6)" strokeWidth="0.8"/>
+                      <path d="M40,20 Q52,10 56,20 Q52,28 40,24 Z" fill="rgba(200,160,255,0.38)" stroke="rgba(200,160,255,0.6)" strokeWidth="0.8"/>
+                      {/* Lower wings — smaller */}
+                      <path d="M40,26 Q30,22 27,30 Q32,34 40,30 Z" fill="rgba(220,180,255,0.28)" stroke="rgba(220,180,255,0.5)" strokeWidth="0.7"/>
+                      <path d="M40,26 Q50,22 53,30 Q48,34 40,30 Z" fill="rgba(220,180,255,0.28)" stroke="rgba(220,180,255,0.5)" strokeWidth="0.7"/>
+                      {/* Wing shimmer lines */}
+                      <path d="M40,22 Q32,15 26,21" fill="none" stroke="rgba(230,200,255,0.5)" strokeWidth="0.8"/>
+                      <path d="M40,22 Q48,15 54,21" fill="none" stroke="rgba(230,200,255,0.5)" strokeWidth="0.8"/>
+                      {/* Glow aura */}
+                      <circle cx="40" cy="26" r="10" fill="rgba(220,150,255,0.1)"/>
+                      {/* Dress/body */}
+                      <ellipse cx="40" cy="30" rx="4" ry="7" fill="rgba(255,130,220,0.92)"/>
+                      {/* Skirt flare */}
+                      <polygon points="36,36 44,36 47,43 33,43" fill="rgba(255,100,200,0.8)"/>
                       {/* Head */}
-                      <circle cx="40" cy="17" r="5" fill="rgba(255,200,180,0.95)"/>
-                      {/* Hair */}
-                      <path d="M35,14 Q38,10 40,12 Q42,10 45,14" fill="rgba(200,150,255,0.9)" strokeWidth="0"/>
+                      <circle cx="40" cy="19" r="5.5" fill="rgba(255,210,185,0.97)"/>
+                      {/* Hair — flowing */}
+                      <path d="M34.5,17 Q37,11 40,13.5 Q43,11 45.5,17" fill="rgba(180,100,255,0.92)"/>
+                      <path d="M35,20 Q30,26 32,32" fill="none" stroke="rgba(180,100,255,0.7)" strokeWidth="2.5" strokeLinecap="round"/>
+                      {/* Face */}
+                      <circle cx="38" cy="20" r="1.2" fill="rgba(100,60,120,0.9)"/>
+                      <circle cx="42" cy="20" r="1.2" fill="rgba(100,60,120,0.9)"/>
+                      <path d="M38,23 Q40,25 42,23" fill="none" stroke="rgba(200,100,140,0.7)" strokeWidth="1" strokeLinecap="round"/>
+                      {/* Wand in hand */}
+                      <line x1="44" y1="28" x2="56" y2="18" stroke="rgba(200,175,80,0.9)" strokeWidth="1.8" strokeLinecap="round"/>
+                      <circle cx="56" cy="18" r="3" fill="rgba(255,220,50,0.95)" className="it-pulse"/>
                     </g>
-                    {/* Fairy dust trail */}
-                    {[{x:50,y:20},{x:55,y:15},{x:60,y:18},{x:65,y:12}].map(({x,y},i)=>(
-                      <circle key={i} cx={x} cy={y} r={2-i*0.3} fill="rgba(255,220,100,0.85)" className="it-star" style={{animationDelay:`${i*0.2}s`}}/>
-                    ))}
+                    {/* Fairy flutters across on hover — trailing sparkle dust */}
+                    <g className="it-fairy-flutter" style={{transformOrigin:'20px 28px'}}>
+                      {/* Flying fairy — smaller, mid-flight pose */}
+                      <path d="M20,22 Q11,14 8,22 Q11,28 20,26 Z" fill="rgba(200,160,255,0.5)" stroke="rgba(200,160,255,0.7)" strokeWidth="0.7"/>
+                      <path d="M20,22 Q29,14 32,22 Q29,28 20,26 Z" fill="rgba(200,160,255,0.5)" stroke="rgba(200,160,255,0.7)" strokeWidth="0.7"/>
+                      <ellipse cx="20" cy="28" rx="3" ry="5" fill="rgba(255,130,220,0.9)"/>
+                      <circle cx="20" cy="21" r="4" fill="rgba(255,210,185,0.97)"/>
+                      <path d="M17,19 Q19,15 20,17 Q21,15 23,19" fill="rgba(180,100,255,0.9)"/>
+                      {/* Dust trail */}
+                      {[0,1,2,3,4].map(i=>(
+                        <circle key={i} cx={8+i*3} cy={30+i} r={2-i*0.3} fill="rgba(255,230,100,0.85)" className="it-star" style={{animationDelay:`${i*0.15}s`}}/>
+                      ))}
+                    </g>
                   </>),
                   // ── UNICORNS — magical night with rainbow ────────────────────
                   'Unicorns': (<>
@@ -665,30 +692,51 @@ export default function OnboardingPage() {
                       <circle key={i} cx={x} cy={y} r="2" fill="rgba(255,220,255,0.9)" className="it-star" style={{animationDelay:`${i*0.3}s`}}/>
                     ))}
                   </>),
-                  // ── PRINCESSES — golden palace at dusk ──────────────────────
+                  // ── PRINCESSES — Disney princess in ballgown ─────────────────
                   'Princesses': (<>
-                    {/* Stars */}
-                    <S cx={8}  cy={4}  r={1.0} d="0s"/><S cx={68} cy={3}  r={1.2} d="0.5s"/>
-                    <S cx={76} cy={14} r={0.9} d="0.8s"/>
-                    {/* Palace towers */}
-                    {[[16,52],[28,46],[44,46],[60,52]].map(([x,y],i)=>(
-                      <g key={i}>
-                        <rect x={x-5} y={y-16} width={10} height={16+8} fill="rgba(180,130,40,0.7)" rx="1"/>
-                        <polygon points={`${x},${y-16} ${x-5},${y-8} ${x+5},${y-8}`} fill="rgba(220,160,50,0.8)"/>
-                        {/* Tower window */}
-                        <rect x={x-2} y={y-12} width={4} height={6} rx="2" fill="rgba(255,220,80,0.9)" className="it-star" style={{animationDelay:`${i*0.2}s`}}/>
-                      </g>
-                    ))}
-                    {/* Palace wall */}
-                    <rect x="11" y="46" width="58" height="14" fill="rgba(160,115,35,0.7)"/>
-                    {/* Gate */}
-                    <rect x="35" y="50" width="10" height="10" rx="5 5 0 0" fill="rgba(0,0,0,0.4)"/>
-                    {/* Crown — large and regal */}
-                    <polygon points="40,5 34,22 28,16 32,28 24,26 34,36 46,36 56,26 48,28 48,16 46,22" fill="rgba(255,200,30,0.97)"/>
-                    {/* Crown gems */}
-                    {[[32,15,'rgba(255,80,80,0.95)'],[40,9,'rgba(255,220,50,1)'],[48,15,'rgba(200,80,255,0.95)'],[35,22,'rgba(80,200,255,0.9)'],[45,22,'rgba(80,255,150,0.9)']].map(([x,y,col],i)=>(
-                      <circle key={i} cx={x as number} cy={y as number} r="3.2" fill={col as string} className="it-star" style={{animationDelay:`${i*0.18}s`}}/>
-                    ))}
+                    <S cx={6}  cy={3}  r={1.0} d="0s"/><S cx={68} cy={4}  r={1.2} d="0.5s"/>
+                    <S cx={76} cy={14} r={0.9} d="0.8s"/><S cx={14} cy={18} r={0.8} d="0.3s"/>
+                    {/* Palace ballroom arch background */}
+                    <rect x="0" y="42" width="80" height="18" fill="rgba(180,130,40,0.3)"/>
+                    <path d="M20,42 Q40,30 60,42" fill="rgba(180,130,40,0.2)"/>
+                    {/* Chandelier */}
+                    <line x1="40" y1="0" x2="40" y2="8" stroke="rgba(220,190,80,0.6)" strokeWidth="1"/>
+                    <ellipse cx="40" cy="10" rx="8" ry="4" fill="rgba(200,170,60,0.4)"/>
+                    {[0,1,2,3,4,5].map(i=><circle key={i} cx={33+i*3} cy={12} r="1.5" fill="rgba(255,230,100,0.9)" className="it-star" style={{animationDelay:`${i*0.2}s`}}/>)}
+                    {/* Princess figure — center stage */}
+                    <g className="it-bob" style={{transformOrigin:'40px 30px'}}>
+                      {/* Ballgown — layered skirt, Disney style */}
+                      <polygon points="40,32 20,60 60,60" fill="rgba(180,80,200,0.7)"/>
+                      <ellipse cx="40" cy="52" rx="22" ry="8" fill="rgba(200,100,220,0.6)"/>
+                      {/* Skirt sparkle decoration */}
+                      {[[28,44],[35,50],[45,50],[52,44],[32,56],[48,56]].map(([x,y],i)=>(
+                        <circle key={i} cx={x} cy={y} r="1.5" fill="rgba(255,220,255,0.8)" className="it-star" style={{animationDelay:`${i*0.2}s`}}/>
+                      ))}
+                      {/* Bodice */}
+                      <ellipse cx="40" cy="30" rx="6" ry="8" fill="rgba(200,100,220,0.85)"/>
+                      {/* Gloved arms */}
+                      <path d="M34,28 Q24,22 20,26" fill="none" stroke="rgba(255,200,210,0.9)" strokeWidth="3.5" strokeLinecap="round"/>
+                      <circle cx="20" cy="26" r="2.5" fill="rgba(255,200,210,0.95)"/>
+                      <path d="M46,28 Q56,22 60,26" fill="none" stroke="rgba(255,200,210,0.9)" strokeWidth="3.5" strokeLinecap="round"/>
+                      <circle cx="60" cy="26" r="2.5" fill="rgba(255,200,210,0.95)"/>
+                      {/* Neck & head */}
+                      <ellipse cx="40" cy="19" rx="1.8" ry="3" fill="rgba(255,210,185,0.97)"/>
+                      <circle cx="40" cy="13" r="7" fill="rgba(255,210,185,0.97)"/>
+                      {/* Hair — long and elegant */}
+                      <path d="M33,10 Q36,3 40,5 Q44,3 47,10" fill="rgba(200,140,50,0.95)"/>
+                      <path d="M33,14 Q26,20 28,30" fill="none" stroke="rgba(200,140,50,0.8)" strokeWidth="3.5" strokeLinecap="round"/>
+                      <path d="M47,14 Q54,20 52,30" fill="none" stroke="rgba(200,140,50,0.8)" strokeWidth="3.5" strokeLinecap="round"/>
+                      {/* Face details */}
+                      <circle cx="37.5" cy="13.5" r="1.3" fill="rgba(100,60,120,0.9)"/>
+                      <circle cx="42.5" cy="13.5" r="1.3" fill="rgba(100,60,120,0.9)"/>
+                      <path d="M37.5,16.5 Q40,19 42.5,16.5" fill="none" stroke="rgba(200,80,120,0.8)" strokeWidth="1.2" strokeLinecap="round"/>
+                      {/* Tiara / Crown */}
+                      <path d="M34,8 L36,3 L38,6 L40,1 L42,6 L44,3 L46,8" fill="none" stroke="rgba(255,220,40,0.95)" strokeWidth="2" strokeLinejoin="round"/>
+                      {/* Crown gems */}
+                      {[[36,3,'rgba(255,80,80,0.95)'],[40,1,'rgba(255,220,40,1)'],[44,3,'rgba(200,80,255,0.95)']].map(([x,y,col],i)=>(
+                        <circle key={i} cx={x as number} cy={y as number} r="2" fill={col as string} className="it-star" style={{animationDelay:`${i*0.25}s`}}/>
+                      ))}
+                    </g>
                   </>),
                   // ── PIRATES — tall ship on the dark sea ─────────────────────
                   'Pirates': (<>
@@ -755,35 +803,42 @@ export default function OnboardingPage() {
                       </g>
                     </g>
                   </>),
-                  // ── MAGIC — wand waves with sparkles ────────────────────────
+                  // ── MAGIC — elegant wand with swirling energy ────────────────
                   'Magic': (<>
-                    {/* Background sparkles — fixed positions, opacity blink only */}
-                    {[{x:8,y:7},{x:68,y:5},{x:74,y:22},{x:12,y:38},{x:72,y:45},{x:5,y:52},{x:38,y:56}].map(({x,y},i)=>(
-                      <circle key={i} cx={x} cy={y} r={i%2===0?1.8:1.2} fill={c(0.85)} className="it-star" style={{animationDelay:`${i*0.3}s`}}/>
+                    {/* Background sparkles */}
+                    {[{x:6,y:5},{x:15,y:30},{x:70,y:8},{x:74,y:32},{x:8,y:50},{x:75,y:52}].map(({x,y},i)=>(
+                      <circle key={i} cx={x} cy={y} r={1.4+i%2*0.5} fill={c(0.8)} className="it-star" style={{animationDelay:`${i*0.38}s`}}/>
                     ))}
-                    {/* Entire wand pivots from handle — always waving */}
-                    <g className="it-wand-swing" style={{transformOrigin:'34px 52px'}}>
-                      {/* Handle */}
-                      <rect x="29" y="48" width="10" height="13" rx="4" fill="rgba(90,50,15,0.97)"/>
-                      <rect x="27" y="44" width="14" height="6"  rx="3" fill="rgba(130,80,20,0.97)"/>
-                      {/* Wand stick */}
-                      <line x1="34" y1="44" x2="56" y2="10" stroke="rgba(210,175,95,0.95)" strokeWidth="3" strokeLinecap="round"/>
-                      {/* Tip glow halo */}
-                      <circle cx="56" cy="9" r="8" fill={c(0.18)}/>
-                      <circle cx="56" cy="9" r="5" fill={c(0.4)}/>
-                      {/* Bright star tip */}
-                      <circle cx="56" cy="9" r="3" fill={c(0.95)} className="it-pulse"/>
-                      {/* Star rays */}
-                      {[0,1,2,3,4,5,6,7].map(i=>(
-                        <line key={i} x1="56" y1="9" x2={56+8*Math.cos(i*45*Math.PI/180)} y2={9+8*Math.sin(i*45*Math.PI/180)} stroke={c(0.7)} strokeWidth="1.2" strokeLinecap="round"/>
+                    {/* Wand pivots from handle base */}
+                    <g className="it-wand-swing" style={{transformOrigin:'35px 56px'}}>
+                      {/* Handle — carved wood with bands */}
+                      <rect x="29" y="48" width="12" height="16" rx="4" fill="rgba(75,38,8,0.97)"/>
+                      <rect x="29" y="51" width="12" height="2"  rx="1" fill="rgba(175,135,45,0.75)"/>
+                      <rect x="29" y="55" width="12" height="2"  rx="1" fill="rgba(175,135,45,0.75)"/>
+                      <rect x="29" y="59" width="12" height="2"  rx="1" fill="rgba(175,135,45,0.75)"/>
+                      {/* Guard / crosspiece */}
+                      <rect x="25" y="46" width="20" height="4" rx="2" fill="rgba(155,115,40,0.9)"/>
+                      {/* Shaft — tapered golden */}
+                      <path d="M35,46 L54,10" stroke="rgba(215,180,75,0.97)" strokeWidth="4" strokeLinecap="round"/>
+                      <path d="M35,46 L54,10" stroke="rgba(255,230,130,0.5)" strokeWidth="1.8" strokeLinecap="round"/>
+                      {/* Crystal orb at tip — glowing */}
+                      <circle cx="54" cy="9"  r="7"  fill={c(0.15)}/>
+                      <circle cx="54" cy="9"  r="4.5" fill={c(0.45)}/>
+                      <circle cx="54" cy="9"  r="3"   fill={c(0.92)} className="it-pulse"/>
+                      {/* 8-pointed star burst */}
+                      {[0,22.5,45,67.5,90,112.5,135,157.5,180,202.5,225,247.5,270,292.5,315,337.5].map((deg,i)=>(
+                        <line key={i} x1="54" y1="9" x2={54+(i%2===0?11:7)*Math.cos(deg*Math.PI/180)} y2={9+(i%2===0?11:7)*Math.sin(deg*Math.PI/180)} stroke={c(i%2===0?0.75:0.45)} strokeWidth={i%2===0?1.4:0.9} strokeLinecap="round"/>
                       ))}
-                      {/* Orbiting sparkles around the star tip */}
-                      {[0,1,2,3,4,5].map(i=>(
-                        <circle key={i} r="2.2" fill={c(0.9)} className="it-orbit" style={{transformOrigin:'56px 9px',animationDelay:`${i*0.2}s`}}/>
+                      {/* Swirling energy arcs — S-curves emanating from tip */}
+                      <path d="M54,9 Q48,2 40,10 Q32,18 36,28 Q40,36 34,42" fill="none" stroke={c(0.5)} strokeWidth="1.6" strokeLinecap="round" className="it-pulse"/>
+                      <path d="M54,9 Q62,3 68,12 Q74,22 68,30 Q62,36 66,44" fill="none" stroke={c(0.4)} strokeWidth="1.3" strokeLinecap="round" className="it-pulse" style={{animationDelay:'0.6s'}}/>
+                      {/* Orbiting energy beads */}
+                      {[0,1,2,3,4].map(i=>(
+                        <circle key={i} r="2.5" fill={c(0.92)} className="it-orbit" style={{transformOrigin:'54px 9px',animationDelay:`${i*0.22}s`}}/>
                       ))}
-                      {/* Sparkle trail along the wand stick */}
-                      {[{x:51,y:17},{x:47,y:24},{x:42,y:31},{x:38,y:38}].map(({x,y},i)=>(
-                        <circle key={i} cx={x} cy={y} r={2.2-i*0.4} fill={c(0.55-i*0.08)} className="it-star" style={{animationDelay:`${i*0.2}s`}}/>
+                      {/* Trail down shaft */}
+                      {[{x:51,y:16},{x:47,y:23},{x:43,y:31},{x:39,y:39}].map(({x,y},i)=>(
+                        <circle key={i} cx={x} cy={y} r={2.8-i*0.45} fill={c(0.62-i*0.1)} className="it-star" style={{animationDelay:`${i*0.22}s`}}/>
                       ))}
                     </g>
                   </>),
