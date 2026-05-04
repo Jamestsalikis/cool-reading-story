@@ -468,7 +468,12 @@ export default function OnboardingPage() {
                 const c2= (o: number) => active ? a(o * 0.7) : `rgba(${r2},${g2},${b2},${o * 0.65})`;
                 const p = c;
                 // Tiles with dark atmospheric backgrounds (like Space)
-                const DARK_BG: Record<string,string> = { 'Space':'#0C0A2E', 'Superheroes':'#0B1120', 'Pirates':'#071422', 'Fantasy':'#1A0A3E', 'Aliens':'#030A0F', 'Gaming':'#0D0A1E' };
+                const DARK_BG: Record<string,string> = {
+                  'Space':'#0C0A2E', 'Superheroes':'#0B1120', 'Pirates':'#071422',
+                  'Fantasy':'#1A0A3E', 'Aliens':'#030A0F', 'Gaming':'#0D0A1E',
+                  'Fairies':'#2A0A3A', 'Dinosaurs':'#0A1A08',
+                  'Soccer':'#0A3A14', 'Cars & Trucks':'#1A1A1A',
+                };
                 const darkBg = DARK_BG[option.label];
                 const S = (props:{cx:number;cy:number;r:number;d:string}) => <circle cx={props.cx} cy={props.cy} r={props.r} fill="rgba(255,248,200,0.92)" className="it-star" style={{animationDelay:props.d}}/>;
                 const scene: Record<string, React.ReactNode> = {
@@ -583,23 +588,41 @@ export default function OnboardingPage() {
                       <circle key={i} r="2" fill="rgba(220,180,255,0.95)" className="it-orbit" style={{transformOrigin:'40px 9px',animationDelay:`${i*0.22}s`}}/>
                     ))}
                   </>),
-                  // ── FAIRIES — enchanted garden ──────────────────────────────
+                  // ── FAIRIES — magical night garden ──────────────────────────
                   'Fairies': (<>
-                    {[[8,55],[22,52],[40,56],[58,52],[72,55]].map(([x,y],i)=>(
+                    {/* Stars */}
+                    <S cx={6}  cy={4}  r={1.1} d="0s"/><S cx={20} cy={2}  r={0.8} d="0.4s"/>
+                    <S cx={58} cy={5}  r={1.3} d="0.8s"/><S cx={72} cy={3}  r={0.9} d="0.3s"/>
+                    <S cx={78} cy={18} r={1.1} d="0.6s"/>
+                    {/* Moon */}
+                    <circle cx="14" cy="12" r="9"  fill="rgba(255,220,255,0.85)"/>
+                    <circle cx="18" cy="10" r="7.5" fill="#2A0A3A"/>
+                    {/* Glowing flowers on ground */}
+                    {[[10,54],[24,50],[40,55],[56,50],[70,54]].map(([x,y],i)=>(
                       <g key={i}>
-                        <line x1={x} y1={y} x2={x} y2={60} stroke={c(0.35)} strokeWidth="1.5"/>
-                        {[0,1,2,3,4].map(j=><ellipse key={j} cx={x+Math.cos(j*72*Math.PI/180)*3.5} cy={y+Math.sin(j*72*Math.PI/180)*3.5} rx="2.2" ry="1.4" fill={c(0.5)} transform={`rotate(${j*72},${x},${y})`}/>)}
-                        <circle cx={x} cy={y} r="1.8" fill={c(0.8)}/>
+                        <line x1={x} y1={y} x2={x} y2={60} stroke="rgba(100,255,150,0.5)" strokeWidth="1.5"/>
+                        {[0,1,2,3,4].map(j=><ellipse key={j} cx={x+Math.cos(j*72*Math.PI/180)*3.5} cy={y+Math.sin(j*72*Math.PI/180)*3.5} rx="2.5" ry="1.5" fill={`rgba(${[255,180,255,200,255][j]},${[150,100,200,180,100][j]},${[200,255,100,255,220][j]},0.7)`} transform={`rotate(${j*72},${x},${y})`}/>)}
+                        <circle cx={x} cy={y} r="2" fill="rgba(255,255,150,0.95)" className="it-star" style={{animationDelay:`${i*0.3}s`}}/>
                       </g>
                     ))}
-                    <ellipse cx="40" cy="26" rx="3.5" ry="6" fill={c(0.7)}/>
-                    <circle  cx="40" cy="18" r="4.5" fill={c(0.6)}/>
-                    <ellipse cx="32" cy="24" rx="9" ry="5" fill={c(0.22)} transform="rotate(-22,32,24)"/>
-                    <ellipse cx="48" cy="24" rx="9" ry="5" fill={c(0.22)} transform="rotate(22,48,24)"/>
-                    {[0,1,2,3,4].map(i=><circle key={i} cx={48+i*5} cy={28-i*2} r="1.5" fill={c(0.9)} className="it-star" style={{animationDelay:`${i*0.2}s`}}/>)}
-                    <g className="it-up" style={{transformOrigin:'40px 14px'}}>
-                      <circle cx="40" cy="8" r="2" fill={c(0.9)}/>
+                    {/* Fairy — glowing body + wings */}
+                    <g className="it-bob" style={{transformOrigin:'40px 24px'}}>
+                      {/* Wings */}
+                      <ellipse cx="31" cy="22" rx="10" ry="6" fill="rgba(220,180,255,0.3)" transform="rotate(-25,31,22)"/>
+                      <ellipse cx="49" cy="22" rx="10" ry="6" fill="rgba(220,180,255,0.3)" transform="rotate(25,49,22)"/>
+                      {/* Glow */}
+                      <circle cx="40" cy="24" r="8" fill="rgba(255,180,255,0.12)"/>
+                      {/* Body */}
+                      <ellipse cx="40" cy="26" rx="3.5" ry="6" fill="rgba(255,160,220,0.9)"/>
+                      {/* Head */}
+                      <circle cx="40" cy="17" r="5" fill="rgba(255,200,180,0.95)"/>
+                      {/* Hair */}
+                      <path d="M35,14 Q38,10 40,12 Q42,10 45,14" fill="rgba(200,150,255,0.9)" strokeWidth="0"/>
                     </g>
+                    {/* Fairy dust trail */}
+                    {[{x:50,y:20},{x:55,y:15},{x:60,y:18},{x:65,y:12}].map(({x,y},i)=>(
+                      <circle key={i} cx={x} cy={y} r={2-i*0.3} fill="rgba(255,220,100,0.85)" className="it-star" style={{animationDelay:`${i*0.2}s`}}/>
+                    ))}
                   </>),
                   // ── UNICORNS — rainbow meadow ───────────────────────────────
                   'Unicorns': (<>
@@ -757,23 +780,45 @@ export default function OnboardingPage() {
                       <circle  cx="42" cy="39" r="1.5" fill="rgba(0,0,0,0.9)"/>
                     </g>
                   </>),
-                  // ── DINOSAURS — prehistoric jungle ──────────────────────────
+                  // ── DINOSAURS — prehistoric jungle night ────────────────────
                   'Dinosaurs': (<>
-                    {[[4,38],[4,48],[74,40],[74,52]].map(([x,y],i)=>(
-                      <g key={i}><line x1={x+4} y1={60} x2={x+4} y2={y} stroke={c(0.35)} strokeWidth="2"/>
-                      {[-8,0,8].map((dx,j)=><ellipse key={j} cx={x+4+dx} cy={y-j*4} rx="7" ry="4" fill={c(0.2)} transform={`rotate(${dx*3},${x+4+dx},${y-j*4})`}/>)}</g>
+                    {/* Stars in the dark sky */}
+                    <S cx={10} cy={4}  r={1.2} d="0s"/><S cx={28} cy={2}  r={0.9} d="0.4s"/>
+                    <S cx={55} cy={5}  r={1.4} d="0.7s"/><S cx={72} cy={3}  r={1.0} d="0.2s"/>
+                    {/* Jungle ferns — left side */}
+                    {[0,1,2].map(i=>(
+                      <g key={i}><line x1={6+i*3} y1={60} x2={6+i*3} y2={35-i*4} stroke="rgba(20,120,40,0.8)" strokeWidth="2"/>
+                      {[-1,0,1].map(j=><ellipse key={j} cx={(6+i*3)+j*8} cy={35-i*4+j*4} rx="8" ry="4" fill="rgba(20,140,50,0.45)" transform={`rotate(${j*20},${(6+i*3)+j*8},${35-i*4+j*4})`}/>)}</g>
                     ))}
-                    <rect x="0" y="52" width="80" height="8" fill={c(0.1)}/>
-                    {[15,30,45,62].map((x,i)=>(
-                      <g key={i}><ellipse cx={x} cy={54} rx="5" ry="3" fill={c(0.2)}/><ellipse cx={x+8} cy={56} rx="4" ry="2.5" fill={c(0.15)}/></g>
+                    {/* Jungle ferns — right side */}
+                    {[0,1,2].map(i=>(
+                      <g key={i}><line x1={72-i*3} y1={60} x2={72-i*3} y2={32-i*4} stroke="rgba(20,120,40,0.8)" strokeWidth="2"/>
+                      {[-1,0,1].map(j=><ellipse key={j} cx={(72-i*3)+j*8} cy={32-i*4+j*4} rx="8" ry="4" fill="rgba(20,140,50,0.45)" transform={`rotate(${j*20},${(72-i*3)+j*8},${32-i*4+j*4})`}/>)}</g>
                     ))}
-                    <g className="it-walk" style={{transformOrigin:'12px 36px'}}>
-                      <ellipse cx="12" cy="36" rx="9" ry="7" fill={c(0.75)}/>
-                      <ellipse cx="19" cy="32" rx="6" ry="5" fill={c(0.65)}/>
-                      <polygon points="25,30 32,25 28,33" fill={c(0.55)}/>
-                      <circle cx="21" cy="31" r="2" fill={active?`rgba(${r1},${g1},${b1},1)`:c(0.5)}/>
-                      <line x1="7"  y1="42" x2="5"  y2="50" stroke={c(0.65)} strokeWidth="2"/>
-                      <line x1="16" y1="42" x2="14" y2="50" stroke={c(0.65)} strokeWidth="2"/>
+                    {/* Ground */}
+                    <rect x="0" y="50" width="80" height="10" fill="rgba(20,80,20,0.4)"/>
+                    {/* Footprints */}
+                    {[16,30,46,60].map((x,i)=>(
+                      <ellipse key={i} cx={x} cy={54} rx="4" ry="2.5" fill="rgba(10,60,10,0.5)" transform={`rotate(${i%2===0?-15:15},${x},54)`}/>
+                    ))}
+                    {/* T-Rex walking across */}
+                    <g className="it-walk" style={{transformOrigin:'16px 34px'}}>
+                      {/* Body */}
+                      <ellipse cx="16" cy="34" rx="11" ry="8" fill="rgba(80,160,60,0.9)"/>
+                      {/* Head + neck */}
+                      <ellipse cx="25" cy="27" rx="8" ry="6" fill="rgba(90,170,65,0.9)"/>
+                      {/* Snout */}
+                      <polygon points="33,25 40,22 38,30" fill="rgba(80,155,55,0.9)"/>
+                      {/* Eye */}
+                      <circle cx="29" cy="25" r="2.5" fill="rgba(0,0,0,0.8)"/>
+                      <circle cx="29.5" cy="24.5" r="1" fill="rgba(255,255,100,0.9)"/>
+                      {/* Tiny arms */}
+                      <line x1="20" y1="30" x2="25" y2="36" stroke="rgba(80,160,60,0.9)" strokeWidth="2.5" strokeLinecap="round"/>
+                      {/* Legs */}
+                      <line x1="12" y1="41" x2="8"  y2="52" stroke="rgba(70,140,50,0.9)" strokeWidth="3" strokeLinecap="round"/>
+                      <line x1="20" y1="41" x2="18" y2="52" stroke="rgba(70,140,50,0.9)" strokeWidth="3" strokeLinecap="round"/>
+                      {/* Tail */}
+                      <path d="M5,36 Q-4,38 -8,34" fill="none" stroke="rgba(80,160,60,0.9)" strokeWidth="3.5" strokeLinecap="round"/>
                     </g>
                   </>),
                   // ── ANIMALS — wildlife ──────────────────────────────────────
@@ -906,18 +951,31 @@ export default function OnboardingPage() {
                     <line x1="50" y1="50" x2="50" y2="54" stroke="rgba(150,120,200,0.6)" strokeWidth="1.2"/>
                     <line x1="48" y1="52" x2="52" y2="52" stroke="rgba(150,120,200,0.6)" strokeWidth="1.2"/>
                   </>),
-                  // ── SOCCER — match ──────────────────────────────────────────
+                  // ── SOCCER — sunny pitch ─────────────────────────────────────
                   'Soccer': (<>
-                    <rect x="0" y="0" width="80" height="60" fill={c(0.05)}/>
-                    {[0,1,2,3,4].map(i=><rect key={i} x={i*16} y={0} width={8} height={60} fill={c(i%2===0?0.08:0.04)}/>)}
-                    <line x1="40" y1="0" x2="40" y2="60" stroke={c(0.25)} strokeWidth="1"/>
-                    <circle cx="40" cy="30" r="20" fill="none" stroke={c(0.2)} strokeWidth="1"/>
-                    <line x1="0" y1="20" x2="0" y2="40" stroke={c(0.5)} strokeWidth="2.5"/>
-                    <line x1="0" y1="20" x2="12" y2="20" stroke={c(0.5)} strokeWidth="2.5"/>
-                    <line x1="0" y1="40" x2="12" y2="40" stroke={c(0.5)} strokeWidth="2.5"/>
-                    <g className="it-bounce" style={{transformOrigin:'40px 30px'}}>
-                      <circle cx="40" cy="30" r="9" fill={c(0.8)}/>
-                      {[0,1,2,3,4].map(i=><line key={i} x1="40" y1="30" x2={40+9*Math.cos(i*72*Math.PI/180)} y2={30+9*Math.sin(i*72*Math.PI/180)} stroke={c(0.3)} strokeWidth="1.2"/>)}
+                    {/* Sky */}
+                    <rect x="0" y="0" width="80" height="28" fill="rgba(100,180,255,0.4)"/>
+                    {/* Clouds */}
+                    <ellipse cx="18" cy="10" rx="12" ry="5" fill="rgba(255,255,255,0.7)"/>
+                    <ellipse cx="12" cy="12" rx="8"  ry="4" fill="rgba(255,255,255,0.65)"/>
+                    <ellipse cx="62" cy="8"  rx="10" ry="4" fill="rgba(255,255,255,0.65)"/>
+                    <ellipse cx="70" cy="10" rx="7"  ry="3.5" fill="rgba(255,255,255,0.6)"/>
+                    {/* Grass stripe pattern */}
+                    {[0,1,2,3,4].map(i=><rect key={i} x={i*16} y={28} width={8} height={32} fill={i%2===0?'rgba(30,160,60,0.8)':'rgba(25,145,55,0.8)'}/>)}
+                    <line x1="0"  y1="28" x2="80" y2="28" stroke="rgba(255,255,255,0.3)" strokeWidth="1"/>
+                    {/* Pitch markings */}
+                    <line x1="40" y1="28" x2="40" y2="60" stroke="rgba(255,255,255,0.5)" strokeWidth="1.2"/>
+                    <circle cx="40" cy="44" r="12" fill="none" stroke="rgba(255,255,255,0.45)" strokeWidth="1.2"/>
+                    {/* Goal posts */}
+                    <line x1="0" y1="32" x2="0" y2="48" stroke="rgba(255,255,255,0.9)" strokeWidth="2.5"/>
+                    <line x1="0" y1="32" x2="10" y2="32" stroke="rgba(255,255,255,0.9)" strokeWidth="2.5"/>
+                    <line x1="0" y1="48" x2="10" y2="48" stroke="rgba(255,255,255,0.9)" strokeWidth="2.5"/>
+                    {/* Ball bouncing */}
+                    <g className="it-bounce" style={{transformOrigin:'50px 42px'}}>
+                      <circle cx="50" cy="42" r="9" fill="rgba(255,255,255,0.95)"/>
+                      {/* Ball panels */}
+                      {[0,1,2,3,4].map(i=><line key={i} x1="50" y1="42" x2={50+9*Math.cos(i*72*Math.PI/180)} y2={42+9*Math.sin(i*72*Math.PI/180)} stroke="rgba(0,0,0,0.3)" strokeWidth="1.2"/>)}
+                      <circle cx="50" cy="42" r="3.5" fill="rgba(0,0,0,0.15)"/>
                     </g>
                   </>),
                   // ── FOOTBALL — field ────────────────────────────────────────
@@ -1095,20 +1153,39 @@ export default function OnboardingPage() {
                       </g>
                     ))}
                   </>),
-                  // ── CARS & TRUCKS — road ────────────────────────────────────
+                  // ── CARS & TRUCKS — night highway ────────────────────────────
                   'Cars & Trucks': (<>
-                    <rect x="0" y="40" width="80" height="20" fill={c(0.12)}/>
-                    <rect x="0" y="38" width="80" height="3"  fill={c(0.25)}/>
-                    <rect x="0" y="57" width="80" height="3"  fill={c(0.25)}/>
-                    {[0,1,2,3,4].map(i=><rect key={i} x={4+i*18} y={49} width={10} height={2} rx="1" fill={c(0.35)}/>)}
+                    {/* Night sky with stars */}
+                    <S cx={12} cy={5}  r={1.2} d="0s"/><S cx={30} cy={3}  r={0.9} d="0.3s"/>
+                    <S cx={52} cy={6}  r={1.4} d="0.6s"/><S cx={68} cy={4}  r={1.0} d="0.9s"/>
+                    {/* Road surface */}
+                    <rect x="0" y="36" width="80" height="24" fill="rgba(40,40,50,0.95)"/>
+                    {/* Road edge lines */}
+                    <line x1="0" y1="36" x2="80" y2="36" stroke="rgba(255,255,255,0.5)" strokeWidth="2"/>
+                    <line x1="0" y1="59" x2="80" y2="59" stroke="rgba(255,255,255,0.5)" strokeWidth="2"/>
+                    {/* Lane dashes */}
+                    {[0,1,2,3].map(i=><rect key={i} x={i*22+2} y={46} width={14} height={2} rx="1" fill="rgba(255,220,0,0.8)"/>)}
+                    {/* Car zooming — with glowing headlights */}
                     <g className="it-car">
-                      <rect x="-5" y="40" width="32" height="11" rx="3" fill={c(0.9)}/>
-                      <rect x="0"  y="33" width="22" height="9"  rx="2" fill={c(0.7)}/>
-                      <circle cx="-1" cy="52" r="4.5" fill={c(0.5)}/>
-                      <circle cx="21" cy="52" r="4.5" fill={c(0.5)}/>
-                      <rect x="22" y="42" width="5" height="3" rx="1" fill="rgba(255,220,0,0.95)"/>
+                      {/* Car body */}
+                      <rect x="-5" y="38" width="34" height="12" rx="3" fill="rgba(220,50,50,0.95)"/>
+                      {/* Roof/cabin */}
+                      <rect x="2"  y="31" width="22" height="9"  rx="2" fill="rgba(180,30,30,0.95)"/>
+                      {/* Windows */}
+                      <rect x="4"  y="33" width="8"  height="5"  rx="1" fill="rgba(150,210,255,0.7)"/>
+                      <rect x="14" y="33" width="8"  height="5"  rx="1" fill="rgba(150,210,255,0.7)"/>
+                      {/* Wheels */}
+                      <circle cx="2"  cy="51" r="5" fill="rgba(20,20,20,0.95)"/>
+                      <circle cx="2"  cy="51" r="2.5" fill="rgba(100,100,100,0.8)"/>
+                      <circle cx="22" cy="51" r="5" fill="rgba(20,20,20,0.95)"/>
+                      <circle cx="22" cy="51" r="2.5" fill="rgba(100,100,100,0.8)"/>
+                      {/* Headlights — bright yellow cones */}
+                      <rect x="27" y="40" width="6" height="4" rx="1" fill="rgba(255,230,50,0.97)"/>
+                      {/* Headlight beam */}
+                      <polygon points="29,42 80,36 80,48" fill="rgba(255,230,50,0.06)"/>
                     </g>
-                    {[0,1,2,3].map(i=><line key={i} x1={60-i*5} y1={42+i} x2={80} y2={42+i} stroke={c(0.18)} strokeWidth="1" className="it-flash" style={{animationDelay:`${i*0.08}s`}}/>)}
+                    {/* Speed lines */}
+                    {[0,1,2,3].map(i=><line key={i} x1={62-i*8} y1={40+i*4} x2={80} y2={40+i*4} stroke="rgba(255,220,50,0.2)" strokeWidth="1" className="it-flash" style={{animationDelay:`${i*0.1}s`}}/>)}
                   </>),
                 };
                 return (
