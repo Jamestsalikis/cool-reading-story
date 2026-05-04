@@ -933,52 +933,92 @@ export default function OnboardingPage() {
                       {[0,1,2].map(i=><line key={i} x1={45+i*5} y1="23" x2={43+i*5} y2="37" stroke={c(0.2)} strokeWidth="1" transform="rotate(-15,50,30)"/>)}
                     </g>
                   </>),
-                  // ── GYMNASTICS — performance ────────────────────────────────
+                  // ── GYMNASTICS — cartwheel on bright floor ──────────────────
                   'Gymnastics': (<>
-                    <rect x="10" y="50" width="60" height="4" rx="2" fill={c(0.45)}/>
-                    {[0,1,2,3,4,5,6].map(i=><rect key={i} x={12+i*9} y={50} width={5} height={4} fill={i%2===0?c(0.55):c(0.35)} rx="1"/>)}
+                    {/* Bright gym floor */}
+                    <rect x="0" y="48" width="80" height="12" fill="rgba(255,220,150,0.5)"/>
+                    {[0,1,2,3,4,5].map(i=><line key={i} x1={i*16} y1="48" x2={i*16} y2="60" stroke="rgba(200,160,80,0.3)" strokeWidth="1"/>)}
+                    <line x1="0" y1="48" x2="80" y2="48" stroke="rgba(200,160,80,0.5)" strokeWidth="1.5"/>
+                    {/* Balance beam */}
+                    <rect x="15" y="36" width="50" height="3" rx="1.5" fill={c(0.7)}/>
+                    <rect x="22" y="39" width="4" height="9" rx="1" fill={c(0.5)}/>
+                    <rect x="54" y="39" width="4" height="9" rx="1" fill={c(0.5)}/>
+                    {/* Gymnast doing cartwheel (spin on hover) */}
                     <g className="it-spin-f" style={{transformOrigin:'40px 28px'}}>
-                      <circle cx="40" cy="14" r="5.5" fill={c(0.75)}/>
-                      <line x1="40" y1="19.5" x2="40" y2="35" stroke={c(0.65)} strokeWidth="2.5"/>
-                      <line x1="28" y1="25" x2="52" y2="25" stroke={c(0.65)} strokeWidth="2.5"/>
-                      <line x1="40" y1="35" x2="33" y2="48" stroke={c(0.65)} strokeWidth="2.5"/>
-                      <line x1="40" y1="35" x2="47" y2="48" stroke={c(0.65)} strokeWidth="2.5"/>
+                      <circle cx="40" cy="14" r="6" fill={c(0.85)}/>
+                      <line x1="40" y1="20" x2="40" y2="35" stroke={c(0.8)} strokeWidth="3" strokeLinecap="round"/>
+                      <line x1="26" y1="25" x2="54" y2="25" stroke={c(0.8)} strokeWidth="3" strokeLinecap="round"/>
+                      <line x1="40" y1="35" x2="32" y2="48" stroke={c(0.8)} strokeWidth="2.5" strokeLinecap="round"/>
+                      <line x1="40" y1="35" x2="48" y2="48" stroke={c(0.8)} strokeWidth="2.5" strokeLinecap="round"/>
                     </g>
-                    {[{x:12,y:18},{x:68,y:18},{x:20,y:38},{x:60,y:38}].map(({x,y},i)=>(
-                      <circle key={i} cx={x} cy={y} r="2" fill={c(0.6)} className="it-star" style={{animationDelay:`${i*0.35}s`}}/>
+                    {/* Stars around gymnast */}
+                    {[{x:14,y:14},{x:66,y:14},{x:18,y:36},{x:62,y:36}].map(({x,y},i)=>(
+                      <circle key={i} cx={x} cy={y} r="2.2" fill={c(0.75)} className="it-star" style={{animationDelay:`${i*0.3}s`}}/>
                     ))}
+                    {/* Ribbon */}
+                    <path d="M12,22 Q22,8 35,20 Q48,32 62,16" fill="none" stroke={c(0.5)} strokeWidth="1.5" strokeDasharray="4,3" className="it-ribbon"/>
                   </>),
-                  // ── DANCING — dance floor ───────────────────────────────────
+                  // ── DANCING — spotlight stage ────────────────────────────────
                   'Dancing': (<>
-                    <ellipse cx="40" cy="54" rx="32" ry="6" fill={c(0.12)}/>
-                    <circle cx="40" cy="30" r="26" fill="none" stroke={c(0.1)} strokeWidth="1" strokeDasharray="3,4"/>
-                    <circle cx="40" cy="30" r="18" fill="none" stroke={c(0.08)} strokeWidth="1" strokeDasharray="3,4"/>
-                    <g className="it-spin-f" style={{transformOrigin:'40px 29px'}}>
-                      <circle cx="40" cy="14" r="5.5" fill={c(0.75)}/>
-                      <line x1="40" y1="19.5" x2="40" y2="35" stroke={c(0.65)} strokeWidth="2.5"/>
-                      <line x1="29" y1="25" x2="51" y2="25" stroke={c(0.65)} strokeWidth="2.5"/>
-                      <line x1="40" y1="35" x2="32" y2="48" stroke={c(0.65)} strokeWidth="2.5"/>
-                      <line x1="40" y1="35" x2="48" y2="44" stroke={c(0.65)} strokeWidth="2.5"/>
+                    {/* Stage floor */}
+                    <rect x="0" y="48" width="80" height="12" fill="rgba(60,30,80,0.4)"/>
+                    <line x1="0" y1="48" x2="80" y2="48" stroke="rgba(150,100,200,0.4)" strokeWidth="1.5"/>
+                    {/* Spotlight cone */}
+                    <polygon points="40,0 20,48 60,48" fill="rgba(255,220,100,0.06)"/>
+                    <circle cx="40" cy="2" r="5" fill="rgba(255,220,80,0.5)" className="it-pulse"/>
+                    {/* Stage circles */}
+                    <circle cx="40" cy="48" rx="28" ry="5" fill="rgba(255,220,80,0.08)"/>
+                    {/* Dancer spinning */}
+                    <g className="it-spin-f" style={{transformOrigin:'40px 30px'}}>
+                      <circle cx="40" cy="14" r="6" fill={c(0.85)}/>
+                      <line x1="40" y1="20" x2="40" y2="35" stroke={c(0.8)} strokeWidth="2.8" strokeLinecap="round"/>
+                      {/* Arms in dance pose */}
+                      <line x1="40" y1="25" x2="28" y2="18" stroke={c(0.8)} strokeWidth="2.8" strokeLinecap="round"/>
+                      <line x1="40" y1="25" x2="52" y2="30" stroke={c(0.8)} strokeWidth="2.8" strokeLinecap="round"/>
+                      {/* Legs in dance pose */}
+                      <line x1="40" y1="35" x2="30" y2="50" stroke={c(0.8)} strokeWidth="2.5" strokeLinecap="round"/>
+                      <line x1="40" y1="35" x2="50" y2="44" stroke={c(0.8)} strokeWidth="2.5" strokeLinecap="round"/>
                     </g>
-                    {[16,30,50,64].map((x,i)=>(
+                    {/* Floating notes */}
+                    {[14,28,52,66].map((x,i)=>(
                       <g key={i} className="it-up" style={{animationDelay:`${i*0.35}s`,transformOrigin:`${x}px 44px`}}>
-                        <text x={x-5} y="46" fontSize="13" fill={c(0.8)}>♪</text>
+                        <text x={x-5} y="44" fontSize="13" fill={c(0.85)}>♪</text>
                       </g>
                     ))}
                   </>),
-                  // ── KARATE — dojo ───────────────────────────────────────────
+                  // ── KARATE — dojo with breaking board ──────────────────────
                   'Karate': (<>
-                    {[0,1,2,3,4].map(i=><rect key={i} x={i*16} y={50} width={14} height={10} fill={c(0.1+i*0.035)} rx="1"/>)}
-                    <line x1="0" y1="50" x2="80" y2="50" stroke={c(0.4)} strokeWidth="2"/>
+                    {/* Dojo floor mats */}
+                    {[0,1,2,3,4].map(i=><rect key={i} x={i*16} y={50} width={14} height={10} fill={c(0.12+i*0.03)} rx="1"/>)}
+                    <line x1="0" y1="50" x2="80" y2="50" stroke={c(0.45)} strokeWidth="2"/>
+                    {/* Belt rank display */}
+                    <rect x="60" y="4" width="16" height="8" rx="2" fill={c(0.35)}/>
+                    <rect x="62" y="6" width="12" height="4" rx="1" fill="rgba(220,50,50,0.9)"/>
+                    <text x="65" y="11" fontSize="4" fill="rgba(255,255,255,0.9)">DAN</text>
+                    {/* Karateka in kick pose */}
                     <g className="it-bob" style={{transformOrigin:'30px 28px'}}>
-                      <circle cx="30" cy="12" r="5.5" fill={c(0.75)}/>
-                      <line x1="30" y1="17.5" x2="30" y2="33" stroke={c(0.65)} strokeWidth="2.5"/>
-                      <line x1="18" y1="23" x2="42" y2="21" stroke={c(0.65)} strokeWidth="2.5"/>
-                      <line x1="30" y1="33" x2="22" y2="46" stroke={c(0.65)} strokeWidth="2.5"/>
-                      <line x1="30" y1="33" x2="38" y2="43" stroke={c(0.65)} strokeWidth="2.5"/>
+                      <circle cx="30" cy="10" r="6" fill={c(0.85)}/>
+                      {/* White gi (outfit) */}
+                      <rect x="24" y="15" width="12" height="16" rx="2" fill="rgba(255,255,255,0.7)"/>
+                      <line x1="30" y1="15" x2="30" y2="31" stroke={c(0.5)} strokeWidth="1"/>
+                      {/* Belt */}
+                      <rect x="24" y="25" width="12" height="2.5" rx="1" fill="rgba(220,50,50,0.9)"/>
+                      {/* Kicking leg */}
+                      <line x1="30" y1="31" x2="48" y2="22" stroke={c(0.85)} strokeWidth="3" strokeLinecap="round"/>
+                      <circle cx="49" cy="21" r="3" fill={c(0.7)}/>
+                      {/* Standing leg */}
+                      <line x1="30" y1="31" x2="26" y2="48" stroke={c(0.85)} strokeWidth="3" strokeLinecap="round"/>
+                      {/* Punching arm */}
+                      <line x1="30" y1="20" x2="48" y2="18" stroke={c(0.85)} strokeWidth="3" strokeLinecap="round"/>
+                      {/* Back arm */}
+                      <line x1="30" y1="20" x2="16" y2="24" stroke={c(0.85)} strokeWidth="2.5" strokeLinecap="round"/>
                     </g>
-                    <g className="it-flash" style={{transformOrigin:'58px 28px'}}>
-                      {[0,1,2,3,4].map(i=><line key={i} x1="58" y1="28" x2={66+i*3} y2={18+i*6} stroke={c(0.9)} strokeWidth="2"/>)}
+                    {/* Breaking board */}
+                    <g className="it-flash" style={{transformOrigin:'54px 28px'}}>
+                      <rect x="50" y="18" width="12" height="20" rx="1" fill="rgba(180,120,60,0.8)"/>
+                      <line x1="50" y1="27" x2="62" y2="28" stroke="rgba(120,70,30,0.6)" strokeWidth="1"/>
+                      {/* Crack/break lines */}
+                      {[0,1,2,3].map(i=><line key={i} x1="56" y1={18+i*6} x2={52+i*2} y2={22+i*5} stroke="rgba(255,200,0,0.9)" strokeWidth="1.5"/>)}
                     </g>
                   </>),
                   // ── SWIMMING — pool ─────────────────────────────────────────
