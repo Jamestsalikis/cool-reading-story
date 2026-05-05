@@ -618,7 +618,7 @@ export default function OnboardingPage() {
                       </g>
                     ))}
                     {/* Resting fairy — gently bobs in idle */}
-                    <g className="it-bob" style={{transformOrigin:'40px 26px'}}>
+                    <g className="it-bob" style={{transformOrigin:'40px 26px', animationDelay:'0.0s'}}>
                       {/* Upper wings — large teardrop shape */}
                       <path d="M40,20 Q28,10 24,20 Q28,28 40,24 Z" fill="rgba(200,160,255,0.38)" stroke="rgba(200,160,255,0.6)" strokeWidth="0.8"/>
                       <path d="M40,20 Q52,10 56,20 Q52,28 40,24 Z" fill="rgba(200,160,255,0.38)" stroke="rgba(200,160,255,0.6)" strokeWidth="0.8"/>
@@ -677,7 +677,7 @@ export default function OnboardingPage() {
                     <circle cx="68" cy="9" r="7" fill="rgba(255,240,200,0.18)"/>
                     <circle cx="68" cy="9" r="5" fill="rgba(255,240,210,0.40)"/>
                     {/* Unicorn — slim elegant horse silhouette */}
-                    <g className="it-bob" style={{transformOrigin:'38px 32px'}}>
+                    <g className="it-bob" style={{transformOrigin:'38px 32px', animationDelay:'0.15s'}}>
                       {/* Tail */}
                       <path d="M22,33 Q12,27 8,21 Q10,31 14,35" fill="none" stroke="rgba(230,120,210,0.85)" strokeWidth="3.5" strokeLinecap="round"/>
                       <path d="M22,33 Q10,36 9,43" fill="none" stroke="rgba(255,160,220,0.65)" strokeWidth="2.5" strokeLinecap="round"/>
@@ -728,7 +728,7 @@ export default function OnboardingPage() {
                     <ellipse cx="40" cy="10" rx="8" ry="4" fill="rgba(200,170,60,0.4)"/>
                     {[0,1,2,3,4,5].map(i=><circle key={i} cx={33+i*3} cy={12} r="1.5" fill="rgba(255,230,100,0.9)" className="it-star" style={{animationDelay:`${i*0.2}s`}}/>)}
                     {/* Princess figure */}
-                    <g className="it-bob" style={{transformOrigin:'40px 30px'}}>
+                    <g className="it-bob" style={{transformOrigin:'40px 30px', animationDelay:'0.9s'}}>
                       {/* Ballgown — 3 layered tiers */}
                       <polygon points="40,32 16,60 64,60" fill="rgba(180,80,200,0.75)"/>
                       <polygon points="40,38 20,60 60,60" fill="rgba(200,100,220,0.65)"/>
@@ -781,7 +781,7 @@ export default function OnboardingPage() {
                     <path d="M0,50 Q10,44 20,50 Q30,56 40,50 Q50,44 60,50 Q70,56 80,50" fill="rgba(20,50,130,0.45)" className="it-wave-y"/>
                     <path d="M0,56 Q10,50 20,56 Q30,62 40,56 Q50,50 60,56 Q70,62 80,56" fill="rgba(20,50,130,0.55)" className="it-wave-y" style={{animationDelay:'0.5s'}}/>
                     {/* Ship — gently bobs on the water */}
-                    <g className="it-bob" style={{transformOrigin:'40px 40px'}}>
+                    <g className="it-bob" style={{transformOrigin:'40px 40px', animationDelay:'1.1s'}}>
                       {/* Hull */}
                       <polygon points="20,38 60,38 56,50 24,50" fill="rgba(90,48,12,0.97)"/>
                       {/* Deck railing */}
@@ -1016,7 +1016,7 @@ export default function OnboardingPage() {
                       {[[60,45],[64,45],[68,45],[72,45]].map(([x,y],i)=><rect key={i} x={x-2} y={y} width={4} height={11} rx="2" fill="rgba(115,110,120,0.8)"/>)}
                     </g>
                     {/* Lion — foreground center */}
-                    <g className="it-bob" style={{transformOrigin:'40px 36px'}}>
+                    <g className="it-bob" style={{transformOrigin:'40px 36px', animationDelay:'0.8s'}}>
                       {/* Mane */}
                       <circle cx="40" cy="28" r="14" fill="rgba(155,85,18,0.72)"/>
                       {/* Body */}
@@ -1210,7 +1210,7 @@ export default function OnboardingPage() {
                       <rect x="24" y="31" width="2.5" height="3" rx="0.5" fill="rgba(200,160,100,0.9)"/>
                     </g>
                     {/* Enemy */}
-                    <g className="it-bob" style={{transformOrigin:'56px 24px'}}>
+                    <g className="it-bob" style={{transformOrigin:'56px 24px', animationDelay:'1.3s'}}>
                       <rect x="52" y="20" width="8" height="7" rx="1" fill="rgba(255,60,60,0.9)"/>
                       <rect x="50" y="18" width="4" height="3" rx="0.5" fill="rgba(255,60,60,0.9)"/>
                       <rect x="58" y="18" width="4" height="3" rx="0.5" fill="rgba(255,60,60,0.9)"/>
@@ -1440,7 +1440,7 @@ export default function OnboardingPage() {
                     <path d="M0,28 Q10,24 20,28 Q30,32 40,28 Q50,24 60,28 Q70,32 80,28" fill="rgba(180,220,255,0.2)" className="it-wave-y"/>
                     <path d="M0,34 Q10,31 20,34 Q30,37 40,34 Q50,31 60,34 Q70,37 80,34" fill="rgba(100,180,255,0.12)" className="it-wave-y" style={{animationDelay:'0.4s'}}/>
                     {/* Swimmer — FIXED in lane 3 (x=26 to x=39), bobbing not sliding */}
-                    <g className="it-bob" style={{transformOrigin:'32px 34px'}}>
+                    <g className="it-bob" style={{transformOrigin:'32px 34px', animationDelay:'0.2s'}}>
                       {/* Body streamlined */}
                       <rect x="18" y="29" width="22" height="7" rx="3.5" fill="rgba(20,80,200,0.92)"/>
                       {/* Head with cap */}
@@ -1483,7 +1483,7 @@ export default function OnboardingPage() {
                     {/* Active brushstroke */}
                     <path className="it-draw" d="M24,36 Q32,30 42,34 Q50,38 54,32" fill="none" stroke="rgba(255,100,20,0.9)" strokeWidth="3" strokeDasharray="50" strokeLinecap="round"/>
                     {/* Hand + brush — arm coming in from right, brush tip at stroke end */}
-                    <g className="it-bob" style={{transformOrigin:'62px 18px'}}>
+                    <g className="it-bob" style={{transformOrigin:'62px 18px', animationDelay:'1.0s'}}>
                       {/* Arm */}
                       <path d="M78,4 Q70,12 60,26 Q57,30 55,33" fill="none" stroke="rgba(230,185,145,0.95)" strokeWidth="5" strokeLinecap="round"/>
                       {/* Brush handle */}
@@ -1530,7 +1530,7 @@ export default function OnboardingPage() {
                     <rect x="0"  y="46" width="80" height="14" fill="rgba(100,70,30,0.65)"/>
                     <rect x="0"  y="44" width="80" height="4"  rx="1" fill="rgba(120,90,40,0.7)"/>
                     {/* Chef figure — left */}
-                    <g className="it-bob" style={{transformOrigin:'14px 24px'}}>
+                    <g className="it-bob" style={{transformOrigin:'14px 24px', animationDelay:'1.2s'}}>
                       {/* Chef hat */}
                       <ellipse cx="14" cy="7" rx="7" ry="3" fill="rgba(245,242,238,0.95)"/>
                       <rect x="9" y="1" width="10" height="8" rx="1" fill="rgba(245,242,238,0.95)"/>
@@ -1585,7 +1585,7 @@ export default function OnboardingPage() {
                     <path d="M9,16 Q6,18 5,22 Q9,24 9,26" fill="none" stroke="rgba(255,100,160,0.65)" strokeWidth="2.5" strokeLinecap="round"/>
                     <path d="M17,16 Q20,18 21,22 Q17,24 17,26" fill="none" stroke="rgba(180,100,220,0.65)" strokeWidth="2.5" strokeLinecap="round"/>
                     {/* Fashion Barbie doll — center */}
-                    <g className="it-bob" style={{transformOrigin:'48px 28px'}}>
+                    <g className="it-bob" style={{transformOrigin:'48px 28px', animationDelay:'1.4s'}}>
                       {/* Long blonde hair */}
                       <path d="M42,14 Q36,20 33,32 Q35,42 39,50" fill="none" stroke="rgba(255,210,50,0.9)" strokeWidth="5" strokeLinecap="round"/>
                       <path d="M42,14 Q37,18 34,28 Q36,38 41,48" fill="none" stroke="rgba(255,228,90,0.65)" strokeWidth="3" strokeLinecap="round"/>
