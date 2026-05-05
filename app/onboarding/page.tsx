@@ -677,6 +677,7 @@ export default function OnboardingPage() {
                     <circle cx="68" cy="9" r="7" fill="rgba(255,240,200,0.18)"/>
                     <circle cx="68" cy="9" r="5" fill="rgba(255,240,210,0.40)"/>
                     {/* Unicorn */}
+                    <g transform="translate(6,5) scale(0.78)">
                     <g className="it-bob" style={{transformOrigin:'38px 35px', animationDelay:'0.15s'}}>
                       {/* Tail — rainbow flowing */}
                       <path d="M20,35 Q8,24 5,15 Q9,26 13,32" fill="none" stroke="rgba(255,90,200,0.92)" strokeWidth="5" strokeLinecap="round"/>
@@ -722,6 +723,7 @@ export default function OnboardingPage() {
                       <polygon points="50,47 56,47 58,37 52,37" fill="rgba(228,215,252,0.97)"/>
                       <polygon points="53,37 58,37 63,46 57,46" fill="rgba(228,215,252,0.95)"/>
                       <ellipse cx="60" cy="46" rx="3.5" ry="2" fill="rgba(160,120,210,0.88)"/>
+                    </g>
                     </g>
                     {/* Sparkles */}
                     {[{x:8,y:24},{x:4,y:36},{x:74,y:18},{x:78,y:30}].map(({x,y},i)=>(
@@ -931,69 +933,82 @@ export default function OnboardingPage() {
                   </>),
                   // ── DINOSAURS — triceratops + brachiosaurus ──────────────────
                   'Dinosaurs': (<>
-                    <S cx={8} cy={3} r={1.1} d="0s"/><S cx={24} cy={2} r={0.8} d="0.4s"/>
-                    <S cx={58} cy={4} r={1.3} d="0.7s"/>
-                    {/* Dark jungle tree silhouettes */}
-                    {[[0,22],[8,26],[66,24],[74,20]].map(([x,h],i)=>(
+                    {/* Forest background — layered dark pines */}
+                    {[[0,28],[6,34],[68,30],[74,26]].map(([x,h],i)=>(
                       <g key={i}>
-                        <rect x={x+1} y={60-h*0.3} width={4} height={h*0.3} fill="rgba(4,14,4,0.95)" rx="1"/>
-                        <polygon points={`${x+3-h*0.38},${60-h*0.3} ${x+3+h*0.38},${60-h*0.3} ${x+3},${60-h}`} fill="rgba(6,20,6,0.92)"/>
-                        <polygon points={`${x+3-h*0.3},${60-h*0.55} ${x+3+h*0.3},${60-h*0.55} ${x+3},${60-h*1.15}`} fill="rgba(8,24,8,0.85)"/>
+                        <rect x={x+1} y={60-h*0.28} width="3" height={h*0.28} fill="rgba(12,28,8,0.95)" rx="1"/>
+                        <polygon points={`${x+2.5-h*0.4},${60-h*0.28} ${x+2.5+h*0.4},${60-h*0.28} ${x+2.5},${60-h}`} fill="rgba(8,38,12,0.93)"/>
+                        <polygon points={`${x+2.5-h*0.3},${60-h*0.52} ${x+2.5+h*0.3},${60-h*0.52} ${x+2.5},${60-h*1.12}`} fill="rgba(10,48,14,0.85)"/>
                       </g>
                     ))}
+                    {/* Mid forest — slightly lighter */}
+                    {[[14,20],[20,24],[54,22],[60,18]].map(([x,h],i)=>(
+                      <g key={i}>
+                        <rect x={x+1} y={60-h*0.28} width="2.5" height={h*0.28} fill="rgba(14,36,10,0.88)" rx="1"/>
+                        <polygon points={`${x+2.5-h*0.35},${60-h*0.28} ${x+2.5+h*0.35},${60-h*0.28} ${x+2.5},${60-h}`} fill="rgba(12,48,16,0.82)"/>
+                      </g>
+                    ))}
+                    {/* Moon */}
+                    <circle cx="40" cy="8" r="8" fill="rgba(255,248,210,0.14)"/>
+                    <circle cx="40" cy="8" r="5" fill="rgba(255,248,210,0.38)"/>
                     {/* Ground */}
-                    <rect x="0" y="52" width="80" height="8" fill="rgba(8,32,8,0.7)"/>
-                    {/* Moon — bright, dramatic */}
-                    <circle cx="64" cy="9" r="9" fill="rgba(255,248,210,0.18)"/>
-                    <circle cx="64" cy="9" r="6" fill="rgba(255,248,210,0.45)"/>
-                    {/* Brachiosaurus — dark silhouette far right */}
-                    <g style={{opacity:0.45}}>
-                      <path d="M60,52 Q58,38 56,22 Q58,14 62,16" fill="none" stroke="rgba(4,14,4,1)" strokeWidth="9" strokeLinecap="round"/>
-                      <ellipse cx="62" cy="16" rx="7" ry="4" fill="rgba(4,14,4,1)"/>
-                      <ellipse cx="60" cy="50" rx="10" ry="7" fill="rgba(4,14,4,0.95)"/>
-                      {[[55,52],[59,52],[63,52],[67,52]].map(([x,y],i)=>(
-                        <line key={i} x1={x} y1={y} x2={x} y2={60} stroke="rgba(4,14,4,1)" strokeWidth="4" strokeLinecap="round"/>
-                      ))}
-                    </g>
-                    {/* T-Rex — LARGE, AMBER-ORANGE, high contrast against dark bg */}
-                    <g className="it-bob" style={{transformOrigin:'22px 30px', animationDelay:'0.3s'}}>
-                      {/* Tail */}
-                      <path d="M8,46 Q1,50 0,56" fill="none" stroke="rgba(195,108,32,0.95)" strokeWidth="7" strokeLinecap="round"/>
-                      {/* Body */}
-                      <ellipse cx="20" cy="38" rx="13" ry="11" fill="rgba(200,118,38,0.97)"/>
-                      {/* Lighter belly */}
-                      <ellipse cx="20" cy="41" rx="8" ry="7" fill="rgba(230,155,65,0.55)"/>
-                      {/* Back ridge spikes */}
-                      {[16,20,24,28].map((x,i)=>(
-                        <polygon key={i} points={`${x-3},29 ${x+3},29 ${x},${21-i*1.5}`} fill="rgba(165,85,22,0.8)"/>
-                      ))}
-                      {/* Hind leg left */}
-                      <path d="M14,48 Q11,54 9,60" fill="none" stroke="rgba(178,96,28,0.95)" strokeWidth="7" strokeLinecap="round"/>
-                      <path d="M9,60 Q6,62 4,60" fill="none" stroke="rgba(178,96,28,0.95)" strokeWidth="5" strokeLinecap="round"/>
-                      <path d="M9,60 Q9,63 7,62" fill="none" stroke="rgba(178,96,28,0.88)" strokeWidth="4" strokeLinecap="round"/>
-                      {/* Hind leg right */}
-                      <path d="M26,48 Q29,54 31,60" fill="none" stroke="rgba(178,96,28,0.95)" strokeWidth="7" strokeLinecap="round"/>
-                      <path d="M31,60 Q34,62 36,60" fill="none" stroke="rgba(178,96,28,0.95)" strokeWidth="5" strokeLinecap="round"/>
-                      {/* Tiny arms — iconic */}
-                      <path d="M30,34 Q36,31 38,35" fill="none" stroke="rgba(190,105,30,0.9)" strokeWidth="4" strokeLinecap="round"/>
-                      <path d="M38,35 Q40,33 40,37" fill="none" stroke="rgba(190,105,30,0.88)" strokeWidth="3" strokeLinecap="round"/>
-                      {/* Thick neck */}
-                      <path d="M27,27 Q31,19 34,12" fill="none" stroke="rgba(205,122,40,0.97)" strokeWidth="11" strokeLinecap="round"/>
-                      {/* Massive head */}
-                      <ellipse cx="35" cy="10" rx="14" ry="9" fill="rgba(208,126,42,0.97)"/>
-                      {/* Lower jaw open */}
-                      <ellipse cx="37" cy="17" rx="11" ry="5" fill="rgba(192,108,34,0.97)"/>
-                      {/* Top teeth — all pointing down from upper jaw */}
-                      {[27,31,35,39,43,46].map((x,i)=>(
-                        <polygon key={i} points={`${x},12 ${x+2.5},12 ${x+1.2},19`} fill="rgba(245,240,225,0.97)"/>
-                      ))}
-                      {/* Reptile eye — amber iris + vertical slit pupil */}
-                      <circle cx="42" cy="8" r="4" fill="rgba(190,125,10,0.97)"/>
-                      <ellipse cx="42" cy="8" rx="1.2" ry="3" fill="rgba(8,4,0,0.97)"/>
-                      <circle cx="43" cy="6.5" r="0.8" fill="rgba(255,255,255,0.75)"/>
+                    <rect x="0" y="53" width="80" height="7" fill="rgba(10,34,10,0.75)"/>
+                    {/* Ground ferns */}
+                    {[10,28,46,64].map((x,i)=>(
+                      <g key={i}>
+                        <path d={`M${x},53 Q${x-6},47 ${x-10},45`} fill="none" stroke="rgba(16,55,14,0.7)" strokeWidth="2" strokeLinecap="round"/>
+                        <path d={`M${x},53 Q${x+6},47 ${x+10},45`} fill="none" stroke="rgba(16,55,14,0.7)" strokeWidth="2" strokeLinecap="round"/>
+                      </g>
+                    ))}
+                    {/* Stegosaurus */}
+                    <g className="it-bob" style={{transformOrigin:'36px 40px', animationDelay:'0.2s'}}>
+                      {/* Tail — thick, curves left and up */}
+                      <path d="M18,42 Q8,38 4,30 Q3,25 6,24" fill="none" stroke="rgba(48,110,38,0.97)" strokeWidth="8" strokeLinecap="round"/>
+                      {/* Tail tip spike */}
+                      <polygon points="4,22 8,28 2,26" fill="rgba(35,85,28,0.95)"/>
+                      {/* Body — wide, low, fat */}
+                      <ellipse cx="36" cy="42" rx="20" ry="11" fill="rgba(52,118,42,0.97)"/>
+                      {/* Belly highlight */}
+                      <ellipse cx="36" cy="46" rx="13" ry="6" fill="rgba(68,145,55,0.35)"/>
+                      {/* Neck connecting to head */}
+                      <polygon points="50,34 56,36 60,28 54,26" fill="rgba(52,118,42,0.97)"/>
+                      {/* Head — small, angled forward-down */}
+                      <ellipse cx="60" cy="34" rx="9" ry="6" fill="rgba(52,118,42,0.97)"/>
+                      {/* Snout — beak-like */}
+                      <polygon points="67,35 74,38 72,42 65,40" fill="rgba(42,95,34,0.97)"/>
+                      {/* Eye — small, calm */}
+                      <circle cx="62" cy="31" r="2.8" fill="rgba(10,5,2,0.95)"/>
+                      <circle cx="63" cy="30" r="1.1" fill="rgba(255,255,255,0.8)"/>
                       {/* Nostril */}
-                      <ellipse cx="48" cy="11" rx="2" ry="1.3" fill="rgba(162,84,20,0.7)"/>
+                      <ellipse cx="70" cy="37" rx="1.4" ry="1" fill="rgba(28,68,22,0.7)"/>
+                      {/* 4 legs — thick pillars */}
+                      <polygon points="22,51 29,51 28,60 21,60" fill="rgba(44,100,35,0.97)"/>
+                      <polygon points="30,51 37,51 36,60 29,60" fill="rgba(44,100,35,0.95)"/>
+                      <polygon points="38,51 45,51 44,60 37,60" fill="rgba(44,100,35,0.97)"/>
+                      <polygon points="46,51 53,51 52,60 45,60" fill="rgba(44,100,35,0.95)"/>
+                      {/* Toe bumps on feet */}
+                      {[[24,60],[33,60],[41,60],[49,60]].map(([x,y],i)=>(
+                        <ellipse key={i} cx={x} cy={y} rx="4" ry="2" fill="rgba(36,84,28,0.9)"/>
+                      ))}
+                      {/* Back plates — iconic stego feature, amber/orange for contrast */}
+                      {[
+                        {x:22,y:32,h:9},
+                        {x:28,y:29,h:13},
+                        {x:34,y:27,h:16},
+                        {x:40,y:27,h:15},
+                        {x:46,y:29,h:12},
+                        {x:51,y:31,h:9},
+                      ].map(({x,y,h},i)=>(
+                        <polygon key={i}
+                          points={`${x},${y} ${x-h*0.45},${y+h*0.55} ${x},${y+h} ${x+h*0.45},${y+h*0.55}`}
+                          fill={i===2||i===3?"rgba(235,148,22,0.97)":"rgba(218,128,18,0.93)"}
+                        />
+                      ))}
                     </g>
+                    {/* Fireflies */}
+                    {[{x:12,y:30},{x:62,y:22},{x:72,y:35},{x:8,y:44}].map(({x,y},i)=>(
+                      <circle key={i} cx={x} cy={y} r="1.5" fill="rgba(180,255,100,0.85)" className="it-star" style={{animationDelay:`${i*0.45}s`}}/>
+                    ))}
                   </>),
                   // ── ANIMALS — safari with multiple animals ────────────────────
                   'Animals': (<>
