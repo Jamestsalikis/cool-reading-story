@@ -1389,55 +1389,53 @@ export default function OnboardingPage() {
                     {/* Tatami mats */}
                     {[0,1,2,3,4].map(i=><rect key={i} x={i*16} y={51} width={14} height={9} fill={c(0.1+i*0.02)} rx="1"/>)}
                     <line x1="0" y1="51" x2="80" y2="51" stroke={c(0.45)} strokeWidth="1.5"/>
-                    {/* Impact burst — top right */}
-                    <g className="it-pulse" style={{transformOrigin:'70px 13px'}}>
-                      {[0,40,80,120,160,200,240,280,320].map((deg,i)=>(
-                        <line key={i} x1="70" y1="13"
-                          x2={70+16*Math.cos(deg*Math.PI/180)}
-                          y2={13+16*Math.sin(deg*Math.PI/180)}
-                          stroke={i%2===0?"rgba(255,200,30,0.92)":"rgba(255,120,20,0.78)"}
-                          strokeWidth={i%2===0?2.8:1.6} strokeLinecap="round"/>
+                    {/* Ki aura — subtle background glow */}
+                    <g className="it-pulse" style={{transformOrigin:'36px 30px', opacity:0.5}}>
+                      {[0,36,72,108,144,180,216,252,288,324].map((deg,i)=>(
+                        <line key={i} x1="36" y1="30"
+                          x2={36+24*Math.cos(deg*Math.PI/180)}
+                          y2={30+24*Math.sin(deg*Math.PI/180)}
+                          stroke={i%2===0?"rgba(255,180,20,0.6)":"rgba(255,100,20,0.45)"}
+                          strokeWidth={i%2===0?1.8:1.2} strokeLinecap="round"/>
                       ))}
-                      <circle cx="70" cy="13" r="7" fill="rgba(255,210,40,0.92)"/>
-                      <circle cx="70" cy="13" r="3.5" fill="rgba(255,248,160,0.97)"/>
                     </g>
-                    {/* Karateka — bold gi, filled limbs */}
-                    <g className="it-bob" style={{transformOrigin:'35px 30px', animationDelay:'0.6s'}}>
-                      {/* Standing leg */}
-                      <polygon points="26,44 33,44 32,59 25,59" fill="rgba(244,244,248,0.97)"/>
-                      <ellipse cx="28.5" cy="58.5" rx="5.5" ry="3.2" fill="rgba(228,188,132,0.95)"/>
+                    {/* Karateka — guard stance, both feet grounded */}
+                    <g className="it-bob" style={{transformOrigin:'34px 32px', animationDelay:'0.6s'}}>
+                      {/* Back left leg */}
+                      <polygon points="22,45 29,45 27,59 20,59" fill="rgba(244,244,248,0.97)"/>
+                      <ellipse cx="23.5" cy="59" rx="5" ry="2.8" fill="rgba(228,188,132,0.95)"/>
+                      {/* Front right leg */}
+                      <polygon points="35,45 42,45 44,59 37,59" fill="rgba(244,244,248,0.97)"/>
+                      <ellipse cx="40.5" cy="59" rx="5" ry="2.8" fill="rgba(228,188,132,0.95)"/>
                       {/* Gi body */}
-                      <path d="M20,21 L35,15 L50,21 L48,47 L22,47Z" fill="rgba(250,250,252,0.97)"/>
-                      <path d="M35,15 L27,41" stroke="rgba(175,175,188,0.55)" strokeWidth="1.8"/>
-                      <path d="M35,15 L43,41" stroke="rgba(175,175,188,0.55)" strokeWidth="1.8"/>
+                      <path d="M19,22 L34,16 L49,22 L47,46 L21,46Z" fill="rgba(250,250,252,0.97)"/>
+                      <path d="M34,16 L26,42" stroke="rgba(175,175,188,0.5)" strokeWidth="1.8"/>
+                      <path d="M34,16 L42,42" stroke="rgba(175,175,188,0.5)" strokeWidth="1.8"/>
                       {/* Black belt */}
-                      <rect x="20" y="42" width="28" height="5.5" rx="2.2" fill="rgba(8,8,12,0.97)"/>
-                      {/* Kicking leg — diagonal upper-right */}
-                      <polygon points="44,35 51,41 70,21 63,15" fill="rgba(244,244,248,0.97)"/>
-                      {/* Kicking foot */}
-                      <ellipse cx="67" cy="18" rx="7" ry="4.2" fill="rgba(228,188,132,0.95)" transform="rotate(-42 67 18)"/>
-                      {/* Guard arm — back left */}
-                      <polygon points="22,27 28,34 14,43 8,36" fill="rgba(244,244,248,0.97)"/>
-                      <circle cx="11" cy="39.5" r="5" fill="rgba(228,188,132,0.95)"/>
-                      {/* Punch arm — upper right toward burst */}
-                      <polygon points="46,26 52,32 66,19 60,13" fill="rgba(244,244,248,0.97)"/>
-                      <circle cx="63" cy="16" r="5.5" fill="rgba(228,188,132,0.95)"/>
+                      <rect x="19" y="41" width="30" height="5.5" rx="2.2" fill="rgba(8,8,12,0.97)"/>
+                      {/* Front guard arm — extended forward at chest height */}
+                      <polygon points="44,24 50,30 64,24 58,18" fill="rgba(244,244,248,0.97)"/>
+                      <circle cx="61" cy="21" r="5.5" fill="rgba(228,188,132,0.95)"/>
+                      {/* Back chamber arm — fist pulled to hip */}
+                      <polygon points="23,27 27,34 10,43 6,36" fill="rgba(244,244,248,0.97)"/>
+                      <circle cx="7" cy="39.5" r="5" fill="rgba(228,188,132,0.95)"/>
                       {/* Head */}
-                      <circle cx="35" cy="9" r="9.5" fill="rgba(228,188,132,0.97)"/>
-                      {/* Headband */}
-                      <rect x="25.5" y="5" width="19" height="5.5" rx="2.5" fill="rgba(212,25,25,0.95)"/>
-                      {/* Eyes */}
-                      <circle cx="31" cy="9.5" r="1.7" fill="rgba(18,6,2,0.93)"/>
-                      <circle cx="39" cy="9.5" r="1.7" fill="rgba(18,6,2,0.93)"/>
+                      <circle cx="34" cy="9" r="9.5" fill="rgba(228,188,132,0.97)"/>
+                      {/* Red headband */}
+                      <rect x="24.5" y="5" width="19" height="5.5" rx="2.5" fill="rgba(212,25,25,0.95)"/>
+                      {/* Eyes — focused forward */}
+                      <circle cx="30" cy="9.5" r="1.7" fill="rgba(18,6,2,0.93)"/>
+                      <circle cx="38" cy="9.5" r="1.7" fill="rgba(18,6,2,0.93)"/>
                       {/* Fierce brows */}
-                      <path d="M28.5,6.5 L33,8.2" stroke="rgba(55,22,4,0.82)" strokeWidth="1.8" strokeLinecap="round"/>
-                      <path d="M41.5,8.2 L37,6.5" stroke="rgba(55,22,4,0.82)" strokeWidth="1.8" strokeLinecap="round"/>
+                      <path d="M27.5,6.5 L32,8.2" stroke="rgba(55,22,4,0.82)" strokeWidth="1.8" strokeLinecap="round"/>
+                      <path d="M40.5,8.2 L36,6.5" stroke="rgba(55,22,4,0.82)" strokeWidth="1.8" strokeLinecap="round"/>
                       {/* Determined mouth */}
-                      <path d="M32.5,13.5 L37.5,13.5" stroke="rgba(135,65,22,0.75)" strokeWidth="1.5" strokeLinecap="round"/>
+                      <path d="M31.5,13.5 L36.5,13.5" stroke="rgba(135,65,22,0.75)" strokeWidth="1.5" strokeLinecap="round"/>
                     </g>
-                    {/* Motion lines */}
-                    <line x1="53" y1="22" x2="59" y2="15" stroke="rgba(255,200,40,0.55)" strokeWidth="2.2" strokeLinecap="round"/>
-                    <line x1="51" y1="26" x2="57" y2="19" stroke="rgba(255,180,30,0.38)" strokeWidth="1.7" strokeLinecap="round"/>
+                    {/* Energy lines at guard fist */}
+                    <line x1="65" y1="16" x2="72" y2="12" stroke="rgba(255,200,40,0.65)" strokeWidth="2.2" strokeLinecap="round"/>
+                    <line x1="67" y1="22" x2="74" y2="21" stroke="rgba(255,180,30,0.45)" strokeWidth="1.6" strokeLinecap="round"/>
+                    <line x1="65" y1="27" x2="72" y2="28" stroke="rgba(255,160,20,0.32)" strokeWidth="1.3" strokeLinecap="round"/>
                   </>),
                   // ── SWIMMING — competition pool ───────────────────────────────
                   'Swimming': (<>
