@@ -676,38 +676,52 @@ export default function OnboardingPage() {
                     {/* Moon */}
                     <circle cx="68" cy="9" r="7" fill="rgba(255,240,200,0.18)"/>
                     <circle cx="68" cy="9" r="5" fill="rgba(255,240,210,0.40)"/>
-                    {/* Unicorn — slim elegant horse silhouette */}
-                    <g className="it-bob" style={{transformOrigin:'38px 32px', animationDelay:'0.15s'}}>
-                      {/* Tail */}
-                      <path d="M22,33 Q12,27 8,21 Q10,31 14,35" fill="none" stroke="rgba(230,120,210,0.85)" strokeWidth="3.5" strokeLinecap="round"/>
-                      <path d="M22,33 Q10,36 9,43" fill="none" stroke="rgba(255,160,220,0.65)" strokeWidth="2.5" strokeLinecap="round"/>
-                      {/* Body — slim ry=8 (was 12) */}
-                      <ellipse cx="36" cy="36" rx="16" ry="8" fill="rgba(240,225,255,0.97)"/>
-                      {/* Neck — upright */}
-                      <ellipse cx="49" cy="27" rx="6" ry="10" fill="rgba(240,225,255,0.97)" transform="rotate(-12,49,27)"/>
-                      {/* Mane */}
-                      <path d="M45,19 Q49,12 53,15 Q51,21 55,24" fill="none" stroke="rgba(220,100,200,0.9)" strokeWidth="3.5" strokeLinecap="round"/>
-                      <path d="M45,19 Q50,10 56,13 Q52,20 57,23" fill="none" stroke="rgba(255,150,220,0.65)" strokeWidth="2.2" strokeLinecap="round"/>
+                    {/* Unicorn */}
+                    <g className="it-bob" style={{transformOrigin:'38px 35px', animationDelay:'0.15s'}}>
+                      {/* Tail — rainbow flowing */}
+                      <path d="M20,35 Q8,24 5,15 Q9,26 13,32" fill="none" stroke="rgba(255,90,200,0.92)" strokeWidth="5" strokeLinecap="round"/>
+                      <path d="M20,37 Q7,37 5,46 Q10,40 15,39" fill="none" stroke="rgba(170,70,255,0.88)" strokeWidth="4" strokeLinecap="round"/>
+                      <path d="M20,33 Q8,20 11,11 Q14,21 18,27" fill="none" stroke="rgba(60,215,255,0.82)" strokeWidth="3" strokeLinecap="round"/>
+                      {/* Body — big and round */}
+                      <ellipse cx="37" cy="37" rx="18" ry="11" fill="rgba(242,230,255,0.97)"/>
+                      {/* Back legs — thick polygons */}
+                      <polygon points="23,47 29,47 28,59 22,59" fill="rgba(228,215,252,0.97)"/>
+                      <polygon points="31,47 37,47 38,59 32,59" fill="rgba(228,215,252,0.95)"/>
+                      {/* Back hooves */}
+                      <ellipse cx="25" cy="59" rx="3.5" ry="2" fill="rgba(160,120,210,0.88)"/>
+                      <ellipse cx="35" cy="59" rx="3.5" ry="2" fill="rgba(160,120,210,0.88)"/>
+                      {/* Neck */}
+                      <polygon points="48,27 55,29 59,17 52,14" fill="rgba(242,230,255,0.97)"/>
+                      {/* Mane — rainbow lush */}
+                      <path d="M52,14 Q55,5 53,1 Q49,7 47,15" fill="none" stroke="rgba(255,80,185,0.95)" strokeWidth="6" strokeLinecap="round"/>
+                      <path d="M55,16 Q60,7 57,2 Q53,9 51,17" fill="none" stroke="rgba(155,55,255,0.90)" strokeWidth="4.5" strokeLinecap="round"/>
+                      <path d="M58,19 Q64,11 62,5 Q57,12 55,20" fill="none" stroke="rgba(55,210,255,0.85)" strokeWidth="3.2" strokeLinecap="round"/>
                       {/* Head */}
-                      <ellipse cx="59" cy="22" rx="9" ry="7.5" fill="rgba(240,225,255,0.97)"/>
+                      <ellipse cx="63" cy="21" rx="10" ry="8" fill="rgba(242,230,255,0.97)"/>
                       {/* Snout */}
-                      <ellipse cx="67" cy="24" rx="4.5" ry="3.2" fill="rgba(235,215,255,0.97)"/>
-                      <circle cx="71" cy="25" r="0.9" fill="rgba(200,150,220,0.55)"/>
-                      {/* Eye */}
-                      <circle cx="61" cy="20" r="2.5" fill="rgba(80,40,120,0.95)"/>
-                      <circle cx="61.6" cy="19.4" r="1" fill="rgba(255,255,255,0.95)"/>
-                      {/* Horn */}
-                      <polygon points="58,16 55,4 62,15" fill="rgba(255,205,50,0.97)"/>
-                      {[57.5,57,56.5,56].map((x,i)=><line key={i} x1={x} y1={15-i*2.8} x2={x+1.5} y2={15-i*2.8} stroke="rgba(220,160,30,0.5)" strokeWidth="0.7"/>)}
-                      {/* Legs — 4 slim elegant legs */}
-                      <line x1="28" y1="43" x2="26" y2="56" stroke="rgba(230,215,255,0.95)" strokeWidth="3" strokeLinecap="round"/>
-                      <line x1="33" y1="44" x2="31" y2="56" stroke="rgba(230,215,255,0.95)" strokeWidth="3" strokeLinecap="round"/>
-                      <line x1="42" y1="44" x2="44" y2="56" stroke="rgba(230,215,255,0.95)" strokeWidth="3" strokeLinecap="round"/>
-                      <line x1="48" y1="43" x2="51" y2="55" stroke="rgba(230,215,255,0.95)" strokeWidth="3" strokeLinecap="round"/>
-                      {/* Hooves */}
-                      {[[26,56],[31,56],[44,56],[51,55]].map(([x,y],i)=>(
-                        <ellipse key={i} cx={x} cy={y} rx="2.5" ry="1.8" fill="rgba(180,140,200,0.8)"/>
-                      ))}
+                      <ellipse cx="72" cy="24" rx="5" ry="3.5" fill="rgba(235,218,255,0.97)"/>
+                      <circle cx="75" cy="25.5" r="1.1" fill="rgba(195,155,228,0.55)"/>
+                      {/* Eye — big expressive */}
+                      <circle cx="64" cy="19" r="3.8" fill="rgba(55,20,100,0.95)"/>
+                      <circle cx="65.2" cy="17.8" r="1.6" fill="rgba(255,255,255,0.95)"/>
+                      <circle cx="64.8" cy="17.2" r="0.7" fill="rgba(255,255,255,0.7)"/>
+                      {/* Eyelashes */}
+                      <line x1="61" y1="16" x2="59.5" y2="14" stroke="rgba(70,30,110,0.85)" strokeWidth="1.3" strokeLinecap="round"/>
+                      <line x1="64" y1="15" x2="63.5" y2="13" stroke="rgba(70,30,110,0.85)" strokeWidth="1.3" strokeLinecap="round"/>
+                      <line x1="67" y1="16" x2="67.5" y2="14" stroke="rgba(70,30,110,0.85)" strokeWidth="1.3" strokeLinecap="round"/>
+                      {/* Horn — tall gold */}
+                      <polygon points="61,14 59,0 67,13" fill="rgba(255,198,35,0.97)"/>
+                      <line x1="60.5" y1="11" x2="62.5" y2="11" stroke="rgba(215,145,15,0.6)" strokeWidth="0.9"/>
+                      <line x1="59.8" y1="8" x2="62" y2="8" stroke="rgba(215,145,15,0.6)" strokeWidth="0.9"/>
+                      <line x1="59.2" y1="5" x2="61.5" y2="5" stroke="rgba(215,145,15,0.6)" strokeWidth="0.9"/>
+                      <line x1="59" y1="2" x2="60.8" y2="2" stroke="rgba(215,145,15,0.6)" strokeWidth="0.9"/>
+                      {/* Front standing leg */}
+                      <polygon points="43,47 49,47 48,59 42,59" fill="rgba(228,215,252,0.97)"/>
+                      <ellipse cx="45" cy="59" rx="3.5" ry="2" fill="rgba(160,120,210,0.88)"/>
+                      {/* Front prancing leg — raised */}
+                      <polygon points="50,47 56,47 58,37 52,37" fill="rgba(228,215,252,0.97)"/>
+                      <polygon points="53,37 58,37 63,46 57,46" fill="rgba(228,215,252,0.95)"/>
+                      <ellipse cx="60" cy="46" rx="3.5" ry="2" fill="rgba(160,120,210,0.88)"/>
                     </g>
                     {/* Sparkles */}
                     {[{x:8,y:24},{x:4,y:36},{x:74,y:18},{x:78,y:30}].map(({x,y},i)=>(
