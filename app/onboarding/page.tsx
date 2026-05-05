@@ -1271,89 +1271,91 @@ export default function OnboardingPage() {
                       {[0,1,2].map(i=><line key={i} x1={42+i*5} y1="21" x2={40+i*5} y2="39" stroke="rgba(255,255,255,0.35)" strokeWidth="1" transform="rotate(-20,48,30)"/>)}
                     </g>
                   </>),
-                  // ── GYMNASTICS — proper gymnast on beam ──────────────────────
+                  // ── GYMNASTICS — gymnast on balance beam ─────────────────
                   'Gymnastics': (<>
                     {/* Gym floor */}
-                    <rect x="0" y="50" width="80" height="10" fill="rgba(255,225,160,0.45)"/>
-                    {[0,1,2,3,4].map(i=><line key={i} x1={i*20} y1="50" x2={i*20} y2="60" stroke="rgba(200,160,80,0.2)" strokeWidth="1"/>)}
+                    <rect x="0" y="50" width="80" height="10" fill="rgba(255,225,160,0.4)"/>
                     <line x1="0" y1="50" x2="80" y2="50" stroke="rgba(200,160,80,0.45)" strokeWidth="1.5"/>
                     {/* Balance beam + supports */}
-                    <rect x="10" y="37" width="60" height="3.5" rx="1.5" fill={c(0.78)}/>
-                    <rect x="18" y="40" width="5" height="10" rx="1" fill={c(0.55)}/>
-                    <rect x="57" y="40" width="5" height="10" rx="1" fill={c(0.55)}/>
-                    {/* Gymnast in arabesque — clean proportions */}
-                    <g className="it-bob" style={{transformOrigin:'38px 22px'}}>
-                      {/* Standing leg */}
-                      <line x1="38" y1="37" x2="38" y2="26" stroke={c(0.82)} strokeWidth="4.5" strokeLinecap="round"/>
-                      {/* Body leotard */}
-                      <rect x="34.5" y="20" width="7" height="11" rx="3.5" fill={c(0.88)}/>
-                      {/* Leotard shimmer */}
-                      <ellipse cx="38" cy="25" rx="3" ry="4" fill={c(0.5)}/>
-                      {/* Head */}
-                      <circle cx="38" cy="13" r="6.5" fill={c(0.92)}/>
+                    <rect x="8" y="38" width="64" height="3.5" rx="1.5" fill={c(0.85)}/>
+                    <rect x="16" y="41" width="5" height="9" rx="1" fill={c(0.55)}/>
+                    <rect x="59" y="41" width="5" height="9" rx="1" fill={c(0.55)}/>
+                    {/* GYMNAST — bold arabesque */}
+                    <g className="it-bob" style={{transformOrigin:'38px 20px',animationDelay:'0.5s'}}>
                       {/* Hair bun */}
-                      <ellipse cx="38" cy="7" rx="4" ry="3.5" fill={c(0.72)}/>
-                      <circle cx="38" cy="7" r="2" fill={c(0.85)}/>
+                      <ellipse cx="38" cy="2" rx="5.5" ry="4" fill={c(0.72)}/>
+                      <circle cx="38" cy="2" r="2.5" fill={c(0.88)}/>
+                      {/* Head */}
+                      <circle cx="38" cy="10" r="8" fill={c(0.95)}/>
                       {/* Face */}
-                      <circle cx="35.5" cy="13.5" r="1.2" fill={c(0.85)}/>
-                      <circle cx="40.5" cy="13.5" r="1.2" fill={c(0.85)}/>
-                      <path d="M35.5,15.5 Q38,17.5 40.5,15.5" fill="none" stroke={c(0.75)} strokeWidth="1" strokeLinecap="round"/>
-                      {/* Arms raised in V */}
-                      <line x1="38" y1="22" x2="25" y2="13" stroke={c(0.88)} strokeWidth="3.5" strokeLinecap="round"/>
-                      <circle cx="25" cy="13" r="2.5" fill={c(0.85)}/>
-                      <line x1="38" y1="22" x2="51" y2="13" stroke={c(0.88)} strokeWidth="3.5" strokeLinecap="round"/>
-                      <circle cx="51" cy="13" r="2.5" fill={c(0.85)}/>
-                      {/* Arabesque leg raised behind */}
-                      <path d="M38,30 Q46,34 58,26" fill="none" stroke={c(0.82)} strokeWidth="4" strokeLinecap="round"/>
-                      <ellipse cx="59" cy="25.5" rx="3" ry="2" fill={c(0.72)} transform="rotate(-20,59,25.5)"/>
+                      <circle cx="35" cy="9.5" r="1.5" fill={c(0.78)}/>
+                      <circle cx="41" cy="9.5" r="1.5" fill={c(0.78)}/>
+                      <path d="M35,12.5 Q38,15 41,12.5" fill="none" stroke={c(0.68)} strokeWidth="1.2" strokeLinecap="round"/>
+                      {/* Body leotard — bold solid ellipse */}
+                      <ellipse cx="38" cy="24" rx="9" ry="10" fill={c(0.92)}/>
+                      {/* White centre shimmer */}
+                      <line x1="38" y1="14" x2="38" y2="34" stroke="rgba(255,255,255,0.35)" strokeWidth="2.5" strokeLinecap="round"/>
+                      {/* Standing leg — thick */}
+                      <line x1="38" y1="34" x2="38" y2="38" stroke={c(0.86)} strokeWidth="6" strokeLinecap="round"/>
+                      {/* Arms raised wide V */}
+                      <line x1="38" y1="19" x2="21" y2="8" stroke={c(0.88)} strokeWidth="5" strokeLinecap="round"/>
+                      <circle cx="21" cy="8" r="3.5" fill={c(0.88)}/>
+                      <line x1="38" y1="19" x2="55" y2="8" stroke={c(0.88)} strokeWidth="5" strokeLinecap="round"/>
+                      <circle cx="55" cy="8" r="3.5" fill={c(0.88)}/>
+                      {/* Arabesque leg raised behind — thick */}
+                      <path d="M38,32 Q50,38 64,28" fill="none" stroke={c(0.85)} strokeWidth="5.5" strokeLinecap="round"/>
+                      <ellipse cx="65" cy="27" rx="4" ry="2.5" fill={c(0.72)} transform="rotate(-25,65,27)"/>
                     </g>
-                    {/* Score stars */}
-                    {[[6,16],[72,16]].map(([x,y],i)=>(
-                      <g key={i}>{[0,8,16].map(dx=><circle key={dx} cx={x+dx} cy={y} r="2.2" fill={c(0.8)} className="it-star" style={{animationDelay:`${(dx/8)*0.25}s`}}/>)}</g>
+                    {/* Score star clusters */}
+                    {[[4,22],[66,22]].map(([x,y],i)=>(
+                      <g key={i}>{[0,8,16].map(dx=><circle key={dx} cx={x+dx} cy={y} r="2.2" fill={c(0.78)} className="it-star" style={{animationDelay:`${(i*3+dx/8)*0.2}s`}}/>)}</g>
                     ))}
                     {/* Ribbon */}
-                    <path d="M6,30 Q18,10 32,22 Q48,36 62,18" fill="none" stroke={c(0.42)} strokeWidth="2" strokeLinecap="round" className="it-ribbon"/>
+                    <path d="M4,32 Q18,14 32,26 Q48,40 62,22" fill="none" stroke={c(0.42)} strokeWidth="2" strokeLinecap="round" className="it-ribbon"/>
                   </>),
-                  // ── DANCING — ballet dancer in spotlight ──────────────────────
+                  // ── DANCING — dancer in spotlight ────────────────────────
                   'Dancing': (<>
                     {/* Stage floor */}
-                    <rect x="0" y="50" width="80" height="10" fill="rgba(60,20,90,0.55)"/>
-                    <line x1="0" y1="50" x2="80" y2="50" stroke="rgba(160,100,220,0.5)" strokeWidth="1.5"/>
+                    <rect x="0" y="50" width="80" height="10" fill="rgba(60,10,10,0.65)"/>
+                    <line x1="0" y1="50" x2="80" y2="50" stroke="rgba(200,80,80,0.5)" strokeWidth="1.5"/>
                     {/* Spotlight */}
-                    <circle cx="40" cy="3" r="7" fill="rgba(255,220,100,0.65)" className="it-pulse"/>
-                    <polygon points="35,3 45,3 52,50 28,50" fill="rgba(255,220,100,0.07)"/>
-                    <ellipse cx="40" cy="50" rx="25" ry="5" fill="rgba(255,200,100,0.08)"/>
-                    {/* Salsa dancer — dynamic arm-up pose, NO spinning */}
-                    <g className="it-bob" style={{transformOrigin:'40px 30px'}}>
-                      {/* Flowing skirt */}
-                      <path d="M40,36 Q28,40 20,52 Q32,50 40,46 Q48,50 60,52 Q52,40 40,36" fill={c(0.72)}/>
-                      <path d="M40,38 Q30,42 22,52 Q34,49 40,44" fill={c(0.52)}/>
-                      {/* Body */}
-                      <ellipse cx="40" cy="28" rx="6" ry="10" fill={c(0.88)}/>
-                      {/* Head */}
-                      <circle cx="40" cy="14" r="7" fill={c(0.92)}/>
-                      {/* Hair — flowing side */}
-                      <path d="M36,9 Q31,6 29,12 Q31,20 34,26" fill="none" stroke={c(0.72)} strokeWidth="4" strokeLinecap="round"/>
-                      <path d="M44,9 Q49,6 50,12 Q49,18 47,22" fill="none" stroke={c(0.72)} strokeWidth="3" strokeLinecap="round"/>
+                    <circle cx="40" cy="2" r="8" fill="rgba(255,220,100,0.68)" className="it-pulse"/>
+                    <polygon points="34,2 46,2 54,50 26,50" fill="rgba(255,220,100,0.08)"/>
+                    <ellipse cx="40" cy="50" rx="26" ry="5" fill="rgba(255,200,100,0.09)"/>
+                    {/* DANCER — cream skin + bright dress for contrast on dark maroon */}
+                    <g className="it-bob" style={{transformOrigin:'40px 28px',animationDelay:'0.4s'}}>
+                      {/* Flared skirt — wide, bright */}
+                      <path d="M40,36 Q25,40 14,52 Q29,49 40,45 Q51,49 66,52 Q55,40 40,36" fill={c(0.88)}/>
+                      <path d="M40,38 Q27,42 18,52 Q31,49 40,45" fill={c(0.62)}/>
+                      {/* Skirt top/waist accent */}
+                      <ellipse cx="40" cy="36" rx="8" ry="3" fill={c(0.75)}/>
+                      {/* Body — cream for contrast */}
+                      <ellipse cx="40" cy="26" rx="7" ry="10" fill="rgba(248,218,158,0.97)"/>
+                      {/* Red dress bodice overlay */}
+                      <ellipse cx="40" cy="31" rx="7" ry="6" fill={c(0.80)}/>
+                      {/* Head — cream */}
+                      <circle cx="40" cy="12" r="8" fill="rgba(248,218,158,0.97)"/>
+                      {/* Hair up in bun */}
+                      <ellipse cx="40" cy="5" rx="5.5" ry="4.5" fill={c(0.68)}/>
+                      <circle cx="40" cy="5" r="2.5" fill={c(0.82)}/>
                       {/* Face */}
-                      <circle cx="37" cy="14" r="1.4" fill={c(0.88)}/>
-                      <circle cx="43" cy="14" r="1.4" fill={c(0.88)}/>
-                      <path d="M37,17 Q40,20 43,17" fill="none" stroke={c(0.78)} strokeWidth="1.2" strokeLinecap="round"/>
-                      {/* Arm raised up */}
-                      <path d="M36,24 Q26,18 22,10" fill="none" stroke={c(0.88)} strokeWidth="4" strokeLinecap="round"/>
-                      <circle cx="22" cy="10" r="3" fill={c(0.85)}/>
-                      {/* Arm out to side */}
-                      <path d="M44,26 Q54,28 60,24" fill="none" stroke={c(0.88)} strokeWidth="4" strokeLinecap="round"/>
-                      <circle cx="60" cy="24" r="3" fill={c(0.85)}/>
-                      {/* Front leg — stepping */}
-                      <line x1="38" y1="44" x2="34" y2="55" stroke={c(0.85)} strokeWidth="4.5" strokeLinecap="round"/>
-                      <ellipse cx="34" cy="56" rx="3" ry="1.8" fill={c(0.7)}/>
-                      {/* Back leg */}
-                      <line x1="42" y1="44" x2="48" y2="54" stroke={c(0.82)} strokeWidth="4" strokeLinecap="round"/>
-                      <ellipse cx="48" cy="55" rx="3" ry="1.8" fill={c(0.65)}/>
+                      <circle cx="37" cy="11.5" r="1.5" fill={c(0.72)}/>
+                      <circle cx="43" cy="11.5" r="1.5" fill={c(0.72)}/>
+                      <path d="M37,14.5 Q40,17 43,14.5" fill="none" stroke={c(0.62)} strokeWidth="1.3" strokeLinecap="round"/>
+                      {/* Arm raised up — cream */}
+                      <path d="M34,22 Q23,16 19,7" fill="none" stroke="rgba(248,218,158,0.97)" strokeWidth="5.5" strokeLinecap="round"/>
+                      <circle cx="19" cy="7" r="4" fill="rgba(248,218,158,0.97)"/>
+                      {/* Arm out right — cream */}
+                      <path d="M46,24 Q57,26 64,21" fill="none" stroke="rgba(248,218,158,0.97)" strokeWidth="5" strokeLinecap="round"/>
+                      <circle cx="64" cy="21" r="3.5" fill="rgba(248,218,158,0.97)"/>
+                      {/* Legs — cream */}
+                      <line x1="37" y1="44" x2="32" y2="55" stroke="rgba(238,205,145,0.96)" strokeWidth="5" strokeLinecap="round"/>
+                      <ellipse cx="31" cy="56" rx="3.5" ry="2" fill={c(0.68)}/>
+                      <line x1="43" y1="44" x2="50" y2="54" stroke="rgba(238,205,145,0.94)" strokeWidth="4.5" strokeLinecap="round"/>
+                      <ellipse cx="50" cy="55" rx="3" ry="2" fill={c(0.62)}/>
                     </g>
-                    {/* Music notes floating up */}
-                    {[10,24,56,70].map((x,i)=>(
+                    {/* Music notes */}
+                    {[8,22,56,70].map((x,i)=>(
                       <g key={i} className="it-up" style={{animationDelay:`${i*0.38}s`,transformOrigin:`${x}px 44px`}}>
                         <text x={x-5} y="44" fontSize="14" fill={c(0.85)}>♪</text>
                       </g>
