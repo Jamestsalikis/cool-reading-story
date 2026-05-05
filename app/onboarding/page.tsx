@@ -983,14 +983,14 @@ export default function OnboardingPage() {
                       <ellipse cx="35" cy="10" rx="14" ry="9" fill="rgba(208,126,42,0.97)"/>
                       {/* Lower jaw open */}
                       <ellipse cx="37" cy="17" rx="11" ry="5" fill="rgba(192,108,34,0.97)"/>
-                      {/* Top teeth */}
+                      {/* Top teeth — all pointing down from upper jaw */}
                       {[27,31,35,39,43,46].map((x,i)=>(
-                        <polygon key={i} points={`${x},12 ${x+2.2},12 ${x+1.1},${i%2===0?7:17}`} fill="rgba(245,240,225,0.97)"/>
+                        <polygon key={i} points={`${x},12 ${x+2.5},12 ${x+1.2},19`} fill="rgba(245,240,225,0.97)"/>
                       ))}
-                      {/* Bright yellow eye */}
-                      <circle cx="42" cy="8" r="4.5" fill="rgba(255,210,0,0.97)"/>
-                      <circle cx="42" cy="8" r="2.8" fill="rgba(0,0,0,0.95)"/>
-                      <circle cx="43" cy="7" r="1.1" fill="rgba(255,255,255,0.9)"/>
+                      {/* Reptile eye — amber iris + vertical slit pupil */}
+                      <circle cx="42" cy="8" r="4" fill="rgba(190,125,10,0.97)"/>
+                      <ellipse cx="42" cy="8" rx="1.2" ry="3" fill="rgba(8,4,0,0.97)"/>
+                      <circle cx="43" cy="6.5" r="0.8" fill="rgba(255,255,255,0.75)"/>
                       {/* Nostril */}
                       <ellipse cx="48" cy="11" rx="2" ry="1.3" fill="rgba(162,84,20,0.7)"/>
                     </g>
