@@ -837,38 +837,50 @@ export default function OnboardingPage() {
                   </>),
                   // ── MAGIC — elegant wand with swirling energy ────────────────
                   'Magic': (<>
-                    {[{x:6,y:5},{x:15,y:30},{x:70,y:8},{x:74,y:32},{x:8,y:50},{x:75,y:52}].map(({x,y},i)=>(
-                      <circle key={i} cx={x} cy={y} r={1.4+i%2*0.5} fill={c(0.8)} className="it-star" style={{animationDelay:`${i*0.38}s`}}/>
+                    {/* Twinkling background stars */}
+                    {[{x:66,y:6,r:1.6},{x:76,y:24,r:1.2},{x:8,y:12,r:1.5},{x:4,y:46,r:1.2},{x:78,y:50,r:1.4}].map(({x,y,r},i)=>(
+                      <circle key={i} cx={x} cy={y} r={r} fill="rgba(255,210,80,0.85)" className="it-star" style={{animationDelay:`${i*0.42}s`}}/>
                     ))}
-                    {/* Wand — long elegant tapered stick */}
-                    <g className="it-wand-swing" style={{transformOrigin:'42px 56px'}}>
-                      {/* Wand shaft */}
-                      <line x1="42" y1="56" x2="22" y2="6" stroke="rgba(90,55,18,0.97)" strokeWidth="3.5" strokeLinecap="round"/>
-                      <line x1="42" y1="56" x2="22" y2="6" stroke="rgba(210,170,80,0.35)" strokeWidth="1.5" strokeLinecap="round"/>
-                      {/* Handle wrap */}
-                      <rect x="37" y="50" width="9" height="14" rx="4" fill="rgba(55,28,6,0.97)"/>
-                      {[52,55.5,59].map(y=><rect key={y} x="37" y={y} width="9" height="2" rx="1" fill="rgba(140,100,40,0.6)"/>)}
-                      {/* Glowing star tip */}
-                      <circle cx="22" cy="6" r="8" fill={c(0.12)}/>
-                      <circle cx="22" cy="6" r="5.5" fill={c(0.3)}/>
-                      <circle cx="22" cy="6" r="3.5" fill={c(0.95)} className="it-pulse"/>
-                      {/* 12-ray starburst */}
-                      {[0,30,60,90,120,150,180,210,240,270,300,330].map((deg,i)=>(
-                        <line key={i} x1="22" y1="6" x2={22+(i%2===0?13:8)*Math.cos(deg*Math.PI/180)} y2={6+(i%2===0?13:8)*Math.sin(deg*Math.PI/180)} stroke={c(i%2===0?0.85:0.45)} strokeWidth={i%2===0?1.5:0.9} strokeLinecap="round"/>
+                    {/* WIZARD HAT — tall golden */}
+                    <polygon points="34,1 22,27 52,27" fill="rgba(210,162,18,0.97)"/>
+                    <polygon points="34,1 22,27 52,27" fill="rgba(255,220,70,0.22)"/>
+                    <ellipse cx="37" cy="27" rx="18" ry="5" fill="rgba(182,128,10,0.97)"/>
+                    {/* Star on hat */}
+                    <polygon points="34,7 35.4,11 39.4,11 36.2,13.5 37.6,17.5 34,15.2 30.4,17.5 31.8,13.5 28.6,11 32.6,11" fill="rgba(255,248,120,0.97)"/>
+                    {/* WIZARD FACE */}
+                    <circle cx="37" cy="35" r="7.5" fill="rgba(228,188,132,0.96)"/>
+                    <circle cx="34" cy="33.5" r="1.4" fill="rgba(45,15,75,0.92)"/>
+                    <circle cx="40" cy="33.5" r="1.4" fill="rgba(45,15,75,0.92)"/>
+                    <path d="M33.5,37 Q37,40 40.5,37" fill="none" stroke="rgba(140,80,40,0.82)" strokeWidth="1.4" strokeLinecap="round"/>
+                    {/* WIZARD ROBE */}
+                    <path d="M22,42 Q17,60 13,60 L58,60 Q56,42 50,42 Q44,40 37,42 Q30,40 22,42Z" fill="rgba(82,32,148,0.97)"/>
+                    <line x1="37" y1="43" x2="35" y2="59" stroke="rgba(125,80,210,0.35)" strokeWidth="2"/>
+                    {/* WAND ARM — sleeve extending right */}
+                    <path d="M50,50 Q60,44 66,36" fill="none" stroke="rgba(82,32,148,0.97)" strokeWidth="10" strokeLinecap="round"/>
+                    {/* Hand */}
+                    <circle cx="66" cy="36" r="5.5" fill="rgba(228,188,132,0.96)"/>
+                    {/* Wand shaft */}
+                    <line x1="66" y1="32" x2="72" y2="14" stroke="rgba(80,44,10,0.97)" strokeWidth="4" strokeLinecap="round"/>
+                    <line x1="66" y1="32" x2="72" y2="14" stroke="rgba(200,148,55,0.28)" strokeWidth="2" strokeLinecap="round"/>
+                    {/* Grip ring */}
+                    <line x1="63" y1="35" x2="70" y2="25" stroke="rgba(160,105,28,0.82)" strokeWidth="2.5" strokeLinecap="round"/>
+                    {/* MAGIC BURST at wand tip */}
+                    <g className="it-bob" style={{transformOrigin:'72px 14px',animationDelay:'0.7s'}}>
+                      <circle cx="72" cy="14" r="12" fill="rgba(195,145,255,0.1)"/>
+                      <circle cx="72" cy="14" r="7.5" fill="rgba(220,175,255,0.22)"/>
+                      <circle cx="72" cy="14" r="4.5" fill="rgba(245,208,255,0.6)"/>
+                      <circle cx="72" cy="14" r="2.6" fill="rgba(255,244,255,0.97)" className="it-pulse"/>
+                      {[0,45,90,135,180,225,270,315].map((deg,i)=>(
+                        <line key={i} x1="72" y1="14"
+                          x2={72+13*Math.cos(deg*Math.PI/180)}
+                          y2={14+13*Math.sin(deg*Math.PI/180)}
+                          stroke={i%2===0?"rgba(255,218,75,0.92)":"rgba(208,138,255,0.82)"}
+                          strokeWidth={i%2===0?2.2:1.4} strokeLinecap="round"/>
                       ))}
-                      {/* Magic trails */}
-                      <path d="M22,6 Q10,0 6,12 Q2,22 10,30" fill="none" stroke={c(0.55)} strokeWidth="1.8" strokeLinecap="round" className="it-pulse"/>
-                      <path d="M22,6 Q32,-2 40,8 Q48,18 42,28" fill="none" stroke={c(0.45)} strokeWidth="1.4" strokeLinecap="round" className="it-pulse" style={{animationDelay:'0.5s'}}/>
-                      <path d="M22,6 Q14,-4 8,4 Q4,10 8,18" fill="none" stroke={c(0.4)} strokeWidth="1.2" strokeLinecap="round" className="it-pulse" style={{animationDelay:'0.9s'}}/>
-                      {/* Orbiting sparkles */}
-                      {[0,1,2,3,4].map(i=>(
-                        <circle key={i} r="2.5" fill={c(0.92)} className="it-orbit" style={{transformOrigin:'22px 6px',animationDelay:`${i*0.22}s`}}/>
+                      {[{x:-8,y:-8},{x:5,y:-12},{x:12,y:2},{x:-12,y:4},{x:2,y:11}].map(({x,y},i)=>(
+                        <circle key={i} cx={72+x} cy={14+y} r={2.2} fill="rgba(255,228,78,0.9)" className="it-star" style={{animationDelay:`${i*0.22}s`}}/>
                       ))}
                     </g>
-                    {/* Floating spell dust */}
-                    {[{x:54,y:14},{x:66,y:28},{x:10,y:18},{x:8,y:42}].map(({x,y},i)=>(
-                      <circle key={i} cx={x} cy={y} r="2.2" fill={c(0.75)} className="it-star" style={{animationDelay:`${i*0.4}s`}}/>
-                    ))}
                   </>),
                   // ── ALIENS — dark space encounter ───────────────────────────
                   'Aliens': (<>
