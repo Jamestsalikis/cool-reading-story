@@ -14,6 +14,6 @@ export async function GET(request: Request) {
     }
   }
 
-  // Auth error — redirect to login with error param
+  // Auth error  -  redirect to login with error param
   return NextResponse.redirect(`${origin}/login?error=auth_error`);
 }

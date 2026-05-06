@@ -17,7 +17,7 @@ const CHILD_PALETTES = [
   { cover: '#6CC06C', spine: '#4a9a4a', light: '#EEF8EE' },
 ];
 
-// keyframes (spin, pulse) are now in globals.css — no runtime injection needed
+// keyframes (spin, pulse) are now in globals.css  -  no runtime injection needed
 const pageStyles = `
   .book-cover-panel {
     transition: transform 0.55s cubic-bezier(0.4,0,0.2,1), box-shadow 0.55s ease;
@@ -71,7 +71,7 @@ function BookCard({ story, palette }: { story: Story; palette: Palette }) {
   );
 }
 
-// ── Series fan — volumes fanned like playing cards ────────────────────────────
+// ── Series fan  -  volumes fanned like playing cards ────────────────────────────
 function SeriesFan({ volumes, palette }: { volumes: Story[]; palette: Palette }) {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const router = useRouter();
@@ -421,9 +421,9 @@ export default function DashboardPage() {
             if (pollData.status === 'failed') break;
           }
         }
-      } catch { /* Image pre-gen failed gracefully — story still navigates */ }
+      } catch { /* Image pre-gen failed gracefully  -  story still navigates */ }
 
-      // Navigate to story — images 2-5 continue generating on the story page
+      // Navigate to story  -  images 2-5 continue generating on the story page
       router.push(`/stories/${storyId}`);
     } finally { setGenerating(null); generatingLock.current = false; }
   };
@@ -539,7 +539,7 @@ export default function DashboardPage() {
               <p style={{ color: '#5E6A7A', animation: 'pulse 2s ease infinite' }}>Loading your library...</p>
             ) : children.length === 0 ? (
               <div style={{ maxWidth: '420px', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-                <Fable pose="welcome" dialogue="Your library is empty — shall we write the first story?" size={150} />
+                <Fable pose="welcome" dialogue="Your library is empty  -  shall we write the first story?" size={150} />
                 <div style={{ marginTop: '16px' }}>
                   <Link href="/onboarding" style={{ display: 'inline-block', padding: '0.75rem 1.75rem', background: '#FF6B35', color: '#fff', borderRadius: '8px', textDecoration: 'none', fontWeight: '600', fontSize: '0.9rem' }}>Get started</Link>
                 </div>
@@ -585,7 +585,7 @@ export default function DashboardPage() {
 
                       {/* Shelf: singles as BookCards, series as SeriesFan */}
                       {shelf.length === 0 ? (
-                        <p style={{ color: '#5E6A7A', fontSize: '0.875rem', fontStyle: 'italic' }}>No stories yet — generate the first one above.</p>
+                        <p style={{ color: '#5E6A7A', fontSize: '0.875rem', fontStyle: 'italic' }}>No stories yet  -  generate the first one above.</p>
                       ) : (
                         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '32px 24px', alignItems: 'flex-start' }}>
                           {shelf.map(item =>
@@ -688,7 +688,7 @@ export default function DashboardPage() {
                       onClick={() => setPaywallReason('daily_limit')}
                       style={{ marginTop: '4px', padding: '0.55rem 1rem', borderRadius: '8px', border: 'none', background: '#FF6B35', color: '#fff', cursor: 'pointer', fontWeight: '600', fontSize: '0.8rem' }}
                     >
-                      Get extra book — A$0.99
+                      Get extra book  -  A$0.99
                     </button>
                   )}
                 </div>
@@ -714,7 +714,7 @@ export default function DashboardPage() {
                 onClick={() => setPaywallReason('free_exhausted')}
                 style={{ width: '100%', padding: '0.75rem', borderRadius: '10px', border: 'none', background: '#FF6B35', color: '#fff', cursor: 'pointer', fontWeight: '600', fontSize: '0.9rem' }}
               >
-                Subscribe — from A$9.99/month
+                Subscribe  -  from A$9.99/month
               </button>
             )}
           </div>

@@ -68,32 +68,33 @@ function buildPrompt(child: {
 
   return `You are a master children's story writer creating a personalised bedtime picture book.
 
-MANDATORY SAFETY RULES — these override everything else:
+MANDATORY SAFETY RULES  -  these override everything else:
 - Never generate sexual, romantic, adult, or suggestive content of any kind
 - Never generate violence, gore, horror, or frightening content
 - Never generate abusive, bullying, discriminatory, or hateful content
 - Never generate content that could be used to groom, harm, or exploit children
 - The story must be 100% wholesome, safe, and appropriate for children aged 3-12
 - If any part of the child's profile could lead to harmful content, use safe alternative themes instead
+- NEVER use em dashes ( - ) in ANY text output, story content, titles, or prompts. Use commas, full stops, or rewrite the sentence instead
 
 TALEPOP BRAND VOICE & WRITING STYLE:
-This story will be typeset in two fonts that define the TalePop aesthetic — write to match their personalities:
+This story will be typeset in two fonts that define the TalePop aesthetic  -  write to match their personalities:
 
-TITLES (Bambino font — playful, friendly, hand-drawn, full of character):
+TITLES (Bambino font  -  playful, friendly, hand-drawn, full of character):
 - Punchy and specific: capture the exact adventure in 3-6 memorable words
-- Warm and exciting — a child should want to read it the moment they see it
-- Think hand-lettered, bouncy, joyful — never dry or generic
+- Warm and exciting  -  a child should want to read it the moment they see it
+- Think hand-lettered, bouncy, joyful  -  never dry or generic
 
-STORY PROSE (Nunito font — clean, rounded, easy to read, perfect for bedtime):
+STORY PROSE (Nunito font  -  clean, rounded, easy to read, perfect for bedtime):
 - Smooth natural rhythm that flows beautifully when read aloud
-- Rounded, warm sentences — never stiff, formal, or clunky
+- Rounded, warm sentences  -  never stiff, formal, or clunky
 - Short-to-medium sentences that breathe; commas for gentle pauses
-- Clean and uncluttered — vivid but not overwrought
+- Clean and uncluttered  -  vivid but not overwrought
 
 OVERALL VOICE:
-- Warm, encouraging, full of wonder — every sentence should feel like a hug
+- Warm, encouraging, full of wonder  -  every sentence should feel like a hug
 - Speak to children with joy and delight; speak to the adventure with excitement
-- Celebrate imagination, curiosity, and confidence — the child is capable and brave
+- Celebrate imagination, curiosity, and confidence  -  the child is capable and brave
 - Use vivid sensory details: colours, sounds, smells, textures that bring the world to life
 - Avoid passive voice; keep the child actively doing, discovering, and choosing
 
@@ -111,38 +112,38 @@ ${followUpDesc ? `- Personal details from ${name}:\n${followUpDesc}` : ''}
 - Reading level: ${reading_level} → target ${wordTarget} words total
 
 Requirements:
-1. ${name} is the hero — describe ${pronouns.them} with their actual appearance
-2. Weave their interests naturally into the plot — they drive the adventure
-3. Include their pet, siblings, or best friend if provided — give them real roles using their actual names/nicknames
+1. ${name} is the hero  -  describe ${pronouns.them} with their actual appearance
+2. Weave their interests naturally into the plot  -  they drive the adventure
+3. Include their pet, siblings, or best friend if provided  -  give them real roles using their actual names/nicknames
 4. If a location is provided, set the story there or reference it naturally
 5. Include a warm, gentle moral lesson that emerges naturally from the story
-6. End on a cosy, bedtime-appropriate note — winding down, not exciting
+6. End on a cosy, bedtime-appropriate note  -  winding down, not exciting
 7. Use language appropriate for age ${age}: ${reading_level === 'beginner' ? 'short sentences, simple words, lots of repetition' : reading_level === 'intermediate' ? 'flowing sentences, rich descriptions, some new vocabulary' : 'complex narrative, vivid imagery, sophisticated vocabulary'}
-8. Make it feel uniquely written FOR ${name} — not a generic story with a name swapped in
+8. Make it feel uniquely written FOR ${name}  -  not a generic story with a name swapped in
 9. Split the story into exactly 5 pages. Each page should have 2-4 paragraphs of text.
-10. Before writing page prompts, define a CHARACTER ANCHOR. Begin with this EXACT style prefix (copy it word for word): "Premium illustrated children's picture book art, warm painterly style, bold ink outlines, expressive cartoon character with large bright eyes, jewel-tone palette of midnight navy and ocean teal and sunshine yellow and tangerine orange, magical golden atmospheric lighting, dreamy enchanted background." — then describe: ${name}'s specific hair style and colour, eye colour, and a specific named outfit (e.g. "a red polka-dot dress and white sandals" or "a yellow striped hoodie and blue jeans and white sneakers"). Choose an outfit that fits ${name}'s personality and interests. This full anchor must be copied verbatim into every image prompt.
+10. Before writing page prompts, define a CHARACTER ANCHOR. Begin with this EXACT style prefix (copy it word for word): "Premium illustrated children's picture book art, warm painterly style, bold ink outlines, expressive cartoon character with large bright eyes, jewel-tone palette of midnight navy and ocean teal and sunshine yellow and tangerine orange, magical golden atmospheric lighting, dreamy enchanted background."  -  then describe: ${name}'s specific hair style and colour, eye colour, and a specific named outfit (e.g. "a red polka-dot dress and white sandals" or "a yellow striped hoodie and blue jeans and white sneakers"). Choose an outfit that fits ${name}'s personality and interests. This full anchor must be copied verbatim into every image prompt.
 
 CRITICAL IMAGE PROMPT RULES:
 
 CONSISTENCY (non-negotiable):
-- Start EVERY image_prompt with the character_anchor string — word for word, no changes
-- The character must look identical in all 5 images: same face, same age (${age}), same exact outfit — never taller, never older
+- Start EVERY image_prompt with the character_anchor string  -  word for word, no changes
+- The character must look identical in all 5 images: same face, same age (${age}), same exact outfit  -  never taller, never older
 - End every image prompt with: "No text, no words, no letters anywhere in the image."
 
 WHAT MAKES A GREAT CHILDREN'S BOOK ILLUSTRATION (apply to every page):
-- Capture the EMOTIONAL PEAK of that page — the single most exciting or heartfelt moment, not a neutral in-between moment
-- Show STRONG EMOTION on the character's face: wide eyes of wonder, a beaming smile of triumph, eyebrows raised in surprise, a focused determined gaze — the child reading should FEEL what ${name} feels
-- Use DYNAMIC COMPOSITION — avoid the character just standing still. Show them mid-action: leaping, reaching, pointing, spinning, crouching to look at something magical, running with arms out
+- Capture the EMOTIONAL PEAK of that page  -  the single most exciting or heartfelt moment, not a neutral in-between moment
+- Show STRONG EMOTION on the character's face: wide eyes of wonder, a beaming smile of triumph, eyebrows raised in surprise, a focused determined gaze  -  the child reading should FEEL what ${name} feels
+- Use DYNAMIC COMPOSITION  -  avoid the character just standing still. Show them mid-action: leaping, reaching, pointing, spinning, crouching to look at something magical, running with arms out
 - Vary the composition across the 5 pages so the book feels cinematic and alive:
-  • Page 1 — Wide establishing shot: show the full world, ${name} small within a large magical environment, setting the sense of adventure and scale
-  • Page 2 — Discovery / reaction shot: ${name} close-up or mid-shot, face expressing the moment of surprise or excitement when the adventure begins
-  • Page 3 — Action shot: the most dynamic moment — movement, energy, something happening; diagonal lines, flying objects, rushing wind
-  • Page 4 — Dramatic / emotional peak: the highest-stakes or most wondrous moment; strong lighting contrast, foreground detail, depth
-  • Page 5 — Warm resolution: cosy and intimate, soft golden light, ${name} at peace — a scene that feels like a hug and naturally invites sleep
-- ENVIRONMENTAL STORYTELLING: the background must actively tell the story — glowing portals, weather matching the mood, magical sparks, creatures reacting, shadows and light that create drama
+  • Page 1  -  Wide establishing shot: show the full world, ${name} small within a large magical environment, setting the sense of adventure and scale
+  • Page 2  -  Discovery / reaction shot: ${name} close-up or mid-shot, face expressing the moment of surprise or excitement when the adventure begins
+  • Page 3  -  Action shot: the most dynamic moment  -  movement, energy, something happening; diagonal lines, flying objects, rushing wind
+  • Page 4  -  Dramatic / emotional peak: the highest-stakes or most wondrous moment; strong lighting contrast, foreground detail, depth
+  • Page 5  -  Warm resolution: cosy and intimate, soft golden light, ${name} at peace  -  a scene that feels like a hug and naturally invites sleep
+- ENVIRONMENTAL STORYTELLING: the background must actively tell the story  -  glowing portals, weather matching the mood, magical sparks, creatures reacting, shadows and light that create drama
 - LIGHTING IS MOOD: use warm golden glows for triumph and safety, cool moonlit blues for mystery, sunrise pinks for hope, shafts of magical light to spotlight ${name} as the hero
 - FOREGROUND DEPTH: include foreground elements (flowers, rocks, foliage, sparkles) to give the scene 3D depth and draw the child's eye into the picture
-- Every image should make a child say "WOW" and want to know what happens next — except page 5 which should make them feel safe and sleepy
+- Every image should make a child say "WOW" and want to know what happens next  -  except page 5 which should make them feel safe and sleepy
 
 Return ONLY valid JSON, no markdown, no explanation:
 {
@@ -150,11 +151,11 @@ Return ONLY valid JSON, no markdown, no explanation:
   "moral": "The gentle lesson in one sentence",
   "theme_emoji": "One emoji representing the story theme",
   "word_count": estimated_total_word_count_as_number,
-  "character_anchor": "Premium illustrated children's picture book art, warm painterly style, bold ink outlines, expressive cartoon character with large bright eyes, jewel-tone palette of midnight navy and ocean teal and sunshine yellow and tangerine orange, magical golden atmospheric lighting, dreamy enchanted background. [NAME], a [AGE]-year-old [GENDER] child with [HAIR DESCRIPTION], wearing [SPECIFIC OUTFIT] — same child, same face, same exact outfit in every image.",
+  "character_anchor": "Premium illustrated children's picture book art, warm painterly style, bold ink outlines, expressive cartoon character with large bright eyes, jewel-tone palette of midnight navy and ocean teal and sunshine yellow and tangerine orange, magical golden atmospheric lighting, dreamy enchanted background. [NAME], a [AGE]-year-old [GENDER] child with [HAIR DESCRIPTION], wearing [SPECIFIC OUTFIT]  -  same child, same face, same exact outfit in every image.",
   "pages": [
     {
       "page_number": 1,
-      "content": "Page text here — 2-4 paragraphs",
+      "content": "Page text here  -  2-4 paragraphs",
       "image_prompt": "[character_anchor copied verbatim] [1-2 sentences of scene action]. No text, no words, no letters anywhere in the image."
     }
   ]
@@ -208,7 +209,7 @@ async function generateImage(prompt: string): Promise<string | null> {
       return null;
     }
 
-    console.log('Prediction status:', prediction.status, '— polling...');
+    console.log('Prediction status:', prediction.status, ' -  polling...');
 
     // Otherwise poll
     const pollUrl = prediction.urls?.get;
@@ -279,7 +280,7 @@ export async function POST(request: Request) {
     }
 
     // --- PRE-GENERATED TRIAL STORY SHORTCUT ---
-    // Free users get a static sample story for trial interests — no Claude API call.
+    // Free users get a static sample story for trial interests  -  no Claude API call.
     const { data: subData } = await supabase
       .from('user_subscriptions')
       .select('status, free_stories_remaining')

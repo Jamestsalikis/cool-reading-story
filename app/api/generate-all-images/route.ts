@@ -7,7 +7,7 @@ const REPLICATE_API_TOKEN = process.env.REPLICATE_API_TOKEN;
 
 // Generates one image. Uses Prefer: wait=10 so Replicate holds the connection
 // until the image is done (Flux Schnell typically finishes in 2-5s).
-// No extra polling — keeps each call predictably short so all 5 fit in 60s.
+// No extra polling  -  keeps each call predictably short so all 5 fit in 60s.
 async function generateImage(prompt: string): Promise<string | null> {
   try {
     const res = await fetch(
@@ -60,7 +60,7 @@ export async function POST(request: Request) {
   const pages: Array<{ page_number: number; image_prompt?: string; image_url?: string }> =
     story.pages || [];
 
-  // Sequential — Replicate 429s on concurrent requests. Each image typically
+  // Sequential  -  Replicate 429s on concurrent requests. Each image typically
   // takes 2-5s with Prefer: wait=10, so 5 images = ~15-25s total, well within 60s.
   for (const page of pages) {
     if (!page.image_prompt || page.image_url) continue;

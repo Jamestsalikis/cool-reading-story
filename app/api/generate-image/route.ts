@@ -4,12 +4,12 @@ import { createClient } from '@/lib/supabase/server';
 // Starts a Replicate prediction and returns immediately.
 // If Replicate finishes within 8s (fast path), saves to DB and returns image_url.
 // Otherwise returns { status: 'processing', prediction_id, poll_url } for the
-// frontend to poll via /api/poll-image — keeps this function well under Vercel's limit.
+// frontend to poll via /api/poll-image  -  keeps this function well under Vercel's limit.
 export const maxDuration = 30;
 
 const REPLICATE_API_TOKEN = process.env.REPLICATE_API_TOKEN;
 
-// TalePop visual style — appended to every Replicate prompt for consistent, engaging illustration style
+// TalePop visual style  -  appended to every Replicate prompt for consistent, engaging illustration style
 const TALEPOP_STYLE_SUFFIX =
   'Premium illustrated children\'s picture book art, warm painterly style, bold ink outlines, ' +
   'expressive cartoon character with large bright eyes and vivid emotional expression, ' +
@@ -19,7 +19,7 @@ const TALEPOP_STYLE_SUFFIX =
   'vibrant and exciting, every detail invites the child deeper into the world.';
 
 // Derive a stable integer seed from a story UUID so all pages of one story
-// use the same Flux seed — improves visual consistency across illustrations.
+// use the same Flux seed  -  improves visual consistency across illustrations.
 function storyIdToSeed(storyId: string): number {
   let hash = 0;
   for (let i = 0; i < storyId.length; i++) {
@@ -64,7 +64,7 @@ export async function POST(request: Request) {
     // Compose final prompt: story-specific prompt + global TalePop style suffix
     const finalPrompt = `${page.image_prompt} ${TALEPOP_STYLE_SUFFIX}`;
 
-    // Create prediction — retry once on 429 (rate limit) with a 5s backoff.
+    // Create prediction  -  retry once on 429 (rate limit) with a 5s backoff.
     // Two attempts × ~500ms each + 5s wait = ~6s worst case, within Hobby's 10s limit.
     let prediction: { id?: string; urls?: { get: string }; error?: string } | null = null;
 

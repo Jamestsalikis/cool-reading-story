@@ -96,7 +96,7 @@ export default function Home() {
       <nav style={{ position: 'sticky', top: 0, zIndex: 50, background: '#FFF4E6', borderBottom: '1px solid #F0E4D0', padding: '0.5rem 2rem' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Link href="/" style={{ textDecoration: 'none' }}>
-            <img src="/mood-3.png" alt="TalePop" style={{ height: '72px', width: 'auto' }} />
+            <img src="/mood-3.png" alt="TalePop" style={{ height: '72px', width: 'auto', mixBlendMode: 'multiply' }} />
           </Link>
           <div className="nav-desktop" style={{ gap: '2.5rem', alignItems: 'center' }}>
             <a href="#how-it-works" style={{ color: '#0D183D', textDecoration: 'none', fontSize: '0.9rem', fontWeight: 600 }}>How it works</a>
@@ -133,7 +133,7 @@ export default function Home() {
           <div>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#0D183D', borderRadius: '999px', padding: '0.45rem 1.1rem', marginBottom: '1.75rem' }}>
               <span>🎁</span>
-              <span style={{ fontSize: '0.78rem', fontWeight: 800, color: '#FFB703', letterSpacing: '0.04em' }}>2 FREE STORIES — NO CARD NEEDED</span>
+              <span style={{ fontSize: '0.78rem', fontWeight: 800, color: '#FFB703', letterSpacing: '0.04em' }}>2 FREE STORIES  -  NO CARD NEEDED</span>
             </div>
 
             <h1 className="font-serif" style={{ fontSize: 'clamp(2.25rem, 5.5vw, 3.75rem)', lineHeight: 1.1, color: '#0D183D', marginBottom: '1.25rem', letterSpacing: '-0.01em' }}>
@@ -142,7 +142,7 @@ export default function Home() {
             </h1>
 
             <p style={{ fontSize: '1.05rem', color: '#5E6A7A', lineHeight: 1.75, marginBottom: '2rem', maxWidth: '440px', fontWeight: 500 }}>
-              Tell us who your child is — their name, what they love, who their best friend is — and we&apos;ll write them a story that has never existed before.
+              Tell us who your child is  -  their name, what they love, who their best friend is  -  and we&apos;ll write them a story that has never existed before.
             </p>
 
             {/* Name preview widget */}
@@ -161,7 +161,7 @@ export default function Home() {
               <div style={{ background: '#FFF4E6', borderRadius: '10px', padding: '0.875rem 1rem', borderLeft: '3px solid #FF6B35' }}>
                 <p style={{ fontSize: '0.72rem', fontWeight: 700, color: '#1496A6', letterSpacing: '0.04em', marginBottom: '5px', textTransform: 'uppercase' }}>Tonight&apos;s story begins...</p>
                 <p style={{ fontSize: '0.92rem', color: '#0D183D', lineHeight: 1.65, fontWeight: 500 }}>
-                  Once upon a time, <strong style={{ color: '#FF6B35' }}>{capitalised}</strong> discovered a glowing doorway hidden behind their bookshelf — and on the other side was a world that existed just for them{childName.trim() ? <span className="cursor" /> : '...'}
+                  Once upon a time, <strong style={{ color: '#FF6B35' }}>{capitalised}</strong> discovered a glowing doorway hidden behind their bookshelf  -  and on the other side was a world that existed just for them{childName.trim() ? <span className="cursor" /> : '...'}
                 </p>
               </div>
             </div>
@@ -182,50 +182,18 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Right: illustrated scene — mood board night world */}
+          {/* Right: illustrated scene */}
           <div className="hero-book-panel" style={{
-            backgroundImage: "url('/mood-2.png')",
-            backgroundSize: '165%',
-            backgroundPosition: '25% 0%',
-            backgroundRepeat: 'no-repeat'
+            backgroundImage: "url('/hero-illustration.png')",
+            backgroundSize: '280%',
+            backgroundPosition: '2% 58%',
+            backgroundRepeat: 'no-repeat',
+            padding: 0
           }}>
-            {/* Overlay: dark gradient for readability + hides bottom of image on mobile */}
-            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(145deg, rgba(13,24,61,0.55) 0%, rgba(13,24,61,0.25) 50%, rgba(13,24,61,0.5) 100%)' }} />
-            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '30%', background: 'linear-gradient(transparent, rgba(13,24,61,0.95))' }} />
-
-            {/* Floating story card */}
-            <div className="book-float" style={{ position: 'relative', zIndex: 1 }}>
-              <div style={{ background: 'white', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 20px 60px rgba(0,0,0,0.35)' }}>
-                {/* Book header */}
-                <div style={{ background: 'linear-gradient(135deg, #FF6B35, #FFB703)', padding: '1rem 1.25rem' }}>
-                  <p style={{ fontSize: '0.65rem', fontWeight: 800, color: 'rgba(255,255,255,0.7)', letterSpacing: '0.08em', marginBottom: '3px' }}>TONIGHT&apos;S TALEPOP STORY</p>
-                  <p className="font-serif" style={{ color: 'white', fontSize: '1rem', lineHeight: 1.3 }}>Zara, Zak and the Kingdom Beyond the Mist</p>
-                </div>
-                {/* Story excerpt */}
-                <div style={{ padding: '1.25rem' }}>
-                  <p style={{ fontSize: '0.85rem', color: '#0D183D', lineHeight: 1.8, fontWeight: 500 }}>
-                    <strong style={{ color: '#FF6B35', fontSize: '1.4rem', float: 'left', lineHeight: 1, marginRight: '4px', marginTop: '2px', fontFamily: 'Fredoka One, cursive' }}>Z</strong>
-                    ara and her brother Zak had been walking through the mist for hours when the castle appeared — impossibly tall, glowing at every window...
-                  </p>
-                  <div style={{ marginTop: '0.875rem', paddingTop: '0.875rem', borderTop: '1px solid #F0E4D0', display: 'flex', gap: '6px' }}>
-                    {['Dragon 🐉', 'Unicorn 🦄', 'Adventure ✨'].map(t => (
-                      <span key={t} style={{ background: '#FFF0E0', color: '#FF6B35', fontSize: '0.68rem', fontWeight: 700, padding: '2px 8px', borderRadius: '20px' }}>{t}</span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Rating strip below the card */}
-            <div style={{ position: 'relative', zIndex: 1, display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <div style={{ display: 'flex', gap: '2px' }}>
-                {[1,2,3,4,5].map(i => <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill="#FFB703"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>)}
-              </div>
-              <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.82rem', fontWeight: 500 }}>Loved by 2,500+ families</p>
-            </div>
-
-            {/* Decorative page number */}
-            <div style={{ position: 'absolute', bottom: '1.5rem', right: '1.75rem', color: 'rgba(255,255,255,0.2)', fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.06em' }}>PAGE 1 OF 5</div>
+            {/* Top fade: blends into cream hero background */}
+            <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '35%', background: 'linear-gradient(to bottom, #FFF4E6 0%, transparent 100%)' }} />
+            {/* Bottom fade: blends into dark section below */}
+            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '35%', background: 'linear-gradient(to top, rgba(13,24,61,0.9) 0%, transparent 100%)' }} />
           </div>
         </div>
       </section>
@@ -241,7 +209,7 @@ export default function Home() {
               Written for Zara & Zak. No one else.
             </h2>
             <p style={{ color: '#5E6A7A', fontSize: '0.95rem', fontWeight: 500, maxWidth: '500px', margin: '0 auto', lineHeight: 1.7 }}>
-              Every word invented from scratch — their names, their adventure, their world.
+              Every word invented from scratch  -  their names, their adventure, their world.
             </p>
           </div>
 
@@ -260,7 +228,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Story illustration — hero-illustration.png, left side characters (0% 44%) */}
+            {/* Story illustration  -  hero-illustration.png, left side characters (0% 44%) */}
             <div style={{
               position: 'relative', height: '220px', overflow: 'hidden',
               backgroundImage: "url('/hero-illustration.png')",
@@ -274,7 +242,7 @@ export default function Home() {
             <div style={{ padding: '2rem 2rem 2.5rem' }}>
               <p style={{ fontSize: '1rem', color: '#0D183D', lineHeight: 1.9, fontWeight: 500, marginBottom: '1rem' }}>
                 <strong style={{ color: '#FF6B35', fontSize: '1.8rem', float: 'left', lineHeight: 1, marginRight: '6px', marginTop: '4px', fontFamily: 'Fredoka One, cursive' }}>Z</strong>
-                ara and her brother Zak had been walking through the mist for what felt like hours when the castle appeared — impossibly tall, purple-turreted, glowing at every window as if someone inside had been expecting them.
+                ara and her brother Zak had been walking through the mist for what felt like hours when the castle appeared  -  impossibly tall, purple-turreted, glowing at every window as if someone inside had been expecting them.
               </p>
               <p style={{ fontSize: '1rem', color: '#0D183D', lineHeight: 1.9, fontWeight: 500, marginBottom: '1.5rem' }}>
                 A dragon landed on the drawbridge. It was green, about the size of a large horse, and it was wearing a very small hat. Behind it, a unicorn peered around the tower with enormous golden eyes.
@@ -334,7 +302,7 @@ export default function Home() {
               Two children. Two completely different stories.
             </h2>
             <p style={{ color: '#5E6A7A', fontWeight: 500, maxWidth: '500px', margin: '0 auto', lineHeight: 1.75, fontSize: '0.975rem' }}>
-              Their name, age, interests, friends, and even their pet go in. What comes out has never been written before — and never will be again.
+              Their name, age, interests, friends, and even their pet go in. What comes out has never been written before  -  and never will be again.
             </p>
           </div>
 
@@ -350,7 +318,7 @@ export default function Home() {
               <div style={{ padding: '1.5rem 1.75rem' }}>
                 <p style={{ fontSize: '0.72rem', fontWeight: 800, color: '#FF6B35', letterSpacing: '0.07em', marginBottom: '0.75rem', textTransform: 'uppercase' }}>His story began:</p>
                 <p style={{ fontSize: '0.925rem', color: '#0D183D', lineHeight: 1.8, fontWeight: 500 }}>
-                  The mission had one problem: Snoopy kept pressing buttons. Not important buttons — Leo had hidden those. Just the ones that made lights flash and sounds beep. &apos;Snoopy,&apos; said Leo, &apos;we are approaching the asteroid belt.&apos; Snoopy wagged his tail and pressed another button. The spaceship played a fanfare...
+                  The mission had one problem: Snoopy kept pressing buttons. Not important buttons  -  Leo had hidden those. Just the ones that made lights flash and sounds beep. &apos;Snoopy,&apos; said Leo, &apos;we are approaching the asteroid belt.&apos; Snoopy wagged his tail and pressed another button. The spaceship played a fanfare...
                 </p>
               </div>
             </div>
@@ -375,7 +343,7 @@ export default function Home() {
           <div className="trust-bar" style={{ marginTop: '3rem' }}>
             {[
               { icon: <RefreshCw size={18} color="#FF6B35" />, title: 'Never the same story twice', desc: 'Every story is invented fresh. No recycled plots, ever.' },
-              { icon: <Star size={18} color="#FFB703" />, title: 'Their world, front and centre', desc: 'Their interests shape the entire plot — not just the name.' },
+              { icon: <Star size={18} color="#FFB703" />, title: 'Their world, front and centre', desc: 'Their interests shape the entire plot  -  not just the name.' },
               { icon: <Shield size={18} color="#6CC06C" />, title: 'Safe & age-appropriate', desc: 'Every story crafted thoughtfully for kids aged 3–10.' },
               { icon: <Heart size={18} color="#FF6B35" />, title: 'No data sold. Ever.', desc: 'Your child\'s details are private. That\'s a promise.' },
             ].map((t, i) => (
@@ -431,7 +399,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── How it works — SUNSHINE YELLOW ─── */}
+      {/* ─── How it works  -  SUNSHINE YELLOW ─── */}
       <section id="how-it-works" style={{ background: '#FFB703', padding: '6rem 2rem' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
@@ -442,7 +410,7 @@ export default function Home() {
           </div>
           <div className="three-col">
             {[
-              { num: '1', emoji: '✏️', title: 'Tell us about them', desc: 'Name, age, what makes them laugh, their best friend, their pet — the more you share, the richer the story.', color: '#FF6B35' },
+              { num: '1', emoji: '✏️', title: 'Tell us about them', desc: 'Name, age, what makes them laugh, their best friend, their pet  -  the more you share, the richer the story.', color: '#FF6B35' },
               { num: '2', emoji: '📖', title: 'We write it from scratch', desc: 'A unique 5-page adventure, invented entirely around your child. No two TalePop stories have ever been the same.', color: '#0D183D' },
               { num: '3', emoji: '🌙', title: 'Read it together tonight', desc: 'Open their story, read it aloud, and watch their face when they realise the adventure is theirs.', color: '#1496A6' },
             ].map((step, i) => (
@@ -473,7 +441,7 @@ export default function Home() {
           <div className="two-col" style={{ marginTop: '3rem' }}>
             <div className="plan-card" style={{ border: '2px solid #F0E4D0', background: 'white' }}>
               <h3 className="font-serif" style={{ fontSize: '1.5rem', marginBottom: '0.4rem', color: '#0D183D' }}>Monthly</h3>
-              <p style={{ color: '#9CA8B4', marginBottom: '1.5rem', fontSize: '0.9rem', fontWeight: 500 }}>Flexible — cancel anytime</p>
+              <p style={{ color: '#9CA8B4', marginBottom: '1.5rem', fontSize: '0.9rem', fontWeight: 500 }}>Flexible  -  cancel anytime</p>
               <div style={{ marginBottom: '0.75rem' }}>
                 <span style={{ fontSize: '2.75rem', fontWeight: 800, color: '#FF6B35', letterSpacing: '-0.02em' }}>A$9.99</span>
                 <span style={{ color: '#9CA8B4', fontSize: '0.9rem', fontWeight: 500 }}>/month</span>
@@ -496,7 +464,7 @@ export default function Home() {
 
             <div className="plan-card" style={{ background: '#FF6B35', color: 'white', position: 'relative' }}>
               <div style={{ position: 'absolute', top: '-15px', left: '50%', transform: 'translateX(-50%)', background: '#FFB703', color: '#0D183D', padding: '0.35rem 1.25rem', borderRadius: '999px', fontSize: '0.68rem', fontWeight: '900', whiteSpace: 'nowrap', letterSpacing: '0.04em' }}>
-                ⭐ BEST VALUE — SAVE 20%
+                ⭐ BEST VALUE  -  SAVE 20%
               </div>
               <h3 className="font-serif" style={{ fontSize: '1.5rem', marginBottom: '0.4rem' }}>Annual</h3>
               <p style={{ opacity: 0.75, marginBottom: '1.5rem', fontSize: '0.9rem', fontWeight: 500 }}>Two months free</p>
@@ -527,7 +495,7 @@ export default function Home() {
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'white', border: '1px solid #E8E0D5', borderRadius: '10px', padding: '0.6rem 1.25rem', boxShadow: '0 1px 6px rgba(13,24,61,0.06)' }}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6CC06C" strokeWidth="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               <span style={{ fontSize: '0.8rem', color: '#5E6A7A', fontWeight: 600 }}>
-                Secure payment via <strong style={{ color: '#635BFF' }}>Stripe</strong> — your card details are never stored by TalePop
+                Secure payment via <strong style={{ color: '#635BFF' }}>Stripe</strong>  -  your card details are never stored by TalePop
               </span>
             </div>
             <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
@@ -551,7 +519,7 @@ export default function Home() {
           {[
             {
               q: 'How personalised is it, really?',
-              a: 'Every word is invented fresh — not a template with the name swapped in. Your child's interests, best friend, pet, and personality shape the actual plot. Two children with the same name get completely different stories.'
+              a: 'Every word is invented fresh  -  not a template with the name swapped in. Your child's interests, best friend, pet, and personality shape the actual plot. Two children with the same name get completely different stories.'
             },
             {
               q: 'What age is TalePop for?',
@@ -559,7 +527,7 @@ export default function Home() {
             },
             {
               q: 'Can I add more than one child?',
-              a: 'Yes — unlimited profiles, one subscription. Each child gets their own profile, their own story preferences, and their own shelf. Brothers and sisters never share a story unless you want them to.'
+              a: 'Yes  -  unlimited profiles, one subscription. Each child gets their own profile, their own story preferences, and their own shelf. Brothers and sisters never share a story unless you want them to.'
             },
             {
               q: 'Can I actually cancel anytime?',

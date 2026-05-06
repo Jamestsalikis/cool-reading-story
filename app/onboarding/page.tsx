@@ -60,7 +60,7 @@ const INTEREST_OPTIONS = [
   { emoji: '🚗', label: 'Cars & Trucks', g: ['#DC2626','#F97316'], sh: 'rgba(220,38,38,0.40)' },
 ];
 
-// 2 questions per interest — specific enough to give Claude vivid details
+// 2 questions per interest  -  specific enough to give Claude vivid details
 const FOLLOW_UP_QUESTIONS: Record<string, { q: string; placeholder: string }[]> = {
   'Superheroes':  [
     { q: 'If you could have one superpower, what would it be?',   placeholder: 'e.g. Flying, invisibility, super speed' },
@@ -115,7 +115,7 @@ const FOLLOW_UP_QUESTIONS: Record<string, { q: string; placeholder: string }[]> 
     { q: 'Which planet would you visit first?',                   placeholder: 'e.g. Saturn, a made-up one with candy rings' },
   ],
   'Robots': [
-    { q: "What's your robot's name and what can it do?",          placeholder: 'e.g. RoboMax — makes pancakes and tells jokes' },
+    { q: "What's your robot's name and what can it do?",          placeholder: 'e.g. RoboMax  -  makes pancakes and tells jokes' },
     { q: 'Would your robot be big or small, silly or serious?',   placeholder: 'e.g. Tiny and very sarcastic' },
   ],
   'Science': [
@@ -148,7 +148,7 @@ const FOLLOW_UP_QUESTIONS: Record<string, { q: string; placeholder: string }[]> 
   ],
   'Swimming': [
     { q: "What's your favourite stroke?",                         placeholder: 'e.g. Freestyle, butterfly' },
-    { q: 'Do you prefer the pool or the ocean?',                  placeholder: 'e.g. The ocean — it feels like an adventure' },
+    { q: 'Do you prefer the pool or the ocean?',                  placeholder: 'e.g. The ocean  -  it feels like an adventure' },
   ],
   'Art': [
     { q: "What's your favourite thing to draw or paint?",         placeholder: 'e.g. Dragons, rainbows, portraits of my dog' },
@@ -160,7 +160,7 @@ const FOLLOW_UP_QUESTIONS: Record<string, { q: string; placeholder: string }[]> 
   ],
   'Cooking': [
     { q: "What's your favourite thing to cook or bake?",          placeholder: 'e.g. Chocolate chip cookies, pancakes' },
-    { q: 'If you had your own restaurant, what would it be called and serve?', placeholder: 'e.g. "Princess Kitchen" — only desserts' },
+    { q: 'If you had your own restaurant, what would it be called and serve?', placeholder: 'e.g. "Princess Kitchen"  -  only desserts' },
   ],
   'Dolls': [
     { q: "What are your favourite dolls' names?",                 placeholder: 'e.g. Bella, Princess Rose, Captain Tiny' },
@@ -168,7 +168,7 @@ const FOLLOW_UP_QUESTIONS: Record<string, { q: string; placeholder: string }[]> 
   ],
   'Cars & Trucks': [
     { q: "What's your dream car or truck?",                       placeholder: 'e.g. A red race car, a giant monster truck' },
-    { q: 'Would you rather drive a race car, a monster truck, or a fire engine?', placeholder: 'e.g. Monster truck — so I can crush everything' },
+    { q: 'Would you rather drive a race car, a monster truck, or a fire engine?', placeholder: 'e.g. Monster truck  -  so I can crush everything' },
   ],
 };
 
@@ -270,7 +270,7 @@ export default function OnboardingPage() {
           return;
         }
 
-        // Free user who paid for personalised — redirect to Stripe checkout.
+        // Free user who paid for personalised  -  redirect to Stripe checkout.
         // Webhook will grant 1 extra book; on return the dashboard auto-generates
         // a real Claude story using the follow-up answers saved to the child profile.
         if (isFreeUser && wantPersonalised) {
@@ -289,7 +289,7 @@ export default function OnboardingPage() {
           return;
         }
 
-        // Free sample or subscriber — generate immediately
+        // Free sample or subscriber  -  generate immediately
         fetch('/api/generate-story', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -432,7 +432,7 @@ export default function OnboardingPage() {
           <div>
             <ProgressDots />
             <h1 className="font-serif" style={{ fontSize: '2rem', marginBottom: '8px', color: '#0D183D' }}>What does {state.name || 'your child'} love?</h1>
-            <p style={{ color: '#5E6A7A', marginBottom: '32px', fontSize: '0.95rem' }}>Select at least 2 — these shape every story</p>
+            <p style={{ color: '#5E6A7A', marginBottom: '32px', fontSize: '0.95rem' }}>Select at least 2  -  these shape every story</p>
 
             <style>{`
               .int-tile { transition: transform 0.18s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.18s ease; cursor: pointer; }
@@ -537,22 +537,22 @@ export default function OnboardingPage() {
                 const S = (props:{cx:number;cy:number;r:number;d:string}) => <circle cx={props.cx} cy={props.cy} r={props.r} fill="rgba(255,248,200,0.92)" className="it-star" style={{animationDelay:props.d}}/>;
                 const scene: Record<string, React.ReactNode> = {
                   'Space': (<>
-                    {/* Stars — opacity only (no scale/transform so they don't appear to move) */}
+                    {/* Stars  -  opacity only (no scale/transform so they don't appear to move) */}
                     {[{x:6,y:5,r:1.8},{x:19,y:3,r:1.1},{x:33,y:8,r:2.3},{x:50,y:4,r:1.4},{x:63,y:7,r:1.9},{x:75,y:5,r:1.1},
                       {x:10,y:22,r:1.3},{x:72,y:20,r:1.7},{x:4,y:40,r:1.5},{x:66,y:42,r:1.2},{x:40,y:52,r:1.7},{x:14,y:53,r:1.1},{x:78,y:48,r:1.4},{x:55,y:30,r:1.0},{x:27,y:32,r:0.9}
                     ].map(({x,y,r},i)=>(
                       <circle key={i} cx={x} cy={y} r={r} fill="rgba(255,250,220,0.95)" className="it-star" style={{animationDelay:`${i*0.19}s`}}/>
                     ))}
-                    {/* Hero star — same pure opacity blink */}
+                    {/* Hero star  -  same pure opacity blink */}
                     <circle cx="34" cy="8" r="2.8" fill="rgba(255,255,200,1)" className="it-star" style={{animationDelay:'0.7s'}}/>
-                    {/* Crescent moon — fixed position, no movement */}
+                    {/* Crescent moon  -  fixed position, no movement */}
                     <circle cx="62" cy="16" r="13" fill="rgba(255,235,140,0.97)"/>
                     <circle cx="68" cy="13" r="10.5" fill={active ? `rgba(${r1},${g1},${b1},1)` : '#0C0A2E'}/>
-                    {/* Rocket — flies straight left-to-right on hover */}
+                    {/* Rocket  -  flies straight left-to-right on hover */}
                     <g className="it-rocket-h">
                       {/* Body - horizontal ellipse */}
                       <ellipse cx="0" cy="32" rx="14" ry="6" fill="#EF4444"/>
-                      {/* Nose cone — points right */}
+                      {/* Nose cone  -  points right */}
                       <polygon points="14,32 8,26 8,38" fill="#F97316"/>
                       {/* Porthole */}
                       <circle cx="-3" cy="32" r="4.5" fill="#BFDBFE"/>
@@ -562,12 +562,12 @@ export default function OnboardingPage() {
                       <polygon points="-10,26 -16,18 -8,26" fill="#B91C1C"/>
                       {/* Bottom fin */}
                       <polygon points="-10,38 -16,46 -8,38" fill="#B91C1C"/>
-                      {/* Flame — at the back (left) */}
+                      {/* Flame  -  at the back (left) */}
                       <ellipse cx="-16" cy="32" rx="8"   ry="4.5" fill="rgba(251,146,60,0.95)"/>
                       <ellipse cx="-18" cy="32" rx="5.5" ry="3"   fill="rgba(253,224,71,0.95)"/>
                     </g>
                   </>),
-                  // ── SUPERHEROES — dark city, hero flies in & hovers ───────────
+                  // ── SUPERHEROES  -  dark city, hero flies in & hovers ───────────
                   'Superheroes': (<>
                     {/* Subtle stars in sky */}
                     <S cx={20} cy={6} r={1.2} d="0.1s"/><S cx={42} cy={4} r={1.5} d="0.5s"/><S cx={62} cy={7} r={1.0} d="0.9s"/>
@@ -580,19 +580,19 @@ export default function OnboardingPage() {
                     <rect x="48" y="35" width="10" height="25" fill="rgba(200,215,255,0.15)"/>
                     <rect x="56" y="26" width="14" height="34" fill="rgba(200,215,255,0.18)"/>
                     <rect x="68" y="34" width="9"  height="26" fill="rgba(200,215,255,0.13)"/>
-                    {/* Window lights — bright and visible */}
+                    {/* Window lights  -  bright and visible */}
                     {[[10,34],[10,40],[19,40],[25,35],[25,41],[49,37],[49,43],[57,28],[57,34],[57,40],[69,36],[69,42]].map(([x,y],i)=>(
                       <rect key={i} x={x} y={y} width="2.5" height="2" fill="rgba(255,230,100,0.95)" className="it-star" style={{animationDelay:`${i*0.18}s`}}/>
                     ))}
-                    {/* HERO — bigger, bolder, 2.4s cycle */}
+                    {/* HERO  -  bigger, bolder, 2.4s cycle */}
                     <g className="it-hero" style={{transformOrigin:'40px 27px'}}>
-                      {/* Cape — large, dramatic */}
+                      {/* Cape  -  large, dramatic */}
                       <path d="M35,22 Q16,27 14,40 Q24,33 33,37 Q30,28 35,22" fill="#DC2626"/>
                       {/* Body */}
                       <ellipse cx="41" cy="29" rx="7.5" ry="9.5" fill="#1D4ED8"/>
                       {/* Belt */}
                       <rect x="33.5" y="33" width="15" height="3" rx="1.5" fill="#FBBF24"/>
-                      {/* S shield — larger */}
+                      {/* S shield  -  larger */}
                       <circle cx="41" cy="27" r="4.5" fill="rgba(255,200,40,0.95)"/>
                       <text x="38.8" y="29.8" fontSize="6.5" fill="#1D4ED8" fontWeight="900">S</text>
                       {/* Head */}
@@ -611,7 +611,7 @@ export default function OnboardingPage() {
                       <line x1="41" y1="38" x2="36" y2="48" stroke="#1D4ED8" strokeWidth="4" strokeLinecap="round"/>
                     </g>
                   </>),
-                  // ── FANTASY — Disney-style castle with spires ────────────────
+                  // ── FANTASY  -  Disney-style castle with spires ────────────────
                   'Fantasy': (<>
                     <S cx={6} cy={3} r={1.1} d="0s"/><S cx={18} cy={2} r={0.8} d="0.35s"/>
                     <S cx={55} cy={4} r={1.3} d="0.7s"/><S cx={76} cy={6} r={1.0} d="0.5s"/>
@@ -624,7 +624,7 @@ export default function OnboardingPage() {
                     {/* Left tower */}
                     <rect x="15" y="33" width="13" height="27" fill="rgba(155,120,218,0.72)" rx="1"/>
                     <polygon points="21.5,16 15,33 28,33" fill="rgba(188,158,242,0.92)"/>
-                    {/* Main center tower — tallest & grandest */}
+                    {/* Main center tower  -  tallest & grandest */}
                     <rect x="31" y="23" width="18" height="37" fill="rgba(168,132,228,0.82)" rx="1"/>
                     <polygon points="40,1 33,23 47,23" fill="rgba(198,168,250,0.97)"/>
                     {/* Right tower */}
@@ -641,7 +641,7 @@ export default function OnboardingPage() {
                     ))}
                     {/* Grand arched gateway */}
                     <rect x="35" y="49" width="10" height="11" rx="5 5 0 0" fill="rgba(0,0,0,0.45)"/>
-                    {/* Glowing windows — warm amber glow */}
+                    {/* Glowing windows  -  warm amber glow */}
                     {[[8,36],[21.5,22],[40,10],[58.5,22],[72,36],[33,32],[40,32],[47,32],[21.5,40],[58.5,40]].map(([x,y],i)=>(
                       <rect key={i} x={(x as number)-1.5} y={(y as number)} width="3" height="4.5" rx="1.5" fill="rgba(255,215,90,0.92)" className="it-star" style={{animationDelay:`${i*0.14}s`}}/>
                     ))}
@@ -651,7 +651,7 @@ export default function OnboardingPage() {
                       <line key={i} x1="40" y1="1" x2={40+6*Math.cos(i*45*Math.PI/180)} y2={1+6*Math.sin(i*45*Math.PI/180)} stroke="rgba(255,215,60,0.55)" strokeWidth="1.1"/>
                     ))}
                   </>),
-                  // ── FAIRIES — fairy garden, flutters on hover ────────────────
+                  // ── FAIRIES  -  fairy garden, flutters on hover ────────────────
                   'Fairies': (<>
                     <S cx={6} cy={4} r={1.1} d="0s"/><S cx={20} cy={2} r={0.8} d="0.4s"/>
                     <S cx={58} cy={5} r={1.3} d="0.8s"/><S cx={72} cy={3} r={0.9} d="0.3s"/>
@@ -666,12 +666,12 @@ export default function OnboardingPage() {
                         <circle cx={x} cy={y} r="1.8" fill="rgba(255,240,100,0.95)" className="it-star" style={{animationDelay:`${i*0.3}s`}}/>
                       </g>
                     ))}
-                    {/* Resting fairy — gently bobs in idle */}
+                    {/* Resting fairy  -  gently bobs in idle */}
                     <g className="it-bob" style={{transformOrigin:'40px 26px', animationDelay:'0.0s'}}>
-                      {/* Upper wings — large teardrop shape */}
+                      {/* Upper wings  -  large teardrop shape */}
                       <path d="M40,20 Q28,10 24,20 Q28,28 40,24 Z" fill="rgba(200,160,255,0.38)" stroke="rgba(200,160,255,0.6)" strokeWidth="0.8"/>
                       <path d="M40,20 Q52,10 56,20 Q52,28 40,24 Z" fill="rgba(200,160,255,0.38)" stroke="rgba(200,160,255,0.6)" strokeWidth="0.8"/>
-                      {/* Lower wings — smaller */}
+                      {/* Lower wings  -  smaller */}
                       <path d="M40,26 Q30,22 27,30 Q32,34 40,30 Z" fill="rgba(220,180,255,0.28)" stroke="rgba(220,180,255,0.5)" strokeWidth="0.7"/>
                       <path d="M40,26 Q50,22 53,30 Q48,34 40,30 Z" fill="rgba(220,180,255,0.28)" stroke="rgba(220,180,255,0.5)" strokeWidth="0.7"/>
                       {/* Wing shimmer lines */}
@@ -685,7 +685,7 @@ export default function OnboardingPage() {
                       <polygon points="36,36 44,36 47,43 33,43" fill="rgba(255,100,200,0.8)"/>
                       {/* Head */}
                       <circle cx="40" cy="19" r="5.5" fill="rgba(255,210,185,0.97)"/>
-                      {/* Hair — flowing */}
+                      {/* Hair  -  flowing */}
                       <path d="M34.5,17 Q37,11 40,13.5 Q43,11 45.5,17" fill="rgba(180,100,255,0.92)"/>
                       <path d="M35,20 Q30,26 32,32" fill="none" stroke="rgba(180,100,255,0.7)" strokeWidth="2.5" strokeLinecap="round"/>
                       {/* Face */}
@@ -696,9 +696,9 @@ export default function OnboardingPage() {
                       <line x1="44" y1="28" x2="56" y2="18" stroke="rgba(200,175,80,0.9)" strokeWidth="1.8" strokeLinecap="round"/>
                       <circle cx="56" cy="18" r="3" fill="rgba(255,220,50,0.95)" className="it-pulse"/>
                     </g>
-                    {/* Fairy flutters across on hover — trailing sparkle dust */}
+                    {/* Fairy flutters across on hover  -  trailing sparkle dust */}
                     <g className="it-fairy-flutter" style={{transformOrigin:'20px 28px'}}>
-                      {/* Flying fairy — smaller, mid-flight pose */}
+                      {/* Flying fairy  -  smaller, mid-flight pose */}
                       <path d="M20,22 Q11,14 8,22 Q11,28 20,26 Z" fill="rgba(200,160,255,0.5)" stroke="rgba(200,160,255,0.7)" strokeWidth="0.7"/>
                       <path d="M20,22 Q29,14 32,22 Q29,28 20,26 Z" fill="rgba(200,160,255,0.5)" stroke="rgba(200,160,255,0.7)" strokeWidth="0.7"/>
                       <ellipse cx="20" cy="28" rx="3" ry="5" fill="rgba(255,130,220,0.9)"/>
@@ -710,7 +710,7 @@ export default function OnboardingPage() {
                       ))}
                     </g>
                   </>),
-                  // ── UNICORNS — full body prancing unicorn ────────────────────
+                  // ── UNICORNS  -  full body prancing unicorn ────────────────────
                   'Unicorns': (<>
                     <S cx={6} cy={4} r={1.2} d="0s"/><S cx={18} cy={2} r={0.8} d="0.35s"/>
                     <S cx={62} cy={5} r={1.4} d="0.7s"/><S cx={76} cy={3} r={1.0} d="0.4s"/>
@@ -728,13 +728,13 @@ export default function OnboardingPage() {
                     {/* Unicorn */}
                     <g transform="translate(6,5) scale(0.78)">
                     <g className="it-bob" style={{transformOrigin:'38px 35px', animationDelay:'0.15s'}}>
-                      {/* Tail — rainbow flowing */}
+                      {/* Tail  -  rainbow flowing */}
                       <path d="M20,35 Q8,24 5,15 Q9,26 13,32" fill="none" stroke="rgba(255,90,200,0.92)" strokeWidth="5" strokeLinecap="round"/>
                       <path d="M20,37 Q7,37 5,46 Q10,40 15,39" fill="none" stroke="rgba(170,70,255,0.88)" strokeWidth="4" strokeLinecap="round"/>
                       <path d="M20,33 Q8,20 11,11 Q14,21 18,27" fill="none" stroke="rgba(60,215,255,0.82)" strokeWidth="3" strokeLinecap="round"/>
-                      {/* Body — big and round */}
+                      {/* Body  -  big and round */}
                       <ellipse cx="37" cy="37" rx="18" ry="11" fill="rgba(242,230,255,0.97)"/>
-                      {/* Back legs — thick polygons */}
+                      {/* Back legs  -  thick polygons */}
                       <polygon points="23,47 29,47 28,59 22,59" fill="rgba(228,215,252,0.97)"/>
                       <polygon points="31,47 37,47 38,59 32,59" fill="rgba(228,215,252,0.95)"/>
                       {/* Back hooves */}
@@ -742,7 +742,7 @@ export default function OnboardingPage() {
                       <ellipse cx="35" cy="59" rx="3.5" ry="2" fill="rgba(160,120,210,0.88)"/>
                       {/* Neck */}
                       <polygon points="48,27 55,29 59,17 52,14" fill="rgba(242,230,255,0.97)"/>
-                      {/* Mane — rainbow lush */}
+                      {/* Mane  -  rainbow lush */}
                       <path d="M52,14 Q55,5 53,1 Q49,7 47,15" fill="none" stroke="rgba(255,80,185,0.95)" strokeWidth="6" strokeLinecap="round"/>
                       <path d="M55,16 Q60,7 57,2 Q53,9 51,17" fill="none" stroke="rgba(155,55,255,0.90)" strokeWidth="4.5" strokeLinecap="round"/>
                       <path d="M58,19 Q64,11 62,5 Q57,12 55,20" fill="none" stroke="rgba(55,210,255,0.85)" strokeWidth="3.2" strokeLinecap="round"/>
@@ -751,7 +751,7 @@ export default function OnboardingPage() {
                       {/* Snout */}
                       <ellipse cx="72" cy="24" rx="5" ry="3.5" fill="rgba(235,218,255,0.97)"/>
                       <circle cx="75" cy="25.5" r="1.1" fill="rgba(195,155,228,0.55)"/>
-                      {/* Eye — big expressive */}
+                      {/* Eye  -  big expressive */}
                       <circle cx="64" cy="19" r="3.8" fill="rgba(55,20,100,0.95)"/>
                       <circle cx="65.2" cy="17.8" r="1.6" fill="rgba(255,255,255,0.95)"/>
                       <circle cx="64.8" cy="17.2" r="0.7" fill="rgba(255,255,255,0.7)"/>
@@ -759,7 +759,7 @@ export default function OnboardingPage() {
                       <line x1="61" y1="16" x2="59.5" y2="14" stroke="rgba(70,30,110,0.85)" strokeWidth="1.3" strokeLinecap="round"/>
                       <line x1="64" y1="15" x2="63.5" y2="13" stroke="rgba(70,30,110,0.85)" strokeWidth="1.3" strokeLinecap="round"/>
                       <line x1="67" y1="16" x2="67.5" y2="14" stroke="rgba(70,30,110,0.85)" strokeWidth="1.3" strokeLinecap="round"/>
-                      {/* Horn — tall gold */}
+                      {/* Horn  -  tall gold */}
                       <polygon points="61,14 59,0 67,13" fill="rgba(255,198,35,0.97)"/>
                       <line x1="60.5" y1="11" x2="62.5" y2="11" stroke="rgba(215,145,15,0.6)" strokeWidth="0.9"/>
                       <line x1="59.8" y1="8" x2="62" y2="8" stroke="rgba(215,145,15,0.6)" strokeWidth="0.9"/>
@@ -768,7 +768,7 @@ export default function OnboardingPage() {
                       {/* Front standing leg */}
                       <polygon points="43,47 49,47 48,59 42,59" fill="rgba(228,215,252,0.97)"/>
                       <ellipse cx="45" cy="59" rx="3.5" ry="2" fill="rgba(160,120,210,0.88)"/>
-                      {/* Front prancing leg — raised */}
+                      {/* Front prancing leg  -  raised */}
                       <polygon points="50,47 56,47 58,37 52,37" fill="rgba(228,215,252,0.97)"/>
                       <polygon points="53,37 58,37 63,46 57,46" fill="rgba(228,215,252,0.95)"/>
                       <ellipse cx="60" cy="46" rx="3.5" ry="2" fill="rgba(160,120,210,0.88)"/>
@@ -779,7 +779,7 @@ export default function OnboardingPage() {
                       <circle key={i} cx={x} cy={y} r="1.8" fill="rgba(255,220,255,0.9)" className="it-star" style={{animationDelay:`${i*0.3}s`}}/>
                     ))}
                   </>),
-                  // ── PRINCESSES — Disney princess in ballgown ─────────────────
+                  // ── PRINCESSES  -  Disney princess in ballgown ─────────────────
                   'Princesses': (<>
                     <S cx={6}  cy={3}  r={1.0} d="0s"/><S cx={68} cy={4}  r={1.2} d="0.5s"/>
                     <S cx={76} cy={14} r={0.9} d="0.8s"/><S cx={14} cy={18} r={0.8} d="0.3s"/>
@@ -794,7 +794,7 @@ export default function OnboardingPage() {
                     {[0,1,2,3,4,5].map(i=><circle key={i} cx={33+i*3} cy={12} r="1.5" fill="rgba(255,230,100,0.9)" className="it-star" style={{animationDelay:`${i*0.2}s`}}/>)}
                     {/* Princess figure */}
                     <g className="it-bob" style={{transformOrigin:'40px 30px', animationDelay:'0.9s'}}>
-                      {/* Ballgown — 3 layered tiers */}
+                      {/* Ballgown  -  3 layered tiers */}
                       <polygon points="40,32 16,60 64,60" fill="rgba(180,80,200,0.75)"/>
                       <polygon points="40,38 20,60 60,60" fill="rgba(200,100,220,0.65)"/>
                       <ellipse cx="40" cy="56" rx="20" ry="5" fill="rgba(220,130,240,0.5)"/>
@@ -827,7 +827,7 @@ export default function OnboardingPage() {
                       <circle cx="37.5" cy="13.5" r="1.3" fill="rgba(100,60,120,0.9)"/>
                       <circle cx="42.5" cy="13.5" r="1.3" fill="rgba(100,60,120,0.9)"/>
                       <path d="M37.5,16.5 Q40,19 42.5,16.5" fill="none" stroke="rgba(200,80,120,0.8)" strokeWidth="1.2" strokeLinecap="round"/>
-                      {/* Crown — 5-point elaborate */}
+                      {/* Crown  -  5-point elaborate */}
                       <polygon points="33,8 36,2 40,5.5 44,2 47,8" fill="rgba(255,200,40,0.97)"/>
                       <rect x="33" y="7" width="14" height="3.5" rx="1" fill="rgba(240,180,30,0.95)"/>
                       <circle cx="36" cy="3" r="2" fill="rgba(255,80,120,0.95)" className="it-pulse"/>
@@ -835,17 +835,17 @@ export default function OnboardingPage() {
                       <circle cx="44" cy="3" r="2" fill="rgba(255,80,120,0.95)" className="it-pulse" style={{animationDelay:'0.5s'}}/>
                     </g>
                   </>),
-                  // ── PIRATES — tall ship on the dark sea ─────────────────────
+                  // ── PIRATES  -  tall ship on the dark sea ─────────────────────
                   'Pirates': (<>
-                    {/* Stars — fixed, opacity only */}
+                    {/* Stars  -  fixed, opacity only */}
                     <S cx={62} cy={4} r={1.3} d="0s"/><S cx={72} cy={10} r={1.0} d="0.4s"/><S cx={55} cy={2} r={1.5} d="0.8s"/><S cx={76} cy={18} r={0.9} d="0.6s"/>
                     {/* Crescent moon */}
                     <circle cx="10" cy="11" r="9" fill="rgba(255,235,145,0.92)"/>
                     <circle cx="14" cy="9"  r="7.5" fill="#071422"/>
-                    {/* Waves — dark ocean */}
+                    {/* Waves  -  dark ocean */}
                     <path d="M0,50 Q10,44 20,50 Q30,56 40,50 Q50,44 60,50 Q70,56 80,50" fill="rgba(20,50,130,0.45)" className="it-wave-y"/>
                     <path d="M0,56 Q10,50 20,56 Q30,62 40,56 Q50,50 60,56 Q70,62 80,56" fill="rgba(20,50,130,0.55)" className="it-wave-y" style={{animationDelay:'0.5s'}}/>
-                    {/* Ship — gently bobs on the water */}
+                    {/* Ship  -  gently bobs on the water */}
                     <g className="it-bob" style={{transformOrigin:'40px 40px', animationDelay:'1.1s'}}>
                       {/* Hull */}
                       <polygon points="20,38 60,38 56,50 24,50" fill="rgba(90,48,12,0.97)"/>
@@ -876,13 +876,13 @@ export default function OnboardingPage() {
                       <circle cx="43" cy="3.5" r="1.6" fill="rgba(240,240,240,0.9)"/>
                       <line x1="41.4" y1="4.8" x2="43" y2="5.8" stroke="rgba(240,240,240,0.8)" strokeWidth="0.7"/>
                       <line x1="44.6" y1="4.8" x2="43" y2="5.8" stroke="rgba(240,240,240,0.8)" strokeWidth="0.7"/>
-                      {/* Pirate idle — always faintly visible so hover "reveal" is satisfying */}
+                      {/* Pirate idle  -  always faintly visible so hover "reveal" is satisfying */}
                       <g opacity="0.25">
                         <circle cx="40" cy="2.5" r="2.8" fill="rgba(215,168,112,1)"/>
                         <rect x="37" y="0.2" width="6" height="2" rx="0.5" fill="rgba(18,18,18,1)"/>
                         <rect x="37.5" y="4" width="5" height="5.5" rx="0.5" fill="rgba(25,25,80,1)"/>
                       </g>
-                      {/* Pirate on hover — bounces in then waves dramatically */}
+                      {/* Pirate on hover  -  bounces in then waves dramatically */}
                       <g className="it-pirate-appear" style={{transformOrigin:'40px 4px'}}>
                         {/* Body */}
                         <rect x="37.5" y="4" width="5" height="5.5" rx="0.5" fill="rgba(25,25,80,0.97)"/>
@@ -890,7 +890,7 @@ export default function OnboardingPage() {
                         <circle cx="40" cy="2.5" r="2.8" fill="rgba(215,168,112,0.97)"/>
                         {/* Pirate hat */}
                         <rect x="37" y="0.2" width="6" height="2" rx="0.5" fill="rgba(18,18,18,0.97)"/>
-                        {/* Waving arm — wide rotation */}
+                        {/* Waving arm  -  wide rotation */}
                         <g className="it-pirate-wave" style={{transformOrigin:'42.5px 5.5px'}}>
                           <line x1="42.5" y1="5.5" x2="49" y2="1.5" stroke="rgba(25,25,80,0.97)" strokeWidth="2" strokeLinecap="round"/>
                           <circle cx="49" cy="1.5" r="2" fill="rgba(215,168,112,0.97)"/>
@@ -900,13 +900,13 @@ export default function OnboardingPage() {
                       </g>
                     </g>
                   </>),
-                  // ── MAGIC — elegant wand with swirling energy ────────────────
+                  // ── MAGIC  -  elegant wand with swirling energy ────────────────
                   'Magic': (<>
                     {/* Twinkling background stars */}
                     {[{x:66,y:6,r:1.6},{x:76,y:24,r:1.2},{x:8,y:12,r:1.5},{x:4,y:46,r:1.2},{x:78,y:50,r:1.4}].map(({x,y,r},i)=>(
                       <circle key={i} cx={x} cy={y} r={r} fill="rgba(255,210,80,0.85)" className="it-star" style={{animationDelay:`${i*0.42}s`}}/>
                     ))}
-                    {/* WIZARD HAT — tall golden */}
+                    {/* WIZARD HAT  -  tall golden */}
                     <polygon points="34,1 22,27 52,27" fill="rgba(210,162,18,0.97)"/>
                     <polygon points="34,1 22,27 52,27" fill="rgba(255,220,70,0.22)"/>
                     <ellipse cx="37" cy="27" rx="18" ry="5" fill="rgba(182,128,10,0.97)"/>
@@ -920,7 +920,7 @@ export default function OnboardingPage() {
                     {/* WIZARD ROBE */}
                     <path d="M22,42 Q17,60 13,60 L58,60 Q56,42 50,42 Q44,40 37,42 Q30,40 22,42Z" fill="rgba(82,32,148,0.97)"/>
                     <line x1="37" y1="43" x2="35" y2="59" stroke="rgba(125,80,210,0.35)" strokeWidth="2"/>
-                    {/* WAND ARM — sleeve extending right */}
+                    {/* WAND ARM  -  sleeve extending right */}
                     <path d="M50,50 Q60,44 66,36" fill="none" stroke="rgba(82,32,148,0.97)" strokeWidth="10" strokeLinecap="round"/>
                     {/* Hand */}
                     <circle cx="66" cy="36" r="5.5" fill="rgba(228,188,132,0.96)"/>
@@ -947,7 +947,7 @@ export default function OnboardingPage() {
                       ))}
                     </g>
                   </>),
-                  // ── ALIENS — dark space encounter ───────────────────────────
+                  // ── ALIENS  -  dark space encounter ───────────────────────────
                   'Aliens': (<>
                     {/* Stars */}
                     {[{x:6,y:4,r:1.3},{x:18,y:2,r:0.9},{x:38,y:5,r:1.6},{x:54,y:3,r:1.1},{x:66,y:6,r:1.4},{x:74,y:14,r:1.0},{x:4,y:18,r:1.2},{x:76,y:28,r:0.8}].map(({x,y,r},i)=>(
@@ -957,7 +957,7 @@ export default function OnboardingPage() {
                     <circle cx="68" cy="10" r="9"  fill="rgba(0,180,80,0.25)"/>
                     <circle cx="68" cy="10" r="7"  fill="rgba(0,200,100,0.35)"/>
                     <ellipse cx="68" cy="10" rx="9" ry="3" fill="none" stroke="rgba(0,220,120,0.4)" strokeWidth="1.5" transform="rotate(-20,68,10)"/>
-                    {/* UFO — hovering */}
+                    {/* UFO  -  hovering */}
                     <ellipse cx="40" cy="20" rx="20" ry="9"  fill="rgba(0,180,80,0.35)"/>
                     <ellipse cx="40" cy="21" rx="14" ry="6"  fill="rgba(0,220,120,0.5)"/>
                     <ellipse cx="40" cy="19" rx="7"  ry="6"  fill="rgba(0,240,140,0.4)"/>
@@ -980,9 +980,9 @@ export default function OnboardingPage() {
                       <circle  cx="42" cy="39" r="1.5" fill="rgba(0,0,0,0.9)"/>
                     </g>
                   </>),
-                  // ── DINOSAURS — triceratops + brachiosaurus ──────────────────
+                  // ── DINOSAURS  -  triceratops + brachiosaurus ──────────────────
                   'Dinosaurs': (<>
-                    {/* Forest background — layered dark pines */}
+                    {/* Forest background  -  layered dark pines */}
                     {[[0,28],[6,34],[68,30],[74,26]].map(([x,h],i)=>(
                       <g key={i}>
                         <rect x={x+1} y={60-h*0.28} width="3" height={h*0.28} fill="rgba(12,28,8,0.95)" rx="1"/>
@@ -990,7 +990,7 @@ export default function OnboardingPage() {
                         <polygon points={`${x+2.5-h*0.3},${60-h*0.52} ${x+2.5+h*0.3},${60-h*0.52} ${x+2.5},${60-h*1.12}`} fill="rgba(10,48,14,0.85)"/>
                       </g>
                     ))}
-                    {/* Mid forest — slightly lighter */}
+                    {/* Mid forest  -  slightly lighter */}
                     {[[14,20],[20,24],[54,22],[60,18]].map(([x,h],i)=>(
                       <g key={i}>
                         <rect x={x+1} y={60-h*0.28} width="2.5" height={h*0.28} fill="rgba(14,36,10,0.88)" rx="1"/>
@@ -1011,26 +1011,26 @@ export default function OnboardingPage() {
                     ))}
                     {/* Stegosaurus */}
                     <g className="it-bob" style={{transformOrigin:'36px 40px', animationDelay:'0.2s'}}>
-                      {/* Tail — thick, curves left and up */}
+                      {/* Tail  -  thick, curves left and up */}
                       <path d="M18,42 Q8,38 4,30 Q3,25 6,24" fill="none" stroke="rgba(48,110,38,0.97)" strokeWidth="8" strokeLinecap="round"/>
                       {/* Tail tip spike */}
                       <polygon points="4,22 8,28 2,26" fill="rgba(35,85,28,0.95)"/>
-                      {/* Body — wide, low, fat */}
+                      {/* Body  -  wide, low, fat */}
                       <ellipse cx="36" cy="42" rx="20" ry="11" fill="rgba(52,118,42,0.97)"/>
                       {/* Belly highlight */}
                       <ellipse cx="36" cy="46" rx="13" ry="6" fill="rgba(68,145,55,0.35)"/>
                       {/* Neck connecting to head */}
                       <polygon points="50,34 56,36 60,28 54,26" fill="rgba(52,118,42,0.97)"/>
-                      {/* Head — small, angled forward-down */}
+                      {/* Head  -  small, angled forward-down */}
                       <ellipse cx="60" cy="34" rx="9" ry="6" fill="rgba(52,118,42,0.97)"/>
-                      {/* Snout — beak-like */}
+                      {/* Snout  -  beak-like */}
                       <polygon points="67,35 74,38 72,42 65,40" fill="rgba(42,95,34,0.97)"/>
-                      {/* Eye — small, calm */}
+                      {/* Eye  -  small, calm */}
                       <circle cx="62" cy="31" r="2.8" fill="rgba(10,5,2,0.95)"/>
                       <circle cx="63" cy="30" r="1.1" fill="rgba(255,255,255,0.8)"/>
                       {/* Nostril */}
                       <ellipse cx="70" cy="37" rx="1.4" ry="1" fill="rgba(28,68,22,0.7)"/>
-                      {/* 4 legs — thick pillars */}
+                      {/* 4 legs  -  thick pillars */}
                       <polygon points="22,51 29,51 28,60 21,60" fill="rgba(44,100,35,0.97)"/>
                       <polygon points="30,51 37,51 36,60 29,60" fill="rgba(44,100,35,0.95)"/>
                       <polygon points="38,51 45,51 44,60 37,60" fill="rgba(44,100,35,0.97)"/>
@@ -1039,7 +1039,7 @@ export default function OnboardingPage() {
                       {[[24,60],[33,60],[41,60],[49,60]].map(([x,y],i)=>(
                         <ellipse key={i} cx={x} cy={y} rx="4" ry="2" fill="rgba(36,84,28,0.9)"/>
                       ))}
-                      {/* Back plates — iconic stego feature, amber/orange for contrast */}
+                      {/* Back plates  -  iconic stego feature, amber/orange for contrast */}
                       {[
                         {x:22,y:32,h:9},
                         {x:28,y:29,h:13},
@@ -1059,7 +1059,7 @@ export default function OnboardingPage() {
                       <circle key={i} cx={x} cy={y} r="1.5" fill="rgba(180,255,100,0.85)" className="it-star" style={{animationDelay:`${i*0.45}s`}}/>
                     ))}
                   </>),
-                  // ── ANIMALS — safari with multiple animals ────────────────────
+                  // ── ANIMALS  -  safari with multiple animals ────────────────────
                   'Animals': (<>
                     <S cx={6} cy={3} r={1.0} d="0s"/><S cx={20} cy={2} r={0.8} d="0.4s"/>
                     {/* Savannah sunset */}
@@ -1071,7 +1071,7 @@ export default function OnboardingPage() {
                     {/* Acacia tree */}
                     <rect x="56" y="30" width="4" height="20" fill="rgba(80,50,20,0.6)" rx="1"/>
                     <ellipse cx="58" cy="28" rx="12" ry="6" fill="rgba(25,100,25,0.5)"/>
-                    {/* Giraffe — background left */}
+                    {/* Giraffe  -  background left */}
                     <g style={{opacity:0.82}}>
                       <rect x="10" y="8" width="5" height="28" rx="2.5" fill="rgba(220,175,70,0.9)"/>
                       <ellipse cx="12.5" cy="7" rx="5" ry="4.5" fill="rgba(220,175,70,0.9)"/>
@@ -1083,7 +1083,7 @@ export default function OnboardingPage() {
                       {[[9,32],[13,32],[16,32],[19,32]].map(([x,y],i)=><rect key={i} x={x-1.5} y={y+10} width={3} height={16} rx="1.5" fill="rgba(200,155,55,0.9)"/>)}
                       {[[9,28],[13,30],[17,29],[20,31]].map(([x,y],i)=><ellipse key={i} cx={x} cy={y} rx="2.5" ry="2" fill="rgba(155,100,15,0.55)"/>)}
                     </g>
-                    {/* Elephant — background right */}
+                    {/* Elephant  -  background right */}
                     <g style={{opacity:0.75}}>
                       <ellipse cx="66" cy="40" rx="9" ry="7" fill="rgba(120,115,125,0.75)"/>
                       <ellipse cx="66" cy="31" rx="7" ry="6.5" fill="rgba(120,115,125,0.75)"/>
@@ -1093,7 +1093,7 @@ export default function OnboardingPage() {
                       <path d="M72,34 Q77,35 75,39" fill="none" stroke="rgba(230,220,200,0.7)" strokeWidth="2" strokeLinecap="round"/>
                       {[[60,45],[64,45],[68,45],[72,45]].map(([x,y],i)=><rect key={i} x={x-2} y={y} width={4} height={11} rx="2" fill="rgba(115,110,120,0.8)"/>)}
                     </g>
-                    {/* Lion — foreground center */}
+                    {/* Lion  -  foreground center */}
                     <g className="it-bob" style={{transformOrigin:'40px 36px', animationDelay:'0.8s'}}>
                       {/* Mane */}
                       <circle cx="40" cy="28" r="14" fill="rgba(155,85,18,0.72)"/>
@@ -1125,7 +1125,7 @@ export default function OnboardingPage() {
                       <circle cx="57" cy="51" r="4" fill="rgba(148,78,14,0.75)"/>
                     </g>
                   </>),
-                  // ── OCEAN — deep sea world ───────────────────────────────────
+                  // ── OCEAN  -  deep sea world ───────────────────────────────────
                   'Ocean': (<>
                     {/* Coral reef */}
                     {[[5,58],[14,54],[60,56],[72,52]].map(([x,y],i)=>(
@@ -1141,7 +1141,7 @@ export default function OnboardingPage() {
                     {[12,28,50,66].map((cx,i)=>(
                       <circle key={i} cx={cx} cy={18+i*5} r={2.2+i%2*0.8} fill="rgba(150,220,255,0.4)" className="it-up" style={{animationDelay:`${i*0.5}s`}}/>
                     ))}
-                    {/* Tropical fish — eye on right = swims forward left-to-right */}
+                    {/* Tropical fish  -  eye on right = swims forward left-to-right */}
                     <g className="it-swim">
                       {/* Body */}
                       <ellipse cx="0" cy="26" rx="12" ry="7" fill="rgba(255,120,0,0.95)"/>
@@ -1163,7 +1163,7 @@ export default function OnboardingPage() {
                       {[0,1,2,3,4].map(i=><line key={i} x1="66" y1="55" x2={66+8*Math.cos(i*72*Math.PI/180)} y2={55+8*Math.sin(i*72*Math.PI/180)} stroke="rgba(255,150,50,0.8)" strokeWidth="2.5" strokeLinecap="round"/>)}
                     </g>
                   </>),
-                  // ── NATURE — sunrise forest ──────────────────────────────────
+                  // ── NATURE  -  sunrise forest ──────────────────────────────────
                   'Nature': (<>
                     {/* Sunrise sky gradient effect */}
                     <ellipse cx="40" cy="0" rx="35" ry="22" fill="rgba(255,160,50,0.15)"/>
@@ -1196,7 +1196,7 @@ export default function OnboardingPage() {
                       <path key={i} d={`M${x},${y} Q${x+4},${y-3} ${x+8},${y}`} fill="none" stroke="rgba(0,0,0,0.4)" strokeWidth="1.2" strokeLinecap="round"/>
                     ))}
                   </>),
-                  // ── ROBOTS — dark robot workshop ─────────────────────────────
+                  // ── ROBOTS  -  dark robot workshop ─────────────────────────────
                   'Robots': (<>
                     {/* Circuit board traces */}
                     {[[5,20],[5,35],[75,22],[75,38]].map(([x,y],i)=>(
@@ -1210,7 +1210,7 @@ export default function OnboardingPage() {
                     {/* Antenna */}
                     <line x1="40" y1="7" x2="40" y2="9" stroke="rgba(100,200,255,0.8)" strokeWidth="2"/>
                     <circle cx="40" cy="5.5" r="2.5" fill="rgba(100,200,255,0.9)" className="it-star" style={{animationDelay:'0s'}}/>
-                    {/* Eyes — glowing */}
+                    {/* Eyes  -  glowing */}
                     <circle cx="35" cy="14" r="4" fill="rgba(0,0,0,0.5)"/>
                     <circle cx="35" cy="14" r="2.8" fill="rgba(0,220,180,0.9)" className="it-star" style={{animationDelay:'0s'}}/>
                     <circle cx="45" cy="14" r="4" fill="rgba(0,0,0,0.5)"/>
@@ -1237,7 +1237,7 @@ export default function OnboardingPage() {
                       {[0,1,2,3,4,5].map(i=><line key={i} x1="68" y1="42" x2={68+9*Math.cos(i*60*Math.PI/180)} y2={42+9*Math.sin(i*60*Math.PI/180)} stroke="rgba(100,150,220,0.4)" strokeWidth="1.5"/>)}
                     </g>
                   </>),
-                  // ── SCIENCE — glowing dark lab ───────────────────────────────
+                  // ── SCIENCE  -  glowing dark lab ───────────────────────────────
                   'Science': (<>
                     {/* Lab shelf */}
                     <line x1="0" y1="18" x2="80" y2="18" stroke="rgba(60,120,160,0.4)" strokeWidth="1.5"/>
@@ -1262,7 +1262,7 @@ export default function OnboardingPage() {
                     {/* Glow effect on flask */}
                     <ellipse cx="40" cy="46" rx="14" ry="8" fill="rgba(0,220,180,0.08)" className="it-pulse"/>
                   </>),
-                  // ── GAMING — dark arcade ─────────────────────────────────────
+                  // ── GAMING  -  dark arcade ─────────────────────────────────────
                   'Gaming': (<>
                     {/* Screen glow */}
                     <rect x="10" y="4"  width="60" height="48" rx="5" fill="rgba(80,40,180,0.25)" stroke="rgba(120,80,220,0.6)" strokeWidth="1.5"/>
@@ -1301,7 +1301,7 @@ export default function OnboardingPage() {
                     <line x1="50" y1="50" x2="50" y2="54" stroke="rgba(150,120,200,0.6)" strokeWidth="1.2"/>
                     <line x1="48" y1="52" x2="52" y2="52" stroke="rgba(150,120,200,0.6)" strokeWidth="1.2"/>
                   </>),
-                  // ── SOCCER — sunny pitch ─────────────────────────────────────
+                  // ── SOCCER  -  sunny pitch ─────────────────────────────────────
                   'Soccer': (<>
                     {/* Sky */}
                     <rect x="0" y="0" width="80" height="28" fill="rgba(100,180,255,0.4)"/>
@@ -1328,7 +1328,7 @@ export default function OnboardingPage() {
                       <circle cx="50" cy="42" r="3.5" fill="rgba(0,0,0,0.15)"/>
                     </g>
                   </>),
-                  // ── FOOTBALL — night game under lights ──────────────────────
+                  // ── FOOTBALL  -  night game under lights ──────────────────────
                   'Football': (<>
                     {/* Field stripes */}
                     {[0,1,2,3,4].map(i=><rect key={i} x={i*16} y={0} width={8} height={60} fill={i%2===0?'rgba(20,100,30,0.8)':'rgba(18,90,26,0.8)'}/>)}
@@ -1349,7 +1349,7 @@ export default function OnboardingPage() {
                       {[0,1,2].map(i=><line key={i} x1={42+i*5} y1="21" x2={40+i*5} y2="39" stroke="rgba(255,255,255,0.35)" strokeWidth="1" transform="rotate(-20,48,30)"/>)}
                     </g>
                   </>),
-                  // ── GYMNASTICS — gymnast on balance beam ─────────────────
+                  // ── GYMNASTICS  -  gymnast on balance beam ─────────────────
                   'Gymnastics': (<>
                     {/* Gym floor */}
                     <rect x="0" y="50" width="80" height="10" fill="rgba(255,225,160,0.3)"/>
@@ -1361,9 +1361,9 @@ export default function OnboardingPage() {
                     {/* Spotlight */}
                     <polygon points="18,0 36,0 46,47 8,47" fill="rgba(255,220,150,0.05)"/>
                     <circle cx="27" cy="2" r="5" fill="rgba(255,220,120,0.5)" className="it-pulse"/>
-                    {/* Gymnast — cream skin on dark bg */}
+                    {/* Gymnast  -  cream skin on dark bg */}
                     <g className="it-bob" style={{transformOrigin:'27px 27px',animationDelay:'0.5s'}}>
-                      {/* Arabesque leg — raised behind, going right */}
+                      {/* Arabesque leg  -  raised behind, going right */}
                       <polygon points="25,37 31,37 46,29 40,24" fill="rgba(232,205,178,0.97)"/>
                       <ellipse cx="43" cy="26.5" rx="4.5" ry="2.5" fill="rgba(232,205,178,0.97)" transform="rotate(-22,43,27)"/>
                       {/* Standing leg */}
@@ -1371,12 +1371,12 @@ export default function OnboardingPage() {
                       {/* Body leotard */}
                       <ellipse cx="26" cy="27" rx="8" ry="9" fill={c(0.92)}/>
                       <line x1="26" y1="18" x2="26" y2="36" stroke="rgba(255,255,255,0.28)" strokeWidth="2" strokeLinecap="round"/>
-                      {/* Wand arm — raised to top right */}
+                      {/* Wand arm  -  raised to top right */}
                       <polygon points="26,19 31,20 40,9 35,8" fill="rgba(232,205,178,0.97)"/>
                       <circle cx="37.5" cy="8.5" r="3.2" fill="rgba(232,205,178,0.97)"/>
                       {/* Wand stick */}
                       <line x1="40" y1="7" x2="50" y2="2" stroke="rgba(210,210,220,0.92)" strokeWidth="1.5" strokeLinecap="round"/>
-                      {/* Other arm — out to left */}
+                      {/* Other arm  -  out to left */}
                       <polygon points="21,24 26,28 13,33 11,29" fill="rgba(232,205,178,0.97)"/>
                       <circle cx="10" cy="31" r="3.2" fill="rgba(232,205,178,0.97)"/>
                       {/* Head */}
@@ -1389,7 +1389,7 @@ export default function OnboardingPage() {
                       <ellipse cx="27" cy="5" rx="5" ry="3.5" fill={c(0.88)}/>
                       <circle cx="27" cy="4.5" r="2" fill={c(0.96)}/>
                     </g>
-                    {/* Ribbon — multicolor flowing from wand tip */}
+                    {/* Ribbon  -  multicolor flowing from wand tip */}
                     <g className="it-ribbon" style={{transformOrigin:'50px 2px'}}>
                       <path d="M50,2 Q63,12 59,25 Q55,38 66,46" fill="none" stroke="rgba(255,75,185,0.93)" strokeWidth="2.5" strokeLinecap="round"/>
                       <path d="M50,2 Q68,10 72,24 Q75,38 66,48" fill="none" stroke="rgba(60,210,255,0.88)" strokeWidth="2" strokeLinecap="round"/>
@@ -1400,7 +1400,7 @@ export default function OnboardingPage() {
                       <g key={i}>{[0,7,14].map(dx=><circle key={dx} cx={x+dx} cy={y} r="2" fill={c(0.75)} className="it-star" style={{animationDelay:`${(i*3+dx/7)*0.2}s`}}/>)}</g>
                     ))}
                   </>),
-                  // ── DANCING — dancer in spotlight ────────────────────────
+                  // ── DANCING  -  dancer in spotlight ────────────────────────
                   'Dancing': (<>
                     {/* Stage floor */}
                     <rect x="0" y="50" width="80" height="10" fill="rgba(60,10,10,0.65)"/>
@@ -1409,18 +1409,18 @@ export default function OnboardingPage() {
                     <circle cx="40" cy="2" r="8" fill="rgba(255,220,100,0.68)" className="it-pulse"/>
                     <polygon points="34,2 46,2 54,50 26,50" fill="rgba(255,220,100,0.08)"/>
                     <ellipse cx="40" cy="50" rx="26" ry="5" fill="rgba(255,200,100,0.09)"/>
-                    {/* DANCER — cream skin + bright dress for contrast on dark maroon */}
+                    {/* DANCER  -  cream skin + bright dress for contrast on dark maroon */}
                     <g className="it-bob" style={{transformOrigin:'40px 28px',animationDelay:'0.4s'}}>
-                      {/* Flared skirt — wide, bright */}
+                      {/* Flared skirt  -  wide, bright */}
                       <path d="M40,36 Q25,40 14,52 Q29,49 40,45 Q51,49 66,52 Q55,40 40,36" fill={c(0.88)}/>
                       <path d="M40,38 Q27,42 18,52 Q31,49 40,45" fill={c(0.62)}/>
                       {/* Skirt top/waist accent */}
                       <ellipse cx="40" cy="36" rx="8" ry="3" fill={c(0.75)}/>
-                      {/* Body — cream for contrast */}
+                      {/* Body  -  cream for contrast */}
                       <ellipse cx="40" cy="26" rx="7" ry="10" fill="rgba(248,218,158,0.97)"/>
                       {/* Red dress bodice overlay */}
                       <ellipse cx="40" cy="31" rx="7" ry="6" fill={c(0.80)}/>
-                      {/* Head — cream */}
+                      {/* Head  -  cream */}
                       <circle cx="40" cy="12" r="8" fill="rgba(248,218,158,0.97)"/>
                       {/* Hair up in bun */}
                       <ellipse cx="40" cy="5" rx="5.5" ry="4.5" fill={c(0.68)}/>
@@ -1429,13 +1429,13 @@ export default function OnboardingPage() {
                       <circle cx="37" cy="11.5" r="1.5" fill={c(0.72)}/>
                       <circle cx="43" cy="11.5" r="1.5" fill={c(0.72)}/>
                       <path d="M37,14.5 Q40,17 43,14.5" fill="none" stroke={c(0.62)} strokeWidth="1.3" strokeLinecap="round"/>
-                      {/* Arm raised up — cream */}
+                      {/* Arm raised up  -  cream */}
                       <path d="M34,22 Q23,16 19,7" fill="none" stroke="rgba(248,218,158,0.97)" strokeWidth="5.5" strokeLinecap="round"/>
                       <circle cx="19" cy="7" r="4" fill="rgba(248,218,158,0.97)"/>
-                      {/* Arm out right — cream */}
+                      {/* Arm out right  -  cream */}
                       <path d="M46,24 Q57,26 64,21" fill="none" stroke="rgba(248,218,158,0.97)" strokeWidth="5" strokeLinecap="round"/>
                       <circle cx="64" cy="21" r="3.5" fill="rgba(248,218,158,0.97)"/>
-                      {/* Legs — cream */}
+                      {/* Legs  -  cream */}
                       <line x1="37" y1="44" x2="32" y2="55" stroke="rgba(238,205,145,0.96)" strokeWidth="5" strokeLinecap="round"/>
                       <ellipse cx="31" cy="56" rx="3.5" ry="2" fill={c(0.68)}/>
                       <line x1="43" y1="44" x2="50" y2="54" stroke="rgba(238,205,145,0.94)" strokeWidth="4.5" strokeLinecap="round"/>
@@ -1448,12 +1448,12 @@ export default function OnboardingPage() {
                       </g>
                     ))}
                   </>),
-                  // ── KARATE — martial artist in proper gi ─────────────────────
+                  // ── KARATE  -  martial artist in proper gi ─────────────────────
                   'Karate': (<>
                     {/* Tatami mats */}
                     {[0,1,2,3,4].map(i=><rect key={i} x={i*16} y={51} width={14} height={9} fill={c(0.1+i*0.02)} rx="1"/>)}
                     <line x1="0" y1="51" x2="80" y2="51" stroke={c(0.45)} strokeWidth="1.5"/>
-                    {/* Ki aura — subtle background glow */}
+                    {/* Ki aura  -  subtle background glow */}
                     <g className="it-pulse" style={{transformOrigin:'36px 30px', opacity:0.5}}>
                       {[0,36,72,108,144,180,216,252,288,324].map((deg,i)=>(
                         <line key={i} x1="36" y1="30"
@@ -1463,7 +1463,7 @@ export default function OnboardingPage() {
                           strokeWidth={i%2===0?1.8:1.2} strokeLinecap="round"/>
                       ))}
                     </g>
-                    {/* Karateka — guard stance, both feet grounded */}
+                    {/* Karateka  -  guard stance, both feet grounded */}
                     <g className="it-bob" style={{transformOrigin:'34px 32px', animationDelay:'0.6s'}}>
                       {/* Back left leg */}
                       <polygon points="22,45 29,45 27,59 20,59" fill="rgba(244,244,248,0.97)"/>
@@ -1477,17 +1477,17 @@ export default function OnboardingPage() {
                       <path d="M34,16 L42,42" stroke="rgba(175,175,188,0.5)" strokeWidth="1.8"/>
                       {/* Black belt */}
                       <rect x="19" y="41" width="30" height="5.5" rx="2.2" fill="rgba(8,8,12,0.97)"/>
-                      {/* Front guard arm — extended forward at chest height */}
+                      {/* Front guard arm  -  extended forward at chest height */}
                       <polygon points="44,24 50,30 64,24 58,18" fill="rgba(244,244,248,0.97)"/>
                       <circle cx="61" cy="21" r="5.5" fill="rgba(228,188,132,0.95)"/>
-                      {/* Back chamber arm — fist pulled to hip */}
+                      {/* Back chamber arm  -  fist pulled to hip */}
                       <polygon points="23,27 27,34 10,43 6,36" fill="rgba(244,244,248,0.97)"/>
                       <circle cx="7" cy="39.5" r="5" fill="rgba(228,188,132,0.95)"/>
                       {/* Head */}
                       <circle cx="34" cy="9" r="9.5" fill="rgba(228,188,132,0.97)"/>
                       {/* Red headband */}
                       <rect x="24.5" y="5" width="19" height="5.5" rx="2.5" fill="rgba(212,25,25,0.95)"/>
-                      {/* Eyes — focused forward */}
+                      {/* Eyes  -  focused forward */}
                       <circle cx="30" cy="9.5" r="1.7" fill="rgba(18,6,2,0.93)"/>
                       <circle cx="38" cy="9.5" r="1.7" fill="rgba(18,6,2,0.93)"/>
                       {/* Fierce brows */}
@@ -1501,7 +1501,7 @@ export default function OnboardingPage() {
                     <line x1="67" y1="22" x2="74" y2="21" stroke="rgba(255,180,30,0.45)" strokeWidth="1.6" strokeLinecap="round"/>
                     <line x1="65" y1="27" x2="72" y2="28" stroke="rgba(255,160,20,0.32)" strokeWidth="1.3" strokeLinecap="round"/>
                   </>),
-                  // ── SWIMMING — competition pool ───────────────────────────────
+                  // ── SWIMMING  -  competition pool ───────────────────────────────
                   'Swimming': (<>
                     {/* Pool edge */}
                     <rect x="0" y="16" width="80" height="6" fill="rgba(180,180,200,0.85)"/>
@@ -1524,7 +1524,7 @@ export default function OnboardingPage() {
                     {/* Wave shimmer */}
                     <path d="M0,28 Q10,24 20,28 Q30,32 40,28 Q50,24 60,28 Q70,32 80,28" fill="rgba(180,220,255,0.2)" className="it-wave-y"/>
                     <path d="M0,34 Q10,31 20,34 Q30,37 40,34 Q50,31 60,34 Q70,37 80,34" fill="rgba(100,180,255,0.12)" className="it-wave-y" style={{animationDelay:'0.4s'}}/>
-                    {/* Swimmer — FIXED in lane 3 (x=26 to x=39), bobbing not sliding */}
+                    {/* Swimmer  -  FIXED in lane 3 (x=26 to x=39), bobbing not sliding */}
                     <g className="it-bob" style={{transformOrigin:'32px 34px', animationDelay:'0.2s'}}>
                       {/* Body streamlined */}
                       <rect x="18" y="29" width="22" height="7" rx="3.5" fill="rgba(20,80,200,0.92)"/>
@@ -1538,7 +1538,7 @@ export default function OnboardingPage() {
                       {/* Legs kicking */}
                       <path d="M18,33 Q14,37 10,33" fill="none" stroke="rgba(230,185,140,0.9)" strokeWidth="3.5" strokeLinecap="round"/>
                       <path d="M18,33 Q14,29 10,34" fill="none" stroke="rgba(230,185,140,0.85)" strokeWidth="3" strokeLinecap="round"/>
-                      {/* Lead arm — forward stroke */}
+                      {/* Lead arm  -  forward stroke */}
                       <path d="M38,31 Q43,23 48,25" fill="none" stroke="rgba(230,185,140,0.92)" strokeWidth="4" strokeLinecap="round"/>
                       <circle cx="48" cy="25" r="3.5" fill="rgba(230,185,140,0.92)"/>
                       {/* Water splash */}
@@ -1547,7 +1547,7 @@ export default function OnboardingPage() {
                       <path d="M24,31 Q18,25 14,27" fill="none" stroke="rgba(230,185,140,0.8)" strokeWidth="3.5" strokeLinecap="round"/>
                     </g>
                   </>),
-                  // ── ART — painter at easel creating art ──────────────────────
+                  // ── ART  -  painter at easel creating art ──────────────────────
                   'Art': (<>
                     {/* Easel legs */}
                     <line x1="30" y1="8" x2="18" y2="58" stroke={c(0.6)} strokeWidth="2.5" strokeLinecap="round"/>
@@ -1567,7 +1567,7 @@ export default function OnboardingPage() {
                     <rect x="47" y="27" width="3" height="16" fill="rgba(100,60,20,0.65)"/>
                     {/* Active brushstroke */}
                     <path className="it-draw" d="M24,36 Q32,30 42,34 Q50,38 54,32" fill="none" stroke="rgba(255,100,20,0.9)" strokeWidth="3" strokeDasharray="50" strokeLinecap="round"/>
-                    {/* Hand + brush — arm coming in from right, brush tip at stroke end */}
+                    {/* Hand + brush  -  arm coming in from right, brush tip at stroke end */}
                     <g className="it-bob" style={{transformOrigin:'62px 18px', animationDelay:'1.0s'}}>
                       {/* Arm */}
                       <path d="M78,4 Q70,12 60,26 Q57,30 55,33" fill="none" stroke="rgba(230,185,145,0.95)" strokeWidth="5" strokeLinecap="round"/>
@@ -1575,7 +1575,7 @@ export default function OnboardingPage() {
                       <line x1="72" y1="6" x2="55" y2="33" stroke="rgba(130,90,40,0.9)" strokeWidth="3.5" strokeLinecap="round"/>
                       {/* Ferrule */}
                       <rect x="58" y="28" width="5" height="4" rx="1" fill="rgba(180,180,180,0.88)"/>
-                      {/* Bristles — paint-loaded orange */}
+                      {/* Bristles  -  paint-loaded orange */}
                       <ellipse cx="55.5" cy="34.5" rx="2.5" ry="4.5" fill="rgba(255,100,20,0.92)"/>
                     </g>
                     {/* Palette */}
@@ -1587,7 +1587,7 @@ export default function OnboardingPage() {
                     <circle cx="12" cy="50" r="2.5" fill="rgba(200,60,200,0.85)"/>
                     <circle cx="6"  cy="50" r="2.5" fill="rgba(255,130,20,0.85)"/>
                   </>),
-                  // ── MUSIC — dark concert hall ────────────────────────────────
+                  // ── MUSIC  -  dark concert hall ────────────────────────────────
                   'Music': (<>
                     {/* Spotlight */}
                     <circle cx="40" cy="3" r="6" fill="rgba(255,200,100,0.6)" className="it-pulse"/>
@@ -1609,12 +1609,12 @@ export default function OnboardingPage() {
                       </g>
                     ))}
                   </>),
-                  // ── COOKING — busy kitchen with food ──────────────────────────
+                  // ── COOKING  -  busy kitchen with food ──────────────────────────
                   'Cooking': (<>
                     {/* Kitchen counter */}
                     <rect x="0"  y="46" width="80" height="14" fill="rgba(100,70,30,0.65)"/>
                     <rect x="0"  y="44" width="80" height="4"  rx="1" fill="rgba(120,90,40,0.7)"/>
-                    {/* Chef figure — left */}
+                    {/* Chef figure  -  left */}
                     <g className="it-bob" style={{transformOrigin:'14px 24px', animationDelay:'1.2s'}}>
                       {/* Chef hat */}
                       <ellipse cx="14" cy="7" rx="7" ry="3" fill="rgba(245,242,238,0.95)"/>
@@ -1658,18 +1658,18 @@ export default function OnboardingPage() {
                     <ellipse cx="70" cy="50" rx="5" ry="5.5" fill="rgba(180,80,200,0.75)"/>
                     <ellipse cx="60" cy="51" rx="7" ry="4" fill="rgba(100,180,50,0.8)"/>
                   </>),
-                  // ── DOLLS — Barbie-style dollhouse ────────────────────────────
+                  // ── DOLLS  -  Barbie-style dollhouse ────────────────────────────
                   'Dolls': (<>
                     {/* Glamour stars */}
                     {[{x:6,y:4},{x:14,y:14},{x:66,y:6},{x:74,y:16},{x:4,y:28},{x:76,y:26}].map(({x,y},i)=>(
                       <circle key={i} cx={x} cy={y} r={1.5+i%2*0.5} fill="rgba(255,200,220,0.85)" className="it-star" style={{animationDelay:`${i*0.3}s`}}/>
                     ))}
-                    {/* Wardrobe — left */}
+                    {/* Wardrobe  -  left */}
                     <rect x="4" y="8" width="18" height="50" rx="3" fill="rgba(220,80,150,0.32)"/>
                     <line x1="13" y1="8" x2="13" y2="58" stroke="rgba(200,60,130,0.28)" strokeWidth="1"/>
                     <path d="M9,16 Q6,18 5,22 Q9,24 9,26" fill="none" stroke="rgba(255,100,160,0.65)" strokeWidth="2.5" strokeLinecap="round"/>
                     <path d="M17,16 Q20,18 21,22 Q17,24 17,26" fill="none" stroke="rgba(180,100,220,0.65)" strokeWidth="2.5" strokeLinecap="round"/>
-                    {/* Fashion Barbie doll — center */}
+                    {/* Fashion Barbie doll  -  center */}
                     <g className="it-bob" style={{transformOrigin:'48px 28px', animationDelay:'1.4s'}}>
                       {/* Long blonde hair */}
                       <path d="M42,14 Q36,20 33,32 Q35,42 39,50" fill="none" stroke="rgba(255,210,50,0.9)" strokeWidth="5" strokeLinecap="round"/>
@@ -1716,7 +1716,7 @@ export default function OnboardingPage() {
                       <path d="M50,60 Q52,60 52,58" fill="none" stroke="rgba(220,50,140,0.85)" strokeWidth="2.2" strokeLinecap="round"/>
                     </g>
                   </>),
-                  // ── CARS & TRUCKS — night highway ────────────────────────────
+                  // ── CARS & TRUCKS  -  night highway ────────────────────────────
                   'Cars & Trucks': (<>
                     {/* Night sky with stars */}
                     <S cx={12} cy={5}  r={1.2} d="0s"/><S cx={30} cy={3}  r={0.9} d="0.3s"/>
@@ -1728,7 +1728,7 @@ export default function OnboardingPage() {
                     <line x1="0" y1="59" x2="80" y2="59" stroke="rgba(255,255,255,0.5)" strokeWidth="2"/>
                     {/* Lane dashes */}
                     {[0,1,2,3].map(i=><rect key={i} x={i*22+2} y={46} width={14} height={2} rx="1" fill="rgba(255,220,0,0.8)"/>)}
-                    {/* Car zooming — with glowing headlights */}
+                    {/* Car zooming  -  with glowing headlights */}
                     <g className="it-car">
                       {/* Car body */}
                       <rect x="-5" y="38" width="34" height="12" rx="3" fill="rgba(220,50,50,0.95)"/>
@@ -1742,7 +1742,7 @@ export default function OnboardingPage() {
                       <circle cx="2"  cy="51" r="2.5" fill="rgba(100,100,100,0.8)"/>
                       <circle cx="22" cy="51" r="5" fill="rgba(20,20,20,0.95)"/>
                       <circle cx="22" cy="51" r="2.5" fill="rgba(100,100,100,0.8)"/>
-                      {/* Headlights — bright yellow cones */}
+                      {/* Headlights  -  bright yellow cones */}
                       <rect x="27" y="40" width="6" height="4" rx="1" fill="rgba(255,230,50,0.97)"/>
                       {/* Headlight beam */}
                       <polygon points="29,42 80,36 80,48" fill="rgba(255,230,50,0.06)"/>
@@ -1809,7 +1809,7 @@ export default function OnboardingPage() {
               })}
             </div>
 
-            {/* Custom interests added — shown above the input with X to remove */}
+            {/* Custom interests added  -  shown above the input with X to remove */}
             {(() => {
               const builtInLabels = INTEREST_OPTIONS.map(o => o.label);
               const customAdded = state.interests.filter(i => !builtInLabels.includes(i));
@@ -1863,7 +1863,7 @@ export default function OnboardingPage() {
                       opacity: state.interests.length < 2 ? 0.5 : 1,
                       cursor: state.interests.length < 2 ? 'not-allowed' : 'pointer',
                     }}>
-                    ✍️ Personalise — A$0.99
+                    ✍️ Personalise  -  A$0.99
                   </button>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>

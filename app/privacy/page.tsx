@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export const metadata = { title: 'Privacy Policy — TalePop' };
+export const metadata = { title: 'Privacy Policy  -  TalePop' };
 
 export default function PrivacyPage() {
   const updated = '6 May 2026';
@@ -10,7 +10,7 @@ export default function PrivacyPage() {
       <nav style={{ borderBottom: '1px solid #F0E4D0', padding: '1.25rem 2rem' }}>
         <div style={{ maxWidth: '820px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Link href="/" style={{ textDecoration: 'none', display: 'inline-block' }}>
-            <img src="/mood-3.png" alt="TalePop" style={{ height: '44px', width: 'auto' }} />
+            <img src="/mood-3.png" alt="TalePop" style={{ height: '44px', width: 'auto', mixBlendMode: 'multiply' }} />
           </Link>
           <Link href="/login" style={{ fontSize: '0.875rem', color: '#5E6A7A', textDecoration: 'none' }}>Sign in</Link>
         </div>
@@ -25,7 +25,7 @@ export default function PrivacyPage() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
 
           <Section title="1. Who we are">
-            <p>TalePop ("we", "us", "our") is an AI-powered personalised children&apos;s story service operated by [Your Company Name] ABN [XX XXX XXX XXX], based in Australia. We take your privacy — and the privacy of your children — seriously. This policy explains what information we collect, why we collect it, and how we protect it.</p>
+            <p>TalePop ("we", "us", "our") is an AI-powered personalised children&apos;s story service operated by [Your Company Name] ABN [XX XXX XXX XXX], based in Australia. We take your privacy  -  and the privacy of your children  -  seriously. This policy explains what information we collect, why we collect it, and how we protect it.</p>
             <p>Contact: <a href="mailto:hello@talepop.com" style={{ color: '#FF6B35' }}>hello@talepop.com</a></p>
           </Section>
 
@@ -35,7 +35,7 @@ export default function PrivacyPage() {
             <p><strong>Child profile information.</strong> To generate personalised stories, you provide details about your child including their name, age, gender, interests, and optionally appearance (hair colour, eye colour), siblings, friends, pets, and general location (city/country). This information is used solely to generate stories and is never shared with third parties for marketing purposes.</p>
             <p><strong>Generated stories.</strong> We store the stories we create for you so you can access them at any time.</p>
             <p><strong>Usage data.</strong> We collect basic usage information (number of stories generated, subscription status) to manage your account and enforce usage limits.</p>
-            <p><strong>Payment information.</strong> Payments are processed by Stripe. We do not store your credit card details — Stripe handles all payment data under their own privacy and security standards.</p>
+            <p><strong>Payment information.</strong> Payments are processed by Stripe. We do not store your credit card details  -  Stripe handles all payment data under their own privacy and security standards.</p>
             <p><strong>Feedback.</strong> If you submit an app rating or comment through the in-app feedback feature, we store your rating and comment.</p>
           </Section>
 
@@ -50,13 +50,13 @@ export default function PrivacyPage() {
               </thead>
               <tbody>
                 {[
-                  ['Creating and managing your account', 'Art. 6(1)(b) — Performance of a contract'],
-                  ['Generating personalised stories from your child\'s profile', 'Art. 6(1)(b) — Performance of a contract'],
-                  ['Processing subscription payments', 'Art. 6(1)(b) — Performance of a contract'],
-                  ['Sending transactional emails (password reset, billing)', 'Art. 6(1)(b) — Performance of a contract'],
-                  ['Recording parental consent at sign-up', 'Art. 6(1)(c) — Legal obligation (COPPA, AADC)'],
-                  ['Improving our service using anonymised, aggregated data', 'Art. 6(1)(f) — Legitimate interests'],
-                  ['Responding to support requests', 'Art. 6(1)(f) — Legitimate interests'],
+                  ['Creating and managing your account', 'Art. 6(1)(b)  -  Performance of a contract'],
+                  ['Generating personalised stories from your child\'s profile', 'Art. 6(1)(b)  -  Performance of a contract'],
+                  ['Processing subscription payments', 'Art. 6(1)(b)  -  Performance of a contract'],
+                  ['Sending transactional emails (password reset, billing)', 'Art. 6(1)(b)  -  Performance of a contract'],
+                  ['Recording parental consent at sign-up', 'Art. 6(1)(c)  -  Legal obligation (COPPA, AADC)'],
+                  ['Improving our service using anonymised, aggregated data', 'Art. 6(1)(f)  -  Legitimate interests'],
+                  ['Responding to support requests', 'Art. 6(1)(f)  -  Legitimate interests'],
                 ].map(([activity, basis], i) => (
                   <tr key={i} style={{ background: i % 2 === 0 ? 'white' : '#FFF4E6' }}>
                     <td style={{ padding: '0.625rem 0.75rem', border: '1px solid #F0E4D0', color: '#4A3728' }}>{activity}</td>
@@ -69,7 +69,7 @@ export default function PrivacyPage() {
           </Section>
 
           <Section title="4. Children's privacy">
-            <p>We understand that information about children is particularly sensitive. Our service is designed for parents and guardians — children do not create accounts or interact directly with our platform.</p>
+            <p>We understand that information about children is particularly sensitive. Our service is designed for parents and guardians  -  children do not create accounts or interact directly with our platform.</p>
             <p><strong>Parental consent.</strong> Before collecting any child profile data, we require you to confirm that you are 18 or older and are acting as the parent or legal guardian. Your consent is recorded with a timestamp at account creation. Because you must provide a valid payment method to subscribe, this also satisfies the credit card + email verification method of verifiable parental consent under the US Children&apos;s Online Privacy Protection Act (COPPA).</p>
             <p><strong>What we collect about your child.</strong> Name, age, gender, interests, optionally appearance (hair colour, eye colour), and optionally siblings&apos; names, friends&apos; names, pet name/type, and general location (city/country for story setting). We never collect precise GPS location, biometric data, or school details.</p>
             <p><strong>How we use it.</strong> Child profile information is used exclusively to generate personalised stories for your family. We do not use this information for advertising, profiling for commercial purposes, or any purpose beyond story creation.</p>
@@ -93,13 +93,13 @@ export default function PrivacyPage() {
           <Section title="6. Third-party services">
             <p>We use the following third-party services to operate TalePop:</p>
             <ul style={{ paddingLeft: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-              <li><strong>Supabase</strong> — database and authentication (<a href="https://supabase.com/privacy" style={{ color: '#FF6B35' }}>supabase.com/privacy</a>)</li>
-              <li><strong>Anthropic</strong> — AI story generation via the Claude API (<a href="https://www.anthropic.com/privacy" style={{ color: '#FF6B35' }}>anthropic.com/privacy</a>)</li>
-              <li><strong>Replicate</strong> — AI illustration generation (<a href="https://replicate.com/privacy" style={{ color: '#FF6B35' }}>replicate.com/privacy</a>)</li>
-              <li><strong>Stripe</strong> — payment processing (<a href="https://stripe.com/privacy" style={{ color: '#FF6B35' }}>stripe.com/privacy</a>)</li>
-              <li><strong>Vercel</strong> — hosting and deployment (<a href="https://vercel.com/privacy" style={{ color: '#FF6B35' }}>vercel.com/privacy</a>)</li>
+              <li><strong>Supabase</strong>  -  database and authentication (<a href="https://supabase.com/privacy" style={{ color: '#FF6B35' }}>supabase.com/privacy</a>)</li>
+              <li><strong>Anthropic</strong>  -  AI story generation via the Claude API (<a href="https://www.anthropic.com/privacy" style={{ color: '#FF6B35' }}>anthropic.com/privacy</a>)</li>
+              <li><strong>Replicate</strong>  -  AI illustration generation (<a href="https://replicate.com/privacy" style={{ color: '#FF6B35' }}>replicate.com/privacy</a>)</li>
+              <li><strong>Stripe</strong>  -  payment processing (<a href="https://stripe.com/privacy" style={{ color: '#FF6B35' }}>stripe.com/privacy</a>)</li>
+              <li><strong>Vercel</strong>  -  hosting and deployment (<a href="https://vercel.com/privacy" style={{ color: '#FF6B35' }}>vercel.com/privacy</a>)</li>
             </ul>
-            <p>Each service operates under its own privacy policy. We share only the minimum information necessary for each service to function. Child profile data is transmitted to Anthropic (for story generation) and Replicate (image generation prompts only — no personal details). We have assessed these processors and are satisfied they meet appropriate data protection standards.</p>
+            <p>Each service operates under its own privacy policy. We share only the minimum information necessary for each service to function. Child profile data is transmitted to Anthropic (for story generation) and Replicate (image generation prompts only  -  no personal details). We have assessed these processors and are satisfied they meet appropriate data protection standards.</p>
           </Section>
 
           <Section title="7. International data transfers">
@@ -126,8 +126,8 @@ export default function PrivacyPage() {
             <p>To exercise these rights, contact us at <a href="mailto:hello@talepop.com" style={{ color: '#FF6B35' }}>hello@talepop.com</a>. We will respond within 30 days.</p>
             <p><strong>Right to complain.</strong> If you believe we have not handled your personal data in accordance with applicable law, you have the right to lodge a complaint with your local data protection authority:</p>
             <ul style={{ paddingLeft: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-              <li><strong>Australia:</strong> Office of the Australian Information Commissioner (OAIC) — <a href="https://www.oaic.gov.au" style={{ color: '#FF6B35' }}>oaic.gov.au</a></li>
-              <li><strong>United Kingdom:</strong> Information Commissioner&apos;s Office (ICO) — <a href="https://ico.org.uk" style={{ color: '#FF6B35' }}>ico.org.uk</a></li>
+              <li><strong>Australia:</strong> Office of the Australian Information Commissioner (OAIC)  -  <a href="https://www.oaic.gov.au" style={{ color: '#FF6B35' }}>oaic.gov.au</a></li>
+              <li><strong>United Kingdom:</strong> Information Commissioner&apos;s Office (ICO)  -  <a href="https://ico.org.uk" style={{ color: '#FF6B35' }}>ico.org.uk</a></li>
               <li><strong>European Union:</strong> Your national data protection authority</li>
             </ul>
           </Section>

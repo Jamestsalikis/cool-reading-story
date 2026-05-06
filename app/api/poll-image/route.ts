@@ -3,7 +3,7 @@ import { createClient } from '@/lib/supabase/server';
 
 // Lightweight endpoint: polls Replicate ONCE for a prediction's status.
 // If succeeded, saves image_url to Supabase and returns it.
-// Each call completes in <2s — well within Vercel Hobby's 10s limit.
+// Each call completes in <2s  -  well within Vercel Hobby's 10s limit.
 export const maxDuration = 15;
 
 const REPLICATE_API_TOKEN = process.env.REPLICATE_API_TOKEN;
@@ -24,7 +24,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Replicate not configured' }, { status: 500 });
     }
 
-    // Single poll — fast, no waiting
+    // Single poll  -  fast, no waiting
     const pollRes = await fetch(poll_url, {
       headers: { Authorization: `Bearer ${REPLICATE_API_TOKEN}` },
     });
@@ -39,7 +39,7 @@ export async function POST(request: Request) {
       const replicateUrl = polled.output[0];
 
       // Upload image to Supabase Storage for a permanent URL.
-      // Replicate CDN URLs expire after ~1 hour — Storage URLs never expire.
+      // Replicate CDN URLs expire after ~1 hour  -  Storage URLs never expire.
       let permanentUrl = replicateUrl; // fallback if upload fails
       try {
         const imgRes = await fetch(replicateUrl);

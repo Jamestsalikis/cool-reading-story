@@ -33,7 +33,7 @@ export async function POST(request: Request) {
         updated_at: new Date().toISOString(),
       }).eq('user_id', userId);
     } else if (session.mode === 'payment' && session.metadata?.purchase_type === 'extra_book' && userId) {
-      // One-time extra book purchase — grant an additional book for today
+      // One-time extra book purchase  -  grant an additional book for today
       await supabase.rpc('grant_extra_book_today', { uid: userId });
       console.log(`Extra book granted for user ${userId}`);
     }

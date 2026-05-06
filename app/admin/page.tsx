@@ -114,7 +114,7 @@ export default function AdminPage() {
 
   const avgRating = feedback.length > 0
     ? (feedback.reduce((s, f) => s + f.rating, 0) / feedback.length).toFixed(1)
-    : '—';
+    : ' - ';
 
   const ratingCounts = [1, 2, 3, 4, 5].map(r => ({
     r,
@@ -177,7 +177,7 @@ export default function AdminPage() {
         <div style={{ background: '#fff', border: '1px solid #F0E4D0', borderRadius: '12px', padding: '16px 20px', marginBottom: '20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
           <div>
             <p style={{ fontWeight: '600', fontSize: '0.9rem', color: '#0D183D', marginBottom: '2px' }}>Generate Fable character images</p>
-            <p style={{ fontSize: '0.8rem', color: '#5E6A7A' }}>Generates all 5 poses via Replicate and saves to Supabase. Run once — takes ~2 minutes.</p>
+            <p style={{ fontSize: '0.8rem', color: '#5E6A7A' }}>Generates all 5 poses via Replicate and saves to Supabase. Run once  -  takes ~2 minutes.</p>
             {fableResult && <p style={{ fontSize: '0.8rem', color: fableResult.startsWith('Error') ? '#991B1B' : '#1a7a4a', marginTop: '4px' }}>{fableResult}</p>}
           </div>
           <button

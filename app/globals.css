@@ -1,7 +1,7 @@
 :root {
   /* TalePop typography */
   --font-heading: 'Fredoka', 'Arial Rounded MT Bold', cursive; /* Bambino-style: playful, rounded, hand-drawn character */
-  --font-body:    'Nunito', system-ui, sans-serif;              /* Clean, rounded, easy to read — perfect for bedtime stories */
+  --font-body:    'Nunito', system-ui, sans-serif;              /* Clean, rounded, easy to read  -  perfect for bedtime stories */
   --brand:        #FF6B35;
   --brand-dark:   #E85520;
   --brand-navy:   #0D183D;

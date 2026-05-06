@@ -45,7 +45,7 @@ export default function SignupPage() {
     >
       {/* Logo */}
       <a href="/" style={{ textDecoration: 'none', display: 'inline-block', marginBottom: '2rem' }}>
-        <img src="/mood-3.png" alt="TalePop" style={{ height: '90px', width: 'auto' }} />
+        <img src="/mood-3.png" alt="TalePop" style={{ height: '90px', width: 'auto', mixBlendMode: 'multiply' }} />
       </a>
 
       {/* Progress Dots */}

@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 
-// Creates ALL page predictions in a single function call — avoids 5 concurrent
+// Creates ALL page predictions in a single function call  -  avoids 5 concurrent
 // Vercel function invocations which cause burst 500s.
 // Returns an array of { page_number, poll_url } for the frontend to poll.
 export const maxDuration = 30;
@@ -77,7 +77,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ predictions: [] });
     }
 
-    // Create all predictions in parallel — each Replicate call takes ~300-500ms,
+    // Create all predictions in parallel  -  each Replicate call takes ~300-500ms,
     // so 5 in parallel = ~500ms total, well within any timeout limit.
     const results = await Promise.all(
       pagesNeedingImages.map(async (page) => {

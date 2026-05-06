@@ -352,7 +352,7 @@ export default function StoryPage() {
             display: 'flex',
             flexDirection: 'column',
           }}>
-            {/* This wrapper grows to fill the column — no absolute positioning needed */}
+            {/* This wrapper grows to fill the column  -  no absolute positioning needed */}
             <div style={{
               flex: 1,
               overflow: 'hidden',
@@ -450,7 +450,7 @@ export default function StoryPage() {
           </div>
         </div>
 
-        {/* Book — flex column so inner content row can fill the height */}
+        {/* Book  -  flex column so inner content row can fill the height */}
         <div
           key={animKey}
           className={`book-page ${direction === 'forward' ? 'page-forward' : 'page-back'}`}
