@@ -174,30 +174,33 @@ const bookStyles = `
     .book-page-layout {
       flex-direction: row;
       align-items: stretch;
-      min-height: 460px;
     }
+    /* Image column: flex column so illus-wrap can fill full height */
     .book-illus-col {
-      flex: 0 0 44%;
+      flex: 0 0 45%;
       margin-left: 28px;
+      display: flex;
+      flex-direction: column;
     }
-    /* Image fills column height */
+    /* Image fills the full column height — no gap at bottom */
     .book-illus-col .illus-wrap {
+      flex: 1;
       width: 100%;
-      height: 100%;
-      min-height: 340px;
+      min-height: 380px;
     }
+    /* Subtle gutter between image and text — like a page edge */
     .book-text-col {
       flex: 1;
       overflow-y: auto;
-      max-height: 600px;
+      border-left: 1px solid rgba(116,21,21,0.10);
     }
     /* No spine offset — text sits to the right of the image */
     .book-text-inner {
-      padding: 22px 24px 28px 20px;
+      padding: 28px 28px 32px 24px;
     }
     /* Wider book for side-by-side */
     .book-page-wide {
-      max-width: 880px !important;
+      max-width: 860px !important;
     }
   }
 
@@ -657,15 +660,4 @@ export default function StoryPage() {
                 display: 'flex', alignItems: 'center', gap: '6px',
                 background: '#c4784a', border: 'none', borderRadius: '12px',
                 color: 'white', padding: '0.75rem 1.25rem',
-                textDecoration: 'none', fontSize: '1rem', fontWeight: 700,
-                minWidth: '90px', justifyContent: 'center',
-              }}
-            >
-              Library
-            </Link>
-          )}
-        </div>
-      </div>
-    </>
-  );
-}
+                textDecoration: 'none', fontSize
