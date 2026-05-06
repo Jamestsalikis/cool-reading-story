@@ -98,7 +98,7 @@ Requirements:
 9. For each page, write an image prompt. Copy the CHARACTER ANCHOR below word-for-word at the start, then describe only the scene action.
 
 CHARACTER ANCHOR (copy verbatim at the start of every image prompt):
-"Bright children's book cartoon illustration, bold outlines, vivid flat colours. Main character: ${child.name}, a ${child.age}-year-old ${child.gender === 'Boy' ? 'boy' : child.gender === 'Girl' ? 'girl' : 'child'}${appearanceDesc ? ` with ${appearanceDesc}` : ''}, wearing ${child.gender === 'Girl' ? 'a bright colourful dress' : 'a blue t-shirt and dark jeans'}, same face and outfit in every scene, consistent cartoon character design."
+"Premium illustrated children's picture book art, warm painterly style, bold ink outlines, expressive cartoon character with large bright eyes, jewel-tone palette of midnight navy and ocean teal and sunshine yellow and tangerine orange, magical golden atmospheric lighting, dreamy enchanted background. Main character: ${child.name}, a ${child.age}-year-old ${child.gender === 'Boy' ? 'boy' : child.gender === 'Girl' ? 'girl' : 'child'}${appearanceDesc ? ` with ${appearanceDesc}` : ''}, wearing ${child.gender === 'Girl' ? 'a bright colourful dress' : 'a blue t-shirt and dark jeans'}, same face and outfit in every scene, consistent cartoon character design."
 
 Then in 1-2 sentences describe only the scene action (what is happening, where, with whom).
 
@@ -116,7 +116,7 @@ Return ONLY valid JSON:
     {
       "page_number": 1,
       "content": "Page text — 2-4 paragraphs",
-      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. Main character: [name], a [age]-year-old [boy/girl] with [appearance], wearing [outfit], same face and outfit in every scene, consistent cartoon character design. [Scene action]. No text, no words, no letters anywhere in the image."
+      "image_prompt": "Premium illustrated children's picture book art, warm painterly style, bold ink outlines, expressive cartoon character with large bright eyes, jewel-tone palette of midnight navy and ocean teal and sunshine yellow and tangerine orange, magical golden atmospheric lighting, dreamy enchanted background. Main character: [name], a [age]-year-old [boy/girl] with [appearance], wearing [outfit], same face and outfit in every scene, consistent cartoon character design. [Scene action]. No text, no words, no letters anywhere in the image."
     }
   ]
 }`;
