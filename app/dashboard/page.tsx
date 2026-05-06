@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { BookOpen, Users, Settings, CreditCard, Plus, X } from 'lucide-react';
@@ -313,16 +312,14 @@ export default function DashboardPage() {
   const [editingChild, setEditingChild] = useState<ChildRecord | null>(null);
   const [sub, setSub] = useState<{ status: string; free_stories_remaining: number; stories_this_month: number; stories_today: number; extra_books_today: number } | null>(null);
   const supabase = createClient();
-  const searchParams = useSearchParams();
 
   // Auto-refresh after returning from Stripe extra book purchase
   useEffect(() => {
-    if (searchParams.get('extra_book') === 'true') {
+    if (typeof window !== 'undefined' && window.location.search.includes('extra_book=true')) {
       fetchData();
-      // Clean URL without reload
       window.history.replaceState({}, '', '/dashboard');
     }
-  }, [searchParams, fetchData]);
+  }, [fetchData]);
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
