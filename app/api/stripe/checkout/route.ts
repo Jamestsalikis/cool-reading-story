@@ -8,20 +8,15 @@ function getStripe() {
   return new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2025-01-27.acacia' });
 }
 
-// Price IDs — set these after creating products in Stripe dashboard
-// STRIPE_PRICE_MONTHLY and STRIPE_PRICE_ANNUAL must be set in env vars
 export async function POST(request: Request) {
   try {
     const supabase = await createClient();
     const { data: { user }, error: authError } = await supabase.auth.getUser();
     if (authError || !user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
-    const { plan } = await request.json(); // 'monthly' | 'annual'
-    const priceId = plan === 'annual'
-      ? process.env.STRIPE_PRICE_ANNUAL!
-      : process.env.STRIPE_PRICE_MONTHLY!;
+    const { plan } = await request.json(); // 'monthly' | 'annual' | 'extra_book'
 
-    if (!priceId || !process.env.STRIPE_SECRET_KEY) {
+    if (!process.env.STRIPE_SECRET_KEY) {
       return NextResponse.json({ error: 'Stripe not configured' }, { status: 500 });
     }
 
@@ -45,6 +40,41 @@ export async function POST(request: Request) {
         .from('user_subscriptions')
         .update({ stripe_customer_id: customerId })
         .eq('user_id', user.id);
+    }
+
+    // One-time 99c extra book purchase
+    if (plan === 'extra_book') {
+      const session = await stripe.checkout.sessions.create({
+        customer: customerId,
+        mode: 'payment',
+        payment_method_types: ['card'],
+        line_items: [
+          {
+            price_data: {
+              currency: 'aud',
+              product_data: {
+                name: 'Extra Book',
+                description: 'One additional story book for today',
+              },
+              unit_amount: 99, // 99 cents AUD
+            },
+            quantity: 1,
+          },
+        ],
+        success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/dashboard?extra_book=true`,
+        cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/dashboard`,
+        metadata: { supabase_user_id: user.id, purchase_type: 'extra_book' },
+      });
+      return NextResponse.json({ url: session.url });
+    }
+
+    // Subscription plans
+    const priceId = plan === 'annual'
+      ? process.env.STRIPE_PRICE_ANNUAL!
+      : process.env.STRIPE_PRICE_MONTHLY!;
+
+    if (!priceId) {
+      return NextResponse.json({ error: 'Stripe price not configured' }, { status: 500 });
     }
 
     const session = await stripe.checkout.sessions.create({

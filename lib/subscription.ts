@@ -6,6 +6,9 @@ export interface UserSub {
   status: SubStatus;
   free_stories_remaining: number;
   stories_this_month: number;
+  stories_today: number;
+  day_reset_date: string;
+  extra_books_today: number;
   month_reset_date: string;
   stripe_customer_id: string | null;
   stripe_subscription_id: string | null;
@@ -14,11 +17,11 @@ export interface UserSub {
 
 export type PaywallResult =
   | { allowed: true; reason: 'admin' | 'free' | 'subscribed' }
-  | { allowed: false; reason: 'no_subscription' | 'free_exhausted' | 'monthly_limit' };
+  | { allowed: false; reason: 'no_subscription' | 'free_exhausted' | 'monthly_limit' | 'daily_limit' };
 
 /**
  * Check whether a user is allowed to generate a story.
- * Also handles monthly counter reset.
+ * Handles monthly + daily counter resets.
  * Does NOT decrement — call decrementStoryCount() after successful generation.
  */
 export async function checkGenerationAllowed(
@@ -53,8 +56,10 @@ export async function checkGenerationAllowed(
   if (!sub) return { allowed: false, reason: 'no_subscription' };
 
   if (sub.status === 'subscribed') {
-    // Reset monthly counter if needed
     const now = new Date();
+    const today = now.toISOString().split('T')[0]; // YYYY-MM-DD
+
+    // Reset monthly counter if needed
     const resetDate = new Date(sub.month_reset_date);
     if (now >= resetDate) {
       const nextReset = new Date(now.getFullYear(), now.getMonth() + 1, 1)
@@ -66,9 +71,23 @@ export async function checkGenerationAllowed(
         .eq('user_id', userId);
       sub.stories_this_month = 0;
     }
-    if (sub.stories_this_month >= 15) {
-      return { allowed: false, reason: 'monthly_limit' };
+
+    // Reset daily counter if the date has rolled over
+    if (!sub.day_reset_date || sub.day_reset_date < today) {
+      await supabase
+        .from('user_subscriptions')
+        .update({ stories_today: 0, day_reset_date: today, extra_books_today: 0 })
+        .eq('user_id', userId);
+      sub.stories_today = 0;
+      sub.extra_books_today = 0;
     }
+
+    // Daily limit: 1 included in subscription + any extras purchased today
+    const dailyAllowed = 1 + (sub.extra_books_today ?? 0);
+    if ((sub.stories_today ?? 0) >= dailyAllowed) {
+      return { allowed: false, reason: 'daily_limit' };
+    }
+
     return { allowed: true, reason: 'subscribed' };
   }
 
@@ -94,5 +113,6 @@ export async function decrementStoryCount(
   }
   if (reason === 'subscribed') {
     await supabase.rpc('increment_stories_this_month', { uid: userId });
+    await supabase.rpc('increment_stories_today', { uid: userId });
   }
 }

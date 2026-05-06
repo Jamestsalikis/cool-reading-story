@@ -22,7 +22,9 @@ export async function POST(request: Request) {
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object as Stripe.CheckoutSession;
     const userId = session.metadata?.supabase_user_id;
-    if (userId && session.subscription) {
+
+    if (session.mode === 'subscription' && userId && session.subscription) {
+      // Subscription activated
       const subscription = await stripe.subscriptions.retrieve(session.subscription as string);
       await supabase.from('user_subscriptions').update({
         status: 'subscribed',
@@ -30,6 +32,10 @@ export async function POST(request: Request) {
         current_period_end: new Date(subscription.current_period_end * 1000).toISOString(),
         updated_at: new Date().toISOString(),
       }).eq('user_id', userId);
+    } else if (session.mode === 'payment' && session.metadata?.purchase_type === 'extra_book' && userId) {
+      // One-time extra book purchase — grant an additional book for today
+      await supabase.rpc('grant_extra_book_today', { uid: userId });
+      console.log(`Extra book granted for user ${userId}`);
     }
   }
 

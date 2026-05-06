@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback, useRef } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { BookOpen, Users, Settings, CreditCard, Plus, X } from 'lucide-react';
@@ -308,10 +309,20 @@ export default function DashboardPage() {
   const [generatingName, setGeneratingName] = useState('');
   const [generateError, setGenerateError] = useState('');
   const [userName, setUserName] = useState('');
-  const [paywallReason, setPaywallReason] = useState<'free_exhausted' | 'monthly_limit' | 'no_subscription' | null>(null);
+  const [paywallReason, setPaywallReason] = useState<'free_exhausted' | 'monthly_limit' | 'no_subscription' | 'daily_limit' | null>(null);
   const [editingChild, setEditingChild] = useState<ChildRecord | null>(null);
-  const [sub, setSub] = useState<{ status: string; free_stories_remaining: number; stories_this_month: number } | null>(null);
+  const [sub, setSub] = useState<{ status: string; free_stories_remaining: number; stories_this_month: number; stories_today: number; extra_books_today: number } | null>(null);
   const supabase = createClient();
+  const searchParams = useSearchParams();
+
+  // Auto-refresh after returning from Stripe extra book purchase
+  useEffect(() => {
+    if (searchParams.get('extra_book') === 'true') {
+      fetchData();
+      // Clean URL without reload
+      window.history.replaceState({}, '', '/dashboard');
+    }
+  }, [searchParams, fetchData]);
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
@@ -328,7 +339,7 @@ export default function DashboardPage() {
       .from('stories')
       .select('id, title, created_at, word_count, series_id, series_title, volume_number, children(name, age)')
       .order('created_at', { ascending: false });
-    const { data: subData } = await supabase.from('user_subscriptions').select('status, free_stories_remaining, stories_this_month').eq('user_id', user?.id ?? '').single();
+    const { data: subData } = await supabase.from('user_subscriptions').select('status, free_stories_remaining, stories_this_month, stories_today, extra_books_today').eq('user_id', user?.id ?? '').single();
     setSub(subData);
     setChildren(childrenData || []);
     setStories(storiesData || []);
@@ -367,7 +378,7 @@ export default function DashboardPage() {
       // Phase 1: Generate story text
       const res = await fetch('/api/generate-story', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ child_id: childId }) });
       const data = await res.json();
-      if (res.status === 402) { setPaywallReason(data.reason); return; }
+      if (res.status === 402) { setPaywallReason(data.reason as 'free_exhausted' | 'monthly_limit' | 'no_subscription' | 'daily_limit'); return; }
       if (!res.ok) { setGenerateError(data.message || 'Something went wrong.'); return; }
 
       const storyId = data.story?.id;
@@ -485,11 +496,25 @@ export default function DashboardPage() {
               {stories.length > 0 ? `${stories.length} ${stories.length === 1 ? 'book' : 'books'} in your library` : 'Your library is ready'}
             </p>
             {sub && (
-              sub.status === 'subscribed' ? (
-                <span style={{ fontSize: '0.75rem', fontWeight: '600', color: '#1a7a4a', background: '#E6F4EC', padding: '3px 10px', borderRadius: '20px' }}>
-                  {15 - sub.stories_this_month} of 15 stories left this month
-                </span>
-              ) : (
+              sub.status === 'subscribed' ? (() => {
+                const now = new Date();
+                const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+                const dayOfMonth = now.getDate();
+                const todayUsed = (sub.stories_today ?? 0) > 0;
+                const daysLeftIncludingToday = lastDay - dayOfMonth + 1;
+                const booksRemainingMonth = daysLeftIncludingToday - (todayUsed ? 1 : 0);
+                const booksRemainingToday = Math.max(0, 1 + (sub.extra_books_today ?? 0) - (sub.stories_today ?? 0));
+                return (
+                  <>
+                    <span style={{ fontSize: '0.75rem', fontWeight: '600', color: booksRemainingToday > 0 ? '#1a7a4a' : '#741515', background: booksRemainingToday > 0 ? '#E6F4EC' : '#FBF0F0', padding: '3px 10px', borderRadius: '20px' }}>
+                      {booksRemainingToday} {booksRemainingToday === 1 ? 'book' : 'books'} remaining today
+                    </span>
+                    <span style={{ fontSize: '0.75rem', fontWeight: '600', color: '#6B5E4E', background: '#F4F0EB', padding: '3px 10px', borderRadius: '20px' }}>
+                      {booksRemainingMonth} {booksRemainingMonth === 1 ? 'book' : 'books'} remaining this month
+                    </span>
+                  </>
+                );
+              })() : (
                 <span style={{ fontSize: '0.75rem', fontWeight: '600', color: '#741515', background: '#FBF0F0', padding: '3px 10px', borderRadius: '20px' }}>
                   {sub.free_stories_remaining} free {sub.free_stories_remaining === 1 ? 'story' : 'stories'} remaining
                 </span>
@@ -639,11 +664,39 @@ export default function DashboardPage() {
                   {sub?.status === 'subscribed' ? 'Active' : 'Free'}
                 </span>
               </div>
-              {sub?.status === 'subscribed' ? (
-                <p style={{ color: '#6B5E4E', fontSize: '0.875rem' }}>
-                  {15 - (sub?.stories_this_month ?? 0)} of 15 stories remaining this month.
-                </p>
-              ) : (
+              {sub?.status === 'subscribed' ? (() => {
+                const now = new Date();
+                const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+                const dayOfMonth = now.getDate();
+                const todayUsed = (sub.stories_today ?? 0) > 0;
+                const daysLeftIncludingToday = lastDay - dayOfMonth + 1;
+                const booksRemainingMonth = daysLeftIncludingToday - (todayUsed ? 1 : 0);
+                const booksRemainingToday = Math.max(0, 1 + (sub.extra_books_today ?? 0) - (sub.stories_today ?? 0));
+                return (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <p style={{ color: '#6B5E4E', fontSize: '0.875rem' }}>Books remaining today</p>
+                      <span style={{ fontWeight: '700', fontSize: '0.95rem', color: booksRemainingToday > 0 ? '#1a7a4a' : '#741515' }}>
+                        {booksRemainingToday}
+                      </span>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <p style={{ color: '#6B5E4E', fontSize: '0.875rem' }}>Books remaining this month</p>
+                      <span style={{ fontWeight: '700', fontSize: '0.95rem', color: '#1C1614' }}>
+                        {booksRemainingMonth}
+                      </span>
+                    </div>
+                    {booksRemainingToday === 0 && (
+                      <button
+                        onClick={() => setPaywallReason('daily_limit')}
+                        style={{ marginTop: '4px', padding: '0.55rem 1rem', borderRadius: '8px', border: 'none', background: '#741515', color: '#fff', cursor: 'pointer', fontWeight: '600', fontSize: '0.8rem' }}
+                      >
+                        Get extra book — A$0.99
+                      </button>
+                    )}
+                  </div>
+                );
+              })() : (
                 <p style={{ color: '#6B5E4E', fontSize: '0.875rem' }}>
                   {sub?.free_stories_remaining ?? 0} free {(sub?.free_stories_remaining ?? 0) === 1 ? 'story' : 'stories'} remaining. Subscribe for unlimited access.
                 </p>
