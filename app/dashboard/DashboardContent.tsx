@@ -331,13 +331,14 @@ export default function DashboardPage() {
     setLoading(false);
   }, [supabase]);
 
-  // Auto-refresh after returning from Stripe extra book purchase
+  // Auto-refresh after returning from Stripe extra book purchase (runs once on mount)
   useEffect(() => {
     if (typeof window !== 'undefined' && window.location.search.includes('extra_book=true')) {
       fetchData();
       window.history.replaceState({}, '', '/dashboard');
     }
-  }, [fetchData]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
@@ -345,14 +346,15 @@ export default function DashboardPage() {
     return () => window.removeEventListener('resize', check);
   }, []);
 
-  useEffect(() => { fetchData(); }, [fetchData]);
+  useEffect(() => { fetchData(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Refresh books when user navigates back to this tab (e.g. after reading a story)
   useEffect(() => {
     const onFocus = () => fetchData();
     window.addEventListener('focus', onFocus);
     return () => window.removeEventListener('focus', onFocus);
-  }, [fetchData]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Pre-compute subscription stats for subscribed users (avoids IIFEs in JSX)
   const booksRemainingToday = sub?.status === 'subscribed'
