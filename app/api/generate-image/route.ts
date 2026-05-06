@@ -64,7 +64,7 @@ export async function POST(request: Request) {
               prompt: page.image_prompt,
               go_fast: true,
               num_outputs: 1,
-              aspect_ratio: '4:3',
+              aspect_ratio: '2:3',
               output_format: 'webp',
               output_quality: 80,
             },
