@@ -47,7 +47,7 @@ export async function checkGenerationAllowed(
   if (!sub) {
     const { data: created } = await supabase
       .from('user_subscriptions')
-      .insert({ user_id: userId, status: 'free', free_stories_remaining: 3 })
+      .insert({ user_id: userId, status: 'free', free_stories_remaining: 2 })
       .select()
       .single();
     sub = created;
