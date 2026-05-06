@@ -173,7 +173,7 @@ export default function Home() {
               2 free stories. No credit card. Cancel anytime.
             </p>
             <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
-              {['Ages 3–10', 'Safe & ad-free', 'Loved by parents'].map(b => (
+              {['Ages 3–10', 'From 30¢ per story', 'Cancel anytime'].map(b => (
                 <span key={b} style={{ fontSize: '0.72rem', color: '#1496A6', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '4px' }}>
                   <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#1496A6" strokeWidth="3"><polyline points="20 6 9 17 4 12"/></svg>
                   {b}
@@ -309,7 +309,7 @@ export default function Home() {
             { n: '2,500+', label: 'adventures begun' },
             { n: '4.9 ★', label: 'from parents' },
             { n: '2 min', label: 'to first story' },
-            { n: '0', label: 'recycled plots' },
+            { n: '30¢', label: 'per story' },
           ].map(s => (
             <div key={s.n} style={{ textAlign: 'center' }}>
               <p className="font-serif" style={{ fontSize: '1.5rem', color: '#FFB703', marginBottom: '3px' }}>{s.n}</p>
@@ -464,7 +464,7 @@ export default function Home() {
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
             <h2 className="font-serif" style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', color: '#0D183D', marginBottom: '0.5rem', letterSpacing: '-0.01em' }}>
-              Less than a paperback a month.
+              Your child&apos;s story for just 30¢.
             </h2>
             <p style={{ color: '#5E6A7A', fontWeight: 500, fontSize: '0.95rem', marginBottom: '0.5rem' }}>Start with 2 free stories — no card required.</p>
             <p style={{ color: '#FF6B35', fontWeight: 700, fontSize: '0.85rem' }}>Join 2,500+ families already reading tonight.</p>
@@ -474,9 +474,13 @@ export default function Home() {
             <div className="plan-card" style={{ border: '2px solid #F0E4D0', background: 'white' }}>
               <h3 className="font-serif" style={{ fontSize: '1.5rem', marginBottom: '0.4rem', color: '#0D183D' }}>Monthly</h3>
               <p style={{ color: '#9CA8B4', marginBottom: '1.5rem', fontSize: '0.9rem', fontWeight: 500 }}>Flexible — cancel anytime</p>
-              <div style={{ marginBottom: '1.5rem' }}>
+              <div style={{ marginBottom: '0.75rem' }}>
                 <span style={{ fontSize: '2.75rem', fontWeight: 800, color: '#FF6B35', letterSpacing: '-0.02em' }}>A$9.99</span>
                 <span style={{ color: '#9CA8B4', fontSize: '0.9rem', fontWeight: 500 }}>/month</span>
+              </div>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: '#FFF0E0', border: '1.5px solid #FFD4A8', borderRadius: '999px', padding: '0.3rem 0.9rem', marginBottom: '1.5rem' }}>
+                <span style={{ fontSize: '1rem' }}>📖</span>
+                <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#FF6B35' }}>just 30¢ per story</span>
               </div>
               <Link href="/signup" style={{ display: 'block', textAlign: 'center', padding: '0.9rem', border: '2px solid #FF6B35', borderRadius: '12px', color: '#FF6B35', textDecoration: 'none', fontWeight: '800', marginBottom: '1.75rem', transition: 'background 0.15s' }}>
                 Start with 2 free stories
@@ -496,9 +500,13 @@ export default function Home() {
               </div>
               <h3 className="font-serif" style={{ fontSize: '1.5rem', marginBottom: '0.4rem' }}>Annual</h3>
               <p style={{ opacity: 0.75, marginBottom: '1.5rem', fontSize: '0.9rem', fontWeight: 500 }}>Two months free</p>
-              <div style={{ marginBottom: '0.25rem' }}>
+              <div style={{ marginBottom: '0.5rem' }}>
                 <span style={{ fontSize: '2.75rem', fontWeight: 800, letterSpacing: '-0.02em' }}>A$7.99</span>
                 <span style={{ opacity: 0.7, fontSize: '0.9rem', fontWeight: 500 }}>/month</span>
+              </div>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(255,255,255,0.2)', border: '1.5px solid rgba(255,255,255,0.35)', borderRadius: '999px', padding: '0.3rem 0.9rem', marginBottom: '0.6rem' }}>
+                <span style={{ fontSize: '1rem' }}>📖</span>
+                <span style={{ fontSize: '0.8rem', fontWeight: 800, color: 'white' }}>as little as 24¢ per story</span>
               </div>
               <p style={{ opacity: 0.6, fontSize: '0.8rem', marginBottom: '1.5rem', fontWeight: 500 }}>A$95.90 billed annually</p>
               <Link href="/signup?plan=annual" style={{ display: 'block', textAlign: 'center', padding: '0.9rem', background: 'white', borderRadius: '12px', color: '#FF6B35', textDecoration: 'none', fontWeight: '800', marginBottom: '1.75rem' }}>
@@ -514,9 +522,58 @@ export default function Home() {
             </div>
           </div>
 
-          <p style={{ textAlign: 'center', marginTop: '1.75rem', color: '#9CA8B4', fontSize: '0.82rem', fontWeight: 500 }}>
-            Not sure yet? Start free — no card, no commitment.
-          </p>
+          <div style={{ textAlign: 'center', marginTop: '2rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem' }}>
+            <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+              {[
+                { icon: '🔒', text: 'Cancel anytime' },
+                { icon: '📱', text: 'Any device' },
+                { icon: '👨‍👩‍👧', text: 'Unlimited child profiles' },
+              ].map(b => (
+                <span key={b.text} style={{ fontSize: '0.8rem', color: '#9CA8B4', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '5px' }}>
+                  <span>{b.icon}</span>{b.text}
+                </span>
+              ))}
+            </div>
+            <p style={{ color: '#9CA8B4', fontSize: '0.82rem', fontWeight: 500 }}>
+              Not sure yet? Start free — no card, no commitment.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── FAQ ─── */}
+      <section style={{ background: 'white', padding: '5rem 2rem' }}>
+        <div style={{ maxWidth: '720px', margin: '0 auto' }}>
+          <h2 className="font-serif" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', color: '#0D183D', textAlign: 'center', marginBottom: '3rem', letterSpacing: '-0.01em' }}>
+            Questions parents ask us
+          </h2>
+          {[
+            {
+              q: 'How personalised is it, really?',
+              a: 'Every word is invented fresh — not a template with the name swapped in. Your child's interests, best friend, pet, and personality shape the actual plot. Two children with the same name get completely different stories.'
+            },
+            {
+              q: 'What age is TalePop for?',
+              a: 'Ages 3 to 10. You set a reading level when you create your child's profile and we adjust vocabulary, sentence length, and story complexity accordingly. A 4-year-old gets short, simple sentences with big moments; a 9-year-old gets richer language and a proper three-act structure.'
+            },
+            {
+              q: 'Can I add more than one child?',
+              a: 'Yes — unlimited profiles, one subscription. Each child gets their own profile, their own story preferences, and their own shelf. Brothers and sisters never share a story unless you want them to.'
+            },
+            {
+              q: 'Can I actually cancel anytime?',
+              a: 'One click from your account settings. No hoops, no retention flows, no email-us-to-cancel. If you cancel, you keep access until the end of your billing period.'
+            },
+          ].map((item, i) => (
+            <div key={i} style={{ borderBottom: '1px solid #F0E4D0', paddingBottom: '1.75rem', marginBottom: '1.75rem' }}>
+              <p className="font-serif" style={{ fontSize: '1.05rem', color: '#0D183D', fontWeight: 700, marginBottom: '0.6rem' }}>
+                {item.q}
+              </p>
+              <p style={{ color: '#5E6A7A', lineHeight: 1.8, fontWeight: 500, fontSize: '0.95rem' }}>
+                {item.a}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -528,8 +585,8 @@ export default function Home() {
           <h2 className="font-serif" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.75rem)', color: 'white', marginBottom: '1rem', lineHeight: 1.2, letterSpacing: '-0.01em' }}>
             Their story is waiting to be told.
           </h2>
-          <p style={{ color: 'rgba(255,255,255,0.55)', marginBottom: '2.5rem', fontSize: '1rem', lineHeight: 1.7, fontWeight: 500 }}>
-            2 minutes to set up. 2 free stories. The look on their face — priceless.
+          <p style={{ color: 'rgba(255,255,255,0.55)', marginBottom: '2rem', fontSize: '1rem', lineHeight: 1.7, fontWeight: 500 }}>
+            2 minutes to set up. 2 free stories. Then from just 30¢ a story.
           </p>
           <Link href="/signup" style={{ display: 'inline-block', padding: '1.1rem 3rem', background: '#FF6B35', color: '#fff', borderRadius: '12px', textDecoration: 'none', fontWeight: '800', fontSize: '1.05rem', boxShadow: '0 4px 24px rgba(255,107,53,0.45)', letterSpacing: '-0.01em' }}>
             Begin their story
