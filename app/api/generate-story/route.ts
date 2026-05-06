@@ -397,3 +397,20 @@ export async function POST(request: Request) {
         output_tokens: outputTokens,
         character_anchor: storyData.character_anchor || null,
       })
+      .select()
+      .single();
+
+    if (storyError) {
+      console.error('Story save error:', storyError);
+      return NextResponse.json({ error: 'Failed to save story' }, { status: 500 });
+    }
+
+    // Decrement story count now that story is confirmed saved
+    await decrementStoryCount(supabase, user.id, paywallResult.reason);
+
+    return NextResponse.json({ story });
+  } catch (error) {
+    console.error('Story generation error:', error);
+    return NextResponse.json({ error: 'Story generation failed' }, { status: 500 });
+  }
+}

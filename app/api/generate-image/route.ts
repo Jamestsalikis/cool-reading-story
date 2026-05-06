@@ -9,14 +9,12 @@ export const maxDuration = 30;
 
 const REPLICATE_API_TOKEN = process.env.REPLICATE_API_TOKEN;
 
-// TalePop visual style  -  appended to every Replicate prompt for consistent, engaging illustration style
+// TalePop visual style  -  appended to every Replicate prompt for consistent illustration style
 const TALEPOP_STYLE_SUFFIX =
   'Premium illustrated children\'s picture book art, warm painterly style, bold ink outlines, ' +
-  'expressive cartoon character with large bright eyes and vivid emotional expression, ' +
-  'rich jewel-tone colour palette of midnight navy and ocean teal and sunshine yellow and tangerine orange, ' +
-  'magical golden atmospheric lighting with dramatic depth and foreground detail, ' +
-  'cinematic composition with dynamic energy, lush enchanted background full of wonder and story detail, ' +
-  'vibrant and exciting, every detail invites the child deeper into the world.';
+  'expressive cartoon character with large bright eyes, rich jewel-tone colour palette of midnight navy ' +
+  'and ocean teal and sunshine yellow and tangerine orange, magical golden atmospheric lighting, ' +
+  'dreamy enchanted background with stars and clouds.';
 
 // Derive a stable integer seed from a story UUID so all pages of one story
 // use the same Flux seed  -  improves visual consistency across illustrations.
@@ -127,4 +125,13 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       status: 'processing',
-      
+      prediction_id: prediction.id,
+      poll_url: pollUrl,
+      page_number,
+    });
+
+  } catch (err) {
+    console.error('generate-image error:', err);
+    return NextResponse.json({ error: 'Failed' }, { status: 500 });
+  }
+}
