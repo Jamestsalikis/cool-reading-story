@@ -315,20 +315,6 @@ export default function DashboardPage() {
   const [sub, setSub] = useState<{ status: string; free_stories_remaining: number; stories_this_month: number; stories_today: number; extra_books_today: number } | null>(null);
   const supabase = createClient();
 
-  // Auto-refresh after returning from Stripe extra book purchase
-  useEffect(() => {
-    if (typeof window !== 'undefined' && window.location.search.includes('extra_book=true')) {
-      fetchData();
-      window.history.replaceState({}, '', '/dashboard');
-    }
-  }, [fetchData]);
-
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check(); window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
-  }, []);
-
   const fetchData = useCallback(async () => {
     setLoading(true);
     const { data: { user } } = await supabase.auth.getUser();
@@ -344,6 +330,20 @@ export default function DashboardPage() {
     setStories(storiesData || []);
     setLoading(false);
   }, [supabase]);
+
+  // Auto-refresh after returning from Stripe extra book purchase
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.location.search.includes('extra_book=true')) {
+      fetchData();
+      window.history.replaceState({}, '', '/dashboard');
+    }
+  }, [fetchData]);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check(); window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
 
   useEffect(() => { fetchData(); }, [fetchData]);
 
