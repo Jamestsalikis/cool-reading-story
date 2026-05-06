@@ -116,12 +116,25 @@ Requirements:
 6. End on a cosy, bedtime-appropriate note
 7. Use language appropriate for age ${child.age}: ${child.reading_level === 'beginner' ? 'short sentences, simple words' : child.reading_level === 'intermediate' ? 'flowing sentences, rich descriptions' : 'complex narrative, vivid imagery'}
 8. Split into exactly 5 pages, 2-4 paragraphs each
-9. For each page, write an image prompt. Copy the CHARACTER ANCHOR below word-for-word at the start, then describe only the scene action.
+9. For each page, write an image prompt. Copy the CHARACTER ANCHOR below word-for-word at the start, then write a vivid, cinematic scene description (see IMAGE PROMPT RULES below).
 
 CHARACTER ANCHOR (copy verbatim at the start of every image prompt):
 "Premium illustrated children's picture book art, warm painterly style, bold ink outlines, expressive cartoon character with large bright eyes, jewel-tone palette of midnight navy and ocean teal and sunshine yellow and tangerine orange, magical golden atmospheric lighting, dreamy enchanted background. Main character: ${child.name}, a ${child.age}-year-old ${child.gender === 'Boy' ? 'boy' : child.gender === 'Girl' ? 'girl' : 'child'}${appearanceDesc ? ` with ${appearanceDesc}` : ''}, wearing ${child.gender === 'Girl' ? 'a bright colourful dress' : 'a blue t-shirt and dark jeans'}, same face and outfit in every scene, consistent cartoon character design."
 
-Then in 1-2 sentences describe only the scene action (what is happening, where, with whom).
+IMAGE PROMPT RULES — apply to every page:
+- Capture the EMOTIONAL PEAK of that page — the most exciting or heartfelt moment, not a neutral in-between
+- Show STRONG EMOTION on the character's face: wide eyes of wonder, beaming smile of triumph, raised eyebrows of surprise, focused determined gaze
+- Use DYNAMIC COMPOSITION — avoid static standing poses; show the character mid-action: leaping, reaching, pointing, spinning, crouching toward something magical
+- Vary composition across the 5 pages:
+  • Page 1 — Wide establishing shot: full world visible, ${child.name} small within a large magical environment
+  • Page 2 — Discovery / reaction shot: face close or mid-shot, expressing the moment of surprise or excitement
+  • Page 3 — Action shot: most dynamic moment — movement, energy, diagonal lines, flying objects
+  • Page 4 — Dramatic / emotional peak: highest-stakes moment; strong lighting contrast, foreground detail, depth
+  • Page 5 — Warm resolution: cosy and intimate, soft golden light, ${child.name} at peace — feels like a hug
+- ENVIRONMENTAL STORYTELLING: the background must actively tell the story — glowing portals, weather matching the mood, magical sparks, creatures reacting, dramatic shadows and light
+- LIGHTING IS MOOD: warm golden glows for triumph, cool moonlit blues for mystery, sunrise pinks for hope, shafts of magical light spotlighting ${child.name} as the hero
+- FOREGROUND DEPTH: include foreground elements (flowers, rocks, sparkles, foliage) to create 3D depth and draw the eye in
+- Every page 1–4 image should make a child say "WOW" and want to turn the page; page 5 should feel safe and sleepy
 
 CRITICAL RULE: End every image prompt with exactly this phrase: "No text, no words, no letters anywhere in the image."
 
@@ -149,43 +162,4 @@ Return ONLY valid JSON:
     });
 
     const inputTokens = message.usage.input_tokens;
-    const outputTokens = message.usage.output_tokens;
-    console.log(`Sequel tokens — input: ${inputTokens}, output: ${outputTokens}`);
-
-    const rawContent = message.content[0].type === 'text' ? message.content[0].text : '';
-    let storyData: {
-      title: string; moral: string; theme_emoji: string; word_count: number;
-      pages: { page_number: number; content: string; image_prompt: string }[];
-    };
-
-    try {
-      const cleaned = rawContent.replace(/^```json\n?/, '').replace(/\n?```$/, '').trim();
-      storyData = JSON.parse(cleaned);
-    } catch {
-      return NextResponse.json({ error: 'Failed to parse story from AI' }, { status: 500 });
-    }
-
-    const pagesForDB = storyData.pages.map((page) => ({ ...page, image_url: null, poll_url: null }));
-    const fullContent = pagesForDB.map((p) => p.content).join('\n\n');
-
-    // Update source story's series_id if this is the first sequel
-    if (!sourceStory.series_id) {
-      await supabase.from('stories').update({ series_id: seriesId, series_title: seriesTitle, volume_number: 1 }).eq('id', story_id);
-    }
-
-    const { data: newStory, error: storyError } = await supabase
-      .from('stories')
-      .insert({
-        child_id: child.id,
-        parent_id: user.id,
-        title: storyData.title,
-        content: fullContent,
-        moral: storyData.moral,
-        theme: storyData.theme_emoji,
-        word_count: storyData.word_count,
-        reading_time_minutes: Math.ceil((storyData.word_count || 500) / 150),
-        pages: pagesForDB,
-        series_id: seriesId,
-        series_title: seriesTitle,
-        volume_number: volumeNumber,
-        input_tokens: inputToke
+    const outputTokens = message.usag
