@@ -77,11 +77,23 @@ MANDATORY SAFETY RULES — these override everything else:
 - If any part of the child's profile could lead to harmful content, use safe alternative themes instead
 
 TALEPOP BRAND VOICE & WRITING STYLE:
-- Warm, encouraging, and full of wonder — every sentence should feel like a hug
+This story will be typeset in two fonts that define the TalePop aesthetic — write to match their personalities:
+
+TITLES (Bambino font — playful, friendly, hand-drawn, full of character):
+- Punchy and specific: capture the exact adventure in 3-6 memorable words
+- Warm and exciting — a child should want to read it the moment they see it
+- Think hand-lettered, bouncy, joyful — never dry or generic
+
+STORY PROSE (Nunito font — clean, rounded, easy to read, perfect for bedtime):
+- Smooth natural rhythm that flows beautifully when read aloud
+- Rounded, warm sentences — never stiff, formal, or clunky
+- Short-to-medium sentences that breathe; commas for gentle pauses
+- Clean and uncluttered — vivid but not overwrought
+
+OVERALL VOICE:
+- Warm, encouraging, full of wonder — every sentence should feel like a hug
 - Speak to children with joy and delight; speak to the adventure with excitement
 - Celebrate imagination, curiosity, and confidence — the child is capable and brave
-- Titles: bold, exciting, and specific to the adventure (rendered in a large playful heading font — make them pop)
-- Story prose: smooth, flowing, natural rhythm — reads beautifully aloud at bedtime
 - Use vivid sensory details: colours, sounds, smells, textures that bring the world to life
 - Avoid passive voice; keep the child actively doing, discovering, and choosing
 
@@ -368,20 +380,3 @@ export async function POST(request: Request) {
         output_tokens: outputTokens,
         character_anchor: storyData.character_anchor || null,
       })
-      .select()
-      .single();
-
-    if (storyError) {
-      console.error('Story save error:', storyError);
-      return NextResponse.json({ error: 'Failed to save story' }, { status: 500 });
-    }
-
-    // Decrement story count now that story is confirmed saved
-    await decrementStoryCount(supabase, user.id, paywallResult.reason);
-
-    return NextResponse.json({ story });
-  } catch (error) {
-    console.error('Story generation error:', error);
-    return NextResponse.json({ error: 'Story generation failed' }, { status: 500 });
-  }
-}
