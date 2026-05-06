@@ -74,7 +74,7 @@ const S = `
   .wave-divider svg { display: block; width: 100%; }
 
   .hero-book-panel {
-    background: linear-gradient(145deg, #0D183D 0%, #133a6e 50%, #1496A6 100%);
+    background: #0D183D;
     border-radius: 24px; padding: 2.5rem 2rem;
     position: relative; overflow: hidden; min-height: 440px;
     display: flex; flex-direction: column; justify-content: center; gap: 1.5rem;
@@ -172,12 +172,26 @@ export default function Home() {
             <p style={{ fontSize: '0.8rem', color: '#9CA8B4', marginTop: '0.75rem', fontWeight: 500 }}>
               2 free stories. No credit card. Cancel anytime.
             </p>
+            <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
+              {['Ages 3–10', 'Safe & ad-free', 'Loved by parents'].map(b => (
+                <span key={b} style={{ fontSize: '0.72rem', color: '#1496A6', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '4px' }}>
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#1496A6" strokeWidth="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  {b}
+                </span>
+              ))}
+            </div>
           </div>
 
-          {/* Right: floating story book — shows the actual product */}
-          <div className="hero-book-panel">
-            {/* Star scatter background */}
-            <div style={{ position: 'absolute', inset: 0, opacity: 0.2, backgroundImage: 'radial-gradient(circle, #FFB703 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
+          {/* Right: illustrated scene — mood board night world */}
+          <div className="hero-book-panel" style={{
+            backgroundImage: "url('/mood-2.png')",
+            backgroundSize: '165%',
+            backgroundPosition: '25% 0%',
+            backgroundRepeat: 'no-repeat'
+          }}>
+            {/* Overlay: dark gradient for readability + hides bottom of image on mobile */}
+            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(145deg, rgba(13,24,61,0.55) 0%, rgba(13,24,61,0.25) 50%, rgba(13,24,61,0.5) 100%)' }} />
+            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '30%', background: 'linear-gradient(transparent, rgba(13,24,61,0.95))' }} />
 
             {/* Floating story card */}
             <div className="book-float" style={{ position: 'relative', zIndex: 1 }}>
@@ -220,11 +234,14 @@ export default function Home() {
       <section style={{ background: 'white', padding: '3rem 2rem 6rem' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#FFF0E0', borderRadius: '999px', padding: '0.35rem 1rem', marginBottom: '1rem', border: '1px solid #FFD4A8' }}>
+              <span style={{ fontSize: '0.72rem', fontWeight: 800, color: '#FF6B35', letterSpacing: '0.04em' }}>📖 READ A REAL TALEPOP STORY</span>
+            </div>
             <h2 className="font-serif" style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', color: '#0D183D', marginBottom: '0.75rem', letterSpacing: '-0.01em' }}>
-              This is what a TalePop story looks like.
+              Written for Zara & Zak. No one else.
             </h2>
             <p style={{ color: '#5E6A7A', fontSize: '0.95rem', fontWeight: 500, maxWidth: '500px', margin: '0 auto', lineHeight: 1.7 }}>
-              Written fresh for Zara and Zak. Not pulled from a library. Theirs alone.
+              Every word invented from scratch — their names, their adventure, their world.
             </p>
           </div>
 
@@ -373,6 +390,24 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ─── Illustrated scene break ─── */}
+      <div style={{ position: 'relative', height: '260px', overflow: 'hidden' }}>
+        <div style={{
+          position: 'absolute', inset: 0,
+          backgroundImage: "url('/mood-2.png')",
+          backgroundSize: '100%',
+          backgroundPosition: '50% 28%',
+          backgroundRepeat: 'no-repeat'
+        }} />
+        {/* Fade top from cream, fade bottom to dark */}
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, #FFF4E6 0%, transparent 25%, transparent 55%, #0D183D 100%)' }} />
+        <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '2rem' }}>
+          <p className="font-serif" style={{ color: 'white', fontSize: 'clamp(1.1rem, 3vw, 1.65rem)', textAlign: 'center', textShadow: '0 2px 24px rgba(0,0,0,0.7)', maxWidth: '600px', padding: '0 2rem', lineHeight: 1.5 }}>
+            The story that makes them say &ldquo;just one more page.&rdquo;
+          </p>
+        </div>
+      </div>
 
       {/* ─── Testimonial ─── */}
       <section style={{ background: 'linear-gradient(135deg, #0D183D 0%, #0b2252 100%)', padding: '6rem 2rem', position: 'relative', overflow: 'hidden' }}>
