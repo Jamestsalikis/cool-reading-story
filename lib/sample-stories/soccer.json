@@ -1,0 +1,36 @@
+{
+  "interest": "Soccer",
+  "gender": "boy",
+  "title": "{{NAME}}'s Perfect Kick",
+  "moral": "Believing in yourself is the first step to doing something amazing.",
+  "theme_emoji": "⚽",
+  "word_count": 400,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a determined young boy with wavy red hair and green eyes, wearing a green-and-white striped soccer jersey, black shorts, and green soccer cleats — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "The morning of the big match, {{NAME}} couldn't eat his breakfast.\n\n\"What if I miss?\" he asked his mum.\n\n\"Then you try again,\" she said simply, and tucked a note into his sock.\n\nAt the ground, {{NAME}} looked at the goal. It seemed enormous. The whole world seemed to be watching. He could feel his legs going wobbly, right down to his green cleats.",
+      "image_prompt": "{{NAME}}, a determined young boy with wavy red hair and green eyes, wearing a green-and-white striped soccer jersey, black shorts, and green soccer cleats — same child, same face, same exact outfit in every image. Standing nervously at the edge of a sunny soccer field, looking up at a large goal, crowd of colourful supporters in the background. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "{{NAME}} got his first chance early in the second half. The ball rolled to his feet, the goal was open, and he swung his leg back —\n\nThe shot went wide. Way wide. It bounced into the corner flag.\n\n{{NAME}}'s face went hot. He stared at the grass. He wanted to disappear into it.\n\nThen he remembered the note in his sock. He bent down and unfolded it. It said: \"Kick with your heart, not just your foot. Love, Mum.\"",
+      "image_prompt": "{{NAME}}, a determined young boy with wavy red hair and green eyes, wearing a green-and-white striped soccer jersey, black shorts, and green soccer cleats — same child, same face, same exact outfit in every image. Kneeling on a soccer field, reading a small folded note, eyes soft and thoughtful, the ball and goal visible behind him. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "In the final minute, the score was tied. {{NAME}}'s teammate crossed the ball perfectly — it arced through the air and dropped right at his feet.\n\nEverything went quiet. Not real quiet. The crowd was roaring. But inside {{NAME}}'s head, it was peaceful and clear.\n\nHe thought of his mum. He thought of every practice, every rainy afternoon, every time he'd stayed an extra ten minutes after everyone else went home.\n\nHe kicked.",
+      "image_prompt": "{{NAME}}, a determined young boy with wavy red hair and green eyes, wearing a green-and-white striped soccer jersey, black shorts, and green soccer cleats — same child, same face, same exact outfit in every image. Mid-kick on a soccer field, eyes focused and calm, foot connecting powerfully with the ball, golden late-afternoon light around him. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The ball flew straight and true — right into the top corner of the net.\n\nThe crowd erupted. His teammates piled on top of him, laughing and shouting his name. The coach pumped his fist. The goalkeeper just stared.\n\n{{NAME}} lay at the bottom of the pile, looking up at the blue sky, laughing harder than he had in months.\n\n\"That's the one,\" he said to no one in particular.",
+      "image_prompt": "{{NAME}}, a determined young boy with wavy red hair and green eyes, wearing a green-and-white striped soccer jersey, black shorts, and green soccer cleats — same child, same face, same exact outfit in every image. Laughing joyfully at the centre of a huge team pile-on celebration on a sunny soccer field, arms raised, teammates cheering around him. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "That night, {{NAME}} had mud on his knees and grass stains on his jersey. He didn't want to wash either of them.\n\nHe put the note from his mum in his top drawer — the one he saved for important things.\n\nHis legs ached in the best possible way as he climbed into bed. He thought about the shot. The way it had felt — not like kicking a ball at all, but like letting go of something heavy and watching it soar.\n\nHe closed his eyes, and was asleep before his mum had even turned off the light.",
+      "image_prompt": "{{NAME}}, a determined young boy with wavy red hair and green eyes, wearing a green-and-white striped soccer jersey, black shorts, and green soccer cleats — same child, same face, same exact outfit in every image. Tucked peacefully in bed, eyes closed, a soccer trophy and muddy cleats visible on the floor beside him, warm bedside lamp glowing. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

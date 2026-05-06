@@ -8,6 +8,7 @@ export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
+  const [consentChecked, setConsentChecked] = useState(false);
   const [error, setError] = useState('');
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -23,6 +24,7 @@ export default function SignupPage() {
   };
 
   const handleGoogle = async () => {
+    if (!consentChecked) return;
     setGoogleLoading(true);
     setError('');
     await signInWithGoogle();
@@ -102,7 +104,7 @@ export default function SignupPage() {
         {/* Google OAuth Button */}
         <button
           onClick={handleGoogle}
-          disabled={googleLoading}
+          disabled={googleLoading || !consentChecked}
           style={{
             width: '100%',
             padding: '0.875rem 1rem',
@@ -112,13 +114,13 @@ export default function SignupPage() {
             color: '#1A1209',
             fontSize: '0.9375rem',
             fontWeight: 500,
-            cursor: googleLoading ? 'not-allowed' : 'pointer',
+            cursor: (googleLoading || !consentChecked) ? 'not-allowed' : 'pointer',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             gap: '0.75rem',
             marginBottom: '1.5rem',
-            opacity: googleLoading ? 0.7 : 1,
+            opacity: (googleLoading || !consentChecked) ? 0.6 : 1,
           }}
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -177,11 +179,27 @@ export default function SignupPage() {
             />
           </div>
 
+
+          {/* COPPA / Age Consent */}
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', marginBottom: '1.25rem', padding: '1rem', background: '#FBF8F3', borderRadius: '8px', border: '1px solid #E8E0D0' }}>
+            <input
+              id="consent"
+              type="checkbox"
+              checked={consentChecked}
+              onChange={e => setConsentChecked(e.target.checked)}
+              style={{ marginTop: '2px', width: '16px', height: '16px', accentColor: '#741515', flexShrink: 0, cursor: 'pointer' }}
+            />
+            <label htmlFor="consent" style={{ fontSize: '0.8125rem', color: '#4A3728', lineHeight: 1.5, cursor: 'pointer' }}>
+              I confirm I am <strong>18 years of age or older</strong> and am the parent or legal guardian of the child I am creating a profile for. I consent to the collection and use of my child&apos;s information as described in the{' '}
+              <a href="/privacy" target="_blank" rel="noopener noreferrer" style={{ color: '#741515', textDecoration: 'underline' }}>Privacy Policy</a>.
+            </label>
+          </div>
+
           <button
             type="submit"
             className="btn-brand"
-            disabled={loading}
-            style={{ width: '100%', justifyContent: 'center', marginBottom: '1.5rem', cursor: loading ? 'not-allowed' : 'pointer', opacity: loading ? 0.7 : 1 }}
+            disabled={loading || !consentChecked}
+            style={{ width: '100%', justifyContent: 'center', marginBottom: '1.5rem', cursor: (loading || !consentChecked) ? 'not-allowed' : 'pointer', opacity: (loading || !consentChecked) ? 0.6 : 1 }}
           >
             {loading ? 'Creating account...' : 'Next Step'}
           </button>
@@ -199,9 +217,9 @@ export default function SignupPage() {
 
       <p style={{ fontSize: '0.75rem', color: '#6B5E4E', textAlign: 'center', maxWidth: '420px', marginTop: '2rem', lineHeight: '1.5' }}>
         By creating an account, you agree to our{' '}
-        <a href="#" style={{ color: '#741515', textDecoration: 'none', fontWeight: 500 }}>Terms of Service</a>{' '}
+        <a href="/terms" style={{ color: '#741515', textDecoration: 'none', fontWeight: 500 }}>Terms of Service</a>{' '}
         and{' '}
-        <a href="#" style={{ color: '#741515', textDecoration: 'none', fontWeight: 500 }}>Privacy Policy</a>.
+        <a href="/privacy" style={{ color: '#741515', textDecoration: 'none', fontWeight: 500 }}>Privacy Policy</a>.
         We&apos;ll never share your data.
       </p>
     </div>

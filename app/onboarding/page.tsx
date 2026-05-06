@@ -1,9 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { createChild } from '@/lib/supabase/child-actions';
+import { createClient } from '@/lib/supabase/client';
+import { TRIAL_INTERESTS } from '@/lib/sample-stories/index';
 import Fable, { type FablePose } from '@/components/Fable';
 
 type Person = { name: string; nickname: string };
@@ -195,6 +197,23 @@ export default function OnboardingPage() {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
   const [nameError, setNameError] = useState('');
+  const [isFreeUser, setIsFreeUser] = useState(true); // assume free until confirmed
+
+  // Check subscription status on mount
+  useEffect(() => {
+    const checkSub = async () => {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+      const { data } = await supabase
+        .from('user_subscriptions')
+        .select('status')
+        .eq('user_id', user.id)
+        .single();
+      setIsFreeUser(!data || data.status !== 'subscribed');
+    };
+    checkSub();
+  }, []);
 
   // Build the list of follow-up questions from selected interests
   const followUpSections = state.interests
@@ -211,7 +230,8 @@ export default function OnboardingPage() {
       setNameError('');
       setState({ ...state, step: 3 });
     } else if (state.step === 3) {
-      setState({ ...state, step: 4 });
+      // Free users skip follow-up questions (step 4)
+      setState({ ...state, step: isFreeUser ? 5 : 4 });
     } else if (state.step === 4) {
       setState({ ...state, step: 5 });
     } else {
@@ -268,6 +288,8 @@ export default function OnboardingPage() {
   };
 
   const handleInterestToggle = (label: string) => {
+    // Free users can only pick trial interests
+    if (isFreeUser && !TRIAL_INTERESTS.includes(label as typeof TRIAL_INTERESTS[number])) return;
     setState((prev) => ({
       ...prev,
       interests: prev.interests.includes(label)
@@ -461,6 +483,12 @@ export default function OnboardingPage() {
               @keyframes it-star-blink { 0%,100%{opacity:0.9} 50%{opacity:0.08} }
               .it-star { animation: it-star-blink 2s ease-in-out infinite; }
             `}</style>
+            {isFreeUser && (
+              <div style={{ background: '#FFFBEB', border: '1px solid #D97706', borderRadius: '10px', padding: '0.75rem 1rem', marginBottom: '12px', fontSize: '0.8125rem', color: '#92400E', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <span style={{ fontSize: '1rem' }}>✨</span>
+                <span><strong>Free trial:</strong> Choose from 8 sample interests. Subscribe to unlock all 27 themes and personalise your story fully.</span>
+              </div>
+            )}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))', gap: '10px', marginBottom: '16px' }}>
               {INTEREST_OPTIONS.map((option) => {
                 const active = state.interests.includes(option.label);
@@ -1702,20 +1730,25 @@ export default function OnboardingPage() {
                     {[0,1,2,3].map(i=><line key={i} x1={62-i*8} y1={40+i*4} x2={80} y2={40+i*4} stroke="rgba(255,220,50,0.2)" strokeWidth="1" className="it-flash" style={{animationDelay:`${i*0.1}s`}}/>)}
                   </>),
                 };
+                const isLocked = isFreeUser && !TRIAL_INTERESTS.includes(option.label as typeof TRIAL_INTERESTS[number]);
                 return (
                   <button
                     key={option.label}
                     className="int-tile"
-                    onClick={() => handleInterestToggle(option.label)}
+                    onClick={() => {
+                      if (isFreeUser && !TRIAL_INTERESTS.includes(option.label as typeof TRIAL_INTERESTS[number])) return;
+                      handleInterestToggle(option.label);
+                    }}
                     style={{
                       display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end',
                       padding: '0 8px 12px',
                       borderRadius: '18px',
                       minHeight: '100px',
-                      cursor: 'pointer',
+                      cursor: isLocked ? 'not-allowed' : 'pointer',
                       border: 'none',
                       position: 'relative',
                       overflow: 'hidden',
+                      opacity: isLocked ? 0.55 : 1,
                       background: active
                         ? `linear-gradient(145deg, ${option.g[0]}, ${option.g[1]})`
                         : darkBg || 'white',
@@ -1737,6 +1770,15 @@ export default function OnboardingPage() {
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                         fontSize: '10px', color: 'white', fontWeight: '800', lineHeight: 1,
                       }}>✓</span>
+                    )}
+                    {isLocked && (
+                      <span style={{
+                        position: 'absolute', top: '6px', right: '6px', zIndex: 3,
+                        background: 'rgba(0,0,0,0.65)', borderRadius: '4px',
+                        padding: '2px 5px', fontSize: '0.6rem', fontWeight: '700',
+                        color: 'rgba(255,220,100,1)', letterSpacing: '0.04em',
+                        lineHeight: 1.3, textTransform: 'uppercase',
+                      }}>★ Sub</span>
                     )}
                     <span style={{ position: 'relative', zIndex: 1, fontSize: '0.75rem', fontWeight: '800', lineHeight: 1.2, textAlign: 'center', color: (active || !!darkBg) ? 'rgba(255,255,255,1)' : '#1A1209', letterSpacing: '0.03em', textShadow: (active || !!darkBg) ? '0 1px 4px rgba(0,0,0,0.7), 0 0 8px rgba(0,0,0,0.4)' : '0 1px 3px rgba(255,255,255,0.9)' }}>
                       {option.label}

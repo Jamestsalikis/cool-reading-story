@@ -3,11 +3,10 @@ import Link from 'next/link';
 export const metadata = { title: 'Terms of Service — Cool Reading Story' };
 
 export default function TermsPage() {
-  const updated = '26 April 2026';
+  const updated = '6 May 2026';
 
   return (
     <div style={{ background: '#FAF9F6', minHeight: '100vh' }}>
-      {/* Nav */}
       <nav style={{ borderBottom: '1px solid #E8E3DC', padding: '1.25rem 2rem' }}>
         <div style={{ maxWidth: '820px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Link href="/" className="font-serif" style={{ fontSize: '1.2rem', fontWeight: 600, color: '#741515', textDecoration: 'none' }}>
@@ -25,8 +24,12 @@ export default function TermsPage() {
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem', color: '#1C1614', lineHeight: 1.8 }}>
 
+          <div style={{ background: '#FFFBEB', borderRadius: '10px', padding: '1rem 1.5rem', fontSize: '0.875rem', color: '#92400E', borderLeft: '3px solid #D97706' }}>
+            <strong>Beta / Research Preview:</strong> Cool Reading Story is currently in early access. Features may change, and we may update these Terms as the service evolves. We will notify you of material changes by email.
+          </div>
+
           <Section title="1. About these Terms">
-            <p>These Terms of Service ("Terms") govern your use of Cool Reading Story ("we", "us", "our"), an AI-powered personalised children's story service available at cool-reading-story.vercel.app. By creating an account or using our service, you agree to these Terms.</p>
+            <p>These Terms of Service ("Terms") govern your use of Cool Reading Story ("we", "us", "our"), an AI-powered personalised children&apos;s story service. By creating an account or using our service, you agree to these Terms.</p>
             <p>Please read these Terms carefully. If you disagree with any part, please do not use our service.</p>
           </Section>
 
@@ -36,19 +39,24 @@ export default function TermsPage() {
 
           <Section title="3. Your Account">
             <p>You are responsible for keeping your account credentials confidential and for all activity that occurs under your account. Notify us immediately at <a href="mailto:hello@coolreadingstory.com" style={{ color: '#741515' }}>hello@coolreadingstory.com</a> if you suspect unauthorised access.</p>
+            <p>Each account is limited to one child profile on the base subscription. Additional child profiles are available for an add-on fee (see Section 4).</p>
             <p>We reserve the right to suspend or terminate accounts that violate these Terms.</p>
           </Section>
 
           <Section title="4. Subscription and Billing">
             <p><strong>Plans.</strong> We offer a Monthly plan (A$9.99/month) and an Annual plan (A$95.90/year, billed in full). All prices are in Australian dollars and inclusive of any applicable taxes.</p>
-            <p><strong>Story limits.</strong> Subscriptions include up to 15 personalised stories per calendar month. The counter resets on the 1st of each month.</p>
+            <p><strong>Story limits.</strong> Subscriptions include 1 personalised story per day per child profile. Daily limits reset at midnight in your local time zone.</p>
+            <p><strong>Additional child profiles.</strong> The base subscription covers one child profile. You may add additional children for A$3.99/month per child, added to your base subscription.</p>
+            <p><strong>Extra books.</strong> Subscribers may purchase additional books beyond the daily limit for A$0.99 per book. Free trial users may also purchase individual books. These are one-time purchases and are non-refundable once the book has been generated.</p>
+            <p><strong>Free trial.</strong> New accounts receive access to 2 pre-generated sample stories from a selection of 8 interest categories, at no charge and without requiring a payment method. Sample stories are not personalised to your child in real time.</p>
             <p><strong>Billing.</strong> Payments are processed securely by Stripe. Your payment method will be charged at the start of each billing period. You authorise us to charge your payment method on a recurring basis until you cancel.</p>
             <p><strong>Cancellation.</strong> You may cancel at any time through your account settings or by contacting us. Cancellation takes effect at the end of your current billing period. We do not provide refunds for partial periods.</p>
-            <p><strong>Price changes.</strong> We will give you at least 30 days' notice of any price change before it takes effect.</p>
+            <p><strong>Price changes.</strong> We will give you at least 30 days&apos; notice of any price change before it takes effect.</p>
           </Section>
 
           <Section title="5. AI-Generated Content">
-            <p>Stories are generated using artificial intelligence. While we strive for quality and appropriateness, we do not guarantee that every story will be perfect. Stories are generated based on the information you provide about your child and are intended for personal, private family use only.</p>
+            <p>Stories and illustrations are generated using artificial intelligence (Anthropic Claude for text, Replicate Flux for images). While we apply content filters to ensure all output is age-appropriate and wholesome, we do not guarantee that every story will be perfect. Stories are intended for personal, private family use only.</p>
+            <p><strong>Content safety.</strong> All story generation is subject to mandatory safety filters that prohibit sexual, violent, frightening, abusive, discriminatory, or otherwise inappropriate content. If any part of a child&apos;s profile could produce unsafe output, our system substitutes safe alternative themes. You may report any concerning content to <a href="mailto:hello@coolreadingstory.com" style={{ color: '#741515' }}>hello@coolreadingstory.com</a>.</p>
             <p>You own the stories generated for your account and may use them for personal, non-commercial purposes. You may not sell, republish, or distribute stories commercially without our written consent.</p>
             <p>We retain the right to use anonymised, non-identifiable story data to improve our service.</p>
           </Section>
@@ -61,6 +69,7 @@ export default function TermsPage() {
               <li>Share account credentials with others outside your immediate family</li>
               <li>Use automated tools to generate stories in bulk</li>
               <li>Reverse engineer or attempt to extract our AI prompts or models</li>
+              <li>Provide false information about your age or parental status</li>
             </ul>
           </Section>
 
@@ -85,7 +94,7 @@ export default function TermsPage() {
           </Section>
 
           <div style={{ background: '#FBF0F0', borderRadius: '10px', padding: '1.25rem 1.5rem', fontSize: '0.875rem', color: '#741515', borderLeft: '3px solid #741515' }}>
-            <strong>Note:</strong> This document is a working draft. It should be reviewed by a qualified Australian lawyer before the service launches publicly, particularly the consumer guarantees and subscription cancellation provisions under Australian Consumer Law.
+            <strong>Note:</strong> This document is a working draft. It should be reviewed by a qualified Australian lawyer before the service launches publicly, particularly regarding consumer guarantees, subscription cancellation provisions under Australian Consumer Law, and children&apos;s data obligations.
           </div>
         </div>
       </main>

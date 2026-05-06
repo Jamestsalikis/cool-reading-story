@@ -1,0 +1,36 @@
+{
+  "interest": "Superheroes",
+  "gender": "boy",
+  "title": "{{NAME}} and the Shadow Thief",
+  "moral": "True courage means helping others, even when you feel small.",
+  "theme_emoji": "🦸",
+  "word_count": 420,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a brave young boy with messy brown hair and bright blue eyes, wearing a red cape, a yellow star on his blue shirt, and red sneakers — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} had a secret. Hidden under his bed, wrapped in tissue paper, was a red cape with a golden star.\n\nEvery night before bed, {{NAME}} would take it out and hold it up to the moonlight. \"One day,\" he whispered, \"I'll be ready to use this.\"\n\nThat evening, something strange happened. When {{NAME}} looked out his window, the streetlights had no shadows beneath them. The whole neighbourhood had gone dark and flat.",
+      "image_prompt": "{{NAME}}, a brave young boy with messy brown hair and bright blue eyes, wearing a red cape, a yellow star on his blue shirt, and red sneakers — same child, same face, same exact outfit in every image. Standing at a bedroom window at night, holding a glowing red cape up to the moonlight, eyes wide with wonder. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "{{NAME}} put on his cape. The moment it touched his shoulders, he felt a warm tingle from his toes to his ears.\n\nHe took one step — and zoom! He was at the end of the street. Another step — the park! The cape had given him super speed.\n\n\"Whoa!\" laughed {{NAME}}, skidding to a stop. He looked down. His own shadow was still there, stretching long and steady on the path. Whatever was stealing shadows hadn't found him yet.",
+      "image_prompt": "{{NAME}}, a brave young boy with messy brown hair and bright blue eyes, wearing a red cape, a yellow star on his blue shirt, and red sneakers — same child, same face, same exact outfit in every image. Racing at super speed along a neighbourhood street at night, a blur of red cape behind him, a big grin on his face. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "In the middle of the park, {{NAME}} found the Shadow Thief — a small, hunched creature made entirely of grey fog, stuffing shadows into a bulging sack.\n\n\"Stop!\" shouted {{NAME}}.\n\nThe creature froze. It turned two pale eyes toward {{NAME}} and let out a low, sad moan. {{NAME}} noticed something then — the creature had no shadow of its own. It was collecting shadows because it was lonely and cold.\n\n\"Oh,\" said {{NAME}} softly. \"You just wanted a friend.\"",
+      "image_prompt": "{{NAME}}, a brave young boy with messy brown hair and bright blue eyes, wearing a red cape, a yellow star on his blue shirt, and red sneakers — same child, same face, same exact outfit in every image. Facing a small grey fog creature in a moonlit park, the creature clutching a sack of shadows, both looking at each other curiously. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "{{NAME}} reached into the sack and pulled out the shadows one by one. He walked from garden to garden, tucking each shadow back under the streetlights and flowerpots and fence posts where they belonged.\n\nWith every shadow he returned, the neighbourhood glowed a little warmer.\n\nThen {{NAME}} had an idea. He sat beside the Shadow Thief and let the creature borrow his shadow for a little while — just so it could remember what it felt like to have one. The creature let out a sound like a tiny laugh.",
+      "image_prompt": "{{NAME}}, a brave young boy with messy brown hair and bright blue eyes, wearing a red cape, a yellow star on his blue shirt, and red sneakers — same child, same face, same exact outfit in every image. Kneeling beside a small grey fog creature in a glowing neighbourhood street, both of them looking at a long shadow stretching out together on the pavement. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "By the time {{NAME}} climbed back through his window, every shadow was home. The streets were warm and familiar again.\n\nHe folded his cape carefully and slid it back under the bed. He didn't need it to feel like a hero anymore. He already knew he was one — not because of his super speed, but because he had stopped to listen.\n\n{{NAME}} pulled his blanket up to his chin, closed his eyes, and smiled all the way to sleep.",
+      "image_prompt": "{{NAME}}, a brave young boy with messy brown hair and bright blue eyes, wearing a red cape, a yellow star on his blue shirt, and red sneakers — same child, same face, same exact outfit in every image. Tucked into a cosy bed with a glowing nightlight, eyes closed, a small smile on his face, his red cape folded neatly on the bedside table. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

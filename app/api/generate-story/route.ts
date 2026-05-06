@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import Anthropic from '@anthropic-ai/sdk';
 import { createClient } from '@/lib/supabase/server';
 import { checkGenerationAllowed, decrementStoryCount } from '@/lib/subscription';
+import { getSampleStory, isTrialInterest } from '@/lib/sample-stories/index';
 
 // Extend Vercel function timeout to 60s (Pro plan) to allow time for image generation
 export const maxDuration = 60;
@@ -239,6 +240,55 @@ export async function POST(request: Request) {
     if (childError || !child) {
       return NextResponse.json({ error: 'Child not found' }, { status: 404 });
     }
+
+    // --- PRE-GENERATED TRIAL STORY SHORTCUT ---
+    // Free users get a static sample story for trial interests — no Claude API call.
+    const { data: subData } = await supabase
+      .from('user_subscriptions')
+      .select('status, free_stories_remaining')
+      .eq('user_id', user.id)
+      .single();
+
+    const isFreeUser = !subData || subData.status !== 'subscribed';
+    const primaryInterest = (child.interests || [])[0] || '';
+
+    if (isFreeUser && isTrialInterest(primaryInterest)) {
+      const sampleStory = getSampleStory(primaryInterest, child.name);
+      if (sampleStory) {
+        const pagesForDB = sampleStory.pages.map((page) => ({
+          ...page,
+          image_url: null,
+          poll_url: null,
+        }));
+        const fullContent = pagesForDB.map((p) => p.content).join('\n\n');
+        const { data: story, error: storyError } = await supabase
+          .from('stories')
+          .insert({
+            child_id,
+            parent_id: user.id,
+            title: sampleStory.title,
+            content: fullContent,
+            moral: sampleStory.moral,
+            theme: sampleStory.theme_emoji,
+            word_count: sampleStory.word_count,
+            reading_time_minutes: Math.ceil((sampleStory.word_count || 400) / 150),
+            pages: pagesForDB,
+            input_tokens: 0,
+            output_tokens: 0,
+            character_anchor: sampleStory.character_anchor,
+            is_sample: true,
+          })
+          .select()
+          .single();
+        if (storyError) {
+          console.error('Sample story save error:', storyError);
+          return NextResponse.json({ error: 'Failed to save story' }, { status: 500 });
+        }
+        await decrementStoryCount(supabase, user.id, paywallResult.reason);
+        return NextResponse.json({ story });
+      }
+    }
+    // --- END PRE-GEN SHORTCUT ---
 
     // Generate story + page breakdown via Claude
     const prompt = buildPrompt({

@@ -1,0 +1,36 @@
+{
+  "interest": "Animals",
+  "gender": "girl",
+  "title": "{{NAME}}'s Garden Hospital",
+  "moral": "Small acts of kindness grow into something wonderful.",
+  "theme_emoji": "🐾",
+  "word_count": 405,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a caring young girl with a neat brown ponytail and bright green eyes, wearing a yellow raincoat over a white t-shirt, denim overalls, and red gumboots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} found the butterfly on a Wednesday morning, sitting very still on the garden path.\n\nOne of its wings was bent at a sad angle. It fluttered but couldn't lift off.\n\n\"I'll fix you,\" {{NAME}} said firmly.\n\nShe found a shoebox, lined it with soft tissue, and made a tiny sign out of a lollipop stick: GARDEN HOSPITAL — ALL WELCOME. She set the butterfly inside very gently, and put a small leaf of honeysuckle beside it for comfort.",
+      "image_prompt": "{{NAME}}, a caring young girl with a neat brown ponytail and bright green eyes, wearing a yellow raincoat over a white t-shirt, denim overalls, and red gumboots — same child, same face, same exact outfit in every image. Kneeling on a garden path, carefully picking up a small butterfly with a bent wing, an open shoebox lined with tissue waiting beside her. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "Word spread quickly. (Word always spreads quickly in gardens.)\n\nBy afternoon, {{NAME}} had three more patients: a hedgehog with a thorn in its paw, a sparrow with a ruffled wing it couldn't fold flat, and a very indignant frog who had somehow got a piece of fishing line tangled around one leg.\n\n{{NAME}} worked on each one carefully. She used tweezers for the thorn. She smoothed the sparrow's feathers with a cotton bud. She unwound the fishing line loop by loop while the frog glared at her.\n\n\"You're welcome,\" she said.",
+      "image_prompt": "{{NAME}}, a caring young girl with a neat brown ponytail and bright green eyes, wearing a yellow raincoat over a white t-shirt, denim overalls, and red gumboots — same child, same face, same exact outfit in every image. Sitting cross-legged in the garden surrounded by a small shoebox hospital, tending to a hedgehog, a sparrow, and a grumpy frog, all arranged carefully in front of her. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The next morning, {{NAME}} checked on her patients.\n\nThe butterfly opened and closed its wings slowly — testing, testing — and then lifted off in a perfect spiral above the lavender bush.\n\nThe hedgehog snuffled around the tissue box, then rolled out and trundled off under the gate.\n\nThe sparrow ruffled its feathers, found them in order, and flew to the top of the fence where it sang three notes — once for {{NAME}} and twice more just for the joy of it.\n\nOnly the frog stayed. He had decided he liked the shoebox.",
+      "image_prompt": "{{NAME}}, a caring young girl with a neat brown ponytail and bright green eyes, wearing a yellow raincoat over a white t-shirt, denim overalls, and red gumboots — same child, same face, same exact outfit in every image. Standing in a sunny garden, watching a butterfly spiral upward while a sparrow sings on a fence above her and a hedgehog trots through the gate, smiling joyfully. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "That evening, something extraordinary happened.\n\n{{NAME}} was getting ready for bed when she heard it — the garden had filled with sound.\n\nShe looked out her window. In the blue dusk, every animal she had ever helped was there — sparrows on the fence, hedgehogs under the lavender, frogs on the path, and right in the middle, her butterfly, floating.\n\nThey were making sounds — chirps and trills and rustles — all at different pitches, overlapping.\n\n{{NAME}} listened for a long moment. It sounded, she decided, exactly like a song.",
+      "image_prompt": "{{NAME}}, a caring young girl with a neat brown ponytail and bright green eyes, wearing a yellow raincoat over a white t-shirt, denim overalls, and red gumboots — same child, same face, same exact outfit in every image. Looking out a bedroom window at twilight, face lit with wonder, as the garden below is filled with sparrows, hedgehogs, frogs, and a glowing butterfly all gathered together. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "{{NAME}} opened her window just a crack.\n\nThe sounds drifted in — warm and rustling and full of small, alive things.\n\nShe got into bed and pulled her blanket up. Outside, the song continued.\n\nShe thought about all of them: the butterfly's bent wing, the frog's indignant glare, the sparrow's three perfect notes. Such small things. Such enormous things.\n\n{{NAME}} closed her eyes.\n\nThe garden sang her to sleep.",
+      "image_prompt": "{{NAME}}, a caring young girl with a neat brown ponytail and bright green eyes, wearing a yellow raincoat over a white t-shirt, denim overalls, and red gumboots — same child, same face, same exact outfit in every image. Asleep in a cosy bed, window slightly open, moonlight streaming in, peaceful expression, the faint silhouettes of garden animals visible through the curtain. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

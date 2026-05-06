@@ -1,0 +1,36 @@
+{
+  "interest": "Princesses",
+  "gender": "girl",
+  "title": "{{NAME}} and the Kingdom of Stars",
+  "moral": "The bravest adventures begin when you dare to look up.",
+  "theme_emoji": "👑",
+  "word_count": 415,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a curious young princess with dark braided hair and warm hazel eyes, wearing a deep blue gown with silver constellation embroidery, a small gold crown, and soft silver slippers — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "Princess {{NAME}} lived in a tall castle at the edge of the kingdom. She had everything a princess could want — a library full of maps, a garden full of roses, and a telescope by her window.\n\nBut what she really wanted was to see somewhere new.\n\n\"You are a princess,\" said her tutor. \"Princesses do not go wandering.\"\n\n\"Then perhaps,\" said {{NAME}} thoughtfully, \"I shall go at night — when no one is watching.\"",
+      "image_prompt": "{{NAME}}, a curious young princess with dark braided hair and warm hazel eyes, wearing a deep blue gown with silver constellation embroidery, a small gold crown, and soft silver slippers — same child, same face, same exact outfit in every image. Standing at a high castle window at night, looking through a telescope at a sky full of stars, expression full of longing and curiosity. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "That very night, {{NAME}} slipped out of her tower just after midnight.\n\nIn the castle courtyard, where the moonlight fell at a particular angle on the old fountain, she saw something that had never been there before: a staircase.\n\nIt was made of moonbeams — pale silver steps that rose upward and curved out of sight among the clouds.\n\n{{NAME}} placed one foot on the first step. It held. She placed the other. Then she climbed.",
+      "image_prompt": "{{NAME}}, a curious young princess with dark braided hair and warm hazel eyes, wearing a deep blue gown with silver constellation embroidery, a small gold crown, and soft silver slippers — same child, same face, same exact outfit in every image. Stepping onto a glowing silver moonbeam staircase rising from a moonlit castle courtyard, looking upward with wonder. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "At the top of the staircase was a small kingdom — no bigger than {{NAME}}'s bedroom, but absolutely perfect. The houses were made of glass that hummed with their own light. The roads were silver and left trails behind your footsteps.\n\nThe people who lived there were no taller than her hand. They had starlight in their hair and voices like tiny bells.\n\n\"A visitor!\" said the smallest one delightedly. \"We haven't had a visitor since — oh, ages!\"\n\n\"I'm {{NAME}},\" she said. \"I came to explore.\"",
+      "image_prompt": "{{NAME}}, a curious young princess with dark braided hair and warm hazel eyes, wearing a deep blue gown with silver constellation embroidery, a small gold crown, and soft silver slippers — same child, same face, same exact outfit in every image. Standing in a tiny glowing kingdom above the clouds, surrounded by small luminous star-people with glowing hair, looking down at them with delight. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The star children taught {{NAME}} their greatest secret: a dance that made the stars move.\n\nYou had to spin on your left foot, then your right. Clap once, turn, and reach both hands toward the sky. When {{NAME}} did it correctly, two stars overhead swapped places with a little flash.\n\n\"Does that mean they can see me?\" she asked, looking up.\n\n\"Always,\" said the smallest star child. \"They just don't make it obvious.\"",
+      "image_prompt": "{{NAME}}, a curious young princess with dark braided hair and warm hazel eyes, wearing a deep blue gown with silver constellation embroidery, a small gold crown, and soft silver slippers — same child, same face, same exact outfit in every image. Dancing joyfully in the star kingdom with arms raised, tiny star-people dancing around her, two bright stars flashing and swapping places above in the night sky. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "{{NAME}} climbed down the moonbeam staircase as the sky began to turn from black to the deepest shade of blue.\n\nShe slipped back into her tower. She put away her crown and changed into her nightgown and got into bed.\n\nHer tutor would say she had been asleep all night. Her maps wouldn't show where she had been.\n\nBut {{NAME}} looked out at the sky through half-closed eyes — and two stars blinked at her.\n\nShe smiled, and was asleep before the first bird sang.",
+      "image_prompt": "{{NAME}}, a curious young princess with dark braided hair and warm hazel eyes, wearing a deep blue gown with silver constellation embroidery, a small gold crown, and soft silver slippers — same child, same face, same exact outfit in every image. Lying in a grand castle bed, eyes almost closed, looking softly at a window where two stars are visibly brighter than the rest, a small secret smile on her face. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}
