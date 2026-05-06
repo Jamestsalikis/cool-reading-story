@@ -186,14 +186,14 @@ export default function Home() {
           <div className="hero-book-panel" style={{
             backgroundImage: "url('/hero-illustration.png')",
             backgroundSize: '280%',
-            backgroundPosition: '2% 38%',
+            backgroundPosition: '2% 32%',
             backgroundRepeat: 'no-repeat',
             padding: 0
           }}>
             {/* Top fade: blends into cream hero background */}
             <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '35%', background: 'linear-gradient(to bottom, #FFF4E6 0%, transparent 100%)' }} />
-            {/* Bottom fade: blends into dark section below */}
-            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '35%', background: 'linear-gradient(to top, rgba(13,24,61,0.9) 0%, transparent 100%)' }} />
+            {/* Bottom fade: fully opaque to hide colour palette zone */}
+            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '50%', background: 'linear-gradient(to top, rgba(13,24,61,1) 0%, rgba(13,24,61,0.6) 30%, transparent 100%)' }} />
           </div>
         </div>
       </section>
