@@ -185,15 +185,15 @@ export default function Home() {
           {/* Right: illustrated scene */}
           <div className="hero-book-panel" style={{
             backgroundImage: "url('/hero-illustration.png')",
-            backgroundSize: '280%',
-            backgroundPosition: '2% 32%',
+            backgroundSize: '800%',
+            backgroundPosition: '30% 36%',
             backgroundRepeat: 'no-repeat',
             padding: 0
           }}>
             {/* Top fade: blends into cream hero background */}
-            <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '35%', background: 'linear-gradient(to bottom, #FFF4E6 0%, transparent 100%)' }} />
-            {/* Bottom fade: fully opaque to hide colour palette zone */}
-            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '50%', background: 'linear-gradient(to top, rgba(13,24,61,1) 0%, rgba(13,24,61,0.6) 30%, transparent 100%)' }} />
+            <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '30%', background: 'linear-gradient(to bottom, #FFF4E6 0%, transparent 100%)' }} />
+            {/* Bottom fade: palette is clipped by overflow:hidden, this just adds polish */}
+            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '25%', background: 'linear-gradient(to top, rgba(13,24,61,0.95) 0%, transparent 100%)' }} />
           </div>
         </div>
       </section>
