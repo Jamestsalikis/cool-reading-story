@@ -12,7 +12,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+        {/* TalePop typography: Fredoka = heading font (closest free match to Bambino — playful, rounded, hand-drawn character) */}
+        {/* Nunito = body font — clean, rounded, perfect for bedtime reading */}
+        <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet" />
       </head>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
