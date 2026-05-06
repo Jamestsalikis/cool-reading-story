@@ -170,16 +170,19 @@ const bookStyles = `
       flex-direction: row;
       align-items: stretch;
     }
+    /* Column is position:relative so illus-wrap can fill it absolutely */
     .book-illus-col {
       flex: 0 0 45%;
       margin-left: 28px;
-      display: flex;
-      flex-direction: column;
-    }
-    .book-illus-col .illus-wrap {
-      flex: 1;
-      width: 100%;
+      position: relative;
       min-height: 380px;
+    }
+    /* Absolutely fill the column — most reliable cross-browser approach */
+    .book-illus-col .illus-wrap {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
     }
     .book-text-col {
       flex: 1;
@@ -483,7 +486,7 @@ export default function StoryPage() {
     return (
       <div className="book-page-layout">
         <div className="book-illus-col">
-          <div className="illus-wrap" style={{ width: '100%', height: '100%' }}>
+          <div className="illus-wrap">
             {illustrationEl}
             <CornerOrnaments />
           </div>
