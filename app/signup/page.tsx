@@ -44,11 +44,9 @@ export default function SignupPage() {
       }}
     >
       {/* Logo */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '2px', marginBottom: '2rem', justifyContent: 'center' }}>
-        <span className="font-serif" style={{ fontSize: '2rem', color: '#0D183D' }}>Tale</span>
-        <span className="font-serif" style={{ fontSize: '2rem', color: '#FF6B35' }}>Pop</span>
-        <span style={{ background: '#FFB703', width: '8px', height: '8px', borderRadius: '50%', display: 'inline-block', marginLeft: '-3px', marginTop: '-16px' }} />
-      </div>
+      <a href="/" style={{ textDecoration: 'none', display: 'inline-block', marginBottom: '2rem' }}>
+        <img src="/mood-3.png" alt="TalePop" style={{ height: '90px', width: 'auto' }} />
+      </a>
 
       {/* Progress Dots */}
       <div style={{ display: 'flex', gap: '1.5rem', marginBottom: '3rem', justifyContent: 'center' }}>

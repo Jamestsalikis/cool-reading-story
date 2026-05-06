@@ -9,10 +9,8 @@ export default function PrivacyPage() {
     <div style={{ background: '#FFF4E6', minHeight: '100vh' }}>
       <nav style={{ borderBottom: '1px solid #F0E4D0', padding: '1.25rem 2rem' }}>
         <div style={{ maxWidth: '820px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '2px' }}>
-            <span className="font-serif" style={{ fontSize: '1.3rem', color: '#0D183D' }}>Tale</span>
-            <span className="font-serif" style={{ fontSize: '1.3rem', color: '#FF6B35' }}>Pop</span>
-            <span style={{ background: '#FFB703', width: '6px', height: '6px', borderRadius: '50%', display: 'inline-block', marginLeft: '-2px', marginTop: '-12px' }} />
+          <Link href="/" style={{ textDecoration: 'none', display: 'inline-block' }}>
+            <img src="/mood-3.png" alt="TalePop" style={{ height: '44px', width: 'auto' }} />
           </Link>
           <Link href="/login" style={{ fontSize: '0.875rem', color: '#5E6A7A', textDecoration: 'none' }}>Sign in</Link>
         </div>

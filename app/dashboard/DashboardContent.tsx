@@ -487,7 +487,9 @@ export default function DashboardPage() {
 
       {!isMobile && (
         <div style={{ width: '210px', background: '#0D183D', padding: '32px 20px', display: 'flex', flexDirection: 'column', position: 'fixed', height: '100vh', left: 0, top: 0, overflowY: 'auto' }}>
-          <h1 style={{ fontFamily: 'Fredoka One, cursive', fontSize: '1.1rem', marginBottom: '40px', color: 'rgba(255,255,255,0.9)', lineHeight: 1.3 }}>TalePop</h1>
+          <a href="/" style={{ textDecoration: 'none', display: 'inline-block', marginBottom: '32px' }}>
+            <img src="/talepop-logo-light.png" alt="TalePop" style={{ width: '150px', height: 'auto' }} />
+          </a>
           <nav style={{ display: 'flex', flexDirection: 'column', gap: '4px', flex: 1 }}>
             {navItems.map(({ id, label, icon: Icon }) => {
               const active = activeNav === id;
