@@ -466,7 +466,7 @@ export default function Home() {
             <h2 className="font-serif" style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', color: '#0D183D', marginBottom: '0.5rem', letterSpacing: '-0.01em' }}>
               Your child&apos;s story for just 30¢.
             </h2>
-            <p style={{ color: '#5E6A7A', fontWeight: 500, fontSize: '0.95rem', marginBottom: '0.5rem' }}>Start with 2 free stories — no card required.</p>
+            <p style={{ color: '#5E6A7A', fontWeight: 500, fontSize: '0.95rem', marginBottom: '0.5rem' }}>Simple, transparent pricing. Cancel anytime.</p>
             <p style={{ color: '#FF6B35', fontWeight: 700, fontSize: '0.85rem' }}>Join 2,500+ families already reading tonight.</p>
           </div>
 
@@ -482,8 +482,8 @@ export default function Home() {
                 <span style={{ fontSize: '1rem' }}>📖</span>
                 <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#FF6B35' }}>just 30¢ per story</span>
               </div>
-              <Link href="/signup" style={{ display: 'block', textAlign: 'center', padding: '0.9rem', border: '2px solid #FF6B35', borderRadius: '12px', color: '#FF6B35', textDecoration: 'none', fontWeight: '800', marginBottom: '1.75rem', transition: 'background 0.15s' }}>
-                Start with 2 free stories
+              <Link href="/signup" style={{ display: 'block', textAlign: 'center', padding: '0.9rem', background: '#FF6B35', borderRadius: '12px', color: 'white', textDecoration: 'none', fontWeight: '800', marginBottom: '1.75rem', boxShadow: '0 4px 14px rgba(255,107,53,0.3)' }}>
+                Subscribe monthly &rarr;
               </Link>
               <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                 {['Up to 15 stories per month', 'Multiple children profiles', 'Story series (up to 4 volumes)', 'Beautifully illustrated pages', 'Cancel in one click'].map(f => (
@@ -509,8 +509,8 @@ export default function Home() {
                 <span style={{ fontSize: '0.8rem', fontWeight: 800, color: 'white' }}>as little as 24¢ per story</span>
               </div>
               <p style={{ opacity: 0.6, fontSize: '0.8rem', marginBottom: '1.5rem', fontWeight: 500 }}>A$95.90 billed annually</p>
-              <Link href="/signup?plan=annual" style={{ display: 'block', textAlign: 'center', padding: '0.9rem', background: 'white', borderRadius: '12px', color: '#FF6B35', textDecoration: 'none', fontWeight: '800', marginBottom: '1.75rem' }}>
-                Start with 2 free stories
+              <Link href="/signup?plan=annual" style={{ display: 'block', textAlign: 'center', padding: '0.9rem', background: 'white', borderRadius: '12px', color: '#FF6B35', textDecoration: 'none', fontWeight: '800', marginBottom: '1.75rem', boxShadow: '0 4px 14px rgba(0,0,0,0.15)' }}>
+                Get the best deal &rarr;
               </Link>
               <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                 {['Everything in Monthly', 'Priority story generation', 'Early access to new features', 'Save A$24 per year'].map(f => (
@@ -522,21 +522,22 @@ export default function Home() {
             </div>
           </div>
 
-          <div style={{ textAlign: 'center', marginTop: '2rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem' }}>
+          <div style={{ textAlign: 'center', marginTop: '2.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+            {/* Stripe trust badge */}
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'white', border: '1px solid #E8E0D5', borderRadius: '10px', padding: '0.6rem 1.25rem', boxShadow: '0 1px 6px rgba(13,24,61,0.06)' }}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6CC06C" strokeWidth="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span style={{ fontSize: '0.8rem', color: '#5E6A7A', fontWeight: 600 }}>
+                Secure payment via <strong style={{ color: '#635BFF' }}>Stripe</strong> — your card details are never stored by TalePop
+              </span>
+            </div>
             <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-              {[
-                { icon: '🔒', text: 'Cancel anytime' },
-                { icon: '📱', text: 'Any device' },
-                { icon: '👨‍👩‍👧', text: 'Unlimited child profiles' },
-              ].map(b => (
-                <span key={b.text} style={{ fontSize: '0.8rem', color: '#9CA8B4', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '5px' }}>
-                  <span>{b.icon}</span>{b.text}
+              {['Cancel anytime', 'Any device', 'Unlimited child profiles'].map(t => (
+                <span key={t} style={{ fontSize: '0.78rem', color: '#9CA8B4', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '5px' }}>
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#9CA8B4" strokeWidth="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  {t}
                 </span>
               ))}
             </div>
-            <p style={{ color: '#9CA8B4', fontSize: '0.82rem', fontWeight: 500 }}>
-              Not sure yet? Start free — no card, no commitment.
-            </p>
           </div>
         </div>
       </section>
