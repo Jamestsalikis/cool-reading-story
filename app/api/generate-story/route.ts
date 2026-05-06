@@ -99,7 +99,7 @@ Requirements:
 7. Use language appropriate for age ${age}: ${reading_level === 'beginner' ? 'short sentences, simple words, lots of repetition' : reading_level === 'intermediate' ? 'flowing sentences, rich descriptions, some new vocabulary' : 'complex narrative, vivid imagery, sophisticated vocabulary'}
 8. Make it feel uniquely written FOR ${name} — not a generic story with a name swapped in
 9. Split the story into exactly 5 pages. Each page should have 2-4 paragraphs of text.
-10. Before writing page prompts, define a CHARACTER ANCHOR: a single vivid sentence describing ${name}'s exact look — specific hair style and colour, eye colour, and a specific named outfit (e.g. "a red polka-dot dress and white sandals" or "a yellow striped hoodie and blue jeans and white sneakers"). Choose an outfit that fits ${name}'s personality and interests. This anchor must be copied verbatim into every image prompt.
+10. Before writing page prompts, define a CHARACTER ANCHOR. Begin with this EXACT style prefix (copy it word for word): "Premium illustrated children's picture book art, warm painterly style, bold ink outlines, expressive cartoon character with large bright eyes, jewel-tone palette of midnight navy and ocean teal and sunshine yellow and tangerine orange, magical golden atmospheric lighting, dreamy enchanted background." — then describe: ${name}'s specific hair style and colour, eye colour, and a specific named outfit (e.g. "a red polka-dot dress and white sandals" or "a yellow striped hoodie and blue jeans and white sneakers"). Choose an outfit that fits ${name}'s personality and interests. This full anchor must be copied verbatim into every image prompt.
 
 CRITICAL IMAGE PROMPT RULES:
 - Start EVERY image_prompt with the character_anchor string you defined — word for word, no changes
@@ -113,7 +113,7 @@ Return ONLY valid JSON, no markdown, no explanation:
   "moral": "The gentle lesson in one sentence",
   "theme_emoji": "One emoji representing the story theme",
   "word_count": estimated_total_word_count_as_number,
-  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. [NAME], a [AGE]-year-old [GENDER] child with [HAIR DESCRIPTION], wearing [SPECIFIC OUTFIT] — same child, same face, same exact outfit in every image.",
+  "character_anchor": "Premium illustrated children's picture book art, warm painterly style, bold ink outlines, expressive cartoon character with large bright eyes, jewel-tone palette of midnight navy and ocean teal and sunshine yellow and tangerine orange, magical golden atmospheric lighting, dreamy enchanted background. [NAME], a [AGE]-year-old [GENDER] child with [HAIR DESCRIPTION], wearing [SPECIFIC OUTFIT] — same child, same face, same exact outfit in every image.",
   "pages": [
     {
       "page_number": 1,
