@@ -30,16 +30,6 @@ type Story = {
   children: { name: string; age: number };
 };
 
-// Layout per page index — alternates image position for visual interest
-// 'top' = image above text, 'bottom' = text above image
-const PAGE_LAYOUTS: Array<'top' | 'bottom'> = [
-  'top',    // Page 1: big image at top
-  'bottom', // Page 2: text first, image below
-  'top',    // Page 3
-  'bottom', // Page 4
-  'top',    // Page 5
-];
-
 const bookStyles = `
   @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
 
@@ -129,6 +119,86 @@ const bookStyles = `
     border: 1.5px solid rgba(255,255,255,0.55);
     border-radius: 2px;
     pointer-events: none;
+  }
+
+  /* ===== RESPONSIVE SIDE-BY-SIDE LAYOUT ===== */
+
+  /* Shared layout shell */
+  .book-page-layout {
+    display: flex;
+  }
+
+  /* Illustration column */
+  .book-illus-col {
+    flex-shrink: 0;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Text column */
+  .book-text-col {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Text inner padding — default is mobile (includes 28px spine offset) */
+  .book-text-inner {
+    padding: 22px 20px 28px 48px;
+  }
+
+  /* ---- MOBILE (<768px): image top, scrollable text below ---- */
+  @media (max-width: 767px) {
+    .book-page-layout {
+      flex-direction: column;
+    }
+    .book-illus-col {
+      margin-left: 28px;
+      width: calc(100% - 28px);
+      aspect-ratio: 4 / 3;
+    }
+    .book-text-col {
+      overflow-y: auto;
+      /* Image height ≈ 75vw (4:3). Top bar ≈52px, nav ≈70px, margins ≈50px */
+      max-height: calc(100svh - 75vw - 175px);
+      min-height: 150px;
+      -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
+    }
+    .book-text-inner {
+      padding: 18px 20px 28px 48px;
+    }
+  }
+
+  /* ---- TABLET + DESKTOP (≥768px): side by side ---- */
+  @media (min-width: 768px) {
+    .book-page-layout {
+      flex-direction: row;
+      align-items: stretch;
+      min-height: 460px;
+    }
+    .book-illus-col {
+      flex: 0 0 44%;
+      margin-left: 28px;
+    }
+    /* Image fills column height */
+    .book-illus-col .illus-wrap {
+      width: 100%;
+      height: 100%;
+      min-height: 340px;
+    }
+    .book-text-col {
+      flex: 1;
+      overflow-y: auto;
+      max-height: 600px;
+    }
+    /* No spine offset — text sits to the right of the image */
+    .book-text-inner {
+      padding: 22px 24px 28px 20px;
+    }
+    /* Wider book for side-by-side */
+    .book-page-wide {
+      max-width: 880px !important;
+    }
   }
 
   /* ---- Print styles ---- */
@@ -389,7 +459,6 @@ export default function StoryPage() {
   const page = pages[currentPage];
   const isLastPage = currentPage === totalPages - 1;
   const paragraphs = page.content.split('\n\n').filter(Boolean);
-  const layout = PAGE_LAYOUTS[currentPage] ?? 'top';
   const isThisPageGenerating = loadingPages.has(page.page_number);
 
   // ---- Illustration element ----
@@ -410,7 +479,7 @@ export default function StoryPage() {
 
   // ---- Text content element ----
   const textContentEl = (
-    <div style={{ padding: '22px 24px 28px 48px', position: 'relative', zIndex: 2 }}>
+    <div className="book-text-inner" style={{ position: 'relative' }}>
       <DecorativeRule />
       {currentPage === 0 && (
         <h2 style={{ fontFamily: 'Lora, Georgia, serif', fontSize: '1.45rem', color: '#2C1A0E', marginBottom: '18px', lineHeight: 1.3, fontWeight: 600 }}>
@@ -431,32 +500,22 @@ export default function StoryPage() {
     </div>
   );
 
-  // ---- Render layout variant ----
+  // ---- Responsive layout: side-by-side on tablet/desktop, stacked+scroll on mobile ----
   function renderPageContent() {
-    const illustWrap = (
-      <div className="illus-wrap" style={{ width: 'calc(100% - 28px)', marginLeft: '28px', aspectRatio: '4/3' }}>
-        {illustrationEl}
-        <CornerOrnaments />
-      </div>
-    );
-
-    if (layout === 'bottom') {
-      // Text first, image below
-      return (
-        <>
-          {textContentEl}
-          {illustWrap}
-          <div style={{ height: '16px' }} />
-        </>
-      );
-    }
-
-    // 'top' — image above text (default)
     return (
-      <>
-        {illustWrap}
-        {textContentEl}
-      </>
+      <div className="book-page-layout">
+        {/* Illustration column */}
+        <div className="book-illus-col">
+          <div className="illus-wrap" style={{ width: '100%', height: '100%' }}>
+            {illustrationEl}
+            <CornerOrnaments />
+          </div>
+        </div>
+        {/* Text column */}
+        <div className="book-text-col">
+          {textContentEl}
+        </div>
+      </div>
     );
   }
 
@@ -529,7 +588,7 @@ export default function StoryPage() {
         {/* Book */}
         <div
           key={animKey}
-          className={`book-page ${direction === 'forward' ? 'page-forward' : 'page-back'}`}
+          className={`book-page book-page-wide ${direction === 'forward' ? 'page-forward' : 'page-back'}`}
           style={{ width: '100%', maxWidth: '640px', margin: '24px 16px 0', flex: 1 }}
         >
           <div className="page-border" />
