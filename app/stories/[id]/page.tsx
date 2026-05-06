@@ -173,7 +173,6 @@ export default function StoryPage() {
   const [animKey, setAnimKey] = useState(0);
   const [loadingPages, setLoadingPages] = useState<Set<number>>(new Set());
   const [showFeedback, setShowFeedback] = useState(false);
-  // Desktop detection via JS — avoids all CSS media query / specificity issues
   const [isDesktop, setIsDesktop] = useState(false);
   const imageGenStarted = useRef(false);
   const feedbackShown = useRef(false);
@@ -311,7 +310,6 @@ export default function StoryPage() {
     <IllustrationPlaceholder generating={isThisPageGenerating} />
   );
 
-  // Shared text content — rendered inside whichever layout branch is active
   function TextContent({ mobilePadding }: { mobilePadding: boolean }) {
     return (
       <div style={{ padding: mobilePadding ? '18px 20px 28px 48px' : '28px 28px 32px 24px', position: 'relative' }}>
@@ -338,21 +336,28 @@ export default function StoryPage() {
 
   function renderPageContent() {
     if (isDesktop) {
-      // ---- DESKTOP / TABLET: image left, text right, side by side ----
+      // DESKTOP / TABLET: image fills left column, text right, both stretch to full book height
       return (
-        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'stretch', minHeight: '460px' }}>
-          {/* Image column — position:relative so child can fill it absolutely */}
+        <div style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'stretch',
+          flex: 1,
+          minHeight: '460px',
+        }}>
+          {/* Image column: flex column so inner wrapper can flex-fill the height */}
           <div style={{
             flex: '0 0 45%',
             marginLeft: '28px',
-            position: 'relative',
-            minHeight: '400px',
+            display: 'flex',
+            flexDirection: 'column',
           }}>
-            {/* position:absolute + inset:0 = fills parent exactly, no height guesswork */}
+            {/* This wrapper grows to fill the column — no absolute positioning needed */}
             <div style={{
-              position: 'absolute',
-              top: 0, right: 0, bottom: 0, left: 0,
+              flex: 1,
               overflow: 'hidden',
+              position: 'relative',
+              minHeight: '380px',
             }}>
               {illustrationEl}
               <CornerOrnaments />
@@ -372,10 +377,9 @@ export default function StoryPage() {
       );
     }
 
-    // ---- MOBILE: image top, scrollable text below ----
+    // MOBILE: image top (fixed 4:3), scrollable text below
     return (
       <div style={{ display: 'flex', flexDirection: 'column' }}>
-        {/* Image — fixed 4:3 ratio */}
         <div style={{
           marginLeft: '28px',
           width: 'calc(100% - 28px)',
@@ -387,7 +391,6 @@ export default function StoryPage() {
           {illustrationEl}
           <CornerOrnaments />
         </div>
-        {/* Text — scrollable, image stays on screen */}
         <div style={{
           overflowY: 'auto',
           maxHeight: 'calc(100svh - 75vw - 175px)',
@@ -406,7 +409,6 @@ export default function StoryPage() {
     <>
       {showFeedback && <FeedbackModal onClose={() => setShowFeedback(false)} />}
 
-      {/* Print layout */}
       <div className="print-only">
         <div className="print-page">
           <h1 className="print-title">{story.title}</h1>
@@ -426,10 +428,8 @@ export default function StoryPage() {
 
       <style>{bookStyles}</style>
 
-      {/* Screen layout */}
       <div className="no-print" style={{ minHeight: '100vh', background: 'linear-gradient(160deg, #2C1810 0%, #1a0f08 100%)', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '0 0 100px' }}>
 
-        {/* Top bar */}
         <div style={{ width: '100%', padding: '14px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'sticky', top: 0, zIndex: 10, background: 'rgba(44,24,16,0.9)', backdropFilter: 'blur(8px)' }}>
           <Link href="/dashboard" style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'rgba(255,255,255,0.65)', textDecoration: 'none', fontSize: '0.875rem' }}>
             <ArrowLeft size={15} /> Library
@@ -449,17 +449,23 @@ export default function StoryPage() {
           </div>
         </div>
 
-        {/* Book */}
+        {/* Book — flex column so inner content row can fill the height */}
         <div
           key={animKey}
           className={`book-page ${direction === 'forward' ? 'page-forward' : 'page-back'}`}
-          style={{ width: '100%', maxWidth: isDesktop ? '860px' : '640px', margin: '24px 16px 0', flex: 1 }}
+          style={{
+            width: '100%',
+            maxWidth: isDesktop ? '860px' : '640px',
+            margin: '24px 16px 0',
+            flex: 1,
+            display: 'flex',
+            flexDirection: 'column',
+          }}
         >
           <div className="page-border" />
           {renderPageContent()}
         </div>
 
-        {/* Navigation */}
         <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 20, background: 'rgba(44,24,16,0.95)', backdropFilter: 'blur(8px)', borderTop: '1px solid rgba(255,255,255,0.08)', padding: '12px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
           <button
             onClick={() => goToPage(currentPage - 1)}
