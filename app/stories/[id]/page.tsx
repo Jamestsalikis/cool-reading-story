@@ -123,25 +123,21 @@ const bookStyles = `
 
   /* ===== RESPONSIVE SIDE-BY-SIDE LAYOUT ===== */
 
-  /* Shared layout shell */
   .book-page-layout {
     display: flex;
   }
 
-  /* Illustration column */
   .book-illus-col {
     flex-shrink: 0;
     overflow: hidden;
     position: relative;
   }
 
-  /* Text column */
   .book-text-col {
     position: relative;
     z-index: 2;
   }
 
-  /* Text inner padding — default is mobile (includes 28px spine offset) */
   .book-text-inner {
     padding: 22px 20px 28px 48px;
   }
@@ -158,7 +154,6 @@ const bookStyles = `
     }
     .book-text-col {
       overflow-y: auto;
-      /* Image height ≈ 75vw (4:3). Top bar ≈52px, nav ≈70px, margins ≈50px */
       max-height: calc(100svh - 75vw - 175px);
       min-height: 150px;
       -webkit-overflow-scrolling: touch;
@@ -169,36 +164,31 @@ const bookStyles = `
     }
   }
 
-  /* ---- TABLET + DESKTOP (≥768px): side by side ---- */
+  /* ---- TABLET + DESKTOP (>=768px): side by side ---- */
   @media (min-width: 768px) {
     .book-page-layout {
       flex-direction: row;
       align-items: stretch;
     }
-    /* Image column: flex column so illus-wrap can fill full height */
     .book-illus-col {
       flex: 0 0 45%;
       margin-left: 28px;
       display: flex;
       flex-direction: column;
     }
-    /* Image fills the full column height — no gap at bottom */
     .book-illus-col .illus-wrap {
       flex: 1;
       width: 100%;
       min-height: 380px;
     }
-    /* Subtle gutter between image and text — like a page edge */
     .book-text-col {
       flex: 1;
       overflow-y: auto;
       border-left: 1px solid rgba(116,21,21,0.10);
     }
-    /* No spine offset — text sits to the right of the image */
     .book-text-inner {
       padding: 28px 28px 32px 24px;
     }
-    /* Wider book for side-by-side */
     .book-page-wide {
       max-width: 860px !important;
     }
@@ -298,7 +288,7 @@ function DecorativeRule() {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
       <div style={{ flex: 1, height: '1px', background: 'linear-gradient(to right, rgba(116,21,21,0.15), transparent)' }} />
-      <span style={{ fontSize: '0.7rem', color: 'rgba(116,21,21,0.4)' }}>✦</span>
+      <span style={{ fontSize: '0.7rem', color: 'rgba(116,21,21,0.4)' }}>✶</span>
       <div style={{ flex: 1, height: '1px', background: 'linear-gradient(to left, rgba(116,21,21,0.15), transparent)' }} />
     </div>
   );
@@ -312,7 +302,6 @@ export default function StoryPage() {
   const [currentPage, setCurrentPage] = useState(0);
   const [direction, setDirection] = useState<'forward' | 'back'>('forward');
   const [animKey, setAnimKey] = useState(0);
-  // Set of page numbers currently having their image generated
   const [loadingPages, setLoadingPages] = useState<Set<number>>(new Set());
   const [showFeedback, setShowFeedback] = useState(false);
   const imageGenStarted = useRef(false);
@@ -338,18 +327,11 @@ export default function StoryPage() {
           imageGenStarted.current = true;
           setLoadingPages(new Set(pagesNeedingImages.map((p) => p.page_number)));
 
-          // Sequential browser-driven generation — one image at a time.
-          // Each Vercel call is <1s (well within Hobby 10s limit).
-          // Only one Replicate prediction runs at a time — no 429 rate limits.
           (async () => {
             for (const page of pagesNeedingImages) {
-              // If a poll_url already exists in DB (from a previous session that was interrupted),
-              // resume polling it instead of creating a brand new prediction.
-              // This prevents generating a different image on every page refresh.
               let pollUrl: string | null = page.poll_url ?? null;
 
               if (!pollUrl) {
-                // No existing prediction — create one
                 try {
                   const res = await fetch('/api/generate-image', {
                     method: 'POST',
@@ -367,7 +349,6 @@ export default function StoryPage() {
 
               if (!pollUrl) continue;
 
-              // Poll until the image is ready
               for (let i = 0; i < 30; i++) {
                 await new Promise((r) => setTimeout(r, 3000));
                 try {
@@ -398,7 +379,6 @@ export default function StoryPage() {
                 } catch {}
               }
 
-              // Short pause between images — Replicate rate limit breathing room
               await new Promise((r) => setTimeout(r, 2000));
             }
           })();
@@ -421,13 +401,12 @@ export default function StoryPage() {
     setAnimKey((k) => k + 1);
     setCurrentPage(index);
 
-    // Show feedback modal when reaching the last page, once per week
     if (story && index === story.pages.length - 1 && !feedbackShown.current) {
       const last = localStorage.getItem('last_feedback_at');
       const sevenDaysAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
       if (!last || new Date(last).getTime() < sevenDaysAgo) {
         feedbackShown.current = true;
-        setTimeout(() => setShowFeedback(true), 2000); // small delay after landing on last page
+        setTimeout(() => setShowFeedback(true), 2000);
       }
     }
   };
@@ -464,14 +443,12 @@ export default function StoryPage() {
   const paragraphs = page.content.split('\n\n').filter(Boolean);
   const isThisPageGenerating = loadingPages.has(page.page_number);
 
-  // ---- Illustration element ----
   const illustrationEl = page.image_url ? (
     <img
       src={page.image_url}
       alt={`Page ${currentPage + 1} illustration`}
       style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
       onError={(e) => {
-        // Replicate CDN URLs expire — hide the broken image and show placeholder
         (e.target as HTMLImageElement).style.display = 'none';
         (e.target as HTMLImageElement).parentElement?.classList.add('show-placeholder');
       }}
@@ -480,7 +457,6 @@ export default function StoryPage() {
     <IllustrationPlaceholder generating={isThisPageGenerating} />
   );
 
-  // ---- Text content element ----
   const textContentEl = (
     <div className="book-text-inner" style={{ position: 'relative' }}>
       <DecorativeRule />
@@ -503,18 +479,15 @@ export default function StoryPage() {
     </div>
   );
 
-  // ---- Responsive layout: side-by-side on tablet/desktop, stacked+scroll on mobile ----
   function renderPageContent() {
     return (
       <div className="book-page-layout">
-        {/* Illustration column */}
         <div className="book-illus-col">
           <div className="illus-wrap" style={{ width: '100%', height: '100%' }}>
             {illustrationEl}
             <CornerOrnaments />
           </div>
         </div>
-        {/* Text column */}
         <div className="book-text-col">
           {textContentEl}
         </div>
@@ -526,7 +499,6 @@ export default function StoryPage() {
     <>
       {showFeedback && <FeedbackModal onClose={() => setShowFeedback(false)} />}
 
-      {/* Print-only layout: all pages rendered for printing */}
       <div className="print-only">
         <div className="print-page">
           <h1 className="print-title">{story.title}</h1>
@@ -554,10 +526,8 @@ export default function StoryPage() {
 
       <style>{bookStyles}</style>
 
-      {/* Screen layout */}
       <div className="no-print" style={{ minHeight: '100vh', background: 'linear-gradient(160deg, #2C1810 0%, #1a0f08 100%)', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '0 0 100px' }}>
 
-        {/* Top Bar */}
         <div style={{
           width: '100%',
           padding: '14px 20px',
@@ -579,7 +549,7 @@ export default function StoryPage() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             {loadingPages.size > 0 && (
               <span style={{ fontSize: '0.7rem', color: 'rgba(255,200,100,0.7)', fontFamily: 'Georgia, serif' }}>
-                🎨 {loadingPages.size} painting…
+                \U0001f3a8 {loadingPages.size} painting…
               </span>
             )}
             <button onClick={toggleFavourite} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '6px', display: 'flex' }}>
@@ -588,7 +558,6 @@ export default function StoryPage() {
           </div>
         </div>
 
-        {/* Book */}
         <div
           key={animKey}
           className={`book-page book-page-wide ${direction === 'forward' ? 'page-forward' : 'page-back'}`}
@@ -598,7 +567,6 @@ export default function StoryPage() {
           {renderPageContent()}
         </div>
 
-        {/* Navigation */}
         <div style={{
           position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 20,
           background: 'rgba(44,24,16,0.95)', backdropFilter: 'blur(8px)',
@@ -621,7 +589,6 @@ export default function StoryPage() {
             <ChevronLeft size={20} /> Back
           </button>
 
-          {/* Dots */}
           <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
             {pages.map((p, i) => (
               <button
@@ -660,4 +627,15 @@ export default function StoryPage() {
                 display: 'flex', alignItems: 'center', gap: '6px',
                 background: '#c4784a', border: 'none', borderRadius: '12px',
                 color: 'white', padding: '0.75rem 1.25rem',
-                textDecoration: 'none', fontSize
+                textDecoration: 'none', fontSize: '1rem', fontWeight: 700,
+                minWidth: '90px', justifyContent: 'center',
+              }}
+            >
+              Library
+            </Link>
+          )}
+        </div>
+      </div>
+    </>
+  );
+}
