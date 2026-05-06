@@ -149,11 +149,12 @@ export default function Home() {
           {/* Hero illustration — characters area of mood board */}
           <div className="hero-img-panel" style={{
             animation: 'float 5s ease-in-out infinite',
-            backgroundImage: "url('/mood-2.png')",
-            backgroundSize: 'cover',
-            backgroundPosition: '50% 38%'
+            backgroundImage: "url('/hero-illustration.png')",
+            backgroundSize: '350%',
+            backgroundPosition: '28% 42%'
           }}>
-            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '40%', background: 'linear-gradient(transparent, rgba(13,24,61,0.85))' }} />
+            {/* Top gradient hides logo band, bottom hides colour palette */}
+            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, #0D183D 0%, #0D183D 18%, transparent 42%, transparent 52%, #0D183D 80%, #0D183D 100%)' }} />
             <div style={{ position: 'absolute', bottom: '1.5rem', left: '1.5rem', right: '1.5rem', color: 'white' }}>
               <p className="font-serif" style={{ fontSize: '1.05rem' }}>Every night, a story all their own. ✨</p>
             </div>
@@ -220,10 +221,15 @@ export default function Home() {
             </div>
 
             <div>
-              <div style={{ position: 'relative', height: '200px', overflow: 'hidden', background: '#0D183D' }}>
-                <img src="/hero-illustration.png" alt="Story illustration"
-                  style={{ position: 'absolute', width: '280%', maxWidth: 'none', top: '-15%', left: '-30%' }} />
-                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(transparent 40%, white)' }} />
+              <div style={{
+                position: 'relative', height: '220px', overflow: 'hidden',
+                backgroundImage: "url('/hero-illustration.png')",
+                backgroundSize: '320%',
+                backgroundPosition: '96% 6%'
+              }}>
+                {/* Fade left edge (any logo bleed) and bottom into white */}
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(13,24,61,0.55) 0%, transparent 35%)' }} />
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(transparent 45%, white 100%)' }} />
                 <div style={{ position: 'absolute', bottom: '1rem', left: '2rem' }}>
                   <span style={{ background: '#FF6B35', color: 'white', fontSize: '0.7rem', fontWeight: 800, padding: '3px 10px', borderRadius: '999px' }}>CHAPTER 1</span>
                 </div>
@@ -273,13 +279,13 @@ export default function Home() {
                 <div style={{ width: '36px', height: '36px', background: 'rgba(255,255,255,0.25)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.1rem' }}>🚀</div>
                 <div>
                   <p style={{ color: 'white', fontWeight: 800, fontSize: '0.9rem' }}>Leo, age 5</p>
-                  <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.75rem', fontWeight: 500 }}>Loves space · Has a dog named Biscuit</p>
+                  <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.75rem', fontWeight: 500 }}>Loves space · Has a dog named Snoopy</p>
                 </div>
               </div>
               <div style={{ padding: '1.5rem' }}>
                 <p style={{ fontSize: '0.78rem', fontWeight: 800, color: '#FF6B35', letterSpacing: '0.06em', marginBottom: '0.6rem' }}>HIS STORY BEGAN:</p>
                 <p style={{ fontSize: '0.9rem', color: '#0D183D', lineHeight: 1.75, fontWeight: 500 }}>
-                  The mission had one problem: Biscuit kept pressing buttons. Not important buttons — Leo had hidden those. Just the ones that made lights flash and sounds beep. &apos;Biscuit,&apos; said Leo, &apos;we are approaching the asteroid belt.&apos; Biscuit wagged his tail and pressed another button. The spaceship played a fanfare...
+                  The mission had one problem: Snoopy kept pressing buttons. Not important buttons — Leo had hidden those. Just the ones that made lights flash and sounds beep. &apos;Snoopy,&apos; said Leo, &apos;we are approaching the asteroid belt.&apos; Snoopy wagged his tail and pressed another button. The spaceship played a fanfare...
                 </p>
               </div>
             </div>
