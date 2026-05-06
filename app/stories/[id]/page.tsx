@@ -66,7 +66,7 @@ const bookStyles = `
     position: absolute;
     left: 0; top: 0; bottom: 0;
     width: 28px;
-    background: linear-gradient(to right, #E8DDD0, #F5F0E8);
+    background: linear-gradient(to right, #E8DDD0, #FFF0E6);
     border-right: 1px solid rgba(0,0,0,0.06);
     z-index: 1;
   }
@@ -79,7 +79,7 @@ const bookStyles = `
     z-index: 1;
   }
   .story-text {
-    font-family: 'Lora', Georgia, serif;
+    font-family: 'Lora', Fredoka One, cursive;
     font-size: 1.05rem;
     line-height: 1.9;
     color: #2C1A0E;
@@ -110,9 +110,9 @@ const bookStyles = `
     .print-page { page-break-after: always; break-after: page; width: 100%; padding: 0; margin: 0; }
     .print-page:last-child { page-break-after: avoid; }
     .print-image { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
-    .print-text { padding: 24px 32px; font-family: 'Lora', Georgia, serif; font-size: 14pt; line-height: 1.8; color: #000; }
-    .print-title { font-family: 'Lora', Georgia, serif; font-size: 22pt; text-align: center; margin-bottom: 12pt; }
-    .print-moral { border-left: 3px solid #741515; padding-left: 16px; font-style: italic; margin-top: 24pt; font-size: 12pt; }
+    .print-text { padding: 24px 32px; font-family: 'Lora', Fredoka One, cursive; font-size: 14pt; line-height: 1.8; color: #000; }
+    .print-title { font-family: 'Lora', Fredoka One, cursive; font-size: 22pt; text-align: center; margin-bottom: 12pt; }
+    .print-moral { border-left: 3px solid #FF6B35; padding-left: 16px; font-style: italic; margin-top: 24pt; font-size: 12pt; }
     .print-page-num { text-align: center; font-size: 10pt; color: #666; margin-top: 16pt; }
     .book-page, .book-page::before, .book-page::after { box-shadow: none !important; }
   }
@@ -121,13 +121,13 @@ const bookStyles = `
 
 function IllustrationPlaceholder({ generating }: { generating: boolean }) {
   return (
-    <div style={{ width: '100%', height: '100%', background: '#F5F0E8', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+    <div style={{ width: '100%', height: '100%', background: '#FFF0E6', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
       {generating ? (
         <Fable pose="painting" dialogue="Painting your illustration..." size={110} />
       ) : (
         <svg width="48" height="38" viewBox="0 0 48 38" fill="none" opacity="0.2">
-          <path d="M24 7C18 3 7 3 2 5v26c5-2 16-2 22 2 6-4 17-4 22-2V5C44 3 30 3 24 7z" stroke="#741515" strokeWidth="2" strokeLinejoin="round" fill="rgba(116,21,21,0.08)"/>
-          <line x1="24" y1="7" x2="24" y2="33" stroke="#741515" strokeWidth="1.5"/>
+          <path d="M24 7C18 3 7 3 2 5v26c5-2 16-2 22 2 6-4 17-4 22-2V5C44 3 30 3 24 7z" stroke="#FF6B35" strokeWidth="2" strokeLinejoin="round" fill="rgba(255,107,53,0.1)"/>
+          <line x1="24" y1="7" x2="24" y2="33" stroke="#FF6B35" strokeWidth="1.5"/>
         </svg>
       )}
     </div>
@@ -275,15 +275,15 @@ export default function StoryPage() {
   if (loading) {
     return (
       <div style={{ minHeight: '100vh', background: '#2C1810', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <p style={{ color: 'rgba(255,255,255,0.6)', fontFamily: 'Georgia, serif' }}>Opening your book...</p>
+        <p style={{ color: 'rgba(255,255,255,0.6)', fontFamily: 'Fredoka One, cursive' }}>Opening your book...</p>
       </div>
     );
   }
 
   if (!story) {
     return (
-      <div style={{ minHeight: '100vh', backgroundColor: '#FAF7F0', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '16px' }}>
-        <p style={{ color: '#6B5E4E' }}>Story not found.</p>
+      <div style={{ minHeight: '100vh', backgroundColor: '#FFF4E6', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '16px' }}>
+        <p style={{ color: '#5E6A7A' }}>Story not found.</p>
         <Link href="/dashboard" className="btn-brand">Back to dashboard</Link>
       </div>
     );
@@ -303,7 +303,7 @@ export default function StoryPage() {
     <img
       src={page.image_url}
       alt={`Page ${currentPage + 1} illustration`}
-      style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block', background: '#F5F0E8' }}
+      style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block', background: '#FFF0E6' }}
       onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
     />
   ) : (
@@ -315,7 +315,7 @@ export default function StoryPage() {
       <div style={{ padding: mobilePadding ? '18px 20px 28px 48px' : '28px 28px 32px 24px', position: 'relative' }}>
         <DecorativeRule />
         {currentPage === 0 && (
-          <h2 style={{ fontFamily: 'Lora, Georgia, serif', fontSize: '1.45rem', color: '#2C1A0E', marginBottom: '18px', lineHeight: 1.3, fontWeight: 600 }}>
+          <h2 style={{ fontFamily: 'Lora, Fredoka One, cursive', fontSize: '1.45rem', color: '#2C1A0E', marginBottom: '18px', lineHeight: 1.3, fontWeight: 600 }}>
             {story.title}
           </h2>
         )}
@@ -323,11 +323,11 @@ export default function StoryPage() {
           {paragraphs.map((para, i) => <p key={i}>{para}</p>)}
         </div>
         {isLastPage && story.moral && (
-          <div style={{ borderLeft: '3px solid #741515', paddingLeft: '16px', marginTop: '18px', color: '#5a3a2a', fontStyle: 'italic', fontFamily: 'Lora, Georgia, serif', fontSize: '0.9rem', lineHeight: 1.7 }}>
+          <div style={{ borderLeft: '3px solid #FF6B35', paddingLeft: '16px', marginTop: '18px', color: '#5E6A7A', fontStyle: 'italic', fontFamily: 'Lora, Fredoka One, cursive', fontSize: '0.9rem', lineHeight: 1.7 }}>
             {story.moral}
           </div>
         )}
-        <div style={{ textAlign: 'center', marginTop: '18px', color: 'rgba(116,21,21,0.3)', fontSize: '0.78rem', fontFamily: 'Georgia, serif' }}>
+        <div style={{ textAlign: 'center', marginTop: '18px', color: 'rgba(116,21,21,0.3)', fontSize: '0.78rem', fontFamily: 'Fredoka One, cursive' }}>
           &#8212; {currentPage + 1} &#8212;
         </div>
       </div>
@@ -358,7 +358,7 @@ export default function StoryPage() {
               overflow: 'hidden',
               position: 'relative',
               minHeight: '380px',
-              background: '#F5F0E8',
+              background: '#FFF0E6',
             }}>
               {illustrationEl}
               <CornerOrnaments />
@@ -435,12 +435,12 @@ export default function StoryPage() {
           <Link href="/dashboard" style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'rgba(255,255,255,0.65)', textDecoration: 'none', fontSize: '0.875rem' }}>
             <ArrowLeft size={15} /> Library
           </Link>
-          <span style={{ fontFamily: 'Georgia, serif', fontSize: '0.9rem', color: 'rgba(255,255,255,0.8)', textAlign: 'center', flex: 1, padding: '0 12px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+          <span style={{ fontFamily: 'Fredoka One, cursive', fontSize: '0.9rem', color: 'rgba(255,255,255,0.8)', textAlign: 'center', flex: 1, padding: '0 12px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
             {story.title}
           </span>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             {loadingPages.size > 0 && (
-              <span style={{ fontSize: '0.7rem', color: 'rgba(255,200,100,0.7)', fontFamily: 'Georgia, serif' }}>
+              <span style={{ fontSize: '0.7rem', color: 'rgba(255,200,100,0.7)', fontFamily: 'Fredoka One, cursive' }}>
                 painting&#8230;
               </span>
             )}
@@ -483,7 +483,7 @@ export default function StoryPage() {
           {!isLastPage && (
             <button
               onClick={() => goToPage(currentPage + 1)}
-              style={{ display: 'flex', alignItems: 'center', gap: '6px', background: '#741515', border: 'none', borderRadius: '12px', color: 'white', padding: '0.75rem 1.25rem', cursor: 'pointer', fontSize: '1rem', fontWeight: 700, minWidth: '90px', justifyContent: 'center' }}
+              style={{ display: 'flex', alignItems: 'center', gap: '6px', background: '#FF6B35', border: 'none', borderRadius: '12px', color: 'white', padding: '0.75rem 1.25rem', cursor: 'pointer', fontSize: '1rem', fontWeight: 700, minWidth: '90px', justifyContent: 'center' }}
             >
               Next <ChevronRight size={20} />
             </button>

@@ -1,12 +1,15 @@
 :root {
-  --brand:        #741515;
-  --brand-dark:   #5a0f0f;
-  --cream:        #FAF7F0;
-  --cream-dark:   #F0EBE0;
-  --cream-border: #E8E0D0;
-  --text:         #1A1209;
-  --text-muted:   #6B5E4E;
-  --green:        #2D7A3A;
+  --brand:        #FF6B35;
+  --brand-dark:   #E85520;
+  --brand-navy:   #0D183D;
+  --teal:         #1496A6;
+  --sunshine:     #FFB703;
+  --cream:        #FFF4E6;
+  --cream-dark:   #FFE8CC;
+  --cream-border: #F0E4D0;
+  --text:         #0D183D;
+  --text-muted:   #5E6A7A;
+  --green:        #6CC06C;
 }
 
 * { box-sizing: border-box; }
@@ -15,18 +18,18 @@ html { scroll-behavior: smooth; }
 body {
   background: var(--cream);
   color: var(--text);
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Nunito', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
-.font-serif { font-family: 'Playfair Display', Georgia, serif !important; }
+.font-serif { font-family: 'Fredoka One', 'Arial Rounded MT Bold', cursive !important; }
 
 .btn-brand {
   background: var(--brand);
   color: white;
-  font-weight: 500;
+  font-weight: 700;
   padding: 0.75rem 1.75rem;
-  border-radius: 8px;
+  border-radius: 10px;
   border: none;
   cursor: pointer;
   transition: background 0.2s;
@@ -41,9 +44,9 @@ body {
 .btn-outline {
   background: transparent;
   color: var(--brand);
-  font-weight: 500;
+  font-weight: 700;
   padding: 0.75rem 1.75rem;
-  border-radius: 8px;
+  border-radius: 10px;
   border: 2px solid var(--brand);
   cursor: pointer;
   transition: all 0.2s;
@@ -57,15 +60,15 @@ body {
 
 .card {
   background: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(13,24,61,0.08);
 }
 
 .input {
   width: 100%;
   padding: 0.75rem 1rem;
   border: 1.5px solid var(--cream-border);
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: 0.9375rem;
   background: white;
   color: var(--text);
@@ -74,7 +77,7 @@ body {
   font-family: inherit;
 }
 .input:focus { border-color: var(--brand); }
-.input::placeholder { color: #B0A090; }
+.input::placeholder { color: #B8C4D0; }
 
 .chip {
   display: inline-flex;
@@ -85,7 +88,7 @@ body {
   border: 1.5px solid var(--cream-border);
   background: white;
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.15s;
   user-select: none;
@@ -93,7 +96,7 @@ body {
 .chip:hover { border-color: var(--brand); color: var(--brand); }
 .chip.active { border-color: var(--brand); background: var(--brand); color: white; }
 
-/* Shared keyframes — defined once here, never injected inline at runtime */
+/* Shared keyframes */
 @keyframes spin    { to { transform: rotate(360deg); } }
 @keyframes pulse   { 0%,100% { opacity:1; } 50% { opacity:0.5; } }
 @keyframes float   { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-8px); } }

@@ -105,8 +105,8 @@ export default function AdminPage() {
   }
 
   if (loading) return (
-    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAF7F0' }}>
-      <p style={{ color: '#6B5E4E', fontFamily: 'Georgia, serif' }}>Loading...</p>
+    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FFF4E6' }}>
+      <p style={{ color: '#5E6A7A', fontFamily: 'Fredoka One, cursive' }}>Loading...</p>
     </div>
   );
 
@@ -122,34 +122,34 @@ export default function AdminPage() {
   }));
 
   const card: React.CSSProperties = {
-    background: '#fff', borderRadius: '12px', border: '1px solid #E8E0D0', padding: '20px',
+    background: '#fff', borderRadius: '12px', border: '1px solid #F0E4D0', padding: '20px',
   };
 
   const tab = (active: boolean): React.CSSProperties => ({
     padding: '8px 20px', borderRadius: '8px', cursor: 'pointer', fontWeight: '500',
     fontSize: '0.875rem', border: 'none',
-    background: active ? '#741515' : 'transparent',
-    color: active ? '#fff' : '#6B5E4E',
+    background: active ? '#FF6B35' : 'transparent',
+    color: active ? '#fff' : '#5E6A7A',
   });
 
   return (
-    <div style={{ minHeight: '100vh', background: '#FAF7F0', padding: '32px 20px' }}>
+    <div style={{ minHeight: '100vh', background: '#FFF4E6', padding: '32px 20px' }}>
       <div style={{ maxWidth: '860px', margin: '0 auto' }}>
 
         <div style={{ marginBottom: '28px' }}>
-          <h1 style={{ fontFamily: 'Georgia, serif', fontSize: '1.75rem', color: '#1A1209', marginBottom: '4px' }}>Admin Dashboard</h1>
-          <p style={{ color: '#6B5E4E', fontSize: '0.875rem' }}>Cool Reading Story · Internal use only</p>
+          <h1 style={{ fontFamily: 'Fredoka One, cursive', fontSize: '1.75rem', color: '#0D183D', marginBottom: '4px' }}>Admin Dashboard</h1>
+          <p style={{ color: '#5E6A7A', fontSize: '0.875rem' }}>TalePop · Internal use only</p>
         </div>
 
         {/* Summary cards */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px', marginBottom: '28px' }}>
           <div style={{ ...card, textAlign: 'center' }}>
             <p style={{ fontSize: '12px', color: '#888', marginBottom: '4px' }}>Total responses</p>
-            <p style={{ fontSize: '2rem', fontWeight: '700', color: '#1A1209' }}>{feedback.length}</p>
+            <p style={{ fontSize: '2rem', fontWeight: '700', color: '#0D183D' }}>{feedback.length}</p>
           </div>
           <div style={{ ...card, textAlign: 'center' }}>
             <p style={{ fontSize: '12px', color: '#888', marginBottom: '4px' }}>Average rating</p>
-            <p style={{ fontSize: '2rem', fontWeight: '700', color: '#741515' }}>{avgRating} ⭐</p>
+            <p style={{ fontSize: '2rem', fontWeight: '700', color: '#FF6B35' }}>{avgRating} ⭐</p>
           </div>
           <div style={{ ...card, textAlign: 'center' }}>
             <p style={{ fontSize: '12px', color: '#888', marginBottom: '4px' }}>5-star responses</p>
@@ -166,7 +166,7 @@ export default function AdminPage() {
             <div key={r} style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
               <span style={{ fontSize: '0.875rem', color: '#555', width: '24px' }}>{r}⭐</span>
               <div style={{ flex: 1, height: '8px', background: '#F0EDE8', borderRadius: '4px', overflow: 'hidden' }}>
-                <div style={{ width: feedback.length > 0 ? `${(count / feedback.length) * 100}%` : '0%', height: '100%', background: '#741515', borderRadius: '4px', transition: 'width 0.5s' }} />
+                <div style={{ width: feedback.length > 0 ? `${(count / feedback.length) * 100}%` : '0%', height: '100%', background: '#FF6B35', borderRadius: '4px', transition: 'width 0.5s' }} />
               </div>
               <span style={{ fontSize: '0.875rem', color: '#888', width: '32px', textAlign: 'right' }}>{count}</span>
             </div>
@@ -174,16 +174,16 @@ export default function AdminPage() {
         </div>
 
         {/* Generate Fable button */}
-        <div style={{ background: '#fff', border: '1px solid #E8E3DC', borderRadius: '12px', padding: '16px 20px', marginBottom: '20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
+        <div style={{ background: '#fff', border: '1px solid #F0E4D0', borderRadius: '12px', padding: '16px 20px', marginBottom: '20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
           <div>
-            <p style={{ fontWeight: '600', fontSize: '0.9rem', color: '#1C1614', marginBottom: '2px' }}>Generate Fable character images</p>
-            <p style={{ fontSize: '0.8rem', color: '#9B8B7A' }}>Generates all 5 poses via Replicate and saves to Supabase. Run once — takes ~2 minutes.</p>
+            <p style={{ fontWeight: '600', fontSize: '0.9rem', color: '#0D183D', marginBottom: '2px' }}>Generate Fable character images</p>
+            <p style={{ fontSize: '0.8rem', color: '#5E6A7A' }}>Generates all 5 poses via Replicate and saves to Supabase. Run once — takes ~2 minutes.</p>
             {fableResult && <p style={{ fontSize: '0.8rem', color: fableResult.startsWith('Error') ? '#991B1B' : '#1a7a4a', marginTop: '4px' }}>{fableResult}</p>}
           </div>
           <button
             onClick={handleGenerateFable}
             disabled={generatingFable}
-            style={{ padding: '0.6rem 1.25rem', background: '#741515', color: '#fff', border: 'none', borderRadius: '8px', cursor: generatingFable ? 'not-allowed' : 'pointer', fontWeight: '600', fontSize: '0.85rem', opacity: generatingFable ? 0.7 : 1, whiteSpace: 'nowrap' }}
+            style={{ padding: '0.6rem 1.25rem', background: '#FF6B35', color: '#fff', border: 'none', borderRadius: '8px', cursor: generatingFable ? 'not-allowed' : 'pointer', fontWeight: '600', fontSize: '0.85rem', opacity: generatingFable ? 0.7 : 1, whiteSpace: 'nowrap' }}
           >
             {generatingFable ? 'Generating... (~2 min)' : 'Generate Fable'}
           </button>
@@ -199,14 +199,14 @@ export default function AdminPage() {
         {activeTab === 'feedback' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {feedback.length === 0 && (
-              <div style={{ ...card, textAlign: 'center', color: '#9B8B7A', padding: '40px' }}>No feedback yet.</div>
+              <div style={{ ...card, textAlign: 'center', color: '#5E6A7A', padding: '40px' }}>No feedback yet.</div>
             )}
             {feedback.map((f) => (
               <div key={f.id} style={{ ...card, display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
                 <div style={{ fontSize: '1.5rem', lineHeight: 1 }}>{'⭐'.repeat(f.rating)}</div>
                 <div style={{ flex: 1 }}>
-                  {f.comment && <p style={{ fontSize: '0.9rem', color: '#1A1209', marginBottom: '4px' }}>{f.comment}</p>}
-                  <p style={{ fontSize: '0.75rem', color: '#9B8B7A' }}>
+                  {f.comment && <p style={{ fontSize: '0.9rem', color: '#0D183D', marginBottom: '4px' }}>{f.comment}</p>}
+                  <p style={{ fontSize: '0.75rem', color: '#5E6A7A' }}>
                     {new Date(f.created_at).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })}
                   </p>
                 </div>
@@ -227,12 +227,12 @@ export default function AdminPage() {
                   value={newEmail}
                   onChange={(e) => setNewEmail(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && addAdmin()}
-                  style={{ flex: 1, padding: '10px 14px', border: '1.5px solid #E8E0D0', borderRadius: '8px', fontSize: '0.9rem', outline: 'none' }}
+                  style={{ flex: 1, padding: '10px 14px', border: '1.5px solid #F0E4D0', borderRadius: '8px', fontSize: '0.9rem', outline: 'none' }}
                 />
                 <button
                   onClick={addAdmin}
                   disabled={adding || !newEmail.trim()}
-                  style={{ padding: '10px 20px', background: '#741515', color: '#fff', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: '600', fontSize: '0.875rem', opacity: adding ? 0.7 : 1 }}
+                  style={{ padding: '10px 20px', background: '#FF6B35', color: '#fff', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: '600', fontSize: '0.875rem', opacity: adding ? 0.7 : 1 }}
                 >
                   {adding ? 'Adding...' : 'Add'}
                 </button>
@@ -243,12 +243,12 @@ export default function AdminPage() {
               {admins.map((a) => (
                 <div key={a.id} style={{ ...card, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                   <div>
-                    <p style={{ fontWeight: '500', fontSize: '0.9rem', color: '#1A1209' }}>{a.email}</p>
-                    <p style={{ fontSize: '0.75rem', color: '#9B8B7A' }}>Added by {a.added_by} · {new Date(a.created_at).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })}</p>
+                    <p style={{ fontWeight: '500', fontSize: '0.9rem', color: '#0D183D' }}>{a.email}</p>
+                    <p style={{ fontSize: '0.75rem', color: '#5E6A7A' }}>Added by {a.added_by} · {new Date(a.created_at).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })}</p>
                   </div>
                   <button
                     onClick={() => removeAdmin(a.id, a.email)}
-                    style={{ background: 'none', border: '1.5px solid #E8E0D0', borderRadius: '8px', padding: '6px 14px', cursor: 'pointer', color: '#9B8B7A', fontSize: '0.8rem' }}
+                    style={{ background: 'none', border: '1.5px solid #F0E4D0', borderRadius: '8px', padding: '6px 14px', cursor: 'pointer', color: '#5E6A7A', fontSize: '0.8rem' }}
                   >
                     Remove
                   </button>

@@ -1,44 +1,46 @@
 import Link from 'next/link';
 
-export const metadata = { title: 'Terms of Service — Cool Reading Story' };
+export const metadata = { title: 'Terms of Service — TalePop' };
 
 export default function TermsPage() {
   const updated = '6 May 2026';
 
   return (
-    <div style={{ background: '#FAF9F6', minHeight: '100vh' }}>
-      <nav style={{ borderBottom: '1px solid #E8E3DC', padding: '1.25rem 2rem' }}>
+    <div style={{ background: '#FFF4E6', minHeight: '100vh' }}>
+      <nav style={{ borderBottom: '1px solid #F0E4D0', padding: '1.25rem 2rem' }}>
         <div style={{ maxWidth: '820px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Link href="/" className="font-serif" style={{ fontSize: '1.2rem', fontWeight: 600, color: '#741515', textDecoration: 'none' }}>
-            Cool Reading Story
+          <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '2px' }}>
+            <span className="font-serif" style={{ fontSize: '1.3rem', color: '#0D183D' }}>Tale</span>
+            <span className="font-serif" style={{ fontSize: '1.3rem', color: '#FF6B35' }}>Pop</span>
+            <span style={{ background: '#FFB703', width: '6px', height: '6px', borderRadius: '50%', display: 'inline-block', marginLeft: '-2px', marginTop: '-12px' }} />
           </Link>
-          <Link href="/login" style={{ fontSize: '0.875rem', color: '#6B5E4E', textDecoration: 'none' }}>Sign in</Link>
+          <Link href="/login" style={{ fontSize: '0.875rem', color: '#5E6A7A', textDecoration: 'none' }}>Sign in</Link>
         </div>
       </nav>
 
       <main style={{ maxWidth: '720px', margin: '0 auto', padding: '4rem 2rem' }}>
-        <h1 className="font-serif" style={{ fontSize: '2.25rem', fontWeight: 700, color: '#1C1614', marginBottom: '0.5rem' }}>
+        <h1 className="font-serif" style={{ fontSize: '2.25rem', fontWeight: 700, color: '#0D183D', marginBottom: '0.5rem' }}>
           Terms of Service
         </h1>
-        <p style={{ color: '#9B8B7A', fontSize: '0.875rem', marginBottom: '3rem' }}>Last updated: {updated}</p>
+        <p style={{ color: '#5E6A7A', fontSize: '0.875rem', marginBottom: '3rem' }}>Last updated: {updated}</p>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem', color: '#1C1614', lineHeight: 1.8 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem', color: '#0D183D', lineHeight: 1.8 }}>
 
           <div style={{ background: '#FFFBEB', borderRadius: '10px', padding: '1rem 1.5rem', fontSize: '0.875rem', color: '#92400E', borderLeft: '3px solid #D97706' }}>
-            <strong>Beta / Research Preview:</strong> Cool Reading Story is currently in early access. Features may change, and we may update these Terms as the service evolves. We will notify you of material changes by email.
+            <strong>Beta / Research Preview:</strong> TalePop is currently in early access. Features may change, and we may update these Terms as the service evolves. We will notify you of material changes by email.
           </div>
 
           <Section title="1. About these Terms">
-            <p>These Terms of Service ("Terms") govern your use of Cool Reading Story ("we", "us", "our"), an AI-powered personalised children&apos;s story service. By creating an account or using our service, you agree to these Terms.</p>
+            <p>These Terms of Service ("Terms") govern your use of TalePop ("we", "us", "our"), an AI-powered personalised children&apos;s story service. By creating an account or using our service, you agree to these Terms.</p>
             <p>Please read these Terms carefully. If you disagree with any part, please do not use our service.</p>
           </Section>
 
           <Section title="2. Eligibility">
-            <p>You must be at least 18 years old to create an account. Cool Reading Story is designed for parents and guardians to generate stories for children. Children under 13 should not create their own accounts. By registering, you confirm that you are an adult acting on behalf of your family.</p>
+            <p>You must be at least 18 years old to create an account. TalePop is designed for parents and guardians to generate stories for children. Children under 13 should not create their own accounts. By registering, you confirm that you are an adult acting on behalf of your family.</p>
           </Section>
 
           <Section title="3. Your Account">
-            <p>You are responsible for keeping your account credentials confidential and for all activity that occurs under your account. Notify us immediately at <a href="mailto:hello@coolreadingstory.com" style={{ color: '#741515' }}>hello@coolreadingstory.com</a> if you suspect unauthorised access.</p>
+            <p>You are responsible for keeping your account credentials confidential and for all activity that occurs under your account. Notify us immediately at <a href="mailto:hello@coolreadingstory.com" style={{ color: '#FF6B35' }}>hello@coolreadingstory.com</a> if you suspect unauthorised access.</p>
             <p>Each account is limited to one child profile on the base subscription. Additional child profiles are available for an add-on fee (see Section 4).</p>
             <p>We reserve the right to suspend or terminate accounts that violate these Terms.</p>
           </Section>
@@ -56,7 +58,7 @@ export default function TermsPage() {
 
           <Section title="5. AI-Generated Content">
             <p>Stories and illustrations are generated using artificial intelligence (Anthropic Claude for text, Replicate Flux for images). While we apply content filters to ensure all output is age-appropriate and wholesome, we do not guarantee that every story will be perfect. Stories are intended for personal, private family use only.</p>
-            <p><strong>Content safety.</strong> All story generation is subject to mandatory safety filters that prohibit sexual, violent, frightening, abusive, discriminatory, or otherwise inappropriate content. If any part of a child&apos;s profile could produce unsafe output, our system substitutes safe alternative themes. You may report any concerning content to <a href="mailto:hello@coolreadingstory.com" style={{ color: '#741515' }}>hello@coolreadingstory.com</a>.</p>
+            <p><strong>Content safety.</strong> All story generation is subject to mandatory safety filters that prohibit sexual, violent, frightening, abusive, discriminatory, or otherwise inappropriate content. If any part of a child&apos;s profile could produce unsafe output, our system substitutes safe alternative themes. You may report any concerning content to <a href="mailto:hello@coolreadingstory.com" style={{ color: '#FF6B35' }}>hello@coolreadingstory.com</a>.</p>
             <p>You own the stories generated for your account and may use them for personal, non-commercial purposes. You may not sell, republish, or distribute stories commercially without our written consent.</p>
             <p>We retain the right to use anonymised, non-identifiable story data to improve our service.</p>
           </Section>
@@ -90,10 +92,10 @@ export default function TermsPage() {
           </Section>
 
           <Section title="11. Contact">
-            <p>Questions about these Terms? Contact us at <a href="mailto:hello@coolreadingstory.com" style={{ color: '#741515' }}>hello@coolreadingstory.com</a></p>
+            <p>Questions about these Terms? Contact us at <a href="mailto:hello@coolreadingstory.com" style={{ color: '#FF6B35' }}>hello@coolreadingstory.com</a></p>
           </Section>
 
-          <div style={{ background: '#FBF0F0', borderRadius: '10px', padding: '1.25rem 1.5rem', fontSize: '0.875rem', color: '#741515', borderLeft: '3px solid #741515' }}>
+          <div style={{ background: '#FBF0F0', borderRadius: '10px', padding: '1.25rem 1.5rem', fontSize: '0.875rem', color: '#FF6B35', borderLeft: '3px solid #FF6B35' }}>
             <strong>Note:</strong> This document is a working draft. It should be reviewed by a qualified Australian lawyer before the service launches publicly, particularly regarding consumer guarantees, subscription cancellation provisions under Australian Consumer Law, and children&apos;s data obligations.
           </div>
         </div>
@@ -107,7 +109,7 @@ export default function TermsPage() {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
-      <h2 className="font-serif" style={{ fontSize: '1.2rem', fontWeight: 600, color: '#1C1614', marginBottom: '0.75rem' }}>{title}</h2>
+      <h2 className="font-serif" style={{ fontSize: '1.2rem', fontWeight: 600, color: '#0D183D', marginBottom: '0.75rem' }}>{title}</h2>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', color: '#4A3728', fontSize: '0.9375rem' }}>
         {children}
       </div>
@@ -117,12 +119,12 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 function Footer() {
   return (
-    <footer style={{ borderTop: '1px solid #E8E3DC', padding: '2rem', marginTop: '4rem' }}>
-      <div style={{ maxWidth: '720px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', fontSize: '0.8rem', color: '#9B8B7A' }}>
-        <span>© {new Date().getFullYear()} Cool Reading Story</span>
+    <footer style={{ borderTop: '1px solid #F0E4D0', padding: '2rem', marginTop: '4rem' }}>
+      <div style={{ maxWidth: '720px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', fontSize: '0.8rem', color: '#5E6A7A' }}>
+        <span>© {new Date().getFullYear()} TalePop</span>
         <div style={{ display: 'flex', gap: '1.5rem' }}>
-          <Link href="/privacy" style={{ color: '#9B8B7A', textDecoration: 'none' }}>Privacy Policy</Link>
-          <Link href="/terms" style={{ color: '#741515', textDecoration: 'none', fontWeight: 600 }}>Terms of Service</Link>
+          <Link href="/privacy" style={{ color: '#5E6A7A', textDecoration: 'none' }}>Privacy Policy</Link>
+          <Link href="/terms" style={{ color: '#FF6B35', textDecoration: 'none', fontWeight: 600 }}>Terms of Service</Link>
         </div>
       </div>
     </footer>

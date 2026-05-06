@@ -37,22 +37,15 @@ export default function LoginPage() {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        background: '#FAF7F0',
+        background: '#FFF4E6',
         padding: '2rem',
       }}
     >
       {/* Logo */}
-      <div
-        className="font-serif"
-        style={{
-          fontSize: '1.75rem',
-          fontWeight: 600,
-          color: '#741515',
-          marginBottom: '3rem',
-          textAlign: 'center',
-        }}
-      >
-        Cool Reading Story
+      <div style={{ display: 'flex', alignItems: 'center', gap: '2px', marginBottom: '3rem', justifyContent: 'center' }}>
+        <span className="font-serif" style={{ fontSize: '2rem', color: '#0D183D' }}>Tale</span>
+        <span className="font-serif" style={{ fontSize: '2rem', color: '#FF6B35' }}>Pop</span>
+        <span style={{ background: '#FFB703', width: '8px', height: '8px', borderRadius: '50%', display: 'inline-block', marginLeft: '-3px', marginTop: '-16px' }} />
       </div>
 
       {/* Login Card */}
@@ -69,7 +62,7 @@ export default function LoginPage() {
           style={{
             fontSize: '1.75rem',
             fontWeight: 600,
-            color: '#1A1209',
+            color: '#0D183D',
             marginBottom: '0.5rem',
             textAlign: 'center',
           }}
@@ -79,7 +72,7 @@ export default function LoginPage() {
         <p
           style={{
             fontSize: '0.9375rem',
-            color: '#6B5E4E',
+            color: '#5E6A7A',
             textAlign: 'center',
             marginBottom: '2rem',
           }}
@@ -111,10 +104,10 @@ export default function LoginPage() {
           style={{
             width: '100%',
             padding: '0.875rem 1rem',
-            border: '1.5px solid #E8E0D0',
+            border: '1.5px solid #F0E4D0',
             borderRadius: '8px',
             background: 'white',
-            color: '#1A1209',
+            color: '#0D183D',
             fontSize: '0.9375rem',
             fontWeight: 500,
             cursor: googleLoading ? 'not-allowed' : 'pointer',
@@ -138,15 +131,15 @@ export default function LoginPage() {
 
         {/* Divider */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
-          <div style={{ flex: 1, height: '1px', background: '#E8E0D0' }} />
-          <span style={{ fontSize: '0.875rem', color: '#6B5E4E' }}>OR</span>
-          <div style={{ flex: 1, height: '1px', background: '#E8E0D0' }} />
+          <div style={{ flex: 1, height: '1px', background: '#F0E4D0' }} />
+          <span style={{ fontSize: '0.875rem', color: '#5E6A7A' }}>OR</span>
+          <div style={{ flex: 1, height: '1px', background: '#F0E4D0' }} />
         </div>
 
         {/* Form */}
         <form onSubmit={handleSubmit}>
           <div style={{ marginBottom: '1.25rem' }}>
-            <label htmlFor="email" style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: '#1A1209', marginBottom: '0.5rem' }}>
+            <label htmlFor="email" style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: '#0D183D', marginBottom: '0.5rem' }}>
               Email address
             </label>
             <input
@@ -161,13 +154,13 @@ export default function LoginPage() {
 
           <div style={{ marginBottom: '1.5rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-              <label htmlFor="password" style={{ fontSize: '0.875rem', fontWeight: 500, color: '#1A1209' }}>
+              <label htmlFor="password" style={{ fontSize: '0.875rem', fontWeight: 500, color: '#0D183D' }}>
                 Password
               </label>
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                style={{ fontSize: '0.875rem', background: 'transparent', border: 'none', color: '#741515', cursor: 'pointer', textDecoration: 'underline' }}
+                style={{ fontSize: '0.875rem', background: 'transparent', border: 'none', color: '#1496A6', cursor: 'pointer', textDecoration: 'underline' }}
               >
                 {showPassword ? 'Hide' : 'Show'}
               </button>
@@ -193,15 +186,15 @@ export default function LoginPage() {
         </form>
 
         <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
-          <Link href="/forgot-password" style={{ fontSize: '0.875rem', color: '#741515', textDecoration: 'none', fontWeight: 500 }}>
+          <Link href="/forgot-password" style={{ fontSize: '0.875rem', color: '#1496A6', textDecoration: 'none', fontWeight: 600 }}>
             Forgot your password?
           </Link>
         </div>
 
-        <div style={{ textAlign: 'center', paddingTop: '1.5rem', borderTop: '1px solid #E8E0D0' }}>
-          <p style={{ fontSize: '0.9375rem', color: '#1A1209' }}>
+        <div style={{ textAlign: 'center', paddingTop: '1.5rem', borderTop: '1px solid #F0E4D0' }}>
+          <p style={{ fontSize: '0.9375rem', color: '#0D183D' }}>
             Don&apos;t have an account?{' '}
-            <Link href="/signup" style={{ color: '#741515', textDecoration: 'none', fontWeight: 600 }}>
+            <Link href="/signup" style={{ color: '#FF6B35', textDecoration: 'none', fontWeight: 700 }}>
               Start free trial
             </Link>
           </p>

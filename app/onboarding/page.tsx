@@ -339,9 +339,9 @@ export default function OnboardingPage() {
 
   const inputStyle: React.CSSProperties = {
     width: '100%', padding: '0.65rem 0.875rem',
-    border: '1.5px solid #E8E0D0', borderRadius: '8px',
+    border: '1.5px solid #F0E4D0', borderRadius: '8px',
     fontSize: '0.95rem', outline: 'none',
-    backgroundColor: '#fff', color: '#1A1209',
+    backgroundColor: '#fff', color: '#0D183D',
   };
 
   const chipBase: React.CSSProperties = {
@@ -352,25 +352,25 @@ export default function OnboardingPage() {
 
   const chip = (active: boolean): React.CSSProperties => ({
     ...chipBase,
-    border: `1.5px solid ${active ? '#741515' : '#E8E0D0'}`,
-    backgroundColor: active ? '#741515' : '#fff',
-    color: active ? '#fff' : '#1A1209',
+    border: `1.5px solid ${active ? '#FF6B35' : '#F0E4D0'}`,
+    backgroundColor: active ? '#FF6B35' : '#fff',
+    color: active ? '#fff' : '#0D183D',
   });
 
-  const labelStyle: React.CSSProperties = { display: 'block', marginBottom: '8px', fontWeight: '500', color: '#1A1209', fontSize: '0.9rem' };
-  const optionalLabel: React.CSSProperties = { ...labelStyle, color: '#6B5E4E' };
+  const labelStyle: React.CSSProperties = { display: 'block', marginBottom: '8px', fontWeight: '500', color: '#0D183D', fontSize: '0.9rem' };
+  const optionalLabel: React.CSSProperties = { ...labelStyle, color: '#5E6A7A' };
 
   const TOTAL_STEPS = 4; // steps 2–5 = 4 visible dots
   const ProgressDots = () => (
     <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', marginBottom: '40px' }}>
       {[2, 3, 4, 5].map((s) => (
-        <div key={s} style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: state.step >= s ? '#741515' : '#E8E0D0', transition: 'background-color 0.3s' }} />
+        <div key={s} style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: state.step >= s ? '#FF6B35' : '#F0E4D0', transition: 'background-color 0.3s' }} />
       ))}
     </div>
   );
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#FAF7F0', padding: '32px 20px' }}>
+    <div style={{ minHeight: '100vh', backgroundColor: '#FFF4E6', padding: '32px 20px' }}>
       <div style={{ maxWidth: '600px', margin: '0 auto' }}>
         {/* Fable intro */}
         {(() => {
@@ -392,22 +392,22 @@ export default function OnboardingPage() {
         {state.step === 2 && (
           <div>
             <ProgressDots />
-            <h1 className="font-serif" style={{ fontSize: '2rem', marginBottom: '8px', color: '#1A1209' }}>Tell us about your child</h1>
-            <p style={{ color: '#6B5E4E', marginBottom: '32px', fontSize: '0.95rem' }}>This is how they'll appear as the hero of every story</p>
+            <h1 className="font-serif" style={{ fontSize: '2rem', marginBottom: '8px', color: '#0D183D' }}>Tell us about your child</h1>
+            <p style={{ color: '#5E6A7A', marginBottom: '32px', fontSize: '0.95rem' }}>This is how they'll appear as the hero of every story</p>
 
             <div style={{ marginBottom: '24px' }}>
-              <label style={labelStyle}>Child's name <span style={{ color: '#741515' }}>*</span></label>
-              <input type="text" style={{ ...inputStyle, borderColor: nameError ? '#991B1B' : '#E8E0D0' }} placeholder="e.g. Leo" value={state.name}
+              <label style={labelStyle}>Child's name <span style={{ color: '#FF6B35' }}>*</span></label>
+              <input type="text" style={{ ...inputStyle, borderColor: nameError ? '#991B1B' : '#F0E4D0' }} placeholder="e.g. Leo" value={state.name}
                 onChange={(e) => { setState({ ...state, name: e.target.value }); setNameError(''); }} />
               {nameError && <p style={{ color: '#991B1B', fontSize: '0.8rem', marginTop: '6px' }}>{nameError}</p>}
             </div>
 
             <div style={{ marginBottom: '24px' }}>
-              <label style={labelStyle}>Age <span style={{ color: '#741515' }}>*</span></label>
+              <label style={labelStyle}>Age <span style={{ color: '#FF6B35' }}>*</span></label>
               <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                <button onClick={() => setState({ ...state, age: Math.max(3, state.age - 1) })} style={{ width: '44px', height: '44px', borderRadius: '8px', border: '1.5px solid #E8E0D0', backgroundColor: '#fff', cursor: 'pointer', fontSize: '1.25rem' }}>−</button>
+                <button onClick={() => setState({ ...state, age: Math.max(3, state.age - 1) })} style={{ width: '44px', height: '44px', borderRadius: '8px', border: '1.5px solid #F0E4D0', backgroundColor: '#fff', cursor: 'pointer', fontSize: '1.25rem' }}>−</button>
                 <span style={{ fontSize: '1.5rem', fontWeight: '600', minWidth: '40px', textAlign: 'center' }}>{state.age}</span>
-                <button onClick={() => setState({ ...state, age: Math.min(12, state.age + 1) })} style={{ width: '44px', height: '44px', borderRadius: '8px', border: '1.5px solid #E8E0D0', backgroundColor: '#fff', cursor: 'pointer', fontSize: '1.25rem' }}>+</button>
+                <button onClick={() => setState({ ...state, age: Math.min(12, state.age + 1) })} style={{ width: '44px', height: '44px', borderRadius: '8px', border: '1.5px solid #F0E4D0', backgroundColor: '#fff', cursor: 'pointer', fontSize: '1.25rem' }}>+</button>
               </div>
             </div>
 
@@ -422,7 +422,7 @@ export default function OnboardingPage() {
 
             <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
               <button onClick={handleNext} className="btn-brand" style={{ flex: 1, padding: '0.75rem 1.75rem' }}>Next step</button>
-              <Link href="/dashboard" style={{ color: '#741515', textDecoration: 'none', fontWeight: '500' }}>Back</Link>
+              <Link href="/dashboard" style={{ color: '#FF6B35', textDecoration: 'none', fontWeight: '500' }}>Back</Link>
             </div>
           </div>
         )}
@@ -431,8 +431,8 @@ export default function OnboardingPage() {
         {state.step === 3 && (
           <div>
             <ProgressDots />
-            <h1 className="font-serif" style={{ fontSize: '2rem', marginBottom: '8px', color: '#1A1209' }}>What does {state.name || 'your child'} love?</h1>
-            <p style={{ color: '#6B5E4E', marginBottom: '32px', fontSize: '0.95rem' }}>Select at least 2 — these shape every story</p>
+            <h1 className="font-serif" style={{ fontSize: '2rem', marginBottom: '8px', color: '#0D183D' }}>What does {state.name || 'your child'} love?</h1>
+            <p style={{ color: '#5E6A7A', marginBottom: '32px', fontSize: '0.95rem' }}>Select at least 2 — these shape every story</p>
 
             <style>{`
               .int-tile { transition: transform 0.18s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.18s ease; cursor: pointer; }
@@ -1777,7 +1777,7 @@ export default function OnboardingPage() {
                         ? `0 8px 24px ${option.sh}, 0 2px 4px rgba(0,0,0,0.08)`
                         : darkBg
                           ? '0 4px 20px rgba(0,0,0,0.45), 0 0 0 1.5px rgba(255,255,255,0.08)'
-                          : '0 2px 10px rgba(0,0,0,0.07), 0 0 0 1.5px #E8E0D0',
+                          : '0 2px 10px rgba(0,0,0,0.07), 0 0 0 1.5px #F0E4D0',
                     }}
                   >
                     <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }} viewBox="0 0 80 60" preserveAspectRatio="xMidYMid slice">
@@ -1801,7 +1801,7 @@ export default function OnboardingPage() {
                         lineHeight: 1.3, textTransform: 'uppercase',
                       }}>★ Sub</span>
                     )}
-                    <span style={{ position: 'relative', zIndex: 1, fontSize: '0.75rem', fontWeight: '800', lineHeight: 1.2, textAlign: 'center', color: (active || !!darkBg) ? 'rgba(255,255,255,1)' : '#1A1209', letterSpacing: '0.03em', textShadow: (active || !!darkBg) ? '0 1px 4px rgba(0,0,0,0.7), 0 0 8px rgba(0,0,0,0.4)' : '0 1px 3px rgba(255,255,255,0.9)' }}>
+                    <span style={{ position: 'relative', zIndex: 1, fontSize: '0.75rem', fontWeight: '800', lineHeight: 1.2, textAlign: 'center', color: (active || !!darkBg) ? 'rgba(255,255,255,1)' : '#0D183D', letterSpacing: '0.03em', textShadow: (active || !!darkBg) ? '0 1px 4px rgba(0,0,0,0.7), 0 0 8px rgba(0,0,0,0.4)' : '0 1px 3px rgba(255,255,255,0.9)' }}>
                       {option.label}
                     </span>
                   </button>
@@ -1816,9 +1816,9 @@ export default function OnboardingPage() {
               return customAdded.length > 0 ? (
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '12px' }}>
                   {customAdded.map(interest => (
-                    <span key={interest} style={{ display: 'flex', alignItems: 'center', gap: '6px', background: '#FBF0F0', border: '1.5px solid #741515', borderRadius: '8px', padding: '0.4rem 0.8rem', fontSize: '0.85rem', color: '#741515', fontWeight: '600' }}>
+                    <span key={interest} style={{ display: 'flex', alignItems: 'center', gap: '6px', background: '#FFF0E6', border: '1.5px solid #FF6B35', borderRadius: '8px', padding: '0.4rem 0.8rem', fontSize: '0.85rem', color: '#FF6B35', fontWeight: '600' }}>
                       {interest}
-                      <button onClick={() => handleInterestToggle(interest)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#741515', padding: 0, fontSize: '1rem', lineHeight: 1, display: 'flex', alignItems: 'center' }}>×</button>
+                      <button onClick={() => handleInterestToggle(interest)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#FF6B35', padding: 0, fontSize: '1rem', lineHeight: 1, display: 'flex', alignItems: 'center' }}>×</button>
                     </span>
                   ))}
                 </div>
@@ -1836,7 +1836,7 @@ export default function OnboardingPage() {
             </div>
 
             {state.interests.length > 0 && state.interests.length < 2 && (
-              <p style={{ color: '#741515', marginBottom: '12px', fontSize: '0.875rem', fontWeight: '500' }}>Select at least 2 interests</p>
+              <p style={{ color: '#FF6B35', marginBottom: '12px', fontSize: '0.875rem', fontWeight: '500' }}>Select at least 2 interests</p>
             )}
 
             {isFreeUser ? (
@@ -1848,7 +1848,7 @@ export default function OnboardingPage() {
                     disabled={state.interests.length < 2}
                     style={{
                       flex: 1, padding: '0.75rem 1rem', borderRadius: '10px',
-                      border: '1.5px solid #741515', background: 'white', color: '#741515',
+                      border: '1.5px solid #FF6B35', background: 'white', color: '#FF6B35',
                       fontWeight: '600', fontSize: '0.875rem', cursor: state.interests.length < 2 ? 'not-allowed' : 'pointer',
                       opacity: state.interests.length < 2 ? 0.5 : 1,
                     }}>
@@ -1867,10 +1867,10 @@ export default function OnboardingPage() {
                   </button>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <p style={{ fontSize: '0.75rem', color: '#9B8B7A', margin: 0 }}>
+                  <p style={{ fontSize: '0.75rem', color: '#5E6A7A', margin: 0 }}>
                     Personalised adds your child&apos;s details and a unique story
                   </p>
-                  <button onClick={handleBack} style={{ background: 'none', border: 'none', color: '#741515', cursor: 'pointer', fontWeight: '500', padding: 0, fontSize: '0.875rem' }}>Back</button>
+                  <button onClick={handleBack} style={{ background: 'none', border: 'none', color: '#FF6B35', cursor: 'pointer', fontWeight: '500', padding: 0, fontSize: '0.875rem' }}>Back</button>
                 </div>
               </div>
             ) : (
@@ -1880,7 +1880,7 @@ export default function OnboardingPage() {
                   style={{ flex: 1, padding: '0.75rem 1.75rem', opacity: state.interests.length < 2 ? 0.5 : 1, cursor: state.interests.length < 2 ? 'not-allowed' : 'pointer' }}>
                   Next step
                 </button>
-                <button onClick={handleBack} style={{ background: 'none', border: 'none', color: '#741515', cursor: 'pointer', fontWeight: '500', padding: 0 }}>Back</button>
+                <button onClick={handleBack} style={{ background: 'none', border: 'none', color: '#FF6B35', cursor: 'pointer', fontWeight: '500', padding: 0 }}>Back</button>
               </div>
             )}
           </div>
@@ -1890,21 +1890,21 @@ export default function OnboardingPage() {
         {state.step === 4 && (
           <div>
             <ProgressDots />
-            <h1 className="font-serif" style={{ fontSize: '2rem', marginBottom: '8px', color: '#1A1209' }}>Let's get specific!</h1>
-            <p style={{ color: '#6B5E4E', marginBottom: '32px', fontSize: '0.95rem' }}>
+            <h1 className="font-serif" style={{ fontSize: '2rem', marginBottom: '8px', color: '#0D183D' }}>Let's get specific!</h1>
+            <p style={{ color: '#5E6A7A', marginBottom: '32px', fontSize: '0.95rem' }}>
               These details make {state.name || 'your child'}'s story feel like it was written just for them. Skip any you don't know.
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
               {followUpSections.map(({ interest, emoji, questions }) => (
-                <div key={interest} style={{ borderLeft: '3px solid #E8E0D0', paddingLeft: '16px' }}>
+                <div key={interest} style={{ borderLeft: '3px solid #F0E4D0', paddingLeft: '16px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
                     <span style={{
                       display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
                       width: '32px', height: '32px', borderRadius: '8px',
-                      background: '#F5F0E8', fontSize: '1.15rem', flexShrink: 0,
+                      background: '#FFF0E6', fontSize: '1.15rem', flexShrink: 0,
                     }}>{emoji}</span>
-                    <p style={{ fontWeight: '600', color: '#1A1209', margin: 0, fontSize: '0.95rem' }}>{interest}</p>
+                    <p style={{ fontWeight: '600', color: '#0D183D', margin: 0, fontSize: '0.95rem' }}>{interest}</p>
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                     {questions.map(({ q, placeholder }) => (
@@ -1925,10 +1925,10 @@ export default function OnboardingPage() {
 
               {/* Custom interests (no questions defined) */}
               {state.interests.filter(i => !FOLLOW_UP_QUESTIONS[i]).length > 0 && (
-                <div style={{ borderLeft: '3px solid #E8E0D0', paddingLeft: '16px' }}>
+                <div style={{ borderLeft: '3px solid #F0E4D0', paddingLeft: '16px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
-                    <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '32px', height: '32px', borderRadius: '8px', background: '#F5F0E8', fontSize: '1.15rem', flexShrink: 0 }}>⭐</span>
-                    <p style={{ fontWeight: '600', color: '#1A1209', margin: 0, fontSize: '0.95rem' }}>Other interests</p>
+                    <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '32px', height: '32px', borderRadius: '8px', background: '#FFF0E6', fontSize: '1.15rem', flexShrink: 0 }}>⭐</span>
+                    <p style={{ fontWeight: '600', color: '#0D183D', margin: 0, fontSize: '0.95rem' }}>Other interests</p>
                   </div>
                   {state.interests.filter(i => !FOLLOW_UP_QUESTIONS[i]).map((interest) => (
                     <div key={interest} style={{ marginBottom: '12px' }}>
@@ -1950,7 +1950,7 @@ export default function OnboardingPage() {
 
             <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginTop: '32px' }}>
               <button onClick={handleNext} className="btn-brand" style={{ flex: 1, padding: '0.75rem 1.75rem' }}>Next step</button>
-              <button onClick={handleBack} style={{ background: 'none', border: 'none', color: '#741515', cursor: 'pointer', fontWeight: '500', padding: 0 }}>Back</button>
+              <button onClick={handleBack} style={{ background: 'none', border: 'none', color: '#FF6B35', cursor: 'pointer', fontWeight: '500', padding: 0 }}>Back</button>
             </div>
           </div>
         )}
@@ -1959,14 +1959,14 @@ export default function OnboardingPage() {
         {state.step === 5 && (
           <div>
             <ProgressDots />
-            <h1 className="font-serif" style={{ fontSize: '2rem', marginBottom: '8px', color: '#1A1209' }}>Almost there!</h1>
-            <p style={{ color: '#6B5E4E', marginBottom: '28px', fontSize: '0.95rem' }}>
+            <h1 className="font-serif" style={{ fontSize: '2rem', marginBottom: '8px', color: '#0D183D' }}>Almost there!</h1>
+            <p style={{ color: '#5E6A7A', marginBottom: '28px', fontSize: '0.95rem' }}>
               A few more details to make {state.name || 'their'} stories feel truly personal
             </p>
 
             {/* Appearance */}
             <div style={{ marginBottom: '24px' }}>
-              <p style={{ ...labelStyle, marginBottom: '12px' }}>Appearance <span style={{ color: '#9B8B7A', fontWeight: '400', fontSize: '0.8rem' }}>(optional)</span></p>
+              <p style={{ ...labelStyle, marginBottom: '12px' }}>Appearance <span style={{ color: '#5E6A7A', fontWeight: '400', fontSize: '0.8rem' }}>(optional)</span></p>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                 <div>
                   <label style={optionalLabel}>Hair colour</label>
@@ -1981,7 +1981,7 @@ export default function OnboardingPage() {
 
             {/* Location */}
             <div style={{ marginBottom: '24px' }}>
-              <p style={{ ...labelStyle, marginBottom: '12px' }}>Where do they live? <span style={{ color: '#9B8B7A', fontWeight: '400', fontSize: '0.8rem' }}>(optional)</span></p>
+              <p style={{ ...labelStyle, marginBottom: '12px' }}>Where do they live? <span style={{ color: '#5E6A7A', fontWeight: '400', fontSize: '0.8rem' }}>(optional)</span></p>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                 <div>
                   <label style={optionalLabel}>City</label>
@@ -1996,7 +1996,7 @@ export default function OnboardingPage() {
 
             {/* Siblings */}
             <div style={{ marginBottom: '24px' }}>
-              <p style={{ ...labelStyle, marginBottom: '12px' }}>Siblings <span style={{ color: '#9B8B7A', fontWeight: '400', fontSize: '0.8rem' }}>(optional)</span></p>
+              <p style={{ ...labelStyle, marginBottom: '12px' }}>Siblings <span style={{ color: '#5E6A7A', fontWeight: '400', fontSize: '0.8rem' }}>(optional)</span></p>
               {state.siblings.length > 0 && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '10px' }}>
                   {state.siblings.map((s, i) => (
@@ -2006,20 +2006,20 @@ export default function OnboardingPage() {
                       <input type="text" style={inputStyle} placeholder="Nickname (optional)" value={s.nickname}
                         onChange={(e) => { const u = [...state.siblings]; u[i] = { ...u[i], nickname: e.target.value }; setState({ ...state, siblings: u }); }} />
                       <button onClick={() => setState({ ...state, siblings: state.siblings.filter((_, idx) => idx !== i) })}
-                        style={{ background: 'none', border: '1.5px solid #E8E0D0', borderRadius: '8px', width: '36px', height: '36px', cursor: 'pointer', color: '#9B8B7A', fontSize: '1rem', flexShrink: 0 }}>×</button>
+                        style={{ background: 'none', border: '1.5px solid #F0E4D0', borderRadius: '8px', width: '36px', height: '36px', cursor: 'pointer', color: '#5E6A7A', fontSize: '1rem', flexShrink: 0 }}>×</button>
                     </div>
                   ))}
                 </div>
               )}
               <button onClick={() => setState({ ...state, siblings: [...state.siblings, { name: '', nickname: '' }] })}
-                style={{ ...chipBase, border: '1.5px dashed #C8BEAA', backgroundColor: 'transparent', color: '#6B5E4E', width: '100%' }}>
+                style={{ ...chipBase, border: '1.5px dashed #F0E4D0', backgroundColor: 'transparent', color: '#5E6A7A', width: '100%' }}>
                 + Add sibling
               </button>
             </div>
 
             {/* Best friends */}
             <div style={{ marginBottom: '24px' }}>
-              <p style={{ ...labelStyle, marginBottom: '12px' }}>Best friends <span style={{ color: '#9B8B7A', fontWeight: '400', fontSize: '0.8rem' }}>(optional)</span></p>
+              <p style={{ ...labelStyle, marginBottom: '12px' }}>Best friends <span style={{ color: '#5E6A7A', fontWeight: '400', fontSize: '0.8rem' }}>(optional)</span></p>
               {state.friends.length > 0 && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '10px' }}>
                   {state.friends.map((f, i) => (
@@ -2029,20 +2029,20 @@ export default function OnboardingPage() {
                       <input type="text" style={inputStyle} placeholder="Nickname (optional)" value={f.nickname}
                         onChange={(e) => { const u = [...state.friends]; u[i] = { ...u[i], nickname: e.target.value }; setState({ ...state, friends: u }); }} />
                       <button onClick={() => setState({ ...state, friends: state.friends.filter((_, idx) => idx !== i) })}
-                        style={{ background: 'none', border: '1.5px solid #E8E0D0', borderRadius: '8px', width: '36px', height: '36px', cursor: 'pointer', color: '#9B8B7A', fontSize: '1rem', flexShrink: 0 }}>×</button>
+                        style={{ background: 'none', border: '1.5px solid #F0E4D0', borderRadius: '8px', width: '36px', height: '36px', cursor: 'pointer', color: '#5E6A7A', fontSize: '1rem', flexShrink: 0 }}>×</button>
                     </div>
                   ))}
                 </div>
               )}
               <button onClick={() => setState({ ...state, friends: [...state.friends, { name: '', nickname: '' }] })}
-                style={{ ...chipBase, border: '1.5px dashed #C8BEAA', backgroundColor: 'transparent', color: '#6B5E4E', width: '100%' }}>
+                style={{ ...chipBase, border: '1.5px dashed #F0E4D0', backgroundColor: 'transparent', color: '#5E6A7A', width: '100%' }}>
                 + Add friend
               </button>
             </div>
 
             {/* Pet */}
             <div style={{ marginBottom: '24px' }}>
-              <p style={{ ...labelStyle, marginBottom: '12px' }}>Pet <span style={{ color: '#9B8B7A', fontWeight: '400', fontSize: '0.8rem' }}>(optional)</span></p>
+              <p style={{ ...labelStyle, marginBottom: '12px' }}>Pet <span style={{ color: '#5E6A7A', fontWeight: '400', fontSize: '0.8rem' }}>(optional)</span></p>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                 <div>
                   <label style={optionalLabel}>Pet name</label>
@@ -2086,7 +2086,7 @@ export default function OnboardingPage() {
                 {submitting ? 'Creating profile...' : `Create ${state.name || 'profile'}`}
               </button>
               <button onClick={handleBack} disabled={submitting}
-                style={{ background: 'none', border: 'none', color: '#741515', cursor: 'pointer', fontWeight: '500', padding: 0 }}>Back</button>
+                style={{ background: 'none', border: 'none', color: '#FF6B35', cursor: 'pointer', fontWeight: '500', padding: 0 }}>Back</button>
             </div>
           </div>
         )}

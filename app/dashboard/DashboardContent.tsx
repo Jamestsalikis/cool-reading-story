@@ -10,11 +10,11 @@ import Fable from '@/components/Fable';
 import { updateChild } from '@/lib/supabase/child-actions';
 
 const CHILD_PALETTES = [
-  { cover: '#741515', spine: '#4d0e0e', light: '#FBF0F0' },
-  { cover: '#1A3A5A', spine: '#0d2035', light: '#EEF3F8' },
-  { cover: '#2D4A1E', spine: '#1a2d10', light: '#EFF5EB' },
-  { cover: '#4A1E5A', spine: '#2d1038', light: '#F3EEF8' },
-  { cover: '#5A3A0A', spine: '#352005', light: '#FAF3E8' },
+  { cover: '#FF6B35', spine: '#CC4B1A', light: '#FFF0E6' },
+  { cover: '#0D183D', spine: '#070d24', light: '#E8EBF5' },
+  { cover: '#1496A6', spine: '#0c6a77', light: '#E6F6F8' },
+  { cover: '#8E7BFF', spine: '#5c48e0', light: '#F0EEFF' },
+  { cover: '#6CC06C', spine: '#4a9a4a', light: '#EEF8EE' },
 ];
 
 // keyframes (spin, pulse) are now in globals.css — no runtime injection needed
@@ -51,18 +51,18 @@ function BookCard({ story, palette }: { story: Story; palette: Palette }) {
         {/* Spine */}
         <div style={{ position: 'absolute', left: 0, top: 0, width: '18px', height: '100%', background: `linear-gradient(90deg, ${palette.spine} 0%, ${palette.cover} 100%)`, borderRadius: '3px 0 0 3px', zIndex: 3, boxShadow: 'inset -2px 0 5px rgba(0,0,0,0.3)' }} />
         {/* Pages */}
-        {[4, 2].map(o => <div key={o} style={{ position: 'absolute', left: `${18+o}px`, top: `${o*.4}px`, width: `calc(100% - ${18+o}px)`, height: `calc(100% - ${o*.8}px)`, background: '#F5F0E8', borderRadius: '0 3px 3px 0' }} />)}
+        {[4, 2].map(o => <div key={o} style={{ position: 'absolute', left: `${18+o}px`, top: `${o*.4}px`, width: `calc(100% - ${18+o}px)`, height: `calc(100% - ${o*.8}px)`, background: '#FFF0E6', borderRadius: '0 3px 3px 0' }} />)}
         {/* Interior */}
         <div style={{ position: 'absolute', left: '18px', top: 0, width: 'calc(100% - 18px)', height: '100%', background: palette.light, borderRadius: '0 6px 6px 0', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '16px 12px', gap: '8px', boxShadow: 'inset 6px 0 14px rgba(0,0,0,0.05)' }}>
           <div style={{ width: '40px', height: '2px', background: palette.cover, borderRadius: '1px', opacity: 0.4 }} />
-          <p style={{ fontSize: '0.72rem', fontFamily: 'Georgia, serif', fontWeight: '600', textAlign: 'center', color: '#1C1614', lineHeight: 1.45 }}>{story.title}</p>
+          <p style={{ fontSize: '0.72rem', fontFamily: 'Fredoka One, cursive', fontWeight: '600', textAlign: 'center', color: '#0D183D', lineHeight: 1.45 }}>{story.title}</p>
           <div className="book-read-hint" style={{ fontSize: '0.68rem', fontWeight: '700', color: palette.cover, letterSpacing: '0.06em', textTransform: 'uppercase' }}>Read</div>
         </div>
         {/* Cover */}
         <div className="book-cover-panel" style={{ position: 'absolute', left: '18px', top: 0, width: 'calc(100% - 18px)', height: '100%', background: palette.cover, backgroundImage: pattern, borderRadius: '0 6px 6px 0', transformOrigin: 'left center', backfaceVisibility: 'hidden', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '16px 12px', gap: '8px', boxShadow: '3px 3px 12px rgba(0,0,0,0.2)' }}>
           {vol && vol > 1 && <div style={{ position: 'absolute', top: '10px', right: '8px', background: 'rgba(255,255,255,0.2)', color: 'rgba(255,255,255,0.9)', fontSize: '0.6rem', fontWeight: '800', letterSpacing: '0.08em', padding: '2px 7px', borderRadius: '10px' }}>VOL {vol}</div>}
           <div style={{ width: '28px', height: '28px', border: '1.5px solid rgba(255,255,255,0.3)', borderRadius: '3px', transform: 'rotate(45deg)', marginBottom: '4px' }} />
-          <p style={{ fontSize: '0.75rem', fontFamily: 'Georgia, serif', fontWeight: '600', textAlign: 'center', color: 'rgba(255,255,255,0.95)', lineHeight: 1.4 }}>{story.title}</p>
+          <p style={{ fontSize: '0.75rem', fontFamily: 'Fredoka One, cursive', fontWeight: '600', textAlign: 'center', color: 'rgba(255,255,255,0.95)', lineHeight: 1.4 }}>{story.title}</p>
           <div style={{ width: '30px', height: '1px', background: 'rgba(255,255,255,0.25)' }} />
           <p style={{ fontSize: '0.6rem', color: 'rgba(255,255,255,0.55)', letterSpacing: '0.06em' }}>{new Date(story.created_at).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })}</p>
         </div>
@@ -126,7 +126,7 @@ function SeriesFan({ volumes, palette }: { volumes: Story[]; palette: Palette })
                   VOL {vol.volume_number}
                 </div>
                 <div style={{ width: '16px', height: '16px', border: '1px solid rgba(255,255,255,0.3)', borderRadius: '2px', transform: 'rotate(45deg)' }} />
-                <p style={{ fontSize: '0.58rem', fontFamily: 'Georgia, serif', fontWeight: '600', color: 'rgba(255,255,255,0.95)', textAlign: 'center', lineHeight: 1.3 }}>
+                <p style={{ fontSize: '0.58rem', fontFamily: 'Fredoka One, cursive', fontWeight: '600', color: 'rgba(255,255,255,0.95)', textAlign: 'center', lineHeight: 1.3 }}>
                   {vol.title.length > 36 ? vol.title.slice(0, 34) + '…' : vol.title}
                 </p>
                 {isHovered && (
@@ -137,10 +137,10 @@ function SeriesFan({ volumes, palette }: { volumes: Story[]; palette: Palette })
           );
         })}
       </div>
-      <p style={{ fontSize: '0.68rem', color: '#9B8B7A', letterSpacing: '0.02em', textAlign: 'center', maxWidth: `${containerW}px` }}>
+      <p style={{ fontSize: '0.68rem', color: '#5E6A7A', letterSpacing: '0.02em', textAlign: 'center', maxWidth: `${containerW}px` }}>
         {seriesTitleDisplay} · {n} {n === 1 ? 'vol' : 'vols'}
       </p>
-      <p style={{ fontSize: '0.65rem', color: '#C8BEAA', letterSpacing: '0.02em', textAlign: 'center' }}>
+      <p style={{ fontSize: '0.65rem', color: '#F0E4D0', letterSpacing: '0.02em', textAlign: 'center' }}>
         {new Date(volumes[volumes.length - 1].created_at).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })}
       </p>
     </div>
@@ -231,54 +231,54 @@ function EditChildModal({ child, palette, onClose, onSaved }: {
     onClose();
   };
 
-  const inp: React.CSSProperties = { width: '100%', padding: '0.6rem 0.875rem', border: '1.5px solid #E8E0D0', borderRadius: '8px', fontSize: '0.9rem', outline: 'none', background: '#fff' };
-  const chip = (active: boolean): React.CSSProperties => ({ cursor: 'pointer', borderRadius: '8px', fontWeight: '500', fontSize: '0.8rem', padding: '0.4rem 0.8rem', border: `1.5px solid ${active ? palette.cover : '#E8E0D0'}`, background: active ? palette.cover : '#fff', color: active ? '#fff' : '#1C1614' });
+  const inp: React.CSSProperties = { width: '100%', padding: '0.6rem 0.875rem', border: '1.5px solid #F0E4D0', borderRadius: '8px', fontSize: '0.9rem', outline: 'none', background: '#fff' };
+  const chip = (active: boolean): React.CSSProperties => ({ cursor: 'pointer', borderRadius: '8px', fontWeight: '500', fontSize: '0.8rem', padding: '0.4rem 0.8rem', border: `1.5px solid ${active ? palette.cover : '#F0E4D0'}`, background: active ? palette.cover : '#fff', color: active ? '#fff' : '#0D183D' });
 
   return (
     <div style={{ position: 'fixed', inset: 0, zIndex: 200, background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(3px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
       <div style={{ background: '#FFFEF9', borderRadius: '16px', padding: '28px', maxWidth: '560px', width: '100%', maxHeight: '85vh', overflowY: 'auto', boxShadow: '0 24px 60px rgba(0,0,0,0.2)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-          <h2 style={{ fontFamily: 'Georgia, serif', fontSize: '1.3rem', color: '#1C1614' }}>Edit {child.name}&apos;s profile</h2>
-          <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#9B8B7A' }}><X size={20} /></button>
+          <h2 style={{ fontFamily: 'Fredoka One, cursive', fontSize: '1.3rem', color: '#0D183D' }}>Edit {child.name}&apos;s profile</h2>
+          <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#5E6A7A' }}><X size={20} /></button>
         </div>
 
         {error && <div style={{ background: '#FEE2E2', borderRadius: '8px', padding: '10px', marginBottom: '16px', fontSize: '0.85rem', color: '#991B1B' }}>{error}</div>}
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <div>
-            <label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#6B5E4E', display: 'block', marginBottom: '6px' }}>Name</label>
+            <label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '6px' }}>Name</label>
             <input style={inp} value={name} onChange={e => setName(e.target.value)} />
           </div>
           <div>
-            <label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#6B5E4E', display: 'block', marginBottom: '6px' }}>Age</label>
+            <label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '6px' }}>Age</label>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <button onClick={() => setAge(a => Math.max(3, a - 1))} style={{ width: '36px', height: '36px', border: '1.5px solid #E8E0D0', borderRadius: '8px', background: '#fff', cursor: 'pointer', fontSize: '1.1rem' }}>−</button>
+              <button onClick={() => setAge(a => Math.max(3, a - 1))} style={{ width: '36px', height: '36px', border: '1.5px solid #F0E4D0', borderRadius: '8px', background: '#fff', cursor: 'pointer', fontSize: '1.1rem' }}>−</button>
               <span style={{ fontSize: '1.2rem', fontWeight: '600', minWidth: '30px', textAlign: 'center' }}>{age}</span>
-              <button onClick={() => setAge(a => Math.min(12, a + 1))} style={{ width: '36px', height: '36px', border: '1.5px solid #E8E0D0', borderRadius: '8px', background: '#fff', cursor: 'pointer', fontSize: '1.1rem' }}>+</button>
+              <button onClick={() => setAge(a => Math.min(12, a + 1))} style={{ width: '36px', height: '36px', border: '1.5px solid #F0E4D0', borderRadius: '8px', background: '#fff', cursor: 'pointer', fontSize: '1.1rem' }}>+</button>
             </div>
           </div>
           <div>
-            <label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#6B5E4E', display: 'block', marginBottom: '6px' }}>Gender</label>
+            <label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '6px' }}>Gender</label>
             <div style={{ display: 'flex', gap: '8px' }}>
               {['Boy', 'Girl', 'Skip'].map(g => <button key={g} onClick={() => setGender(g)} style={chip(gender === g)}>{g}</button>)}
             </div>
           </div>
           <div>
-            <label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#6B5E4E', display: 'block', marginBottom: '8px' }}>Interests</label>
+            <label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '8px' }}>Interests</label>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
               {INTERESTS.map(i => <button key={i} onClick={() => toggleInterest(i)} style={chip(interests.includes(i))}>{i}</button>)}
             </div>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-            <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#6B5E4E', display: 'block', marginBottom: '6px' }}>Hair colour</label><input style={inp} value={hairColour} onChange={e => setHairColour(e.target.value)} placeholder="e.g. Brown" /></div>
-            <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#6B5E4E', display: 'block', marginBottom: '6px' }}>Eye colour</label><input style={inp} value={eyeColour} onChange={e => setEyeColour(e.target.value)} placeholder="e.g. Blue" /></div>
+            <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '6px' }}>Hair colour</label><input style={inp} value={hairColour} onChange={e => setHairColour(e.target.value)} placeholder="e.g. Brown" /></div>
+            <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '6px' }}>Eye colour</label><input style={inp} value={eyeColour} onChange={e => setEyeColour(e.target.value)} placeholder="e.g. Blue" /></div>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-            <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#6B5E4E', display: 'block', marginBottom: '6px' }}>City</label><input style={inp} value={city} onChange={e => setCity(e.target.value)} placeholder="e.g. Sydney" /></div>
-            <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#6B5E4E', display: 'block', marginBottom: '6px' }}>Country</label><input style={inp} value={country} onChange={e => setCountry(e.target.value)} placeholder="e.g. Australia" /></div>
+            <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '6px' }}>City</label><input style={inp} value={city} onChange={e => setCity(e.target.value)} placeholder="e.g. Sydney" /></div>
+            <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '6px' }}>Country</label><input style={inp} value={country} onChange={e => setCountry(e.target.value)} placeholder="e.g. Australia" /></div>
           </div>
           <div>
-            <label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#6B5E4E', display: 'block', marginBottom: '8px' }}>Reading level</label>
+            <label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '8px' }}>Reading level</label>
             <div style={{ display: 'flex', gap: '8px' }}>
               {[{ id: 'simple', label: 'Simple', sub: '3–5' }, { id: 'medium', label: 'Medium', sub: '6–8' }, { id: 'imaginative', label: 'Imaginative', sub: '9–12' }].map(o => (
                 <button key={o.id} onClick={() => setReadingLevel(o.id)} style={{ ...chip(readingLevel === o.id), display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1px', padding: '8px 14px' }}>
@@ -290,7 +290,7 @@ function EditChildModal({ child, palette, onClose, onSaved }: {
         </div>
 
         <div style={{ display: 'flex', gap: '10px', marginTop: '24px' }}>
-          <button onClick={onClose} style={{ flex: 1, padding: '0.7rem', border: '1.5px solid #E8E0D0', borderRadius: '8px', background: '#fff', color: '#6B5E4E', cursor: 'pointer', fontWeight: '600' }}>Cancel</button>
+          <button onClick={onClose} style={{ flex: 1, padding: '0.7rem', border: '1.5px solid #F0E4D0', borderRadius: '8px', background: '#fff', color: '#5E6A7A', cursor: 'pointer', fontWeight: '600' }}>Cancel</button>
           <button onClick={handleSave} disabled={saving} style={{ flex: 2, padding: '0.7rem', border: 'none', borderRadius: '8px', background: palette.cover, color: '#fff', cursor: saving ? 'not-allowed' : 'pointer', fontWeight: '600', opacity: saving ? 0.7 : 1 }}>{saving ? 'Saving...' : 'Save changes'}</button>
         </div>
       </div>
@@ -452,7 +452,7 @@ export default function DashboardPage() {
   ];
 
   return (
-    <div style={{ minHeight: '100vh', background: '#FAF9F6', display: 'flex', flexDirection: isMobile ? 'column' : 'row' }}>
+    <div style={{ minHeight: '100vh', background: '#FFF4E6', display: 'flex', flexDirection: isMobile ? 'column' : 'row' }}>
       <style>{pageStyles}</style>
 
       {paywallReason && (
@@ -486,8 +486,8 @@ export default function DashboardPage() {
       )}
 
       {!isMobile && (
-        <div style={{ width: '210px', background: '#741515', padding: '32px 20px', display: 'flex', flexDirection: 'column', position: 'fixed', height: '100vh', left: 0, top: 0, overflowY: 'auto' }}>
-          <h1 style={{ fontFamily: 'Georgia, serif', fontSize: '1.1rem', marginBottom: '40px', color: '#E8DDD0', lineHeight: 1.3 }}>Cool Reading<br />Story</h1>
+        <div style={{ width: '210px', background: '#0D183D', padding: '32px 20px', display: 'flex', flexDirection: 'column', position: 'fixed', height: '100vh', left: 0, top: 0, overflowY: 'auto' }}>
+          <h1 style={{ fontFamily: 'Fredoka One, cursive', fontSize: '1.1rem', marginBottom: '40px', color: 'rgba(255,255,255,0.9)', lineHeight: 1.3 }}>TalePop</h1>
           <nav style={{ display: 'flex', flexDirection: 'column', gap: '4px', flex: 1 }}>
             {navItems.map(({ id, label, icon: Icon }) => {
               const active = activeNav === id;
@@ -503,25 +503,25 @@ export default function DashboardPage() {
 
       <div style={{ flex: 1, marginLeft: isMobile ? 0 : '210px', padding: isMobile ? '28px 16px 100px' : '48px 48px 60px' }}>
         <div style={{ marginBottom: '48px' }}>
-          <h2 style={{ fontFamily: 'Georgia, serif', fontSize: '2rem', color: '#1C1614', marginBottom: '6px', fontWeight: '400' }}>
+          <h2 style={{ fontFamily: 'Fredoka One, cursive', fontSize: '2rem', color: '#0D183D', marginBottom: '6px', fontWeight: '400' }}>
             Welcome back{userName ? `, ${userName}` : ''}
           </h2>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
-            <p style={{ color: '#9B8B7A', fontSize: '0.9rem' }}>
+            <p style={{ color: '#5E6A7A', fontSize: '0.9rem' }}>
               {stories.length > 0 ? `${stories.length} ${stories.length === 1 ? 'book' : 'books'} in your library` : 'Your library is ready'}
             </p>
             {sub && (
               sub.status === 'subscribed' ? (
                 <>
-                  <span style={{ fontSize: '0.75rem', fontWeight: '600', color: booksRemainingToday > 0 ? '#1a7a4a' : '#741515', background: booksRemainingToday > 0 ? '#E6F4EC' : '#FBF0F0', padding: '3px 10px', borderRadius: '20px' }}>
+                  <span style={{ fontSize: '0.75rem', fontWeight: '600', color: booksRemainingToday > 0 ? '#1a7a4a' : '#FF6B35', background: booksRemainingToday > 0 ? '#E6F4EC' : '#FFF0E6', padding: '3px 10px', borderRadius: '20px' }}>
                     {booksRemainingToday} {booksRemainingToday === 1 ? 'book' : 'books'} remaining today
                   </span>
-                  <span style={{ fontSize: '0.75rem', fontWeight: '600', color: '#6B5E4E', background: '#F4F0EB', padding: '3px 10px', borderRadius: '20px' }}>
+                  <span style={{ fontSize: '0.75rem', fontWeight: '600', color: '#5E6A7A', background: '#F4F0EB', padding: '3px 10px', borderRadius: '20px' }}>
                     {booksRemainingThisMonth} {booksRemainingThisMonth === 1 ? 'book' : 'books'} remaining this month
                   </span>
                 </>
               ) : (
-                <span style={{ fontSize: '0.75rem', fontWeight: '600', color: '#741515', background: '#FBF0F0', padding: '3px 10px', borderRadius: '20px' }}>
+                <span style={{ fontSize: '0.75rem', fontWeight: '600', color: '#FF6B35', background: '#FFF0E6', padding: '3px 10px', borderRadius: '20px' }}>
                   {sub.free_stories_remaining} free {sub.free_stories_remaining === 1 ? 'story' : 'stories'} remaining
                 </span>
               )
@@ -534,12 +534,12 @@ export default function DashboardPage() {
             {generateError && <div style={{ background: '#FEE2E2', borderRadius: '8px', padding: '12px 16px', marginBottom: '24px', fontSize: '0.875rem', color: '#991B1B' }}>{generateError}</div>}
 
             {loading ? (
-              <p style={{ color: '#9B8B7A', animation: 'pulse 2s ease infinite' }}>Loading your library...</p>
+              <p style={{ color: '#5E6A7A', animation: 'pulse 2s ease infinite' }}>Loading your library...</p>
             ) : children.length === 0 ? (
               <div style={{ maxWidth: '420px', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
                 <Fable pose="welcome" dialogue="Your library is empty — shall we write the first story?" size={150} />
                 <div style={{ marginTop: '16px' }}>
-                  <Link href="/onboarding" style={{ display: 'inline-block', padding: '0.75rem 1.75rem', background: '#741515', color: '#fff', borderRadius: '8px', textDecoration: 'none', fontWeight: '600', fontSize: '0.9rem' }}>Get started</Link>
+                  <Link href="/onboarding" style={{ display: 'inline-block', padding: '0.75rem 1.75rem', background: '#FF6B35', color: '#fff', borderRadius: '8px', textDecoration: 'none', fontWeight: '600', fontSize: '0.9rem' }}>Get started</Link>
                 </div>
               </div>
             ) : (
@@ -558,10 +558,10 @@ export default function DashboardPage() {
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px', flexWrap: 'wrap', gap: '12px' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                           <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: palette.cover }} />
-                          <h3 style={{ fontFamily: 'Georgia, serif', fontSize: '1.2rem', color: '#1C1614', fontWeight: '400' }}>
+                          <h3 style={{ fontFamily: 'Fredoka One, cursive', fontSize: '1.2rem', color: '#0D183D', fontWeight: '400' }}>
                             {child.name}&apos;s books
                           </h3>
-                          <span style={{ fontSize: '0.8rem', color: '#C8BEAA' }}>
+                          <span style={{ fontSize: '0.8rem', color: '#F0E4D0' }}>
                             {storiesByChild(child.id).length} {storiesByChild(child.id).length === 1 ? 'book' : 'books'}
                           </span>
                         </div>
@@ -583,7 +583,7 @@ export default function DashboardPage() {
 
                       {/* Shelf: singles as BookCards, series as SeriesFan */}
                       {shelf.length === 0 ? (
-                        <p style={{ color: '#9B8B7A', fontSize: '0.875rem', fontStyle: 'italic' }}>No stories yet — generate the first one above.</p>
+                        <p style={{ color: '#5E6A7A', fontSize: '0.875rem', fontStyle: 'italic' }}>No stories yet — generate the first one above.</p>
                       ) : (
                         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '32px 24px', alignItems: 'flex-start' }}>
                           {shelf.map(item =>
@@ -606,22 +606,22 @@ export default function DashboardPage() {
         {activeNav === 'children' && (
           <div style={{ maxWidth: '560px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '28px' }}>
-              <h3 style={{ fontFamily: 'Georgia, serif', fontSize: '1.4rem', color: '#1C1614', fontWeight: '400' }}>Children</h3>
-              <Link href="/onboarding" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '0.55rem 1.1rem', background: '#1C1614', color: '#fff', borderRadius: '8px', textDecoration: 'none', fontWeight: '600', fontSize: '0.8rem' }}>
+              <h3 style={{ fontFamily: 'Fredoka One, cursive', fontSize: '1.4rem', color: '#0D183D', fontWeight: '400' }}>Children</h3>
+              <Link href="/onboarding" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '0.55rem 1.1rem', background: '#0D183D', color: '#fff', borderRadius: '8px', textDecoration: 'none', fontWeight: '600', fontSize: '0.8rem' }}>
                 <Plus size={14} /> Add child
               </Link>
             </div>
-            {children.length === 0 ? <p style={{ color: '#9B8B7A' }}>No children added yet.</p> : (
+            {children.length === 0 ? <p style={{ color: '#5E6A7A' }}>No children added yet.</p> : (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 {children.map((child, i) => {
                   const palette = CHILD_PALETTES[i % CHILD_PALETTES.length];
                   return (
-                    <div key={child.id} style={{ background: '#fff', border: '1px solid #E8E3DC', borderRadius: '12px', padding: '20px', borderLeft: `4px solid ${palette.cover}` }}>
+                    <div key={child.id} style={{ background: '#fff', border: '1px solid #F0E4D0', borderRadius: '12px', padding: '20px', borderLeft: `4px solid ${palette.cover}` }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '4px' }}>
-                        <h4 style={{ fontFamily: 'Georgia, serif', fontWeight: '600', color: '#1C1614' }}>{child.name}</h4>
+                        <h4 style={{ fontFamily: 'Fredoka One, cursive', fontWeight: '600', color: '#0D183D' }}>{child.name}</h4>
                         <button onClick={() => setEditingChild(child as ChildRecord)} style={{ fontSize: '0.75rem', fontWeight: '600', color: palette.cover, background: palette.light, border: 'none', borderRadius: '6px', padding: '4px 12px', cursor: 'pointer' }}>Edit</button>
                       </div>
-                      <p style={{ color: '#9B8B7A', fontSize: '0.875rem', marginBottom: child.interests?.length ? '12px' : 0 }}>Age {child.age}</p>
+                      <p style={{ color: '#5E6A7A', fontSize: '0.875rem', marginBottom: child.interests?.length ? '12px' : 0 }}>Age {child.age}</p>
                       {child.interests?.length > 0 && (
                         <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
                           {child.interests.slice(0, 6).map(interest => (
@@ -639,14 +639,14 @@ export default function DashboardPage() {
 
         {activeNav === 'account' && (
           <div style={{ maxWidth: '480px' }}>
-            <h3 style={{ fontFamily: 'Georgia, serif', fontSize: '1.4rem', color: '#1C1614', fontWeight: '400', marginBottom: '28px' }}>Account</h3>
-            <div style={{ background: '#fff', border: '1px solid #E8E3DC', borderRadius: '12px', padding: '24px', marginBottom: '16px' }}>
-              <p style={{ fontSize: '0.75rem', color: '#9B8B7A', marginBottom: '4px', letterSpacing: '0.04em', textTransform: 'uppercase' }}>Signed in as</p>
-              <p style={{ fontWeight: '600', color: '#1C1614', fontSize: '0.95rem' }}>{userName}</p>
+            <h3 style={{ fontFamily: 'Fredoka One, cursive', fontSize: '1.4rem', color: '#0D183D', fontWeight: '400', marginBottom: '28px' }}>Account</h3>
+            <div style={{ background: '#fff', border: '1px solid #F0E4D0', borderRadius: '12px', padding: '24px', marginBottom: '16px' }}>
+              <p style={{ fontSize: '0.75rem', color: '#5E6A7A', marginBottom: '4px', letterSpacing: '0.04em', textTransform: 'uppercase' }}>Signed in as</p>
+              <p style={{ fontWeight: '600', color: '#0D183D', fontSize: '0.95rem' }}>{userName}</p>
             </div>
             <button
               onClick={async () => { await supabase.auth.signOut(); window.location.href = '/'; }}
-              style={{ width: '100%', padding: '0.75rem', borderRadius: '10px', border: '1.5px solid #E8E3DC', background: '#fff', color: '#741515', cursor: 'pointer', fontWeight: '600', fontSize: '0.9rem', textAlign: 'center' }}
+              style={{ width: '100%', padding: '0.75rem', borderRadius: '10px', border: '1.5px solid #F0E4D0', background: '#fff', color: '#FF6B35', cursor: 'pointer', fontWeight: '600', fontSize: '0.9rem', textAlign: 'center' }}
             >
               Sign out
             </button>
@@ -655,14 +655,14 @@ export default function DashboardPage() {
 
         {activeNav === 'subscription' && (
           <div style={{ maxWidth: '480px' }}>
-            <h3 style={{ fontFamily: 'Georgia, serif', fontSize: '1.4rem', color: '#1C1614', fontWeight: '400', marginBottom: '28px' }}>Subscription</h3>
-            <div style={{ background: '#fff', border: '1px solid #E8E3DC', borderRadius: '12px', padding: '24px', marginBottom: '16px' }}>
+            <h3 style={{ fontFamily: 'Fredoka One, cursive', fontSize: '1.4rem', color: '#0D183D', fontWeight: '400', marginBottom: '28px' }}>Subscription</h3>
+            <div style={{ background: '#fff', border: '1px solid #F0E4D0', borderRadius: '12px', padding: '24px', marginBottom: '16px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                <p style={{ fontWeight: '600', color: '#1C1614', fontSize: '0.95rem' }}>Current plan</p>
+                <p style={{ fontWeight: '600', color: '#0D183D', fontSize: '0.95rem' }}>Current plan</p>
                 <span style={{
                   fontSize: '0.75rem', fontWeight: '700', padding: '3px 10px', borderRadius: '20px',
-                  background: sub?.status === 'subscribed' ? '#E6F4EC' : '#FBF0F0',
-                  color: sub?.status === 'subscribed' ? '#1a7a4a' : '#741515',
+                  background: sub?.status === 'subscribed' ? '#E6F4EC' : '#FFF0E6',
+                  color: sub?.status === 'subscribed' ? '#1a7a4a' : '#FF6B35',
                 }}>
                   {sub?.status === 'subscribed' ? 'Active' : 'Free'}
                 </span>
@@ -670,28 +670,28 @@ export default function DashboardPage() {
               {sub?.status === 'subscribed' ? (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <p style={{ color: '#6B5E4E', fontSize: '0.875rem' }}>Books remaining today</p>
-                    <span style={{ fontWeight: '700', fontSize: '0.95rem', color: booksRemainingToday > 0 ? '#1a7a4a' : '#741515' }}>
+                    <p style={{ color: '#5E6A7A', fontSize: '0.875rem' }}>Books remaining today</p>
+                    <span style={{ fontWeight: '700', fontSize: '0.95rem', color: booksRemainingToday > 0 ? '#1a7a4a' : '#FF6B35' }}>
                       {booksRemainingToday}
                     </span>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <p style={{ color: '#6B5E4E', fontSize: '0.875rem' }}>Books remaining this month</p>
-                    <span style={{ fontWeight: '700', fontSize: '0.95rem', color: '#1C1614' }}>
+                    <p style={{ color: '#5E6A7A', fontSize: '0.875rem' }}>Books remaining this month</p>
+                    <span style={{ fontWeight: '700', fontSize: '0.95rem', color: '#0D183D' }}>
                       {booksRemainingThisMonth}
                     </span>
                   </div>
                   {booksRemainingToday === 0 && (
                     <button
                       onClick={() => setPaywallReason('daily_limit')}
-                      style={{ marginTop: '4px', padding: '0.55rem 1rem', borderRadius: '8px', border: 'none', background: '#741515', color: '#fff', cursor: 'pointer', fontWeight: '600', fontSize: '0.8rem' }}
+                      style={{ marginTop: '4px', padding: '0.55rem 1rem', borderRadius: '8px', border: 'none', background: '#FF6B35', color: '#fff', cursor: 'pointer', fontWeight: '600', fontSize: '0.8rem' }}
                     >
                       Get extra book — A$0.99
                     </button>
                   )}
                 </div>
               ) : (
-                <p style={{ color: '#6B5E4E', fontSize: '0.875rem' }}>
+                <p style={{ color: '#5E6A7A', fontSize: '0.875rem' }}>
                   {sub?.free_stories_remaining ?? 0} free {(sub?.free_stories_remaining ?? 0) === 1 ? 'story' : 'stories'} remaining. Subscribe for unlimited access.
                 </p>
               )}
@@ -703,14 +703,14 @@ export default function DashboardPage() {
                   const data = await res.json();
                   if (data.url) window.location.href = data.url;
                 }}
-                style={{ width: '100%', padding: '0.75rem', borderRadius: '10px', border: '1.5px solid #741515', background: '#fff', color: '#741515', cursor: 'pointer', fontWeight: '600', fontSize: '0.9rem' }}
+                style={{ width: '100%', padding: '0.75rem', borderRadius: '10px', border: '1.5px solid #FF6B35', background: '#fff', color: '#FF6B35', cursor: 'pointer', fontWeight: '600', fontSize: '0.9rem' }}
               >
                 Manage billing
               </button>
             ) : (
               <button
                 onClick={() => setPaywallReason('free_exhausted')}
-                style={{ width: '100%', padding: '0.75rem', borderRadius: '10px', border: 'none', background: '#741515', color: '#fff', cursor: 'pointer', fontWeight: '600', fontSize: '0.9rem' }}
+                style={{ width: '100%', padding: '0.75rem', borderRadius: '10px', border: 'none', background: '#FF6B35', color: '#fff', cursor: 'pointer', fontWeight: '600', fontSize: '0.9rem' }}
               >
                 Subscribe — from A$9.99/month
               </button>
@@ -720,7 +720,7 @@ export default function DashboardPage() {
       </div>
 
       {isMobile && (
-        <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, height: '72px', background: '#741515', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
+        <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, height: '72px', background: '#0D183D', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
           {navItems.map(({ id, label, icon: Icon }) => {
             const active = activeNav === id;
             return (

@@ -39,22 +39,15 @@ export default function SignupPage() {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        background: '#FAF7F0',
+        background: '#FFF4E6',
         padding: '2rem',
       }}
     >
       {/* Logo */}
-      <div
-        className="font-serif"
-        style={{
-          fontSize: '1.75rem',
-          fontWeight: 600,
-          color: '#741515',
-          marginBottom: '2rem',
-          textAlign: 'center',
-        }}
-      >
-        Cool Reading Story
+      <div style={{ display: 'flex', alignItems: 'center', gap: '2px', marginBottom: '2rem', justifyContent: 'center' }}>
+        <span className="font-serif" style={{ fontSize: '2rem', color: '#0D183D' }}>Tale</span>
+        <span className="font-serif" style={{ fontSize: '2rem', color: '#FF6B35' }}>Pop</span>
+        <span style={{ background: '#FFB703', width: '8px', height: '8px', borderRadius: '50%', display: 'inline-block', marginLeft: '-3px', marginTop: '-16px' }} />
       </div>
 
       {/* Progress Dots */}
@@ -66,7 +59,7 @@ export default function SignupPage() {
               width: '12px',
               height: '12px',
               borderRadius: '50%',
-              background: step === 1 ? '#741515' : '#E8E0D0',
+              background: step === 1 ? '#FF6B35' : '#F0E4D0',
             }}
           />
         ))}
@@ -76,11 +69,11 @@ export default function SignupPage() {
       <div className="card" style={{ maxWidth: '420px', width: '100%', padding: '2.5rem' }}>
         <h1
           className="font-serif"
-          style={{ fontSize: '1.75rem', fontWeight: 600, color: '#1A1209', marginBottom: '0.5rem', textAlign: 'center' }}
+          style={{ fontSize: '1.75rem', fontWeight: 600, color: '#0D183D', marginBottom: '0.5rem', textAlign: 'center' }}
         >
           Begin your journey
         </h1>
-        <p style={{ fontSize: '0.9375rem', color: '#6B5E4E', textAlign: 'center', marginBottom: '2rem' }}>
+        <p style={{ fontSize: '0.9375rem', color: '#5E6A7A', textAlign: 'center', marginBottom: '2rem' }}>
           Create your account to get started
         </p>
 
@@ -108,10 +101,10 @@ export default function SignupPage() {
           style={{
             width: '100%',
             padding: '0.875rem 1rem',
-            border: '1.5px solid #E8E0D0',
+            border: '1.5px solid #F0E4D0',
             borderRadius: '8px',
             background: 'white',
-            color: '#1A1209',
+            color: '#0D183D',
             fontSize: '0.9375rem',
             fontWeight: 500,
             cursor: (googleLoading || !consentChecked) ? 'not-allowed' : 'pointer',
@@ -134,15 +127,15 @@ export default function SignupPage() {
 
         {/* Divider */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
-          <div style={{ flex: 1, height: '1px', background: '#E8E0D0' }} />
-          <span style={{ fontSize: '0.875rem', color: '#6B5E4E' }}>OR</span>
-          <div style={{ flex: 1, height: '1px', background: '#E8E0D0' }} />
+          <div style={{ flex: 1, height: '1px', background: '#F0E4D0' }} />
+          <span style={{ fontSize: '0.875rem', color: '#5E6A7A' }}>OR</span>
+          <div style={{ flex: 1, height: '1px', background: '#F0E4D0' }} />
         </div>
 
         {/* Form */}
         <form onSubmit={handleSubmit}>
           <div style={{ marginBottom: '1.25rem' }}>
-            <label htmlFor="email" style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: '#1A1209', marginBottom: '0.5rem' }}>
+            <label htmlFor="email" style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: '#0D183D', marginBottom: '0.5rem' }}>
               Email address
             </label>
             <input
@@ -157,13 +150,13 @@ export default function SignupPage() {
 
           <div style={{ marginBottom: '1.5rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-              <label htmlFor="password" style={{ fontSize: '0.875rem', fontWeight: 500, color: '#1A1209' }}>
+              <label htmlFor="password" style={{ fontSize: '0.875rem', fontWeight: 500, color: '#0D183D' }}>
                 Password
               </label>
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                style={{ fontSize: '0.875rem', background: 'transparent', border: 'none', color: '#741515', cursor: 'pointer', textDecoration: 'underline' }}
+                style={{ fontSize: '0.875rem', background: 'transparent', border: 'none', color: '#FF6B35', cursor: 'pointer', textDecoration: 'underline' }}
               >
                 {showPassword ? 'Hide' : 'Show'}
               </button>
@@ -181,17 +174,17 @@ export default function SignupPage() {
 
 
           {/* COPPA / Age Consent */}
-          <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', marginBottom: '1.25rem', padding: '1rem', background: '#FBF8F3', borderRadius: '8px', border: '1px solid #E8E0D0' }}>
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', marginBottom: '1.25rem', padding: '1rem', background: '#FBF8F3', borderRadius: '8px', border: '1px solid #F0E4D0' }}>
             <input
               id="consent"
               type="checkbox"
               checked={consentChecked}
               onChange={e => setConsentChecked(e.target.checked)}
-              style={{ marginTop: '2px', width: '16px', height: '16px', accentColor: '#741515', flexShrink: 0, cursor: 'pointer' }}
+              style={{ marginTop: '2px', width: '16px', height: '16px', accentColor: '#FF6B35', flexShrink: 0, cursor: 'pointer' }}
             />
             <label htmlFor="consent" style={{ fontSize: '0.8125rem', color: '#4A3728', lineHeight: 1.5, cursor: 'pointer' }}>
               I confirm I am <strong>18 years of age or older</strong> and am the parent or legal guardian of the child I am creating a profile for. I consent to the collection and use of my child&apos;s information as described in the{' '}
-              <a href="/privacy" target="_blank" rel="noopener noreferrer" style={{ color: '#741515', textDecoration: 'underline' }}>Privacy Policy</a>.
+              <a href="/privacy" target="_blank" rel="noopener noreferrer" style={{ color: '#FF6B35', textDecoration: 'underline' }}>Privacy Policy</a>.
             </label>
           </div>
 
@@ -205,21 +198,21 @@ export default function SignupPage() {
           </button>
         </form>
 
-        <div style={{ textAlign: 'center', paddingTop: '1.5rem', borderTop: '1px solid #E8E0D0' }}>
-          <p style={{ fontSize: '0.9375rem', color: '#1A1209' }}>
+        <div style={{ textAlign: 'center', paddingTop: '1.5rem', borderTop: '1px solid #F0E4D0' }}>
+          <p style={{ fontSize: '0.9375rem', color: '#0D183D' }}>
             Already have an account?{' '}
-            <Link href="/login" style={{ color: '#741515', textDecoration: 'none', fontWeight: 600 }}>
+            <Link href="/login" style={{ color: '#FF6B35', textDecoration: 'none', fontWeight: 600 }}>
               Sign in
             </Link>
           </p>
         </div>
       </div>
 
-      <p style={{ fontSize: '0.75rem', color: '#6B5E4E', textAlign: 'center', maxWidth: '420px', marginTop: '2rem', lineHeight: '1.5' }}>
+      <p style={{ fontSize: '0.75rem', color: '#5E6A7A', textAlign: 'center', maxWidth: '420px', marginTop: '2rem', lineHeight: '1.5' }}>
         By creating an account, you agree to our{' '}
-        <a href="/terms" style={{ color: '#741515', textDecoration: 'none', fontWeight: 500 }}>Terms of Service</a>{' '}
+        <a href="/terms" style={{ color: '#FF6B35', textDecoration: 'none', fontWeight: 500 }}>Terms of Service</a>{' '}
         and{' '}
-        <a href="/privacy" style={{ color: '#741515', textDecoration: 'none', fontWeight: 500 }}>Privacy Policy</a>.
+        <a href="/privacy" style={{ color: '#FF6B35', textDecoration: 'none', fontWeight: 500 }}>Privacy Policy</a>.
         We&apos;ll never share your data.
       </p>
     </div>

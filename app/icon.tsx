@@ -9,23 +9,19 @@ export default function Icon() {
       style={{
         width: 32,
         height: 32,
-        background: '#741515',
-        borderRadius: 6,
+        background: '#FF6B35',
+        borderRadius: 8,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        fontFamily: 'serif',
+        fontSize: '18px',
+        fontWeight: '900',
+        color: 'white',
+        letterSpacing: '-1px',
       }}
     >
-      <svg width="20" height="16" viewBox="0 0 20 16" fill="none">
-        <path
-          d="M10 3C7.5 1 2.5 1 1 2v11c1.5-1 6.5-1 9 1 2.5-2 7.5-2 9-1V2C17.5 1 12.5 1 10 3z"
-          stroke="white"
-          strokeWidth="1.5"
-          strokeLinejoin="round"
-          fill="rgba(255,255,255,0.15)"
-        />
-        <line x1="10" y1="3" x2="10" y2="14" stroke="white" strokeWidth="1"/>
-      </svg>
+      T★
     </div>,
     { ...size }
   );
