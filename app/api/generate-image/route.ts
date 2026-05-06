@@ -9,6 +9,16 @@ export const maxDuration = 30;
 
 const REPLICATE_API_TOKEN = process.env.REPLICATE_API_TOKEN;
 
+// Derive a stable integer seed from a story UUID so all pages of one story
+// use the same Flux seed — improves visual consistency across illustrations.
+function storyIdToSeed(storyId: string): number {
+  let hash = 0;
+  for (let i = 0; i < storyId.length; i++) {
+    hash = (Math.imul(31, hash) + storyId.charCodeAt(i)) | 0;
+  }
+  return Math.abs(hash) % 2147483647; // keep within Replicate's int32 range
+}
+
 export async function POST(request: Request) {
   try {
     const supabase = await createClient();
@@ -67,6 +77,8 @@ export async function POST(request: Request) {
               aspect_ratio: '2:3',
               output_format: 'webp',
               output_quality: 80,
+              // Deterministic seed per story keeps style/palette consistent across pages
+              seed: storyIdToSeed(story_id),
             },
           }),
         }
