@@ -267,7 +267,7 @@ export default function StoryPage() {
       const sevenDaysAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
       if (!last || new Date(last).getTime() < sevenDaysAgo) {
         feedbackShown.current = true;
-        setTimeout(() => setShowFeedback(true), 2000);
+        setTimeout(() => setShowFeedback(true), 15000);
       }
     }
   };
