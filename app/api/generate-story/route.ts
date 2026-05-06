@@ -98,14 +98,13 @@ Requirements:
 7. Use language appropriate for age ${age}: ${reading_level === 'beginner' ? 'short sentences, simple words, lots of repetition' : reading_level === 'intermediate' ? 'flowing sentences, rich descriptions, some new vocabulary' : 'complex narrative, vivid imagery, sophisticated vocabulary'}
 8. Make it feel uniquely written FOR ${name} — not a generic story with a name swapped in
 9. Split the story into exactly 5 pages. Each page should have 2-4 paragraphs of text.
-10. For each page, write an image prompt. You MUST copy the CHARACTER ANCHOR below word-for-word at the start, then describe only the scene action. The anchor keeps the character identical across all 5 illustrations.
+10. Before writing page prompts, define a CHARACTER ANCHOR: a single vivid sentence describing ${name}'s exact look — specific hair style and colour, eye colour, and a specific named outfit (e.g. "a red polka-dot dress and white sandals" or "a yellow striped hoodie and blue jeans and white sneakers"). Choose an outfit that fits ${name}'s personality and interests. This anchor must be copied verbatim into every image prompt.
 
-CHARACTER ANCHOR (copy verbatim at the start of every image prompt):
-"Bright children's book cartoon illustration, bold outlines, vivid flat colours. Main character: ${name}, a young ${age}-year-old child${appearanceDesc ? ` with ${appearanceDesc}` : ''}${gender === 'Boy' ? ', short hair, boyish features' : gender === 'Girl' ? ', long hair, girlish features' : ''}, wearing ${gender === 'Girl' ? 'a bright colourful dress' : 'a blue t-shirt and dark jeans'}, same young child face, same age, same outfit in every single scene — character must look exactly ${age} years old throughout, never older or taller."
-
-Then in 1-2 sentences describe only the scene action (what is happening, where, with whom).
-
-CRITICAL RULE: End every image prompt with exactly this phrase: "No text, no words, no letters anywhere in the image."
+CRITICAL IMAGE PROMPT RULES:
+- Start EVERY image_prompt with the character_anchor string you defined — word for word, no changes
+- After the anchor, add 1-2 sentences describing only the scene (what is happening, where, who else is present)
+- The character must look identical in all 5 images: same face, same age (${age}), same exact outfit — never taller, never older
+- End every image prompt with: "No text, no words, no letters anywhere in the image."
 
 Return ONLY valid JSON, no markdown, no explanation:
 {
@@ -113,11 +112,12 @@ Return ONLY valid JSON, no markdown, no explanation:
   "moral": "The gentle lesson in one sentence",
   "theme_emoji": "One emoji representing the story theme",
   "word_count": estimated_total_word_count_as_number,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. [NAME], a [AGE]-year-old [GENDER] child with [HAIR DESCRIPTION], wearing [SPECIFIC OUTFIT] — same child, same face, same exact outfit in every image.",
   "pages": [
     {
       "page_number": 1,
       "content": "Page text here — 2-4 paragraphs",
-      "image_prompt": "Children's watercolor picture book illustration, [specific scene description], warm soft colors, cosy and magical, no text"
+      "image_prompt": "[character_anchor copied verbatim] [1-2 sentences of scene action]. No text, no words, no letters anywhere in the image."
     }
   ]
 }`;
@@ -269,6 +269,7 @@ export async function POST(request: Request) {
       moral: string;
       theme_emoji: string;
       word_count: number;
+      character_anchor?: string;
       pages: { page_number: number; content: string; image_prompt: string }[];
     };
 
@@ -306,6 +307,7 @@ export async function POST(request: Request) {
         pages: pagesForDB,
         input_tokens: inputTokens,
         output_tokens: outputTokens,
+        character_anchor: storyData.character_anchor || null,
       })
       .select()
       .single();
