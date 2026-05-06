@@ -96,7 +96,7 @@ export default function Home() {
       <nav style={{ position: 'sticky', top: 0, zIndex: 50, background: '#FFF4E6', borderBottom: '1px solid #F0E4D0', padding: '0.5rem 2rem' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Link href="/" style={{ textDecoration: 'none' }}>
-            <img src="/mood-3.png" alt="TalePop" style={{ height: '72px', width: 'auto', mixBlendMode: 'multiply' }} />
+            <img src="/mood-3.png" alt="TalePop" style={{ height: '72px', width: 'auto' }} />
           </Link>
           <div className="nav-desktop" style={{ gap: '2.5rem', alignItems: 'center' }}>
             <a href="#how-it-works" style={{ color: '#0D183D', textDecoration: 'none', fontSize: '0.9rem', fontWeight: 600 }}>How it works</a>

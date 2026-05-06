@@ -43,7 +43,7 @@ export default function LoginPage() {
     >
       {/* Logo */}
       <a href="/" style={{ textDecoration: 'none', display: 'inline-block', marginBottom: '3rem' }}>
-        <img src="/mood-3.png" alt="TalePop" style={{ height: '90px', width: 'auto', mixBlendMode: 'multiply' }} />
+        <img src="/mood-3.png" alt="TalePop" style={{ height: '90px', width: 'auto' }} />
       </a>
 
       {/* Login Card */}

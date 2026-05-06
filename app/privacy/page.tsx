@@ -10,7 +10,7 @@ export default function PrivacyPage() {
       <nav style={{ borderBottom: '1px solid #F0E4D0', padding: '1.25rem 2rem' }}>
         <div style={{ maxWidth: '820px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Link href="/" style={{ textDecoration: 'none', display: 'inline-block' }}>
-            <img src="/mood-3.png" alt="TalePop" style={{ height: '44px', width: 'auto', mixBlendMode: 'multiply' }} />
+            <img src="/mood-3.png" alt="TalePop" style={{ height: '44px', width: 'auto' }} />
           </Link>
           <Link href="/login" style={{ fontSize: '0.875rem', color: '#5E6A7A', textDecoration: 'none' }}>Sign in</Link>
         </div>
