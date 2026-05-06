@@ -303,7 +303,7 @@ export default function StoryPage() {
     <img
       src={page.image_url}
       alt={`Page ${currentPage + 1} illustration`}
-      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+      style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block', background: '#F5F0E8' }}
       onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
     />
   ) : (
@@ -358,6 +358,7 @@ export default function StoryPage() {
               overflow: 'hidden',
               position: 'relative',
               minHeight: '380px',
+              background: '#F5F0E8',
             }}>
               {illustrationEl}
               <CornerOrnaments />
