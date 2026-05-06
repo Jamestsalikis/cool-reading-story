@@ -149,11 +149,11 @@ export default function Home() {
           {/* Hero illustration — characters area of mood board */}
           <div className="hero-img-panel" style={{
             animation: 'float 5s ease-in-out infinite',
-            backgroundImage: "url('/hero-illustration.png')",
-            backgroundSize: '320%',
-            backgroundPosition: '18% 82%'
+            backgroundImage: "url('/mood-2.png')",
+            backgroundSize: 'cover',
+            backgroundPosition: '50% 38%'
           }}>
-            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '40%', background: 'linear-gradient(transparent, rgba(13,24,61,0.8))' }} />
+            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '40%', background: 'linear-gradient(transparent, rgba(13,24,61,0.85))' }} />
             <div style={{ position: 'absolute', bottom: '1.5rem', left: '1.5rem', right: '1.5rem', color: 'white' }}>
               <p className="font-serif" style={{ fontSize: '1.05rem' }}>Every night, a story all their own. ✨</p>
             </div>
@@ -172,7 +172,7 @@ export default function Home() {
       <section style={{ background: '#0D183D', padding: '1.5rem 2rem 2rem' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', justifyContent: 'center', gap: 'clamp(1.5rem, 4vw, 4rem)', flexWrap: 'wrap', alignItems: 'center' }}>
           {[
-            { n: '12,000+', label: 'adventures begun' },
+            { n: '2,500+', label: 'adventures begun' },
             { n: '4.9 ★', label: 'from parents' },
             { n: '2 min', label: 'to first story' },
             { n: '0', label: 'recycled plots' },
@@ -200,7 +200,7 @@ export default function Home() {
               This is what a TalePop story looks like.
             </h2>
             <p style={{ color: '#5E6A7A', fontSize: '0.95rem', fontWeight: 500, maxWidth: '520px', margin: '0 auto' }}>
-              Written fresh for Zara, age 6. Not pulled from a library. Not built from a template. Hers alone.
+              Written fresh for Zara and Zak. Not pulled from a library. Not built from a template. Theirs alone.
             </p>
           </div>
 
@@ -208,12 +208,12 @@ export default function Home() {
             <div style={{ background: 'linear-gradient(135deg, #0D183D 0%, #1496A6 100%)', padding: '1.5rem 2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
               <div>
                 <h3 className="font-serif" style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.5rem)', color: 'white', lineHeight: 1.2 }}>
-                  Zara and the Triassic Tide Pool
+                  Zara, Zak and the Kingdom Beyond the Mist
                 </h3>
-                <p style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.5)', fontWeight: 500, marginTop: '4px' }}>Written for Zara, age 6</p>
+                <p style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.5)', fontWeight: 500, marginTop: '4px' }}>Written for Zara & Zak</p>
               </div>
               <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
-                {['Dinosaurs', 'Brave & curious', 'Gran\'s garden'].map(t => (
+                {['Age 7 & 9', 'Dragon', 'Unicorn'].map(t => (
                   <span key={t} style={{ background: 'rgba(255,255,255,0.15)', color: 'rgba(255,255,255,0.85)', fontSize: '0.72rem', fontWeight: 700, padding: '3px 10px', borderRadius: '999px' }}>{t}</span>
                 ))}
               </div>
@@ -222,7 +222,7 @@ export default function Home() {
             <div>
               <div style={{ position: 'relative', height: '200px', overflow: 'hidden', background: '#0D183D' }}>
                 <img src="/hero-illustration.png" alt="Story illustration"
-                  style={{ position: 'absolute', width: '260%', maxWidth: 'none', top: '-50%', left: '-40%' }} />
+                  style={{ position: 'absolute', width: '280%', maxWidth: 'none', top: '-15%', left: '-30%' }} />
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(transparent 40%, white)' }} />
                 <div style={{ position: 'absolute', bottom: '1rem', left: '2rem' }}>
                   <span style={{ background: '#FF6B35', color: 'white', fontSize: '0.7rem', fontWeight: 800, padding: '3px 10px', borderRadius: '999px' }}>CHAPTER 1</span>
@@ -232,19 +232,20 @@ export default function Home() {
               <div style={{ padding: '2rem' }}>
                 <p style={{ fontSize: '1rem', color: '#0D183D', lineHeight: 1.85, fontWeight: 500, marginBottom: '1rem' }}>
                   <strong style={{ color: '#FF6B35', fontSize: '1.8rem', float: 'left', lineHeight: 1, marginRight: '6px', marginTop: '4px', fontFamily: 'Fredoka One, cursive' }}>Z</strong>
-                  ara had found a lot of things in her grandmother&apos;s garden — snails, old coins, a button that might have been from a pirate&apos;s coat. But she had never, not once, found a tide pool that glowed.
+                  ara and her brother Zak had been walking through the mist for what felt like hours when the castle appeared — impossibly tall, purple-turreted, glowing at every window as if someone inside had been expecting them.
                 </p>
                 <p style={{ fontSize: '1rem', color: '#0D183D', lineHeight: 1.85, fontWeight: 500, marginBottom: '1.5rem' }}>
-                  She crouched at the edge, her red gumboots squeaking on the rocks, and peered in. Something enormous moved beneath the surface. Something that hadn&apos;t existed for sixty-six million years.
+                  A dragon landed on the drawbridge. It was green, about the size of a large horse, and it was wearing a very small hat. Behind it, a unicorn peered around the tower with enormous golden eyes.
                 </p>
                 <div style={{ borderLeft: '3px solid #1496A6', paddingLeft: '1rem', color: '#5E6A7A', fontSize: '0.9rem', fontStyle: 'italic', lineHeight: 1.7 }}>
-                  &ldquo;Are you afraid?&rdquo; rumbled a voice from the deep.<br />
-                  Zara thought about it carefully, the way brave people do.<br />
-                  &ldquo;Not even a little,&rdquo; she said. And she jumped.
+                  &ldquo;We&apos;ve been waiting,&rdquo; said the dragon.<br />
+                  Zak looked at Zara. Zara looked at Zak.<br />
+                  &ldquo;For us?&rdquo; said Zara.<br />
+                  &ldquo;The kingdom only appears for the right children,&rdquo; said the dragon. &ldquo;And you are exactly right.&rdquo;
                 </div>
                 <div style={{ marginTop: '1.5rem', paddingTop: '1.5rem', borderTop: '1px solid #F0E4D0', display: 'flex', gap: '0.6rem', flexWrap: 'wrap', alignItems: 'center' }}>
                   <span style={{ fontSize: '0.78rem', color: '#5E6A7A', fontWeight: 600 }}>Page 1 of 5</span>
-                  {['Adventure', 'Dinosaurs', 'Ocean'].map(t => (
+                  {['Adventure', 'Dragon', 'Unicorn'].map(t => (
                     <span key={t} style={{ background: '#FFF0E0', border: '1px solid #FFD4A8', borderRadius: '20px', padding: '2px 10px', fontSize: '0.75rem', fontWeight: 700, color: '#FF6B35' }}>{t}</span>
                   ))}
                 </div>
@@ -278,7 +279,7 @@ export default function Home() {
               <div style={{ padding: '1.5rem' }}>
                 <p style={{ fontSize: '0.78rem', fontWeight: 800, color: '#FF6B35', letterSpacing: '0.06em', marginBottom: '0.6rem' }}>HIS STORY BEGAN:</p>
                 <p style={{ fontSize: '0.9rem', color: '#0D183D', lineHeight: 1.75, fontWeight: 500 }}>
-                  The rocket smelled like peanut butter, which Leo thought was suspicious. Biscuit didn&apos;t seem to mind — he was already strapped into the co-pilot seat, tail wagging at approximately warp speed...
+                  The mission had one problem: Biscuit kept pressing buttons. Not important buttons — Leo had hidden those. Just the ones that made lights flash and sounds beep. &apos;Biscuit,&apos; said Leo, &apos;we are approaching the asteroid belt.&apos; Biscuit wagged his tail and pressed another button. The spaceship played a fanfare...
                 </p>
               </div>
             </div>
@@ -446,7 +447,7 @@ export default function Home() {
             <Link href="/" style={{ textDecoration: 'none' }}>
               <img src="/talepop-logo-light.png" alt="TalePop" style={{ height: '52px', width: 'auto' }} />
             </Link>
-            <p style={{ color: 'rgba(255,255,255,0.25)', fontSize: '0.78rem', marginTop: '0.4rem', fontWeight: 500 }}>Stories worth reading twice.</p>
+
           </div>
           <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
             <Link href="/privacy" style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'none', fontSize: '0.85rem', fontWeight: 500 }}>Privacy Policy</Link>
