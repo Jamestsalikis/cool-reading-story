@@ -9,6 +9,13 @@ export const maxDuration = 30;
 
 const REPLICATE_API_TOKEN = process.env.REPLICATE_API_TOKEN;
 
+// TalePop visual style — appended to every Replicate prompt for consistent illustration style
+const TALEPOP_STYLE_SUFFIX =
+  'Premium illustrated children\'s picture book art, warm painterly style, bold ink outlines, ' +
+  'expressive cartoon character with large bright eyes, rich jewel-tone colour palette of midnight navy ' +
+  'and ocean teal and sunshine yellow and tangerine orange, magical golden atmospheric lighting, ' +
+  'dreamy enchanted background with stars and clouds.';
+
 // Derive a stable integer seed from a story UUID so all pages of one story
 // use the same Flux seed — improves visual consistency across illustrations.
 function storyIdToSeed(storyId: string): number {
@@ -52,6 +59,9 @@ export async function POST(request: Request) {
     const page = pages[pageIndex];
     if (!page.image_prompt) return NextResponse.json({ error: 'No image prompt' }, { status: 400 });
 
+    // Compose final prompt: story-specific prompt + global TalePop style suffix
+    const finalPrompt = `${page.image_prompt} ${TALEPOP_STYLE_SUFFIX}`;
+
     // Create prediction — retry once on 429 (rate limit) with a 5s backoff.
     // Two attempts × ~500ms each + 5s wait = ~6s worst case, within Hobby's 10s limit.
     let prediction: { id?: string; urls?: { get: string }; error?: string } | null = null;
@@ -71,7 +81,7 @@ export async function POST(request: Request) {
           },
           body: JSON.stringify({
             input: {
-              prompt: page.image_prompt,
+              prompt: finalPrompt,
               go_fast: true,
               num_outputs: 1,
               aspect_ratio: '2:3',
