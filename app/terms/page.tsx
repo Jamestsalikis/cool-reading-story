@@ -38,7 +38,7 @@ export default function TermsPage() {
           </Section>
 
           <Section title="3. Your Account">
-            <p>You are responsible for keeping your account credentials confidential and for all activity that occurs under your account. Notify us immediately at <a href="mailto:hello@coolreadingstory.com" style={{ color: '#FF6B35' }}>hello@coolreadingstory.com</a> if you suspect unauthorised access.</p>
+            <p>You are responsible for keeping your account credentials confidential and for all activity that occurs under your account. Notify us immediately at <a href="mailto:hello@talepop.com" style={{ color: '#FF6B35' }}>hello@talepop.com</a> if you suspect unauthorised access.</p>
             <p>Each account is limited to one child profile on the base subscription. Additional child profiles are available for an add-on fee (see Section 4).</p>
             <p>We reserve the right to suspend or terminate accounts that violate these Terms.</p>
           </Section>
@@ -56,7 +56,7 @@ export default function TermsPage() {
 
           <Section title="5. AI-Generated Content">
             <p>Stories and illustrations are generated using artificial intelligence (Anthropic Claude for text, Replicate Flux for images). While we apply content filters to ensure all output is age-appropriate and wholesome, we do not guarantee that every story will be perfect. Stories are intended for personal, private family use only.</p>
-            <p><strong>Content safety.</strong> All story generation is subject to mandatory safety filters that prohibit sexual, violent, frightening, abusive, discriminatory, or otherwise inappropriate content. If any part of a child&apos;s profile could produce unsafe output, our system substitutes safe alternative themes. You may report any concerning content to <a href="mailto:hello@coolreadingstory.com" style={{ color: '#FF6B35' }}>hello@coolreadingstory.com</a>.</p>
+            <p><strong>Content safety.</strong> All story generation is subject to mandatory safety filters that prohibit sexual, violent, frightening, abusive, discriminatory, or otherwise inappropriate content. If any part of a child&apos;s profile could produce unsafe output, our system substitutes safe alternative themes. You may report any concerning content to <a href="mailto:hello@talepop.com" style={{ color: '#FF6B35' }}>hello@talepop.com</a>.</p>
             <p>You own the stories generated for your account and may use them for personal, non-commercial purposes. You may not sell, republish, or distribute stories commercially without our written consent.</p>
             <p>We retain the right to use anonymised, non-identifiable story data to improve our service.</p>
           </Section>
@@ -90,7 +90,7 @@ export default function TermsPage() {
           </Section>
 
           <Section title="11. Contact">
-            <p>Questions about these Terms? Contact us at <a href="mailto:hello@coolreadingstory.com" style={{ color: '#FF6B35' }}>hello@coolreadingstory.com</a></p>
+            <p>Questions about these Terms? Contact us at <a href="mailto:hello@talepop.com" style={{ color: '#FF6B35' }}>hello@talepop.com</a></p>
           </Section>
 
           <div style={{ background: '#FBF0F0', borderRadius: '10px', padding: '1.25rem 1.5rem', fontSize: '0.875rem', color: '#FF6B35', borderLeft: '3px solid #FF6B35' }}>

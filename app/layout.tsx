@@ -3,7 +3,21 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "TalePop — Personalised Bedtime Stories for Kids",
-  description: "AI-powered personalised children's stories where your child is the hero. A new tale every day.",
+  description: "Bedtime stories written uniquely for your child. Their name, their friends, their adventures — invented fresh every time. From just 30¢ a story.",
+  openGraph: {
+    title: "TalePop — Personalised Bedtime Stories for Kids",
+    description: "Bedtime stories written uniquely for your child. Their name, their friends, their adventures — invented fresh every time. From just 30¢ a story.",
+    url: "https://cool-reading-story.vercel.app",
+    siteName: "TalePop",
+    images: [{ url: "/hero-illustration.png", width: 1536, height: 1024, alt: "TalePop — Personalised Bedtime Stories" }],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "TalePop — Personalised Bedtime Stories for Kids",
+    description: "Bedtime stories written uniquely for your child. From just 30¢ a story.",
+    images: ["/hero-illustration.png"],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

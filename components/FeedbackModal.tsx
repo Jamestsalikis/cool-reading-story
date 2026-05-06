@@ -62,7 +62,7 @@ export default function FeedbackModal({ onClose }: Props) {
           <>
             <div style={{ fontSize: '2.5rem', marginBottom: '12px' }}>📖</div>
             <h2 style={{ fontFamily: 'Georgia, serif', fontSize: '1.4rem', color: '#1A1209', marginBottom: '8px' }}>
-              How are you enjoying Cool Reading Story?
+              How are you enjoying TalePop?
             </h2>
             <p style={{ color: '#6B5E4E', fontSize: '0.875rem', marginBottom: '28px' }}>
               Takes 30 seconds — helps us make it better for your child.

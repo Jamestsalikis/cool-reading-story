@@ -26,7 +26,7 @@ export default function PrivacyPage() {
 
           <Section title="1. Who we are">
             <p>TalePop ("we", "us", "our") is an AI-powered personalised children&apos;s story service operated by [Your Company Name] ABN [XX XXX XXX XXX], based in Australia. We take your privacy — and the privacy of your children — seriously. This policy explains what information we collect, why we collect it, and how we protect it.</p>
-            <p>Contact: <a href="mailto:hello@coolreadingstory.com" style={{ color: '#FF6B35' }}>hello@coolreadingstory.com</a></p>
+            <p>Contact: <a href="mailto:hello@talepop.com" style={{ color: '#FF6B35' }}>hello@talepop.com</a></p>
           </Section>
 
           <Section title="2. Information we collect">
@@ -76,7 +76,7 @@ export default function PrivacyPage() {
             <p><strong>Profiling.</strong> We use child profile data to personalise story content. We do not create behavioural profiles, serve targeted advertising, or use child data to inform decisions about other products or services. Personalisation is limited to the story generation purpose and is not enabled for any other use.</p>
             <p><strong>Data minimisation.</strong> All child profile fields beyond name and age are optional. We encourage you to share only what is needed to create stories you are happy with.</p>
             <p><strong>Retention.</strong> Child profile data is retained for as long as your account is active. If you delete a child profile, the associated data is deleted within 7 days. If you delete your account, all child data is deleted within 30 days. We do not retain child data beyond what is necessary for the purpose of story generation.</p>
-            <p><strong>Your rights as a parent.</strong> You may at any time review, correct, or delete your child&apos;s profile through the app. To request a full export or deletion of your child&apos;s data, contact us at <a href="mailto:hello@coolreadingstory.com" style={{ color: '#FF6B35' }}>hello@coolreadingstory.com</a>. We will respond within 30 days.</p>
+            <p><strong>Your rights as a parent.</strong> You may at any time review, correct, or delete your child&apos;s profile through the app. To request a full export or deletion of your child&apos;s data, contact us at <a href="mailto:hello@talepop.com" style={{ color: '#FF6B35' }}>hello@talepop.com</a>. We will respond within 30 days.</p>
           </Section>
 
           <Section title="5. How we use your information">
@@ -123,7 +123,7 @@ export default function PrivacyPage() {
               <li>Object to processing based on legitimate interests</li>
               <li>Restrict processing in certain circumstances</li>
             </ul>
-            <p>To exercise these rights, contact us at <a href="mailto:hello@coolreadingstory.com" style={{ color: '#FF6B35' }}>hello@coolreadingstory.com</a>. We will respond within 30 days.</p>
+            <p>To exercise these rights, contact us at <a href="mailto:hello@talepop.com" style={{ color: '#FF6B35' }}>hello@talepop.com</a>. We will respond within 30 days.</p>
             <p><strong>Right to complain.</strong> If you believe we have not handled your personal data in accordance with applicable law, you have the right to lodge a complaint with your local data protection authority:</p>
             <ul style={{ paddingLeft: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <li><strong>Australia:</strong> Office of the Australian Information Commissioner (OAIC) — <a href="https://www.oaic.gov.au" style={{ color: '#FF6B35' }}>oaic.gov.au</a></li>
@@ -141,7 +141,7 @@ export default function PrivacyPage() {
           </Section>
 
           <Section title="12. Contact">
-            <p>Privacy questions or concerns? Email us at <a href="mailto:hello@coolreadingstory.com" style={{ color: '#FF6B35' }}>hello@coolreadingstory.com</a></p>
+            <p>Privacy questions or concerns? Email us at <a href="mailto:hello@talepop.com" style={{ color: '#FF6B35' }}>hello@talepop.com</a></p>
             <p>We aim to respond within 2 business days.</p>
             <p>Postal address: [Your registered business address]</p>
           </Section>

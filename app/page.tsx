@@ -173,7 +173,7 @@ export default function Home() {
               2 free stories. No credit card. Cancel anytime.
             </p>
             <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
-              {['Ages 3–10', 'From 30¢ per story', 'Cancel anytime'].map(b => (
+              {['Ages 3–10', 'From 30¢ per story', 'Safe & ad-free'].map(b => (
                 <span key={b} style={{ fontSize: '0.72rem', color: '#1496A6', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '4px' }}>
                   <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#1496A6" strokeWidth="3"><polyline points="20 6 9 17 4 12"/></svg>
                   {b}
@@ -260,7 +260,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Story illustration - right side of mood board: dragon + starry sky */}
+            {/* Story illustration — hero-illustration.png, left side characters (0% 44%) */}
             <div style={{
               position: 'relative', height: '220px', overflow: 'hidden',
               backgroundImage: "url('/hero-illustration.png')",
@@ -322,7 +322,7 @@ export default function Home() {
       {/* Wave out of dark strip */}
       <div style={{ lineHeight: 0, background: '#0D183D' }}>
         <svg viewBox="0 0 1200 50" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style={{ display: 'block', width: '100%', height: '45px' }}>
-          <path d="M0,20 C300,50 900,0 1200,30 L1200,50 L0,50 Z" fill="white"/>
+          <path d="M0,20 C300,50 900,0 1200,30 L1200,50 L0,50 Z" fill="#FFF4E6"/>
         </svg>
       </div>
 

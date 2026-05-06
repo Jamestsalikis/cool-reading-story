@@ -72,7 +72,7 @@ export default function SignupPage() {
           Begin your journey
         </h1>
         <p style={{ fontSize: '0.9375rem', color: '#5E6A7A', textAlign: 'center', marginBottom: '2rem' }}>
-          Create your account to get started
+          Your first story is waiting.
         </p>
 
         {/* Error message */}
