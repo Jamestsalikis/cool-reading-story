@@ -186,7 +186,7 @@ export default function Home() {
           <div className="hero-book-panel" style={{
             backgroundImage: "url('/hero-illustration.png')",
             backgroundSize: '280%',
-            backgroundPosition: '2% 58%',
+            backgroundPosition: '2% 38%',
             backgroundRepeat: 'no-repeat',
             padding: 0
           }}>
