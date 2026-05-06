@@ -75,7 +75,7 @@ MANDATORY SAFETY RULES  -  these override everything else:
 - Never generate content that could be used to groom, harm, or exploit children
 - The story must be 100% wholesome, safe, and appropriate for children aged 3-12
 - If any part of the child's profile could lead to harmful content, use safe alternative themes instead
-- NEVER use em dashes ( - ) in ANY text output, story content, titles, or prompts. Use commas, full stops, or rewrite the sentence instead
+- NEVER use em dashes in any text output, story content, titles, or prompts. Use commas, full stops, or rewrite the sentence instead
 
 TALEPOP BRAND VOICE & WRITING STYLE:
 This story will be typeset in two fonts that define the TalePop aesthetic  -  write to match their personalities:
@@ -131,19 +131,19 @@ CONSISTENCY (non-negotiable):
 - End every image prompt with: "No text, no words, no letters anywhere in the image."
 
 WHAT MAKES A GREAT CHILDREN'S BOOK ILLUSTRATION (apply to every page):
-- Capture the EMOTIONAL PEAK of that page  -  the single most exciting or heartfelt moment, not a neutral in-between moment
-- Show STRONG EMOTION on the character's face: wide eyes of wonder, a beaming smile of triumph, eyebrows raised in surprise, a focused determined gaze  -  the child reading should FEEL what ${name} feels
-- Use DYNAMIC COMPOSITION  -  avoid the character just standing still. Show them mid-action: leaping, reaching, pointing, spinning, crouching to look at something magical, running with arms out
+- Capture the EMOTIONAL PEAK of that page - the single most exciting or heartfelt moment, not a neutral in-between moment
+- Show STRONG EMOTION on the character's face: wide eyes of wonder, a beaming smile of triumph, eyebrows raised in surprise, a focused determined gaze - the child reading should FEEL what ${name} feels
+- Use DYNAMIC COMPOSITION - avoid the character just standing still. Show them mid-action: leaping, reaching, pointing, spinning, crouching to look at something magical, running with arms out
 - Vary the composition across the 5 pages so the book feels cinematic and alive:
-  • Page 1  -  Wide establishing shot: show the full world, ${name} small within a large magical environment, setting the sense of adventure and scale
-  • Page 2  -  Discovery / reaction shot: ${name} close-up or mid-shot, face expressing the moment of surprise or excitement when the adventure begins
-  • Page 3  -  Action shot: the most dynamic moment  -  movement, energy, something happening; diagonal lines, flying objects, rushing wind
-  • Page 4  -  Dramatic / emotional peak: the highest-stakes or most wondrous moment; strong lighting contrast, foreground detail, depth
-  • Page 5  -  Warm resolution: cosy and intimate, soft golden light, ${name} at peace  -  a scene that feels like a hug and naturally invites sleep
-- ENVIRONMENTAL STORYTELLING: the background must actively tell the story  -  glowing portals, weather matching the mood, magical sparks, creatures reacting, shadows and light that create drama
+  Page 1 - Wide establishing shot: show the full world, ${name} small within a large magical environment, setting the sense of adventure and scale
+  Page 2 - Discovery / reaction shot: ${name} close-up or mid-shot, face expressing the moment of surprise or excitement when the adventure begins
+  Page 3 - Action shot: the most dynamic moment - movement, energy, something happening; diagonal lines, flying objects, rushing wind
+  Page 4 - Dramatic / emotional peak: the highest-stakes or most wondrous moment; strong lighting contrast, foreground detail, depth
+  Page 5 - Warm resolution: cosy and intimate, soft golden light, ${name} at peace - a scene that feels like a hug and naturally invites sleep
+- ENVIRONMENTAL STORYTELLING: the background must actively tell the story - glowing portals, weather matching the mood, magical sparks, creatures reacting, shadows and light that create drama
 - LIGHTING IS MOOD: use warm golden glows for triumph and safety, cool moonlit blues for mystery, sunrise pinks for hope, shafts of magical light to spotlight ${name} as the hero
 - FOREGROUND DEPTH: include foreground elements (flowers, rocks, foliage, sparkles) to give the scene 3D depth and draw the child's eye into the picture
-- Every image should make a child say "WOW" and want to know what happens next  -  except page 5 which should make them feel safe and sleepy
+- Every image should make a child say "WOW" and want to know what happens next - except page 5 which should make them feel safe and sleepy
 
 Return ONLY valid JSON, no markdown, no explanation:
 {
@@ -341,4 +341,59 @@ export async function POST(request: Request) {
     const message = await anthropic.messages.create({
       model: 'claude-sonnet-4-6',
       max_tokens: 4096,
-      messages: [{ role: 'user', content: promp
+      messages: [{ role: 'user', content: prompt }],
+    });
+
+    // Capture real token usage from the API response
+    const inputTokens  = message.usage.input_tokens;
+    const outputTokens = message.usage.output_tokens;
+    console.log(`Token usage  -  input: ${inputTokens}, output: ${outputTokens}, total: ${inputTokens + outputTokens}`);
+
+    const rawContent = message.content[0].type === 'text' ? message.content[0].text : '';
+
+    // Parse JSON response
+    let storyData: {
+      title: string;
+      moral: string;
+      theme_emoji: string;
+      word_count: number;
+      character_anchor?: string;
+      pages: { page_number: number; content: string; image_prompt: string }[];
+    };
+
+    try {
+      const cleaned = rawContent.replace(/^```json\n?/, '').replace(/\n?```$/, '').trim();
+      storyData = JSON.parse(cleaned);
+    } catch {
+      return NextResponse.json({ error: 'Failed to parse story from AI' }, { status: 500 });
+    }
+
+    // Save story immediately  -  image generation is handled separately by
+    // /api/generate-all-images (sequential, Replicate-rate-limit-safe).
+    // No Replicate calls here to avoid competing with that endpoint.
+    const pagesForDB = storyData.pages.map((page) => ({
+      ...page,
+      image_url: null,
+      poll_url: null,
+    }));
+
+    // Combine content for full story text
+    const fullContent = pagesForDB.map((p) => p.content).join('\n\n');
+
+    // Save story to DB including real token counts
+    const { data: story, error: storyError } = await supabase
+      .from('stories')
+      .insert({
+        child_id,
+        parent_id: user.id,
+        title: storyData.title,
+        content: fullContent,
+        moral: storyData.moral,
+        theme: storyData.theme_emoji,
+        word_count: storyData.word_count,
+        reading_time_minutes: Math.ceil((storyData.word_count || 500) / 150),
+        pages: pagesForDB,
+        input_tokens: inputTokens,
+        output_tokens: outputTokens,
+        character_anchor: storyData.character_anchor || null,
+      })

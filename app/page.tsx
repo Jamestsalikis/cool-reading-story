@@ -519,11 +519,11 @@ export default function Home() {
           {[
             {
               q: 'How personalised is it, really?',
-              a: 'Every word is invented fresh  -  not a template with the name swapped in. Your child's interests, best friend, pet, and personality shape the actual plot. Two children with the same name get completely different stories.'
+              a: "Every word is invented fresh - not a template with the name swapped in. Your child's interests, best friend, pet, and personality shape the actual plot. Two children with the same name get completely different stories."
             },
             {
               q: 'What age is TalePop for?',
-              a: 'Ages 3 to 10. You set a reading level when you create your child's profile and we adjust vocabulary, sentence length, and story complexity accordingly. A 4-year-old gets short, simple sentences with big moments; a 9-year-old gets richer language and a proper three-act structure.'
+              a: "Ages 3 to 10. You set a reading level when you create your child's profile and we adjust vocabulary, sentence length, and story complexity accordingly. A 4-year-old gets short, simple sentences with big moments; a 9-year-old gets richer language and a proper three-act structure."
             },
             {
               q: 'Can I add more than one child?',
