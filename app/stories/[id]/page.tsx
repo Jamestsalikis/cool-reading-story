@@ -41,17 +41,12 @@ const bookStyles = `
     from { opacity: 0; transform: translateX(-40px) scale(0.98); }
     to   { opacity: 1; transform: translateX(0) scale(1); }
   }
-  @keyframes shimmer {
-    0%, 100% { opacity: 0.45; }
-    50% { opacity: 0.95; }
-  }
   @keyframes paintDot {
     0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
     40% { opacity: 1; transform: scale(1); }
   }
   .page-forward { animation: pageForward 0.4s cubic-bezier(0.25,0.46,0.45,0.94); }
   .page-back    { animation: pageBack 0.4s cubic-bezier(0.25,0.46,0.45,0.94); }
-  .shimmer { animation: shimmer 1.8s ease infinite; }
   .paint-dot-1 { animation: paintDot 1.4s ease infinite 0s; }
   .paint-dot-2 { animation: paintDot 1.4s ease infinite 0.2s; }
   .paint-dot-3 { animation: paintDot 1.4s ease infinite 0.4s; }
@@ -69,9 +64,7 @@ const bookStyles = `
   .book-page::before {
     content: '';
     position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
+    left: 0; top: 0; bottom: 0;
     width: 28px;
     background: linear-gradient(to right, #E8DDD0, #F5F0E8);
     border-right: 1px solid rgba(0,0,0,0.06);
@@ -80,14 +73,11 @@ const bookStyles = `
   .book-page::after {
     content: '';
     position: absolute;
-    left: 12px;
-    top: 0;
-    bottom: 0;
+    left: 12px; top: 0; bottom: 0;
     width: 1px;
     background: rgba(0,0,0,0.04);
     z-index: 1;
   }
-
   .story-text {
     font-family: 'Lora', Georgia, serif;
     font-size: 1.05rem;
@@ -96,7 +86,6 @@ const bookStyles = `
     letter-spacing: 0.01em;
   }
   .story-text p { margin-bottom: 1.2em; }
-
   .page-border {
     position: absolute;
     inset: 36px 16px 16px 36px;
@@ -104,14 +93,6 @@ const bookStyles = `
     border-radius: 4px;
     pointer-events: none;
     z-index: 0;
-  }
-
-  .illus-wrap {
-    position: relative;
-    overflow: hidden;
-  }
-  .illus-wrap img {
-    width: 100%; height: 100%; object-fit: cover; display: block;
   }
   .corner-ornament {
     position: absolute;
@@ -121,141 +102,26 @@ const bookStyles = `
     pointer-events: none;
   }
 
-  /* ===== RESPONSIVE SIDE-BY-SIDE LAYOUT ===== */
-
-  .book-page-layout {
-    display: flex;
-  }
-
-  .book-illus-col {
-    flex-shrink: 0;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .book-text-col {
-    position: relative;
-    z-index: 2;
-  }
-
-  .book-text-inner {
-    padding: 22px 20px 28px 48px;
-  }
-
-  /* ---- MOBILE (<768px): image top, scrollable text below ---- */
-  @media (max-width: 767px) {
-    .book-page-layout {
-      flex-direction: column;
-    }
-    .book-illus-col {
-      margin-left: 28px;
-      width: calc(100% - 28px);
-      aspect-ratio: 4 / 3;
-    }
-    .book-text-col {
-      overflow-y: auto;
-      max-height: calc(100svh - 75vw - 175px);
-      min-height: 150px;
-      -webkit-overflow-scrolling: touch;
-      scroll-behavior: smooth;
-    }
-    .book-text-inner {
-      padding: 18px 20px 28px 48px;
-    }
-  }
-
-  /* ---- TABLET + DESKTOP (>=768px): side by side ---- */
-  @media (min-width: 768px) {
-    .book-page-layout {
-      flex-direction: row;
-      align-items: stretch;
-    }
-    /* Column is position:relative so illus-wrap can fill it absolutely */
-    .book-illus-col {
-      flex: 0 0 45%;
-      margin-left: 28px;
-      position: relative;
-      min-height: 380px;
-    }
-    /* Absolutely fill the column — most reliable cross-browser approach */
-    .book-illus-col .illus-wrap {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-    }
-    .book-text-col {
-      flex: 1;
-      overflow-y: auto;
-      border-left: 1px solid rgba(116,21,21,0.10);
-    }
-    .book-text-inner {
-      padding: 28px 28px 32px 24px;
-    }
-    .book-page-wide {
-      max-width: 860px !important;
-    }
-  }
-
   /* ---- Print styles ---- */
   @media print {
     body { background: white !important; }
     .no-print { display: none !important; }
     .print-only { display: block !important; }
-    .print-page {
-      page-break-after: always;
-      break-after: page;
-      width: 100%;
-      max-width: 100%;
-      padding: 0;
-      margin: 0;
-    }
+    .print-page { page-break-after: always; break-after: page; width: 100%; padding: 0; margin: 0; }
     .print-page:last-child { page-break-after: avoid; }
-    .print-image {
-      width: 100%;
-      aspect-ratio: 4/3;
-      object-fit: cover;
-    }
-    .print-text {
-      padding: 24px 32px;
-      font-family: 'Lora', Georgia, serif;
-      font-size: 14pt;
-      line-height: 1.8;
-      color: #000;
-    }
-    .print-title {
-      font-family: 'Lora', Georgia, serif;
-      font-size: 22pt;
-      text-align: center;
-      margin-bottom: 12pt;
-    }
-    .print-moral {
-      border-left: 3px solid #741515;
-      padding-left: 16px;
-      font-style: italic;
-      margin-top: 24pt;
-      font-size: 12pt;
-    }
-    .print-page-num {
-      text-align: center;
-      font-size: 10pt;
-      color: #666;
-      margin-top: 16pt;
-    }
+    .print-image { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+    .print-text { padding: 24px 32px; font-family: 'Lora', Georgia, serif; font-size: 14pt; line-height: 1.8; color: #000; }
+    .print-title { font-family: 'Lora', Georgia, serif; font-size: 22pt; text-align: center; margin-bottom: 12pt; }
+    .print-moral { border-left: 3px solid #741515; padding-left: 16px; font-style: italic; margin-top: 24pt; font-size: 12pt; }
+    .print-page-num { text-align: center; font-size: 10pt; color: #666; margin-top: 16pt; }
     .book-page, .book-page::before, .book-page::after { box-shadow: none !important; }
   }
-  @media screen {
-    .print-only { display: none !important; }
-  }
+  @media screen { .print-only { display: none !important; } }
 `;
 
-function IllustrationPlaceholder({ generating }: { generating: boolean; theme?: string }) {
+function IllustrationPlaceholder({ generating }: { generating: boolean }) {
   return (
-    <div style={{
-      width: '100%', height: '100%',
-      background: '#F5F0E8',
-      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '4px',
-    }}>
+    <div style={{ width: '100%', height: '100%', background: '#F5F0E8', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
       {generating ? (
         <Fable pose="painting" dialogue="Painting your illustration..." size={110} />
       ) : (
@@ -291,7 +157,7 @@ function DecorativeRule() {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
       <div style={{ flex: 1, height: '1px', background: 'linear-gradient(to right, rgba(116,21,21,0.15), transparent)' }} />
-      <span style={{ fontSize: '0.7rem', color: 'rgba(116,21,21,0.4)' }}>✶</span>
+      <span style={{ fontSize: '0.7rem', color: 'rgba(116,21,21,0.4)' }}>&#10022;</span>
       <div style={{ flex: 1, height: '1px', background: 'linear-gradient(to left, rgba(116,21,21,0.15), transparent)' }} />
     </div>
   );
@@ -307,9 +173,19 @@ export default function StoryPage() {
   const [animKey, setAnimKey] = useState(0);
   const [loadingPages, setLoadingPages] = useState<Set<number>>(new Set());
   const [showFeedback, setShowFeedback] = useState(false);
+  // Desktop detection via JS — avoids all CSS media query / specificity issues
+  const [isDesktop, setIsDesktop] = useState(false);
   const imageGenStarted = useRef(false);
   const feedbackShown = useRef(false);
   const supabase = createClient();
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 768px)');
+    setIsDesktop(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
 
   useEffect(() => {
     async function fetchStory() {
@@ -322,18 +198,14 @@ export default function StoryPage() {
       if (data) {
         setStory(data);
         setFavourite(data.is_favourite);
-
         const pages: Page[] = data.pages || [];
         const pagesNeedingImages = pages.filter((p) => p.image_prompt && !p.image_url);
-
         if (pagesNeedingImages.length > 0 && !imageGenStarted.current) {
           imageGenStarted.current = true;
           setLoadingPages(new Set(pagesNeedingImages.map((p) => p.page_number)));
-
           (async () => {
             for (const page of pagesNeedingImages) {
               let pollUrl: string | null = page.poll_url ?? null;
-
               if (!pollUrl) {
                 try {
                   const res = await fetch('/api/generate-image', {
@@ -349,9 +221,7 @@ export default function StoryPage() {
                   }
                 } catch {}
               }
-
               if (!pollUrl) continue;
-
               for (let i = 0; i < 30; i++) {
                 await new Promise((r) => setTimeout(r, 3000));
                 try {
@@ -364,24 +234,14 @@ export default function StoryPage() {
                   if (result.status === 'succeeded' && result.image_url) {
                     setStory((prev) => {
                       if (!prev) return prev;
-                      return {
-                        ...prev,
-                        pages: prev.pages.map((p) =>
-                          p.page_number === page.page_number ? { ...p, image_url: result.image_url } : p
-                        ),
-                      };
+                      return { ...prev, pages: prev.pages.map((p) => p.page_number === page.page_number ? { ...p, image_url: result.image_url } : p) };
                     });
-                    setLoadingPages((prev) => {
-                      const next = new Set(prev);
-                      next.delete(page.page_number);
-                      return next;
-                    });
+                    setLoadingPages((prev) => { const next = new Set(prev); next.delete(page.page_number); return next; });
                     break;
                   }
                   if (result.status === 'failed') break;
                 } catch {}
               }
-
               await new Promise((r) => setTimeout(r, 2000));
             }
           })();
@@ -403,7 +263,6 @@ export default function StoryPage() {
     setDirection(index > currentPage ? 'forward' : 'back');
     setAnimKey((k) => k + 1);
     setCurrentPage(index);
-
     if (story && index === story.pages.length - 1 && !feedbackShown.current) {
       const last = localStorage.getItem('last_feedback_at');
       const sevenDaysAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
@@ -433,12 +292,7 @@ export default function StoryPage() {
 
   const pages: Page[] = story.pages?.length > 0
     ? story.pages
-    : story.content.split('\n\n').filter(Boolean).map((para, i) => ({
-        page_number: i + 1,
-        content: para,
-        image_prompt: '',
-        image_url: null,
-      }));
+    : story.content.split('\n\n').filter(Boolean).map((para, i) => ({ page_number: i + 1, content: para, image_prompt: '', image_url: null }));
 
   const totalPages = pages.length;
   const page = pages[currentPage];
@@ -451,48 +305,98 @@ export default function StoryPage() {
       src={page.image_url}
       alt={`Page ${currentPage + 1} illustration`}
       style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-      onError={(e) => {
-        (e.target as HTMLImageElement).style.display = 'none';
-        (e.target as HTMLImageElement).parentElement?.classList.add('show-placeholder');
-      }}
+      onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
     />
   ) : (
     <IllustrationPlaceholder generating={isThisPageGenerating} />
   );
 
-  const textContentEl = (
-    <div className="book-text-inner" style={{ position: 'relative' }}>
-      <DecorativeRule />
-      {currentPage === 0 && (
-        <h2 style={{ fontFamily: 'Lora, Georgia, serif', fontSize: '1.45rem', color: '#2C1A0E', marginBottom: '18px', lineHeight: 1.3, fontWeight: 600 }}>
-          {story.title}
-        </h2>
-      )}
-      <div className="story-text">
-        {paragraphs.map((para, i) => <p key={i}>{para}</p>)}
-      </div>
-      {isLastPage && story.moral && (
-        <div style={{ borderLeft: '3px solid #741515', paddingLeft: '16px', marginTop: '18px', color: '#5a3a2a', fontStyle: 'italic', fontFamily: 'Lora, Georgia, serif', fontSize: '0.9rem', lineHeight: 1.7 }}>
-          {story.moral}
+  // Shared text content — rendered inside whichever layout branch is active
+  function TextContent({ mobilePadding }: { mobilePadding: boolean }) {
+    return (
+      <div style={{ padding: mobilePadding ? '18px 20px 28px 48px' : '28px 28px 32px 24px', position: 'relative' }}>
+        <DecorativeRule />
+        {currentPage === 0 && (
+          <h2 style={{ fontFamily: 'Lora, Georgia, serif', fontSize: '1.45rem', color: '#2C1A0E', marginBottom: '18px', lineHeight: 1.3, fontWeight: 600 }}>
+            {story.title}
+          </h2>
+        )}
+        <div className="story-text">
+          {paragraphs.map((para, i) => <p key={i}>{para}</p>)}
         </div>
-      )}
-      <div style={{ textAlign: 'center', marginTop: '18px', color: 'rgba(116,21,21,0.3)', fontSize: '0.78rem', fontFamily: 'Georgia, serif' }}>
-        — {currentPage + 1} —
+        {isLastPage && story.moral && (
+          <div style={{ borderLeft: '3px solid #741515', paddingLeft: '16px', marginTop: '18px', color: '#5a3a2a', fontStyle: 'italic', fontFamily: 'Lora, Georgia, serif', fontSize: '0.9rem', lineHeight: 1.7 }}>
+            {story.moral}
+          </div>
+        )}
+        <div style={{ textAlign: 'center', marginTop: '18px', color: 'rgba(116,21,21,0.3)', fontSize: '0.78rem', fontFamily: 'Georgia, serif' }}>
+          &#8212; {currentPage + 1} &#8212;
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 
   function renderPageContent() {
-    return (
-      <div className="book-page-layout">
-        <div className="book-illus-col">
-          <div className="illus-wrap">
-            {illustrationEl}
-            <CornerOrnaments />
+    if (isDesktop) {
+      // ---- DESKTOP / TABLET: image left, text right, side by side ----
+      return (
+        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'stretch', minHeight: '460px' }}>
+          {/* Image column — position:relative so child can fill it absolutely */}
+          <div style={{
+            flex: '0 0 45%',
+            marginLeft: '28px',
+            position: 'relative',
+            minHeight: '400px',
+          }}>
+            {/* position:absolute + inset:0 = fills parent exactly, no height guesswork */}
+            <div style={{
+              position: 'absolute',
+              top: 0, right: 0, bottom: 0, left: 0,
+              overflow: 'hidden',
+            }}>
+              {illustrationEl}
+              <CornerOrnaments />
+            </div>
+          </div>
+          {/* Text column */}
+          <div style={{
+            flex: 1,
+            overflowY: 'auto',
+            borderLeft: '1px solid rgba(116,21,21,0.10)',
+            position: 'relative',
+            zIndex: 2,
+          }}>
+            <TextContent mobilePadding={false} />
           </div>
         </div>
-        <div className="book-text-col">
-          {textContentEl}
+      );
+    }
+
+    // ---- MOBILE: image top, scrollable text below ----
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
+        {/* Image — fixed 4:3 ratio */}
+        <div style={{
+          marginLeft: '28px',
+          width: 'calc(100% - 28px)',
+          aspectRatio: '4 / 3',
+          overflow: 'hidden',
+          position: 'relative',
+          flexShrink: 0,
+        }}>
+          {illustrationEl}
+          <CornerOrnaments />
+        </div>
+        {/* Text — scrollable, image stays on screen */}
+        <div style={{
+          overflowY: 'auto',
+          maxHeight: 'calc(100svh - 75vw - 175px)',
+          minHeight: '150px',
+          position: 'relative',
+          zIndex: 2,
+          WebkitOverflowScrolling: 'touch',
+        } as React.CSSProperties}>
+          <TextContent mobilePadding={true} />
         </div>
       </div>
     );
@@ -502,25 +406,18 @@ export default function StoryPage() {
     <>
       {showFeedback && <FeedbackModal onClose={() => setShowFeedback(false)} />}
 
+      {/* Print layout */}
       <div className="print-only">
         <div className="print-page">
           <h1 className="print-title">{story.title}</h1>
-          {pages[0]?.image_url && (
-            <img src={pages[0].image_url} alt="Cover" className="print-image" />
-          )}
+          {pages[0]?.image_url && <img src={pages[0].image_url} alt="Cover" className="print-image" />}
         </div>
         {pages.map((p, i) => (
           <div key={p.page_number} className="print-page">
-            {p.image_url && (
-              <img src={p.image_url} alt={`Page ${i + 1}`} className="print-image" />
-            )}
+            {p.image_url && <img src={p.image_url} alt={`Page ${i + 1}`} className="print-image" />}
             <div className="print-text">
-              {p.content.split('\n\n').filter(Boolean).map((para, j) => (
-                <p key={j}>{para}</p>
-              ))}
-              {i === totalPages - 1 && story.moral && (
-                <div className="print-moral">{story.moral}</div>
-              )}
+              {p.content.split('\n\n').filter(Boolean).map((para, j) => <p key={j}>{para}</p>)}
+              {i === totalPages - 1 && story.moral && <div className="print-moral">{story.moral}</div>}
             </div>
             <div className="print-page-num">{i + 1}</div>
           </div>
@@ -529,20 +426,11 @@ export default function StoryPage() {
 
       <style>{bookStyles}</style>
 
+      {/* Screen layout */}
       <div className="no-print" style={{ minHeight: '100vh', background: 'linear-gradient(160deg, #2C1810 0%, #1a0f08 100%)', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '0 0 100px' }}>
 
-        <div style={{
-          width: '100%',
-          padding: '14px 20px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          position: 'sticky',
-          top: 0,
-          zIndex: 10,
-          background: 'rgba(44,24,16,0.9)',
-          backdropFilter: 'blur(8px)',
-        }}>
+        {/* Top bar */}
+        <div style={{ width: '100%', padding: '14px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'sticky', top: 0, zIndex: 10, background: 'rgba(44,24,16,0.9)', backdropFilter: 'blur(8px)' }}>
           <Link href="/dashboard" style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'rgba(255,255,255,0.65)', textDecoration: 'none', fontSize: '0.875rem' }}>
             <ArrowLeft size={15} /> Library
           </Link>
@@ -552,7 +440,7 @@ export default function StoryPage() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             {loadingPages.size > 0 && (
               <span style={{ fontSize: '0.7rem', color: 'rgba(255,200,100,0.7)', fontFamily: 'Georgia, serif' }}>
-                \U0001f3a8 {loadingPages.size} painting…
+                painting&#8230;
               </span>
             )}
             <button onClick={toggleFavourite} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '6px', display: 'flex' }}>
@@ -561,79 +449,40 @@ export default function StoryPage() {
           </div>
         </div>
 
+        {/* Book */}
         <div
           key={animKey}
-          className={`book-page book-page-wide ${direction === 'forward' ? 'page-forward' : 'page-back'}`}
-          style={{ width: '100%', maxWidth: '640px', margin: '24px 16px 0', flex: 1 }}
+          className={`book-page ${direction === 'forward' ? 'page-forward' : 'page-back'}`}
+          style={{ width: '100%', maxWidth: isDesktop ? '860px' : '640px', margin: '24px 16px 0', flex: 1 }}
         >
           <div className="page-border" />
           {renderPageContent()}
         </div>
 
-        <div style={{
-          position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 20,
-          background: 'rgba(44,24,16,0.95)', backdropFilter: 'blur(8px)',
-          borderTop: '1px solid rgba(255,255,255,0.08)',
-          padding: '12px 20px',
-          display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px',
-        }}>
+        {/* Navigation */}
+        <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 20, background: 'rgba(44,24,16,0.95)', backdropFilter: 'blur(8px)', borderTop: '1px solid rgba(255,255,255,0.08)', padding: '12px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
           <button
             onClick={() => goToPage(currentPage - 1)}
             disabled={currentPage === 0}
-            style={{
-              display: 'flex', alignItems: 'center', gap: '6px',
-              background: 'none', border: '2px solid rgba(255,255,255,0.25)',
-              borderRadius: '12px', color: 'rgba(255,255,255,0.85)',
-              padding: '0.75rem 1.25rem', cursor: currentPage === 0 ? 'not-allowed' : 'pointer',
-              opacity: currentPage === 0 ? 0.25 : 1, fontSize: '1rem', fontWeight: '600',
-              minWidth: '90px', justifyContent: 'center',
-            }}
+            style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'none', border: '2px solid rgba(255,255,255,0.25)', borderRadius: '12px', color: 'rgba(255,255,255,0.85)', padding: '0.75rem 1.25rem', cursor: currentPage === 0 ? 'not-allowed' : 'pointer', opacity: currentPage === 0 ? 0.25 : 1, fontSize: '1rem', fontWeight: '600', minWidth: '90px', justifyContent: 'center' }}
           >
             <ChevronLeft size={20} /> Back
           </button>
-
           <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
             {pages.map((p, i) => (
-              <button
-                key={i}
-                onClick={() => goToPage(i)}
-                style={{
-                  width: i === currentPage ? '22px' : '7px',
-                  height: '7px', borderRadius: '4px',
-                  background: i === currentPage ? '#c4784a' : (p.image_url ? 'rgba(255,255,255,0.4)' : 'rgba(255,255,255,0.18)'),
-                  border: 'none', cursor: 'pointer',
-                  transition: 'all 0.25s', padding: 0,
-                }}
-                title={p.image_url ? `Page ${i + 1}` : `Page ${i + 1} — painting...`}
-              />
+              <button key={i} onClick={() => goToPage(i)} style={{ width: i === currentPage ? '22px' : '7px', height: '7px', borderRadius: '4px', background: i === currentPage ? '#c4784a' : (p.image_url ? 'rgba(255,255,255,0.4)' : 'rgba(255,255,255,0.18)'), border: 'none', cursor: 'pointer', transition: 'all 0.25s', padding: 0 }} />
             ))}
           </div>
-
           {!isLastPage && (
             <button
               onClick={() => goToPage(currentPage + 1)}
-              style={{
-                display: 'flex', alignItems: 'center', gap: '6px',
-                background: '#741515', border: 'none', borderRadius: '12px',
-                color: 'white', padding: '0.75rem 1.25rem',
-                cursor: 'pointer', fontSize: '1rem', fontWeight: 700,
-                minWidth: '90px', justifyContent: 'center',
-              }}
+              style={{ display: 'flex', alignItems: 'center', gap: '6px', background: '#741515', border: 'none', borderRadius: '12px', color: 'white', padding: '0.75rem 1.25rem', cursor: 'pointer', fontSize: '1rem', fontWeight: 700, minWidth: '90px', justifyContent: 'center' }}
             >
               Next <ChevronRight size={20} />
             </button>
           )}
           {isLastPage && (
-            <Link
-              href="/dashboard"
-              style={{
-                display: 'flex', alignItems: 'center', gap: '6px',
-                background: '#c4784a', border: 'none', borderRadius: '12px',
-                color: 'white', padding: '0.75rem 1.25rem',
-                textDecoration: 'none', fontSize: '1rem', fontWeight: 700,
-                minWidth: '90px', justifyContent: 'center',
-              }}
-            >
+            <Link href="/dashboard" style={{ display: 'flex', alignItems: 'center', gap: '6px', background: '#c4784a', border: 'none', borderRadius: '12px', color: 'white', padding: '0.75rem 1.25rem', textDecoration: 'none', fontSize: '1rem', fontWeight: 700, minWidth: '90px', justifyContent: 'center' }}>
               Library
             </Link>
           )}
