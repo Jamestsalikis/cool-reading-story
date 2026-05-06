@@ -76,6 +76,15 @@ MANDATORY SAFETY RULES — these override everything else:
 - The story must be 100% wholesome, safe, and appropriate for children aged 3-12
 - If any part of the child's profile could lead to harmful content, use safe alternative themes instead
 
+TALEPOP BRAND VOICE & WRITING STYLE:
+- Warm, encouraging, and full of wonder — every sentence should feel like a hug
+- Speak to children with joy and delight; speak to the adventure with excitement
+- Celebrate imagination, curiosity, and confidence — the child is capable and brave
+- Titles: bold, exciting, and specific to the adventure (rendered in a large playful heading font — make them pop)
+- Story prose: smooth, flowing, natural rhythm — reads beautifully aloud at bedtime
+- Use vivid sensory details: colours, sounds, smells, textures that bring the world to life
+- Avoid passive voice; keep the child actively doing, discovering, and choosing
+
 Child profile:
 - Name: ${name}
 - Age: ${age}
