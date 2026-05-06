@@ -85,6 +85,8 @@ function SeriesFan({ volumes, palette }: { volumes: Story[]; palette: Palette })
   // Container must be wide enough to hold the fanned books
   const containerW = 140 + (n - 1) * 22 + 40;
   const containerH = 196; // matches BookCard height so tops align with flex-start
+  const seriesTitle = volumes[0].series_title || 'Series';
+  const seriesTitleDisplay = seriesTitle.length > 30 ? seriesTitle.slice(0, 28) + '\u2026' : seriesTitle;
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
@@ -136,7 +138,7 @@ function SeriesFan({ volumes, palette }: { volumes: Story[]; palette: Palette })
         })}
       </div>
       <p style={{ fontSize: '0.68rem', color: '#9B8B7A', letterSpacing: '0.02em', textAlign: 'center', maxWidth: `${containerW}px` }}>
-        {(() => { const t = volumes[0].series_title || 'Series'; return t.length > 30 ? t.slice(0, 28) + '…' : t; })()} · {n} {n === 1 ? 'vol' : 'vols'}
+        {seriesTitleDisplay} · {n} {n === 1 ? 'vol' : 'vols'}
       </p>
       <p style={{ fontSize: '0.65rem', color: '#C8BEAA', letterSpacing: '0.02em', textAlign: 'center' }}>
         {new Date(volumes[volumes.length - 1].created_at).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })}
@@ -356,15 +358,15 @@ export default function DashboardPage() {
   const booksRemainingToday = sub?.status === 'subscribed'
     ? Math.max(0, 1 + (sub.extra_books_today ?? 0) - (sub.stories_today ?? 0))
     : 0;
-  const booksRemainingThisMonth = (() => {
-    if (sub?.status !== 'subscribed') return 0;
+  let booksRemainingThisMonth = 0;
+  if (sub?.status === 'subscribed') {
     const now = new Date();
     const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
     const dayOfMonth = now.getDate();
     const daysLeftIncludingToday = lastDay - dayOfMonth + 1;
     const todayUsed = (sub.stories_today ?? 0) > 0;
-    return daysLeftIncludingToday - (todayUsed ? 1 : 0);
-  })();
+    booksRemainingThisMonth = daysLeftIncludingToday - (todayUsed ? 1 : 0);
+  }
 
   const storiesByChild = (childId: string) => {
     const child = children.find(c => c.id === childId);
@@ -544,6 +546,9 @@ export default function DashboardPage() {
                   const palette = CHILD_PALETTES[childIndex % CHILD_PALETTES.length];
                   const shelf = buildShelf(stories, child.name);
                   const canContinue = storiesByChild(child.id).length > 0 && !isSeriesComplete(child.id);
+                  const latestStory = storiesByChild(child.id)[0];
+                  const seriesStoriesForChild = latestStory?.series_id ? storiesByChild(child.id).filter(s => s.series_id && s.series_id === latestStory.series_id) : [];
+                  const nextVolForChild = latestStory?.series_id ? (seriesStoriesForChild.length + 1) : 2;
 
                   return (
                     <div key={child.id}>
@@ -559,18 +564,12 @@ export default function DashboardPage() {
                           </span>
                         </div>
                         <div style={{ display: 'flex', gap: '10px' }}>
-                          {canContinue && (() => {
-                            const latest = storiesByChild(child.id)[0];
-                            const seriesStories = storiesByChild(child.id).filter(s => s.series_id && s.series_id === latest?.series_id);
-                            // nextVol: if in a series use length+1, if single story then writing Vol 2
-                            const nextVol = latest?.series_id ? (seriesStories.length + 1) : 2;
-                            return (
+                          {canContinue && (
                               <button onClick={() => handleContinueStory(child.id)} disabled={!!generating}
                                 style={{ padding: '0.55rem 1.1rem', borderRadius: '8px', border: 'none', background: palette.cover, color: '#fff', cursor: generating ? 'not-allowed' : 'pointer', fontWeight: '600', fontSize: '0.8rem', opacity: generating ? 0.6 : 1 }}>
-                                + Write Vol {nextVol}
+                                + Write Vol {nextVolForChild}
                               </button>
-                            );
-                          })()}
+                          )}
                           <button onClick={() => handleGenerateStory(child.id)} disabled={!!generating}
                             style={{ padding: '0.55rem 1.1rem', borderRadius: '8px', border: `1.5px solid ${palette.cover}`, background: 'transparent', color: palette.cover, cursor: generating ? 'not-allowed' : 'pointer', fontWeight: '600', fontSize: '0.8rem', opacity: generating ? 0.6 : 1, display: 'flex', alignItems: 'center', gap: '5px' }}>
                             <Plus size={14} /> New story
