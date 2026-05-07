@@ -185,7 +185,7 @@ type ShelfItem = { type: 'single'; story: Story } | { type: 'series'; seriesId: 
 
 function buildShelf(stories: Story[], childName: string): ShelfItem[] {
   // Only include stories that have a generated cover image
-  const mine = stories.filter(s => s.children?.name === childName && s.pages?.[0]?.image_url);
+  const mine = stories.filter(s => s.children?.name === childName && s.pages?.[0]?.image_url?.includes('supabase'));
   const seriesMap = new Map<string, Story[]>();
   const singles: Story[] = [];
   mine.forEach(s => {
