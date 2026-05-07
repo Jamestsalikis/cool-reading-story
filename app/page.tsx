@@ -346,23 +346,23 @@ export default function Home() {
                 Start for free
               </Link>
               {/* Hand-drawn "click here!" annotation */}
-              <svg viewBox="0 0 200 130" width="200" height="130"
-                style={{ position: 'absolute', top: '-38px', left: '-36px', pointerEvents: 'none', zIndex: 2, overflow: 'visible' }}
+              <svg viewBox="0 0 240 155" width="240" height="155"
+                style={{ position: 'absolute', top: '-48px', left: '-48px', pointerEvents: 'none', zIndex: 2, overflow: 'visible' }}
                 xmlns="http://www.w3.org/2000/svg">
-                {/* Wobbly oval around button */}
-                <path d="M 16,45 C 14,22 36,6 100,4 C 164,2 182,20 183,44 C 184,70 164,82 100,84 C 36,86 14,68 16,45 Z"
-                  stroke="#D93F00" strokeWidth="2.8" fill="none" strokeLinecap="round" strokeLinejoin="round"
+                {/* Wobbly oval around button — slightly bigger */}
+                <path d="M 18,52 C 15,24 42,6 120,4 C 198,2 216,26 216,52 C 216,80 196,96 120,98 C 44,100 16,80 18,52 Z"
+                  stroke="#D93F00" strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round"
                   style={{ filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.12))' }}
                 />
-                {/* Arrow swooping down-right */}
-                <path d="M 145,84 C 152,98 165,108 172,116"
-                  stroke="#D93F00" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-                {/* Arrowhead */}
-                <path d="M 172,116 L 163,111 M 172,116 L 169,124"
-                  stroke="#D93F00" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+                {/* Arrow from "click here!" label pointing UP at the oval */}
+                <path d="M 195,136 C 188,122 172,110 164,100"
+                  stroke="#D93F00" strokeWidth="2.8" fill="none" strokeLinecap="round" />
+                {/* Arrowhead — tip at oval, pointing up-left */}
+                <path d="M 164,100 L 174,102 M 164,100 L 168,111"
+                  stroke="#D93F00" strokeWidth="2.8" fill="none" strokeLinecap="round" />
                 {/* "click here!" text */}
-                <text x="98" y="126" textAnchor="start"
-                  style={{ font: "bold 15px 'Caveat', cursive", fill: '#D93F00', letterSpacing: '0.5px' }}>
+                <text x="112" y="150" textAnchor="start"
+                  style={{ font: "bold 17px 'Caveat', cursive", fill: '#D93F00', letterSpacing: '0.5px' }}>
                   click here!
                 </text>
               </svg>
@@ -449,13 +449,6 @@ export default function Home() {
           }}>
             {/* Soft top fade into cream hero background */}
             <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '18%', background: 'linear-gradient(to bottom, #FFF4E6 0%, transparent 100%)' }} />
-            {/* Floating story-theme bubbles */}
-            <span className="theme-bubble" style={{ top: '9%', left: '8%', animation: 'float-bubble 3.2s ease-in-out infinite' }}>🦖 Dinosaurs</span>
-            <span className="theme-bubble" style={{ top: '6%', left: '44%', animation: 'float-bubble2 3.8s ease-in-out infinite' }}>🚀 Space</span>
-            <span className="theme-bubble" style={{ top: '9%', right: '6%', animation: 'float-bubble3 2.9s ease-in-out infinite' }}>🦄 Unicorns</span>
-            <span className="theme-bubble" style={{ top: '24%', left: '5%', animation: 'float-bubble2 4.1s ease-in-out infinite 0.4s' }}>🏴‍☠️ Pirates</span>
-            <span className="theme-bubble" style={{ top: '21%', right: '5%', animation: 'float-bubble 3.5s ease-in-out infinite 0.7s' }}>🤖 Robots</span>
-            <span className="theme-bubble" style={{ top: '36%', left: '30%', animation: 'float-bubble3 3.3s ease-in-out infinite 0.2s' }}>🧚 Fairies</span>
           </div>
         </div>
       </section>
