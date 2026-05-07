@@ -88,15 +88,86 @@ export default function Home() {
   const previewName = childName.trim() || 'your child';
   const capitalised = previewName.charAt(0).toUpperCase() + previewName.slice(1);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "TalePop",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Web",
+        "url": "https://cool-reading-story.vercel.app",
+        "description": "AI-powered personalised bedtime story generator for children aged 3-10. Creates unique stories starring your child using their name, interests, friends and pet.",
+        "offers": {
+          "@type": "Offer",
+          "price": "7.99",
+          "priceCurrency": "AUD",
+          "priceSpecification": {
+            "@type": "RecurringPaymentSpecification",
+            "billingIncrement": 1,
+            "billingPeriod": "P1M"
+          }
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.9",
+          "ratingCount": "2500",
+          "bestRating": "5"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How personalised is a TalePop story?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Every word is invented fresh - not a template with the name swapped in. Your child's interests, best friend, pet, and personality shape the actual plot. Two children with the same name get completely different stories."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What age is TalePop for?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Ages 3 to 10. You set a reading level when you create your child's profile and we adjust vocabulary, sentence length, and story complexity accordingly."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I add more than one child?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes - unlimited profiles, one subscription. Each child gets their own profile, their own story preferences, and their own shelf."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I cancel my TalePop subscription anytime?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "One click from your account settings. No hoops, no retention flows, no email-us-to-cancel. If you cancel, you keep access until the end of your billing period."
+            }
+          }
+        ]
+      }
+    ]
+  };
+
   return (
     <div style={{ background: '#FFF4E6', minHeight: '100vh' }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <style>{S}</style>
 
       {/* ─── Nav ─── */}
       <nav style={{ position: 'sticky', top: 0, zIndex: 50, background: '#FFF4E6', borderBottom: '1px solid #F0E4D0', padding: '0.5rem 2rem' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Link href="/" style={{ textDecoration: 'none' }}>
-            <img src="/mood-3.png" alt="TalePop" style={{ height: '72px', width: 'auto' }} />
+            <img src="/mood-3.png" alt="TalePop - Personalised Bedtime Stories" style={{ height: '72px', width: 'auto' }} />
           </Link>
           <div className="nav-desktop" style={{ gap: '2.5rem', alignItems: 'center' }}>
             <a href="#how-it-works" style={{ color: '#0D183D', textDecoration: 'none', fontSize: '0.9rem', fontWeight: 600 }}>How it works</a>
@@ -173,7 +244,7 @@ export default function Home() {
               2 free stories. No credit card. Cancel anytime.
             </p>
             <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
-              {['Ages 3–10', 'From 30¢ per story', 'Safe & ad-free'].map(b => (
+              {['Ages 3–10', 'From 24¢ per story', 'Safe & ad-free'].map(b => (
                 <span key={b} style={{ fontSize: '0.72rem', color: '#1496A6', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '4px' }}>
                   <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#1496A6" strokeWidth="3"><polyline points="20 6 9 17 4 12"/></svg>
                   {b}
@@ -230,7 +301,7 @@ export default function Home() {
             <div style={{
               position: 'relative', height: '220px', overflow: 'hidden',
               backgroundImage: "url('/book-spread.jpg')",
-              backgroundSize: 'cover', backgroundPosition: 'center 35%'
+              backgroundSize: 'cover', backgroundPosition: '68% 30%'
             }}>
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(13,24,61,0.5) 0%, transparent 30%)' }} />
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(transparent 50%, white 100%)' }} />
@@ -275,7 +346,7 @@ export default function Home() {
             { n: '2,500+', label: 'adventures begun' },
             { n: '4.9 ★', label: 'from parents' },
             { n: '2 min', label: 'to first story' },
-            { n: '30¢', label: 'per story' },
+            { n: '24¢', label: 'per story' },
           ].map(s => (
             <div key={s.n} style={{ textAlign: 'center' }}>
               <p className="font-serif" style={{ fontSize: '1.5rem', color: '#FFB703', marginBottom: '3px' }}>{s.n}</p>
@@ -422,14 +493,14 @@ export default function Home() {
       </section>
 
       {/* ─── Castle walk scene break ─── */}
-      <div style={{ position: 'relative', height: '280px', overflow: 'hidden' }}>
+      <div style={{ position: 'relative', height: '420px', overflow: 'hidden' }}>
         <div style={{
           position: 'absolute', inset: 0,
           backgroundImage: "url('/castle-walk.jpg')",
           backgroundSize: 'cover',
-          backgroundPosition: 'center 40%'
+          backgroundPosition: 'center 12%'
         }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, #FFB703 0%, transparent 22%, transparent 72%, #FFF4E6 100%)' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, #FFB703 0%, transparent 18%, transparent 78%, #FFF4E6 100%)' }} />
       </div>
 
       {/* ─── Pricing ─── */}
@@ -437,7 +508,7 @@ export default function Home() {
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
             <h2 className="font-serif" style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', color: '#0D183D', marginBottom: '0.5rem', letterSpacing: '-0.01em' }}>
-              Your child&apos;s story for just 30¢.
+              Your child&apos;s story from just 24¢.
             </h2>
             <p style={{ color: '#5E6A7A', fontWeight: 500, fontSize: '0.95rem', marginBottom: '0.5rem' }}>Simple, transparent pricing. Cancel anytime.</p>
             <p style={{ color: '#FF6B35', fontWeight: 700, fontSize: '0.85rem' }}>Join 2,500+ families already reading tonight.</p>
@@ -453,13 +524,13 @@ export default function Home() {
               </div>
               <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: '#FFF0E0', border: '1.5px solid #FFD4A8', borderRadius: '999px', padding: '0.3rem 0.9rem', marginBottom: '1.5rem' }}>
                 <span style={{ fontSize: '1rem' }}>📖</span>
-                <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#FF6B35' }}>just 30¢ per story</span>
+                <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#FF6B35' }}>just 33¢ per story</span>
               </div>
               <Link href="/signup" style={{ display: 'block', textAlign: 'center', padding: '0.9rem', background: '#FF6B35', borderRadius: '12px', color: 'white', textDecoration: 'none', fontWeight: '800', marginBottom: '1.75rem', boxShadow: '0 4px 14px rgba(255,107,53,0.3)' }}>
                 Subscribe monthly &rarr;
               </Link>
               <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                {['Up to 15 stories per month', 'Multiple children profiles', 'Story series (up to 4 volumes)', 'Beautifully illustrated pages', 'Cancel in one click'].map(f => (
+                {['A story every day', 'Multiple children profiles', 'Story series (up to 4 volumes)', 'Beautifully illustrated pages', 'Cancel in one click'].map(f => (
                   <li key={f} style={{ display: 'flex', gap: '0.75rem', fontSize: '0.9rem', color: '#0D183D', fontWeight: 500, alignItems: 'flex-start' }}>
                     <Check size={16} color="#6CC06C" style={{ flexShrink: 0, marginTop: '3px' }} />{f}
                   </li>
@@ -560,7 +631,7 @@ export default function Home() {
             Their story is waiting to be told.
           </h2>
           <p style={{ color: 'rgba(255,255,255,0.55)', marginBottom: '2rem', fontSize: '1rem', lineHeight: 1.7, fontWeight: 500 }}>
-            2 minutes to set up. 2 free stories. Then from just 30¢ a story.
+            2 minutes to set up. 2 free stories. Then from just 24¢ a story.
           </p>
           <Link href="/signup" style={{ display: 'inline-block', padding: '1.1rem 3rem', background: '#FF6B35', color: '#fff', borderRadius: '12px', textDecoration: 'none', fontWeight: '800', fontSize: '1.05rem', boxShadow: '0 4px 24px rgba(255,107,53,0.45)', letterSpacing: '-0.01em' }}>
             Begin their story
