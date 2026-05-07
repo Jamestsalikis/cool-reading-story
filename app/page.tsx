@@ -73,6 +73,11 @@ const S = `
 
   @keyframes pulse-green { 0%,100% { box-shadow: 0 0 0 3px rgba(108,192,108,0.3); } 50% { box-shadow: 0 0 0 6px rgba(108,192,108,0.1); } }
 
+  @keyframes slide-up { from { transform: translateY(120%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+  @keyframes slide-down { from { transform: translateY(0); opacity: 1; } to { transform: translateY(120%); opacity: 0; } }
+  .signup-toast { animation: slide-up 0.45s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+  .signup-toast.hiding { animation: slide-down 0.35s ease-in forwards; }
+
   .wave-divider svg { display: block; width: 100%; }
 
   .hero-book-panel {
@@ -88,11 +93,50 @@ export default function Home() {
   const [childName, setChildName] = useState('');
 
   const [minutesAgo, setMinutesAgo] = useState<number | null>(null);
+  const [toast, setToast] = useState<{ city: string; country: string; flag: string } | null>(null);
+  const [toastHiding, setToastHiding] = useState(false);
   useEffect(() => {
     const start = Math.floor(Math.random() * 8) + 1;
     setMinutesAgo(start);
     const t = setInterval(() => setMinutesAgo(m => (m ?? start) + 1), 60000);
     return () => clearInterval(t);
+  }, []);
+
+  useEffect(() => {
+    const locations = [
+      { city: 'Sydney', country: 'Australia', flag: '🇦🇺' },
+      { city: 'Melbourne', country: 'Australia', flag: '🇦🇺' },
+      { city: 'Brisbane', country: 'Australia', flag: '🇦🇺' },
+      { city: 'Perth', country: 'Australia', flag: '🇦🇺' },
+      { city: 'Auckland', country: 'New Zealand', flag: '🇳🇿' },
+      { city: 'Wellington', country: 'New Zealand', flag: '🇳🇿' },
+      { city: 'London', country: 'United Kingdom', flag: '🇬🇧' },
+      { city: 'Manchester', country: 'United Kingdom', flag: '🇬🇧' },
+      { city: 'Edinburgh', country: 'United Kingdom', flag: '🇬🇧' },
+      { city: 'Bristol', country: 'United Kingdom', flag: '🇬🇧' },
+      { city: 'New York', country: 'United States', flag: '🇺🇸' },
+      { city: 'Los Angeles', country: 'United States', flag: '🇺🇸' },
+      { city: 'Chicago', country: 'United States', flag: '🇺🇸' },
+      { city: 'Austin', country: 'United States', flag: '🇺🇸' },
+      { city: 'Seattle', country: 'United States', flag: '🇺🇸' },
+      { city: 'Toronto', country: 'Canada', flag: '🇨🇦' },
+      { city: 'Vancouver', country: 'Canada', flag: '🇨🇦' },
+      { city: 'Dublin', country: 'Ireland', flag: '🇮🇪' },
+      { city: 'Cape Town', country: 'South Africa', flag: '🇿🇦' },
+    ];
+    let idx = Math.floor(Math.random() * locations.length);
+    const show = () => {
+      idx = (idx + 1) % locations.length;
+      setToastHiding(false);
+      setToast(locations[idx]);
+      setTimeout(() => {
+        setToastHiding(true);
+        setTimeout(() => setToast(null), 400);
+      }, 4500);
+    };
+    const initial = setTimeout(show, 3000 + Math.random() * 3000);
+    const interval = setInterval(show, 18000 + Math.random() * 10000);
+    return () => { clearTimeout(initial); clearInterval(interval); };
   }, []);
 
   const previewName = childName.trim() || 'your child';
@@ -661,6 +705,26 @@ export default function Home() {
           <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.8rem', marginTop: '1rem', fontWeight: 500 }}>No credit card. Cancel anytime. 2 stories free.</p>
         </div>
       </section>
+
+      {/* ─── Signup toast ─── */}
+      {toast && (
+        <div className={`signup-toast${toastHiding ? ' hiding' : ''}`} style={{
+          position: 'fixed', bottom: '1.5rem', left: '1.5rem', zIndex: 999,
+          background: 'white', borderRadius: '14px', padding: '0.75rem 1rem',
+          boxShadow: '0 8px 32px rgba(13,24,61,0.18)', border: '1px solid #F0E4D0',
+          display: 'flex', alignItems: 'center', gap: '10px', maxWidth: '260px'
+        }}>
+          <span style={{ fontSize: '1.4rem', flexShrink: 0 }}>{toast.flag}</span>
+          <div>
+            <p style={{ fontSize: '0.78rem', fontWeight: 800, color: '#0D183D', marginBottom: '1px' }}>
+              Someone just signed up
+            </p>
+            <p style={{ fontSize: '0.72rem', color: '#5E6A7A', fontWeight: 500 }}>
+              {toast.city}, {toast.country}
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* ─── Footer ─── */}
       <footer style={{ background: '#080E22', padding: '2.5rem 2rem' }}>
