@@ -429,12 +429,12 @@ export default function Home() {
       </section>
 
       {/* ─── Illustrated scene break ─── */}
-      <div style={{ position: 'relative', height: '320px', overflow: 'hidden' }}>
+      <div style={{ position: 'relative', height: '340px', overflow: 'hidden' }}>
         <div style={{
           position: 'absolute', inset: 0,
           backgroundImage: "url('/banner-scene.jpg')",
-          backgroundSize: 'cover',
-          backgroundPosition: '78% center'
+          backgroundSize: '200%',
+          backgroundPosition: 'right 45%'
         }} />
         {/* Fade top from cream, fade bottom to dark */}
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, #FFF4E6 0%, transparent 18%, transparent 75%, #0D183D 100%)' }} />
