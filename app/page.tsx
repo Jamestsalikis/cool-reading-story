@@ -89,10 +89,37 @@ const S = `
 
   @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
 
-  /* Live-draw animation for click-here annotation */
-  @keyframes draw-oval   { to { stroke-dashoffset: 0; } }
-  @keyframes draw-arrow  { to { stroke-dashoffset: 0; } }
-  @keyframes reveal-text { to { width: 118px; } }
+  /* Live-draw looping annotation — 4.5s cycle */
+  @keyframes draw-oval-loop {
+    0%, 3.3%  { stroke-dashoffset: 520; }
+    27.8%     { stroke-dashoffset: 0; }
+    99%       { stroke-dashoffset: 0; }
+    100%      { stroke-dashoffset: 520; }
+  }
+  @keyframes draw-arrow-loop {
+    0%, 27.8% { stroke-dashoffset: 65; }
+    36.7%     { stroke-dashoffset: 0; }
+    99%       { stroke-dashoffset: 0; }
+    100%      { stroke-dashoffset: 65; }
+  }
+  @keyframes draw-ah1-loop {
+    0%, 36%   { stroke-dashoffset: 18; }
+    40.4%     { stroke-dashoffset: 0; }
+    99%       { stroke-dashoffset: 0; }
+    100%      { stroke-dashoffset: 18; }
+  }
+  @keyframes draw-ah2-loop {
+    0%, 39.6% { stroke-dashoffset: 18; }
+    44%       { stroke-dashoffset: 0; }
+    99%       { stroke-dashoffset: 0; }
+    100%      { stroke-dashoffset: 18; }
+  }
+  @keyframes draw-text-loop {
+    0%, 42.2% { width: 0px; }
+    54.4%     { width: 118px; }
+    99%       { width: 118px; }
+    100%      { width: 0px; }
+  }
 
   @keyframes float-bubble {
     0%,100% { transform: translateY(0px) rotate(-2deg); }
@@ -359,29 +386,29 @@ export default function Home() {
                   stroke="#D93F00" strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round"
                   style={{
                     strokeDasharray: 520, strokeDashoffset: 520,
-                    animation: 'draw-oval 1.1s ease-out 0.15s forwards',
+                    animation: 'draw-oval-loop 4.5s linear infinite',
                     filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.10))'
                   }}
                 />
                 {/* Arrow curve — draws after oval (1.3s → 1.8s) */}
                 <path d="M 195,136 C 188,122 172,110 164,100"
                   stroke="#D93F00" strokeWidth="2.8" fill="none" strokeLinecap="round"
-                  style={{ strokeDasharray: 65, strokeDashoffset: 65, animation: 'draw-arrow 0.4s ease-out 1.25s forwards' }}
+                  style={{ strokeDasharray: 65, strokeDashoffset: 65, animation: 'draw-arrow-loop 4.5s linear infinite' }}
                 />
                 {/* Arrowhead lines — appear after arrow (1.65s → 1.95s) */}
                 <path d="M 164,100 L 174,102"
                   stroke="#D93F00" strokeWidth="2.8" fill="none" strokeLinecap="round"
-                  style={{ strokeDasharray: 18, strokeDashoffset: 18, animation: 'draw-arrow 0.2s ease-out 1.62s forwards' }}
+                  style={{ strokeDasharray: 18, strokeDashoffset: 18, animation: 'draw-ah1-loop 4.5s linear infinite' }}
                 />
                 <path d="M 164,100 L 168,111"
                   stroke="#D93F00" strokeWidth="2.8" fill="none" strokeLinecap="round"
-                  style={{ strokeDasharray: 18, strokeDashoffset: 18, animation: 'draw-arrow 0.2s ease-out 1.78s forwards' }}
+                  style={{ strokeDasharray: 18, strokeDashoffset: 18, animation: 'draw-ah2-loop 4.5s linear infinite' }}
                 />
                 {/* "click here!" text — written left-to-right via clip wipe */}
                 <defs>
                   <clipPath id="write-clip">
                     <rect x="112" y="130" height="28"
-                      style={{ width: 0, animation: 'reveal-text 0.55s ease-in-out 1.9s forwards' } as React.CSSProperties} />
+                      style={{ width: 0, animation: 'draw-text-loop 4.5s linear infinite' } as React.CSSProperties} />
                   </clipPath>
                 </defs>
                 <text x="112" y="150" textAnchor="start" clipPath="url(#write-clip)"
