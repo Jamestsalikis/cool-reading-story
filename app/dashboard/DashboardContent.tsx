@@ -105,7 +105,8 @@ function BookCard({ story, palette }: { story: Story; palette: Palette }) {
                 <div style={{ position: 'absolute', inset: 0, backgroundImage: `url(${coverImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.05) 55%, transparent 100%)' }} />
                 {vol && vol > 1 && <div style={{ position: 'absolute', top: '8px', right: '7px', background: 'rgba(0,0,0,0.55)', color: '#fff', fontSize: '0.58rem', fontWeight: '800', padding: '2px 7px', borderRadius: '8px', zIndex: 1 }}>VOL {vol}</div>}
-                <p style={{ position: 'absolute', bottom: '10px', left: '8px', right: '8px', fontSize: '0.7rem', fontFamily: 'Fredoka, cursive', color: '#fff', lineHeight: 1.35, textShadow: '0 1px 4px rgba(0,0,0,0.7)', zIndex: 1 }}>{story.title}</p>
+                <p style={{ position: 'absolute', bottom: '22px', left: '8px', right: '8px', fontSize: '0.7rem', fontFamily: 'Fredoka, cursive', color: '#fff', lineHeight: 1.35, textShadow: '0 1px 4px rgba(0,0,0,0.7)', zIndex: 1 }}>{story.title}</p>
+                <p style={{ position: 'absolute', bottom: '8px', left: '8px', right: '8px', fontSize: '0.55rem', color: 'rgba(255,255,255,0.65)', zIndex: 1, letterSpacing: '0.03em' }}>{new Date(story.created_at).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })}</p>
               </>
             ) : (
               <>
@@ -125,7 +126,7 @@ function BookCard({ story, palette }: { story: Story; palette: Palette }) {
   );
 }
 
-function SeriesFan({ volumes, palette }: { volumes: Story[]; palette: Palette }) {
+function SeriesFan({ volumes, palette, onContinue }: { volumes: Story[]; palette: Palette; onContinue?: () => void }) {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const router = useRouter();
   const n = volumes.length;
@@ -170,6 +171,12 @@ function SeriesFan({ volumes, palette }: { volumes: Story[]; palette: Palette })
         })}
       </div>
       <p style={{ fontSize: '0.68rem', color: '#5E6A7A', textAlign: 'center', maxWidth: `${containerW}px` }}>{seriesTitleDisplay} · {n} {n === 1 ? 'vol' : 'vols'}</p>
+      {onContinue && n < 4 && (
+        <button onClick={e => { e.stopPropagation(); onContinue(); }}
+          style={{ marginTop: '6px', padding: '0.4rem 1rem', borderRadius: '20px', border: 'none', background: '#FF6B35', color: '#fff', fontWeight: '700', fontSize: '0.72rem', cursor: 'pointer', boxShadow: '0 2px 8px rgba(255,107,53,0.35)' }}>
+          Next chapter →
+        </button>
+      )}
     </div>
   );
 }
@@ -177,7 +184,8 @@ function SeriesFan({ volumes, palette }: { volumes: Story[]; palette: Palette })
 type ShelfItem = { type: 'single'; story: Story } | { type: 'series'; seriesId: string; volumes: Story[] };
 
 function buildShelf(stories: Story[], childName: string): ShelfItem[] {
-  const mine = stories.filter(s => s.children?.name === childName);
+  // Only include stories that have a generated cover image
+  const mine = stories.filter(s => s.children?.name === childName && s.pages?.[0]?.image_url);
   const seriesMap = new Map<string, Story[]>();
   const singles: Story[] = [];
   mine.forEach(s => {
@@ -366,18 +374,18 @@ export default function DashboardPage() {
     } finally { setGenerating(null); generatingLock.current = false; }
   };
 
-  const handleContinueStory = async (childId: string) => {
-    const child = children.find(c => c.id === childId);
-    const latest = storiesByChild(childId)[0];
-    if (!latest) return;
-    setGeneratingName(child?.name || '');
-    setGenerating(`sequel-${latest.id}`); setGenerateError('');
+  const handleContinueStory = async (storyId: string) => {
+    const storyRef = stories.find(s => s.id === storyId);
+    if (!storyRef) return;
+    const childName = storyRef.children?.name || '';
+    setGeneratingName(childName);
+    setGenerating(`sequel-${storyId}`); setGenerateError('');
     try {
-      const res = await fetch('/api/generate-sequel', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ story_id: latest.id }) });
+      const res = await fetch('/api/generate-sequel', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ story_id: storyId }) });
       const data = await res.json();
       if (res.status === 402) setPaywallReason(data.reason);
       else if (!res.ok) setGenerateError(data.error || 'Something went wrong.');
-      else await fetchData();
+      else { await fetchData(); }
     } finally { setGenerating(null); }
   };
 
@@ -526,22 +534,16 @@ export default function DashboardPage() {
                           </div>
                         </div>
                         <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-                          {canContinue && (
-                            <button onClick={() => handleContinueStory(child.id)} disabled={!!generating}
-                              style={{ padding: '0.6rem 1.2rem', borderRadius: '10px', border: 'none', background: palette.cover, color: '#fff', cursor: generating ? 'not-allowed' : 'pointer', fontWeight: '700', fontSize: '0.85rem', opacity: generating ? 0.6 : 1 }}>
-                              Next chapter →
-                            </button>
-                          )}
                           <button onClick={() => handleGenerateStory(child.id)} disabled={!!generating}
                             style={{ padding: '0.6rem 1.2rem', borderRadius: '10px', border: `2px solid ${palette.cover}`, background: 'white', color: palette.cover, cursor: generating ? 'not-allowed' : 'pointer', fontWeight: '700', fontSize: '0.85rem', opacity: generating ? 0.6 : 1, display: 'flex', alignItems: 'center', gap: '6px' }}>
-                            <Plus size={14} /> Tonight&apos;s story
+                            <Plus size={14} /> New story
                           </button>
                         </div>
                       </div>
 
                       {shelf.length === 0 ? (
                         <div style={{ textAlign: 'center', padding: '40px 20px', color: '#9CA8B4', fontSize: '0.9rem' }}>
-                          No stories yet. Hit &quot;Tonight&apos;s story&quot; to write the first one!
+                          No stories yet. Hit &quot;New story&quot; to write the first one!
                         </div>
                       ) : (
                         <div style={{ background: `linear-gradient(to bottom, ${palette.light}88, ${palette.light}22)`, borderRadius: '16px 16px 0 0', padding: '24px 24px 0' }}>
@@ -549,7 +551,7 @@ export default function DashboardPage() {
                             {shelf.map(item =>
                               item.type === 'single'
                                 ? <BookCard key={item.story.id} story={item.story} palette={palette} />
-                                : <SeriesFan key={item.seriesId} volumes={item.volumes} palette={palette} />
+                                : <SeriesFan key={item.seriesId} volumes={item.volumes} palette={palette} onContinue={item.volumes.length < 4 && !generating ? () => handleContinueStory(item.volumes[item.volumes.length - 1].id) : undefined} />
                             )}
                           </div>
                           <div style={{ height: '14px', background: 'linear-gradient(to bottom, #D4974E 0%, #A87240 50%, #8B5E30 100%)', borderRadius: '0 0 4px 4px', boxShadow: 'inset 0 2px 4px rgba(255,255,255,0.12), 0 5px 12px rgba(0,0,0,0.2)' }} />
