@@ -301,7 +301,7 @@ export default function Home() {
             <div style={{
               position: 'relative', height: '220px', overflow: 'hidden',
               backgroundImage: "url('/book-spread.jpg')",
-              backgroundSize: 'cover', backgroundPosition: '68% 30%'
+              backgroundSize: 'cover', backgroundPosition: '82% 28%'
             }}>
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(13,24,61,0.5) 0%, transparent 30%)' }} />
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(transparent 50%, white 100%)' }} />
@@ -434,7 +434,7 @@ export default function Home() {
           position: 'absolute', inset: 0,
           backgroundImage: "url('/banner-scene.jpg')",
           backgroundSize: 'cover',
-          backgroundPosition: 'center center'
+          backgroundPosition: '78% center'
         }} />
         {/* Fade top from cream, fade bottom to dark */}
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, #FFF4E6 0%, transparent 18%, transparent 75%, #0D183D 100%)' }} />
@@ -526,11 +526,14 @@ export default function Home() {
                 <span style={{ fontSize: '1rem' }}>📖</span>
                 <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#FF6B35' }}>just 33¢ per story</span>
               </div>
-              <Link href="/signup" style={{ display: 'block', textAlign: 'center', padding: '0.9rem', background: '#FF6B35', borderRadius: '12px', color: 'white', textDecoration: 'none', fontWeight: '800', marginBottom: '1.75rem', boxShadow: '0 4px 14px rgba(255,107,53,0.3)' }}>
+              <Link href="/signup" style={{ display: 'block', textAlign: 'center', padding: '0.9rem', background: '#FF6B35', borderRadius: '12px', color: 'white', textDecoration: 'none', fontWeight: '800', boxShadow: '0 4px 14px rgba(255,107,53,0.3)' }}>
                 Subscribe monthly &rarr;
               </Link>
+              <p style={{ fontSize: '0.75rem', color: '#9CA8B4', textAlign: 'center', marginTop: '0.5rem', marginBottom: '1.25rem', fontWeight: 500 }}>
+                Additional children: A$3.99/month each
+              </p>
               <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                {['A story every day', 'Multiple children profiles', 'Story series (up to 4 volumes)', 'Beautifully illustrated pages', 'Cancel in one click'].map(f => (
+                {['A story every day', '1 child profile included', 'Story series (up to 4 volumes)', 'Beautifully illustrated pages', 'Cancel in one click'].map(f => (
                   <li key={f} style={{ display: 'flex', gap: '0.75rem', fontSize: '0.9rem', color: '#0D183D', fontWeight: 500, alignItems: 'flex-start' }}>
                     <Check size={16} color="#6CC06C" style={{ flexShrink: 0, marginTop: '3px' }} />{f}
                   </li>
@@ -553,9 +556,12 @@ export default function Home() {
                 <span style={{ fontSize: '0.8rem', fontWeight: 800, color: 'white' }}>as little as 24¢ per story</span>
               </div>
               <p style={{ opacity: 0.6, fontSize: '0.8rem', marginBottom: '1.5rem', fontWeight: 500 }}>A$95.90 billed annually</p>
-              <Link href="/signup?plan=annual" style={{ display: 'block', textAlign: 'center', padding: '0.9rem', background: 'white', borderRadius: '12px', color: '#FF6B35', textDecoration: 'none', fontWeight: '800', marginBottom: '1.75rem', boxShadow: '0 4px 14px rgba(0,0,0,0.15)' }}>
+              <Link href="/signup?plan=annual" style={{ display: 'block', textAlign: 'center', padding: '0.9rem', background: 'white', borderRadius: '12px', color: '#FF6B35', textDecoration: 'none', fontWeight: '800', boxShadow: '0 4px 14px rgba(0,0,0,0.15)' }}>
                 Get the best deal &rarr;
               </Link>
+              <p style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.55)', textAlign: 'center', marginTop: '0.5rem', marginBottom: '1.25rem', fontWeight: 500 }}>
+                Additional children: A$3.99/month each
+              </p>
               <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                 {['Everything in Monthly', 'Priority story generation', 'Early access to new features', 'Save A$24 per year'].map(f => (
                   <li key={f} style={{ display: 'flex', gap: '0.75rem', fontSize: '0.9rem', fontWeight: 500, alignItems: 'flex-start' }}>
@@ -602,8 +608,8 @@ export default function Home() {
               a: "Ages 3 to 10. You set a reading level when you create your child's profile and we adjust vocabulary, sentence length, and story complexity accordingly. A 4-year-old gets short, simple sentences with big moments; a 9-year-old gets richer language and a proper three-act structure."
             },
             {
-              q: 'Can I add more than one child?',
-              a: 'Yes  -  unlimited profiles, one subscription. Each child gets their own profile, their own story preferences, and their own shelf. Brothers and sisters never share a story unless you want them to.'
+              q: 'Can I buy additional stories?',
+              a: "Yes. If you want a story outside your daily plan, you can buy individual stories for just 99¢ each. Great for gifting a cousin a story, or sneaking in a bonus read on a special night."
             },
             {
               q: 'Can I actually cancel anytime?',
