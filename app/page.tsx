@@ -89,7 +89,7 @@ const S = `
     display: flex; flex-direction: column; justify-content: center; gap: 1.5rem;
   }
 
-  @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
+  
 
   /* Live-draw looping annotation — 4.5s cycle */
   @keyframes draw-oval-loop {
@@ -400,7 +400,7 @@ export default function Home() {
                 </clipPath>
               </defs>
               <text x="90" y="126" textAnchor="start" clipPath="url(#write-clip-m)"
-                style={{ font: "bold 15px 'Caveat', cursive", fill: '#D93F00', letterSpacing: '0.5px' }}>
+                style={{ font: "bold 15px 'Fredoka', cursive", fill: '#D93F00', letterSpacing: '0.5px' }}>
                 click here!
               </text>
             </svg>
@@ -449,7 +449,7 @@ export default function Home() {
                   </clipPath>
                 </defs>
                 <text x="112" y="150" textAnchor="start" clipPath="url(#write-clip)"
-                  style={{ font: "bold 17px 'Caveat', cursive", fill: '#D93F00', letterSpacing: '0.5px' }}>
+                  style={{ font: "bold 17px 'Fredoka', cursive", fill: '#D93F00', letterSpacing: '0.5px' }}>
                   click here!
                 </text>
               </svg>
