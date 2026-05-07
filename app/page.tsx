@@ -89,6 +89,11 @@ const S = `
 
   @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
 
+  /* Live-draw animation for click-here annotation */
+  @keyframes draw-oval   { to { stroke-dashoffset: 0; } }
+  @keyframes draw-arrow  { to { stroke-dashoffset: 0; } }
+  @keyframes fade-draw   { to { opacity: 1; } }
+
   @keyframes float-bubble {
     0%,100% { transform: translateY(0px) rotate(-2deg); }
     50%      { transform: translateY(-9px) rotate(2deg); }
@@ -345,24 +350,36 @@ export default function Home() {
               <Link href="/signup" style={{ padding: '0.6rem 1.5rem', background: '#FF6B35', color: '#fff', borderRadius: '10px', textDecoration: 'none', fontWeight: '700', fontSize: '0.875rem', boxShadow: '0 2px 10px rgba(255,107,53,0.3)', position: 'relative', zIndex: 1 }}>
                 Start for free
               </Link>
-              {/* Hand-drawn "click here!" annotation */}
+              {/* Hand-drawn "click here!" annotation — draws live on load */}
               <svg viewBox="0 0 240 155" width="240" height="155"
                 style={{ position: 'absolute', top: '-48px', left: '-48px', pointerEvents: 'none', zIndex: 2, overflow: 'visible' }}
                 xmlns="http://www.w3.org/2000/svg">
-                {/* Wobbly oval around button — slightly bigger */}
+                {/* Wobbly oval — draws first (0.2s → 1.4s) */}
                 <path d="M 18,52 C 15,24 42,6 120,4 C 198,2 216,26 216,52 C 216,80 196,96 120,98 C 44,100 16,80 18,52 Z"
                   stroke="#D93F00" strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round"
-                  style={{ filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.12))' }}
+                  style={{
+                    strokeDasharray: 520, strokeDashoffset: 520,
+                    animation: 'draw-oval 1.1s ease-out 0.15s forwards',
+                    filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.10))'
+                  }}
                 />
-                {/* Arrow from "click here!" label pointing UP at the oval */}
+                {/* Arrow curve — draws after oval (1.3s → 1.8s) */}
                 <path d="M 195,136 C 188,122 172,110 164,100"
-                  stroke="#D93F00" strokeWidth="2.8" fill="none" strokeLinecap="round" />
-                {/* Arrowhead — tip at oval, pointing up-left */}
-                <path d="M 164,100 L 174,102 M 164,100 L 168,111"
-                  stroke="#D93F00" strokeWidth="2.8" fill="none" strokeLinecap="round" />
-                {/* "click here!" text */}
+                  stroke="#D93F00" strokeWidth="2.8" fill="none" strokeLinecap="round"
+                  style={{ strokeDasharray: 65, strokeDashoffset: 65, animation: 'draw-arrow 0.4s ease-out 1.25s forwards' }}
+                />
+                {/* Arrowhead lines — appear after arrow (1.65s → 1.95s) */}
+                <path d="M 164,100 L 174,102"
+                  stroke="#D93F00" strokeWidth="2.8" fill="none" strokeLinecap="round"
+                  style={{ strokeDasharray: 18, strokeDashoffset: 18, animation: 'draw-arrow 0.2s ease-out 1.62s forwards' }}
+                />
+                <path d="M 164,100 L 168,111"
+                  stroke="#D93F00" strokeWidth="2.8" fill="none" strokeLinecap="round"
+                  style={{ strokeDasharray: 18, strokeDashoffset: 18, animation: 'draw-arrow 0.2s ease-out 1.78s forwards' }}
+                />
+                {/* "click here!" text — fades in last (1.9s → 2.3s) */}
                 <text x="112" y="150" textAnchor="start"
-                  style={{ font: "bold 17px 'Caveat', cursive", fill: '#D93F00', letterSpacing: '0.5px' }}>
+                  style={{ font: "bold 17px 'Caveat', cursive", fill: '#D93F00', letterSpacing: '0.5px', opacity: 0, animation: 'fade-draw 0.45s ease-out 1.9s forwards' }}>
                   click here!
                 </text>
               </svg>
