@@ -86,6 +86,31 @@ const S = `
     position: relative; overflow: hidden; min-height: 440px;
     display: flex; flex-direction: column; justify-content: center; gap: 1.5rem;
   }
+
+  @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
+
+  @keyframes float-bubble {
+    0%,100% { transform: translateY(0px) rotate(-2deg); }
+    50%      { transform: translateY(-9px) rotate(2deg); }
+  }
+  @keyframes float-bubble2 {
+    0%,100% { transform: translateY(0px) rotate(1deg); }
+    50%      { transform: translateY(-12px) rotate(-2deg); }
+  }
+  @keyframes float-bubble3 {
+    0%,100% { transform: translateY(0px) rotate(3deg); }
+    50%      { transform: translateY(-7px) rotate(-3deg); }
+  }
+  .theme-bubble {
+    position: absolute;
+    display: inline-flex; align-items: center; gap: 5px;
+    background: rgba(255,255,255,0.92);
+    border-radius: 999px; padding: 5px 12px;
+    font-size: 0.75rem; font-weight: 700; color: #0D183D;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+    white-space: nowrap; pointer-events: none;
+    backdrop-filter: blur(4px);
+  }
 `;
 
 export default function Home() {
@@ -103,25 +128,114 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    // Weighted by English-speaking population: USA ~65%, UK ~15%, AU ~10%, CA ~5%, NZ 2%, IE 2%, ZA 1%
     const locations = [
+      // USA ~65 entries
+      { city: 'New York', country: 'United States', flag: '🇺🇸' },
+      { city: 'Los Angeles', country: 'United States', flag: '🇺🇸' },
+      { city: 'Chicago', country: 'United States', flag: '🇺🇸' },
+      { city: 'Houston', country: 'United States', flag: '🇺🇸' },
+      { city: 'Phoenix', country: 'United States', flag: '🇺🇸' },
+      { city: 'Philadelphia', country: 'United States', flag: '🇺🇸' },
+      { city: 'San Antonio', country: 'United States', flag: '🇺🇸' },
+      { city: 'San Diego', country: 'United States', flag: '🇺🇸' },
+      { city: 'Dallas', country: 'United States', flag: '🇺🇸' },
+      { city: 'Austin', country: 'United States', flag: '🇺🇸' },
+      { city: 'Seattle', country: 'United States', flag: '🇺🇸' },
+      { city: 'Denver', country: 'United States', flag: '🇺🇸' },
+      { city: 'Nashville', country: 'United States', flag: '🇺🇸' },
+      { city: 'Boston', country: 'United States', flag: '🇺🇸' },
+      { city: 'Portland', country: 'United States', flag: '🇺🇸' },
+      { city: 'Las Vegas', country: 'United States', flag: '🇺🇸' },
+      { city: 'Atlanta', country: 'United States', flag: '🇺🇸' },
+      { city: 'Minneapolis', country: 'United States', flag: '🇺🇸' },
+      { city: 'Tampa', country: 'United States', flag: '🇺🇸' },
+      { city: 'Orlando', country: 'United States', flag: '🇺🇸' },
+      { city: 'Charlotte', country: 'United States', flag: '🇺🇸' },
+      { city: 'Raleigh', country: 'United States', flag: '🇺🇸' },
+      { city: 'San Francisco', country: 'United States', flag: '🇺🇸' },
+      { city: 'Indianapolis', country: 'United States', flag: '🇺🇸' },
+      { city: 'Columbus', country: 'United States', flag: '🇺🇸' },
+      { city: 'Fort Worth', country: 'United States', flag: '🇺🇸' },
+      { city: 'San Jose', country: 'United States', flag: '🇺🇸' },
+      { city: 'Jacksonville', country: 'United States', flag: '🇺🇸' },
+      { city: 'Oklahoma City', country: 'United States', flag: '🇺🇸' },
+      { city: 'Louisville', country: 'United States', flag: '🇺🇸' },
+      { city: 'Baltimore', country: 'United States', flag: '🇺🇸' },
+      { city: 'Milwaukee', country: 'United States', flag: '🇺🇸' },
+      { city: 'Albuquerque', country: 'United States', flag: '🇺🇸' },
+      { city: 'Sacramento', country: 'United States', flag: '🇺🇸' },
+      { city: 'Kansas City', country: 'United States', flag: '🇺🇸' },
+      { city: 'Mesa', country: 'United States', flag: '🇺🇸' },
+      { city: 'Omaha', country: 'United States', flag: '🇺🇸' },
+      { city: 'Colorado Springs', country: 'United States', flag: '🇺🇸' },
+      { city: 'Virginia Beach', country: 'United States', flag: '🇺🇸' },
+      { city: 'Long Beach', country: 'United States', flag: '🇺🇸' },
+      { city: 'New Orleans', country: 'United States', flag: '🇺🇸' },
+      { city: 'Honolulu', country: 'United States', flag: '🇺🇸' },
+      { city: 'Tucson', country: 'United States', flag: '🇺🇸' },
+      { city: 'Fresno', country: 'United States', flag: '🇺🇸' },
+      { city: 'Arlington', country: 'United States', flag: '🇺🇸' },
+      { city: 'Bakersfield', country: 'United States', flag: '🇺🇸' },
+      { city: 'Anaheim', country: 'United States', flag: '🇺🇸' },
+      { city: 'Lexington', country: 'United States', flag: '🇺🇸' },
+      { city: 'Stockton', country: 'United States', flag: '🇺🇸' },
+      { city: 'Pittsburgh', country: 'United States', flag: '🇺🇸' },
+      { city: 'St. Louis', country: 'United States', flag: '🇺🇸' },
+      { city: 'Riverside', country: 'United States', flag: '🇺🇸' },
+      { city: 'Cincinnati', country: 'United States', flag: '🇺🇸' },
+      { city: 'Anchorage', country: 'United States', flag: '🇺🇸' },
+      { city: 'Scottsdale', country: 'United States', flag: '🇺🇸' },
+      { city: 'Plano', country: 'United States', flag: '🇺🇸' },
+      { city: 'Henderson', country: 'United States', flag: '🇺🇸' },
+      { city: 'Chandler', country: 'United States', flag: '🇺🇸' },
+      { city: 'Madison', country: 'United States', flag: '🇺🇸' },
+      { city: 'Durham', country: 'United States', flag: '🇺🇸' },
+      { city: 'Gilbert', country: 'United States', flag: '🇺🇸' },
+      { city: 'Boise', country: 'United States', flag: '🇺🇸' },
+      { city: 'Richmond', country: 'United States', flag: '🇺🇸' },
+      { city: 'Spokane', country: 'United States', flag: '🇺🇸' },
+      { city: 'Des Moines', country: 'United States', flag: '🇺🇸' },
+      // UK ~15 entries
+      { city: 'London', country: 'United Kingdom', flag: '🇬🇧' },
+      { city: 'Manchester', country: 'United Kingdom', flag: '🇬🇧' },
+      { city: 'Birmingham', country: 'United Kingdom', flag: '🇬🇧' },
+      { city: 'Leeds', country: 'United Kingdom', flag: '🇬🇧' },
+      { city: 'Glasgow', country: 'United Kingdom', flag: '🇬🇧' },
+      { city: 'Sheffield', country: 'United Kingdom', flag: '🇬🇧' },
+      { city: 'Edinburgh', country: 'United Kingdom', flag: '🇬🇧' },
+      { city: 'Liverpool', country: 'United Kingdom', flag: '🇬🇧' },
+      { city: 'Bristol', country: 'United Kingdom', flag: '🇬🇧' },
+      { city: 'Cardiff', country: 'United Kingdom', flag: '🇬🇧' },
+      { city: 'Leicester', country: 'United Kingdom', flag: '🇬🇧' },
+      { city: 'Belfast', country: 'United Kingdom', flag: '🇬🇧' },
+      { city: 'Nottingham', country: 'United Kingdom', flag: '🇬🇧' },
+      { city: 'Newcastle', country: 'United Kingdom', flag: '🇬🇧' },
+      { city: 'Southampton', country: 'United Kingdom', flag: '🇬🇧' },
+      // Australia ~10 entries
       { city: 'Sydney', country: 'Australia', flag: '🇦🇺' },
       { city: 'Melbourne', country: 'Australia', flag: '🇦🇺' },
       { city: 'Brisbane', country: 'Australia', flag: '🇦🇺' },
       { city: 'Perth', country: 'Australia', flag: '🇦🇺' },
-      { city: 'Auckland', country: 'New Zealand', flag: '🇳🇿' },
-      { city: 'Wellington', country: 'New Zealand', flag: '🇳🇿' },
-      { city: 'London', country: 'United Kingdom', flag: '🇬🇧' },
-      { city: 'Manchester', country: 'United Kingdom', flag: '🇬🇧' },
-      { city: 'Edinburgh', country: 'United Kingdom', flag: '🇬🇧' },
-      { city: 'Bristol', country: 'United Kingdom', flag: '🇬🇧' },
-      { city: 'New York', country: 'United States', flag: '🇺🇸' },
-      { city: 'Los Angeles', country: 'United States', flag: '🇺🇸' },
-      { city: 'Chicago', country: 'United States', flag: '🇺🇸' },
-      { city: 'Austin', country: 'United States', flag: '🇺🇸' },
-      { city: 'Seattle', country: 'United States', flag: '🇺🇸' },
+      { city: 'Adelaide', country: 'Australia', flag: '🇦🇺' },
+      { city: 'Gold Coast', country: 'Australia', flag: '🇦🇺' },
+      { city: 'Canberra', country: 'Australia', flag: '🇦🇺' },
+      { city: 'Newcastle', country: 'Australia', flag: '🇦🇺' },
+      { city: 'Hobart', country: 'Australia', flag: '🇦🇺' },
+      { city: 'Darwin', country: 'Australia', flag: '🇦🇺' },
+      // Canada ~5 entries
       { city: 'Toronto', country: 'Canada', flag: '🇨🇦' },
       { city: 'Vancouver', country: 'Canada', flag: '🇨🇦' },
+      { city: 'Calgary', country: 'Canada', flag: '🇨🇦' },
+      { city: 'Ottawa', country: 'Canada', flag: '🇨🇦' },
+      { city: 'Edmonton', country: 'Canada', flag: '🇨🇦' },
+      // New Zealand ~2 entries
+      { city: 'Auckland', country: 'New Zealand', flag: '🇳🇿' },
+      { city: 'Wellington', country: 'New Zealand', flag: '🇳🇿' },
+      // Ireland ~2 entries
       { city: 'Dublin', country: 'Ireland', flag: '🇮🇪' },
+      { city: 'Cork', country: 'Ireland', flag: '🇮🇪' },
+      // South Africa ~1 entry
       { city: 'Cape Town', country: 'South Africa', flag: '🇿🇦' },
     ];
     let idx = Math.floor(Math.random() * locations.length);
@@ -227,9 +341,32 @@ export default function Home() {
             <a href="#how-it-works" style={{ color: '#0D183D', textDecoration: 'none', fontSize: '0.9rem', fontWeight: 600 }}>How it works</a>
             <a href="#pricing" style={{ color: '#0D183D', textDecoration: 'none', fontSize: '0.9rem', fontWeight: 600 }}>Pricing</a>
             <Link href="/login" style={{ color: '#0D183D', textDecoration: 'none', fontSize: '0.9rem', fontWeight: 600 }}>Sign in</Link>
-            <Link href="/signup" style={{ padding: '0.6rem 1.5rem', background: '#FF6B35', color: '#fff', borderRadius: '10px', textDecoration: 'none', fontWeight: '700', fontSize: '0.875rem', boxShadow: '0 2px 10px rgba(255,107,53,0.3)' }}>
-              Start for free
-            </Link>
+            <span style={{ position: 'relative', display: 'inline-block' }}>
+              <Link href="/signup" style={{ padding: '0.6rem 1.5rem', background: '#FF6B35', color: '#fff', borderRadius: '10px', textDecoration: 'none', fontWeight: '700', fontSize: '0.875rem', boxShadow: '0 2px 10px rgba(255,107,53,0.3)', position: 'relative', zIndex: 1 }}>
+                Start for free
+              </Link>
+              {/* Hand-drawn "click here!" annotation */}
+              <svg viewBox="0 0 200 130" width="200" height="130"
+                style={{ position: 'absolute', top: '-38px', left: '-36px', pointerEvents: 'none', zIndex: 2, overflow: 'visible' }}
+                xmlns="http://www.w3.org/2000/svg">
+                {/* Wobbly oval around button */}
+                <path d="M 16,45 C 14,22 36,6 100,4 C 164,2 182,20 183,44 C 184,70 164,82 100,84 C 36,86 14,68 16,45 Z"
+                  stroke="#D93F00" strokeWidth="2.8" fill="none" strokeLinecap="round" strokeLinejoin="round"
+                  style={{ filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.12))' }}
+                />
+                {/* Arrow swooping down-right */}
+                <path d="M 145,84 C 152,98 165,108 172,116"
+                  stroke="#D93F00" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+                {/* Arrowhead */}
+                <path d="M 172,116 L 163,111 M 172,116 L 169,124"
+                  stroke="#D93F00" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+                {/* "click here!" text */}
+                <text x="98" y="126" textAnchor="start"
+                  style={{ font: "bold 15px 'Caveat', cursive", fill: '#D93F00', letterSpacing: '0.5px' }}>
+                  click here!
+                </text>
+              </svg>
+            </span>
           </div>
           <button className="nav-mobile-btn" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             style={{ background: 'transparent', border: 'none', cursor: 'pointer', padding: '0.5rem', display: 'flex' }}>
@@ -256,11 +393,6 @@ export default function Home() {
 
           {/* Left: copy + widget */}
           <div>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#0D183D', borderRadius: '999px', padding: '0.45rem 1.1rem', marginBottom: '1.75rem' }}>
-              <span>🎁</span>
-              <span style={{ fontSize: '0.78rem', fontWeight: 800, color: '#FFB703', letterSpacing: '0.04em' }}>2 FREE STORIES  -  NO CARD NEEDED</span>
-            </div>
-
             <h1 className="font-serif" style={{ fontSize: 'clamp(2.25rem, 5.5vw, 3.75rem)', lineHeight: 1.1, color: '#0D183D', marginBottom: '1.25rem', letterSpacing: '-0.01em' }}>
               The bedtime story<br />
               <span style={{ color: '#FF6B35' }}>written only for them.</span>
@@ -317,6 +449,13 @@ export default function Home() {
           }}>
             {/* Soft top fade into cream hero background */}
             <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '18%', background: 'linear-gradient(to bottom, #FFF4E6 0%, transparent 100%)' }} />
+            {/* Floating story-theme bubbles */}
+            <span className="theme-bubble" style={{ top: '9%', left: '8%', animation: 'float-bubble 3.2s ease-in-out infinite' }}>🦖 Dinosaurs</span>
+            <span className="theme-bubble" style={{ top: '6%', left: '44%', animation: 'float-bubble2 3.8s ease-in-out infinite' }}>🚀 Space</span>
+            <span className="theme-bubble" style={{ top: '9%', right: '6%', animation: 'float-bubble3 2.9s ease-in-out infinite' }}>🦄 Unicorns</span>
+            <span className="theme-bubble" style={{ top: '24%', left: '5%', animation: 'float-bubble2 4.1s ease-in-out infinite 0.4s' }}>🏴‍☠️ Pirates</span>
+            <span className="theme-bubble" style={{ top: '21%', right: '5%', animation: 'float-bubble 3.5s ease-in-out infinite 0.7s' }}>🤖 Robots</span>
+            <span className="theme-bubble" style={{ top: '36%', left: '30%', animation: 'float-bubble3 3.3s ease-in-out infinite 0.2s' }}>🧚 Fairies</span>
           </div>
         </div>
       </section>
