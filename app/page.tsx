@@ -398,9 +398,7 @@ export default function Home() {
         <div style={{ maxWidth: '1000px', margin: '0 auto', display: 'flex', justifyContent: 'center', gap: 'clamp(2rem, 5vw, 5rem)', flexWrap: 'wrap', alignItems: 'center' }}>
           {/* Live delivery indicator */}
           <div style={{ textAlign: 'center' }}>
-            <div style={{ marginBottom: '3px' }}>
-              <p className="font-serif" style={{ fontSize: '1.5rem', color: '#FFB703', margin: 0 }}>{minutesAgo !== null ? `${minutesAgo} min ago` : '...'}</p>
-            </div>
+            <p className="font-serif" style={{ fontSize: '1.5rem', color: '#FFB703', marginBottom: '3px' }}>{minutesAgo !== null ? `${minutesAgo} min ago` : '...'}</p>
             <p style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.45)', fontWeight: 700, letterSpacing: '0.06em' }}>LAST STORY DELIVERED</p>
           </div>
           {[
