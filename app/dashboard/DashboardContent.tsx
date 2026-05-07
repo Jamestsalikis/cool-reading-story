@@ -77,7 +77,7 @@ function Confetti({ onDone }: { onDone: () => void }) {
   );
 }
 
-function BookCard({ story, palette }: { story: Story; palette: Palette }) {
+function BookCard({ story, palette, onContinue }: { story: Story; palette: Palette; onContinue?: () => void }) {
   const router = useRouter();
   const coverImage = story.pages?.[0]?.image_url;
   const tilt = getBookTilt(story.id);
@@ -122,6 +122,12 @@ function BookCard({ story, palette }: { story: Story; palette: Palette }) {
           </div>
         </div>
       </div>
+      {onContinue && (
+        <button onClick={e => { e.stopPropagation(); onContinue(); }}
+          style={{ marginTop: '6px', padding: '0.4rem 1rem', borderRadius: '20px', border: 'none', background: '#FF6B35', color: '#fff', fontWeight: '700', fontSize: '0.72rem', cursor: 'pointer', boxShadow: '0 2px 8px rgba(255,107,53,0.35)' }}>
+          Next chapter →
+        </button>
+      )}
     </div>
   );
 }
@@ -550,7 +556,7 @@ export default function DashboardPage() {
                           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '32px 20px', alignItems: 'flex-end', paddingBottom: '20px' }}>
                             {shelf.map(item =>
                               item.type === 'single'
-                                ? <BookCard key={item.story.id} story={item.story} palette={palette} />
+                                ? <BookCard key={item.story.id} story={item.story} palette={palette} onContinue={!generating ? () => handleContinueStory(item.story.id) : undefined} />
                                 : <SeriesFan key={item.seriesId} volumes={item.volumes} palette={palette} onContinue={item.volumes.length < 4 && !generating ? () => handleContinueStory(item.volumes[item.volumes.length - 1].id) : undefined} />
                             )}
                           </div>
