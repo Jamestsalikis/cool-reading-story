@@ -92,7 +92,7 @@ const S = `
   /* Live-draw animation for click-here annotation */
   @keyframes draw-oval   { to { stroke-dashoffset: 0; } }
   @keyframes draw-arrow  { to { stroke-dashoffset: 0; } }
-  @keyframes fade-draw   { to { opacity: 1; } }
+  @keyframes reveal-text { to { width: 118px; } }
 
   @keyframes float-bubble {
     0%,100% { transform: translateY(0px) rotate(-2deg); }
@@ -377,9 +377,15 @@ export default function Home() {
                   stroke="#D93F00" strokeWidth="2.8" fill="none" strokeLinecap="round"
                   style={{ strokeDasharray: 18, strokeDashoffset: 18, animation: 'draw-arrow 0.2s ease-out 1.78s forwards' }}
                 />
-                {/* "click here!" text — fades in last (1.9s → 2.3s) */}
-                <text x="112" y="150" textAnchor="start"
-                  style={{ font: "bold 17px 'Caveat', cursive", fill: '#D93F00', letterSpacing: '0.5px', opacity: 0, animation: 'fade-draw 0.45s ease-out 1.9s forwards' }}>
+                {/* "click here!" text — written left-to-right via clip wipe */}
+                <defs>
+                  <clipPath id="write-clip">
+                    <rect x="112" y="130" height="28"
+                      style={{ width: 0, animation: 'reveal-text 0.55s ease-in-out 1.9s forwards' } as React.CSSProperties} />
+                  </clipPath>
+                </defs>
+                <text x="112" y="150" textAnchor="start" clipPath="url(#write-clip)"
+                  style={{ font: "bold 17px 'Caveat', cursive", fill: '#D93F00', letterSpacing: '0.5px' }}>
                   click here!
                 </text>
               </svg>
