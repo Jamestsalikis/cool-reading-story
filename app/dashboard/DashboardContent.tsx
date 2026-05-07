@@ -284,12 +284,24 @@ export default function DashboardPage() {
   const [editingChild, setEditingChild] = useState<ChildRecord | null>(null);
   const [sub, setSub] = useState<{ status: string; free_stories_remaining: number; stories_this_month: number; stories_today: number; extra_books_today: number } | null>(null);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [userEmail, setUserEmail] = useState('');
+  const [userId, setUserId] = useState('');
+  const [accountSection, setAccountSection] = useState<null | 'email' | 'password'>(null);
+  const [newEmail, setNewEmail] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [accountMsg, setAccountMsg] = useState<{ ok: boolean; text: string } | null>(null);
+  const [accountLoading, setAccountLoading] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [deleteInput, setDeleteInput] = useState('');
+  const [referralCopied, setReferralCopied] = useState(false);
   const router = useRouter();
   const supabase = createClient();
 
   const fetchData = useCallback(async () => {
     setLoading(true);
     const { data: { user } } = await supabase.auth.getUser();
+    if (user) { setUserEmail(user.email ?? ''); setUserId(user.id); }
     const { data: childrenData } = await supabase.from('children').select('*').order('created_at', { ascending: true });
     const { data: storiesData } = await supabase.from('stories').select('id, title, created_at, word_count, series_id, series_title, volume_number, pages, children(name, age)').order('created_at', { ascending: false });
     const { data: subData } = await supabase.from('user_subscriptions').select('status, free_stories_remaining, stories_this_month, stories_today, extra_books_today').eq('user_id', user?.id ?? '').single();
@@ -595,9 +607,61 @@ export default function DashboardPage() {
             <div>
               <h3 style={{ fontFamily: 'Fredoka One, cursive', fontSize: '1.4rem', color: '#0D183D', fontWeight: '400', marginBottom: '16px' }}>Account</h3>
               <div style={{ background: '#fff', border: '1px solid #F0E4D0', borderRadius: '12px', padding: '20px', marginBottom: '12px' }}>
-                <p style={{ fontSize: '0.72rem', color: '#5E6A7A', marginBottom: '4px', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Signed in</p>
-                <p style={{ fontWeight: '600', color: '#0D183D', fontSize: '0.95rem' }}>{firstChild?.name ? `${firstChild.name}'s family` : 'Your account'}</p>
+                <p style={{ fontSize: '0.72rem', color: '#5E6A7A', marginBottom: '4px', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Signed in as</p>
+                <p style={{ fontWeight: '600', color: '#0D183D', fontSize: '0.95rem' }}>{userEmail || (firstChild?.name ? `${firstChild.name}'s family` : 'Your account')}</p>
               </div>
+              {/* Change email / password toggles */}
+              <div style={{ display: 'flex', gap: '10px', marginBottom: '12px' }}>
+                <button onClick={() => { setAccountSection(accountSection === 'email' ? null : 'email'); setAccountMsg(null); }}
+                  style={{ flex: 1, padding: '0.65rem', borderRadius: '10px', border: '1.5px solid #F0E4D0', background: accountSection === 'email' ? '#FFF0E6' : '#fff', color: '#0D183D', cursor: 'pointer', fontWeight: '600', fontSize: '0.82rem' }}>
+                  Change email
+                </button>
+                <button onClick={() => { setAccountSection(accountSection === 'password' ? null : 'password'); setAccountMsg(null); }}
+                  style={{ flex: 1, padding: '0.65rem', borderRadius: '10px', border: '1.5px solid #F0E4D0', background: accountSection === 'password' ? '#FFF0E6' : '#fff', color: '#0D183D', cursor: 'pointer', fontWeight: '600', fontSize: '0.82rem' }}>
+                  Change password
+                </button>
+              </div>
+              {/* Inline form */}
+              {accountSection && (
+                <div style={{ background: '#FFF8F3', border: '1.5px solid #F0E4D0', borderRadius: '12px', padding: '16px', marginBottom: '12px' }}>
+                  {accountSection === 'email' ? (
+                    <>
+                      <p style={{ fontSize: '0.82rem', color: '#5E6A7A', marginBottom: '10px' }}>Enter a new email address. We'll send a confirmation link.</p>
+                      <input type="email" placeholder="New email address" value={newEmail} onChange={e => setNewEmail(e.target.value)}
+                        style={{ width: '100%', padding: '0.65rem 0.9rem', borderRadius: '8px', border: '1.5px solid #F0E4D0', fontSize: '0.875rem', outline: 'none', boxSizing: 'border-box' as const, marginBottom: '10px' }} />
+                      <button disabled={accountLoading || !newEmail} onClick={async () => {
+                        setAccountLoading(true); setAccountMsg(null);
+                        const { error } = await supabase.auth.updateUser({ email: newEmail });
+                        setAccountLoading(false);
+                        setAccountMsg(error ? { ok: false, text: error.message } : { ok: true, text: 'Confirmation sent — check your new inbox.' });
+                        if (!error) setNewEmail('');
+                      }} style={{ width: '100%', padding: '0.65rem', borderRadius: '8px', border: 'none', background: '#FF6B35', color: '#fff', fontWeight: '700', fontSize: '0.875rem', cursor: 'pointer', opacity: accountLoading || !newEmail ? 0.5 : 1 }}>
+                        {accountLoading ? 'Sending…' : 'Send confirmation'}
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <p style={{ fontSize: '0.82rem', color: '#5E6A7A', marginBottom: '10px' }}>Choose a new password (minimum 8 characters).</p>
+                      <input type="password" placeholder="New password" value={newPassword} onChange={e => setNewPassword(e.target.value)}
+                        style={{ width: '100%', padding: '0.65rem 0.9rem', borderRadius: '8px', border: '1.5px solid #F0E4D0', fontSize: '0.875rem', outline: 'none', boxSizing: 'border-box' as const, marginBottom: '8px' }} />
+                      <input type="password" placeholder="Confirm password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)}
+                        style={{ width: '100%', padding: '0.65rem 0.9rem', borderRadius: '8px', border: '1.5px solid #F0E4D0', fontSize: '0.875rem', outline: 'none', boxSizing: 'border-box' as const, marginBottom: '10px' }} />
+                      <button disabled={accountLoading || newPassword.length < 8 || newPassword !== confirmPassword} onClick={async () => {
+                        setAccountLoading(true); setAccountMsg(null);
+                        const { error } = await supabase.auth.updateUser({ password: newPassword });
+                        setAccountLoading(false);
+                        setAccountMsg(error ? { ok: false, text: error.message } : { ok: true, text: 'Password updated successfully.' });
+                        if (!error) { setNewPassword(''); setConfirmPassword(''); setAccountSection(null); }
+                      }} style={{ width: '100%', padding: '0.65rem', borderRadius: '8px', border: 'none', background: '#FF6B35', color: '#fff', fontWeight: '700', fontSize: '0.875rem', cursor: 'pointer', opacity: (accountLoading || newPassword.length < 8 || newPassword !== confirmPassword) ? 0.5 : 1 }}>
+                        {accountLoading ? 'Updating…' : 'Update password'}
+                      </button>
+                    </>
+                  )}
+                  {accountMsg && (
+                    <p style={{ marginTop: '10px', fontSize: '0.82rem', fontWeight: '600', color: accountMsg.ok ? '#1a7a4a' : '#cc2200' }}>{accountMsg.text}</p>
+                  )}
+                </div>
+              )}
               <button onClick={async () => { await supabase.auth.signOut(); window.location.href = '/'; }}
                 style={{ width: '100%', padding: '0.7rem', borderRadius: '10px', border: '1.5px solid #F0E4D0', background: '#fff', color: '#FF6B35', cursor: 'pointer', fontWeight: '600', fontSize: '0.875rem' }}>
                 Sign out
@@ -647,6 +711,54 @@ export default function DashboardPage() {
                   style={{ width: '100%', padding: '0.7rem', borderRadius: '10px', border: 'none', background: '#FF6B35', color: '#fff', cursor: 'pointer', fontWeight: '600', fontSize: '0.875rem' }}>
                   Subscribe - from A$9.99/month
                 </button>
+              )}
+            </div>
+
+            {/* ── Referral code ── */}
+            <div>
+              <h3 style={{ fontFamily: 'Fredoka One, cursive', fontSize: '1.4rem', color: '#0D183D', fontWeight: '400', marginBottom: '8px' }}>Refer a friend 🎁</h3>
+              <p style={{ fontSize: '0.82rem', color: '#5E6A7A', marginBottom: '12px' }}>Share your code — your friend gets <strong>10% off</strong> their first month.</p>
+              <div style={{ background: '#fff', border: '1.5px solid #F0E4D0', borderRadius: '12px', padding: '16px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
+                <span style={{ fontFamily: 'monospace', fontSize: '1.15rem', fontWeight: '800', letterSpacing: '0.12em', color: '#FF6B35' }}>
+                  {userId ? `TALE-${userId.replace(/-/g,'').slice(0,8).toUpperCase()}` : '—'}
+                </span>
+                <button onClick={() => {
+                  const code = `TALE-${userId.replace(/-/g,'').slice(0,8).toUpperCase()}`;
+                  navigator.clipboard.writeText(code).then(() => { setReferralCopied(true); setTimeout(() => setReferralCopied(false), 2000); });
+                }} style={{ padding: '0.5rem 1rem', borderRadius: '8px', border: 'none', background: referralCopied ? '#1a7a4a' : '#FF6B35', color: '#fff', fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer', transition: 'background 0.2s' }}>
+                  {referralCopied ? 'Copied! ✓' : 'Copy'}
+                </button>
+              </div>
+            </div>
+
+            {/* ── Danger zone ── */}
+            <div>
+              <h3 style={{ fontFamily: 'Fredoka One, cursive', fontSize: '1.4rem', color: '#cc2200', fontWeight: '400', marginBottom: '8px' }}>Danger zone</h3>
+              {!showDeleteConfirm ? (
+                <button onClick={() => setShowDeleteConfirm(true)}
+                  style={{ width: '100%', padding: '0.7rem', borderRadius: '10px', border: '1.5px solid #cc2200', background: '#fff', color: '#cc2200', cursor: 'pointer', fontWeight: '600', fontSize: '0.875rem' }}>
+                  Delete my account
+                </button>
+              ) : (
+                <div style={{ background: '#FFF5F5', border: '1.5px solid #cc2200', borderRadius: '12px', padding: '16px' }}>
+                  <p style={{ fontSize: '0.875rem', color: '#cc2200', fontWeight: '600', marginBottom: '8px' }}>This will permanently delete your account, all children, and all stories. This cannot be undone.</p>
+                  <p style={{ fontSize: '0.82rem', color: '#5E6A7A', marginBottom: '10px' }}>Type <strong>DELETE</strong> to confirm:</p>
+                  <input type="text" placeholder="DELETE" value={deleteInput} onChange={e => setDeleteInput(e.target.value)}
+                    style={{ width: '100%', padding: '0.65rem 0.9rem', borderRadius: '8px', border: '1.5px solid #cc2200', fontSize: '0.875rem', outline: 'none', boxSizing: 'border-box' as const, marginBottom: '10px' }} />
+                  <div style={{ display: 'flex', gap: '10px' }}>
+                    <button onClick={() => { setShowDeleteConfirm(false); setDeleteInput(''); }}
+                      style={{ flex: 1, padding: '0.65rem', borderRadius: '8px', border: '1.5px solid #F0E4D0', background: '#fff', color: '#5E6A7A', cursor: 'pointer', fontWeight: '600', fontSize: '0.82rem' }}>
+                      Cancel
+                    </button>
+                    <button disabled={deleteInput !== 'DELETE'} onClick={async () => {
+                      const res = await fetch('/api/account/delete', { method: 'DELETE' });
+                      if (res.ok) { await supabase.auth.signOut(); window.location.href = '/'; }
+                      else { setAccountMsg({ ok: false, text: 'Could not delete account. Please contact support.' }); setShowDeleteConfirm(false); }
+                    }} style={{ flex: 1, padding: '0.65rem', borderRadius: '8px', border: 'none', background: deleteInput === 'DELETE' ? '#cc2200' : '#e8a0a0', color: '#fff', cursor: deleteInput === 'DELETE' ? 'pointer' : 'default', fontWeight: '700', fontSize: '0.82rem' }}>
+                      Delete forever
+                    </button>
+                  </div>
+                </div>
               )}
             </div>
 
