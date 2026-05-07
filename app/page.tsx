@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { X, Check, Shield, RefreshCw, Star, Heart } from 'lucide-react';
 
 const S = `
@@ -71,6 +71,8 @@ const S = `
   @keyframes gentle-bob { 0%,100% { transform: translateY(0) rotate(-1deg); } 50% { transform: translateY(-10px) rotate(1deg); } }
   .book-float { animation: gentle-bob 5s ease-in-out infinite; }
 
+  @keyframes pulse-green { 0%,100% { box-shadow: 0 0 0 3px rgba(108,192,108,0.3); } 50% { box-shadow: 0 0 0 6px rgba(108,192,108,0.1); } }
+
   .wave-divider svg { display: block; width: 100%; }
 
   .hero-book-panel {
@@ -84,6 +86,12 @@ const S = `
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [childName, setChildName] = useState('');
+
+  const [minutesAgo, setMinutesAgo] = useState(() => Math.floor(Math.random() * 7) + 2);
+  useEffect(() => {
+    const t = setInterval(() => setMinutesAgo(m => m + 1), 60000);
+    return () => clearInterval(t);
+  }, []);
 
   const previewName = childName.trim() || 'your child';
   const capitalised = previewName.charAt(0).toUpperCase() + previewName.slice(1);
@@ -342,10 +350,17 @@ export default function Home() {
       {/* ─── Social proof strip ─── */}
       <section style={{ background: '#0D183D', padding: '1.25rem 2rem 2.5rem' }}>
         <div style={{ maxWidth: '1000px', margin: '0 auto', display: 'flex', justifyContent: 'center', gap: 'clamp(2rem, 5vw, 5rem)', flexWrap: 'wrap', alignItems: 'center' }}>
+          {/* Live delivery indicator */}
+          <div style={{ textAlign: 'center' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '7px', marginBottom: '3px' }}>
+              <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#6CC06C', display: 'inline-block', boxShadow: '0 0 0 3px rgba(108,192,108,0.3)', animation: 'pulse-green 2s ease-in-out infinite' }} />
+              <p className="font-serif" style={{ fontSize: '1.5rem', color: '#FFB703', margin: 0 }}>{minutesAgo} min ago</p>
+            </div>
+            <p style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.45)', fontWeight: 700, letterSpacing: '0.06em' }}>LAST STORY DELIVERED</p>
+          </div>
           {[
             { n: '2,500+', label: 'adventures begun' },
             { n: '4.9 ★', label: 'from parents' },
-            { n: '2 min', label: 'to first story' },
             { n: '24¢', label: 'per story' },
           ].map(s => (
             <div key={s.n} style={{ textAlign: 'center' }}>
