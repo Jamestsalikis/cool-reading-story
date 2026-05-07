@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { BookOpen, Users, Settings, CreditCard, Plus, X } from 'lucide-react';
+import { BookOpen, Users, Settings, Plus, X } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import PaywallModal from '@/components/PaywallModal';
 import { updateChild } from '@/lib/supabase/child-actions';
@@ -373,7 +373,6 @@ export default function DashboardPage() {
     { id: 'stories', label: 'Stories', icon: BookOpen },
     { id: 'children', label: 'Children', icon: Users },
     { id: 'account', label: 'Account', icon: Settings },
-    { id: 'subscription', label: 'Subscription', icon: CreditCard },
   ];
 
   const hour = new Date().getHours();
@@ -590,46 +589,67 @@ export default function DashboardPage() {
         )}
 
         {activeNav === 'account' && (
-          <div style={{ maxWidth: '480px' }}>
-            <h3 style={{ fontFamily: 'Fredoka One, cursive', fontSize: '1.4rem', color: '#0D183D', fontWeight: '400', marginBottom: '28px' }}>Account</h3>
-            <div style={{ background: '#fff', border: '1px solid #F0E4D0', borderRadius: '12px', padding: '24px', marginBottom: '16px' }}>
-              <p style={{ fontSize: '0.75rem', color: '#5E6A7A', marginBottom: '4px', letterSpacing: '0.04em', textTransform: 'uppercase' }}>Signed in</p>
-              <p style={{ fontWeight: '600', color: '#0D183D', fontSize: '0.95rem' }}>{firstChild?.name ? `${firstChild.name}'s family` : 'Your account'}</p>
-            </div>
-            <button onClick={async () => { await supabase.auth.signOut(); window.location.href = '/'; }}
-              style={{ width: '100%', padding: '0.75rem', borderRadius: '10px', border: '1.5px solid #F0E4D0', background: '#fff', color: '#FF6B35', cursor: 'pointer', fontWeight: '600', fontSize: '0.9rem' }}>
-              Sign out
-            </button>
-          </div>
-        )}
+          <div style={{ maxWidth: '480px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
 
-        {activeNav === 'subscription' && (
-          <div style={{ maxWidth: '480px' }}>
-            <h3 style={{ fontFamily: 'Fredoka One, cursive', fontSize: '1.4rem', color: '#0D183D', fontWeight: '400', marginBottom: '28px' }}>Subscription</h3>
-            <div style={{ background: '#fff', border: '1px solid #F0E4D0', borderRadius: '12px', padding: '24px', marginBottom: '16px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                <p style={{ fontWeight: '600', color: '#0D183D', fontSize: '0.95rem' }}>Current plan</p>
-                <span style={{ fontSize: '0.75rem', fontWeight: '700', padding: '3px 10px', borderRadius: '20px', background: sub?.status === 'subscribed' ? '#E6F4EC' : '#FFF0E6', color: sub?.status === 'subscribed' ? '#1a7a4a' : '#FF6B35' }}>
-                  {sub?.status === 'subscribed' ? 'Active' : 'Free'}
-                </span>
+            {/* ── Account info ── */}
+            <div>
+              <h3 style={{ fontFamily: 'Fredoka One, cursive', fontSize: '1.4rem', color: '#0D183D', fontWeight: '400', marginBottom: '16px' }}>Account</h3>
+              <div style={{ background: '#fff', border: '1px solid #F0E4D0', borderRadius: '12px', padding: '20px', marginBottom: '12px' }}>
+                <p style={{ fontSize: '0.72rem', color: '#5E6A7A', marginBottom: '4px', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Signed in</p>
+                <p style={{ fontWeight: '600', color: '#0D183D', fontSize: '0.95rem' }}>{firstChild?.name ? `${firstChild.name}'s family` : 'Your account'}</p>
+              </div>
+              <button onClick={async () => { await supabase.auth.signOut(); window.location.href = '/'; }}
+                style={{ width: '100%', padding: '0.7rem', borderRadius: '10px', border: '1.5px solid #F0E4D0', background: '#fff', color: '#FF6B35', cursor: 'pointer', fontWeight: '600', fontSize: '0.875rem' }}>
+                Sign out
+              </button>
+            </div>
+
+            {/* ── Subscription ── */}
+            <div>
+              <h3 style={{ fontFamily: 'Fredoka One, cursive', fontSize: '1.4rem', color: '#0D183D', fontWeight: '400', marginBottom: '16px' }}>Subscription</h3>
+              <div style={{ background: '#fff', border: '1px solid #F0E4D0', borderRadius: '12px', padding: '20px', marginBottom: '12px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                  <p style={{ fontWeight: '600', color: '#0D183D', fontSize: '0.95rem' }}>Current plan</p>
+                  <span style={{ fontSize: '0.75rem', fontWeight: '700', padding: '3px 10px', borderRadius: '20px', background: sub?.status === 'subscribed' ? '#E6F4EC' : '#FFF0E6', color: sub?.status === 'subscribed' ? '#1a7a4a' : '#FF6B35' }}>
+                    {sub?.status === 'subscribed' ? 'Active' : 'Free'}
+                  </span>
+                </div>
+                {sub?.status === 'subscribed' ? (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <p style={{ color: '#5E6A7A', fontSize: '0.875rem' }}>Stories available today</p>
+                      <span style={{ fontWeight: '700', color: booksRemainingToday > 0 ? '#1a7a4a' : '#FF6B35' }}>{booksRemainingToday}</span>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <p style={{ color: '#5E6A7A', fontSize: '0.875rem' }}>Stories remaining this month</p>
+                      <span style={{ fontWeight: '700', color: '#0D183D' }}>{booksRemainingThisMonth}</span>
+                    </div>
+                    {booksRemainingToday === 0 && (
+                      <button onClick={() => setPaywallReason('daily_limit')}
+                        style={{ marginTop: '4px', padding: '0.55rem 1rem', borderRadius: '8px', border: 'none', background: '#FF6B35', color: '#fff', cursor: 'pointer', fontWeight: '600', fontSize: '0.8rem' }}>
+                        Add a story tonight - A$0.99
+                      </button>
+                    )}
+                  </div>
+                ) : (
+                  <p style={{ color: '#5E6A7A', fontSize: '0.875rem' }}>
+                    {sub?.free_stories_remaining ?? 0} free {(sub?.free_stories_remaining ?? 0) === 1 ? 'story' : 'stories'} remaining. Subscribe for a new story every night.
+                  </p>
+                )}
               </div>
               {sub?.status === 'subscribed' ? (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between' }}><p style={{ color: '#5E6A7A', fontSize: '0.875rem' }}>Stories available today</p><span style={{ fontWeight: '700', color: booksRemainingToday > 0 ? '#1a7a4a' : '#FF6B35' }}>{booksRemainingToday}</span></div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between' }}><p style={{ color: '#5E6A7A', fontSize: '0.875rem' }}>Stories remaining this month</p><span style={{ fontWeight: '700', color: '#0D183D' }}>{booksRemainingThisMonth}</span></div>
-                  {booksRemainingToday === 0 && <button onClick={() => setPaywallReason('daily_limit')} style={{ marginTop: '4px', padding: '0.55rem 1rem', borderRadius: '8px', border: 'none', background: '#FF6B35', color: '#fff', cursor: 'pointer', fontWeight: '600', fontSize: '0.8rem' }}>Add a story tonight - A$0.99</button>}
-                </div>
+                <button onClick={async () => { const res = await fetch('/api/stripe/portal', { method: 'POST' }); const d = await res.json(); if (d.url) window.location.href = d.url; }}
+                  style={{ width: '100%', padding: '0.7rem', borderRadius: '10px', border: '1.5px solid #FF6B35', background: '#fff', color: '#FF6B35', cursor: 'pointer', fontWeight: '600', fontSize: '0.875rem' }}>
+                  Manage billing
+                </button>
               ) : (
-                <p style={{ color: '#5E6A7A', fontSize: '0.875rem' }}>{sub?.free_stories_remaining ?? 0} free {(sub?.free_stories_remaining ?? 0) === 1 ? 'story' : 'stories'} remaining. Subscribe for a new story every night.</p>
+                <button onClick={() => setPaywallReason('free_exhausted')}
+                  style={{ width: '100%', padding: '0.7rem', borderRadius: '10px', border: 'none', background: '#FF6B35', color: '#fff', cursor: 'pointer', fontWeight: '600', fontSize: '0.875rem' }}>
+                  Subscribe - from A$9.99/month
+                </button>
               )}
             </div>
-            {sub?.status === 'subscribed' ? (
-              <button onClick={async () => { const res = await fetch('/api/stripe/portal', { method: 'POST' }); const d = await res.json(); if (d.url) window.location.href = d.url; }}
-                style={{ width: '100%', padding: '0.75rem', borderRadius: '10px', border: '1.5px solid #FF6B35', background: '#fff', color: '#FF6B35', cursor: 'pointer', fontWeight: '600', fontSize: '0.9rem' }}>Manage billing</button>
-            ) : (
-              <button onClick={() => setPaywallReason('free_exhausted')}
-                style={{ width: '100%', padding: '0.75rem', borderRadius: '10px', border: 'none', background: '#FF6B35', color: '#fff', cursor: 'pointer', fontWeight: '600', fontSize: '0.9rem' }}>Subscribe - from A$9.99/month</button>
-            )}
+
           </div>
         )}
       </div>
