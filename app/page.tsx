@@ -354,8 +354,7 @@ export default function Home() {
         <div style={{ maxWidth: '1000px', margin: '0 auto', display: 'flex', justifyContent: 'center', gap: 'clamp(2rem, 5vw, 5rem)', flexWrap: 'wrap', alignItems: 'center' }}>
           {/* Live delivery indicator */}
           <div style={{ textAlign: 'center' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '7px', marginBottom: '3px' }}>
-              <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#6CC06C', display: 'inline-block', boxShadow: '0 0 0 3px rgba(108,192,108,0.3)', animation: 'pulse-green 2s ease-in-out infinite' }} />
+            <div style={{ marginBottom: '3px' }}>
               <p className="font-serif" style={{ fontSize: '1.5rem', color: '#FFB703', margin: 0 }}>{minutesAgo !== null ? `${minutesAgo} min ago` : '...'}</p>
             </div>
             <p style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.45)', fontWeight: 700, letterSpacing: '0.06em' }}>LAST STORY DELIVERED</p>
@@ -379,6 +378,95 @@ export default function Home() {
           <path d="M0,20 C300,50 900,0 1200,30 L1200,50 L0,50 Z" fill="#FFF4E6"/>
         </svg>
       </div>
+
+      {/* ─── Pricing ─── */}
+      <section id="pricing" style={{ background: '#FFF4E6', padding: '6rem 2rem' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
+            <h2 className="font-serif" style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', color: '#0D183D', marginBottom: '0.5rem', letterSpacing: '-0.01em' }}>
+              Your child&apos;s story from just 24¢.
+            </h2>
+            <p style={{ color: '#5E6A7A', fontWeight: 500, fontSize: '0.95rem', marginBottom: '0.5rem' }}>Simple, transparent pricing. Cancel anytime.</p>
+            <p style={{ color: '#FF6B35', fontWeight: 700, fontSize: '0.85rem' }}>Join 2,500+ families already reading tonight.</p>
+          </div>
+
+          <div className="two-col" style={{ marginTop: '3rem' }}>
+            <div className="plan-card" style={{ border: '2px solid #F0E4D0', background: 'white' }}>
+              <h3 className="font-serif" style={{ fontSize: '1.5rem', marginBottom: '0.4rem', color: '#0D183D' }}>Monthly</h3>
+              <p style={{ color: '#9CA8B4', marginBottom: '1.5rem', fontSize: '0.9rem', fontWeight: 500 }}>Flexible  -  cancel anytime</p>
+              <div style={{ marginBottom: '0.75rem' }}>
+                <span style={{ fontSize: '2.75rem', fontWeight: 800, color: '#FF6B35', letterSpacing: '-0.02em' }}>A$9.99</span>
+                <span style={{ color: '#9CA8B4', fontSize: '0.9rem', fontWeight: 500 }}>/month</span>
+              </div>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: '#FFF0E0', border: '1.5px solid #FFD4A8', borderRadius: '999px', padding: '0.3rem 0.9rem', marginBottom: '1.5rem' }}>
+                <span style={{ fontSize: '1rem' }}>📖</span>
+                <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#FF6B35' }}>just 33¢ per story</span>
+              </div>
+              <Link href="/signup" style={{ display: 'block', textAlign: 'center', padding: '0.9rem', background: '#FF6B35', borderRadius: '12px', color: 'white', textDecoration: 'none', fontWeight: '800', boxShadow: '0 4px 14px rgba(255,107,53,0.3)' }}>
+                Subscribe monthly &rarr;
+              </Link>
+              <p style={{ fontSize: '0.75rem', color: '#9CA8B4', textAlign: 'center', marginTop: '0.5rem', marginBottom: '1.25rem', fontWeight: 500 }}>
+                Additional children: A$3.99/month each
+              </p>
+              <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                {['A story every day', '1 child profile included', 'Story series (up to 4 volumes)', 'Beautifully illustrated pages', 'Cancel in one click'].map(f => (
+                  <li key={f} style={{ display: 'flex', gap: '0.75rem', fontSize: '0.9rem', color: '#0D183D', fontWeight: 500, alignItems: 'flex-start' }}>
+                    <Check size={16} color="#6CC06C" style={{ flexShrink: 0, marginTop: '3px' }} />{f}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="plan-card" style={{ background: '#FF6B35', color: 'white', position: 'relative' }}>
+              <div style={{ position: 'absolute', top: '-15px', left: '50%', transform: 'translateX(-50%)', background: '#FFB703', color: '#0D183D', padding: '0.35rem 1.25rem', borderRadius: '999px', fontSize: '0.68rem', fontWeight: '900', whiteSpace: 'nowrap', letterSpacing: '0.04em' }}>
+                ⭐ BEST VALUE  -  SAVE 20%
+              </div>
+              <h3 className="font-serif" style={{ fontSize: '1.5rem', marginBottom: '0.4rem' }}>Annual</h3>
+              <p style={{ opacity: 0.75, marginBottom: '1.5rem', fontSize: '0.9rem', fontWeight: 500 }}>Two months free</p>
+              <div style={{ marginBottom: '0.5rem' }}>
+                <span style={{ fontSize: '2.75rem', fontWeight: 800, letterSpacing: '-0.02em' }}>A$7.99</span>
+                <span style={{ opacity: 0.7, fontSize: '0.9rem', fontWeight: 500 }}>/month</span>
+              </div>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(255,255,255,0.2)', border: '1.5px solid rgba(255,255,255,0.35)', borderRadius: '999px', padding: '0.3rem 0.9rem', marginBottom: '0.6rem' }}>
+                <span style={{ fontSize: '1rem' }}>📖</span>
+                <span style={{ fontSize: '0.8rem', fontWeight: 800, color: 'white' }}>as little as 24¢ per story</span>
+              </div>
+              <p style={{ opacity: 0.6, fontSize: '0.8rem', marginBottom: '1.5rem', fontWeight: 500 }}>A$95.90 billed annually</p>
+              <Link href="/signup?plan=annual" style={{ display: 'block', textAlign: 'center', padding: '0.9rem', background: 'white', borderRadius: '12px', color: '#FF6B35', textDecoration: 'none', fontWeight: '800', boxShadow: '0 4px 14px rgba(0,0,0,0.15)' }}>
+                Get the best deal &rarr;
+              </Link>
+              <p style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.55)', textAlign: 'center', marginTop: '0.5rem', marginBottom: '1.25rem', fontWeight: 500 }}>
+                Additional children: A$3.99/month each
+              </p>
+              <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                {['Everything in Monthly', 'Priority story generation', 'Early access to new features', 'Save A$24 per year'].map(f => (
+                  <li key={f} style={{ display: 'flex', gap: '0.75rem', fontSize: '0.9rem', fontWeight: 500, alignItems: 'flex-start' }}>
+                    <Check size={16} color="rgba(255,255,255,0.9)" style={{ flexShrink: 0, marginTop: '3px' }} />{f}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div style={{ textAlign: 'center', marginTop: '2.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+            {/* Stripe trust badge */}
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'white', border: '1px solid #E8E0D5', borderRadius: '10px', padding: '0.6rem 1.25rem', boxShadow: '0 1px 6px rgba(13,24,61,0.06)' }}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6CC06C" strokeWidth="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span style={{ fontSize: '0.8rem', color: '#5E6A7A', fontWeight: 600 }}>
+                Secure payment via <strong style={{ color: '#635BFF' }}>Stripe</strong>  -  your card details are never stored by TalePop
+              </span>
+            </div>
+            <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+              {['Cancel anytime', 'Any device', 'Unlimited child profiles'].map(t => (
+                <span key={t} style={{ fontSize: '0.78rem', color: '#9CA8B4', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '5px' }}>
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#9CA8B4" strokeWidth="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ─── Two children proof ─── */}
       <section style={{ background: '#FFF4E6', padding: '6rem 2rem' }}>
@@ -519,95 +607,6 @@ export default function Home() {
         }} />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, #FFB703 0%, transparent 18%, transparent 78%, #FFF4E6 100%)' }} />
       </div>
-
-      {/* ─── Pricing ─── */}
-      <section id="pricing" style={{ background: '#FFF4E6', padding: '6rem 2rem' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-            <h2 className="font-serif" style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', color: '#0D183D', marginBottom: '0.5rem', letterSpacing: '-0.01em' }}>
-              Your child&apos;s story from just 24¢.
-            </h2>
-            <p style={{ color: '#5E6A7A', fontWeight: 500, fontSize: '0.95rem', marginBottom: '0.5rem' }}>Simple, transparent pricing. Cancel anytime.</p>
-            <p style={{ color: '#FF6B35', fontWeight: 700, fontSize: '0.85rem' }}>Join 2,500+ families already reading tonight.</p>
-          </div>
-
-          <div className="two-col" style={{ marginTop: '3rem' }}>
-            <div className="plan-card" style={{ border: '2px solid #F0E4D0', background: 'white' }}>
-              <h3 className="font-serif" style={{ fontSize: '1.5rem', marginBottom: '0.4rem', color: '#0D183D' }}>Monthly</h3>
-              <p style={{ color: '#9CA8B4', marginBottom: '1.5rem', fontSize: '0.9rem', fontWeight: 500 }}>Flexible  -  cancel anytime</p>
-              <div style={{ marginBottom: '0.75rem' }}>
-                <span style={{ fontSize: '2.75rem', fontWeight: 800, color: '#FF6B35', letterSpacing: '-0.02em' }}>A$9.99</span>
-                <span style={{ color: '#9CA8B4', fontSize: '0.9rem', fontWeight: 500 }}>/month</span>
-              </div>
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: '#FFF0E0', border: '1.5px solid #FFD4A8', borderRadius: '999px', padding: '0.3rem 0.9rem', marginBottom: '1.5rem' }}>
-                <span style={{ fontSize: '1rem' }}>📖</span>
-                <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#FF6B35' }}>just 33¢ per story</span>
-              </div>
-              <Link href="/signup" style={{ display: 'block', textAlign: 'center', padding: '0.9rem', background: '#FF6B35', borderRadius: '12px', color: 'white', textDecoration: 'none', fontWeight: '800', boxShadow: '0 4px 14px rgba(255,107,53,0.3)' }}>
-                Subscribe monthly &rarr;
-              </Link>
-              <p style={{ fontSize: '0.75rem', color: '#9CA8B4', textAlign: 'center', marginTop: '0.5rem', marginBottom: '1.25rem', fontWeight: 500 }}>
-                Additional children: A$3.99/month each
-              </p>
-              <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                {['A story every day', '1 child profile included', 'Story series (up to 4 volumes)', 'Beautifully illustrated pages', 'Cancel in one click'].map(f => (
-                  <li key={f} style={{ display: 'flex', gap: '0.75rem', fontSize: '0.9rem', color: '#0D183D', fontWeight: 500, alignItems: 'flex-start' }}>
-                    <Check size={16} color="#6CC06C" style={{ flexShrink: 0, marginTop: '3px' }} />{f}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="plan-card" style={{ background: '#FF6B35', color: 'white', position: 'relative' }}>
-              <div style={{ position: 'absolute', top: '-15px', left: '50%', transform: 'translateX(-50%)', background: '#FFB703', color: '#0D183D', padding: '0.35rem 1.25rem', borderRadius: '999px', fontSize: '0.68rem', fontWeight: '900', whiteSpace: 'nowrap', letterSpacing: '0.04em' }}>
-                ⭐ BEST VALUE  -  SAVE 20%
-              </div>
-              <h3 className="font-serif" style={{ fontSize: '1.5rem', marginBottom: '0.4rem' }}>Annual</h3>
-              <p style={{ opacity: 0.75, marginBottom: '1.5rem', fontSize: '0.9rem', fontWeight: 500 }}>Two months free</p>
-              <div style={{ marginBottom: '0.5rem' }}>
-                <span style={{ fontSize: '2.75rem', fontWeight: 800, letterSpacing: '-0.02em' }}>A$7.99</span>
-                <span style={{ opacity: 0.7, fontSize: '0.9rem', fontWeight: 500 }}>/month</span>
-              </div>
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(255,255,255,0.2)', border: '1.5px solid rgba(255,255,255,0.35)', borderRadius: '999px', padding: '0.3rem 0.9rem', marginBottom: '0.6rem' }}>
-                <span style={{ fontSize: '1rem' }}>📖</span>
-                <span style={{ fontSize: '0.8rem', fontWeight: 800, color: 'white' }}>as little as 24¢ per story</span>
-              </div>
-              <p style={{ opacity: 0.6, fontSize: '0.8rem', marginBottom: '1.5rem', fontWeight: 500 }}>A$95.90 billed annually</p>
-              <Link href="/signup?plan=annual" style={{ display: 'block', textAlign: 'center', padding: '0.9rem', background: 'white', borderRadius: '12px', color: '#FF6B35', textDecoration: 'none', fontWeight: '800', boxShadow: '0 4px 14px rgba(0,0,0,0.15)' }}>
-                Get the best deal &rarr;
-              </Link>
-              <p style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.55)', textAlign: 'center', marginTop: '0.5rem', marginBottom: '1.25rem', fontWeight: 500 }}>
-                Additional children: A$3.99/month each
-              </p>
-              <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                {['Everything in Monthly', 'Priority story generation', 'Early access to new features', 'Save A$24 per year'].map(f => (
-                  <li key={f} style={{ display: 'flex', gap: '0.75rem', fontSize: '0.9rem', fontWeight: 500, alignItems: 'flex-start' }}>
-                    <Check size={16} color="rgba(255,255,255,0.9)" style={{ flexShrink: 0, marginTop: '3px' }} />{f}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          <div style={{ textAlign: 'center', marginTop: '2.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
-            {/* Stripe trust badge */}
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'white', border: '1px solid #E8E0D5', borderRadius: '10px', padding: '0.6rem 1.25rem', boxShadow: '0 1px 6px rgba(13,24,61,0.06)' }}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6CC06C" strokeWidth="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              <span style={{ fontSize: '0.8rem', color: '#5E6A7A', fontWeight: 600 }}>
-                Secure payment via <strong style={{ color: '#635BFF' }}>Stripe</strong>  -  your card details are never stored by TalePop
-              </span>
-            </div>
-            <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-              {['Cancel anytime', 'Any device', 'Unlimited child profiles'].map(t => (
-                <span key={t} style={{ fontSize: '0.78rem', color: '#9CA8B4', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '5px' }}>
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#9CA8B4" strokeWidth="3"><polyline points="20 6 9 17 4 12"/></svg>
-                  {t}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* ─── FAQ ─── */}
       <section style={{ background: 'white', padding: '5rem 2rem' }}>
