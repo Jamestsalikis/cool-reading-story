@@ -20,9 +20,11 @@ const S = `
   @media (min-width: 768px) { .proof-grid { grid-template-columns: 1fr 1fr; } }
 
   .nav-desktop { display: none; }
+  .nav-mobile-cta { display: flex; align-items: center; }
   @media (min-width: 768px) {
     .nav-desktop { display: flex; }
     .nav-mobile-btn { display: none !important; }
+    .nav-mobile-cta { display: none !important; }
   }
 
   .story-card {
@@ -369,6 +371,41 @@ export default function Home() {
           <Link href="/" style={{ textDecoration: 'none' }}>
             <img src="/mood-3.png" alt="TalePop - Personalised Bedtime Stories" style={{ height: '72px', width: 'auto' }} />
           </Link>
+          {/* Mobile-only: Start for free button + annotation — visible immediately on phone */}
+          <span className="nav-mobile-cta" style={{ position: 'relative', zIndex: 10 }}>
+            <Link href="/signup" style={{ padding: '0.48rem 1rem', background: '#FF6B35', color: '#fff', borderRadius: '9px', textDecoration: 'none', fontWeight: '700', fontSize: '0.82rem', boxShadow: '0 2px 8px rgba(255,107,53,0.3)', position: 'relative', zIndex: 1, whiteSpace: 'nowrap' }}>
+              Start for free
+            </Link>
+            <svg viewBox="0 0 200 130" width="200" height="130"
+              style={{ position: 'absolute', top: '-38px', left: '-38px', pointerEvents: 'none', zIndex: 2, overflow: 'visible' }}
+              xmlns="http://www.w3.org/2000/svg">
+              <path d="M 16,44 C 14,20 36,5 100,4 C 164,3 182,22 182,44 C 182,68 162,80 100,82 C 36,84 14,68 16,44 Z"
+                stroke="#D93F00" strokeWidth="2.8" fill="none" strokeLinecap="round" strokeLinejoin="round"
+                style={{ strokeDasharray: 490, strokeDashoffset: 490, animation: 'draw-oval-loop 4.5s linear infinite', filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.10))' } as React.CSSProperties}
+              />
+              <path d="M 160,113 C 153,100 140,92 136,84"
+                stroke="#D93F00" strokeWidth="2.5" fill="none" strokeLinecap="round"
+                style={{ strokeDasharray: 55, strokeDashoffset: 55, animation: 'draw-arrow-loop 4.5s linear infinite' } as React.CSSProperties}
+              />
+              <path d="M 136,84 L 145,87" stroke="#D93F00" strokeWidth="2.5" fill="none" strokeLinecap="round"
+                style={{ strokeDasharray: 14, strokeDashoffset: 14, animation: 'draw-ah1-loop 4.5s linear infinite' } as React.CSSProperties}
+              />
+              <path d="M 136,84 L 139,93" stroke="#D93F00" strokeWidth="2.5" fill="none" strokeLinecap="round"
+                style={{ strokeDasharray: 14, strokeDashoffset: 14, animation: 'draw-ah2-loop 4.5s linear infinite' } as React.CSSProperties}
+              />
+              <defs>
+                <clipPath id="write-clip-m">
+                  <rect x="90" y="109" height="24"
+                    style={{ width: 0, animation: 'draw-text-loop 4.5s linear infinite' } as React.CSSProperties} />
+                </clipPath>
+              </defs>
+              <text x="90" y="126" textAnchor="start" clipPath="url(#write-clip-m)"
+                style={{ font: "bold 15px 'Caveat', cursive", fill: '#D93F00', letterSpacing: '0.5px' }}>
+                click here!
+              </text>
+            </svg>
+          </span>
+
           <div className="nav-desktop" style={{ gap: '2.5rem', alignItems: 'center' }}>
             <a href="#how-it-works" style={{ color: '#0D183D', textDecoration: 'none', fontSize: '0.9rem', fontWeight: 600 }}>How it works</a>
             <a href="#pricing" style={{ color: '#0D183D', textDecoration: 'none', fontSize: '0.9rem', fontWeight: 600 }}>Pricing</a>
