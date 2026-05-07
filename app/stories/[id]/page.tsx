@@ -79,7 +79,7 @@ const bookStyles = `
     z-index: 1;
   }
   .story-text {
-    font-family: 'Lora', Fredoka One, cursive;
+    font-family: 'Lora', Fredoka, cursive;
     font-size: 1.05rem;
     line-height: 1.9;
     color: #2C1A0E;
@@ -110,8 +110,8 @@ const bookStyles = `
     .print-page { page-break-after: always; break-after: page; width: 100%; padding: 0; margin: 0; }
     .print-page:last-child { page-break-after: avoid; }
     .print-image { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
-    .print-text { padding: 24px 32px; font-family: 'Lora', Fredoka One, cursive; font-size: 14pt; line-height: 1.8; color: #000; }
-    .print-title { font-family: 'Lora', Fredoka One, cursive; font-size: 22pt; text-align: center; margin-bottom: 12pt; }
+    .print-text { padding: 24px 32px; font-family: 'Lora', Fredoka, cursive; font-size: 14pt; line-height: 1.8; color: #000; }
+    .print-title { font-family: 'Lora', Fredoka, cursive; font-size: 22pt; text-align: center; margin-bottom: 12pt; }
     .print-moral { border-left: 3px solid #FF6B35; padding-left: 16px; font-style: italic; margin-top: 24pt; font-size: 12pt; }
     .print-page-num { text-align: center; font-size: 10pt; color: #666; margin-top: 16pt; }
     .book-page, .book-page::before, .book-page::after { box-shadow: none !important; }
@@ -275,7 +275,7 @@ export default function StoryPage() {
   if (loading) {
     return (
       <div style={{ minHeight: '100vh', background: '#2C1810', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <p style={{ color: 'rgba(255,255,255,0.6)', fontFamily: 'Fredoka One, cursive' }}>Opening your book...</p>
+        <p style={{ color: 'rgba(255,255,255,0.6)', fontFamily: 'Fredoka, cursive' }}>Opening your book...</p>
       </div>
     );
   }
@@ -315,7 +315,7 @@ export default function StoryPage() {
       <div style={{ padding: mobilePadding ? '18px 20px 28px 48px' : '28px 28px 32px 24px', position: 'relative' }}>
         <DecorativeRule />
         {currentPage === 0 && (
-          <h2 style={{ fontFamily: 'Lora, Fredoka One, cursive', fontSize: '1.45rem', color: '#2C1A0E', marginBottom: '18px', lineHeight: 1.3, fontWeight: 600 }}>
+          <h2 style={{ fontFamily: 'Lora, Fredoka, cursive', fontSize: '1.45rem', color: '#2C1A0E', marginBottom: '18px', lineHeight: 1.3, fontWeight: 600 }}>
             {story.title}
           </h2>
         )}
@@ -323,11 +323,11 @@ export default function StoryPage() {
           {paragraphs.map((para, i) => <p key={i}>{para}</p>)}
         </div>
         {isLastPage && story.moral && (
-          <div style={{ borderLeft: '3px solid #FF6B35', paddingLeft: '16px', marginTop: '18px', color: '#5E6A7A', fontStyle: 'italic', fontFamily: 'Lora, Fredoka One, cursive', fontSize: '0.9rem', lineHeight: 1.7 }}>
+          <div style={{ borderLeft: '3px solid #FF6B35', paddingLeft: '16px', marginTop: '18px', color: '#5E6A7A', fontStyle: 'italic', fontFamily: 'Lora, Fredoka, cursive', fontSize: '0.9rem', lineHeight: 1.7 }}>
             {story.moral}
           </div>
         )}
-        <div style={{ textAlign: 'center', marginTop: '18px', color: 'rgba(116,21,21,0.3)', fontSize: '0.78rem', fontFamily: 'Fredoka One, cursive' }}>
+        <div style={{ textAlign: 'center', marginTop: '18px', color: 'rgba(116,21,21,0.3)', fontSize: '0.78rem', fontFamily: 'Fredoka, cursive' }}>
           &#8212; {currentPage + 1} &#8212;
         </div>
       </div>
@@ -435,12 +435,12 @@ export default function StoryPage() {
           <Link href="/dashboard" style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'rgba(255,255,255,0.65)', textDecoration: 'none', fontSize: '0.875rem' }}>
             <ArrowLeft size={15} /> Library
           </Link>
-          <span style={{ fontFamily: 'Fredoka One, cursive', fontSize: '0.9rem', color: 'rgba(255,255,255,0.8)', textAlign: 'center', flex: 1, padding: '0 12px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+          <span style={{ fontFamily: 'Fredoka, cursive', fontSize: '0.9rem', color: 'rgba(255,255,255,0.8)', textAlign: 'center', flex: 1, padding: '0 12px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
             {story.title}
           </span>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             {loadingPages.size > 0 && (
-              <span style={{ fontSize: '0.7rem', color: 'rgba(255,200,100,0.7)', fontFamily: 'Fredoka One, cursive' }}>
+              <span style={{ fontSize: '0.7rem', color: 'rgba(255,200,100,0.7)', fontFamily: 'Fredoka, cursive' }}>
                 painting&#8230;
               </span>
             )}

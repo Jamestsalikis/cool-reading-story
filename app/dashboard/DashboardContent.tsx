@@ -96,7 +96,7 @@ function BookCard({ story, palette }: { story: Story; palette: Palette }) {
           <div style={{ position: 'absolute', left: '18px', top: 0, width: 'calc(100% - 18px)', height: '100%', borderRadius: '0 6px 6px 0', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '16px 12px', gap: '8px', overflow: 'hidden', background: '#FFF8F0' }}>
             {coverImage && <div style={{ position: 'absolute', inset: 0, backgroundImage: `url(${coverImage})`, backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.2 }} />}
             <div style={{ position: 'relative', zIndex: 1, width: '40px', height: '2px', background: palette.cover, borderRadius: '1px', opacity: 0.4 }} />
-            <p style={{ position: 'relative', zIndex: 1, fontSize: '0.72rem', fontFamily: 'Fredoka One, cursive', textAlign: 'center', color: '#0D183D', lineHeight: 1.45 }}>{story.title}</p>
+            <p style={{ position: 'relative', zIndex: 1, fontSize: '0.72rem', fontFamily: 'Fredoka, cursive', textAlign: 'center', color: '#0D183D', lineHeight: 1.45 }}>{story.title}</p>
             <div className="book-read-hint" style={{ position: 'relative', zIndex: 1, fontSize: '0.68rem', fontWeight: '700', color: palette.cover, letterSpacing: '0.06em', textTransform: 'uppercase' }}>Read</div>
           </div>
           <div className="book-cover-panel" style={{ position: 'absolute', left: '18px', top: 0, width: 'calc(100% - 18px)', height: '100%', background: palette.cover, borderRadius: '0 6px 6px 0', transformOrigin: 'left center', backfaceVisibility: 'hidden', zIndex: 2, overflow: 'hidden', boxShadow: '3px 3px 14px rgba(0,0,0,0.22)' }}>
@@ -105,7 +105,7 @@ function BookCard({ story, palette }: { story: Story; palette: Palette }) {
                 <div style={{ position: 'absolute', inset: 0, backgroundImage: `url(${coverImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.05) 55%, transparent 100%)' }} />
                 {vol && vol > 1 && <div style={{ position: 'absolute', top: '8px', right: '7px', background: 'rgba(0,0,0,0.55)', color: '#fff', fontSize: '0.58rem', fontWeight: '800', padding: '2px 7px', borderRadius: '8px', zIndex: 1 }}>VOL {vol}</div>}
-                <p style={{ position: 'absolute', bottom: '10px', left: '8px', right: '8px', fontSize: '0.7rem', fontFamily: 'Fredoka One, cursive', color: '#fff', lineHeight: 1.35, textShadow: '0 1px 4px rgba(0,0,0,0.7)', zIndex: 1 }}>{story.title}</p>
+                <p style={{ position: 'absolute', bottom: '10px', left: '8px', right: '8px', fontSize: '0.7rem', fontFamily: 'Fredoka, cursive', color: '#fff', lineHeight: 1.35, textShadow: '0 1px 4px rgba(0,0,0,0.7)', zIndex: 1 }}>{story.title}</p>
               </>
             ) : (
               <>
@@ -113,7 +113,7 @@ function BookCard({ story, palette }: { story: Story; palette: Palette }) {
                 {vol && vol > 1 && <div style={{ position: 'absolute', top: '10px', right: '8px', background: 'rgba(255,255,255,0.2)', color: 'rgba(255,255,255,0.9)', fontSize: '0.6rem', fontWeight: '800', padding: '2px 7px', borderRadius: '10px' }}>VOL {vol}</div>}
                 <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '16px 12px', gap: '8px' }}>
                   <div style={{ width: '28px', height: '28px', border: '1.5px solid rgba(255,255,255,0.3)', borderRadius: '3px', transform: 'rotate(45deg)' }} />
-                  <p style={{ fontSize: '0.75rem', fontFamily: 'Fredoka One, cursive', textAlign: 'center', color: 'rgba(255,255,255,0.95)', lineHeight: 1.4 }}>{story.title}</p>
+                  <p style={{ fontSize: '0.75rem', fontFamily: 'Fredoka, cursive', textAlign: 'center', color: 'rgba(255,255,255,0.95)', lineHeight: 1.4 }}>{story.title}</p>
                   <p style={{ fontSize: '0.6rem', color: 'rgba(255,255,255,0.5)', letterSpacing: '0.06em' }}>{new Date(story.created_at).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })}</p>
                 </div>
               </>
@@ -158,11 +158,11 @@ function SeriesFan({ volumes, palette }: { volumes: Story[]; palette: Palette })
                 <div style={{ position: 'absolute', top: '6px', right: '5px', background: 'rgba(0,0,0,0.45)', color: '#fff', fontSize: '0.5rem', fontWeight: '800', padding: '1px 5px', borderRadius: '6px', zIndex: 2 }}>VOL {vol.volume_number}</div>
                 {!coverImage && (
                   <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '10px 8px' }}>
-                    <p style={{ fontSize: '0.56rem', fontFamily: 'Fredoka One, cursive', color: 'rgba(255,255,255,0.9)', textAlign: 'center', lineHeight: 1.3 }}>{vol.title.length > 36 ? vol.title.slice(0, 34) + '…' : vol.title}</p>
+                    <p style={{ fontSize: '0.56rem', fontFamily: 'Fredoka, cursive', color: 'rgba(255,255,255,0.9)', textAlign: 'center', lineHeight: 1.3 }}>{vol.title.length > 36 ? vol.title.slice(0, 34) + '…' : vol.title}</p>
                   </div>
                 )}
                 {isHovered && (
-                  <p style={{ position: 'absolute', bottom: '8px', left: '5px', right: '5px', fontSize: '0.52rem', fontFamily: 'Fredoka One, cursive', color: '#fff', textAlign: 'center', zIndex: 2, textShadow: '0 1px 3px rgba(0,0,0,0.8)' }}>{vol.title.length > 30 ? vol.title.slice(0, 28) + '…' : vol.title}</p>
+                  <p style={{ position: 'absolute', bottom: '8px', left: '5px', right: '5px', fontSize: '0.52rem', fontFamily: 'Fredoka, cursive', color: '#fff', textAlign: 'center', zIndex: 2, textShadow: '0 1px 3px rgba(0,0,0,0.8)' }}>{vol.title.length > 30 ? vol.title.slice(0, 28) + '…' : vol.title}</p>
                 )}
               </div>
             </div>
@@ -230,7 +230,7 @@ function EditChildModal({ child, palette, onClose, onSaved }: { child: ChildReco
     <div style={{ position: 'fixed', inset: 0, zIndex: 200, background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(3px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
       <div style={{ background: '#FFFEF9', borderRadius: '16px', padding: '28px', maxWidth: '560px', width: '100%', maxHeight: '85vh', overflowY: 'auto', boxShadow: '0 24px 60px rgba(0,0,0,0.2)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-          <h2 style={{ fontFamily: 'Fredoka One, cursive', fontSize: '1.3rem', color: '#0D183D' }}>Edit {child.name}&apos;s profile</h2>
+          <h2 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.3rem', color: '#0D183D' }}>Edit {child.name}&apos;s profile</h2>
           <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#5E6A7A' }}><X size={20} /></button>
         </div>
         {error && <div style={{ background: '#FEE2E2', borderRadius: '8px', padding: '10px', marginBottom: '16px', fontSize: '0.85rem', color: '#991B1B' }}>{error}</div>}
@@ -415,7 +415,7 @@ export default function DashboardPage() {
           <div style={{ fontSize: '4rem', animation: 'writing-pulse 1.4s ease-in-out infinite' }}>
             {generating.startsWith('painting') ? '🎨' : '✨'}
           </div>
-          <p style={{ fontFamily: 'Fredoka One, cursive', fontSize: 'clamp(1.3rem, 4vw, 1.8rem)', color: '#FFB703', textAlign: 'center', lineHeight: 1.3 }}>
+          <p style={{ fontFamily: 'Fredoka, cursive', fontSize: 'clamp(1.3rem, 4vw, 1.8rem)', color: '#FFB703', textAlign: 'center', lineHeight: 1.3 }}>
             {generating.startsWith('painting') ? 'Painting the illustrations...' : generating.startsWith('sequel') ? `Writing the next adventure for ${generatingName}!` : `Writing ${generatingName}'s story...`}
           </p>
           <p style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.85rem', animation: 'writing-pulse 2s ease infinite' }}>Usually takes about 30 seconds</p>
@@ -459,7 +459,7 @@ export default function DashboardPage() {
 
         {!loading && children.length > 0 && activeNav === 'stories' && (
           <div style={{ marginBottom: '32px' }}>
-            <h2 style={{ fontFamily: 'Fredoka One, cursive', fontSize: 'clamp(1.6rem, 4vw, 2.4rem)', color: '#0D183D', fontWeight: '400', marginBottom: '4px' }}>
+            <h2 style={{ fontFamily: 'Fredoka, cursive', fontSize: 'clamp(1.6rem, 4vw, 2.4rem)', color: '#0D183D', fontWeight: '400', marginBottom: '4px' }}>
               {timeGreeting}, {firstChild?.name}! {hour >= 18 ? '🌙' : hour >= 12 ? '☀️' : '🌟'}
             </h2>
             <p style={{ color: '#5E6A7A', fontSize: '0.95rem' }}>
@@ -474,12 +474,12 @@ export default function DashboardPage() {
             {loading ? (
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '16px', padding: '80px 0' }}>
                 <div style={{ fontSize: '3rem', animation: 'writing-pulse 1.2s ease-in-out infinite' }}>📚</div>
-                <p style={{ color: '#5E6A7A', fontFamily: 'Fredoka One, cursive', fontSize: '1.1rem' }}>Loading your library...</p>
+                <p style={{ color: '#5E6A7A', fontFamily: 'Fredoka, cursive', fontSize: '1.1rem' }}>Loading your library...</p>
               </div>
             ) : children.length === 0 ? (
               <div style={{ maxWidth: '420px', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', margin: '60px auto 0' }}>
                 <div style={{ fontSize: '5rem', marginBottom: '16px', animation: 'writing-pulse 2s ease-in-out infinite' }}>📖</div>
-                <h3 style={{ fontFamily: 'Fredoka One, cursive', fontSize: '1.6rem', color: '#0D183D', marginBottom: '8px' }}>Your library is empty!</h3>
+                <h3 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.6rem', color: '#0D183D', marginBottom: '8px' }}>Your library is empty!</h3>
                 <p style={{ color: '#5E6A7A', marginBottom: '24px', lineHeight: 1.6 }}>Let&apos;s create a child&apos;s profile and write their very first story.</p>
                 <Link href="/onboarding" style={{ display: 'inline-block', padding: '0.85rem 2rem', background: '#FF6B35', color: '#fff', borderRadius: '12px', textDecoration: 'none', fontWeight: '700', fontSize: '1rem', boxShadow: '0 4px 16px rgba(255,107,53,0.35)' }}>Let&apos;s get started!</Link>
               </div>
@@ -496,7 +496,7 @@ export default function DashboardPage() {
                       <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '0.7rem', fontWeight: '800', letterSpacing: '0.1em', marginBottom: '6px', textTransform: 'uppercase' }}>
                         Continue reading · {mostRecentStory.children?.name}
                       </p>
-                      <p style={{ fontFamily: 'Fredoka One, cursive', fontSize: 'clamp(1.1rem, 3vw, 1.5rem)', color: '#fff', marginBottom: '14px', lineHeight: 1.2, maxWidth: '400px' }}>
+                      <p style={{ fontFamily: 'Fredoka, cursive', fontSize: 'clamp(1.1rem, 3vw, 1.5rem)', color: '#fff', marginBottom: '14px', lineHeight: 1.2, maxWidth: '400px' }}>
                         {mostRecentStory.title}
                       </p>
                       <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: '#FF6B35', color: '#fff', padding: '0.5rem 1.25rem', borderRadius: '10px', fontWeight: '700', fontSize: '0.875rem', boxShadow: '0 2px 10px rgba(255,107,53,0.4)' }}>
@@ -521,7 +521,7 @@ export default function DashboardPage() {
                         <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
                           <span style={{ fontSize: '2.2rem', lineHeight: 1 }}>{palette.emoji}</span>
                           <div>
-                            <h3 style={{ fontFamily: 'Fredoka One, cursive', fontSize: '1.3rem', color: '#0D183D', fontWeight: '400', marginBottom: '2px' }}>{child.name}&apos;s Library</h3>
+                            <h3 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.3rem', color: '#0D183D', fontWeight: '400', marginBottom: '2px' }}>{child.name}&apos;s Library</h3>
                             <p style={{ fontSize: '0.78rem', color: '#5E6A7A' }}>{storiesByChild(child.id).length} {storiesByChild(child.id).length === 1 ? 'story' : 'stories'}</p>
                           </div>
                         </div>
@@ -566,7 +566,7 @@ export default function DashboardPage() {
         {activeNav === 'children' && (
           <div style={{ maxWidth: '560px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '28px' }}>
-              <h3 style={{ fontFamily: 'Fredoka One, cursive', fontSize: '1.4rem', color: '#0D183D', fontWeight: '400' }}>Children</h3>
+              <h3 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.4rem', color: '#0D183D', fontWeight: '400' }}>Children</h3>
               <Link href="/onboarding" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '0.55rem 1.1rem', background: '#0D183D', color: '#fff', borderRadius: '8px', textDecoration: 'none', fontWeight: '600', fontSize: '0.8rem' }}>
                 <Plus size={14} /> Add child
               </Link>
@@ -580,7 +580,7 @@ export default function DashboardPage() {
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '4px' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                           <span style={{ fontSize: '1.5rem' }}>{palette.emoji}</span>
-                          <h4 style={{ fontFamily: 'Fredoka One, cursive', fontWeight: '600', color: '#0D183D' }}>{child.name}</h4>
+                          <h4 style={{ fontFamily: 'Fredoka, cursive', fontWeight: '600', color: '#0D183D' }}>{child.name}</h4>
                         </div>
                         <button onClick={() => setEditingChild(child as ChildRecord)} style={{ fontSize: '0.75rem', fontWeight: '600', color: palette.cover, background: palette.light, border: 'none', borderRadius: '6px', padding: '4px 12px', cursor: 'pointer' }}>Edit</button>
                       </div>
@@ -605,7 +605,7 @@ export default function DashboardPage() {
 
             {/* ── Account info ── */}
             <div>
-              <h3 style={{ fontFamily: 'Fredoka One, cursive', fontSize: '1.4rem', color: '#0D183D', fontWeight: '400', marginBottom: '16px' }}>Account</h3>
+              <h3 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.4rem', color: '#0D183D', fontWeight: '400', marginBottom: '16px' }}>Account</h3>
               <div style={{ background: '#fff', border: '1px solid #F0E4D0', borderRadius: '12px', padding: '20px', marginBottom: '12px' }}>
                 <p style={{ fontSize: '0.72rem', color: '#5E6A7A', marginBottom: '4px', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Signed in as</p>
                 <p style={{ fontWeight: '600', color: '#0D183D', fontSize: '0.95rem' }}>{userEmail || (firstChild?.name ? `${firstChild.name}'s family` : 'Your account')}</p>
@@ -670,7 +670,7 @@ export default function DashboardPage() {
 
             {/* ── Subscription ── */}
             <div>
-              <h3 style={{ fontFamily: 'Fredoka One, cursive', fontSize: '1.4rem', color: '#0D183D', fontWeight: '400', marginBottom: '16px' }}>Subscription</h3>
+              <h3 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.4rem', color: '#0D183D', fontWeight: '400', marginBottom: '16px' }}>Subscription</h3>
               <div style={{ background: '#fff', border: '1px solid #F0E4D0', borderRadius: '12px', padding: '20px', marginBottom: '12px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
                   <p style={{ fontWeight: '600', color: '#0D183D', fontSize: '0.95rem' }}>Current plan</p>
@@ -716,7 +716,7 @@ export default function DashboardPage() {
 
             {/* ── Referral code ── */}
             <div>
-              <h3 style={{ fontFamily: 'Fredoka One, cursive', fontSize: '1.4rem', color: '#0D183D', fontWeight: '400', marginBottom: '8px' }}>Refer a friend 🎁</h3>
+              <h3 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.4rem', color: '#0D183D', fontWeight: '400', marginBottom: '8px' }}>Refer a friend 🎁</h3>
               <p style={{ fontSize: '0.82rem', color: '#5E6A7A', marginBottom: '12px' }}>Share your code — your friend gets <strong>10% off</strong> their first month.</p>
               <div style={{ background: '#fff', border: '1.5px solid #F0E4D0', borderRadius: '12px', padding: '16px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
                 <span style={{ fontFamily: 'monospace', fontSize: '1.15rem', fontWeight: '800', letterSpacing: '0.12em', color: '#FF6B35' }}>
@@ -733,7 +733,7 @@ export default function DashboardPage() {
 
             {/* ── Danger zone ── */}
             <div>
-              <h3 style={{ fontFamily: 'Fredoka One, cursive', fontSize: '1.4rem', color: '#cc2200', fontWeight: '400', marginBottom: '8px' }}>Danger zone</h3>
+              <h3 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.4rem', color: '#cc2200', fontWeight: '400', marginBottom: '8px' }}>Danger zone</h3>
               {!showDeleteConfirm ? (
                 <button onClick={() => setShowDeleteConfirm(true)}
                   style={{ width: '100%', padding: '0.7rem', borderRadius: '10px', border: '1.5px solid #cc2200', background: '#fff', color: '#cc2200', cursor: 'pointer', fontWeight: '600', fontSize: '0.875rem' }}>

@@ -583,7 +583,7 @@ export default function Home() {
 
             <div style={{ padding: '2rem 2rem 2.5rem' }}>
               <p style={{ fontSize: '1rem', color: '#0D183D', lineHeight: 1.9, fontWeight: 500, marginBottom: '1rem' }}>
-                <strong style={{ color: '#FF6B35', fontSize: '1.8rem', float: 'left', lineHeight: 1, marginRight: '6px', marginTop: '4px', fontFamily: 'Fredoka One, cursive' }}>Z</strong>
+                <strong style={{ color: '#FF6B35', fontSize: '1.8rem', float: 'left', lineHeight: 1, marginRight: '6px', marginTop: '4px', fontFamily: 'Fredoka, cursive' }}>Z</strong>
                 ara and her brother Zak had been walking through the mist for what felt like hours when the castle appeared  -  impossibly tall, purple-turreted, glowing at every window as if someone inside had been expecting them.
               </p>
               <p style={{ fontSize: '1rem', color: '#0D183D', lineHeight: 1.9, fontWeight: 500, marginBottom: '1.5rem' }}>

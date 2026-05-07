@@ -106,7 +106,7 @@ export default function AdminPage() {
 
   if (loading) return (
     <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FFF4E6' }}>
-      <p style={{ color: '#5E6A7A', fontFamily: 'Fredoka One, cursive' }}>Loading...</p>
+      <p style={{ color: '#5E6A7A', fontFamily: 'Fredoka, cursive' }}>Loading...</p>
     </div>
   );
 
@@ -137,7 +137,7 @@ export default function AdminPage() {
       <div style={{ maxWidth: '860px', margin: '0 auto' }}>
 
         <div style={{ marginBottom: '28px' }}>
-          <h1 style={{ fontFamily: 'Fredoka One, cursive', fontSize: '1.75rem', color: '#0D183D', marginBottom: '4px' }}>Admin Dashboard</h1>
+          <h1 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.75rem', color: '#0D183D', marginBottom: '4px' }}>Admin Dashboard</h1>
           <p style={{ color: '#5E6A7A', fontSize: '0.875rem' }}>TalePop · Internal use only</p>
         </div>
 
