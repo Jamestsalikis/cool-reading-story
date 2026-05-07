@@ -184,16 +184,14 @@ export default function Home() {
 
           {/* Right: illustrated scene */}
           <div className="hero-book-panel" style={{
-            backgroundImage: "url('/hero-illustration.png')",
-            backgroundSize: '800%',
-            backgroundPosition: '30% 36%',
+            backgroundImage: "url('/hero-scene.jpg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center 60%',
             backgroundRepeat: 'no-repeat',
             padding: 0
           }}>
-            {/* Top fade: blends into cream hero background */}
-            <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '30%', background: 'linear-gradient(to bottom, #FFF4E6 0%, transparent 100%)' }} />
-            {/* Bottom fade: palette is clipped by overflow:hidden, this just adds polish */}
-            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '25%', background: 'linear-gradient(to top, rgba(13,24,61,0.95) 0%, transparent 100%)' }} />
+            {/* Soft top fade into cream hero background */}
+            <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '18%', background: 'linear-gradient(to bottom, #FFF4E6 0%, transparent 100%)' }} />
           </div>
         </div>
       </section>
@@ -228,11 +226,11 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Story illustration  -  hero-illustration.png, left side characters (0% 44%) */}
+            {/* Story illustration - open book spread */}
             <div style={{
               position: 'relative', height: '220px', overflow: 'hidden',
-              backgroundImage: "url('/hero-illustration.png')",
-              backgroundSize: '280%', backgroundPosition: '0% 44%'
+              backgroundImage: "url('/book-spread.jpg')",
+              backgroundSize: 'cover', backgroundPosition: 'center 35%'
             }}>
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(13,24,61,0.5) 0%, transparent 30%)' }} />
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(transparent 50%, white 100%)' }} />
@@ -360,26 +358,22 @@ export default function Home() {
       </section>
 
       {/* ─── Illustrated scene break ─── */}
-      <div style={{ position: 'relative', height: '260px', overflow: 'hidden' }}>
+      <div style={{ position: 'relative', height: '320px', overflow: 'hidden' }}>
         <div style={{
           position: 'absolute', inset: 0,
-          backgroundImage: "url('/mood-2.png')",
-          backgroundSize: '100%',
-          backgroundPosition: '50% 28%',
-          backgroundRepeat: 'no-repeat'
+          backgroundImage: "url('/banner-scene.jpg')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center center'
         }} />
         {/* Fade top from cream, fade bottom to dark */}
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, #FFF4E6 0%, transparent 25%, transparent 55%, #0D183D 100%)' }} />
-        <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '2rem' }}>
-          <p className="font-serif" style={{ color: 'white', fontSize: 'clamp(1.1rem, 3vw, 1.65rem)', textAlign: 'center', textShadow: '0 2px 24px rgba(0,0,0,0.7)', maxWidth: '600px', padding: '0 2rem', lineHeight: 1.5 }}>
-            The story that makes them say &ldquo;just one more page.&rdquo;
-          </p>
-        </div>
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, #FFF4E6 0%, transparent 18%, transparent 75%, #0D183D 100%)' }} />
       </div>
 
       {/* ─── Testimonial ─── */}
-      <section style={{ background: 'linear-gradient(135deg, #0D183D 0%, #0b2252 100%)', padding: '6rem 2rem', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, opacity: 0.12, backgroundImage: 'radial-gradient(circle, #FFB703 1px, transparent 1px)', backgroundSize: '36px 36px' }} />
+      <section style={{ background: '#0D183D', padding: '6rem 2rem', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: "url('/unicorn-night.jpg')", backgroundSize: 'cover', backgroundPosition: 'center center' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'rgba(8,14,34,0.78)' }} />
+        <div style={{ position: 'absolute', inset: 0, opacity: 0.08, backgroundImage: 'radial-gradient(circle, #FFB703 1px, transparent 1px)', backgroundSize: '36px 36px' }} />
         {/* Huge decorative quote mark */}
         <div style={{ position: 'absolute', top: '2rem', left: '50%', transform: 'translateX(-50%)', fontSize: '14rem', lineHeight: 1, color: 'rgba(255,183,3,0.06)', fontFamily: 'Georgia, serif', userSelect: 'none', pointerEvents: 'none' }}>&ldquo;</div>
         <div style={{ position: 'relative', maxWidth: '720px', margin: '0 auto', textAlign: 'center' }}>
@@ -426,6 +420,17 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ─── Castle walk scene break ─── */}
+      <div style={{ position: 'relative', height: '280px', overflow: 'hidden' }}>
+        <div style={{
+          position: 'absolute', inset: 0,
+          backgroundImage: "url('/castle-walk.jpg')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center 40%'
+        }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, #FFB703 0%, transparent 22%, transparent 72%, #FFF4E6 100%)' }} />
+      </div>
 
       {/* ─── Pricing ─── */}
       <section id="pricing" style={{ background: '#FFF4E6', padding: '6rem 2rem' }}>
