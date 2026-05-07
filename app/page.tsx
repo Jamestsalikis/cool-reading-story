@@ -298,7 +298,7 @@ export default function Home() {
         "name": "TalePop",
         "applicationCategory": "EducationalApplication",
         "operatingSystem": "Web",
-        "url": "https://cool-reading-story.vercel.app",
+        "url": "https://www.talepopstories.com",
         "description": "AI-powered personalised bedtime story generator for children aged 3-10. Creates unique stories starring your child using their name, interests, friends and pet.",
         "offers": {
           "@type": "Offer",

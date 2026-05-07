@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://cool-reading-story.vercel.app"),
+  metadataBase: new URL("https://www.talepopstories.com"),
   title: {
     default: "TalePop - Personalised Bedtime Stories for Kids | AI Story Generator",
     template: "%s | TalePop"
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "TalePop - Personalised Bedtime Stories for Kids",
     description: "Create personalised bedtime stories starring your child. Their name, interests, best friend and pet woven into a unique AI-written adventure. Ages 3-10. 2 free stories to start.",
-    url: "https://cool-reading-story.vercel.app",
+    url: "https://www.talepopstories.com",
     siteName: "TalePop",
     images: [
       {
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true, "max-image-preview": "large" }
   },
   alternates: {
-    canonical: "https://cool-reading-story.vercel.app"
+    canonical: "https://www.talepopstories.com"
   }
 };
 
