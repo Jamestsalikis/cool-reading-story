@@ -87,9 +87,11 @@ export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [childName, setChildName] = useState('');
 
-  const [minutesAgo, setMinutesAgo] = useState(() => Math.floor(Math.random() * 7) + 2);
+  const [minutesAgo, setMinutesAgo] = useState<number | null>(null);
   useEffect(() => {
-    const t = setInterval(() => setMinutesAgo(m => m + 1), 60000);
+    const start = Math.floor(Math.random() * 8) + 1;
+    setMinutesAgo(start);
+    const t = setInterval(() => setMinutesAgo(m => (m ?? start) + 1), 60000);
     return () => clearInterval(t);
   }, []);
 
@@ -354,7 +356,7 @@ export default function Home() {
           <div style={{ textAlign: 'center' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '7px', marginBottom: '3px' }}>
               <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#6CC06C', display: 'inline-block', boxShadow: '0 0 0 3px rgba(108,192,108,0.3)', animation: 'pulse-green 2s ease-in-out infinite' }} />
-              <p className="font-serif" style={{ fontSize: '1.5rem', color: '#FFB703', margin: 0 }}>{minutesAgo} min ago</p>
+              <p className="font-serif" style={{ fontSize: '1.5rem', color: '#FFB703', margin: 0 }}>{minutesAgo !== null ? `${minutesAgo} min ago` : '...'}</p>
             </div>
             <p style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.45)', fontWeight: 700, letterSpacing: '0.06em' }}>LAST STORY DELIVERED</p>
           </div>
