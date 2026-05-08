@@ -20,6 +20,7 @@ type OnboardingState = {
   followUpAnswers: Record<string, string>; // key: "Interest::Question"
   hairColour: string;
   eyeColour: string;
+  skinColour: string;
   siblings: Person[];
   friends: Person[];
   petName: string;
@@ -184,6 +185,7 @@ export default function OnboardingPage() {
     followUpAnswers: {},
     hairColour: '',
     eyeColour: '',
+    skinColour: '',
     siblings: [],
     friends: [],
     petName: '',
@@ -255,6 +257,7 @@ export default function OnboardingPage() {
           followUpAnswers: followUpList,
           hairColour: state.hairColour,
           eyeColour: state.eyeColour,
+          skinColour: state.skinColour,
           siblings: state.siblings,
           friends: state.friends,
           petName: state.petName,
@@ -1970,6 +1973,16 @@ export default function OnboardingPage() {
             <div style={{ marginBottom: '24px' }}>
               <p style={{ ...labelStyle, marginBottom: '12px' }}>Appearance <span style={{ color: '#5E6A7A', fontWeight: '400', fontSize: '0.8rem' }}>(optional)</span></p>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                <div>
+                  <label style={optionalLabel}>Skin colour</label>
+                  <select style={inputStyle} value={state.skinColour} onChange={(e) => setState({ ...state, skinColour: e.target.value })}>
+                    <option value="">Select...</option>
+                    <option value="White">White</option>
+                    <option value="Tanned">Tanned</option>
+                    <option value="Semi Brown">Semi Brown</option>
+                    <option value="Brown">Brown</option>
+                  </select>
+                </div>
                 <div>
                   <label style={optionalLabel}>Hair colour</label>
                   <input type="text" style={inputStyle} placeholder="e.g. Brown" value={state.hairColour} onChange={(e) => setState({ ...state, hairColour: e.target.value })} />
