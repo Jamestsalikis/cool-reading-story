@@ -12,6 +12,7 @@ export async function createChild(data: {
   followUpAnswers: { question: string; answer: string }[];
   hairColour: string;
   eyeColour: string;
+  skinColour: string;
   siblings: Person[];
   friends: Person[];
   petName: string;
@@ -43,6 +44,7 @@ export async function createChild(data: {
       appearance: {
         hairColour: data.hairColour,
         eyeColour: data.eyeColour,
+        skinColour: data.skinColour,
         siblings: data.siblings.filter(s => s.name.trim()),
         friends: data.friends.filter(f => f.name.trim()),
         followUpAnswers: data.followUpAnswers,
@@ -66,6 +68,7 @@ export async function updateChild(childId: string, data: {
   interests: string[];
   hairColour: string;
   eyeColour: string;
+  skinColour: string;
   city: string;
   country: string;
   readingLevel: string;
@@ -100,6 +103,7 @@ export async function updateChild(childId: string, data: {
         ...(current?.appearance || {}),
         hairColour: data.hairColour,
         eyeColour: data.eyeColour,
+        skinColour: data.skinColour,
         city: data.city,
         country: data.country,
       },
@@ -124,3 +128,4 @@ export async function getChildren() {
 
   return { children: children || [] };
 }
+
