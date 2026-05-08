@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { createChild } from '@/lib/supabase/child-actions';
 import { createClient } from '@/lib/supabase/client';
 import { TRIAL_INTERESTS } from '@/lib/sample-stories/index';
-import Fable, { type FablePose } from '@/components/Fable';
 
 type Person = { name: string; nickname: string };
 
@@ -375,21 +374,7 @@ export default function OnboardingPage() {
   return (
     <div style={{ minHeight: '100vh', backgroundColor: '#FFF4E6', padding: '32px 20px' }}>
       <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-        {/* Fable intro */}
-        {(() => {
-          const fableConfig: Record<number, { pose: FablePose; dialogue: string }> = {
-            2: { pose: 'welcome',  dialogue: "Hi, I'm Fable! I write personalised stories. Tell me about your child." },
-            3: { pose: 'writing',  dialogue: "Ooh, what do they love? The more I know, the better the story!" },
-            4: { pose: 'thinking', dialogue: "Perfect. I'm already getting ideas..." },
-            5: { pose: 'thinking', dialogue: "Almost ready. Just a few final details..." },
-          };
-          const cfg = fableConfig[state.step];
-          return cfg ? (
-            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '24px' }}>
-              <Fable pose={cfg.pose} dialogue={cfg.dialogue} size={120} />
-            </div>
-          ) : null;
-        })()}
+
 
         {/* ── Step 2: Name / Age / Gender ── */}
         {state.step === 2 && (
@@ -1975,13 +1960,24 @@ export default function OnboardingPage() {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                 <div>
                   <label style={optionalLabel}>Skin colour</label>
-                  <select style={inputStyle} value={state.skinColour} onChange={(e) => setState({ ...state, skinColour: e.target.value })}>
-                    <option value="">Select...</option>
-                    <option value="White">White</option>
-                    <option value="Tanned">Tanned</option>
-                    <option value="Semi Brown">Semi Brown</option>
-                    <option value="Brown">Brown</option>
-                  </select>
+                  <div style={{ display: 'flex', gap: '10px', marginTop: '4px' }}>
+                    {[
+                      { label: 'White',      hex: '#F5D5B5' },
+                      { label: 'Tanned',     hex: '#C8956C' },
+                      { label: 'Semi Brown', hex: '#8D5524' },
+                      { label: 'Brown',      hex: '#4A2512' },
+                    ].map(({ label, hex }) => (
+                      <button key={label} type="button" title={label}
+                        onClick={() => setState({ ...state, skinColour: state.skinColour === label ? '' : label })}
+                        style={{
+                          width: '32px', height: '32px', borderRadius: '50%',
+                          background: hex, border: state.skinColour === label ? '3px solid #FF6B35' : '3px solid transparent',
+                          outline: state.skinColour === label ? '2px solid #FF6B35' : '2px solid #E0CDB8',
+                          outlineOffset: '2px', cursor: 'pointer', flexShrink: 0,
+                        }}
+                      />
+                    ))}
+                  </div>
                 </div>
                 <div>
                   <label style={optionalLabel}>Hair colour</label>
