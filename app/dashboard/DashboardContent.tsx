@@ -296,14 +296,15 @@ function EditChildModal({ child, palette, onClose, onSaved }: { child: ChildReco
             )}
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-            <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '6px' }}>Skin colour</label>
-              <select style={inp} value={skinColour} onChange={e => setSkinColour(e.target.value)}>
-                <option value="">Select...</option>
-                <option value="White">White</option>
-                <option value="Tanned">Tanned</option>
-                <option value="Semi Brown">Semi Brown</option>
-                <option value="Brown">Brown</option>
-              </select>
+            <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '8px' }}>Skin colour</label>
+              <div style={{ display: 'flex', gap: '10px' }}>
+                {([{ label: 'White', hex: '#F5D5B5' }, { label: 'Tanned', hex: '#C8956C' }, { label: 'Semi Brown', hex: '#8D5524' }, { label: 'Brown', hex: '#4A2512' }] as {label:string;hex:string}[]).map(({ label, hex }) => (
+                  <button key={label} type="button" title={label}
+                    onClick={() => setSkinColour(skinColour === label ? '' : label)}
+                    style={{ width: '32px', height: '32px', borderRadius: '50%', background: hex, border: skinColour === label ? '3px solid #FF6B35' : '3px solid transparent', outline: skinColour === label ? '2px solid #FF6B35' : '2px solid #E0CDB8', outlineOffset: '2px', cursor: 'pointer', flexShrink: 0 }}
+                  />
+                ))}
+              </div>
             </div>
             <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '6px' }}>Hair colour</label><input style={inp} value={hairColour} onChange={e => setHairColour(e.target.value)} placeholder="e.g. Brown" /></div>
             <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '6px' }}>Eye colour</label><input style={inp} value={eyeColour} onChange={e => setEyeColour(e.target.value)} placeholder="e.g. Blue" /></div>
