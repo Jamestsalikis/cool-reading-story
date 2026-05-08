@@ -508,54 +508,40 @@ export default function DashboardPage() {
 
         {!loading && children.length > 0 && activeNav === 'stories' && (
           <div style={{ marginBottom: '32px' }}>
-            <h2 style={{ fontFamily: 'Fredoka, cursive', fontSize: 'clamp(1.6rem, 4vw, 2.4rem)', color: '#0D183D', fontWeight: '400', marginBottom: '4px' }}>
+            <h2 style={{ fontFamily: 'Fredoka, cursive', fontSize: 'clamp(1.6rem, 4vw, 2.4rem)', color: '#0D183D', fontWeight: '400', marginBottom: '6px' }}>
               {timeGreeting}, {firstChild?.name}! {hour >= 18 ? '🌙' : hour >= 12 ? '☀️' : '🌟'}
             </h2>
-            <p style={{ color: '#5E6A7A', fontSize: '0.95rem' }}>
-              {stories.length === 0 ? 'Your library is waiting for its first story.' : `${stories.length} ${stories.length === 1 ? 'book' : 'books'} in the library`}
-            </p>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+              <p style={{ color: '#5E6A7A', fontSize: '0.95rem' }}>
+                {stories.length === 0 ? 'Your library is waiting for its first story.' : `${stories.length} ${stories.length === 1 ? 'book' : 'books'} in the library`}
+              </p>
+              {sub && sub.status === 'subscribed' && (
+                <>
+                  <span style={{ color: '#D1D5DB', fontSize: '0.8rem' }}>·</span>
+                  <span style={{ fontSize: '0.75rem', fontWeight: '600', padding: '3px 10px', borderRadius: '20px', background: booksRemainingToday > 0 ? '#F0FDF4' : '#FFF7ED', color: booksRemainingToday > 0 ? '#15803D' : '#C2410C', border: `1px solid ${booksRemainingToday > 0 ? '#BBF7D0' : '#FED7AA'}` }}>
+                    {booksRemainingToday > 0 ? `${booksRemainingToday} tonight` : 'New story tomorrow'}
+                  </span>
+                  <span style={{ fontSize: '0.75rem', fontWeight: '600', padding: '3px 10px', borderRadius: '20px', background: '#F5F3FF', color: '#6D28D9', border: '1px solid #DDD6FE' }}>
+                    {booksRemainingThisMonth} this month
+                  </span>
+                </>
+              )}
+              {sub && sub.status !== 'subscribed' && sub.free_stories_remaining > 0 && (
+                <>
+                  <span style={{ color: '#D1D5DB', fontSize: '0.8rem' }}>·</span>
+                  <span style={{ fontSize: '0.75rem', fontWeight: '600', padding: '3px 10px', borderRadius: '20px', background: '#FFF7ED', color: '#C2410C', border: '1px solid #FED7AA' }}>
+                    {sub.free_stories_remaining} free {sub.free_stories_remaining === 1 ? 'story' : 'stories'} left
+                  </span>
+                </>
+              )}
+            </div>
           </div>
         )}
 
         {activeNav === 'stories' && (
           <>
             {generateError && <div style={{ background: '#FEE2E2', borderRadius: '10px', padding: '12px 16px', marginBottom: '24px', fontSize: '0.875rem', color: '#991B1B' }}>{generateError}</div>}
-            {sub && !loading && (
-              <div style={{ display: 'flex', gap: '10px', marginBottom: '24px', flexWrap: 'wrap' }}>
-                {sub.status === 'subscribed' ? (
-                  <>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: booksRemainingToday > 0 ? '#F0FDF4' : '#FFF7ED', border: `1.5px solid ${booksRemainingToday > 0 ? '#BBF7D0' : '#FED7AA'}`, borderRadius: '10px', padding: '8px 14px' }}>
-                      <span style={{ fontSize: '1.1rem' }}>{booksRemainingToday > 0 ? '✨' : '🌙'}</span>
-                      <div>
-                        <p style={{ fontSize: '0.7rem', fontWeight: '600', color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '1px' }}>Tonight</p>
-                        <p style={{ fontSize: '0.95rem', fontWeight: '700', color: booksRemainingToday > 0 ? '#15803D' : '#C2410C' }}>
-                          {booksRemainingToday > 0 ? `${booksRemainingToday} story ready` : 'New story tomorrow'}
-                        </p>
-                      </div>
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: '#F8F7FF', border: '1.5px solid #E0E7FF', borderRadius: '10px', padding: '8px 14px' }}>
-                      <span style={{ fontSize: '1.1rem' }}>📅</span>
-                      <div>
-                        <p style={{ fontSize: '0.7rem', fontWeight: '600', color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '1px' }}>This month</p>
-                        <p style={{ fontSize: '0.95rem', fontWeight: '700', color: '#0D183D' }}>
-                          {booksRemainingThisMonth} {booksRemainingThisMonth === 1 ? 'story' : 'stories'} remaining
-                        </p>
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: '#FFF7ED', border: '1.5px solid #FED7AA', borderRadius: '10px', padding: '8px 14px' }}>
-                    <span style={{ fontSize: '1.1rem' }}>🎁</span>
-                    <div>
-                      <p style={{ fontSize: '0.7rem', fontWeight: '600', color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '1px' }}>Free stories</p>
-                      <p style={{ fontSize: '0.95rem', fontWeight: '700', color: '#C2410C' }}>
-                        {sub.free_stories_remaining} {sub.free_stories_remaining === 1 ? 'story' : 'stories'} remaining
-                      </p>
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
+
             {loading ? (
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '16px', padding: '80px 0' }}>
                 <div style={{ fontSize: '3rem', animation: 'writing-pulse 1.2s ease-in-out infinite' }}>📚</div>
