@@ -230,7 +230,15 @@ function EditChildModal({ child, palette, onClose, onSaved }: { child: ChildReco
   const [readingLevel, setReadingLevel] = useState(() => { const m: Record<string,string> = { beginner:'simple', intermediate:'medium', advanced:'imaginative' }; return m[child.reading_level] || 'medium'; });
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
-  const toggleInterest = (i: string) => setInterests(prev => prev.includes(i) ? prev.filter(x => x !== i) : [...prev, i]);
+  const toggleInterest = (i: string) => setInterests(prev => prev.includes(i) ? prev.filter(x => x !== i) : prev.length >= 5 ? prev : [...prev, i]);
+  const [customInterestVal, setCustomInterestVal] = useState('');
+  const handleAddCustom = () => {
+    const val = customInterestVal.trim();
+    if (val && interests.length < 5 && !interests.includes(val)) {
+      setInterests(prev => [...prev, val]);
+      setCustomInterestVal('');
+    }
+  };
   const handleSave = async () => {
     if (!name.trim()) { setError('Name is required'); return; }
     setSaving(true);
@@ -258,7 +266,34 @@ function EditChildModal({ child, palette, onClose, onSaved }: { child: ChildReco
             </div>
           </div>
           <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '6px' }}>Gender</label><div style={{ display: 'flex', gap: '8px' }}>{['Boy','Girl','Skip'].map(g => <button key={g} onClick={() => setGender(g)} style={chip(gender === g)}>{g}</button>)}</div></div>
-          <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '8px' }}>Interests</label><div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>{INTERESTS.map(i => <button key={i} onClick={() => toggleInterest(i)} style={chip(interests.includes(i))}>{i}</button>)}</div></div>
+          <div>
+            <label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '4px' }}>Interests</label>
+            <p style={{ fontSize: '0.75rem', color: interests.length >= 5 ? '#FF6B35' : '#9CA3AF', marginBottom: '8px' }}>{interests.length}/5 selected{interests.length >= 5 ? ' — remove one to add another' : ''}</p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '10px' }}>
+              {INTERESTS.map(i => <button key={i} onClick={() => toggleInterest(i)} style={chip(interests.includes(i))} disabled={!interests.includes(i) && interests.length >= 5}>{i}</button>)}
+              {interests.filter(i => !INTERESTS.includes(i)).map(i => (
+                <button key={i} onClick={() => toggleInterest(i)} style={{ ...chip(true), display: 'flex', alignItems: 'center', gap: '4px' }}>
+                  {i} <span style={{ fontSize: '0.9rem', lineHeight: 1 }}>×</span>
+                </button>
+              ))}
+            </div>
+            {interests.length < 5 && (
+              <div style={{ display: 'flex', gap: '8px' }}>
+                <input
+                  style={{ ...inp, flex: 1 }}
+                  placeholder="Add a custom interest..."
+                  value={customInterestVal}
+                  onChange={e => setCustomInterestVal(e.target.value)}
+                  onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); handleAddCustom(); } }}
+                />
+                {customInterestVal.trim() && (
+                  <button onClick={handleAddCustom} style={{ padding: '0.6rem 1rem', background: palette.cover, color: '#fff', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: '600', fontSize: '0.85rem', whiteSpace: 'nowrap' }}>
+                    Add
+                  </button>
+                )}
+              </div>
+            )}
+          </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
             <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '6px' }}>Hair colour</label><input style={inp} value={hairColour} onChange={e => setHairColour(e.target.value)} placeholder="e.g. Brown" /></div>
             <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '6px' }}>Eye colour</label><input style={inp} value={eyeColour} onChange={e => setEyeColour(e.target.value)} placeholder="e.g. Blue" /></div>
@@ -789,3 +824,4 @@ export default function DashboardPage() {
     </div>
   );
 }
+
