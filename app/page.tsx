@@ -475,7 +475,7 @@ export default function Home() {
       </nav>
 
       {/* ─── Hero ─── */}
-      <section style={{ maxWidth: '1200px', margin: '0 auto', padding: '4.5rem 2rem 3.5rem' }}>
+      <section style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem 2rem 3rem' }}>
         <div className="hero-grid">
 
           {/* Left: copy + widget */}
@@ -957,3 +957,4 @@ export default function Home() {
     </div>
   );
 }
+
