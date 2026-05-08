@@ -315,12 +315,12 @@ export default function OnboardingPage() {
       ...prev,
       interests: prev.interests.includes(label)
         ? prev.interests.filter((i) => i !== label)
-        : [...prev.interests, label],
+        : prev.interests.length >= 5 ? prev.interests : [...prev.interests, label],
     }));
   };
 
   const handleAddCustomInterest = () => {
-    if (state.customInterest.trim()) {
+    if (state.customInterest.trim() && state.interests.length < 5) {
       setState((prev) => ({
         ...prev,
         interests: [...prev.interests, state.customInterest.trim()],
@@ -432,7 +432,9 @@ export default function OnboardingPage() {
           <div>
             <ProgressDots />
             <h1 className="font-serif" style={{ fontSize: '2rem', marginBottom: '8px', color: '#0D183D' }}>What does {state.name || 'your child'} love?</h1>
-            <p style={{ color: '#5E6A7A', marginBottom: '32px', fontSize: '0.95rem' }}>Select at least 2  -  these shape every story</p>
+            <p style={{ color: state.interests.length >= 5 ? '#FF6B35' : '#5E6A7A', marginBottom: '32px', fontSize: '0.95rem' }}>
+              {state.interests.length >= 5 ? 'Maximum 5 selected — remove one to swap' : `Pick up to 5 — ${state.interests.length} selected so far`}
+            </p>
 
             <style>{`
               .int-tile { transition: transform 0.18s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.18s ease; cursor: pointer; }
@@ -2094,3 +2096,4 @@ export default function OnboardingPage() {
     </div>
   );
 }
+
