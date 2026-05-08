@@ -739,9 +739,7 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            {/* ── Danger zone ── */}
             <div>
-              <h3 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.4rem', color: '#cc2200', fontWeight: '400', marginBottom: '8px' }}>Danger zone</h3>
               {!showDeleteConfirm ? (
                 <button onClick={() => setShowDeleteConfirm(true)}
                   style={{ width: '100%', padding: '0.7rem', borderRadius: '10px', border: '1.5px solid #cc2200', background: '#fff', color: '#cc2200', cursor: 'pointer', fontWeight: '600', fontSize: '0.875rem' }}>
