@@ -544,9 +544,6 @@ export default function Home() {
       <section style={{ background: 'white', padding: '3rem 2rem 6rem' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#FFF0E0', borderRadius: '999px', padding: '0.35rem 1rem', marginBottom: '1rem', border: '1px solid #FFD4A8' }}>
-              <span style={{ fontSize: '0.72rem', fontWeight: 800, color: '#FF6B35', letterSpacing: '0.04em' }}>📖 READ A REAL TALEPOP STORY</span>
-            </div>
             <h2 className="font-serif" style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', color: '#0D183D', marginBottom: '0.75rem', letterSpacing: '-0.01em' }}>
               Written for Zara & Zak. No one else.
             </h2>
