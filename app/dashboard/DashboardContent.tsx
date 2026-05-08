@@ -520,6 +520,42 @@ export default function DashboardPage() {
         {activeNav === 'stories' && (
           <>
             {generateError && <div style={{ background: '#FEE2E2', borderRadius: '10px', padding: '12px 16px', marginBottom: '24px', fontSize: '0.875rem', color: '#991B1B' }}>{generateError}</div>}
+            {sub && !loading && (
+              <div style={{ display: 'flex', gap: '10px', marginBottom: '24px', flexWrap: 'wrap' }}>
+                {sub.status === 'subscribed' ? (
+                  <>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: booksRemainingToday > 0 ? '#F0FDF4' : '#FFF7ED', border: `1.5px solid ${booksRemainingToday > 0 ? '#BBF7D0' : '#FED7AA'}`, borderRadius: '10px', padding: '8px 14px' }}>
+                      <span style={{ fontSize: '1.1rem' }}>{booksRemainingToday > 0 ? '✨' : '🌙'}</span>
+                      <div>
+                        <p style={{ fontSize: '0.7rem', fontWeight: '600', color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '1px' }}>Tonight</p>
+                        <p style={{ fontSize: '0.95rem', fontWeight: '700', color: booksRemainingToday > 0 ? '#15803D' : '#C2410C' }}>
+                          {booksRemainingToday > 0 ? `${booksRemainingToday} story ready` : 'New story tomorrow'}
+                        </p>
+                      </div>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: '#F8F7FF', border: '1.5px solid #E0E7FF', borderRadius: '10px', padding: '8px 14px' }}>
+                      <span style={{ fontSize: '1.1rem' }}>📅</span>
+                      <div>
+                        <p style={{ fontSize: '0.7rem', fontWeight: '600', color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '1px' }}>This month</p>
+                        <p style={{ fontSize: '0.95rem', fontWeight: '700', color: '#0D183D' }}>
+                          {booksRemainingThisMonth} {booksRemainingThisMonth === 1 ? 'story' : 'stories'} remaining
+                        </p>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: '#FFF7ED', border: '1.5px solid #FED7AA', borderRadius: '10px', padding: '8px 14px' }}>
+                    <span style={{ fontSize: '1.1rem' }}>🎁</span>
+                    <div>
+                      <p style={{ fontSize: '0.7rem', fontWeight: '600', color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '1px' }}>Free stories</p>
+                      <p style={{ fontSize: '0.95rem', fontWeight: '700', color: '#C2410C' }}>
+                        {sub.free_stories_remaining} {sub.free_stories_remaining === 1 ? 'story' : 'stories'} remaining
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
             {loading ? (
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '16px', padding: '80px 0' }}>
                 <div style={{ fontSize: '3rem', animation: 'writing-pulse 1.2s ease-in-out infinite' }}>📚</div>
