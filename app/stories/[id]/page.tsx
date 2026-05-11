@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Heart, ChevronLeft, ChevronRight } from 'lucide-react';
-import Fable from '@/components/Fable';
 import { createClient } from '@/lib/supabase/client';
 import FeedbackModal from '@/components/FeedbackModal';
 
@@ -123,7 +122,11 @@ function IllustrationPlaceholder({ generating }: { generating: boolean }) {
   return (
     <div style={{ width: '100%', height: '100%', background: '#FFF0E6', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
       {generating ? (
-        <Fable pose="painting" dialogue="Painting your illustration..." size={110} />
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
+          <div style={{ width: '40px', height: '40px', border: '3px solid #FFD4B8', borderTop: '3px solid #FF6B35', borderRadius: '50%', animation: 'spin 1s linear infinite' }} />
+          <p style={{ fontSize: '0.8rem', color: '#FF6B35', fontWeight: '600' }}>Painting your illustration...</p>
+          <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+        </div>
       ) : (
         <svg width="48" height="38" viewBox="0 0 48 38" fill="none" opacity="0.2">
           <path d="M24 7C18 3 7 3 2 5v26c5-2 16-2 22 2 6-4 17-4 22-2V5C44 3 30 3 24 7z" stroke="#FF6B35" strokeWidth="2" strokeLinejoin="round" fill="rgba(255,107,53,0.1)"/>
