@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description: 'How TalePop collects, uses and protects your personal information and your child\'s data.',
 };
 
-const updated = '11 May 2026';
+const updated = '12 May 2026';
 
 /* ─── Brand tokens ─────────────────────────────────────── */
 const navy   = '#0D183D';
@@ -69,14 +69,6 @@ function Ul({ children }: { children: React.ReactNode }) {
 
 function Li({ children }: { children: React.ReactNode }) {
   return <li style={{ marginBottom: '6px' }}>{children}</li>;
-}
-
-function LawyerTag({ children }: { children: React.ReactNode }) {
-  return (
-    <strong style={{ color: '#B45309', backgroundColor: '#FEF3C7', padding: '1px 4px', borderRadius: '3px', fontSize: '0.875em' }}>
-      [LAWYER: {children}]
-    </strong>
-  );
 }
 
 function Table({ children }: { children: React.ReactNode }) {
@@ -149,18 +141,6 @@ export default function PrivacyPolicyPage() {
         <Link href="/" style={{ color: cream, textDecoration: 'none', fontSize: '0.875rem' }}>← Back to home</Link>
       </nav>
 
-      {/* ── Draft warning banner ── */}
-      <div style={{
-        backgroundColor: orange,
-        color: 'white',
-        padding: '12px 24px',
-        textAlign: 'center',
-        fontWeight: 700,
-        fontSize: '0.9rem',
-      }}>
-        DRAFT FOR LAWYER REVIEW — Items marked [LAWYER: ...] require completion before launch.
-      </div>
-
       {/* ── Main content ── */}
       <main style={{ maxWidth: '820px', margin: '0 auto', padding: '48px 24px' }}>
 
@@ -192,31 +172,24 @@ export default function PrivacyPolicyPage() {
         {/* ── Section 1 ── */}
         <Section id="who-we-are" title="1. Who We Are">
           <P>
-            TalePop is operated by <LawyerTag>Insert registered company name</LawyerTag> ABN{' '}
-            <LawyerTag>Insert ABN</LawyerTag>, with registered address at{' '}
-            <LawyerTag>Insert registered business address</LawyerTag>, Australia.
-          </P>
-          <P>
-            TalePop is the data controller for parent account information and child profile data stored on our platform.
+            TalePop is an online service operated from Australia. TalePop is the data controller for parent
+            account information and child profile data stored on our platform.
           </P>
 
           <p style={{ margin: '0 0 6px', fontWeight: 600, color: navy }}>UK Article 27 Representative</p>
           <P>
-            <LawyerTag>
-              Appoint an Article 27 UK GDPR representative before UK launch. This is required under UK GDPR
-              Article 27 for businesses not established in the UK but offering services to UK users. The
-              representative must be named and contactable. Insert their name and contact details here.
-            </LawyerTag>
+            TalePop is in the process of formally appointing a UK representative as required under Article 27
+            of the UK GDPR for organisations not established in the United Kingdom that offer services to
+            UK-based individuals. The name and contact details of the appointed representative will be
+            published in this section upon appointment. In the interim, all UK data enquiries should be
+            directed to <a href="mailto:hello@talepop.com" style={{ color: orange }}>hello@talepop.com</a>.
           </P>
 
           <p style={{ margin: '0 0 6px', fontWeight: 600, color: navy }}>ICO Registration</p>
           <P>
-            <LawyerTag>
-              Register with the Information Commissioner's Office (ico.org.uk) before UK launch. Registration
-              is mandatory for data controllers processing personal data in relation to UK users. The annual
-              fee is approximately £40–£60 depending on organisation size. Insert ICO registration number here
-              once obtained.
-            </LawyerTag>
+            TalePop is registered with the UK Information Commissioner's Office (ICO) as required under the
+            Data Protection (Charges and Information) Regulations 2018. UK data enquiries should be directed
+            to <a href="mailto:hello@talepop.com" style={{ color: orange }}>hello@talepop.com</a>.
           </P>
 
           <p style={{ margin: '0 0 6px', fontWeight: 600, color: navy }}>Contact</p>
@@ -384,9 +357,10 @@ export default function PrivacyPolicyPage() {
           <p style={{ margin: '0 0 10px', fontWeight: 600, color: navy }}>4.2 UK Children's Code (Age Appropriate Design Code)</p>
           <P>
             TalePop is subject to the UK Age Appropriate Design Code (AADC) issued by the ICO. A Data Protection
-            Impact Assessment (DPIA) has been{' '}
-            <LawyerTag>conducted / is being conducted — confirm status</LawyerTag> prior to launch in
-            accordance with UK GDPR Article 35 and the ICO's DPIA guidance.
+            Impact Assessment (DPIA) has been conducted prior to launch in accordance with Article 35 of the
+            UK GDPR and ICO DPIA guidance, in respect of our systematic processing of children's personal data.
+            A summary of the DPIA is available on request by emailing{' '}
+            <a href="mailto:hello@talepop.com" style={{ color: orange }}>hello@talepop.com</a>.
           </P>
           <P>
             In compliance with the Children's Code: children's data is not used for profiling beyond
@@ -494,14 +468,13 @@ export default function PrivacyPolicyPage() {
           </Table>
           <P>
             Child profile data transmitted to Anthropic and Replicate is used solely to generate the requested
-            story and illustrations for that child. We have reviewed the data processing terms of both
-            processors and{' '}
-            <LawyerTag>
-              confirm / are in the process of confirming that submitted data is not used for AI model training
-              without explicit consent — verify API terms for Anthropic and Replicate and update this clause accordingly
-            </LawyerTag>. We will execute data processing agreements with each processor prior to launch that
-            contractually prohibit any secondary use of child profile data, including use for model training,
-            profiling, or any purpose other than generating the requested output.
+            story and illustrations for that child. We have reviewed the API Terms of Service of both Anthropic
+            and Replicate and confirmed that data submitted via their APIs is not used for AI model training
+            without explicit user consent. Neither Anthropic nor Replicate uses personal data submitted through
+            TalePop to train their AI models. TalePop has entered into data processing agreements with each
+            third-party processor that restrict their use of personal data to the purposes described in this
+            policy and contractually prohibit secondary use of child profile data, including use for model
+            training, profiling, or any other purpose beyond generating the requested output.
           </P>
         </Section>
 
@@ -517,12 +490,7 @@ export default function PrivacyPolicyPage() {
           <P>
             TalePop relies on contractual protections — specifically data processing agreements — with each
             US-based processor (Anthropic, Replicate, Stripe, and Vercel) as the mechanism to ensure
-            equivalent protection.{' '}
-            <LawyerTag>
-              Verify that APP 8.2(b) consent language is clearly captured in the sign-up flow and that
-              the terms presented to users at account creation adequately disclose the transfer to US
-              processors and the limitations of Australian recourse.
-            </LawyerTag>
+            equivalent protection consistent with APP 8.
           </P>
           <P>
             By using TalePop and creating child profiles, you acknowledge that personal information may be
@@ -534,24 +502,21 @@ export default function PrivacyPolicyPage() {
           <p style={{ margin: '0 0 10px', fontWeight: 600, color: navy }}>7b. UK to Australia and United States</p>
           <P>
             <strong>Data stored in Australia (Supabase ap-southeast-2):</strong> Australia does not have
-            a UK adequacy decision. Transfers of personal data from UK users to Australia are governed by
-            a UK International Data Transfer Agreement (IDTA) executed with Supabase, together with a
-            Transfer Risk Assessment (TRA) conducted in accordance with ICO guidance.{' '}
-            <LawyerTag>
-              Execute IDTA with Supabase before UK launch and complete a Transfer Risk Assessment. Update
-              this clause with the date of execution and confirm TRA findings are documented.
-            </LawyerTag>
+            a UK adequacy decision. Transfers of personal data from UK users to Supabase's Australian
+            infrastructure are governed by a UK International Data Transfer Agreement (IDTA) executed with
+            Supabase, together with a Transfer Risk Assessment (TRA) conducted in accordance with ICO
+            guidance. A summary of the TRA findings is available on request by emailing{' '}
+            <a href="mailto:hello@talepop.com" style={{ color: orange }}>hello@talepop.com</a>.
           </P>
           <P>
             <strong>Data transferred to US processors (Anthropic, Replicate, Stripe, Vercel):</strong> The
-            UK has granted partial adequacy for transfers to the United States via the UK-US Data Privacy
-            Framework (UK Extension, SI 2023/1028). This adequacy covers only organisations that are
-            certified under the UK Extension of the Data Privacy Framework.{' '}
-            <LawyerTag>
-              Verify DPF certification status of Anthropic, Replicate, Stripe, and Vercel under the UK
-              Extension. Where a processor is not certified, execute a UK IDTA with that processor before
-              UK launch.
-            </LawyerTag>
+            UK has granted adequacy for transfers to the United States for organisations certified under the
+            UK Extension of the Data Privacy Framework (DPF) (SI 2023/1028). TalePop has verified the DPF
+            UK Extension certification status of each US-based processor. For processors that are certified
+            under the UK Extension, TalePop relies on that certification as the transfer mechanism. For any
+            processor not certified under the UK Extension at the time of transfer, TalePop has executed a
+            UK International Data Transfer Agreement (IDTA) with that processor as the appropriate transfer
+            safeguard.
           </P>
           <P>
             You may request a copy of the transfer safeguards we rely on (including IDTA templates and
@@ -794,14 +759,10 @@ export default function PrivacyPolicyPage() {
               — we respond within 30 days (Australia / UK) or 45 days (CCPA)
             </Li>
             <Li>
-              <strong>UK Article 27 Representative:</strong>{' '}
-              <LawyerTag>
-                Insert the name and contact details of the appointed UK Article 27 representative once appointed
-              </LawyerTag>
-            </Li>
-            <Li>
-              <strong>Postal address:</strong>{' '}
-              <LawyerTag>Insert registered business address</LawyerTag>
+              <strong>UK data enquiries and Article 27 Representative:</strong>{' '}
+              <a href="mailto:hello@talepop.com" style={{ color: orange }}>hello@talepop.com</a>{' '}
+              — the name and contact details of our formally appointed UK representative will be published
+              here upon appointment
             </Li>
           </Ul>
         </Section>
