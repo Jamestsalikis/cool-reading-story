@@ -51,7 +51,7 @@ function Footer() {
       <p style={{ margin: '0 0 8px' }}>
         <Link href="/privacy" style={{ color: cream, textDecoration: 'none', marginRight: '16px' }}>Privacy Policy</Link>
         <Link href="/terms" style={{ color: cream, textDecoration: 'none', marginRight: '16px' }}>Terms of Service</Link>
-        <a href="mailto:hello@talepop.com" style={{ color: cream, textDecoration: 'none' }}>hello@talepop.com</a>
+        <a href="mailto:info@talepopstories.com" style={{ color: cream, textDecoration: 'none' }}>info@talepopstories.com</a>
       </p>
       <p style={{ margin: 0, color: muted }}>© {new Date().getFullYear()} TalePop. All rights reserved.</p>
     </footer>
@@ -182,19 +182,19 @@ export default function PrivacyPolicyPage() {
             of the UK GDPR for organisations not established in the United Kingdom that offer services to
             UK-based individuals. The name and contact details of the appointed representative will be
             published in this section upon appointment. In the interim, all UK data enquiries should be
-            directed to <a href="mailto:hello@talepop.com" style={{ color: orange }}>hello@talepop.com</a>.
+            directed to <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a>.
           </P>
 
           <p style={{ margin: '0 0 6px', fontWeight: 600, color: navy }}>ICO Registration</p>
           <P>
             TalePop is registered with the UK Information Commissioner's Office (ICO) as required under the
             Data Protection (Charges and Information) Regulations 2018. UK data enquiries should be directed
-            to <a href="mailto:hello@talepop.com" style={{ color: orange }}>hello@talepop.com</a>.
+            to <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a>.
           </P>
 
           <p style={{ margin: '0 0 6px', fontWeight: 600, color: navy }}>Contact</p>
           <P>
-            For all privacy enquiries: <a href="mailto:hello@talepop.com" style={{ color: orange }}>hello@talepop.com</a>
+            For all privacy enquiries: <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a>
           </P>
         </Section>
 
@@ -309,7 +309,7 @@ export default function PrivacyPolicyPage() {
             For UK users, TalePop processes children's personal data as part of providing the service. Where we
             rely on legitimate interests as a lawful basis for processing children's data, we apply a higher
             threshold of scrutiny. A Legitimate Interests Assessment (LIA) has been conducted and is available
-            on request by emailing <a href="mailto:hello@talepop.com" style={{ color: orange }}>hello@talepop.com</a>.
+            on request by emailing <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a>.
           </P>
           <P>
             For Australian users, TalePop collects and uses personal information in accordance with the
@@ -345,12 +345,12 @@ export default function PrivacyPolicyPage() {
           <P>
             An alternative consent mechanism is available for users who are unable to use the payment-based
             method. To request an alternative consent process, please email{' '}
-            <a href="mailto:hello@talepop.com" style={{ color: orange }}>hello@talepop.com</a>.
+            <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a>.
           </P>
           <P>
             Parents may at any time review the personal information collected about their child, request
             corrections, or request deletion of their child's profile and all associated data by contacting
-            us at <a href="mailto:hello@talepop.com" style={{ color: orange }}>hello@talepop.com</a> or through
+            us at <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a> or through
             the account settings page.
           </P>
 
@@ -360,7 +360,7 @@ export default function PrivacyPolicyPage() {
             Impact Assessment (DPIA) has been conducted prior to launch in accordance with Article 35 of the
             UK GDPR and ICO DPIA guidance, in respect of our systematic processing of children's personal data.
             A summary of the DPIA is available on request by emailing{' '}
-            <a href="mailto:hello@talepop.com" style={{ color: orange }}>hello@talepop.com</a>.
+            <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a>.
           </P>
           <P>
             In compliance with the Children's Code: children's data is not used for profiling beyond
@@ -506,7 +506,7 @@ export default function PrivacyPolicyPage() {
             infrastructure are governed by a UK International Data Transfer Agreement (IDTA) executed with
             Supabase, together with a Transfer Risk Assessment (TRA) conducted in accordance with ICO
             guidance. A summary of the TRA findings is available on request by emailing{' '}
-            <a href="mailto:hello@talepop.com" style={{ color: orange }}>hello@talepop.com</a>.
+            <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a>.
           </P>
           <P>
             <strong>Data transferred to US processors (Anthropic, Replicate, Stripe, Vercel):</strong> The
@@ -521,7 +521,7 @@ export default function PrivacyPolicyPage() {
           <P>
             You may request a copy of the transfer safeguards we rely on (including IDTA templates and
             Transfer Risk Assessment summaries) by emailing{' '}
-            <a href="mailto:hello@talepop.com" style={{ color: orange }}>hello@talepop.com</a>.
+            <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a>.
           </P>
 
           <p style={{ margin: '0 0 10px', fontWeight: 600, color: navy }}>7c. All Regions — General</p>
@@ -618,7 +618,7 @@ export default function PrivacyPolicyPage() {
           <P>
             Depending on your jurisdiction, you have the following rights in relation to your personal
             information and the child profile data you have provided. To exercise any of these rights,
-            contact us at <a href="mailto:hello@talepop.com" style={{ color: orange }}>hello@talepop.com</a>.
+            contact us at <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a>.
             We will respond within 30 days (Australia / UK) or 45 days (CCPA / California).
           </P>
           <Table>
@@ -670,7 +670,7 @@ export default function PrivacyPolicyPage() {
             personal information for cross-context behavioural advertising. You have the right to opt out of
             any future sale or sharing of personal information. To submit a CCPA request — including requests
             to know, correct, delete, or limit — please email{' '}
-            <a href="mailto:hello@talepop.com" style={{ color: orange }}>hello@talepop.com</a> with the
+            <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a> with the
             subject line "CCPA Privacy Request."
           </P>
 
@@ -751,16 +751,16 @@ export default function PrivacyPolicyPage() {
           <Ul>
             <Li>
               <strong>General enquiries:</strong>{' '}
-              <a href="mailto:hello@talepop.com" style={{ color: orange }}>hello@talepop.com</a>
+              <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a>
             </Li>
             <Li>
               <strong>Privacy and data requests (access, correction, deletion, CCPA, portability):</strong>{' '}
-              <a href="mailto:hello@talepop.com" style={{ color: orange }}>hello@talepop.com</a>{' '}
+              <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a>{' '}
               — we respond within 30 days (Australia / UK) or 45 days (CCPA)
             </Li>
             <Li>
               <strong>UK data enquiries and Article 27 Representative:</strong>{' '}
-              <a href="mailto:hello@talepop.com" style={{ color: orange }}>hello@talepop.com</a>{' '}
+              <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a>{' '}
               — the name and contact details of our formally appointed UK representative will be published
               here upon appointment
             </Li>
