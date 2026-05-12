@@ -1,0 +1,60 @@
+<svg width="900" height="260" viewBox="0 0 900 260" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <clipPath id="clip">
+    <rect width="900" height="260"/>
+  </clipPath>
+</defs>
+<g clip-path="url(#clip)">
+  <rect width="900" height="260" fill="#B8521A"/>
+  <rect width="900" height="260" fill="#C96020" opacity="0.6"/>
+  <ellipse cx="750" cy="280" rx="260" ry="180" fill="#A04410" opacity="0.55"/>
+  <ellipse cx="820" cy="250" rx="180" ry="140" fill="#8C3A0C" opacity="0.4"/>
+  <ellipse cx="120" cy="290" rx="220" ry="160" fill="#A04410" opacity="0.45"/>
+  <ellipse cx="50" cy="260" rx="160" ry="130" fill="#8C3A0C" opacity="0.35"/>
+  <path d="M600 260 Q620 180 660 140 Q700 100 730 130 Q760 160 750 210 Q740 240 720 260Z" fill="#8A3800" opacity="0.75"/>
+  <path d="M700 260 Q730 170 780 120 Q820 80 850 110 Q880 140 870 200 Q860 230 840 260Z" fill="#7A3000" opacity="0.65"/>
+  <path d="M820 260 Q850 190 890 150 Q920 120 940 140 Q960 165 950 220 Q940 245 920 260Z" fill="#6A2800" opacity="0.6"/>
+  <path d="M0 260 Q30 180 70 140 Q110 100 140 130 Q170 160 160 220 Q150 245 130 260Z" fill="#8A3800" opacity="0.7"/>
+  <path d="M100 260 Q130 170 170 120 Q210 80 240 110 Q265 135 255 200 Q245 235 220 260Z" fill="#7A3000" opacity="0.6"/>
+  <path d="M-10 260 Q10 220 30 190 Q20 195 15 210 Q35 175 55 150 Q45 158 40 170 Q60 140 80 120 Q70 130 65 148 Q85 115 105 100 Q95 114 92 130 Q110 105 125 95 Q115 112 110 128 Q90 155 70 180 Q80 165 75 175 Q55 200 35 230 Q45 215 38 222 Q15 245 -5 260Z" fill="#6B2D00" opacity="0.85"/>
+  <path d="M910 260 Q890 220 870 190 Q880 195 885 210 Q865 175 845 150 Q855 158 860 170 Q840 140 820 120 Q830 130 835 148 Q815 115 795 100 Q805 114 808 130 Q790 105 775 95 Q785 112 790 128 Q810 155 830 180 Q820 165 825 175 Q845 200 865 230 Q855 215 862 222 Q885 245 905 260Z" fill="#6B2D00" opacity="0.8"/>
+  <ellipse cx="450" cy="320" rx="350" ry="200" fill="#D4711E" opacity="0.25"/>
+  <path d="M180 260 Q185 230 200 215 Q210 205 220 210 Q215 220 205 235 Q200 245 180 260Z" fill="#5C2500" opacity="0.9"/>
+  <path d="M175 260 Q170 228 155 210 Q143 198 132 205 Q140 216 152 232 Q160 244 175 260Z" fill="#5C2500" opacity="0.9"/>
+  <path d="M178 260 Q178 225 178 200 Q180 185 185 190 Q188 200 185 220 Q183 240 178 260Z" fill="#5C2500" opacity="0.85"/>
+  <path d="M180 260 Q195 235 215 220 Q228 210 235 215 Q228 228 212 240 Q198 250 180 260Z" fill="#6B2D00" opacity="0.8"/>
+  <path d="M178 260 Q160 232 140 218 Q126 208 120 214 Q128 226 145 238 Q162 250 178 260Z" fill="#6B2D00" opacity="0.8"/>
+  <path d="M720 260 Q725 230 740 215 Q750 205 760 210 Q755 220 745 235 Q740 245 720 260Z" fill="#5C2500" opacity="0.9"/>
+  <path d="M715 260 Q710 228 695 210 Q683 198 672 205 Q680 216 692 232 Q700 244 715 260Z" fill="#5C2500" opacity="0.9"/>
+  <path d="M718 260 Q718 225 718 200 Q720 185 725 190 Q728 200 725 220 Q723 240 718 260Z" fill="#5C2500" opacity="0.85"/>
+  <path d="M720 260 Q735 235 755 220 Q768 210 775 215 Q768 228 752 240 Q738 250 720 260Z" fill="#6B2D00" opacity="0.8"/>
+  <path d="M718 260 Q700 232 680 218 Q666 208 660 214 Q668 226 685 238 Q702 250 718 260Z" fill="#6B2D00" opacity="0.8"/>
+  <path d="M300 260 Q310 230 320 200 Q325 185 322 175 Q318 185 315 200 Q308 225 300 260Z" fill="#4E2000" opacity="0.9"/>
+  <path d="M320 260 Q315 228 308 205 Q303 190 305 178 Q310 188 314 205 Q318 228 320 260Z" fill="#4E2000" opacity="0.85"/>
+  <path d="M340 260 Q348 235 358 215 Q364 200 362 188 Q357 198 352 215 Q345 235 340 260Z" fill="#4E2000" opacity="0.88"/>
+  <path d="M360 260 Q355 232 348 210 Q343 195 346 182 Q351 192 355 210 Q358 232 360 260Z" fill="#4E2000" opacity="0.82"/>
+  <path d="M540 260 Q550 230 560 200 Q565 185 562 175 Q558 185 555 200 Q548 225 540 260Z" fill="#4E2000" opacity="0.9"/>
+  <path d="M560 260 Q555 228 548 205 Q543 190 545 178 Q550 188 554 205 Q558 228 560 260Z" fill="#4E2000" opacity="0.85"/>
+  <path d="M580 260 Q588 235 598 215 Q604 200 602 188 Q597 198 592 215 Q585 235 580 260Z" fill="#4E2000" opacity="0.88"/>
+  <path d="M900 0 L580 260 L640 260 L900 20Z" fill="#E8892A" opacity="0.06"/>
+  <path d="M900 0 L700 260 L760 260 L900 40Z" fill="#E8892A" opacity="0.05"/>
+  <path d="M900 0 L800 260 L860 260 L900 60Z" fill="#E8892A" opacity="0.04"/>
+  <circle cx="420" cy="80" r="2.5" fill="#FFD580" opacity="0.6"/>
+  <circle cx="470" cy="110" r="1.8" fill="#FFD580" opacity="0.5"/>
+  <circle cx="390" cy="55" r="1.5" fill="#FFD580" opacity="0.45"/>
+  <circle cx="500" cy="70" r="2" fill="#FFD580" opacity="0.55"/>
+  <circle cx="350" cy="95" r="1.5" fill="#FFD580" opacity="0.4"/>
+  <circle cx="560" cy="60" r="2" fill="#FFD580" opacity="0.45"/>
+  <circle cx="620" cy="90" r="1.5" fill="#FFD580" opacity="0.4"/>
+  <circle cx="280" cy="115" r="2" fill="#FFD580" opacity="0.35"/>
+  <line x1="420" y1="77" x2="420" y2="83" stroke="#FFD580" stroke-width="1" opacity="0.6"/>
+  <line x1="417" y1="80" x2="423" y2="80" stroke="#FFD580" stroke-width="1" opacity="0.6"/>
+  <line x1="500" y1="67" x2="500" y2="73" stroke="#FFD580" stroke-width="1" opacity="0.55"/>
+  <line x1="497" y1="70" x2="503" y2="70" stroke="#FFD580" stroke-width="1" opacity="0.55"/>
+  <line x1="560" y1="57" x2="560" y2="63" stroke="#FFD580" stroke-width="1" opacity="0.45"/>
+  <line x1="557" y1="60" x2="563" y2="60" stroke="#FFD580" stroke-width="1" opacity="0.45"/>
+  <rect x="0" y="220" width="900" height="40" fill="#3D1800" opacity="0.5"/>
+  <rect x="0" y="0" width="420" height="260" fill="#2A0F00" opacity="0.42"/>
+  <rect x="0" y="0" width="200" height="260" fill="#1A0800" opacity="0.25"/>
+</g>
+</svg>
