@@ -117,7 +117,12 @@ Requirements:
 3. Include their pet, siblings, or best friend if provided  -  give them real roles using their actual names/nicknames
 4. If a location is provided, set the story there or reference it naturally
 5. Include a warm, gentle moral lesson that emerges naturally from the story
-6. End on a cosy, bedtime-appropriate note  -  winding down, not exciting
+6. End with a warm goodnight or goodbye that settles ${name} toward sleep  -  but weave in a single cliffhanger seed on the final page. Choose whichever style fits the story's plot and ${name}'s interests most naturally:
+   - DISCOVERY: the hero notices something mysterious just as their eyes grow heavy (a glowing door, an unrecognised star, a sealed note slipped under the mat)
+   - VISITOR: a gentle knock, a shadow, or a distant voice calls from somewhere unknown  -  just as the story closes, before it is answered
+   - OBJECT: a character quietly passes the hero something (a torn map, a magical item, a tiny key) and whispers they will need it for what is coming, then ${name} drifts off holding it
+   - NARRATOR TEASE: after the goodnight, the narrator speaks one warm line directly to the child: "But little did ${name} know... tomorrow would bring the biggest adventure yet."
+   The cliffhanger must feel like a natural part of the story, not bolted on at the end. Keep it gentle  -  curious and exciting, not scary. The page 5 image stays warm and sleepy; the hook lives in the words only.
 7. Use language appropriate for age ${age}: ${reading_level === 'beginner' ? 'short sentences, simple words, lots of repetition' : reading_level === 'intermediate' ? 'flowing sentences, rich descriptions, some new vocabulary' : 'complex narrative, vivid imagery, sophisticated vocabulary'}
 8. Make it feel uniquely written FOR ${name}  -  not a generic story with a name swapped in
 9. Split the story into exactly 5 pages. Each page should have 2-4 paragraphs of text.
