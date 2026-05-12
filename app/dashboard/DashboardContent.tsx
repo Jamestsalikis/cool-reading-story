@@ -385,10 +385,11 @@ export default function DashboardPage() {
 
   const booksRemainingToday = sub?.status === 'subscribed' ? Math.max(0, 1 + (sub.extra_books_today ?? 0) - (sub.stories_today ?? 0)) : 0;
   let booksRemainingThisMonth = 0;
+  let daysInMonth = 31;
   if (sub?.status === 'subscribed') {
     const now = new Date();
-    const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
-    booksRemainingThisMonth = (lastDay - now.getDate() + 1) - ((sub.stories_today ?? 0) > 0 ? 1 : 0);
+    daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+    booksRemainingThisMonth = (daysInMonth - now.getDate() + 1) - ((sub.stories_today ?? 0) > 0 ? 1 : 0);
   }
 
   const storiesByChild = (childId: string) => { const child = children.find(c => c.id === childId); if (!child) return []; return stories.filter(s => s.children?.name === child.name); };
@@ -503,9 +504,9 @@ export default function DashboardPage() {
           </div>
         )}
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
-          {sub && !isMobile && (
-            <span style={{ fontSize: '0.75rem', fontWeight: '700', padding: '4px 12px', borderRadius: '999px', background: sub.status === 'subscribed' ? '#E6F4EC' : '#FFF0E6', color: sub.status === 'subscribed' ? '#1a7a4a' : '#FF6B35' }}>
-              {sub.status === 'subscribed' ? (booksRemainingToday > 0 ? '✨ Story ready tonight!' : '🌙 New story tomorrow') : `${sub.free_stories_remaining} free stories left`}
+          {sub && !isMobile && sub.status !== 'subscribed' && (
+            <span style={{ fontSize: '0.75rem', fontWeight: '700', padding: '4px 12px', borderRadius: '999px', background: '#FFF0E6', color: '#FF6B35' }}>
+              {sub.free_stories_remaining} free {sub.free_stories_remaining === 1 ? 'story' : 'stories'} left
             </span>
           )}
           <button onClick={async () => { await supabase.auth.signOut(); window.location.href = '/'; }} style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', background: 'white', border: '1.5px solid #F0E4D0', borderRadius: '8px', padding: '6px 14px', cursor: 'pointer' }}>
@@ -529,11 +530,11 @@ export default function DashboardPage() {
               {sub && sub.status === 'subscribed' && (
                 <>
                   <span style={{ color: '#D1D5DB', fontSize: '0.8rem' }}>·</span>
-                  <span style={{ fontSize: '0.75rem', fontWeight: '600', padding: '3px 10px', borderRadius: '20px', background: booksRemainingToday > 0 ? '#F0FDF4' : '#FFF7ED', color: booksRemainingToday > 0 ? '#15803D' : '#C2410C', border: `1px solid ${booksRemainingToday > 0 ? '#BBF7D0' : '#FED7AA'}` }}>
-                    {booksRemainingToday > 0 ? `${booksRemainingToday} tonight` : 'New story tomorrow'}
+                  <span style={{ fontSize: '0.75rem', fontWeight: '600', padding: '3px 10px', borderRadius: '20px', background: '#F0FDF4', color: '#15803D', border: '1px solid #BBF7D0' }}>
+                    {booksRemainingToday}/{1 + (sub.extra_books_today ?? 0)} stories remaining today
                   </span>
                   <span style={{ fontSize: '0.75rem', fontWeight: '600', padding: '3px 10px', borderRadius: '20px', background: '#F5F3FF', color: '#6D28D9', border: '1px solid #DDD6FE' }}>
-                    {booksRemainingThisMonth} this month
+                    {booksRemainingThisMonth}/{daysInMonth} stories remaining this month
                   </span>
                 </>
               )}
