@@ -102,7 +102,12 @@ Requirements:
 3. ${child.name} is still the hero with the same appearance and personality
 4. ${isFinalVolume ? 'This is the FINAL volume of the series  -  bring the overall adventure to a satisfying, complete conclusion. Give the series a proper ending with a meaningful resolution.' : 'Leave a natural story hook at the end that sets up one more adventure.'}
 5. Include a warm, gentle moral lesson appropriate to this chapter
-6. End on a cosy, bedtime-appropriate note
+6. End with a warm goodnight or goodbye that settles the child toward sleep  -  but weave in a single cliffhanger seed on the final page. Choose whichever style fits the story's plot and the child's interests most naturally:
+   - DISCOVERY: the hero notices something mysterious just as their eyes grow heavy (a glowing door, an unrecognised star, a sealed note slipped under the mat)
+   - VISITOR: a gentle knock, a shadow, or a distant voice calls from somewhere unknown  -  just as the story closes, before it is answered
+   - OBJECT: a character quietly passes the hero something (a torn map, a magical item, a tiny key) and whispers they will need it for what is coming, then the hero drifts off holding it
+   - NARRATOR TEASE: after the goodnight, the narrator speaks one warm line directly to the child: "But little did [name] know... tomorrow would bring the biggest adventure yet."
+   The cliffhanger must feel like a natural part of the story, not bolted on at the end. Keep it gentle  -  curious and exciting, not scary. The page 5 image stays warm and sleepy; the hook lives in the words only.
 7. Use language appropriate for age ${child.age}: ${child.reading_level === 'beginner' ? 'short sentences, simple words' : child.reading_level === 'intermediate' ? 'flowing sentences, rich descriptions' : 'complex narrative, vivid imagery'}
 8. Split into exactly 5 pages, 2-4 paragraphs each
 9. For each page, write an image prompt. Copy the CHARACTER ANCHOR below word-for-word at the start, then describe only the scene action.
