@@ -28,26 +28,7 @@ export default function AdminPage() {
   const [newEmail, setNewEmail] = useState('');
   const [adding, setAdding] = useState(false);
   const [activeTab, setActiveTab] = useState<'feedback' | 'admins'>('feedback');
-  const [generatingFable, setGeneratingFable] = useState(false);
-  const [fableResult, setFableResult] = useState<string | null>(null);
 
-  const handleGenerateFable = async () => {
-    setGeneratingFable(true);
-    setFableResult(null);
-    try {
-      const res = await fetch('/api/admin/generate-fable', { method: 'POST' });
-      const data = await res.json();
-      if (data.success) {
-        setFableResult(`Generated ${Object.keys(data.poses).length} poses: ${Object.keys(data.poses).join(', ')}`);
-      } else {
-        setFableResult('Error: ' + (data.error || 'Unknown'));
-      }
-    } catch {
-      setFableResult('Failed to generate');
-    } finally {
-      setGeneratingFable(false);
-    }
-  };
 
   useEffect(() => {
     async function init() {
@@ -173,21 +154,6 @@ export default function AdminPage() {
           ))}
         </div>
 
-        {/* Generate Fable button */}
-        <div style={{ background: '#fff', border: '1px solid #F0E4D0', borderRadius: '12px', padding: '16px 20px', marginBottom: '20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
-          <div>
-            <p style={{ fontWeight: '600', fontSize: '0.9rem', color: '#0D183D', marginBottom: '2px' }}>Generate Fable character images</p>
-            <p style={{ fontSize: '0.8rem', color: '#5E6A7A' }}>Generates all 5 poses via Replicate and saves to Supabase. Run once  -  takes ~2 minutes.</p>
-            {fableResult && <p style={{ fontSize: '0.8rem', color: fableResult.startsWith('Error') ? '#991B1B' : '#1a7a4a', marginTop: '4px' }}>{fableResult}</p>}
-          </div>
-          <button
-            onClick={handleGenerateFable}
-            disabled={generatingFable}
-            style={{ padding: '0.6rem 1.25rem', background: '#FF6B35', color: '#fff', border: 'none', borderRadius: '8px', cursor: generatingFable ? 'not-allowed' : 'pointer', fontWeight: '600', fontSize: '0.85rem', opacity: generatingFable ? 0.7 : 1, whiteSpace: 'nowrap' }}
-          >
-            {generatingFable ? 'Generating... (~2 min)' : 'Generate Fable'}
-          </button>
-        </div>
 
         {/* Tabs */}
         <div style={{ display: 'flex', gap: '8px', marginBottom: '20px', background: '#F0EDE8', padding: '4px', borderRadius: '10px', width: 'fit-content' }}>
