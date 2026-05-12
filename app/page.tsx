@@ -645,7 +645,7 @@ export default function Home() {
               Your child&apos;s story from just 24¢.
             </h2>
             <p style={{ color: '#5E6A7A', fontWeight: 500, fontSize: '0.95rem', marginBottom: '0.5rem' }}>Simple, transparent pricing. Cancel anytime.</p>
-            <p style={{ color: '#FF6B35', fontWeight: 700, fontSize: '0.85rem' }}>Be among the first families to try TalePop.</p>
+            <p style={{ color: '#FF6B35', fontWeight: 700, fontSize: '0.85rem' }}>Tonight's story is already waiting for them.</p>
           </div>
 
           <div className="two-col" style={{ marginTop: '3rem' }}>
