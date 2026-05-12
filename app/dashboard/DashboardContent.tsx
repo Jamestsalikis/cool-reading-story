@@ -571,17 +571,19 @@ export default function DashboardPage() {
                 {/* Continue reading hero */}
                 {mostRecentStory && (
                   <div className="continue-card" onClick={() => router.push(`/stories/${mostRecentStory.id}`)}
-                    style={{ borderRadius: '20px', overflow: 'hidden', position: 'relative', height: isMobile ? '180px' : '220px', cursor: 'pointer', boxShadow: '0 8px 32px rgba(0,0,0,0.14)', background: mostRecentCover ? 'transparent' : mostRecentPalette.cover }}>
-                    {mostRecentCover && <div style={{ position: 'absolute', inset: 0, backgroundImage: `url(${mostRecentCover})`, backgroundSize: 'cover', backgroundPosition: 'center top' }} />}
-                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%)' }} />
+                    style={{ borderRadius: '20px', overflow: 'hidden', position: 'relative', height: isMobile ? '180px' : '220px', cursor: 'pointer', boxShadow: '0 8px 32px rgba(0,0,0,0.18)', backgroundImage: 'url(/continue-bg.svg)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+                    {/* Story cover image blended into right side when available */}
+                    {mostRecentCover && <div style={{ position: 'absolute', inset: 0, backgroundImage: `url(${mostRecentCover})`, backgroundSize: 'cover', backgroundPosition: 'center top', opacity: 0.35 }} />}
+                    {/* Left-to-right gradient keeps text readable over any background */}
+                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(30,10,0,0.82) 0%, rgba(20,6,0,0.55) 45%, rgba(0,0,0,0.08) 100%)' }} />
                     <div style={{ position: 'absolute', bottom: '24px', left: '28px' }}>
-                      <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '0.7rem', fontWeight: '800', letterSpacing: '0.1em', marginBottom: '6px', textTransform: 'uppercase' }}>
-                        Continue reading · {mostRecentStory.children?.name}
+                      <p style={{ color: 'rgba(255,210,140,0.85)', fontSize: '0.68rem', fontWeight: '800', letterSpacing: '0.12em', marginBottom: '6px', textTransform: 'uppercase' }}>
+                        ▶ Continue reading · {mostRecentStory.children?.name}
                       </p>
-                      <p style={{ fontFamily: 'Fredoka, cursive', fontSize: 'clamp(1.1rem, 3vw, 1.5rem)', color: '#fff', marginBottom: '14px', lineHeight: 1.2, maxWidth: '400px' }}>
+                      <p style={{ fontFamily: 'Fredoka, cursive', fontSize: 'clamp(1.1rem, 3vw, 1.5rem)', color: '#fff', marginBottom: '14px', lineHeight: 1.2, maxWidth: '400px', textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}>
                         {mostRecentStory.title}
                       </p>
-                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: '#FF6B35', color: '#fff', padding: '0.5rem 1.25rem', borderRadius: '10px', fontWeight: '700', fontSize: '0.875rem', boxShadow: '0 2px 10px rgba(255,107,53,0.4)' }}>
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: '#FF6B35', color: '#fff', padding: '0.5rem 1.25rem', borderRadius: '10px', fontWeight: '700', fontSize: '0.875rem', boxShadow: '0 2px 12px rgba(255,107,53,0.5)' }}>
                         Keep reading →
                       </span>
                     </div>
@@ -847,14 +849,4 @@ export default function DashboardPage() {
             const active = activeNav === id;
             return (
               <button key={id} onClick={() => setActiveNav(id)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '3px', border: 'none', background: 'none', cursor: 'pointer', color: active ? '#FF6B35' : '#9CA8B4', padding: '8px 12px', flex: 1 }}>
-                <Icon size={22} />
-                <span style={{ fontSize: '0.6rem', fontWeight: active ? '700' : '500', letterSpacing: '0.04em', textTransform: 'uppercase' }}>{label}</span>
-              </button>
-            );
-          })}
-        </div>
-      )}
-    </div>
-  );
-}
-
+                <I
