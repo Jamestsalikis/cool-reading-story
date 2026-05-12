@@ -452,6 +452,21 @@ export default function DashboardPage() {
     } finally { setGenerating(null); }
   };
 
+  const handleBuyExtraBook = async () => {
+    try {
+      const res = await fetch('/api/stripe/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ plan: 'extra_book' }),
+      });
+      const data = await res.json();
+      if (data.url) window.location.href = data.url;
+      else setGenerateError('Could not start checkout. Please try again.');
+    } catch {
+      setGenerateError('Could not start checkout. Please try again.');
+    }
+  };
+
   const navItems = [
     { id: 'stories', label: 'Stories', icon: BookOpen },
     { id: 'children', label: 'Children', icon: Users },
@@ -628,12 +643,17 @@ export default function DashboardPage() {
                           </div>
                         </div>
                         <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-                          <button onClick={() => handleGenerateStory(child.id)}
-                            disabled={!!generating || (sub?.status === 'subscribed' && childStoriesUsedToday.has(child.name))}
-                            title={sub?.status === 'subscribed' && childStoriesUsedToday.has(child.name) ? `${child.name} already has a story for today` : undefined}
-                            style={{ padding: '0.6rem 1.2rem', borderRadius: '10px', border: `2px solid ${palette.cover}`, background: 'white', color: palette.cover, cursor: (generating || (sub?.status === 'subscribed' && childStoriesUsedToday.has(child.name))) ? 'not-allowed' : 'pointer', fontWeight: '700', fontSize: '0.85rem', opacity: (generating || (sub?.status === 'subscribed' && childStoriesUsedToday.has(child.name))) ? 0.4 : 1, display: 'flex', alignItems: 'center', gap: '6px' }}>
-                            <Plus size={14} /> New story
-                          </button>
+                          {sub?.status === 'subscribed' && childStoriesUsedToday.has(child.name) ? (
+                            <button onClick={handleBuyExtraBook} disabled={!!generating}
+                              style={{ padding: '0.6rem 1.2rem', borderRadius: '10px', border: '2px solid #FF6B35', background: '#FF6B35', color: '#fff', cursor: generating ? 'not-allowed' : 'pointer', fontWeight: '700', fontSize: '0.85rem', opacity: generating ? 0.6 : 1, display: 'flex', alignItems: 'center', gap: '6px' }}>
+                              <Plus size={14} /> Extra story – 99¢
+                            </button>
+                          ) : (
+                            <button onClick={() => handleGenerateStory(child.id)} disabled={!!generating}
+                              style={{ padding: '0.6rem 1.2rem', borderRadius: '10px', border: `2px solid ${palette.cover}`, background: 'white', color: palette.cover, cursor: generating ? 'not-allowed' : 'pointer', fontWeight: '700', fontSize: '0.85rem', opacity: generating ? 0.6 : 1, display: 'flex', alignItems: 'center', gap: '6px' }}>
+                              <Plus size={14} /> New story
+                            </button>
+                          )}
                         </div>
                       </div>
 
