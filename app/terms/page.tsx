@@ -51,7 +51,7 @@ function Footer() {
       <p style={{ margin: '0 0 8px' }}>
         <Link href="/privacy" style={{ color: cream, textDecoration: 'none', marginRight: '16px' }}>Privacy Policy</Link>
         <Link href="/terms" style={{ color: cream, textDecoration: 'none', marginRight: '16px' }}>Terms of Service</Link>
-        <a href="mailto:hello@talepop.com" style={{ color: cream, textDecoration: 'none' }}>hello@talepop.com</a>
+        <a href="mailto:info@talepopstories.com" style={{ color: cream, textDecoration: 'none' }}>info@talepopstories.com</a>
       </p>
       <p style={{ margin: 0, color: muted }}>© {new Date().getFullYear()} TalePop. All rights reserved.</p>
     </footer>
@@ -252,7 +252,7 @@ export default function TermsOfServicePage() {
           </P>
           <P>
             If you suspect unauthorised access to your account, notify us immediately at{' '}
-            <a href="mailto:hello@talepop.com" style={{ color: orange }}>hello@talepop.com</a>. We are not
+            <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a>. We are not
             liable for any loss or damage resulting from unauthorised access due to your failure to protect
             your credentials.
           </P>
@@ -312,7 +312,7 @@ export default function TermsOfServicePage() {
           <P>
             We offer a full refund if requested within 14 days of your initial subscription payment, provided
             you have not generated more than 5 personalised stories during that period. To request a refund,
-            contact <a href="mailto:hello@talepop.com" style={{ color: orange }}>hello@talepop.com</a>.
+            contact <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a>.
           </P>
           <InfoBox variant="green">
             <strong>Australian Consumer Law:</strong> Subscription fees and billing practices are subject to
@@ -342,7 +342,7 @@ export default function TermsOfServicePage() {
             <Li>
               You should review generated stories before sharing them with your child. If you encounter
               content you consider inappropriate, please report it to{' '}
-              <a href="mailto:hello@talepop.com" style={{ color: orange }}>hello@talepop.com</a>.
+              <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a>.
             </Li>
             <Li>
               Generated stories and illustrations are provided for personal, non-commercial family use.
@@ -359,7 +359,7 @@ export default function TermsOfServicePage() {
             by their parent or legal guardian. All such data is handled in accordance with the Children's
             Online Privacy Protection Act (COPPA, 16 C.F.R. Part 312). Parents may review, correct, or
             request deletion of their child's personal information at any time by contacting{' '}
-            <a href="mailto:hello@talepop.com" style={{ color: orange, fontWeight: 600 }}>hello@talepop.com</a>.
+            <a href="mailto:info@talepopstories.com" style={{ color: orange, fontWeight: 600 }}>info@talepopstories.com</a>.
           </InfoBox>
         </Section>
 
@@ -411,7 +411,7 @@ export default function TermsOfServicePage() {
           </P>
           <P>
             If you believe TalePop has failed to meet a consumer guarantee, please contact us at{' '}
-            <a href="mailto:hello@talepop.com" style={{ color: orange }}>hello@talepop.com</a> in the
+            <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a> in the
             first instance. We will work with you to provide a fair remedy.
           </P>
         </Section>
@@ -523,7 +523,7 @@ export default function TermsOfServicePage() {
           </P>
           <Ol>
             <Li>
-              Contact us at <a href="mailto:hello@talepop.com" style={{ color: orange }}>hello@talepop.com</a>{' '}
+              Contact us at <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a>{' '}
               with a clear description of your concern, what you believe has gone wrong, and what outcome
               you are seeking.
             </Li>
@@ -568,7 +568,7 @@ export default function TermsOfServicePage() {
           <Ul>
             <Li>
               <strong>Email:</strong>{' '}
-              <a href="mailto:hello@talepop.com" style={{ color: orange }}>hello@talepop.com</a>
+              <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a>
             </Li>
           </Ul>
           <P>
