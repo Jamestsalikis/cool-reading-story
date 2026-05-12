@@ -35,6 +35,25 @@ export async function POST(request: Request) {
     const child = sourceStory.children;
     const volumeNumber = (sourceStory.volume_number ?? 1) + 1;
 
+    // Per-child daily limit: each child can only receive 1 story per day.
+    // This prevents a parent from using additional-child credits to generate
+    // multiple stories for the same child.
+    if (paywallResult.reason === 'subscribed') {
+      const todayStart = new Date();
+      todayStart.setHours(0, 0, 0, 0);
+      const { count: storiesForChildToday } = await supabase
+        .from('stories')
+        .select('id', { count: 'exact', head: true })
+        .eq('child_id', child.id)
+        .gte('created_at', todayStart.toISOString());
+      if ((storiesForChildToday ?? 0) >= 1) {
+        return NextResponse.json(
+          { error: `${child.name} already has a story for today. Each child gets one story per day.` },
+          { status: 429 }
+        );
+      }
+    }
+
     if (volumeNumber > 4) {
       return NextResponse.json({ error: 'Series is complete (max 4 volumes)' }, { status: 400 });
     }
