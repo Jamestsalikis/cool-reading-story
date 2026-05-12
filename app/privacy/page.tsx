@@ -434,35 +434,35 @@ export default function PrivacyPolicyPage() {
                 <Td>Australia (ap-southeast-2 region)</Td>
                 <Td>Database and authentication — all account and profile data is stored here</Td>
                 <Td>Parent account, child profiles (name, age, gender, interests, appearance descriptors, generated stories)</Td>
-                <Td><a href="https://supabase.com/privacy" style={{ color: orange }}>supabase.com/privacy</a></Td>
+                <Td><a href="https://supabase.com/privacy" style={{ color: orange }} target="_blank" rel="noopener noreferrer">supabase.com/privacy</a></Td>
               </Tr>
               <Tr shade>
                 <Td><strong>Anthropic (Claude API)</strong></Td>
                 <Td>United States</Td>
                 <Td>AI story text generation — the Claude API generates the story narrative based on the child's profile</Td>
                 <Td>Child's name, age, gender, interests, reading level, and optionally appearance descriptors, sibling names, friend names, pet name, city, and country — as entered by the parent</Td>
-                <Td><a href="https://www.anthropic.com/privacy" style={{ color: orange }}>anthropic.com/privacy</a></Td>
+                <Td><a href="https://www.anthropic.com/privacy" style={{ color: orange }} target="_blank" rel="noopener noreferrer">anthropic.com/privacy</a></Td>
               </Tr>
               <Tr>
                 <Td><strong>Replicate (Flux Schnell API)</strong></Td>
                 <Td>United States</Td>
                 <Td>AI illustration generation — the Flux Schnell model generates illustrations for each story page</Td>
                 <Td>Image description prompts derived from the child profile, including appearance descriptors and scene descriptions from the story</Td>
-                <Td><a href="https://replicate.com/privacy" style={{ color: orange }}>replicate.com/privacy</a></Td>
+                <Td><a href="https://replicate.com/privacy" style={{ color: orange }} target="_blank" rel="noopener noreferrer">replicate.com/privacy</a></Td>
               </Tr>
               <Tr shade>
                 <Td><strong>Stripe</strong></Td>
                 <Td>United States</Td>
                 <Td>Subscription payment processing</Td>
                 <Td>Parent email address and payment card details only — no child data is transmitted to Stripe</Td>
-                <Td><a href="https://stripe.com/privacy" style={{ color: orange }}>stripe.com/privacy</a></Td>
+                <Td><a href="https://stripe.com/privacy" style={{ color: orange }} target="_blank" rel="noopener noreferrer">stripe.com/privacy</a></Td>
               </Tr>
               <Tr>
                 <Td><strong>Vercel</strong></Td>
                 <Td>United States</Td>
                 <Td>Web hosting and application deployment</Td>
                 <Td>Web traffic logs (IP address, request metadata) — no structured child profile data</Td>
-                <Td><a href="https://vercel.com/legal/privacy-policy" style={{ color: orange }}>vercel.com/privacy</a></Td>
+                <Td><a href="https://vercel.com/legal/privacy-policy" style={{ color: orange }} target="_blank" rel="noopener noreferrer">vercel.com/privacy</a></Td>
               </Tr>
             </tbody>
           </Table>
@@ -682,15 +682,15 @@ export default function PrivacyPolicyPage() {
           <Ul>
             <Li>
               <strong>Australia:</strong> Office of the Australian Information Commissioner (OAIC) —{' '}
-              <a href="https://www.oaic.gov.au" style={{ color: orange }}>oaic.gov.au</a>
+              <a href="https://www.oaic.gov.au" style={{ color: orange }} target="_blank" rel="noopener noreferrer">oaic.gov.au</a>
             </Li>
             <Li>
               <strong>United Kingdom:</strong> Information Commissioner's Office (ICO) —{' '}
-              <a href="https://ico.org.uk" style={{ color: orange }}>ico.org.uk</a>
+              <a href="https://ico.org.uk" style={{ color: orange }} target="_blank" rel="noopener noreferrer">ico.org.uk</a>
             </Li>
             <Li>
               <strong>United States:</strong> Federal Trade Commission (FTC) —{' '}
-              <a href="https://www.ftc.gov" style={{ color: orange }}>ftc.gov</a>, or your relevant state
+              <a href="https://www.ftc.gov" style={{ color: orange }} target="_blank" rel="noopener noreferrer">ftc.gov</a>, or your relevant state
               Attorney General's office
             </Li>
           </Ul>

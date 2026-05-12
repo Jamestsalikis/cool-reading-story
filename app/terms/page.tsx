@@ -537,17 +537,17 @@ export default function TermsOfServicePage() {
               <Ul>
                 <Li>
                   <strong>Australia:</strong> Australian Competition and Consumer Commission (ACCC) at{' '}
-                  <a href="https://www.accc.gov.au" style={{ color: orange }}>accc.gov.au</a>, or your
+                  <a href="https://www.accc.gov.au" style={{ color: orange }} target="_blank" rel="noopener noreferrer">accc.gov.au</a>, or your
                   relevant state or territory fair trading office
                 </Li>
                 <Li>
                   <strong>United Kingdom:</strong> Citizens Advice at{' '}
-                  <a href="https://www.citizensadvice.org.uk" style={{ color: orange }}>citizensadvice.org.uk</a>,
+                  <a href="https://www.citizensadvice.org.uk" style={{ color: orange }} target="_blank" rel="noopener noreferrer">citizensadvice.org.uk</a>,
                   or your local Trading Standards office
                 </Li>
                 <Li>
                   <strong>United States:</strong> Federal Trade Commission (FTC) at{' '}
-                  <a href="https://www.ftc.gov" style={{ color: orange }}>ftc.gov</a>, or your relevant
+                  <a href="https://www.ftc.gov" style={{ color: orange }} target="_blank" rel="noopener noreferrer">ftc.gov</a>, or your relevant
                   state attorney general's consumer protection division
                 </Li>
               </Ul>

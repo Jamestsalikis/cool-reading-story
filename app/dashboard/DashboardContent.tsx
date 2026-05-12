@@ -250,7 +250,7 @@ function EditChildModal({ child, palette, onClose, onSaved }: { child: ChildReco
   const inp: React.CSSProperties = { width: '100%', padding: '0.6rem 0.875rem', border: '1.5px solid #F0E4D0', borderRadius: '8px', fontSize: '0.9rem', outline: 'none', background: '#fff' };
   const chip = (active: boolean): React.CSSProperties => ({ cursor: 'pointer', borderRadius: '8px', fontWeight: '500', fontSize: '0.8rem', padding: '0.4rem 0.8rem', border: `1.5px solid ${active ? palette.cover : '#F0E4D0'}`, background: active ? palette.cover : '#fff', color: active ? '#fff' : '#0D183D' });
   return (
-    <div style={{ position: 'fixed', inset: 0, zIndex: 200, background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(3px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
+    <div style={{ position: 'fixed', inset: 0, zIndex: 1000, background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(3px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
       <div style={{ background: '#FFFEF9', borderRadius: '16px', padding: '28px', maxWidth: '560px', width: '100%', maxHeight: '85vh', overflowY: 'auto', boxShadow: '0 24px 60px rgba(0,0,0,0.2)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
           <h2 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.3rem', color: '#0D183D' }}>Edit {child.name}&apos;s profile</h2>
@@ -404,7 +404,7 @@ export default function DashboardPage() {
       const res = await fetch('/api/generate-story', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ child_id: childId }) });
       const data = await res.json();
       if (res.status === 402) { setPaywallReason(data.reason); return; }
-      if (!res.ok) { setGenerateError(data.message || 'Something went wrong.'); return; }
+      if (!res.ok) { setGenerateError(data.error || data.message || 'Something went wrong. Please try again.'); return; }
       const storyId = data.story?.id;
       if (!storyId) { await fetchData(); return; }
       setGenerating(`painting-${childId}`);

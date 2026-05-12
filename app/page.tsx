@@ -618,8 +618,8 @@ export default function Home() {
             <p style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.45)', fontWeight: 700, letterSpacing: '0.06em' }}>LAST STORY DELIVERED</p>
           </div>
           {[
-            { n: '2,500+', label: 'adventures begun' },
-            { n: '4.9 ★', label: 'from parents' },
+            { n: '3', label: 'free stories to start' },
+            { n: '1/day', label: 'story per child' },
             { n: '24¢', label: 'per story' },
           ].map(s => (
             <div key={s.n} style={{ textAlign: 'center' }}>
@@ -638,14 +638,14 @@ export default function Home() {
       </div>
 
       {/* ─── Pricing ─── */}
-      <section id="pricing" style={{ background: '#FFF4E6', padding: '6rem 2rem' }}>
+      <section id="pricing" style={{ background: '#FFF4E6', padding: '3rem 2rem 6rem' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
             <h2 className="font-serif" style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', color: '#0D183D', marginBottom: '0.5rem', letterSpacing: '-0.01em' }}>
               Your child&apos;s story from just 24¢.
             </h2>
             <p style={{ color: '#5E6A7A', fontWeight: 500, fontSize: '0.95rem', marginBottom: '0.5rem' }}>Simple, transparent pricing. Cancel anytime.</p>
-            <p style={{ color: '#FF6B35', fontWeight: 700, fontSize: '0.85rem' }}>Join 2,500+ families already reading tonight.</p>
+            <p style={{ color: '#FF6B35', fontWeight: 700, fontSize: '0.85rem' }}>Be among the first families to try TalePop.</p>
           </div>
 
           <div className="two-col" style={{ marginTop: '3rem' }}>
