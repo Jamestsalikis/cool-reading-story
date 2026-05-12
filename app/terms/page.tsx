@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description: 'Terms and conditions governing use of TalePop\'s personalised children\'s story service.',
 };
 
-const updated = '11 May 2026';
+const updated = '12 May 2026';
 
 /* ─── Brand tokens ─────────────────────────────────────── */
 const navy   = '#0D183D';
@@ -73,14 +73,6 @@ function Ol({ children }: { children: React.ReactNode }) {
 
 function Li({ children }: { children: React.ReactNode }) {
   return <li style={{ marginBottom: '6px' }}>{children}</li>;
-}
-
-function LawyerTag({ children }: { children: React.ReactNode }) {
-  return (
-    <strong style={{ color: '#B45309', backgroundColor: '#FEF3C7', padding: '1px 4px', borderRadius: '3px', fontSize: '0.875em' }}>
-      [LAWYER: {children}]
-    </strong>
-  );
 }
 
 function InfoBox({ children, variant = 'orange' }: { children: React.ReactNode; variant?: 'orange' | 'green' | 'navy' }) {
@@ -202,8 +194,7 @@ export default function TermsOfServicePage() {
         <Section id="about" title="1. About These Terms">
           <P>
             These Terms of Service ("Terms") form a legally binding agreement between you (the parent or
-            guardian who created the account) and TalePop, operated by{' '}
-            <LawyerTag>Insert registered company name</LawyerTag> ABN <LawyerTag>Insert ABN</LawyerTag>{' '}
+            guardian who created the account) and TalePop, an online service operated from Australia
             ("TalePop," "we," "us," or "our").
           </P>
           <P>
@@ -579,42 +570,11 @@ export default function TermsOfServicePage() {
               <strong>Email:</strong>{' '}
               <a href="mailto:hello@talepop.com" style={{ color: orange }}>hello@talepop.com</a>
             </Li>
-            <Li>
-              <strong>Registered business address:</strong>{' '}
-              <LawyerTag>Insert registered business address</LawyerTag>
-            </Li>
           </Ul>
           <P>
             We aim to respond to all enquiries within 2 business days.
           </P>
         </Section>
-
-        {/* ── Draft note at bottom ── */}
-        <div style={{
-          backgroundColor: '#FEF3C7',
-          border: '1.5px solid #D97706',
-          borderRadius: '10px',
-          padding: '16px 20px',
-          marginTop: '48px',
-        }}>
-          <p style={{ margin: '0 0 8px', fontWeight: 700, color: '#92400E', fontSize: '0.9rem' }}>
-            DRAFT NOTE FOR LEGAL REVIEW
-          </p>
-          <p style={{ margin: 0, color: '#78350F', fontSize: '0.875rem', lineHeight: '1.7' }}>
-            This Terms of Service has been drafted to address Australian Consumer Law, UK Consumer Rights
-            Act 2015, COPPA, and CCPA requirements.{' '}
-            <LawyerTag>
-              Please review specifically: (1) ACL unfair contract terms audit of all clauses — ensure no
-              clause creates a significant imbalance in the parties' rights and obligations; (2) auto-renewal
-              disclosure compliance with ACCC guidelines on subscription traps; (3) UK Consumer Rights Act
-              2015 compliance for all terms affecting UK consumers, including the fairness test for standard
-              terms; (4) COPPA operator accountability provisions for Anthropic and Replicate as data
-              processors handling child profile data — confirm data processing agreements are in place;
-              (5) confirm ABN, registered company name, and registered address before launch and insert
-              throughout.
-            </LawyerTag>
-          </p>
-        </div>
 
       </main>
 
