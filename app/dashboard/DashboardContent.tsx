@@ -572,9 +572,9 @@ export default function DashboardPage() {
                 {mostRecentStory && (
                   <div className="continue-card" onClick={() => router.push(`/stories/${mostRecentStory.id}`)}
                     style={{ borderRadius: '20px', overflow: 'hidden', position: 'relative', height: isMobile ? '180px' : '220px', cursor: 'pointer', boxShadow: '0 8px 32px rgba(0,0,0,0.18)', backgroundImage: 'url(/continue-bg.svg)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
-                    {/* Story cover image blended into right side when available */}
+                    {/* Story cover blended into right side when available */}
                     {mostRecentCover && <div style={{ position: 'absolute', inset: 0, backgroundImage: `url(${mostRecentCover})`, backgroundSize: 'cover', backgroundPosition: 'center top', opacity: 0.35 }} />}
-                    {/* Left-to-right gradient keeps text readable over any background */}
+                    {/* Left-to-right gradient keeps text readable */}
                     <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(30,10,0,0.82) 0%, rgba(20,6,0,0.55) 45%, rgba(0,0,0,0.08) 100%)' }} />
                     <div style={{ position: 'absolute', bottom: '24px', left: '28px' }}>
                       <p style={{ color: 'rgba(255,210,140,0.85)', fontSize: '0.68rem', fontWeight: '800', letterSpacing: '0.12em', marginBottom: '6px', textTransform: 'uppercase' }}>
@@ -849,4 +849,14 @@ export default function DashboardPage() {
             const active = activeNav === id;
             return (
               <button key={id} onClick={() => setActiveNav(id)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '3px', border: 'none', background: 'none', cursor: 'pointer', color: active ? '#FF6B35' : '#9CA8B4', padding: '8px 12px', flex: 1 }}>
-                <I
+                <Icon size={22} />
+                <span style={{ fontSize: '0.6rem', fontWeight: active ? '700' : '500', letterSpacing: '0.04em', textTransform: 'uppercase' }}>{label}</span>
+              </button>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
