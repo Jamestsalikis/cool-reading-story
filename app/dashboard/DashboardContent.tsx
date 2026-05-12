@@ -392,6 +392,16 @@ export default function DashboardPage() {
     booksRemainingThisMonth = (daysInMonth - now.getDate() + 1) - ((sub.stories_today ?? 0) > 0 ? 1 : 0);
   }
 
+  // Per-child: which children have already received a story today?
+  const todayStr = new Date().toISOString().split('T')[0];
+  const childStoriesUsedToday = new Set(
+    stories
+      .filter(s => s.created_at && s.created_at.startsWith(todayStr))
+      .map(s => s.children?.name)
+      .filter(Boolean)
+  );
+  const childrenAvailableToday = children.filter(c => !childStoriesUsedToday.has(c.name)).length;
+
   const storiesByChild = (childId: string) => { const child = children.find(c => c.id === childId); if (!child) return []; return stories.filter(s => s.children?.name === child.name); };
   const isSeriesComplete = (childId: string) => { const latest = storiesByChild(childId)[0]; if (!latest?.series_id) return false; return stories.filter(s => s.series_id === latest.series_id).some(s => s.volume_number === 4); };
 
@@ -530,8 +540,8 @@ export default function DashboardPage() {
               {sub && sub.status === 'subscribed' && (
                 <>
                   <span style={{ color: '#D1D5DB', fontSize: '0.8rem' }}>·</span>
-                  <span style={{ fontSize: '0.75rem', fontWeight: '600', padding: '3px 10px', borderRadius: '20px', background: '#F0FDF4', color: '#15803D', border: '1px solid #BBF7D0' }}>
-                    {booksRemainingToday}/{1 + (sub.extra_books_today ?? 0)} stories remaining today
+                  <span style={{ fontSize: '0.75rem', fontWeight: '600', padding: '3px 10px', borderRadius: '20px', background: childrenAvailableToday > 0 ? '#F0FDF4' : '#F9FAFB', color: childrenAvailableToday > 0 ? '#15803D' : '#9CA8B4', border: `1px solid ${childrenAvailableToday > 0 ? '#BBF7D0' : '#E5E7EB'}` }}>
+                    {childrenAvailableToday}/{children.length} {children.length === 1 ? 'child' : 'children'} available today
                   </span>
                   <span style={{ fontSize: '0.75rem', fontWeight: '600', padding: '3px 10px', borderRadius: '20px', background: '#F5F3FF', color: '#6D28D9', border: '1px solid #DDD6FE' }}>
                     {booksRemainingThisMonth}/{daysInMonth} stories remaining this month
@@ -607,12 +617,21 @@ export default function DashboardPage() {
                           <span style={{ fontSize: '2.2rem', lineHeight: 1 }}>{palette.emoji}</span>
                           <div>
                             <h3 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.3rem', color: '#0D183D', fontWeight: '400', marginBottom: '2px' }}>{child.name}&apos;s Library</h3>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                             <p style={{ fontSize: '0.78rem', color: '#5E6A7A' }}>{storiesByChild(child.id).length} {storiesByChild(child.id).length === 1 ? 'story' : 'stories'}</p>
+                            {sub?.status === 'subscribed' && (
+                              <span style={{ fontSize: '0.68rem', fontWeight: '700', padding: '2px 8px', borderRadius: '20px', background: childStoriesUsedToday.has(child.name) ? '#F3F4F6' : '#F0FDF4', color: childStoriesUsedToday.has(child.name) ? '#9CA8B4' : '#15803D', border: `1px solid ${childStoriesUsedToday.has(child.name) ? '#E5E7EB' : '#BBF7D0'}` }}>
+                                {childStoriesUsedToday.has(child.name) ? '✓ Story used today' : '⚡ Story ready'}
+                              </span>
+                            )}
+                          </div>
                           </div>
                         </div>
                         <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-                          <button onClick={() => handleGenerateStory(child.id)} disabled={!!generating}
-                            style={{ padding: '0.6rem 1.2rem', borderRadius: '10px', border: `2px solid ${palette.cover}`, background: 'white', color: palette.cover, cursor: generating ? 'not-allowed' : 'pointer', fontWeight: '700', fontSize: '0.85rem', opacity: generating ? 0.6 : 1, display: 'flex', alignItems: 'center', gap: '6px' }}>
+                          <button onClick={() => handleGenerateStory(child.id)}
+                            disabled={!!generating || (sub?.status === 'subscribed' && childStoriesUsedToday.has(child.name))}
+                            title={sub?.status === 'subscribed' && childStoriesUsedToday.has(child.name) ? `${child.name} already has a story for today` : undefined}
+                            style={{ padding: '0.6rem 1.2rem', borderRadius: '10px', border: `2px solid ${palette.cover}`, background: 'white', color: palette.cover, cursor: (generating || (sub?.status === 'subscribed' && childStoriesUsedToday.has(child.name))) ? 'not-allowed' : 'pointer', fontWeight: '700', fontSize: '0.85rem', opacity: (generating || (sub?.status === 'subscribed' && childStoriesUsedToday.has(child.name))) ? 0.4 : 1, display: 'flex', alignItems: 'center', gap: '6px' }}>
                             <Plus size={14} /> New story
                           </button>
                         </div>
