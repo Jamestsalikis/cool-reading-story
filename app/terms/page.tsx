@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description: 'Terms and conditions governing use of TalePop\'s personalised children\'s story service.',
 };
 
-const updated = '12 May 2026';
+const updated = '13 May 2026';
 
 /* ─── Brand tokens ─────────────────────────────────────── */
 const navy   = '#0D183D';
@@ -162,7 +162,7 @@ export default function TermsOfServicePage() {
         color: '#065F46',
         fontSize: '0.875rem',
       }}>
-        TalePop is available to users in <strong>Australia</strong>, the <strong>United Kingdom</strong>, and the{' '}
+        TalePop is available to users in <strong>Australia</strong>, <strong>Canada</strong>, and the{' '}
         <strong>United States</strong>. These Terms are governed by Australian law but include consumer
         protections required in each jurisdiction.
       </div>
@@ -198,8 +198,8 @@ export default function TermsOfServicePage() {
             ("TalePop," "we," "us," or "our").
           </P>
           <P>
-            TalePop provides an AI-powered personalised children's storytelling platform that generates
-            custom stories and illustrations featuring a child's name, interests, and personal details as
+            TalePop provides an AI-powered personalised children&apos;s storytelling platform that generates
+            custom stories and illustrations featuring a child&apos;s name, interests, and personal details as
             entered by the parent or guardian ("the Service").
           </P>
           <P>
@@ -224,19 +224,21 @@ export default function TermsOfServicePage() {
           <P>
             TalePop accounts are created and managed exclusively by adults. Children do not create accounts on
             TalePop and do not interact directly with the account management interface. All personal information
-            about a child is entered by the parent or guardian on the child's behalf.
+            about a child is entered by the parent or guardian on the child&apos;s behalf.
+          </P>
+          <P>
+            TalePop is currently available to users in Australia, Canada, and the United States. If you are
+            accessing the service from another country, you do so at your own risk and are responsible for
+            compliance with local laws.
           </P>
           <InfoBox variant="navy">
-            <strong>United Kingdom users:</strong> If you are accessing TalePop from the United Kingdom, you
-            confirm you are at least 18 years old. Under UK GDPR Article 8 and the Data Protection Act 2018,
-            the age of digital consent in the UK is 13. Children do not create accounts on TalePop — all
-            accounts are created and managed by adults on behalf of their family.
+            <strong>Canadian users:</strong> If you are accessing TalePop from Canada, you confirm you are at
+            least 18 years old (or the applicable age of majority in your province or territory). Under
+            Canada&apos;s Personal Information Protection and Electronic Documents Act (PIPEDA) and provincial
+            privacy legislation, meaningful consent for the collection and use of a child&apos;s personal information
+            requires parental or guardian authorisation. All accounts on TalePop are created and managed by
+            adults on behalf of their family.
           </InfoBox>
-          <P>
-            TalePop is currently available to users in Australia, the United Kingdom, and the United States.
-            If you are accessing the service from another country, you do so at your own risk and are
-            responsible for compliance with local laws.
-          </P>
         </Section>
 
         {/* ── Section 3 ── */}
@@ -273,28 +275,32 @@ export default function TermsOfServicePage() {
           </P>
           <Ul>
             <Li>
-              <strong>Free tier:</strong> Access to 3 pre-generated sample stories. No payment required.
-              Sample stories are not personalised to the child profile.
+              <strong>Free tier:</strong> Access to 3 complimentary stories to try the service. No payment required.
             </Li>
             <Li>
-              <strong>Monthly subscription:</strong> Full access to personalised story generation, unlimited
-              stories, and all current features. Billed monthly in advance.
+              <strong>Monthly subscription:</strong> Full access to personalised story generation and all current
+              features. Billed monthly in advance.
             </Li>
             <Li>
               <strong>Annual subscription:</strong> Full access at a discounted rate. Billed annually in advance.
             </Li>
+            <Li>
+              <strong>Extra story (one-time):</strong> A single additional story may be purchased for the current
+              day outside the standard daily limit.
+            </Li>
           </Ul>
           <P>
             Current pricing is displayed at the point of purchase. We reserve the right to change pricing with
-            30 days' notice. Price changes will not apply to your current billing period — they will take
+            30 days&apos; notice. Price changes will not apply to your current billing period — they will take
             effect from your next renewal date.
           </P>
 
           <p style={{ margin: '0 0 10px', fontWeight: 600, color: navy }}>4.2 Billing and Payment</p>
           <P>
-            Payments are processed by Stripe. By subscribing, you authorise TalePop to charge your nominated
-            payment method the applicable subscription fee at the start of each billing period. All amounts
-            are in Australian dollars (AUD) unless otherwise stated.
+            Payments are processed by our third-party payment service provider. By subscribing, you authorise
+            TalePop to charge your nominated payment method the applicable subscription fee at the start of
+            each billing period. All amounts are in Australian dollars (AUD) unless otherwise stated at the
+            point of purchase.
           </P>
           <P>
             If a payment fails, we will retry the payment and notify you by email. Continued payment failure
@@ -314,20 +320,31 @@ export default function TermsOfServicePage() {
             you have not generated more than 5 personalised stories during that period. To request a refund,
             contact <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a>.
           </P>
+
           <InfoBox variant="green">
             <strong>Australian Consumer Law:</strong> Subscription fees and billing practices are subject to
-            the Australian Consumer Law (ACL). Your statutory rights under the ACL — including rights to
-            remedies for services that fail to meet consumer guarantees — are not excluded by these Terms.
-            Nothing in this section limits any right you have under the ACL.
+            the Australian Consumer Law (ACL, Competition and Consumer Act 2010, Schedule 2). Your statutory
+            rights under the ACL — including rights to remedies for services that fail to meet consumer
+            guarantees — are not excluded by these Terms. Nothing in this section limits any right you have
+            under the ACL.
+          </InfoBox>
+
+          <InfoBox variant="navy">
+            <strong>Canadian consumers — Quebec distance contracts:</strong> If you are a Quebec resident, you
+            have the right to cancel a distance contract (including a subscription entered into online) within
+            10 days of receiving your contract confirmation, without providing a reason and without penalty,
+            pursuant to the Consumer Protection Act (RLRQ, c. P-40.1). To exercise this right, notify us at{' '}
+            <a href="mailto:info@talepopstories.com" style={{ color: navy, fontWeight: 600 }}>info@talepopstories.com</a>{' '}
+            within 10 days of account creation. Other Canadian provinces also provide cancellation rights under
+            their respective consumer protection legislation; contact us to exercise any such right.
           </InfoBox>
         </Section>
 
         {/* ── Section 5 ── */}
         <Section id="ai-content" title="5. AI-Generated Content">
           <P>
-            TalePop uses artificial intelligence (AI) to generate story text via the Anthropic Claude API
-            and illustrations via the Replicate Flux Schnell API. By using TalePop, you understand and
-            acknowledge the following:
+            TalePop uses artificial intelligence to generate story text and illustrations. By using TalePop,
+            you understand and acknowledge the following:
           </P>
           <Ul>
             <Li>
@@ -337,7 +354,7 @@ export default function TermsOfServicePage() {
             <Li>
               Story and illustration outputs may occasionally contain unexpected, imperfect, or
               unintended content. We implement content filtering and safety guidelines but cannot
-              guarantee that all outputs will meet every family's expectations.
+              guarantee that all outputs will meet every family&apos;s expectations.
             </Li>
             <Li>
               You should review generated stories before sharing them with your child. If you encounter
@@ -350,15 +367,19 @@ export default function TermsOfServicePage() {
             </Li>
             <Li>
               TalePop does not claim copyright in AI-generated outputs. The stories are generated for
-              your personal use.
+              your personal use only.
+            </Li>
+            <Li>
+              AI-generated content is creative fiction and is not intended to be factually accurate. Story
+              content should not be relied upon as educational fact.
             </Li>
           </Ul>
           <InfoBox variant="orange">
             <strong>COPPA Notice:</strong> We do not knowingly collect personal information from children
             under 13 for any purpose other than generating personalised stories for that child, as directed
-            by their parent or legal guardian. All such data is handled in accordance with the Children's
+            by their parent or legal guardian. All such data is handled in accordance with the Children&apos;s
             Online Privacy Protection Act (COPPA, 16 C.F.R. Part 312). Parents may review, correct, or
-            request deletion of their child's personal information at any time by contacting{' '}
+            request deletion of their child&apos;s personal information at any time by contacting{' '}
             <a href="mailto:info@talepopstories.com" style={{ color: orange, fontWeight: 600 }}>info@talepopstories.com</a>.
           </InfoBox>
         </Section>
@@ -370,13 +391,13 @@ export default function TermsOfServicePage() {
           </P>
           <Ul>
             <Li>Provide false, misleading, or fraudulent information when creating an account or child profile</Li>
-            <Li>Attempt to access or reverse-engineer TalePop's AI models, prompts, or backend systems</Li>
+            <Li>Attempt to access, probe, or reverse-engineer TalePop&apos;s AI systems, prompts, or backend infrastructure</Li>
             <Li>Use TalePop for any commercial purpose, including reselling or redistributing generated stories</Li>
             <Li>Use the service in any way that violates applicable laws or regulations, including privacy, child protection, and consumer protection laws</Li>
             <Li>Attempt to circumvent or disable content safety measures or filters</Li>
             <Li>Use automated tools, scripts, or bots to access the service at a rate beyond normal human usage</Li>
             <Li>Share your account credentials with others or create accounts on behalf of children</Li>
-            <Li>Submit profile information intended to generate content that is harmful, offensive, discriminatory, or in violation of any third party's rights</Li>
+            <Li>Submit profile information intended to generate content that is harmful, offensive, discriminatory, or in violation of any third party&apos;s rights</Li>
           </Ul>
           <P>
             We reserve the right to suspend or terminate your account if we reasonably believe you have
@@ -386,7 +407,9 @@ export default function TermsOfServicePage() {
         </Section>
 
         {/* ── Section 7 ── */}
-        <Section id="acl-guarantees" title="7. Australian Consumer Law Guarantees">
+        <Section id="acl-guarantees" title="7. Consumer Protections by Jurisdiction">
+
+          <p style={{ margin: '0 0 10px', fontWeight: 600, color: navy }}>7.1 Australia — Australian Consumer Law</p>
           <InfoBox variant="green">
             <strong>Your statutory rights under the Australian Consumer Law cannot be excluded.</strong>
           </InfoBox>
@@ -403,24 +426,48 @@ export default function TermsOfServicePage() {
             A service fails to meet the consumer guarantee of acceptable quality if it is not fit for the
             purpose for which services of that kind are commonly supplied (personalised story generation
             for children), not provided with due care and skill, or not provided within a reasonable time.
-          </P>
-          <P>
             Nothing in these Terms excludes, restricts, or modifies any right or remedy, or any guarantee,
             warranty, or other term or condition, implied or imposed by the Australian Consumer Law.
-            These statutory guarantees apply regardless of any other term in these Terms.
           </P>
           <P>
             If you believe TalePop has failed to meet a consumer guarantee, please contact us at{' '}
             <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a> in the
             first instance. We will work with you to provide a fair remedy.
           </P>
+
+          <p style={{ margin: '0 0 10px', fontWeight: 600, color: navy }}>7.2 Canada — Consumer Protection</p>
+          <P>
+            Canadian consumers have rights under applicable provincial consumer protection legislation,
+            including but not limited to the Consumer Protection Act 2002 (Ontario), the Consumer Protection
+            Act (RLRQ, c. P-40.1) (Quebec), the Business Practices and Consumer Protection Act (British
+            Columbia), and equivalent statutes in other provinces and territories. The federal Competition Act
+            (R.S.C. 1985, c. C-34) also applies to TalePop&apos;s business practices.
+          </P>
+          <P>
+            These provincial and federal rights cannot be overridden by TalePop&apos;s choice of Australian
+            governing law. Nothing in these Terms limits, excludes, or restricts any right you have under
+            applicable Canadian consumer protection law.
+          </P>
+
+          <p style={{ margin: '0 0 10px', fontWeight: 600, color: navy }}>7.3 United States — Consumer Protection</p>
+          <P>
+            US consumers have rights under applicable federal and state consumer protection laws, including
+            the Federal Trade Commission Act (15 U.S.C. §45) and equivalent state consumer protection
+            statutes. California consumers have additional rights under the California Consumer Privacy Act
+            (CCPA/CPRA) as described in our{' '}
+            <Link href="/privacy" style={{ color: orange }}>Privacy Policy</Link>.
+          </P>
+          <P>
+            Nothing in these Terms limits, excludes, or restricts any right you have under applicable US
+            federal or state consumer protection law.
+          </P>
         </Section>
 
         {/* ── Section 8 ── */}
         <Section id="disclaimer" title="8. Disclaimer of Warranties">
           <P>
-            To the maximum extent permitted by applicable law, TalePop is provided "as is" and "as
-            available" without warranties of any kind, whether express, implied, or statutory. We do
+            To the maximum extent permitted by applicable law, TalePop is provided &ldquo;as is&rdquo; and &ldquo;as
+            available&rdquo; without warranties of any kind, whether express, implied, or statutory. We do
             not warrant that:
           </P>
           <Ul>
@@ -431,19 +478,19 @@ export default function TermsOfServicePage() {
           </Ul>
           <P>
             This disclaimer applies to the maximum extent permitted by applicable law and does not affect
-            your statutory rights under the Australian Consumer Law, the UK Consumer Rights Act 2015, or
-            other applicable mandatory consumer protection legislation. In Australia and the United Kingdom,
-            implied guarantees and warranties that cannot be excluded by law continue to apply.
+            your statutory rights under the Australian Consumer Law or other applicable mandatory consumer
+            protection legislation in Australia, Canada, or the United States. Implied guarantees and
+            warranties that cannot be excluded by law continue to apply.
           </P>
         </Section>
 
         {/* ── Section 9 ── */}
         <Section id="liability" title="9. Limitation of Liability">
           <P>
-            To the maximum extent permitted by Australian law, UK law, and other applicable law, our total
-            aggregate liability to you for any claim arising from or related to your use of TalePop — whether
-            in contract, tort, negligence, under statute, or otherwise — is limited to the total amount you
-            paid to TalePop in the 30 days immediately preceding the event giving rise to the claim.
+            To the maximum extent permitted by applicable law, our total aggregate liability to you for any
+            claim arising from or related to your use of TalePop — whether in contract, tort, negligence,
+            under statute, or otherwise — is limited to the total amount you paid to TalePop in the 30 days
+            immediately preceding the event giving rise to the claim.
           </P>
           <P>
             We are not liable for any indirect, incidental, special, punitive, or consequential damages,
@@ -456,9 +503,10 @@ export default function TermsOfServicePage() {
           </P>
           <Ul>
             <Li>(a) any liability that cannot be excluded or limited under the Australian Consumer Law, including liability for major failures to comply with consumer guarantees</Li>
-            <Li>(b) any liability that cannot be excluded or limited under the UK Consumer Rights Act 2015</Li>
-            <Li>(c) any liability arising from our fraud or wilful misconduct</Li>
-            <Li>(d) any liability arising from our breach of our data protection and privacy obligations under the Privacy Act 1988 (Cth), UK GDPR, or COPPA</Li>
+            <Li>(b) any liability that cannot be excluded or limited under applicable Canadian consumer protection legislation, including provincial consumer protection statutes</Li>
+            <Li>(c) any liability that cannot be excluded or limited under applicable United States federal or state consumer protection law</Li>
+            <Li>(d) any liability arising from our fraud or wilful misconduct</Li>
+            <Li>(e) any liability arising from our breach of our data protection and privacy obligations under the Privacy Act 1988 (Cth), PIPEDA, or COPPA</Li>
           </Ul>
         </Section>
 
@@ -473,7 +521,7 @@ export default function TermsOfServicePage() {
             We may update these Terms at any time. When we make material changes, we will:
           </P>
           <Ul>
-            <Li>Update the "Last updated" date at the top of this page</Li>
+            <Li>Update the &ldquo;Last updated&rdquo; date at the top of this page</Li>
             <Li>Send an email notification to your registered account email address</Li>
             <Li>Where required by law, seek fresh consent before applying changes that materially alter your rights</Li>
           </Ul>
@@ -481,6 +529,11 @@ export default function TermsOfServicePage() {
             If you do not accept the updated Terms, you may close your account before the changes take
             effect. Continued use of the service after the effective date of updated Terms constitutes
             your acceptance of those changes.
+          </P>
+          <P>
+            For Quebec residents: material amendments to a distance contract require notice and, where
+            required by the Consumer Protection Act (RLRQ, c. P-40.1), your express agreement to the
+            amended terms before they take effect in relation to your subscription.
           </P>
         </Section>
 
@@ -497,10 +550,13 @@ export default function TermsOfServicePage() {
           </P>
           <Ul>
             <Li>
-              <strong>United Kingdom:</strong> If you are a consumer resident in the United Kingdom, you
-              have the benefit of mandatory consumer protections under UK law, including the Consumer
-              Rights Act 2015 and the UK GDPR, which cannot be excluded or overridden by a choice of
-              Australian law. Your statutory rights under UK law are unaffected.
+              <strong>Canada:</strong> If you are a consumer resident in Canada, you retain the benefit of
+              mandatory consumer protections under applicable federal and provincial law, including the
+              Competition Act (R.S.C. 1985, c. C-34), provincial consumer protection statutes, PIPEDA, and
+              Quebec Law 25. These rights cannot be displaced by a choice of Australian governing law.
+              Nothing in these Terms limits your right to bring a complaint before the Office of the Privacy
+              Commissioner of Canada, the Commission d&apos;accès à l&apos;information du Québec (for Quebec
+              residents), or any other applicable regulatory authority.
             </Li>
             <Li>
               <strong>California, United States:</strong> If you are a California resident, you have
@@ -537,18 +593,27 @@ export default function TermsOfServicePage() {
               <Ul>
                 <Li>
                   <strong>Australia:</strong> Australian Competition and Consumer Commission (ACCC) at{' '}
-                  <a href="https://www.accc.gov.au" style={{ color: orange }} target="_blank" rel="noopener noreferrer">accc.gov.au</a>, or your
-                  relevant state or territory fair trading office
+                  <a href="https://www.accc.gov.au" style={{ color: orange }} target="_blank" rel="noopener noreferrer">accc.gov.au</a>,
+                  or your relevant state or territory fair trading office
                 </Li>
                 <Li>
-                  <strong>United Kingdom:</strong> Citizens Advice at{' '}
-                  <a href="https://www.citizensadvice.org.uk" style={{ color: orange }} target="_blank" rel="noopener noreferrer">citizensadvice.org.uk</a>,
-                  or your local Trading Standards office
+                  <strong>Canada (federal):</strong> Office of the Privacy Commissioner of Canada (OPC) at{' '}
+                  <a href="https://www.priv.gc.ca" style={{ color: orange }} target="_blank" rel="noopener noreferrer">priv.gc.ca</a>{' '}
+                  for privacy matters; Competition Bureau Canada at{' '}
+                  <a href="https://www.competitionbureau.gc.ca" style={{ color: orange }} target="_blank" rel="noopener noreferrer">competitionbureau.gc.ca</a>{' '}
+                  for consumer protection matters
+                </Li>
+                <Li>
+                  <strong>Canada (Quebec):</strong> Office de la protection du consommateur (OPC) at{' '}
+                  <a href="https://www.opc.gouv.qc.ca" style={{ color: orange }} target="_blank" rel="noopener noreferrer">opc.gouv.qc.ca</a>,
+                  or the Commission d&apos;accès à l&apos;information du Québec (CAI) at{' '}
+                  <a href="https://www.cai.gouv.qc.ca" style={{ color: orange }} target="_blank" rel="noopener noreferrer">cai.gouv.qc.ca</a>{' '}
+                  for privacy matters; or your provincial Attorney General&apos;s office
                 </Li>
                 <Li>
                   <strong>United States:</strong> Federal Trade Commission (FTC) at{' '}
-                  <a href="https://www.ftc.gov" style={{ color: orange }} target="_blank" rel="noopener noreferrer">ftc.gov</a>, or your relevant
-                  state attorney general's consumer protection division
+                  <a href="https://www.ftc.gov" style={{ color: orange }} target="_blank" rel="noopener noreferrer">ftc.gov</a>,
+                  or your relevant state attorney general&apos;s consumer protection division
                 </Li>
               </Ul>
             </Li>
