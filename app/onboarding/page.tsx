@@ -421,7 +421,7 @@ export default function OnboardingPage() {
             <ProgressDots />
             <h1 className="font-serif" style={{ fontSize: '2rem', marginBottom: '8px', color: '#0D183D' }}>What does {state.name || 'your child'} love?</h1>
             <p style={{ color: state.interests.length >= 5 ? '#FF6B35' : '#5E6A7A', marginBottom: '32px', fontSize: '0.95rem' }}>
-              {state.interests.length >= 5 ? 'Maximum 5 selected — remove one to swap' : `Pick up to 5 — ${state.interests.length} selected so far`}
+              {state.interests.length >= 5 ? 'Maximum 5 selected. Remove one to swap.' : `Pick up to 5. ${state.interests.length} selected so far`}
             </p>
 
             <style>{`

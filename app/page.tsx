@@ -651,7 +651,7 @@ export default function Home() {
           <div className="two-col" style={{ marginTop: '3rem' }}>
             <div className="plan-card" style={{ border: '2px solid #F0E4D0', background: 'white' }}>
               <h3 className="font-serif" style={{ fontSize: '1.5rem', marginBottom: '0.4rem', color: '#0D183D' }}>Monthly</h3>
-              <p style={{ color: '#9CA8B4', marginBottom: '1.5rem', fontSize: '0.9rem', fontWeight: 500 }}>Flexible  -  cancel anytime</p>
+              <p style={{ color: '#9CA8B4', marginBottom: '1.5rem', fontSize: '0.9rem', fontWeight: 500 }}>Flexible, cancel anytime</p>
               <div style={{ marginBottom: '0.25rem' }}>
                 <span style={{ fontSize: '3.25rem', fontWeight: 900, color: '#FF6B35', letterSpacing: '-0.02em' }}>33¢</span>
                 <span style={{ color: '#9CA8B4', fontSize: '0.85rem', fontWeight: 600 }}> per story</span>
@@ -684,7 +684,7 @@ export default function Home() {
                 <span style={{ opacity: 0.85, fontSize: '0.85rem', fontWeight: 600 }}> per story</span>
               </div>
               <p style={{ fontSize: '0.95rem', fontWeight: 600, marginBottom: '0.25rem', opacity: 0.9 }}>$7.99 / month</p>
-              <p style={{ opacity: 0.65, fontSize: '0.75rem', marginBottom: '1.5rem', fontWeight: 500 }}>$95.88 billed annually — two months free</p>
+              <p style={{ opacity: 0.65, fontSize: '0.75rem', marginBottom: '1.5rem', fontWeight: 500 }}>$95.88 billed annually, two months free</p>
               <Link href="/signup?plan=annual" style={{ display: 'block', textAlign: 'center', padding: '0.9rem', background: 'white', borderRadius: '12px', color: '#FF6B35', textDecoration: 'none', fontWeight: '800', boxShadow: '0 4px 14px rgba(0,0,0,0.15)' }}>
                 Get the best deal &rarr;
               </Link>
@@ -770,7 +770,7 @@ export default function Home() {
           <div className="trust-bar" style={{ marginTop: '3rem' }}>
             {[
               { icon: <BookOpen size={18} color="#FF6B35" />, title: 'Your library, yours to keep', desc: 'Every story is saved. Re-read it tonight, next year, whenever — subscribe and it\'s always there.' },
-              { icon: <Star size={18} color="#FFB703" />, title: 'Their world, front and centre', desc: 'Their interests shape the entire plot  -  not just the name.' },
+              { icon: <Star size={18} color="#FFB703" />, title: 'Their world, front and centre', desc: 'Their interests shape the entire plot, not just the name.' },
               { icon: <Shield size={18} color="#6CC06C" />, title: 'Safe & age-appropriate', desc: 'Every story crafted thoughtfully for kids aged 3–10.' },
               { icon: <Heart size={18} color="#FF6B35" />, title: 'No data sold. Ever.', desc: 'Your child\'s details are private. That\'s a promise.' },
             ].map((t, i) => (

@@ -269,7 +269,7 @@ function EditChildModal({ child, palette, onClose, onSaved }: { child: ChildReco
           <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '6px' }}>Gender</label><div style={{ display: 'flex', gap: '8px' }}>{['Boy','Girl','Skip'].map(g => <button key={g} onClick={() => setGender(g)} style={chip(gender === g)}>{g}</button>)}</div></div>
           <div>
             <label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '4px' }}>Interests</label>
-            <p style={{ fontSize: '0.75rem', color: interests.length >= 5 ? '#FF6B35' : '#9CA3AF', marginBottom: '8px' }}>{interests.length}/5 selected{interests.length >= 5 ? ' — remove one to add another' : ''}</p>
+            <p style={{ fontSize: '0.75rem', color: interests.length >= 5 ? '#FF6B35' : '#9CA3AF', marginBottom: '8px' }}>{interests.length}/5 selected{interests.length >= 5 ? '. Remove one to add another' : ''}</p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '10px' }}>
               {INTERESTS.map(i => <button key={i} onClick={() => toggleInterest(i)} style={chip(interests.includes(i))} disabled={!interests.includes(i) && interests.length >= 5}>{i}</button>)}
               {interests.filter(i => !INTERESTS.includes(i)).map(i => (
@@ -751,7 +751,7 @@ export default function DashboardPage() {
                         setAccountLoading(true); setAccountMsg(null);
                         const { error } = await supabase.auth.updateUser({ email: newEmail });
                         setAccountLoading(false);
-                        setAccountMsg(error ? { ok: false, text: error.message } : { ok: true, text: 'Confirmation sent — check your new inbox.' });
+                        setAccountMsg(error ? { ok: false, text: error.message } : { ok: true, text: 'Confirmation sent. Check your new inbox.' });
                         if (!error) setNewEmail('');
                       }} style={{ width: '100%', padding: '0.65rem', borderRadius: '8px', border: 'none', background: '#FF6B35', color: '#fff', fontWeight: '700', fontSize: '0.875rem', cursor: 'pointer', opacity: accountLoading || !newEmail ? 0.5 : 1 }}>
                         {accountLoading ? 'Sending…' : 'Send confirmation'}
@@ -835,7 +835,7 @@ export default function DashboardPage() {
             {/* ── Referral code ── */}
             <div>
               <h3 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.4rem', color: '#0D183D', fontWeight: '400', marginBottom: '8px' }}>Refer a friend 🎁</h3>
-              <p style={{ fontSize: '0.82rem', color: '#5E6A7A', marginBottom: '12px' }}>Share your code — your friend gets <strong>10% off</strong> their first month.</p>
+              <p style={{ fontSize: '0.82rem', color: '#5E6A7A', marginBottom: '12px' }}>Share your code. Your friend gets <strong>10% off</strong> their first month.</p>
               <div style={{ background: '#fff', border: '1.5px solid #F0E4D0', borderRadius: '12px', padding: '16px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
                 <span style={{ fontFamily: 'monospace', fontSize: '1.15rem', fontWeight: '800', letterSpacing: '0.12em', color: '#FF6B35' }}>
                   {userId ? `TALE-${userId.replace(/-/g,'').slice(0,8).toUpperCase()}` : '—'}

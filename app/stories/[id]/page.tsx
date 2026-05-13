@@ -295,7 +295,7 @@ export default function StoryPage() {
         <div style={{ fontSize: '3.5rem' }}>📚</div>
         <h2 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.75rem', color: 'white', marginBottom: '8px' }}>Your library is waiting</h2>
         <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '1rem', maxWidth: '360px', lineHeight: 1.7 }}>
-          Your stories are saved and ready to read — reactivate your subscription to open your library again.
+          Your stories are saved and ready to read. Reactivate your subscription to open your library again.
         </p>
         <Link href="/dashboard" style={{ background: '#FF6B35', color: 'white', padding: '0.9rem 2rem', borderRadius: '12px', textDecoration: 'none', fontWeight: 800, fontSize: '1rem' }}>
           Reactivate subscription
@@ -363,7 +363,7 @@ export default function StoryPage() {
           </div>
         )}
         <div style={{ textAlign: 'center', marginTop: '18px', color: 'rgba(255,107,53,0.45)', fontSize: '0.78rem', fontFamily: 'Fredoka, cursive' }}>
-          &#8212; {currentPage + 1} &#8212;
+          · {currentPage + 1} ·
         </div>
       </div>
     );
