@@ -3,12 +3,11 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy — TalePop',
-  description: 'How TalePop collects, uses and protects your personal information and your child\'s data.',
+  description: "How TalePop collects, uses and protects your personal information and your child's data.",
 };
 
-const updated = '12 May 2026';
+const updated = '13 May 2026';
 
-/* ─── Brand tokens ─────────────────────────────────────── */
 const navy   = '#0D183D';
 const orange = '#FF6B35';
 const cream  = '#FFF4E6';
@@ -16,38 +15,24 @@ const border = '#F0E4D0';
 const muted  = '#5E6A7A';
 const body   = '#4A3728';
 
-/* ─── Layout components ─────────────────────────────────── */
 function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
   return (
     <section id={id} style={{ marginBottom: '48px' }}>
       <h2 style={{
         fontFamily: "'Fredoka', 'Arial Rounded MT Bold', cursive",
-        fontSize: '1.35rem',
-        fontWeight: 600,
-        color: navy,
-        borderBottom: `2px solid ${border}`,
-        paddingBottom: '10px',
-        marginBottom: '20px',
+        fontSize: '1.35rem', fontWeight: 600, color: navy,
+        borderBottom: `2px solid ${border}`, paddingBottom: '10px', marginBottom: '20px',
       }}>
         {title}
       </h2>
-      <div style={{ color: body, lineHeight: '1.75', fontSize: '0.9375rem' }}>
-        {children}
-      </div>
+      <div style={{ color: body, lineHeight: '1.75', fontSize: '0.9375rem' }}>{children}</div>
     </section>
   );
 }
 
 function Footer() {
   return (
-    <footer style={{
-      backgroundColor: navy,
-      color: 'white',
-      textAlign: 'center',
-      padding: '32px 24px',
-      fontSize: '0.875rem',
-      marginTop: '64px',
-    }}>
+    <footer style={{ backgroundColor: navy, color: 'white', textAlign: 'center', padding: '32px 24px', fontSize: '0.875rem', marginTop: '64px' }}>
       <p style={{ margin: '0 0 8px' }}>
         <Link href="/privacy" style={{ color: cream, textDecoration: 'none', marginRight: '16px' }}>Privacy Policy</Link>
         <Link href="/terms" style={{ color: cream, textDecoration: 'none', marginRight: '16px' }}>Terms of Service</Link>
@@ -58,162 +43,88 @@ function Footer() {
   );
 }
 
-/* ─── Shared prose helpers ───────────────────────────────── */
 function P({ children }: { children: React.ReactNode }) {
   return <p style={{ margin: '0 0 14px' }}>{children}</p>;
 }
-
 function Ul({ children }: { children: React.ReactNode }) {
   return <ul style={{ margin: '0 0 14px', paddingLeft: '20px', listStyleType: 'disc' }}>{children}</ul>;
 }
-
 function Li({ children }: { children: React.ReactNode }) {
   return <li style={{ marginBottom: '6px' }}>{children}</li>;
 }
-
 function Table({ children }: { children: React.ReactNode }) {
   return (
     <div style={{ overflowX: 'auto', marginBottom: '14px' }}>
-      <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem' }}>
-        {children}
-      </table>
+      <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem' }}>{children}</table>
     </div>
   );
 }
-
 function Th({ children }: { children: React.ReactNode }) {
-  return (
-    <th style={{
-      backgroundColor: navy,
-      color: 'white',
-      padding: '10px 12px',
-      textAlign: 'left',
-      fontWeight: 600,
-      fontSize: '0.875rem',
-    }}>
-      {children}
-    </th>
-  );
+  return <th style={{ backgroundColor: navy, color: 'white', padding: '10px 12px', textAlign: 'left', fontWeight: 600, fontSize: '0.875rem' }}>{children}</th>;
 }
-
 function Td({ children }: { children: React.ReactNode }) {
-  return (
-    <td style={{
-      padding: '10px 12px',
-      borderBottom: `1px solid ${border}`,
-      verticalAlign: 'top',
-    }}>
-      {children}
-    </td>
-  );
+  return <td style={{ padding: '10px 12px', borderBottom: `1px solid ${border}`, verticalAlign: 'top' }}>{children}</td>;
 }
-
 function Tr({ children, shade }: { children: React.ReactNode; shade?: boolean }) {
-  return (
-    <tr style={{ backgroundColor: shade ? cream : 'white' }}>
-      {children}
-    </tr>
-  );
+  return <tr style={{ backgroundColor: shade ? cream : 'white' }}>{children}</tr>;
 }
 
-/* ─── Page ───────────────────────────────────────────────── */
 export default function PrivacyPolicyPage() {
   return (
     <div style={{ backgroundColor: cream, minHeight: '100vh', fontFamily: "'Nunito', system-ui, sans-serif" }}>
 
-      {/* ── Nav ── */}
-      <nav style={{
-        backgroundColor: navy,
-        padding: '16px 24px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-      }}>
-        <Link href="/" style={{
-          fontFamily: "'Fredoka', 'Arial Rounded MT Bold', cursive",
-          fontSize: '1.5rem',
-          color: orange,
-          textDecoration: 'none',
-          fontWeight: 600,
-        }}>
+      <nav style={{ backgroundColor: navy, padding: '16px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <Link href="/" style={{ fontFamily: "'Fredoka', 'Arial Rounded MT Bold', cursive", fontSize: '1.5rem', color: orange, textDecoration: 'none', fontWeight: 600 }}>
           TalePop
         </Link>
         <Link href="/" style={{ color: cream, textDecoration: 'none', fontSize: '0.875rem' }}>← Back to home</Link>
       </nav>
 
-      {/* ── Main content ── */}
       <main style={{ maxWidth: '820px', margin: '0 auto', padding: '48px 24px' }}>
 
-        {/* Header */}
         <div style={{ marginBottom: '48px' }}>
-          <h1 style={{
-            fontFamily: "'Fredoka', 'Arial Rounded MT Bold', cursive",
-            fontSize: '2.25rem',
-            color: navy,
-            marginBottom: '8px',
-          }}>
+          <h1 style={{ fontFamily: "'Fredoka', 'Arial Rounded MT Bold', cursive", fontSize: '2.25rem', color: navy, marginBottom: '8px' }}>
             Privacy Policy
           </h1>
-          <p style={{ color: muted, fontSize: '0.875rem', margin: '0 0 4px' }}>
-            Last updated: {updated}
-          </p>
+          <p style={{ color: muted, fontSize: '0.875rem', margin: '0 0 4px' }}>Last updated: {updated}</p>
           <p style={{ color: body, fontSize: '0.9375rem', marginTop: '16px', lineHeight: '1.7' }}>
-            At TalePop, your family's privacy is not a footnote — it is central to how we build everything. This
-            Privacy Policy explains what personal information we collect, why we collect it, how we use it, and the
-            rights you have in relation to it. It applies to parents and guardians who create accounts, and to the
-            child profiles created within those accounts.
+            At TalePop, your family&apos;s privacy is not a footnote. It is central to how we build everything.
+            This Privacy Policy explains what personal information we collect, why we collect it, how we use it,
+            and the rights you have in relation to it. It applies to parents and guardians who create accounts,
+            and to the child profiles created within those accounts.
           </p>
           <p style={{ color: body, fontSize: '0.9375rem', marginTop: '12px', lineHeight: '1.7' }}>
-            TalePop is designed for use in Australia, the United Kingdom, and the United States. Different legal
-            frameworks apply in each jurisdiction. Where relevant, we call out jurisdiction-specific obligations.
+            TalePop is available to users in Australia, Canada, and the United States. Different legal
+            frameworks apply in each jurisdiction and we address each below.
           </p>
         </div>
 
-        {/* ── Section 1 ── */}
         <Section id="who-we-are" title="1. Who We Are">
           <P>
-            TalePop is an online service operated from Australia. TalePop is the data controller for parent
-            account information and child profile data stored on our platform.
+            TalePop is an online service operated from Australia. TalePop is the data controller (and where
+            applicable, the organization responsible for personal information) for parent account information
+            and child profile data stored on our platform.
           </P>
-
-          <p style={{ margin: '0 0 6px', fontWeight: 600, color: navy }}>UK Article 27 Representative</p>
-          <P>
-            TalePop is in the process of formally appointing a UK representative as required under Article 27
-            of the UK GDPR for organisations not established in the United Kingdom that offer services to
-            UK-based individuals. The name and contact details of the appointed representative will be
-            published in this section upon appointment. In the interim, all UK data enquiries should be
-            directed to <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a>.
-          </P>
-
-          <p style={{ margin: '0 0 6px', fontWeight: 600, color: navy }}>ICO Registration</p>
-          <P>
-            TalePop is registered with the UK Information Commissioner's Office (ICO) as required under the
-            Data Protection (Charges and Information) Regulations 2018. UK data enquiries should be directed
-            to <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a>.
-          </P>
-
           <p style={{ margin: '0 0 6px', fontWeight: 600, color: navy }}>Contact</p>
           <P>
-            For all privacy enquiries: <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a>
+            For all privacy enquiries:{' '}
+            <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a>
           </P>
         </Section>
 
-        {/* ── Section 2 ── */}
         <Section id="information-we-collect" title="2. Information We Collect">
           <p style={{ margin: '0 0 10px', fontWeight: 600, color: navy }}>2.1 Parent / Guardian Account Information</p>
           <Ul>
             <Li>Email address (used for login, account communications, and as the verified parental contact for COPPA purposes)</Li>
-            <Li>Password (hashed and never stored in plaintext)</Li>
-            <Li>Payment information (processed and stored by Stripe — we do not store card numbers)</Li>
+            <Li>Password (hashed; never stored in plaintext)</Li>
+            <Li>Payment information (processed by our payment service provider; we do not store card numbers)</Li>
             <Li>Subscription tier and billing history</Li>
           </Ul>
 
           <p style={{ margin: '0 0 10px', fontWeight: 600, color: navy }}>2.2 Child Profile Data</p>
-          <P>
-            Parents create child profiles to personalise stories. This may include:
-          </P>
+          <P>Parents create child profiles to personalise stories. This may include:</P>
           <Ul>
-            <Li>Child's first name or nickname</Li>
+            <Li>Child&apos;s first name or nickname</Li>
             <Li>Age</Li>
             <Li>Gender (if provided)</Li>
             <Li>Interests and hobbies</Li>
@@ -226,15 +137,14 @@ export default function PrivacyPolicyPage() {
           <P>
             Parents may optionally provide appearance descriptors for their child, including hair colour, eye colour,
             and other physical descriptors. These are used to generate illustrations and story descriptions that
-            reflect the child's appearance.
+            reflect the child&apos;s appearance.
           </P>
           <P>
-            Some appearance descriptors — such as those indicating racial or ethnic background — may constitute
-            sensitive information under the Australian Privacy Act 1988, section 6 (definition of "sensitive
-            information"), and special category data under UK GDPR Article 9. The provision of appearance data
-            is entirely optional. Where such data is provided, TalePop relies on explicit consent, which is
-            obtained at the time of account creation and child profile setup. You may omit appearance data
-            entirely without affecting the core functionality of TalePop.
+            Some appearance descriptors may constitute sensitive information under the Australian Privacy Act 1988
+            (Cth) and sensitive personal information under applicable Canadian and US privacy laws. The provision
+            of appearance data is entirely optional. Where such data is provided, TalePop relies on explicit
+            consent obtained at account creation and child profile setup. You may omit appearance data entirely
+            without affecting the core functionality of TalePop.
           </P>
 
           <p style={{ margin: '0 0 10px', fontWeight: 600, color: navy }}>2.4 Generated Content</p>
@@ -246,151 +156,191 @@ export default function PrivacyPolicyPage() {
 
           <p style={{ margin: '0 0 10px', fontWeight: 600, color: navy }}>2.5 Technical Data</p>
           <Ul>
-            <Li>IP address and approximate location (via Vercel hosting infrastructure)</Li>
+            <Li>IP address and approximate location (via our hosting infrastructure)</Li>
             <Li>Browser type and device information</Li>
             <Li>Pages visited and time spent (aggregated analytics only)</Li>
             <Li>Error logs for debugging purposes</Li>
           </Ul>
         </Section>
 
-        {/* ── Section 3 ── */}
-        <Section id="legal-basis" title="3. Legal Basis for Processing (UK GDPR)">
+        <Section id="legal-basis" title="3. Legal Framework for Collection and Use">
+          <p style={{ margin: '0 0 10px', fontWeight: 600, color: navy }}>3.1 Australia — Privacy Act 1988 (Cth), Australian Privacy Principles</p>
           <P>
-            For users in the United Kingdom, TalePop processes personal data under the following lawful bases
-            under UK GDPR Article 6:
+            TalePop collects and handles personal information in accordance with the Australian Privacy Principles
+            (APPs) under the Privacy Act 1988 (Cth). We collect only the personal information necessary for the
+            purposes described in this policy (APP 3), we use it only for those purposes or directly related
+            secondary purposes (APP 6), and we take reasonable steps to protect it (APP 11). We notify
+            individuals of the purposes of collection at or before the time of collection (APP 5).
           </P>
+
+          <p style={{ margin: '0 0 10px', fontWeight: 600, color: navy }}>3.2 Canada — PIPEDA and Provincial Laws</p>
+          <P>
+            TalePop collects, uses, and discloses personal information in accordance with the Personal
+            Information Protection and Electronic Documents Act (PIPEDA, S.C. 2000, c. 5) and, where applicable,
+            substantially similar provincial legislation including the Personal Information Protection Act (PIPA)
+            in Alberta and British Columbia, and Law 25 (An Act to Modernize Legislative Provisions as Regards
+            the Protection of Personal Information, S.Q. 2021, c. 25) in Quebec.
+          </P>
+          <P>
+            Under PIPEDA, TalePop adheres to the ten fair information principles: accountability, identifying
+            purposes, consent, limiting collection, limiting use/disclosure/retention, accuracy, safeguards,
+            openness, individual access, and challenging compliance. Under Quebec Law 25, we conduct Privacy
+            Impact Assessments (PIAs) for new projects involving personal information, apply data minimisation,
+            and provide enhanced rights to Quebec residents including data portability and the right to
+            de-indexation.
+          </P>
+          <P>
+            TalePop&apos;s Chief Privacy Officer is responsible for the organisation&apos;s compliance with these
+            obligations and can be contacted at{' '}
+            <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a>.
+          </P>
+
+          <p style={{ margin: '0 0 10px', fontWeight: 600, color: navy }}>3.3 United States — COPPA and State Privacy Laws</p>
+          <P>
+            For US users, TalePop complies with the Children&apos;s Online Privacy Protection Act (COPPA, 15
+            U.S.C. §§ 6501-6506; 16 C.F.R. Part 312) and, where applicable, the California Consumer Privacy
+            Act as amended by the California Privacy Rights Act (CCPA/CPRA, Cal. Civ. Code § 1798.100 et seq.).
+            We also comply with applicable state-level privacy and breach notification laws including those of
+            Virginia (VCDPA), Colorado (CPA), Connecticut (CTDPA), Texas (TDPSA), and other states with
+            comprehensive privacy legislation.
+          </P>
+
+          <p style={{ margin: '0 0 10px', fontWeight: 600, color: navy }}>3.4 Purposes and Legal Grounds</p>
           <Table>
             <thead>
               <tr>
                 <Th>Processing activity</Th>
-                <Th>Lawful basis</Th>
+                <Th>AU legal ground</Th>
+                <Th>CA legal ground</Th>
+                <Th>US legal ground</Th>
               </tr>
             </thead>
             <tbody>
               <Tr>
                 <Td>Creating and managing your account</Td>
-                <Td>Art. 6(1)(b) — performance of a contract</Td>
+                <Td>APP 3 — necessary for service provision</Td>
+                <Td>PIPEDA — consent; necessary to provide service</Td>
+                <Td>Contract performance; legitimate interest</Td>
               </Tr>
               <Tr shade>
                 <Td>Generating personalised stories and illustrations</Td>
-                <Td>Art. 6(1)(b) — performance of a contract</Td>
+                <Td>APP 3 — primary purpose</Td>
+                <Td>PIPEDA — identified purpose; consent</Td>
+                <Td>Contract; COPPA verifiable parental consent</Td>
               </Tr>
               <Tr>
-                <Td>Processing subscription payments</Td>
-                <Td>Art. 6(1)(b) — performance of a contract</Td>
+                <Td>Processing payments</Td>
+                <Td>APP 3 — necessary for service provision</Td>
+                <Td>PIPEDA — necessary for commercial transaction</Td>
+                <Td>Contract performance</Td>
               </Tr>
               <Tr shade>
-                <Td>Sending transactional emails (account confirmation, subscription receipts)</Td>
-                <Td>Art. 6(1)(b) — performance of a contract</Td>
+                <Td>Sending transactional emails</Td>
+                <Td>APP 6 — directly related to primary purpose</Td>
+                <Td>PIPEDA; CASL s.6(6) — transactional/relationship message</Td>
+                <Td>Contract; CAN-SPAM Act transactional exception</Td>
               </Tr>
               <Tr>
-                <Td>Sending marketing communications</Td>
-                <Td>Art. 6(1)(a) — consent (opt-in at registration)</Td>
+                <Td>Sending marketing emails</Td>
+                <Td>APP 3 — express consent (opt-in)</Td>
+                <Td>CASL s.6 — express consent required</Td>
+                <Td>Express consent (opt-in at registration)</Td>
               </Tr>
               <Tr shade>
-                <Td>Maintaining security logs and preventing fraud</Td>
-                <Td>Art. 6(1)(f) — legitimate interests (security and integrity of the service)</Td>
+                <Td>Security logs and fraud prevention</Td>
+                <Td>APP 3/11 — necessary to protect integrity</Td>
+                <Td>PIPEDA — legitimate interest; security safeguard</Td>
+                <Td>Legitimate interest</Td>
               </Tr>
               <Tr>
-                <Td>Product analytics and service improvement</Td>
-                <Td>Art. 6(1)(f) — legitimate interests (improving the service for all users)</Td>
+                <Td>Product analytics and improvement</Td>
+                <Td>APP 6 — related secondary purpose (de-identified)</Td>
+                <Td>PIPEDA — de-identified aggregate data</Td>
+                <Td>Legitimate interest (de-identified data only)</Td>
               </Tr>
               <Tr shade>
                 <Td>Processing optional appearance data</Td>
-                <Td>Art. 9(2)(a) — explicit consent (for special category data)</Td>
-              </Tr>
-              <Tr>
-                <Td>Sending child profile data to AI processors (Anthropic, Replicate)</Td>
-                <Td>Art. 6(1)(b) — contract performance + Art. 6(1)(f) — legitimate interests, subject to Legitimate Interests Assessment (LIA)</Td>
+                <Td>APP 3/7 — explicit consent for sensitive information</Td>
+                <Td>PIPEDA — express consent for sensitive data</Td>
+                <Td>CCPA — explicit consent; COPPA parental consent</Td>
               </Tr>
             </tbody>
           </Table>
-          <P>
-            For UK users, TalePop processes children's personal data as part of providing the service. Where we
-            rely on legitimate interests as a lawful basis for processing children's data, we apply a higher
-            threshold of scrutiny. A Legitimate Interests Assessment (LIA) has been conducted and is available
-            on request by emailing <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a>.
-          </P>
-          <P>
-            For Australian users, TalePop collects and uses personal information in accordance with the
-            Australian Privacy Principles (APPs) under the Privacy Act 1988 (Cth). For US users, we comply
-            with the Children's Online Privacy Protection Act (COPPA, 16 C.F.R. Part 312) and, where
-            applicable, the California Consumer Privacy Act (CCPA).
-          </P>
         </Section>
 
-        {/* ── Section 4 ── */}
         <Section id="childrens-privacy" title="4. Children's Privacy">
           <P>
             TalePop is a service for families. Parents and guardians create and manage all accounts. Children
-            do not interact directly with TalePop — they do not create accounts, enter information, or see
-            account management interfaces. All personal information about a child is entered by the
-            parent or guardian.
+            do not interact directly with TalePop, do not create accounts, and do not enter information. All
+            personal information about a child is entered by the parent or guardian.
           </P>
 
           <p style={{ margin: '0 0 10px', fontWeight: 600, color: navy }}>4.1 COPPA — Verifiable Parental Consent (United States)</p>
           <P>
-            TalePop is subject to the Children's Online Privacy Protection Act (COPPA). We do not knowingly
+            TalePop is subject to the Children&apos;s Online Privacy Protection Act (COPPA). We do not knowingly
             collect personal information from children under 13 for any purpose other than generating
             personalised stories for that child as directed by their parent or legal guardian.
           </P>
           <P>
-            TalePop obtains verifiable parental consent through the Stripe payment transaction process. A credit
-            card or debit card payment by the parent constitutes a monetary transaction that generates a
-            notification to the primary cardholder, which is an FTC-approved method of verifiable parental
-            consent under 16 C.F.R. §312.5(b)(2). The act of completing payment and creating child profiles
-            constitutes verifiable parental consent for TalePop to collect and use the child profile data
-            described in this policy.
+            TalePop obtains verifiable parental consent through the payment transaction process. A credit or
+            debit card payment by the parent constitutes a monetary transaction that generates a notification
+            to the primary cardholder, which is an FTC-approved method of verifiable parental consent under
+            16 C.F.R. §312.5(b)(2). The act of completing payment and creating child profiles constitutes
+            verifiable parental consent for TalePop to collect and use the child profile data described in
+            this policy.
           </P>
           <P>
-            An alternative consent mechanism is available for users who are unable to use the payment-based
-            method. To request an alternative consent process, please email{' '}
+            An alternative consent mechanism is available for users who cannot use the payment-based method.
+            To request an alternative consent process, please email{' '}
             <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a>.
           </P>
           <P>
-            Parents may at any time review the personal information collected about their child, request
-            corrections, or request deletion of their child's profile and all associated data by contacting
-            us at <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a> or through
+            Parents may at any time review, request corrections to, or request deletion of their child&apos;s
+            profile and all associated data by contacting us at{' '}
+            <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a> or through
             the account settings page.
           </P>
 
-          <p style={{ margin: '0 0 10px', fontWeight: 600, color: navy }}>4.2 UK Children's Code (Age Appropriate Design Code)</p>
+          <p style={{ margin: '0 0 10px', fontWeight: 600, color: navy }}>4.2 Australia — Children&apos;s Online Privacy</p>
           <P>
-            TalePop is subject to the UK Age Appropriate Design Code (AADC) issued by the ICO. A Data Protection
-            Impact Assessment (DPIA) has been conducted prior to launch in accordance with Article 35 of the
-            UK GDPR and ICO DPIA guidance, in respect of our systematic processing of children's personal data.
-            A summary of the DPIA is available on request by emailing{' '}
-            <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a>.
+            Australia&apos;s Online Safety Act 2021 and the Australian Children&apos;s Online Privacy Code (anticipated to
+            come into effect by December 2026 under the Privacy Act 1988) establish obligations for online
+            services likely to be accessed by children. TalePop designs all data handling practices around the
+            best interests of the child as the primary consideration, consistent with the expected requirements
+            of the Australian Children&apos;s Online Privacy Code. We will update this policy as the Code is
+            finalised and enacted.
           </P>
           <P>
-            In compliance with the Children's Code: children's data is not used for profiling beyond
-            personalising the individual child's own stories. We do not profile children for commercial
-            purposes. We do not use nudge techniques, serve targeted advertising, or create commercial
-            profiles of children. Geolocation data is not collected beyond the optional city/country field
-            entered by the parent for story personalisation purposes.
+            Child data collected by TalePop is not used for profiling beyond personalising the individual
+            child&apos;s own stories. We do not profile children for commercial purposes and do not create
+            behavioural databases of children.
           </P>
 
-          <p style={{ margin: '0 0 10px', fontWeight: 600, color: navy }}>4.3 Australian Children's Online Privacy Code</p>
+          <p style={{ margin: '0 0 10px', fontWeight: 600, color: navy }}>4.3 Canada — Children&apos;s Consent under PIPEDA and Provincial Law</p>
           <P>
-            Australia's Online Safety Act 2021 and the proposed Australian Children's Online Privacy Code
-            (anticipated to come into effect by December 2026) establish obligations for online services
-            likely to be accessed by children. TalePop is actively designing all data handling practices
-            around the best interests of the child as the primary consideration, consistent with the
-            expected requirements of the Australian Children's Online Privacy Code. We will update this
-            policy and our practices as the Code is finalised and enacted.
+            Under PIPEDA and the guidance of the Office of the Privacy Commissioner of Canada (OPC), the
+            consent of children under 13 years of age requires parental or guardian authorisation to be
+            meaningful. TalePop does not permit children to create accounts directly. All child profiles are
+            created and managed by the parent or guardian, and the parent&apos;s account creation and payment
+            transaction constitutes the authorisation for TalePop to collect and process the child&apos;s profile
+            information for the purpose of story generation.
+          </P>
+          <P>
+            For Quebec residents, TalePop complies with the enhanced child privacy requirements under
+            Quebec Law 25, including data minimisation and the prohibition on using children&apos;s personal
+            information for commercial profiling purposes.
           </P>
 
           <p style={{ margin: '0 0 10px', fontWeight: 600, color: navy }}>4.4 Profiling — All Jurisdictions</p>
           <P>
-            We use child profile data solely to generate that specific child's personalised stories and
+            We use child profile data solely to generate that specific child&apos;s personalised stories and
             illustrations. We do not create cross-child profiles, behavioural databases, or commercial
-            profiles of children. AI personalisation is strictly limited to story and illustration
-            generation for the individual child profile. Child profile data is never used to train AI
-            models or for any analytical purpose beyond delivering the requested story.
+            profiles of children. AI personalisation is strictly limited to story and illustration generation
+            for the individual child profile. Child profile data is never used to train AI models or for any
+            analytical purpose beyond delivering the requested story.
           </P>
         </Section>
 
-        {/* ── Section 5 ── */}
         <Section id="how-we-use" title="5. How We Use Your Information">
           <P>We use the information we collect to:</P>
           <Ul>
@@ -401,143 +351,131 @@ export default function PrivacyPolicyPage() {
             <Li>Send marketing or product update emails (where you have opted in)</Li>
             <Li>Provide customer support when you contact us</Li>
             <Li>Detect, investigate, and prevent fraudulent or unauthorised use of the service</Li>
-            <Li>Comply with our legal obligations in Australia, the United Kingdom, and the United States</Li>
-            <Li>Improve the quality, reliability, and relevance of story generation (using aggregated, de-identified analytics only — not individual child profiles)</Li>
+            <Li>Comply with our legal obligations in Australia, Canada, and the United States</Li>
+            <Li>Improve the quality, reliability, and relevance of story generation (using aggregated, de-identified analytics only)</Li>
           </Ul>
           <P>
-            We do not sell your personal information or your child's personal information to any third party.
-            We do not use your information for targeted advertising.
+            We do not sell your personal information or your child&apos;s personal information to any third party.
+            We do not use your information for targeted advertising. We do not share personal information for
+            cross-context behavioural advertising.
           </P>
         </Section>
 
-        {/* ── Section 6 ── */}
-        <Section id="third-parties" title="6. Third-Party Services and Data Processors">
+        <Section id="third-parties" title="6. Third-Party Service Providers and Data Processors">
           <P>
-            TalePop uses trusted third-party services to deliver the platform. The following table lists
-            each data processor, the country in which they operate, their purpose, what child data (if any)
-            is transmitted to them, and a link to their privacy policy. All processors are engaged under
-            data processing agreements that contractually limit their use of data to the specified purpose.
+            TalePop engages trusted third-party service providers to operate the platform. We do not disclose
+            the identity of our technology providers publicly in order to protect our proprietary systems.
+            The categories of providers we use, and the purposes for which data is shared, are set out below.
+            All service providers are engaged under written agreements that contractually restrict their use
+            of personal information to the specified purpose and prohibit secondary use, including use for
+            AI model training, profiling, or advertising.
           </P>
           <Table>
             <thead>
               <tr>
-                <Th>Processor</Th>
-                <Th>Country</Th>
+                <Th>Category</Th>
+                <Th>Location</Th>
                 <Th>Purpose</Th>
-                <Th>Child data transmitted</Th>
-                <Th>Privacy policy</Th>
+                <Th>Child data shared</Th>
               </tr>
             </thead>
             <tbody>
               <Tr>
-                <Td><strong>Supabase</strong></Td>
-                <Td>Australia (ap-southeast-2 region)</Td>
-                <Td>Database and authentication — all account and profile data is stored here</Td>
+                <Td><strong>Cloud database and authentication provider</strong></Td>
+                <Td>Australia</Td>
+                <Td>Stores all account data, child profiles, and generated stories; manages user authentication</Td>
                 <Td>Parent account, child profiles (name, age, gender, interests, appearance descriptors, generated stories)</Td>
-                <Td><a href="https://supabase.com/privacy" style={{ color: orange }} target="_blank" rel="noopener noreferrer">supabase.com/privacy</a></Td>
               </Tr>
               <Tr shade>
-                <Td><strong>Anthropic (Claude API)</strong></Td>
+                <Td><strong>AI text generation provider</strong></Td>
                 <Td>United States</Td>
-                <Td>AI story text generation — the Claude API generates the story narrative based on the child's profile</Td>
-                <Td>Child's name, age, gender, interests, reading level, and optionally appearance descriptors, sibling names, friend names, pet name, city, and country — as entered by the parent</Td>
-                <Td><a href="https://www.anthropic.com/privacy" style={{ color: orange }} target="_blank" rel="noopener noreferrer">anthropic.com/privacy</a></Td>
+                <Td>Generates personalised story narrative based on the child&apos;s profile</Td>
+                <Td>Child&apos;s name, age, gender, interests, reading level, and optionally appearance descriptors, sibling names, friend names, pet name, city, and country, as entered by the parent</Td>
               </Tr>
               <Tr>
-                <Td><strong>Replicate (Flux Schnell API)</strong></Td>
+                <Td><strong>AI image generation provider</strong></Td>
                 <Td>United States</Td>
-                <Td>AI illustration generation — the Flux Schnell model generates illustrations for each story page</Td>
-                <Td>Image description prompts derived from the child profile, including appearance descriptors and scene descriptions from the story</Td>
-                <Td><a href="https://replicate.com/privacy" style={{ color: orange }} target="_blank" rel="noopener noreferrer">replicate.com/privacy</a></Td>
+                <Td>Generates illustrations for each story page</Td>
+                <Td>Image description prompts derived from the child profile and story content, including appearance descriptors and scene descriptions</Td>
               </Tr>
               <Tr shade>
-                <Td><strong>Stripe</strong></Td>
+                <Td><strong>Payment processing provider</strong></Td>
                 <Td>United States</Td>
-                <Td>Subscription payment processing</Td>
-                <Td>Parent email address and payment card details only — no child data is transmitted to Stripe</Td>
-                <Td><a href="https://stripe.com/privacy" style={{ color: orange }} target="_blank" rel="noopener noreferrer">stripe.com/privacy</a></Td>
+                <Td>Processes subscription and one-time payments</Td>
+                <Td>Parent email address and payment details only. No child profile data is shared with our payment provider.</Td>
               </Tr>
               <Tr>
-                <Td><strong>Vercel</strong></Td>
+                <Td><strong>Cloud hosting and infrastructure provider</strong></Td>
                 <Td>United States</Td>
-                <Td>Web hosting and application deployment</Td>
-                <Td>Web traffic logs (IP address, request metadata) — no structured child profile data</Td>
-                <Td><a href="https://vercel.com/legal/privacy-policy" style={{ color: orange }} target="_blank" rel="noopener noreferrer">vercel.com/privacy</a></Td>
+                <Td>Hosts the TalePop web application and serves content to users</Td>
+                <Td>Web traffic logs (IP address, request metadata) only. No structured child profile data.</Td>
               </Tr>
             </tbody>
           </Table>
           <P>
-            Child profile data transmitted to Anthropic and Replicate is used solely to generate the requested
-            story and illustrations for that child. We have reviewed the API Terms of Service of both Anthropic
-            and Replicate and confirmed that data submitted via their APIs is not used for AI model training
-            without explicit user consent. Neither Anthropic nor Replicate uses personal data submitted through
-            TalePop to train their AI models. TalePop has entered into data processing agreements with each
-            third-party processor that restrict their use of personal data to the purposes described in this
-            policy and contractually prohibit secondary use of child profile data, including use for model
-            training, profiling, or any other purpose beyond generating the requested output.
+            Child profile data transmitted to our AI service providers is used solely to generate the
+            requested story and illustrations for that child. We have confirmed that our AI service providers
+            do not use personal data submitted through their APIs to train AI models without explicit opt-in
+            consent, and no such opt-in is enabled for TalePop. Our data processing agreements with all
+            third-party providers contractually prohibit secondary use of child profile data, including model
+            training, profiling, or any other use beyond generating the requested output.
           </P>
         </Section>
 
-        {/* ── Section 7 ── */}
         <Section id="international-transfers" title="7. International Data Transfers">
-          <p style={{ margin: '0 0 10px', fontWeight: 600, color: navy }}>7a. Australia to United States (Anthropic, Replicate, Stripe, Vercel)</p>
+          <p style={{ margin: '0 0 10px', fontWeight: 600, color: navy }}>7a. Australia — Transfers to the United States</p>
           <P>
             Under Australian Privacy Principle 8 (APP 8) of the Privacy Act 1988 (Cth), before disclosing
             personal information to overseas recipients, TalePop takes reasonable steps to ensure those
-            recipients protect the information consistently with the Australian Privacy Principles. The United
-            States does not have a law substantially similar to Australia's Privacy Act.
+            recipients handle the information consistently with the Australian Privacy Principles. The United
+            States does not have a law substantially similar to Australia&apos;s Privacy Act.
           </P>
           <P>
-            TalePop relies on contractual protections — specifically data processing agreements — with each
-            US-based processor (Anthropic, Replicate, Stripe, and Vercel) as the mechanism to ensure
-            equivalent protection consistent with APP 8.
+            TalePop relies on contractual protections, specifically data processing agreements with each
+            US-based service provider, as the mechanism to ensure equivalent protection consistent with APP 8.
           </P>
           <P>
             By using TalePop and creating child profiles, you acknowledge that personal information may be
-            disclosed to US-based processors that are not required to comply with the Australian Privacy
-            Principles, and that you may have limited recourse under Australian law if such a processor
+            disclosed to US-based providers that are not required to comply with the Australian Privacy
+            Principles, and that you may have limited recourse under Australian law if such a provider
             mishandles your information. This acknowledgement is recorded as part of your account creation.
           </P>
 
-          <p style={{ margin: '0 0 10px', fontWeight: 600, color: navy }}>7b. UK to Australia and United States</p>
+          <p style={{ margin: '0 0 10px', fontWeight: 600, color: navy }}>7b. Canada — Transfers to the United States and Australia</p>
           <P>
-            <strong>Data stored in Australia (Supabase ap-southeast-2):</strong> Australia does not have
-            a UK adequacy decision. Transfers of personal data from UK users to Supabase's Australian
-            infrastructure are governed by a UK International Data Transfer Agreement (IDTA) executed with
-            Supabase, together with a Transfer Risk Assessment (TRA) conducted in accordance with ICO
-            guidance. A summary of the TRA findings is available on request by emailing{' '}
-            <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a>.
+            Under PIPEDA, organisations may transfer personal information to service providers in other
+            countries for processing, provided those providers offer a comparable level of protection.
+            TalePop transfers Canadian users&apos; personal information to service providers located in Australia
+            and the United States.
           </P>
           <P>
-            <strong>Data transferred to US processors (Anthropic, Replicate, Stripe, Vercel):</strong> The
-            UK has granted adequacy for transfers to the United States for organisations certified under the
-            UK Extension of the Data Privacy Framework (DPF) (SI 2023/1028). TalePop has verified the DPF
-            UK Extension certification status of each US-based processor. For processors that are certified
-            under the UK Extension, TalePop relies on that certification as the transfer mechanism. For any
-            processor not certified under the UK Extension at the time of transfer, TalePop has executed a
-            UK International Data Transfer Agreement (IDTA) with that processor as the appropriate transfer
-            safeguard.
+            TalePop takes contractual measures, including data processing agreements with all service
+            providers, to ensure that personal information transferred outside Canada is protected to a
+            standard comparable to that required by PIPEDA. These agreements restrict service providers&apos;
+            use of personal information to the specified purposes and require appropriate security safeguards.
           </P>
           <P>
-            You may request a copy of the transfer safeguards we rely on (including IDTA templates and
-            Transfer Risk Assessment summaries) by emailing{' '}
-            <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a>.
+            Canadian users are advised that personal information transferred to service providers in the
+            United States and Australia may be subject to access by authorities in those countries under
+            their applicable laws. By creating an account and child profiles, you acknowledge this transfer
+            and consent to it for the purposes of receiving the TalePop service.
+          </P>
+          <P>
+            For Quebec residents, this cross-border transfer has been assessed under Quebec Law 25. A
+            Privacy Impact Assessment in respect of cross-border data flows is available on request by
+            emailing <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a>.
           </P>
 
-          <p style={{ margin: '0 0 10px', fontWeight: 600, color: navy }}>7c. All Regions — General</p>
+          <p style={{ margin: '0 0 10px', fontWeight: 600, color: navy }}>7c. All Regions — Security of Transfers</p>
           <P>
-            All personal data is transmitted between your browser, our servers, and our processors using
-            TLS encryption (HTTPS). All data stored in Supabase is encrypted at rest. Illustration outputs
-            stored via Replicate are accessed over encrypted connections.
+            All personal data is transmitted between your browser, our servers, and our service providers
+            using TLS encryption (HTTPS). All stored data is encrypted at rest. Generated illustrations are
+            stored and served over encrypted connections.
           </P>
         </Section>
 
-        {/* ── Section 8 ── */}
         <Section id="data-retention" title="8. Data Retention">
-          <P>
-            We retain your data only for as long as necessary to provide the service and meet our legal
-            obligations. The following table sets out our retention periods by data type:
-          </P>
+          <P>We retain your data only for as long as necessary to provide the service and meet our legal obligations.</P>
           <Table>
             <thead>
               <tr>
@@ -560,17 +498,21 @@ export default function PrivacyPolicyPage() {
               </Tr>
               <Tr shade>
                 <Td>Payment records</Td>
-                <Td>7 years from the date of transaction (required under Australian taxation law)</Td>
+                <Td>7 years from the date of transaction (required under Australian taxation law and comparable Canadian record-keeping obligations)</Td>
               </Tr>
               <Tr>
                 <Td>Parental consent records (COPPA)</Td>
                 <Td>Duration of account, plus 7 years after account closure</Td>
               </Tr>
               <Tr shade>
+                <Td>Breach of security safeguards records (PIPEDA Canada)</Td>
+                <Td>24 months from the date of the breach (as required by the Breach of Security Safeguards Regulations, SOR/2018-64)</Td>
+              </Tr>
+              <Tr>
                 <Td>Story feedback and ratings</Td>
                 <Td>2 years from submission, or until account deletion, whichever is earlier</Td>
               </Tr>
-              <Tr>
+              <Tr shade>
                 <Td>Security and access logs</Td>
                 <Td>90 days</Td>
               </Tr>
@@ -583,43 +525,46 @@ export default function PrivacyPolicyPage() {
           </P>
         </Section>
 
-        {/* ── Section 9 ── */}
         <Section id="data-breach" title="9. Data Breach Notification">
           <P>
             TalePop has implemented technical and organisational measures to protect personal information
-            against unauthorised access, disclosure, alteration, and destruction. In the event that we
-            experience an eligible data breach that is likely to result in serious harm to any individual,
-            we will take the following steps:
+            against unauthorised access, disclosure, alteration, and destruction. In the event of a data
+            breach that may result in risk of harm, we will take the following steps:
           </P>
           <P>
-            <strong>Australia:</strong> In accordance with the Notifiable Data Breaches scheme under Part IIIC
-            of the Privacy Act 1988 (Cth), we will notify the Office of the Australian Information Commissioner
-            (OAIC) and all affected account holders as soon as practicable, and no later than 30 days after
-            becoming aware that an eligible data breach has occurred or is likely to have occurred. Our
-            notification will include a description of the nature of the breach, the type of personal
-            information involved, and the steps we are taking or have taken in response.
+            <strong>Australia:</strong> In accordance with the Notifiable Data Breaches (NDB) scheme under
+            Part IIIC of the Privacy Act 1988 (Cth), we will notify the Office of the Australian Information
+            Commissioner (OAIC) and all affected account holders as soon as practicable, and no later than
+            30 days after becoming aware that an eligible data breach has occurred or is likely to have
+            occurred. Our notification will include a description of the breach, the type of personal
+            information involved, and the steps we are taking in response.
           </P>
           <P>
-            <strong>United Kingdom:</strong> In accordance with UK GDPR Article 33, we will notify the
-            Information Commissioner's Office (ICO) within 72 hours of becoming aware of a personal data
-            breach where that breach is likely to result in a risk to the rights and freedoms of individuals.
-            Where the breach is likely to result in a high risk to individuals' rights and freedoms, we will
-            also notify affected UK users without undue delay under UK GDPR Article 34.
+            <strong>Canada:</strong> In accordance with the Breach of Security Safeguards Regulations under
+            PIPEDA (SOR/2018-64), if a breach of security safeguards involving personal information creates
+            a real risk of significant harm to an individual, we will report the breach to the Privacy
+            Commissioner of Canada and notify all affected individuals as soon as feasible. We maintain
+            records of all security breaches for a minimum of 24 months from the date of the breach,
+            regardless of whether they create a real risk of significant harm. Factors we assess in
+            determining real risk of significant harm include the sensitivity of the information, the
+            probability of misuse, and the number of individuals affected.
           </P>
           <P>
-            <strong>United States:</strong> We will comply with all applicable US state data breach
-            notification laws, including notifying affected California residents in accordance with the
-            California Consumer Privacy Act and the California Civil Code §1798.82.
+            <strong>United States:</strong> We comply with all applicable US federal and state data breach
+            notification laws. For California residents, we provide notice in accordance with the California
+            Consumer Privacy Act (Cal. Civ. Code § 1798.150) and the California Civil Code § 1798.82
+            (California Data Breach Notification Act). For residents of other states, we comply with
+            applicable state breach notification statutes. Where federal law applies (including with respect
+            to COPPA), we notify the Federal Trade Commission as required.
           </P>
         </Section>
 
-        {/* ── Section 10 ── */}
         <Section id="your-rights" title="10. Your Privacy Rights">
           <P>
             Depending on your jurisdiction, you have the following rights in relation to your personal
-            information and the child profile data you have provided. To exercise any of these rights,
-            contact us at <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a>.
-            We will respond within 30 days (Australia / UK) or 45 days (CCPA / California).
+            information and the child profile data you have provided. To exercise any right, contact us at{' '}
+            <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a>. We will
+            respond within 30 days (Australia / Canada) or 45 days (US / CCPA).
           </P>
           <Table>
             <thead>
@@ -631,53 +576,62 @@ export default function PrivacyPolicyPage() {
             <tbody>
               <Tr>
                 <Td><strong>Access your personal data</strong> — request a copy of the personal information we hold about you and your child profiles</Td>
-                <Td>AU: APP 12 | UK: Art 15 UK GDPR | US-CA: CCPA Right to Know</Td>
+                <Td>AU: APP 12 | CA: PIPEDA Principle 9 | US-CA: CCPA Right to Know</Td>
               </Tr>
               <Tr shade>
-                <Td><strong>Correct inaccurate data</strong> — request correction of personal information that is inaccurate, incomplete, or out of date</Td>
-                <Td>AU: APP 13 | UK: Art 16 UK GDPR | US-CA: CCPA Right to Correct</Td>
+                <Td><strong>Correct inaccurate data</strong> — request correction of personal information that is inaccurate or incomplete</Td>
+                <Td>AU: APP 13 | CA: PIPEDA Principle 9 | US-CA: CCPA Right to Correct</Td>
               </Tr>
               <Tr>
-                <Td><strong>Delete your account and associated data</strong> — including all child profiles, generated stories, and account information (subject to retention obligations for payment records)</Td>
-                <Td>AU: APP 11 | UK: Art 17 UK GDPR | US-CA: CCPA Right to Delete | COPPA: parental right to deletion</Td>
+                <Td><strong>Delete your account and all associated data</strong> — including all child profiles, generated stories, and account information (subject to retention obligations for payment records)</Td>
+                <Td>AU: APP 11 | CA: PIPEDA; Quebec Law 25 | US-CA: CCPA Right to Delete | COPPA: parental right to deletion</Td>
               </Tr>
               <Tr shade>
-                <Td><strong>Export your stories (data portability)</strong> — receive a copy of generated stories in a portable format</Td>
-                <Td>UK: Art 20 UK GDPR</Td>
+                <Td><strong>Data portability</strong> — receive a copy of your generated stories in a portable format</Td>
+                <Td>CA: Quebec Law 25 right to portability | US-CA: CCPA</Td>
               </Tr>
               <Tr>
-                <Td><strong>Restrict or object to processing</strong> — request restriction of processing in defined circumstances, or object to processing based on legitimate interests</Td>
-                <Td>UK: Arts 18 and 21 UK GDPR</Td>
+                <Td><strong>De-indexation / withdrawal of consent</strong> — withdraw consent for processing at any time where consent is the legal basis (does not affect lawfulness of prior processing)</Td>
+                <Td>AU / CA / US</Td>
               </Tr>
               <Tr shade>
-                <Td><strong>Withdraw consent</strong> — withdraw consent at any time where consent is the lawful basis (e.g., marketing emails, appearance data processing); withdrawal does not affect the lawfulness of prior processing</Td>
-                <Td>AU / UK / US</Td>
+                <Td><strong>Limit use of sensitive personal information</strong> — including appearance data</Td>
+                <Td>US-CA: CCPA | CA: PIPEDA; Quebec Law 25</Td>
               </Tr>
               <Tr>
-                <Td><strong>Limit use of sensitive personal information</strong> — including appearance data that may constitute sensitive information</Td>
-                <Td>US-CA: CCPA</Td>
+                <Td><strong>Non-discrimination</strong> — you will not be penalised or offered a reduced level of service for exercising your privacy rights</Td>
+                <Td>US-CA: CCPA | AU: APP | CA: PIPEDA</Td>
               </Tr>
               <Tr shade>
-                <Td><strong>Non-discrimination</strong> — you will not be penalised, offered a reduced level of service, or charged a different price for exercising your privacy rights</Td>
-                <Td>US-CA: CCPA</Td>
+                <Td><strong>Lodge a complaint</strong> — escalate unresolved concerns to the relevant supervisory authority</Td>
+                <Td>AU: OAIC | CA: OPC / provincial commissioners | US: FTC / state AGs</Td>
               </Tr>
             </tbody>
           </Table>
 
           <p style={{ margin: '0 0 10px', fontWeight: 600, color: navy }}>California Residents</p>
           <P>
-            We do not sell your personal information or your child's personal information. We do not share
+            We do not sell your personal information or your child&apos;s personal information. We do not share
             personal information for cross-context behavioural advertising. You have the right to opt out of
-            any future sale or sharing of personal information. To submit a CCPA request — including requests
-            to know, correct, delete, or limit — please email{' '}
+            any future sale or sharing. To submit a CCPA request, please email{' '}
             <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a> with the
-            subject line "CCPA Privacy Request."
+            subject line &ldquo;CCPA Privacy Request.&rdquo;
           </P>
 
-          <p style={{ margin: '0 0 10px', fontWeight: 600, color: navy }}>Complaints</p>
+          <p style={{ margin: '0 0 10px', fontWeight: 600, color: navy }}>Quebec Residents</p>
           <P>
-            If you are not satisfied with our response to a privacy request or concern, you have the right
-            to make a complaint to the relevant supervisory authority:
+            Quebec residents have additional rights under Law 25, including the right to data portability
+            (in a structured, commonly used, and technological format), the right to de-indexation (removal
+            of publicly available personal information), and the right to request that personal information
+            not be communicated outside Quebec where adequate protection cannot be ensured. To exercise
+            these rights, contact{' '}
+            <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a>.
+          </P>
+
+          <p style={{ margin: '0 0 10px', fontWeight: 600, color: navy }}>Supervisory Authorities</p>
+          <P>
+            If you are not satisfied with our response to a privacy request or concern, you may contact
+            the relevant authority:
           </P>
           <Ul>
             <Li>
@@ -685,31 +639,27 @@ export default function PrivacyPolicyPage() {
               <a href="https://www.oaic.gov.au" style={{ color: orange }} target="_blank" rel="noopener noreferrer">oaic.gov.au</a>
             </Li>
             <Li>
-              <strong>United Kingdom:</strong> Information Commissioner's Office (ICO) —{' '}
-              <a href="https://ico.org.uk" style={{ color: orange }} target="_blank" rel="noopener noreferrer">ico.org.uk</a>
+              <strong>Canada (federal):</strong> Office of the Privacy Commissioner of Canada (OPC) —{' '}
+              <a href="https://www.priv.gc.ca" style={{ color: orange }} target="_blank" rel="noopener noreferrer">priv.gc.ca</a>
+            </Li>
+            <Li>
+              <strong>Canada (Quebec):</strong> Commission d&apos;accès à l&apos;information du Québec (CAI) —{' '}
+              <a href="https://www.cai.gouv.qc.ca" style={{ color: orange }} target="_blank" rel="noopener noreferrer">cai.gouv.qc.ca</a>
             </Li>
             <Li>
               <strong>United States:</strong> Federal Trade Commission (FTC) —{' '}
-              <a href="https://www.ftc.gov" style={{ color: orange }} target="_blank" rel="noopener noreferrer">ftc.gov</a>, or your relevant state
-              Attorney General's office
+              <a href="https://www.ftc.gov" style={{ color: orange }} target="_blank" rel="noopener noreferrer">ftc.gov</a>, or your state Attorney General&apos;s office
             </Li>
           </Ul>
-          <P>
-            We encourage you to contact us first so we have the opportunity to address your concern before
-            you escalate to a supervisory authority.
-          </P>
+          <P>We encourage you to contact us first so we can address your concern before escalation.</P>
         </Section>
 
-        {/* ── Section 11 ── */}
         <Section id="cookies" title="11. Cookies and Tracking">
-          <P>
-            TalePop uses the following types of cookies and similar technologies:
-          </P>
+          <P>TalePop uses the following types of cookies and similar technologies:</P>
           <Ul>
             <Li>
-              <strong>Essential cookies:</strong> Required for authentication (session management via
-              Supabase) and core site functionality. These cannot be disabled without preventing you from
-              logging in.
+              <strong>Essential cookies:</strong> Required for authentication (session management) and
+              core site functionality. These cannot be disabled without preventing you from logging in.
             </Li>
             <Li>
               <strong>Preference cookies:</strong> Remember your settings such as selected child profile
@@ -725,28 +675,32 @@ export default function PrivacyPolicyPage() {
             clear cookies through your browser settings. Disabling essential cookies will prevent you from
             accessing your account.
           </P>
+          <P>
+            <strong>Canadian users (CASL):</strong> Where cookies or similar technologies constitute
+            electronic access to a device under Canada&apos;s Anti-Spam Legislation (CASL), TalePop relies
+            on implied consent for essential and functional cookies necessary to provide the service
+            you have requested. No non-essential tracking technologies are deployed without express consent.
+          </P>
         </Section>
 
-        {/* ── Section 12 ── */}
         <Section id="changes" title="12. Changes to This Policy">
           <P>
-            We may update this Privacy Policy from time to time to reflect changes in our practices, technology,
-            legal requirements, or other factors. When we make material changes, we will update the "Last
-            updated" date at the top of this page and, where the changes are significant, notify you by email
-            to your registered account address.
+            We may update this Privacy Policy from time to time to reflect changes in our practices,
+            technology, legal requirements, or other factors. When we make material changes, we will update
+            the &ldquo;Last updated&rdquo; date at the top of this page and, where the changes are significant, notify
+            you by email to your registered account address.
           </P>
           <P>
-            Your continued use of TalePop after a policy update constitutes acceptance of the updated policy.
-            If you do not agree with a material change, you may close your account at any time through the
-            account settings page.
+            Your continued use of TalePop after a policy update constitutes acceptance of the updated
+            policy. If you do not agree with a material change, you may close your account at any time
+            through the account settings page.
           </P>
         </Section>
 
-        {/* ── Section 13 ── */}
         <Section id="contact" title="13. Contact Us">
           <P>
-            If you have any questions, concerns, or requests relating to this Privacy Policy or our handling
-            of your personal information, please contact us:
+            If you have any questions, concerns, or requests relating to this Privacy Policy or our
+            handling of your personal information, please contact us:
           </P>
           <Ul>
             <Li>
@@ -754,21 +708,18 @@ export default function PrivacyPolicyPage() {
               <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a>
             </Li>
             <Li>
-              <strong>Privacy and data requests (access, correction, deletion, CCPA, portability):</strong>{' '}
+              <strong>Privacy and data requests (access, correction, deletion, CCPA, portability, de-indexation):</strong>{' '}
               <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a>{' '}
-              — we respond within 30 days (Australia / UK) or 45 days (CCPA)
+              — we respond within 30 days (AU / CA) or 45 days (US / CCPA)
             </Li>
             <Li>
-              <strong>UK data enquiries and Article 27 Representative:</strong>{' '}
-              <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a>{' '}
-              — the name and contact details of our formally appointed UK representative will be published
-              here upon appointment
+              <strong>COPPA parental requests (review, correction, or deletion of child data):</strong>{' '}
+              <a href="mailto:info@talepopstories.com" style={{ color: orange }}>info@talepopstories.com</a>
             </Li>
           </Ul>
         </Section>
 
       </main>
-
       <Footer />
     </div>
   );
