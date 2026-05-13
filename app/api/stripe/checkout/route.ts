@@ -8,18 +8,43 @@ function getStripe() {
   return new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2025-01-27.acacia' });
 }
 
+// Map locale → currency. Defaults to AUD.
+function currencyFromLocale(locale: string): 'aud' | 'usd' | 'cad' {
+  const lower = locale.toLowerCase();
+  if (lower === 'en-us' || lower.startsWith('en-us')) return 'usd';
+  if (lower === 'en-ca' || lower.startsWith('en-ca') || lower === 'fr-ca') return 'cad';
+  return 'aud';
+}
+
+// Price IDs per currency
+const PRICE_IDS: Record<string, { monthly: string; annual: string }> = {
+  aud: {
+    monthly: process.env.STRIPE_PRICE_MONTHLY!,
+    annual:  process.env.STRIPE_PRICE_ANNUAL!,
+  },
+  usd: {
+    monthly: process.env.STRIPE_PRICE_MONTHLY_USD!,
+    annual:  process.env.STRIPE_PRICE_ANNUAL_USD!,
+  },
+  cad: {
+    monthly: process.env.STRIPE_PRICE_MONTHLY_CAD!,
+    annual:  process.env.STRIPE_PRICE_ANNUAL_CAD!,
+  },
+};
+
 export async function POST(request: Request) {
   try {
     const supabase = await createClient();
     const { data: { user }, error: authError } = await supabase.auth.getUser();
     if (authError || !user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
-    const { plan } = await request.json(); // 'monthly' | 'annual' | 'extra_book'
+    const { plan, locale } = await request.json(); // 'monthly' | 'annual' | 'extra_book'
 
     if (!process.env.STRIPE_SECRET_KEY) {
       return NextResponse.json({ error: 'Stripe not configured' }, { status: 500 });
     }
 
+    const currency = currencyFromLocale(locale || 'en-AU');
     const stripe = getStripe();
 
     // Get or create Stripe customer
@@ -42,7 +67,7 @@ export async function POST(request: Request) {
         .eq('user_id', user.id);
     }
 
-    // One-time 99c extra book purchase
+    // One-time 99c extra book purchase — currency-aware
     if (plan === 'extra_book') {
       const session = await stripe.checkout.sessions.create({
         customer: customerId,
@@ -51,12 +76,12 @@ export async function POST(request: Request) {
         line_items: [
           {
             price_data: {
-              currency: 'aud',
+              currency,
               product_data: {
                 name: 'Extra Book',
                 description: 'One additional story book for today',
               },
-              unit_amount: 99, // 99 cents AUD
+              unit_amount: 99, // 99 cents in local currency
             },
             quantity: 1,
           },
@@ -68,10 +93,9 @@ export async function POST(request: Request) {
       return NextResponse.json({ url: session.url });
     }
 
-    // Subscription plans
-    const priceId = plan === 'annual'
-      ? process.env.STRIPE_PRICE_ANNUAL!
-      : process.env.STRIPE_PRICE_MONTHLY!;
+    // Subscription plans — pick price ID for user's currency
+    const prices = PRICE_IDS[currency] || PRICE_IDS['aud'];
+    const priceId = plan === 'annual' ? prices.annual : prices.monthly;
 
     if (!priceId) {
       return NextResponse.json({ error: 'Stripe price not configured' }, { status: 500 });

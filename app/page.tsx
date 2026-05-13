@@ -653,7 +653,7 @@ export default function Home() {
               <h3 className="font-serif" style={{ fontSize: '1.5rem', marginBottom: '0.4rem', color: '#0D183D' }}>Monthly</h3>
               <p style={{ color: '#9CA8B4', marginBottom: '1.5rem', fontSize: '0.9rem', fontWeight: 500 }}>Flexible  -  cancel anytime</p>
               <div style={{ marginBottom: '0.75rem' }}>
-                <span style={{ fontSize: '2.75rem', fontWeight: 800, color: '#FF6B35', letterSpacing: '-0.02em' }}>A$9.99</span>
+                <span style={{ fontSize: '2.75rem', fontWeight: 800, color: '#FF6B35', letterSpacing: '-0.02em' }}>$9.99</span>
                 <span style={{ color: '#9CA8B4', fontSize: '0.9rem', fontWeight: 500 }}>/month</span>
               </div>
               <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: '#FFF0E0', border: '1.5px solid #FFD4A8', borderRadius: '999px', padding: '0.3rem 0.9rem', marginBottom: '1.5rem' }}>
@@ -664,7 +664,7 @@ export default function Home() {
                 Subscribe monthly &rarr;
               </Link>
               <p style={{ fontSize: '0.75rem', color: '#9CA8B4', textAlign: 'center', marginTop: '0.5rem', marginBottom: '1.25rem', fontWeight: 500 }}>
-                Additional children: A$3.99/month each
+                Additional children: $3.99/month each
               </p>
               <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                 {['A story every day', '1 child profile included', 'Story series (up to 4 volumes)', 'Beautifully illustrated pages', 'Cancel in one click'].map(f => (
@@ -682,7 +682,7 @@ export default function Home() {
               <h3 className="font-serif" style={{ fontSize: '1.5rem', marginBottom: '0.4rem' }}>Annual</h3>
               <p style={{ opacity: 0.75, marginBottom: '1.5rem', fontSize: '0.9rem', fontWeight: 500 }}>Two months free</p>
               <div style={{ marginBottom: '0.5rem' }}>
-                <span style={{ fontSize: '2.75rem', fontWeight: 800, letterSpacing: '-0.02em' }}>A$7.99</span>
+                <span style={{ fontSize: '2.75rem', fontWeight: 800, letterSpacing: '-0.02em' }}>$7.99</span>
                 <span style={{ opacity: 0.7, fontSize: '0.9rem', fontWeight: 500 }}>/month</span>
               </div>
               <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(255,255,255,0.2)', border: '1.5px solid rgba(255,255,255,0.35)', borderRadius: '999px', padding: '0.3rem 0.9rem', marginBottom: '0.6rem' }}>
@@ -694,7 +694,7 @@ export default function Home() {
                 Get the best deal &rarr;
               </Link>
               <p style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.55)', textAlign: 'center', marginTop: '0.5rem', marginBottom: '1.25rem', fontWeight: 500 }}>
-                Additional children: A$3.99/month each
+                Additional children: $3.99/month each
               </p>
               <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                 {['Everything in Monthly', 'Priority story generation', 'Early access to new features', 'Save A$24 per year'].map(f => (

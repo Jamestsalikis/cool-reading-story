@@ -16,7 +16,7 @@ export default function PaywallModal({ reason, onClose }: Props) {
       const res = await fetch('/api/stripe/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ plan }),
+        body: JSON.stringify({ plan, locale: navigator.language }),
       });
       const data = await res.json();
       if (data.url) window.location.href = data.url;
