@@ -81,14 +81,14 @@ const bookStyles = `
     font-family: 'Lora', Fredoka, cursive;
     font-size: 1.05rem;
     line-height: 1.9;
-    color: #2C1A0E;
+    color: #0D183D;
     letter-spacing: 0.01em;
   }
   .story-text p { margin-bottom: 1.2em; }
   .page-border {
     position: absolute;
     inset: 36px 16px 16px 36px;
-    border: 1.5px solid rgba(116,21,21,0.10);
+    border: 1.5px solid rgba(13,24,61,0.08);
     border-radius: 4px;
     pointer-events: none;
     z-index: 0;
@@ -159,9 +159,9 @@ function CornerOrnaments() {
 function DecorativeRule() {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
-      <div style={{ flex: 1, height: '1px', background: 'linear-gradient(to right, rgba(116,21,21,0.15), transparent)' }} />
-      <span style={{ fontSize: '0.7rem', color: 'rgba(116,21,21,0.4)' }}>&#10022;</span>
-      <div style={{ flex: 1, height: '1px', background: 'linear-gradient(to left, rgba(116,21,21,0.15), transparent)' }} />
+      <div style={{ flex: 1, height: '1px', background: 'linear-gradient(to right, rgba(255,107,53,0.2), transparent)' }} />
+      <span style={{ fontSize: '0.7rem', color: 'rgba(255,107,53,0.5)' }}>&#10022;</span>
+      <div style={{ flex: 1, height: '1px', background: 'linear-gradient(to left, rgba(255,107,53,0.2), transparent)' }} />
     </div>
   );
 }
@@ -277,7 +277,7 @@ export default function StoryPage() {
 
   if (loading) {
     return (
-      <div style={{ minHeight: '100vh', background: '#2C1810', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div style={{ minHeight: '100vh', background: '#0D183D', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <p style={{ color: 'rgba(255,255,255,0.6)', fontFamily: 'Fredoka, cursive' }}>Opening your book...</p>
       </div>
     );
@@ -318,7 +318,7 @@ export default function StoryPage() {
       <div style={{ padding: mobilePadding ? '18px 20px 28px 48px' : '28px 28px 32px 24px', position: 'relative' }}>
         <DecorativeRule />
         {currentPage === 0 && (
-          <h2 style={{ fontFamily: 'Lora, Fredoka, cursive', fontSize: '1.45rem', color: '#2C1A0E', marginBottom: '18px', lineHeight: 1.3, fontWeight: 600 }}>
+          <h2 style={{ fontFamily: 'Lora, Fredoka, cursive', fontSize: '1.45rem', color: '#0D183D', marginBottom: '18px', lineHeight: 1.3, fontWeight: 600 }}>
             {story.title}
           </h2>
         )}
@@ -330,7 +330,7 @@ export default function StoryPage() {
             {story.moral}
           </div>
         )}
-        <div style={{ textAlign: 'center', marginTop: '18px', color: 'rgba(116,21,21,0.3)', fontSize: '0.78rem', fontFamily: 'Fredoka, cursive' }}>
+        <div style={{ textAlign: 'center', marginTop: '18px', color: 'rgba(255,107,53,0.45)', fontSize: '0.78rem', fontFamily: 'Fredoka, cursive' }}>
           &#8212; {currentPage + 1} &#8212;
         </div>
       </div>
@@ -371,7 +371,7 @@ export default function StoryPage() {
           <div style={{
             flex: 1,
             overflowY: 'auto',
-            borderLeft: '1px solid rgba(116,21,21,0.10)',
+            borderLeft: '1px solid rgba(13,24,61,0.08)',
             position: 'relative',
             zIndex: 2,
           }}>
@@ -432,9 +432,9 @@ export default function StoryPage() {
 
       <style>{bookStyles}</style>
 
-      <div className="no-print" style={{ minHeight: '100vh', background: 'linear-gradient(160deg, #2C1810 0%, #1a0f08 100%)', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '0 0 100px' }}>
+      <div className="no-print" style={{ minHeight: '100vh', background: 'linear-gradient(160deg, #0D183D 0%, #060D24 100%)', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '0 0 100px' }}>
 
-        <div style={{ width: '100%', padding: '14px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'sticky', top: 0, zIndex: 10, background: 'rgba(44,24,16,0.9)', backdropFilter: 'blur(8px)' }}>
+        <div style={{ width: '100%', padding: '14px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'sticky', top: 0, zIndex: 10, background: 'rgba(13,24,61,0.95)', backdropFilter: 'blur(8px)' }}>
           <Link href="/dashboard" style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'rgba(255,255,255,0.65)', textDecoration: 'none', fontSize: '0.875rem' }}>
             <ArrowLeft size={15} /> Library
           </Link>
@@ -443,12 +443,12 @@ export default function StoryPage() {
           </span>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             {loadingPages.size > 0 && (
-              <span style={{ fontSize: '0.7rem', color: 'rgba(255,200,100,0.7)', fontFamily: 'Fredoka, cursive' }}>
+              <span style={{ fontSize: '0.7rem', color: 'rgba(255,183,3,0.85)', fontFamily: 'Fredoka, cursive' }}>
                 painting&#8230;
               </span>
             )}
             <button onClick={toggleFavourite} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '6px', display: 'flex' }}>
-              <Heart size={19} color="#c4784a" fill={favourite ? '#c4784a' : 'none'} />
+              <Heart size={19} color="#FF6B35" fill={favourite ? '#FF6B35' : 'none'} />
             </button>
           </div>
         </div>
@@ -470,7 +470,7 @@ export default function StoryPage() {
           {renderPageContent()}
         </div>
 
-        <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 20, background: 'rgba(44,24,16,0.95)', backdropFilter: 'blur(8px)', borderTop: '1px solid rgba(255,255,255,0.08)', padding: '12px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
+        <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 20, background: 'rgba(13,24,61,0.97)', backdropFilter: 'blur(8px)', borderTop: '1px solid rgba(255,255,255,0.08)', padding: '12px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
           <button
             onClick={() => goToPage(currentPage - 1)}
             disabled={currentPage === 0}
@@ -480,7 +480,7 @@ export default function StoryPage() {
           </button>
           <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
             {pages.map((p, i) => (
-              <button key={i} onClick={() => goToPage(i)} style={{ width: i === currentPage ? '22px' : '7px', height: '7px', borderRadius: '4px', background: i === currentPage ? '#c4784a' : (p.image_url ? 'rgba(255,255,255,0.4)' : 'rgba(255,255,255,0.18)'), border: 'none', cursor: 'pointer', transition: 'all 0.25s', padding: 0 }} />
+              <button key={i} onClick={() => goToPage(i)} style={{ width: i === currentPage ? '22px' : '7px', height: '7px', borderRadius: '4px', background: i === currentPage ? '#FF6B35' : (p.image_url ? 'rgba(255,255,255,0.4)' : 'rgba(255,255,255,0.18)'), border: 'none', cursor: 'pointer', transition: 'all 0.25s', padding: 0 }} />
             ))}
           </div>
           {!isLastPage && (
@@ -492,7 +492,7 @@ export default function StoryPage() {
             </button>
           )}
           {isLastPage && (
-            <Link href="/dashboard" style={{ display: 'flex', alignItems: 'center', gap: '6px', background: '#c4784a', border: 'none', borderRadius: '12px', color: 'white', padding: '0.75rem 1.25rem', textDecoration: 'none', fontSize: '1rem', fontWeight: 700, minWidth: '90px', justifyContent: 'center' }}>
+            <Link href="/dashboard" style={{ display: 'flex', alignItems: 'center', gap: '6px', background: '#FF6B35', border: 'none', borderRadius: '12px', color: 'white', padding: '0.75rem 1.25rem', textDecoration: 'none', fontSize: '1rem', fontWeight: 700, minWidth: '90px', justifyContent: 'center' }}>
               Library
             </Link>
           )}
