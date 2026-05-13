@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { X, Check, Shield, RefreshCw, Star, Heart } from 'lucide-react';
+import { X, Check, Shield, RefreshCw, Star, Heart, BookOpen } from 'lucide-react';
 
 const S = `
   .hero-grid {
@@ -769,7 +769,7 @@ export default function Home() {
 
           <div className="trust-bar" style={{ marginTop: '3rem' }}>
             {[
-              { icon: <RefreshCw size={18} color="#FF6B35" />, title: 'Never the same story twice', desc: 'Every story is invented fresh. No recycled plots, ever.' },
+              { icon: <BookOpen size={18} color="#FF6B35" />, title: 'Your library, yours to keep', desc: 'Every story is saved. Re-read it tonight, next year, whenever — subscribe and it\'s always there.' },
               { icon: <Star size={18} color="#FFB703" />, title: 'Their world, front and centre', desc: 'Their interests shape the entire plot  -  not just the name.' },
               { icon: <Shield size={18} color="#6CC06C" />, title: 'Safe & age-appropriate', desc: 'Every story crafted thoughtfully for kids aged 3–10.' },
               { icon: <Heart size={18} color="#FF6B35" />, title: 'No data sold. Ever.', desc: 'Your child\'s details are private. That\'s a promise.' },

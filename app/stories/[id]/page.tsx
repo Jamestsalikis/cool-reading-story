@@ -179,6 +179,7 @@ export default function StoryPage() {
   const [isDesktop, setIsDesktop] = useState(false);
   const imageGenStarted = useRef(false);
   const feedbackShown = useRef(false);
+  const [locked, setLocked] = useState(false);
   const supabase = createClient();
 
   useEffect(() => {
@@ -198,6 +199,19 @@ export default function StoryPage() {
         .single();
 
       if (data) {
+        // Check subscription access — cancelled users lose library access
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) {
+          const { data: adminRow } = await supabase
+            .from('admin_emails').select('email').eq('email', user.email ?? '').single();
+          if (!adminRow) {
+            const { data: sub } = await supabase
+              .from('user_subscriptions').select('status, free_stories_remaining').eq('user_id', user.id).single();
+            const isActive = sub?.status === 'subscribed';
+            const hasFreeStories = (sub?.free_stories_remaining ?? 0) > 0;
+            if (!isActive && !hasFreeStories) { setLocked(true); setLoading(false); return; }
+          }
+        }
         setStory(data);
         setFavourite(data.is_favourite);
         const pages: Page[] = data.pages || [];
@@ -274,6 +288,24 @@ export default function StoryPage() {
       }
     }
   };
+
+  if (locked) {
+    return (
+      <div style={{ minHeight: '100vh', background: '#0D183D', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '24px', padding: '24px', textAlign: 'center' }}>
+        <div style={{ fontSize: '3.5rem' }}>📚</div>
+        <h2 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.75rem', color: 'white', marginBottom: '8px' }}>Your library is waiting</h2>
+        <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '1rem', maxWidth: '360px', lineHeight: 1.7 }}>
+          Your stories are saved and ready to read — reactivate your subscription to open your library again.
+        </p>
+        <Link href="/dashboard" style={{ background: '#FF6B35', color: 'white', padding: '0.9rem 2rem', borderRadius: '12px', textDecoration: 'none', fontWeight: 800, fontSize: '1rem' }}>
+          Reactivate subscription
+        </Link>
+        <Link href="/dashboard" style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.85rem', textDecoration: 'none' }}>
+          ← Back to dashboard
+        </Link>
+      </div>
+    );
+  }
 
   if (loading) {
     return (
