@@ -171,7 +171,7 @@ Return ONLY valid JSON, no markdown, no explanation:
   "moral": "The gentle lesson in one sentence",
   "theme_emoji": "One emoji representing the story theme",
   "word_count": estimated_total_word_count_as_number,
-  "character_anchor": "Premium illustrated children's picture book art, warm painterly style, bold ink outlines, expressive cartoon character with large bright eyes, jewel-tone palette of midnight navy and ocean teal and sunshine yellow and tangerine orange, magical golden atmospheric lighting, dreamy enchanted background. [NAME], a [AGE]-year-old [GENDER] child with [HAIR DESCRIPTION], wearing [SPECIFIC OUTFIT]  -  same child, same face, same exact outfit in every image.",
+  "character_anchor": "Disney Pixar 3D animated movie style, large expressive eyes, smooth rounded cartoon features, cel-shaded vibrant saturated colours, warm soft cinematic lighting, magical storybook atmosphere, professional Disney feature film quality. [NAME], a [AGE]-year-old child with [EXACT HAIR COLOUR AND STYLE], wearing [EXACT OUTFIT: every piece named with specific vivid colours]  -  same character, same face, same exact outfit in every image.",
   "pages": [
     {
       "page_number": 1,
