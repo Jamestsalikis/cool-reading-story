@@ -91,25 +91,35 @@ export async function checkGenerationAllowed(
     return { allowed: true, reason: 'subscribed' };
   }
 
-  // Free user — check remaining
-  if (sub.free_stories_remaining > 0) {
+  // Free user — allow if account exists. Per-child has_used_free_story gate is
+  // enforced in the generate-story route after the child record is fetched.
+  if (sub.status === 'free' || sub.status === 'cancelled') {
     return { allowed: true, reason: 'free' };
   }
 
-  return { allowed: false, reason: 'free_exhausted' };
+  return { allowed: false, reason: 'no_subscription' };
 }
 
 /**
  * Decrement the appropriate counter after a story is successfully saved.
+ * For free users, also marks the child's has_used_free_story = true.
  */
 export async function decrementStoryCount(
   supabase: SupabaseClient,
   userId: string,
-  reason: 'admin' | 'free' | 'subscribed'
+  reason: 'admin' | 'free' | 'subscribed',
+  childId?: string
 ) {
   if (reason === 'admin') return;
   if (reason === 'free') {
-    await supabase.rpc('decrement_free_stories', { uid: userId });
+    // Mark this child as having used their one free story
+    if (childId) {
+      await supabase
+        .from('children')
+        .update({ has_used_free_story: true })
+        .eq('id', childId)
+        .eq('parent_id', userId);
+    }
   }
   if (reason === 'subscribed') {
     await supabase.rpc('increment_stories_this_month', { uid: userId });

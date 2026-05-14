@@ -32,6 +32,34 @@ export async function createChild(data: {
     imaginative: 'advanced',
   };
 
+  // Subscription gate: free users can only have 1 child profile
+  const { data: adminRow } = await supabase
+    .from('admin_emails')
+    .select('email')
+    .eq('email', user.email ?? '')
+    .single();
+
+  if (!adminRow) {
+    const { data: subRow } = await supabase
+      .from('user_subscriptions')
+      .select('status')
+      .eq('user_id', user.id)
+      .single();
+
+    const isSubscribed = subRow?.status === 'subscribed';
+
+    if (!isSubscribed) {
+      const { count: existingChildren } = await supabase
+        .from('children')
+        .select('id', { count: 'exact', head: true })
+        .eq('parent_id', user.id);
+
+      if ((existingChildren ?? 0) >= 1) {
+        return { error: 'subscription_required' };
+      }
+    }
+  }
+
   const { data: child, error } = await supabase
     .from('children')
     .insert({

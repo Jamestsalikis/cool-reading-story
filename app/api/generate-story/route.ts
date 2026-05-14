@@ -135,6 +135,13 @@ CONSISTENCY (non-negotiable):
 - The character must look identical in all 5 images: same face, same age (${age}), same exact outfit  -  never taller, never older
 - End every image prompt with: "No text, no words, no letters anywhere in the image."
 
+PAGE SPECIFICITY (non-negotiable):
+- Each image_prompt MUST be uniquely tied to what actually happens on that page. Do NOT write generic scene prompts.
+- Extract from the page text: the specific named location, the specific action happening, any named creatures or magical objects, and the emotional moment.
+- If page 2 text mentions "${name} found a tiny blue door hidden behind a waterfall", the image MUST show: a tiny blue door, a waterfall, and ${name} discovering it - NOT just "${name} standing in a forest".
+- A reader who sees only the image should be able to tell which page of the story it illustrates.
+- Each of the 5 images must look completely different in composition and setting - never repeat the same scene or location.
+
 WHAT MAKES A GREAT CHILDREN'S BOOK ILLUSTRATION (apply to every page):
 - Capture the EMOTIONAL PEAK of that page - the single most exciting or heartfelt moment, not a neutral in-between moment
 - Show STRONG EMOTION on the character's face: wide eyes of wonder, a beaming smile of triumph, eyebrows raised in surprise, a focused determined gaze - the child reading should FEEL what ${name} feels
@@ -161,7 +168,7 @@ Return ONLY valid JSON, no markdown, no explanation:
     {
       "page_number": 1,
       "content": "Page text here  -  2-4 paragraphs",
-      "image_prompt": "[character_anchor copied verbatim] [1-2 sentences of scene action]. No text, no words, no letters anywhere in the image."
+      "image_prompt": "[character_anchor copied verbatim] [3-5 sentences that describe THIS PAGE SPECIFICALLY: (1) the exact named location from this page's text e.g. 'a glowing crystal cave with purple stalactites dripping silver light', (2) the specific action the character is doing at this exact story moment e.g. 'leaping across a gap between two floating islands, arms outstretched, hair streaming behind', (3) any named creature, object, or character from this page e.g. 'a tiny dragon with emerald scales perched on her shoulder blowing a single spark', (4) the emotional expression on the character's face matching this page's mood]. No text, no words, no letters anywhere in the image."
     }
   ]
 }`;
@@ -284,6 +291,17 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Child not found' }, { status: 404 });
     }
 
+    // Free user per-child gate: each child gets exactly one free story.
+    // Once has_used_free_story is true, that child can't generate again until subscribed.
+    if (paywallResult.reason === 'free') {
+      if (child.has_used_free_story) {
+        return NextResponse.json(
+          { error: 'paywall', reason: 'free_exhausted' },
+          { status: 402 }
+        );
+      }
+    }
+
     // Per-child daily limit: each child can only receive 1 story per day.
     // This prevents a parent from using additional-child credits to generate
     // multiple stories for the same child.
@@ -356,7 +374,7 @@ export async function POST(request: Request) {
           console.error('Sample story save error:', storyError);
           return NextResponse.json({ error: 'Failed to save story' }, { status: 500 });
         }
-        await decrementStoryCount(supabase, user.id, paywallResult.reason);
+        await decrementStoryCount(supabase, user.id, paywallResult.reason, child_id);
         return NextResponse.json({ story });
       }
     }
@@ -440,7 +458,7 @@ export async function POST(request: Request) {
     }
 
     // Decrement story count now that story is confirmed saved
-    await decrementStoryCount(supabase, user.id, paywallResult.reason);
+    await decrementStoryCount(supabase, user.id, paywallResult.reason, child_id);
 
     return NextResponse.json({ story });
   } catch (error) {

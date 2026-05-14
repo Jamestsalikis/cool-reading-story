@@ -267,7 +267,11 @@ export default function OnboardingPage() {
         });
 
         if (result.error || !result.child) {
-          setSubmitError(result.error || 'Failed to save profile');
+          if (result.error === 'subscription_required') {
+            setSubmitError('A subscription is required to add more than one child profile. Please subscribe from your dashboard.');
+          } else {
+            setSubmitError(result.error || 'Failed to save profile');
+          }
           setSubmitting(false);
           return;
         }

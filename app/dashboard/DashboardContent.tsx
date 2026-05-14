@@ -40,7 +40,7 @@ const pageStyles = `
   }
 `;
 
-type Child = { id: string; name: string; age: number; interests: string[] };
+type Child = { id: string; name: string; age: number; interests: string[]; has_used_free_story?: boolean };
 type Story = {
   id: string; title: string; created_at: string; word_count: number;
   series_id: string | null; series_title: string | null; volume_number: number | null;
@@ -342,7 +342,7 @@ export default function DashboardPage() {
   const [generateError, setGenerateError] = useState('');
   const [paywallReason, setPaywallReason] = useState<'free_exhausted' | 'monthly_limit' | 'no_subscription' | 'daily_limit' | null>(null);
   const [editingChild, setEditingChild] = useState<ChildRecord | null>(null);
-  const [sub, setSub] = useState<{ status: string; free_stories_remaining: number; stories_this_month: number; stories_today: number; extra_books_today: number } | null>(null);
+  const [sub, setSub] = useState<{ status: string; stories_this_month: number; stories_today: number; extra_books_today: number } | null>(null);
   const [showConfetti, setShowConfetti] = useState(false);
   const [userEmail, setUserEmail] = useState('');
   const [userId, setUserId] = useState('');
@@ -364,7 +364,7 @@ export default function DashboardPage() {
     if (user) { setUserEmail(user.email ?? ''); setUserId(user.id); }
     const { data: childrenData } = await supabase.from('children').select('*').order('created_at', { ascending: true });
     const { data: storiesData } = await supabase.from('stories').select('id, title, created_at, word_count, series_id, series_title, volume_number, pages, children(name, age)').order('created_at', { ascending: false });
-    const { data: subData } = await supabase.from('user_subscriptions').select('status, free_stories_remaining, stories_this_month, stories_today, extra_books_today').eq('user_id', user?.id ?? '').single();
+    const { data: subData } = await supabase.from('user_subscriptions').select('status, stories_this_month, stories_today, extra_books_today').eq('user_id', user?.id ?? '').single();
     setSub(subData);
     setChildren(childrenData || []);
     setStories(storiesData || []);
@@ -401,6 +401,9 @@ export default function DashboardPage() {
       .filter(Boolean)
   );
   const childrenAvailableToday = children.filter(c => !childStoriesUsedToday.has(c.name)).length;
+
+  // Computed from per-child flag — each child gets 1 free story
+  const freeStoriesRemaining = sub?.status === 'subscribed' ? 0 : children.filter(c => !c.has_used_free_story).length;
 
   const storiesByChild = (childId: string) => { const child = children.find(c => c.id === childId); if (!child) return []; return stories.filter(s => s.children?.name === child.name); };
   const isSeriesComplete = (childId: string) => { const latest = storiesByChild(childId)[0]; if (!latest?.series_id) return false; return stories.filter(s => s.series_id === latest.series_id).some(s => s.volume_number === 4); };
@@ -529,9 +532,9 @@ export default function DashboardPage() {
           </div>
         )}
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
-          {sub && !isMobile && sub.status !== 'subscribed' && (
+          {sub && !isMobile && sub.status !== 'subscribed' && freeStoriesRemaining > 0 && (
             <span style={{ fontSize: '0.75rem', fontWeight: '700', padding: '4px 12px', borderRadius: '999px', background: '#FFF0E6', color: '#FF6B35' }}>
-              {sub.free_stories_remaining} free {sub.free_stories_remaining === 1 ? 'story' : 'stories'} left
+              {freeStoriesRemaining} free {freeStoriesRemaining === 1 ? 'story' : 'stories'} left
             </span>
           )}
           <button onClick={async () => { await supabase.auth.signOut(); window.location.href = '/'; }} style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', background: 'white', border: '1.5px solid #F0E4D0', borderRadius: '8px', padding: '6px 14px', cursor: 'pointer' }}>
@@ -563,11 +566,11 @@ export default function DashboardPage() {
                   </span>
                 </>
               )}
-              {sub && sub.status !== 'subscribed' && sub.free_stories_remaining > 0 && (
+              {sub && sub.status !== 'subscribed' && freeStoriesRemaining > 0 && (
                 <>
                   <span style={{ color: '#D1D5DB', fontSize: '0.8rem' }}>·</span>
                   <span style={{ fontSize: '0.75rem', fontWeight: '600', padding: '3px 10px', borderRadius: '20px', background: '#FFF7ED', color: '#C2410C', border: '1px solid #FED7AA' }}>
-                    {sub.free_stories_remaining} free {sub.free_stories_remaining === 1 ? 'story' : 'stories'} left
+                    {freeStoriesRemaining} free {freeStoriesRemaining === 1 ? 'story' : 'stories'} left
                   </span>
                 </>
               )}
@@ -685,9 +688,18 @@ export default function DashboardPage() {
           <div style={{ maxWidth: '560px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '28px' }}>
               <h3 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.4rem', color: '#0D183D', fontWeight: '400' }}>Children</h3>
-              <Link href="/onboarding" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '0.55rem 1.1rem', background: '#0D183D', color: '#fff', borderRadius: '8px', textDecoration: 'none', fontWeight: '600', fontSize: '0.8rem' }}>
-                <Plus size={14} /> Add child
-              </Link>
+              {sub?.status === 'subscribed' ? (
+                <Link href="/onboarding" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '0.55rem 1.1rem', background: '#0D183D', color: '#fff', borderRadius: '8px', textDecoration: 'none', fontWeight: '600', fontSize: '0.8rem' }}>
+                  <Plus size={14} /> Add child
+                </Link>
+              ) : (
+                <button
+                  onClick={() => setPaywallReason('free_exhausted')}
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '0.55rem 1.1rem', background: '#0D183D', color: '#fff', borderRadius: '8px', border: 'none', cursor: 'pointer', fontWeight: '600', fontSize: '0.8rem' }}
+                >
+                  <Plus size={14} /> Add child
+                </button>
+              )}
             </div>
             {children.length === 0 ? <p style={{ color: '#5E6A7A' }}>No children added yet.</p> : (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
@@ -815,7 +827,7 @@ export default function DashboardPage() {
                   </div>
                 ) : (
                   <p style={{ color: '#5E6A7A', fontSize: '0.875rem' }}>
-                    {sub?.free_stories_remaining ?? 0} free {(sub?.free_stories_remaining ?? 0) === 1 ? 'story' : 'stories'} remaining. Subscribe for a new story every night.
+                    {freeStoriesRemaining} free {(freeStoriesRemaining) === 1 ? 'story' : 'stories'} remaining. Subscribe for a new story every night.
                   </p>
                 )}
               </div>
