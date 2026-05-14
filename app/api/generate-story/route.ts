@@ -20,7 +20,7 @@ function buildPrompt(child: {
   interests: string[];
   appearance: Record<string, unknown>;
   reading_level: string;
-}) {
+}, previousTitles: string[] = []) {
   const { name, age, gender, interests, appearance, reading_level } = child;
 
   const pronouns =
@@ -111,7 +111,11 @@ ${bestFriendDesc ? `- Best friend: ${bestFriendDesc}` : ''}
 ${followUpDesc ? `- Personal details from ${name}:\n${followUpDesc}` : ''}
 - Reading level: ${reading_level} → target ${wordTarget} words total
 
-Requirements:
+${previousTitles.length > 0 ? `IMPORTANT  -  PREVIOUS STORIES WRITTEN FOR ${name}:
+${previousTitles.map((t, i) => `  ${i + 1}. "${t}"`).join('\n')}
+You MUST write a completely different story: different setting, different plot, different adventure type, different characters, and a different title. Do NOT repeat any theme, location, or concept from the list above.
+
+` : ''}Requirements:
 1. ${name} is the hero  -  describe ${pronouns.them} with their actual appearance
 2. Weave their interests naturally into the plot  -  they drive the adventure
 3. Include their pet, siblings, or best friend if provided  -  give them real roles using their actual names/nicknames
@@ -380,6 +384,15 @@ export async function POST(request: Request) {
     }
     // --- END PRE-GEN SHORTCUT ---
 
+    // Fetch this child's previous story titles so Claude can avoid repeating them
+    const { data: prevStories } = await supabase
+      .from('stories')
+      .select('title')
+      .eq('child_id', child_id)
+      .order('created_at', { ascending: false })
+      .limit(10);
+    const previousTitles = (prevStories || []).map((s: { title: string }) => s.title).filter(Boolean);
+
     // Generate story + page breakdown via Claude
     const prompt = buildPrompt({
       name: child.name,
@@ -388,7 +401,7 @@ export async function POST(request: Request) {
       interests: child.interests || [],
       appearance: child.appearance || {},
       reading_level: child.reading_level || 'intermediate',
-    });
+    }, previousTitles);
 
     const message = await anthropic.messages.create({
       model: 'claude-sonnet-4-6',
