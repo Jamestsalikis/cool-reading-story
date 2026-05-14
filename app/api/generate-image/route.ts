@@ -12,10 +12,10 @@ const REPLICATE_API_TOKEN = process.env.REPLICATE_API_TOKEN;
 
 // TalePop visual style  -  appended to every Replicate prompt for consistent illustration style
 const TALEPOP_STYLE_SUFFIX =
-  'Disney Pixar 3D animated movie style, large expressive eyes, smooth rounded cartoon features, ' +
-  'cel-shaded vibrant saturated colours, warm soft cinematic lighting, magical storybook atmosphere, ' +
-  'professional Disney feature film quality, rich jewel-tone palette, dreamy enchanted setting. ' +
-  'No text, no words, no letters anywhere in the image.';
+  'Pixar 3D CGI render, subsurface skin scattering, volumetric rim lighting, specular eye highlights, ' +
+  'smooth rounded cartoon anatomy, large expressive eyes, vibrant saturated jewel-tone colours, ' +
+  'shallow depth of field, warm cinematic lighting, magical storybook atmosphere, ' +
+  'professional Disney Pixar animated feature film quality. No text, no words, no letters in the image.';
 
 // Derive a stable integer seed from a story UUID so all pages of one story
 // use the same Flux seed  -  improves visual consistency across illustrations.
