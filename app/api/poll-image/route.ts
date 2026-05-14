@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
+import { parseBody, pollImageSchema } from '@/lib/validation';
 
 // Lightweight endpoint: polls Replicate ONCE for a prediction's status.
 // If succeeded, saves image_url to Supabase and returns it.
@@ -15,10 +16,7 @@ export async function POST(request: Request) {
     const { data: { user }, error: authError } = await supabase.auth.getUser();
     if (authError || !user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
-    const { story_id, page_number, poll_url } = await request.json();
-    if (!story_id || page_number == null || !poll_url) {
-      return NextResponse.json({ error: 'story_id, page_number, and poll_url required' }, { status: 400 });
-    }
+    const { story_id, page_number, poll_url } = await parseBody(request, pollImageSchema);
 
     if (!REPLICATE_API_TOKEN) {
       return NextResponse.json({ error: 'Replicate not configured' }, { status: 500 });
@@ -88,6 +86,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ status: polled.status ?? 'processing' });
 
   } catch (err) {
+    if (err instanceof Response) return err;
+
     console.error('poll-image error:', err);
     return NextResponse.json({ error: 'Failed' }, { status: 500 });
   }

@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
+import { parseBody, startImagesSchema } from '@/lib/validation';
 
 // Creates ALL page predictions in a single function call  -  avoids 5 concurrent
 // Vercel function invocations which cause burst 500s.
@@ -56,7 +57,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Replicate not configured' }, { status: 500 });
     }
 
-    const { story_id } = await request.json();
+    const { story_id } = await parseBody(request, startImagesSchema);
     if (!story_id) return NextResponse.json({ error: 'story_id required' }, { status: 400 });
 
     const { data: story } = await supabase
@@ -92,6 +93,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ predictions });
 
   } catch (err) {
+    if (err instanceof Response) return err;
+
     console.error('start-images error:', err);
     return NextResponse.json({ error: 'Failed' }, { status: 500 });
   }

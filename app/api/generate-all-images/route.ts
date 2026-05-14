@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
+import { parseBody, generateAllImagesSchema } from '@/lib/validation';
 
 export const maxDuration = 60;
 
@@ -47,7 +48,7 @@ export async function POST(request: Request) {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
-  const { story_id } = await request.json();
+  const { story_id } = await parseBody(request, generateAllImagesSchema);
 
   const { data: story } = await supabase
     .from('stories')

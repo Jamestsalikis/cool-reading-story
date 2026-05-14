@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { createClient } from '@/lib/supabase/server';
+import { parseBody, checkoutSchema } from '@/lib/validation';
 
 export const dynamic = 'force-dynamic';
 
@@ -38,13 +39,13 @@ export async function POST(request: Request) {
     const { data: { user }, error: authError } = await supabase.auth.getUser();
     if (authError || !user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
-    const { plan, locale } = await request.json(); // 'monthly' | 'annual' | 'extra_book'
+    const { plan, locale } = await parseBody(request, checkoutSchema);
 
     if (!process.env.STRIPE_SECRET_KEY) {
       return NextResponse.json({ error: 'Stripe not configured' }, { status: 500 });
     }
 
-    const currency = currencyFromLocale(locale || 'en-AU');
+    const currency = currencyFromLocale(locale);
     const stripe = getStripe();
 
     // Get or create Stripe customer
@@ -114,6 +115,8 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ url: session.url });
   } catch (err) {
+    if (err instanceof Response) return err;
+
     console.error('Stripe checkout error:', err);
     return NextResponse.json({ error: 'Failed to create checkout session' }, { status: 500 });
   }

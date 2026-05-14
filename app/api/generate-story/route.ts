@@ -3,6 +3,7 @@ import Anthropic from '@anthropic-ai/sdk';
 import { createClient } from '@/lib/supabase/server';
 import { checkGenerationAllowed, decrementStoryCount } from '@/lib/subscription';
 import { getSampleStory, isTrialInterest } from '@/lib/sample-stories/index';
+import { parseBody, generateStorySchema } from '@/lib/validation';
 
 // Extend Vercel function timeout to 60s (Pro plan) to allow time for image generation
 export const maxDuration = 60;
@@ -251,6 +252,8 @@ async function generateImage(prompt: string): Promise<string | null> {
       }
     }
   } catch (err) {
+    if (err instanceof Response) return err;
+
     console.error('Image generation error:', err);
   }
 
@@ -267,12 +270,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const body = await request.json();
-    const { child_id } = body;
-
-    if (!child_id) {
-      return NextResponse.json({ error: 'child_id required' }, { status: 400 });
-    }
+    const { child_id } = await parseBody(request, generateStorySchema);
 
     // Paywall check
     const paywallResult = await checkGenerationAllowed(supabase, user.id, user.email);
@@ -475,6 +473,8 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ story });
   } catch (error) {
+    if (error instanceof Response) return error;
+
     console.error('Story generation error:', error);
     return NextResponse.json({ error: 'Story generation failed' }, { status: 500 });
   }

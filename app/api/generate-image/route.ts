@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
+import { parseBody, generateImageSchema } from '@/lib/validation';
 
 // Starts a Replicate prediction and returns immediately.
 // If Replicate finishes within 8s (fast path), saves to DB and returns image_url.
@@ -33,7 +34,7 @@ export async function POST(request: Request) {
     const { data: { user }, error: authError } = await supabase.auth.getUser();
     if (authError || !user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
-    const { story_id, page_number } = await request.json();
+    const { story_id, page_number } = await parseBody(request, generateImageSchema);
     if (!story_id || page_number == null) {
       return NextResponse.json({ error: 'story_id and page_number required' }, { status: 400 });
     }
@@ -131,6 +132,8 @@ export async function POST(request: Request) {
     });
 
   } catch (err) {
+    if (err instanceof Response) return err;
+
     console.error('generate-image error:', err);
     return NextResponse.json({ error: 'Failed' }, { status: 500 });
   }

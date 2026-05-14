@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import Anthropic from '@anthropic-ai/sdk';
 import { createClient } from '@/lib/supabase/server';
 import { checkGenerationAllowed, decrementStoryCount } from '@/lib/subscription';
+import { parseBody, generateSequelSchema } from '@/lib/validation';
 
 export const maxDuration = 60;
 
@@ -13,8 +14,7 @@ export async function POST(request: Request) {
     const { data: { user }, error: authError } = await supabase.auth.getUser();
     if (authError || !user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
-    const { story_id } = await request.json();
-    if (!story_id) return NextResponse.json({ error: 'story_id required' }, { status: 400 });
+    const { story_id } = await parseBody(request, generateSequelSchema);
 
     // Paywall check
     const paywallResult = await checkGenerationAllowed(supabase, user.id, user.email);
@@ -219,6 +219,8 @@ Return ONLY valid JSON:
 
     return NextResponse.json({ story: newStory });
   } catch (error) {
+    if (error instanceof Response) return error;
+
     console.error('Sequel generation error:', error);
     return NextResponse.json({ error: 'Sequel generation failed' }, { status: 500 });
   }
