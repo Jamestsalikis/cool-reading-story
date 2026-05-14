@@ -131,13 +131,16 @@ You MUST write a completely different story: different setting, different plot, 
 7. Use language appropriate for age ${age}: ${reading_level === 'beginner' ? 'short sentences, simple words, lots of repetition' : reading_level === 'intermediate' ? 'flowing sentences, rich descriptions, some new vocabulary' : 'complex narrative, vivid imagery, sophisticated vocabulary'}
 8. Make it feel uniquely written FOR ${name}  -  not a generic story with a name swapped in
 9. Split the story into exactly 5 pages. Each page should have 2-4 paragraphs of text.
-10. Before writing page prompts, define a CHARACTER ANCHOR. Begin with this EXACT style prefix (copy it word for word): "Disney animated movie style illustration, 2D hand-drawn animation aesthetic, large expressive eyes, smooth rounded cartoon features, cel-shaded vibrant colours, rich saturated palette, soft warm cinematic lighting, magical storybook atmosphere, professional Disney feature film quality."  -  then describe: ${name}'s specific hair style and colour, eye colour, and a specific named outfit (e.g. "a red polka-dot dress and white sandals" or "a yellow striped hoodie and blue jeans and white sneakers"). Choose an outfit that fits ${name}'s personality and interests. This full anchor must be copied verbatim into every image prompt.
+10. Before writing page prompts, define a CHARACTER ANCHOR using EXACTLY this format for the character_anchor field:
+"Premium illustrated children's picture book art, warm painterly style, bold ink outlines, expressive cartoon character with large bright eyes, jewel-tone palette of midnight navy and ocean teal and sunshine yellow and tangerine orange, magical golden atmospheric lighting, dreamy enchanted background. ${name}, a ${age}-year-old child with [EXACT HAIR: colour + style e.g. 'curly auburn hair'], wearing [EXACT OUTFIT: name every piece with specific colours e.g. 'a bright cobalt-blue hoodie with a yellow star, forest-green cargo shorts, and orange high-top sneakers']  -  same child, same face, same exact outfit in every image."
+OUTFIT RULES: (a) Pick a specific, distinctive outfit that matches ${name}'s interests. (b) Name EVERY piece: top, bottom, shoes  -  each with a precise colour word. (c) Avoid generic combos like "blue shirt and brown pants"  -  use vivid specific colours like "cherry-red hoodie", "mustard-yellow overalls", "sky-blue sneakers". (d) The outfit is fixed for the whole book  -  never change it between pages.
 
 CRITICAL IMAGE PROMPT RULES:
 
 CONSISTENCY (non-negotiable):
 - Start EVERY image_prompt with the character_anchor string  -  word for word, no changes
-- The character must look identical in all 5 images: same face, same age (${age}), same exact outfit  -  never taller, never older
+- The character must look identical in all 5 images: same face, same age (${age}), same exact outfit  -  never taller, never older, never different clothes
+- NEVER change the outfit between pages: if the anchor says "cherry-red hoodie and mustard-yellow shorts", every page must show exactly that
 - End every image prompt with: "No text, no words, no letters anywhere in the image."
 
 PAGE SPECIFICITY (non-negotiable):
@@ -479,3 +482,4 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Story generation failed' }, { status: 500 });
   }
 }
+
