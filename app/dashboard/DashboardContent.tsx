@@ -441,6 +441,8 @@ export default function DashboardPage() {
   };
 
   const handleContinueStory = async (storyId: string) => {
+    if (generatingLock.current) return;
+    generatingLock.current = true;
     const storyRef = stories.find(s => s.id === storyId);
     if (!storyRef) return;
     const childName = storyRef.children?.name || '';
@@ -449,10 +451,27 @@ export default function DashboardPage() {
     try {
       const res = await fetch('/api/generate-sequel', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ story_id: storyId }) });
       const data = await res.json();
-      if (res.status === 402) setPaywallReason(data.reason);
-      else if (!res.ok) setGenerateError(data.error || 'Something went wrong.');
-      else { await fetchData(); }
-    } finally { setGenerating(null); }
+      if (res.status === 402) { setPaywallReason(data.reason); return; }
+      if (!res.ok) { setGenerateError(data.error || 'Something went wrong.'); return; }
+      const newStoryId = data.story?.id;
+      if (!newStoryId) { await fetchData(); return; }
+      setGenerating(`painting-${storyId}`);
+      try {
+        const imgRes = await fetch('/api/generate-image', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ story_id: newStoryId, page_number: 1 }) });
+        const imgData = await imgRes.json();
+        const pollUrl = imgData.poll_url;
+        if (pollUrl) {
+          for (let i = 0; i < 5; i++) {
+            await new Promise(r => setTimeout(r, 3000));
+            const pollRes = await fetch('/api/poll-image', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ story_id: newStoryId, page_number: 1, poll_url: pollUrl }) });
+            const pollData = await pollRes.json();
+            if (pollData.status === 'succeeded' || pollData.status === 'failed') break;
+          }
+        }
+      } catch { /* image pre-gen failed gracefully */ }
+      setShowConfetti(true);
+      router.push(`/stories/${newStoryId}`);
+    } finally { setGenerating(null); generatingLock.current = false; }
   };
 
   const handleBuyExtraBook = async () => {
@@ -911,4 +930,5 @@ export default function DashboardPage() {
     </div>
   );
 }
+
 
