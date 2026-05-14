@@ -82,12 +82,9 @@ export async function checkGenerationAllowed(
       sub.extra_books_today = 0;
     }
 
-    // Daily limit: 1 included in subscription + any extras purchased today
-    const dailyAllowed = 1 + (sub.extra_books_today ?? 0);
-    if ((sub.stories_today ?? 0) >= dailyAllowed) {
-      return { allowed: false, reason: 'daily_limit' };
-    }
-
+    // No account-wide daily cap — each child gets 1 story/day.
+    // Per-child enforcement happens in the generate-story route.
+    // extra_books_today unlocks additional stories per child there.
     return { allowed: true, reason: 'subscribed' };
   }
 
