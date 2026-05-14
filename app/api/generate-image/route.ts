@@ -15,7 +15,7 @@ const TALEPOP_STYLE_SUFFIX =
   'Premium illustrated children\'s picture book art, warm painterly style, bold ink outlines, ' +
   'expressive cartoon character with large bright eyes, rich jewel-tone colour palette of midnight navy ' +
   'and ocean teal and sunshine yellow and tangerine orange, magical golden atmospheric lighting, ' +
-  'dreamy enchanted background with stars and clouds.';
+  'dreamy enchanted background with stars and clouds. No text, no words, no letters anywhere in the image.';
 
 // Derive a stable integer seed from a story UUID so all pages of one story
 // use the same Flux seed  -  improves visual consistency across illustrations.
@@ -43,9 +43,10 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Replicate not configured' }, { status: 500 });
     }
 
+    // Fetch pages AND character_anchor together — anchor locks character appearance across all pages
     const { data: story } = await supabase
       .from('stories')
-      .select('pages')
+      .select('pages, character_anchor')
       .eq('id', story_id)
       .eq('parent_id', user.id)
       .single();
@@ -60,11 +61,20 @@ export async function POST(request: Request) {
     const page = pages[pageIndex];
     if (!page.image_prompt) return NextResponse.json({ error: 'No image prompt' }, { status: 400 });
 
-    // Compose final prompt: story-specific prompt + global TalePop style suffix
-    const finalPrompt = `${page.image_prompt} ${TALEPOP_STYLE_SUFFIX}`;
+    // Build final prompt:
+    //   1. character_anchor (from DB — canonical appearance, never drifts between pages)
+    //   2. page-specific scene description
+    //   3. TalePop style suffix
+    //
+    // Injecting the stored anchor FIRST means the character description is always
+    // the same across all 5 pages, even if Claude slightly varied wording per page.
+    const characterAnchor = story.character_anchor || '';
+    const finalPrompt = characterAnchor
+      ? `${characterAnchor} ${page.image_prompt} ${TALEPOP_STYLE_SUFFIX}`
+      : `${page.image_prompt} ${TALEPOP_STYLE_SUFFIX}`;
 
     // Create prediction  -  retry once on 429 (rate limit) with a 5s backoff.
-    // Two attempts × ~500ms each + 5s wait = ~6s worst case, within Hobby's 10s limit.
+    // Two attempts x ~500ms each + 5s wait = ~6s worst case, within Hobby's 10s limit.
     let prediction: { id?: string; urls?: { get: string }; error?: string } | null = null;
 
     for (let attempt = 0; attempt < 2; attempt++) {
