@@ -104,14 +104,14 @@ function BookCard({ story, palette, onContinue }: { story: Story; palette: Palet
               <>
                 <div style={{ position: 'absolute', inset: 0, backgroundImage: `url(${coverImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.05) 55%, transparent 100%)' }} />
-                {vol && vol > 1 && <div style={{ position: 'absolute', top: '8px', right: '7px', background: 'rgba(0,0,0,0.55)', color: '#fff', fontSize: '0.58rem', fontWeight: '800', padding: '2px 7px', borderRadius: '8px', zIndex: 1 }}>VOL {vol}</div>}
+                <div style={{ position: 'absolute', top: '8px', right: '7px', background: 'rgba(0,0,0,0.55)', color: '#fff', fontSize: '0.58rem', fontWeight: '800', padding: '2px 7px', borderRadius: '8px', zIndex: 1 }}>VOL {vol || 1}</div>
                 <p style={{ position: 'absolute', bottom: '22px', left: '8px', right: '8px', fontSize: '0.7rem', fontFamily: 'Fredoka, cursive', color: '#fff', lineHeight: 1.35, textShadow: '0 1px 4px rgba(0,0,0,0.7)', zIndex: 1 }}>{story.title}</p>
                 <p style={{ position: 'absolute', bottom: '8px', left: '8px', right: '8px', fontSize: '0.55rem', color: 'rgba(255,255,255,0.65)', zIndex: 1, letterSpacing: '0.03em' }}>{new Date(story.created_at).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })}</p>
               </>
             ) : (
               <>
                 <div style={{ position: 'absolute', inset: 0, backgroundImage: pattern }} />
-                {vol && vol > 1 && <div style={{ position: 'absolute', top: '10px', right: '8px', background: 'rgba(255,255,255,0.2)', color: 'rgba(255,255,255,0.9)', fontSize: '0.6rem', fontWeight: '800', padding: '2px 7px', borderRadius: '10px' }}>VOL {vol}</div>}
+                <div style={{ position: 'absolute', top: '10px', right: '8px', background: 'rgba(255,255,255,0.2)', color: 'rgba(255,255,255,0.9)', fontSize: '0.6rem', fontWeight: '800', padding: '2px 7px', borderRadius: '10px' }}>VOL {vol || 1}</div>
                 <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '16px 12px', gap: '8px' }}>
                   <div style={{ width: '28px', height: '28px', border: '1.5px solid rgba(255,255,255,0.3)', borderRadius: '3px', transform: 'rotate(45deg)' }} />
                   <p style={{ fontSize: '0.75rem', fontFamily: 'Fredoka, cursive', textAlign: 'center', color: 'rgba(255,255,255,0.95)', lineHeight: 1.4 }}>{story.title}</p>
@@ -168,9 +168,8 @@ function SeriesFan({ volumes, palette, onContinue }: { volumes: Story[]; palette
                     <p style={{ fontSize: '0.56rem', fontFamily: 'Fredoka, cursive', color: 'rgba(255,255,255,0.9)', textAlign: 'center', lineHeight: 1.3 }}>{vol.title.length > 36 ? vol.title.slice(0, 34) + '…' : vol.title}</p>
                   </div>
                 )}
-                {isHovered && (
-                  <p style={{ position: 'absolute', bottom: '8px', left: '5px', right: '5px', fontSize: '0.52rem', fontFamily: 'Fredoka, cursive', color: '#fff', textAlign: 'center', zIndex: 2, textShadow: '0 1px 3px rgba(0,0,0,0.8)' }}>{vol.title.length > 30 ? vol.title.slice(0, 28) + '…' : vol.title}</p>
-                )}
+                <p style={{ position: 'absolute', bottom: '18px', left: '5px', right: '5px', fontSize: '0.52rem', fontFamily: 'Fredoka, cursive', color: '#fff', textAlign: 'center', zIndex: 2, textShadow: '0 1px 3px rgba(0,0,0,0.8)' }}>{vol.title.length > 30 ? vol.title.slice(0, 28) + '…' : vol.title}</p>
+                <p style={{ position: 'absolute', bottom: '6px', left: '5px', right: '5px', fontSize: '0.44rem', color: 'rgba(255,255,255,0.65)', textAlign: 'center', zIndex: 2 }}>{new Date(vol.created_at).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })}</p>
               </div>
             </div>
           );
@@ -689,7 +688,9 @@ export default function DashboardPage() {
                             {shelf.map(item =>
                               item.type === 'single'
                                 ? <BookCard key={item.story.id} story={item.story} palette={palette} onContinue={!generating ? () => handleContinueStory(item.story.id) : undefined} />
-                                : <SeriesFan key={item.seriesId} volumes={item.volumes} palette={palette} onContinue={item.volumes.length < 4 && !generating ? () => handleContinueStory(item.volumes[item.volumes.length - 1].id) : undefined} />
+                                : item.volumes.length === 1
+                                  ? <BookCard key={item.seriesId} story={item.volumes[0]} palette={palette} onContinue={!generating ? () => handleContinueStory(item.volumes[0].id) : undefined} />
+                                  : <SeriesFan key={item.seriesId} volumes={item.volumes} palette={palette} onContinue={item.volumes.length < 4 && !generating ? () => handleContinueStory(item.volumes[item.volumes.length - 1].id) : undefined} />
                             )}
                           </div>
                           <div style={{ height: '14px', background: 'linear-gradient(to bottom, #D4974E 0%, #A87240 50%, #8B5E30 100%)', borderRadius: '0 0 4px 4px', boxShadow: 'inset 0 2px 4px rgba(255,255,255,0.12), 0 5px 12px rgba(0,0,0,0.2)' }} />
@@ -930,5 +931,6 @@ export default function DashboardPage() {
     </div>
   );
 }
+
 
 
