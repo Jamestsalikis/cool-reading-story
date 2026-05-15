@@ -25,13 +25,57 @@ const SAMPLE_STORIES: Record<TrialInterest, typeof superheroes> = {
   Fairies: fairies,
 };
 
-export function getSampleStory(interest: string, childName: string): typeof superheroes | null {
+export interface ChildProfile {
+  name: string;
+  age?: number;
+  gender?: string;
+  hairColour?: string;
+  eyeColour?: string;
+}
+
+/**
+ * Returns a sample story personalised with the child's name and appearance.
+ * Story text uses cached content (no Claude API call) but image prompts are
+ * updated with the child's actual hair colour, eye colour, and gender so the
+ * generated illustrations match the real child.
+ */
+export function getSampleStory(interest: string, child: ChildProfile | string): typeof superheroes | null {
   const story = SAMPLE_STORIES[interest as TrialInterest];
   if (!story) return null;
-  // Substitute child name placeholder throughout all text fields
-  return JSON.parse(
-    JSON.stringify(story).replace(/\{\{NAME\}\}/g, childName)
-  );
+
+  // Support legacy string-only calls (just a name)
+  const profile: ChildProfile = typeof child === 'string' ? { name: child } : child;
+
+  let storyStr = JSON.stringify(story);
+
+  // 1. Replace child name placeholder
+  storyStr = storyStr.replace(/\{\{NAME\}\}/g, profile.name);
+
+  // 2. Personalise appearance in character_anchor and image_prompts.
+  //    Pattern: "with [anything] and [anything] eyes" covers all sample JSON
+  //    appearance descriptions regardless of hair style wording.
+  if (profile.hairColour && profile.eyeColour) {
+    const hairDesc = `${profile.hairColour} hair`;
+    const eyeDesc = `${profile.eyeColour} eyes`;
+    storyStr = storyStr.replace(
+      /with [^,"\\]+ and [^,"\\]+ eyes/g,
+      `with ${hairDesc} and ${eyeDesc}`
+    );
+  }
+
+  // 3. Personalise gender descriptor (young boy / young girl / young princess).
+  if (profile.gender) {
+    const genderWord = profile.gender === 'Girl' ? 'girl' : profile.gender === 'Boy' ? 'boy' : null;
+    if (genderWord) {
+      storyStr = storyStr.replace(/young (boy|girl)/g, `young ${genderWord}`);
+      // Handle "young princess" / "young prince" for the Princesses story
+      if (genderWord === 'boy') {
+        storyStr = storyStr.replace(/young princess/g, 'young prince');
+      }
+    }
+  }
+
+  return JSON.parse(storyStr);
 }
 
 export function isTrialInterest(interest: string): interest is TrialInterest {
