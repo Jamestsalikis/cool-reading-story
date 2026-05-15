@@ -56,6 +56,9 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "https://www.talepopstories.com"
+  },
+  verification: {
+    google: "_F1GWblpMkTCzwHOCrtI8XnyHSAv3b9VIZ-t5jWie9U"
   }
 };
 
