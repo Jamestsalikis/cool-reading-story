@@ -481,12 +481,12 @@ export default function Home() {
           {/* Left: copy + widget */}
           <div>
             <h1 className="font-serif" style={{ fontSize: 'clamp(2.25rem, 5.5vw, 3.75rem)', lineHeight: 1.1, color: '#0D183D', marginBottom: '1.25rem', letterSpacing: '-0.01em' }}>
-              The bedtime story<br />
-              <span style={{ color: '#FF6B35' }}>written only for them.</span>
+              Personalised Bedtime Stories<br />
+              <span style={{ color: '#FF6B35' }}>Written Just for Your Child</span>
             </h1>
 
             <p style={{ fontSize: '1.05rem', color: '#5E6A7A', lineHeight: 1.75, marginBottom: '2rem', maxWidth: '440px', fontWeight: 500 }}>
-              Tell us who your child is  -  their name, what they love, who their best friend is  -  and we&apos;ll write them a story that has never existed before.
+              Enter your child&apos;s name, interests and best friend — and we&apos;ll write them a personalised bedtime story that has never existed before. In under 60 seconds.
             </p>
 
             {/* Name preview widget */}
@@ -514,7 +514,7 @@ export default function Home() {
               Begin their story
             </Link>
             <p style={{ fontSize: '0.8rem', color: '#9CA8B4', marginTop: '0.75rem', fontWeight: 500 }}>
-              2 free stories. No credit card. Cancel anytime.
+              3 free stories. No credit card. Cancel anytime.
             </p>
             <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
               {['Ages 3–10', 'From 24¢ per story', 'Safe & ad-free'].map(b => (
@@ -906,12 +906,12 @@ export default function Home() {
             Their story is waiting to be told.
           </h2>
           <p style={{ color: 'rgba(255,255,255,0.55)', marginBottom: '2rem', fontSize: '1rem', lineHeight: 1.7, fontWeight: 500 }}>
-            2 minutes to set up. 2 free stories. Then from just 24¢ a story.
+            2 minutes to set up. 3 free stories. Then from just 24¢ a story.
           </p>
           <Link href="/signup" style={{ display: 'inline-block', padding: '1.1rem 3rem', background: '#FF6B35', color: '#fff', borderRadius: '12px', textDecoration: 'none', fontWeight: '800', fontSize: '1.05rem', boxShadow: '0 4px 24px rgba(255,107,53,0.45)', letterSpacing: '-0.01em' }}>
             Begin their story
           </Link>
-          <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.8rem', marginTop: '1rem', fontWeight: 500 }}>No credit card. Cancel anytime. 2 stories free.</p>
+          <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.8rem', marginTop: '1rem', fontWeight: 500 }}>No credit card. Cancel anytime. 3 stories free.</p>
         </div>
       </section>
 

@@ -4,10 +4,10 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.talepopstories.com"),
   title: {
-    default: "TalePop - Personalised Bedtime Stories for Kids | AI Story Generator",
+    default: "Personalised Bedtime Stories for Kids | TalePop",
     template: "%s | TalePop"
   },
-  description: "Create personalised bedtime stories starring your child. TalePop writes unique AI-powered stories using your child's name, interests, best friend and pet. Ages 3-10. Start with 2 free stories - no credit card needed.",
+  description: "Personalised bedtime stories and children's books written around your child — their name, interests, best friend and pet in every story. Ages 3–10. Start with 3 free stories.",
   keywords: [
     "personalised bedtime stories",
     "personalised children's stories",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   category: "Children's Education",
   openGraph: {
     title: "TalePop - Personalised Bedtime Stories for Kids",
-    description: "Create personalised bedtime stories starring your child. Their name, interests, best friend and pet woven into a unique AI-written adventure. Ages 3-10. 2 free stories to start.",
+    description: "Personalised bedtime stories and children's books written around your child — their name, interests, best friend and pet in every story. Ages 3–10. Start with 3 free stories.",
     url: "https://www.talepopstories.com",
     siteName: "TalePop",
     images: [
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "TalePop - Personalised Bedtime Stories for Kids",
-    description: "AI-written bedtime stories starring your child. Their name, interests and friends in every story. Ages 3-10. 2 free stories to start.",
+    description: "Personalised bedtime stories starring your child. Their name, interests and friends woven into every story. Ages 3–10. Start with 3 free stories.",
     images: ["/hero-scene.jpg"],
   },
   robots: {
