@@ -32,7 +32,6 @@ export async function signUp(formData: FormData) {
     email,
     password,
     options: {
-      // After email verification, send the user straight to onboarding
       emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback?next=/onboarding`,
     },
   });
@@ -41,10 +40,22 @@ export async function signUp(formData: FormData) {
     return { error: error.message };
   }
 
-  // Return success so the signup page can show a "check your email" message
-  // rather than redirecting to /onboarding (which would fail if email confirmation
-  // is required and the user isn't authenticated yet).
   return { success: true, email };
+}
+
+export async function resendVerificationEmail(email: string) {
+  const supabase = await createClient();
+
+  const { error } = await supabase.auth.resend({
+    type: 'signup',
+    email,
+    options: {
+      emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback?next=/onboarding`,
+    },
+  });
+
+  if (error) return { error: error.message };
+  return { success: true };
 }
 
 export async function signOut() {
