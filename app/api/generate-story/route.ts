@@ -348,7 +348,14 @@ export async function POST(request: Request) {
     const primaryInterest = (child.interests || [])[0] || '';
 
     if (isFreeUser && isTrialInterest(primaryInterest)) {
-      const sampleStory = getSampleStory(primaryInterest, child.name);
+      const appearance = (child.appearance || {}) as Record<string, string>;
+      const sampleStory = getSampleStory(primaryInterest, {
+        name: child.name,
+        age: child.age,
+        gender: child.gender,
+        hairColour: appearance.hairColour,
+        eyeColour: appearance.eyeColour,
+      });
       if (sampleStory) {
         const pagesForDB = sampleStory.pages.map((page) => ({
           ...page,
