@@ -32,7 +32,8 @@ export async function signUp(formData: FormData) {
     email,
     password,
     options: {
-      emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`,
+      // After email verification, send the user straight to onboarding
+      emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback?next=/onboarding`,
     },
   });
 
@@ -40,9 +41,10 @@ export async function signUp(formData: FormData) {
     return { error: error.message };
   }
 
-  // Redirect to onboarding after successful signup
-  revalidatePath('/', 'layout');
-  redirect('/onboarding');
+  // Return success so the signup page can show a "check your email" message
+  // rather than redirecting to /onboarding (which would fail if email confirmation
+  // is required and the user isn't authenticated yet).
+  return { success: true, email };
 }
 
 export async function signOut() {
