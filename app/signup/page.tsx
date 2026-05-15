@@ -10,6 +10,7 @@ export default function SignupPage() {
   const [googleLoading, setGoogleLoading] = useState(false);
   const [consentChecked, setConsentChecked] = useState(false);
   const [error, setError] = useState('');
+  const [successEmail, setSuccessEmail] = useState('');
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -19,6 +20,9 @@ export default function SignupPage() {
     const result = await signUp(formData);
     if (result?.error) {
       setError(result.error);
+      setLoading(false);
+    } else if (result?.success) {
+      setSuccessEmail(result.email || '');
       setLoading(false);
     }
   };
@@ -30,6 +34,82 @@ export default function SignupPage() {
     await signInWithGoogle();
     setGoogleLoading(false);
   };
+
+  // --- Success state: email verification pending ---
+  if (successEmail) {
+    return (
+      <div
+        style={{
+          minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: '#FFF4E6',
+          padding: '2rem',
+        }}
+      >
+        <a href="/" style={{ textDecoration: 'none', display: 'inline-block', marginBottom: '2rem' }}>
+          <img src="/mood-3.png" alt="TalePop" style={{ height: '90px', width: 'auto' }} />
+        </a>
+
+        <div className="card" style={{ maxWidth: '460px', width: '100%', padding: '2.5rem', textAlign: 'center' }}>
+          {/* Envelope icon */}
+          <div style={{
+            width: '72px', height: '72px', borderRadius: '50%',
+            background: 'linear-gradient(135deg, #FF6B35, #FF8C42)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            margin: '0 auto 1.5rem',
+            boxShadow: '0 8px 24px rgba(255,107,53,0.3)',
+          }}>
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </div>
+
+          <h1
+            className="font-serif"
+            style={{ fontSize: '1.75rem', fontWeight: 600, color: '#0D183D', marginBottom: '0.75rem' }}
+          >
+            Check your inbox!
+          </h1>
+
+          <p style={{ fontSize: '0.9375rem', color: '#5E6A7A', marginBottom: '0.5rem', lineHeight: 1.6 }}>
+            We sent a verification link to
+          </p>
+          <p style={{ fontSize: '1rem', fontWeight: 700, color: '#FF6B35', marginBottom: '1.5rem' }}>
+            {successEmail}
+          </p>
+
+          <p style={{ fontSize: '0.9375rem', color: '#5E6A7A', lineHeight: 1.6, marginBottom: '2rem' }}>
+            Click the link in the email to verify your account and get started. It may take a minute or two to arrive.
+          </p>
+
+          <div style={{
+            background: '#FBF8F3', border: '1px solid #F0E4D0', borderRadius: '10px',
+            padding: '1rem 1.25rem', marginBottom: '2rem',
+          }}>
+            <p style={{ fontSize: '0.8125rem', color: '#4A3728', lineHeight: 1.6, margin: 0 }}>
+              <strong>Can not find it?</strong> Check your spam or junk folder. If it still has not arrived after a few minutes, try signing up again.
+            </p>
+          </div>
+
+          <Link
+            href="/login"
+            style={{
+              display: 'inline-block', width: '100%', padding: '0.875rem',
+              background: 'linear-gradient(135deg, #FF6B35, #FF8C42)',
+              color: 'white', borderRadius: '8px', textDecoration: 'none',
+              fontWeight: 600, fontSize: '0.9375rem', textAlign: 'center',
+            }}
+          >
+            Back to sign in
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -169,7 +249,6 @@ export default function SignupPage() {
               required
             />
           </div>
-
 
           {/* COPPA / Age Consent */}
           <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', marginBottom: '1.25rem', padding: '1rem', background: '#FBF8F3', borderRadius: '8px', border: '1px solid #F0E4D0' }}>
