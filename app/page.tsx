@@ -545,10 +545,10 @@ export default function Home() {
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
             <h2 className="font-serif" style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', color: '#0D183D', marginBottom: '0.75rem', letterSpacing: '-0.01em' }}>
-              Written for Zara & Zak. No one else.
+              Personalised story books for Zara & Zak. No one else.
             </h2>
             <p style={{ color: '#5E6A7A', fontSize: '0.95rem', fontWeight: 500, maxWidth: '500px', margin: '0 auto', lineHeight: 1.7 }}>
-              Every word invented from scratch  -  their names, their adventure, their world.
+              Every personalised children’s story invented from scratch — their name, their adventure, their world.
             </p>
           </div>
 
@@ -729,7 +729,7 @@ export default function Home() {
               Two children. Two completely different stories.
             </h2>
             <p style={{ color: '#5E6A7A', fontWeight: 500, maxWidth: '500px', margin: '0 auto', lineHeight: 1.75, fontSize: '0.975rem' }}>
-              Their name, age, interests, friends, and even their pet go in. What comes out has never been written before  -  and never will be again.
+              Their name, age, interests, friends and pet go into every personalised children’s story. What comes out is a unique kids book that has never been written before — and never will be again.
             </p>
           </div>
 
@@ -769,9 +769,9 @@ export default function Home() {
 
           <div className="trust-bar" style={{ marginTop: '3rem' }}>
             {[
-              { icon: <BookOpen size={18} color="#FF6B35" />, title: 'Your library, yours to keep', desc: 'Every story is saved. Re-read it tonight, next year, whenever — subscribe and it\'s always there.' },
+              { icon: <BookOpen size={18} color="#FF6B35" />, title: 'Your personalised story book library, always there', desc: 'Every story is saved. Re-read it tonight, next year, whenever — subscribe and it\'s always there.' },
               { icon: <Star size={18} color="#FFB703" />, title: 'Their world, front and centre', desc: 'Their interests shape the entire plot, not just the name.' },
-              { icon: <Shield size={18} color="#6CC06C" />, title: 'Safe & age-appropriate', desc: 'Every story crafted thoughtfully for kids aged 3–10.' },
+              { icon: <Shield size={18} color="#6CC06C" />, title: 'Safe children’s stories for ages 3–10', desc: 'Every story crafted thoughtfully for kids aged 3–10.' },
               { icon: <Heart size={18} color="#FF6B35" />, title: 'No data sold. Ever.', desc: 'Your child\'s details are private. That\'s a promise.' },
             ].map((t, i) => (
               <div key={i} className="trust-item">
@@ -827,15 +827,15 @@ export default function Home() {
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
             <h2 className="font-serif" style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', color: '#0D183D', marginBottom: '0.5rem', letterSpacing: '-0.01em' }}>
-              Your child&apos;s story in three steps
+              Get a personalised bedtime story in three steps
             </h2>
             <p style={{ color: 'rgba(13,24,61,0.6)', fontWeight: 600, fontSize: '0.95rem' }}>Ready to read at bedtime tonight.</p>
           </div>
           <div className="three-col">
             {[
-              { num: '1', emoji: '✏️', title: 'Tell us about them', desc: 'Name, age, what makes them laugh, their best friend, their pet  -  the more you share, the richer the story.', color: '#FF6B35' },
-              { num: '2', emoji: '📖', title: 'We write it from scratch', desc: 'A unique 5-page adventure, invented entirely around your child. No two TalePop stories have ever been the same.', color: '#0D183D' },
-              { num: '3', emoji: '🌙', title: 'Read it together tonight', desc: 'Open their story, read it aloud, and watch their face when they realise the adventure is theirs.', color: '#1496A6' },
+              { num: '1', emoji: '✏️', title: 'Tell us about your child', desc: 'Their name, age, what makes them laugh, their best friend, their pet — the more you share, the richer their personalised story.', color: '#FF6B35' },
+              { num: '2', emoji: '📖', title: 'We write their personalised story from scratch', desc: 'A unique 5-page illustrated adventure invented entirely around your child. No two TalePop personalised story books have ever been the same.', color: '#0D183D' },
+              { num: '3', emoji: '🌙', title: 'Read their personalised bedtime story tonight', desc: 'Open it up, read it aloud, and watch their face when they realise the adventure is theirs.', color: '#1496A6' },
             ].map((step, i) => (
               <div key={i} className="step-card">
                 <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>{step.emoji}</div>
@@ -865,7 +865,7 @@ export default function Home() {
       <section style={{ background: 'white', padding: '5rem 2rem' }}>
         <div style={{ maxWidth: '720px', margin: '0 auto' }}>
           <h2 className="font-serif" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', color: '#0D183D', textAlign: 'center', marginBottom: '3rem', letterSpacing: '-0.01em' }}>
-            Questions parents ask us
+            Questions parents ask about our personalised bedtime stories
           </h2>
           {[
             {
@@ -946,6 +946,9 @@ export default function Home() {
             <Link href="/terms" style={{ color: 'rgba(255,255,255,0.35)', textDecoration: 'none', fontSize: '0.85rem', fontWeight: 500 }}>Terms of Service</Link>
             <Link href="/login" style={{ color: 'rgba(255,255,255,0.35)', textDecoration: 'none', fontSize: '0.85rem', fontWeight: 500 }}>Sign in</Link>
           </div>
+          <p style={{ color: 'rgba(255,255,255,0.2)', fontSize: '0.75rem', fontWeight: 400, textAlign: 'center', width: '100%', marginTop: '1rem', lineHeight: 1.6 }}>
+            TalePop creates personalised bedtime stories and children&apos;s books for kids aged 3–10. Every story is written from scratch — your child&apos;s name, interests and world woven into every page.
+          </p>
           <span style={{ color: 'rgba(255,255,255,0.2)', fontSize: '0.8rem', fontWeight: 500 }}>© {new Date().getFullYear()} TalePop</span>
         </div>
       </footer>
