@@ -1763,15 +1763,18 @@ export default function OnboardingPage() {
                       border: 'none',
                       position: 'relative',
                       overflow: 'hidden',
-                      opacity: isLocked ? 0.55 : 1,
-                      background: active
-                        ? `linear-gradient(145deg, ${option.g[0]}, ${option.g[1]})`
-                        : darkBg || 'white',
-                      boxShadow: active
-                        ? `0 8px 24px ${option.sh}, 0 2px 4px rgba(0,0,0,0.08)`
-                        : darkBg
-                          ? '0 4px 20px rgba(0,0,0,0.45), 0 0 0 1.5px rgba(255,255,255,0.08)'
-                          : '0 2px 10px rgba(0,0,0,0.07), 0 0 0 1.5px #F0E4D0',
+                      background: isLocked
+                        ? 'linear-gradient(145deg, #E5E7EB, #D1D5DB)'
+                        : active
+                          ? `linear-gradient(145deg, ${option.g[0]}, ${option.g[1]})`
+                          : darkBg || 'white',
+                      boxShadow: isLocked
+                        ? '0 2px 8px rgba(0,0,0,0.06), 0 0 0 1.5px #D1D5DB'
+                        : active
+                          ? `0 8px 24px ${option.sh}, 0 2px 4px rgba(0,0,0,0.08)`
+                          : darkBg
+                            ? '0 4px 20px rgba(0,0,0,0.45), 0 0 0 1.5px rgba(255,255,255,0.08)'
+                            : '0 2px 10px rgba(0,0,0,0.07), 0 0 0 1.5px #F0E4D0',
                     }}
                   >
                     <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }} viewBox="0 0 80 60" preserveAspectRatio="xMidYMid slice">
