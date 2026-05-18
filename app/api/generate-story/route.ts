@@ -150,6 +150,12 @@ PAGE SPECIFICITY (non-negotiable):
 - A reader who sees only the image should be able to tell which page of the story it illustrates.
 - Each of the 5 images must look completely different in composition and setting - never repeat the same scene or location.
 
+FACE DIRECTION (non-negotiable for every image):
+- ${name} must ALWAYS face toward the viewer in every image — even wide establishing shots
+- The character's face must always be clearly visible and expressive — never show them from behind
+- In wide shots: ${name} walks toward the viewer, looks over shoulder toward viewer, or is shown in 3/4 front-facing profile
+- This is a strict rule: any pose that hides ${name}'s face is WRONG
+
 WHAT MAKES A GREAT CHILDREN'S BOOK ILLUSTRATION (apply to every page):
 - Capture the EMOTIONAL PEAK of that page - the single most exciting or heartfelt moment, not a neutral in-between moment
 - Show STRONG EMOTION on the character's face: wide eyes of wonder, a beaming smile of triumph, eyebrows raised in surprise, a focused determined gaze - the child reading should FEEL what ${name} feels
@@ -489,5 +495,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Story generation failed' }, { status: 500 });
   }
 }
+
 
 
