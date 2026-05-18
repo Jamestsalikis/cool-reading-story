@@ -355,6 +355,28 @@ function EditChildModal({ child, palette, onClose, onSaved }: { child: ChildReco
               <input style={inp} placeholder="Pet type (e.g. Dog)" value={petType} onChange={e => setPetType(e.target.value)} />
             </div>
           </div>
+          {/* Follow-up Q&A from onboarding — read-only display */}
+          {(() => {
+            const qas = (app.followUpAnswers as { question: string; answer: string }[] | undefined) || [];
+            const filled = qas.filter(qa => qa.answer?.trim());
+            if (!filled.length) return null;
+            return (
+              <div>
+                <label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '8px' }}>
+                  Story details <span style={{ fontWeight: 400, color: '#9CA3AF' }}>(from onboarding)</span>
+                </label>
+                <div style={{ background: '#FBF8F3', borderRadius: '10px', border: '1.5px solid #F0E4D0', padding: '12px 16px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                  {filled.map((qa, i) => (
+                    <div key={i}>
+                      <p style={{ fontSize: '0.75rem', fontWeight: '600', color: '#5E6A7A', marginBottom: '4px' }}>{qa.question}</p>
+                      <p style={{ fontSize: '0.875rem', color: '#0D183D', background: '#fff', borderRadius: '6px', border: '1.5px solid #F0E4D0', padding: '0.5rem 0.75rem' }}>{qa.answer}</p>
+                    </div>
+                  ))}
+                  <p style={{ fontSize: '0.7rem', color: '#9CA3AF', marginTop: '4px' }}>These answers shape future story generations. To update them, create a new child profile.</p>
+                </div>
+              </div>
+            );
+          })()}
         </div>
         <div style={{ display: 'flex', gap: '10px', marginTop: '24px' }}>
           <button onClick={onClose} style={{ flex: 1, padding: '0.7rem', border: '1.5px solid #F0E4D0', borderRadius: '8px', background: '#fff', color: '#5E6A7A', cursor: 'pointer', fontWeight: '600' }}>Cancel</button>
@@ -946,36 +968,4 @@ export default function DashboardPage() {
                     <button disabled={deleteInput !== 'DELETE'} onClick={async () => {
                       const res = await fetch('/api/account/delete', { method: 'DELETE' });
                       if (res.ok) { await supabase.auth.signOut(); window.location.href = '/'; }
-                      else { setAccountMsg({ ok: false, text: 'Could not delete account. Please contact support.' }); setShowDeleteConfirm(false); }
-                    }} style={{ flex: 1, padding: '0.65rem', borderRadius: '8px', border: 'none', background: deleteInput === 'DELETE' ? '#cc2200' : '#e8a0a0', color: '#fff', cursor: deleteInput === 'DELETE' ? 'pointer' : 'default', fontWeight: '700', fontSize: '0.82rem' }}>
-                      Delete forever
-                    </button>
-                  </div>
-                </div>
-              )}
-            </div>
-
-          </div>
-        )}
-      </div>
-
-      {/* Mobile bottom nav */}
-      {isMobile && (
-        <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, height: '72px', background: '#fff', borderTop: '2px solid #F0E4D0', display: 'flex', justifyContent: 'space-around', alignItems: 'center', zIndex: 40 }}>
-          {navItems.map(({ id, label, icon: Icon }) => {
-            const active = activeNav === id;
-            return (
-              <button key={id} onClick={() => setActiveNav(id)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '3px', border: 'none', background: 'none', cursor: 'pointer', color: active ? '#FF6B35' : '#9CA8B4', padding: '8px 12px', flex: 1 }}>
-                <Icon size={22} />
-                <span style={{ fontSize: '0.6rem', fontWeight: active ? '700' : '500', letterSpacing: '0.04em', textTransform: 'uppercase' }}>{label}</span>
-              </button>
-            );
-          })}
-        </div>
-      )}
-    </div>
-  );
-}
-
-
-
+                      else { setAccountMsg({ ok: false, text: 'Could not delete a
