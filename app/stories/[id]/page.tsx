@@ -180,7 +180,31 @@ export default function StoryPage() {
   const imageGenStarted = useRef(false);
   const feedbackShown = useRef(false);
   const [locked, setLocked] = useState(false);
+  const [subStatus, setSubStatus] = useState<string | null>(null);
+  const [freeStoriesRemaining, setFreeStoriesRemaining] = useState<number>(3);
   const supabase = createClient();
+
+  // Feedback eligibility — called when reader reaches the last page
+  function shouldShowFeedback(status: string | null, freeLeft: number): boolean {
+    // Never show again once submitted
+    if (localStorage.getItem('feedback_submitted') === 'true') return false;
+
+    // Twice-a-week cadence: don't show again within 3.5 days of last show
+    const lastShown = localStorage.getItem('last_feedback_shown_at');
+    const halfWeekMs = 3.5 * 24 * 60 * 60 * 1000;
+    if (lastShown && Date.now() - new Date(lastShown).getTime() < halfWeekMs) return false;
+
+    if (status === 'subscribed') {
+      // Premium: show after 7 days from when subscription was first detected
+      const subFirst = localStorage.getItem('subscription_first_seen');
+      if (!subFirst) return false;
+      const oneWeekMs = 7 * 24 * 60 * 60 * 1000;
+      return Date.now() - new Date(subFirst).getTime() >= oneWeekMs;
+    } else {
+      // Free user: show when all 3 free stories have been used
+      return freeLeft === 0;
+    }
+  }
 
   useEffect(() => {
     const mq = window.matchMedia('(min-width: 768px)');
@@ -210,6 +234,13 @@ export default function StoryPage() {
             const isActive = sub?.status === 'subscribed';
             const hasFreeStories = (sub?.free_stories_remaining ?? 0) > 0;
             if (!isActive && !hasFreeStories) { setLocked(true); setLoading(false); return; }
+            // Track subscription state for feedback eligibility
+            setSubStatus(sub?.status ?? null);
+            setFreeStoriesRemaining(sub?.free_stories_remaining ?? 3);
+            // Record when we first see a premium subscription (for 7-day trigger)
+            if (sub?.status === 'subscribed' && !localStorage.getItem('subscription_first_seen')) {
+              localStorage.setItem('subscription_first_seen', new Date().toISOString());
+            }
           }
         }
         setStory(data);
@@ -280,10 +311,9 @@ export default function StoryPage() {
     setAnimKey((k) => k + 1);
     setCurrentPage(index);
     if (story && index === story.pages.length - 1 && !feedbackShown.current) {
-      const last = localStorage.getItem('last_feedback_at');
-      const sevenDaysAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
-      if (!last || new Date(last).getTime() < sevenDaysAgo) {
+      if (shouldShowFeedback(subStatus, freeStoriesRemaining)) {
         feedbackShown.current = true;
+        localStorage.setItem('last_feedback_shown_at', new Date().toISOString());
         setTimeout(() => setShowFeedback(true), 15000);
       }
     }
@@ -506,30 +536,4 @@ export default function StoryPage() {
           <button
             onClick={() => goToPage(currentPage - 1)}
             disabled={currentPage === 0}
-            style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'none', border: '2px solid rgba(255,255,255,0.25)', borderRadius: '12px', color: 'rgba(255,255,255,0.85)', padding: '0.75rem 1.25rem', cursor: currentPage === 0 ? 'not-allowed' : 'pointer', opacity: currentPage === 0 ? 0.25 : 1, fontSize: '1rem', fontWeight: '600', minWidth: '90px', justifyContent: 'center' }}
-          >
-            <ChevronLeft size={20} /> Back
-          </button>
-          <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
-            {pages.map((p, i) => (
-              <button key={i} onClick={() => goToPage(i)} style={{ width: i === currentPage ? '22px' : '7px', height: '7px', borderRadius: '4px', background: i === currentPage ? '#FF6B35' : (p.image_url ? 'rgba(255,255,255,0.4)' : 'rgba(255,255,255,0.18)'), border: 'none', cursor: 'pointer', transition: 'all 0.25s', padding: 0 }} />
-            ))}
-          </div>
-          {!isLastPage && (
-            <button
-              onClick={() => goToPage(currentPage + 1)}
-              style={{ display: 'flex', alignItems: 'center', gap: '6px', background: '#FF6B35', border: 'none', borderRadius: '12px', color: 'white', padding: '0.75rem 1.25rem', cursor: 'pointer', fontSize: '1rem', fontWeight: 700, minWidth: '90px', justifyContent: 'center' }}
-            >
-              Next <ChevronRight size={20} />
-            </button>
-          )}
-          {isLastPage && (
-            <Link href="/dashboard" style={{ display: 'flex', alignItems: 'center', gap: '6px', background: '#FF6B35', border: 'none', borderRadius: '12px', color: 'white', padding: '0.75rem 1.25rem', textDecoration: 'none', fontSize: '1rem', fontWeight: 700, minWidth: '90px', justifyContent: 'center' }}>
-              Library
-            </Link>
-          )}
-        </div>
-      </div>
-    </>
-  );
-}
+            style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'none', border: '2px solid rgba(255,255,255,0.25)', borderRadius: '12px', color: 'rgba(255,255,255,0.85)', padding: '0.75rem 1.25rem', cursor: currentPage === 0 ? 'not-allowed' : 'pointer', o
