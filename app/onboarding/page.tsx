@@ -7,6 +7,28 @@ import { createChild } from '@/lib/supabase/child-actions';
 import { createClient } from '@/lib/supabase/client';
 import { TRIAL_INTERESTS } from '@/lib/sample-stories/index';
 
+// Content filter — block inappropriate terms for a children's app
+const BLOCKED_TERMS = [
+  // Profanity
+  'fuck', 'shit', 'bitch', 'bastard', 'piss', 'cock', 'cunt', 'whore', 'slut', 'twat', 'arse',
+  // Sexual / anatomy slang
+  'dick', 'penis', 'vagina', 'pussy', 'boob', 'tit', 'nude', 'naked', 'sex', 'porn', 'erotic',
+  // Adult themes called out by team
+  'gay', 'lesbian', 'trans', 'queer', 'lgbt', 'mardi gras', 'stripper', 'strip club',
+  // Drugs / alcohol
+  'weed', 'marijuana', 'cocaine', 'heroin', 'alcohol', 'drugs',
+  // Violence / hate
+  'murder', 'rape', 'nazi', 'racist', 'terrorist',
+];
+
+function isContentAppropriate(text: string): boolean {
+  const lower = text.toLowerCase();
+  return !BLOCKED_TERMS.some(term => {
+    if (term.includes(' ')) return lower.includes(term);
+    return new RegExp(`\b${term}\b`, 'i').test(lower);
+  });
+}
+
 type Person = { name: string; nickname: string };
 
 type OnboardingState = {
@@ -198,6 +220,7 @@ export default function OnboardingPage() {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
   const [nameError, setNameError] = useState('');
+  const [interestError, setInterestError] = useState('');
   const [isFreeUser, setIsFreeUser] = useState(true); // assume free until confirmed
   const [wantPersonalised, setWantPersonalised] = useState(false);
 
@@ -229,12 +252,19 @@ export default function OnboardingPage() {
   const handleNext = async () => {
     if (state.step === 2) {
       if (!state.name.trim()) { setNameError("Please enter your child's name"); return; }
+      if (!isContentAppropriate(state.name)) { setNameError("This name is not appropriate for a children\'s app. Please choose a different name."); return; }
       setNameError('');
       setState({ ...state, step: 3 });
     } else if (state.step === 3) {
       // Free users who paid for personalised get follow-ups; free sample skips straight to step 5
       setState({ ...state, step: (isFreeUser && !wantPersonalised) ? 5 : 4 });
     } else if (state.step === 4) {
+      // Validate all follow-up answers for appropriate content
+      const badAnswer = Object.values(state.followUpAnswers).find(v => v.trim() && !isContentAppropriate(v));
+      if (badAnswer) {
+        alert("One of your answers contains content that isn\'t appropriate for a children\'s app. Please review your answers and try again.");
+        return;
+      }
       setState({ ...state, step: 5 });
     } else {
       setSubmitting(true);
@@ -326,10 +356,17 @@ export default function OnboardingPage() {
   };
 
   const handleAddCustomInterest = () => {
-    if (state.customInterest.trim() && state.interests.length < 5) {
+    const val = state.customInterest.trim();
+    if (!val) return;
+    if (!isContentAppropriate(val)) {
+      setInterestError("This content is not appropriate for a children\'s app. Please choose a different interest.");
+      return;
+    }
+    if (state.interests.length < 5) {
+      setInterestError('');
       setState((prev) => ({
         ...prev,
-        interests: [...prev.interests, state.customInterest.trim()],
+        interests: [...prev.interests, val],
         customInterest: '',
       }));
       setShowCustomInterest(false);
@@ -425,7 +462,7 @@ export default function OnboardingPage() {
             <ProgressDots />
             <h1 className="font-serif" style={{ fontSize: '2rem', marginBottom: '8px', color: '#0D183D' }}>What does {state.name || 'your child'} love?</h1>
             <p style={{ color: state.interests.length >= 5 ? '#FF6B35' : '#5E6A7A', marginBottom: '32px', fontSize: '0.95rem' }}>
-              {state.interests.length >= 5 ? 'Maximum 5 selected. Remove one to swap.' : `Pick up to 5. ${state.interests.length} selected so far`}
+              {state.interests.length >= 5 ? 'Maximum 5 selected. Remove one to swap.' : 'Select at least 2 — these shape every story'}
             </p>
 
             <style>{`
@@ -1763,18 +1800,14 @@ export default function OnboardingPage() {
                       border: 'none',
                       position: 'relative',
                       overflow: 'hidden',
-                      background: isLocked
-                        ? 'linear-gradient(145deg, #E5E7EB, #D1D5DB)'
-                        : active
-                          ? `linear-gradient(145deg, ${option.g[0]}, ${option.g[1]})`
-                          : darkBg || 'white',
-                      boxShadow: isLocked
-                        ? '0 2px 8px rgba(0,0,0,0.06), 0 0 0 1.5px #D1D5DB'
-                        : active
-                          ? `0 8px 24px ${option.sh}, 0 2px 4px rgba(0,0,0,0.08)`
-                          : darkBg
-                            ? '0 4px 20px rgba(0,0,0,0.45), 0 0 0 1.5px rgba(255,255,255,0.08)'
-                            : '0 2px 10px rgba(0,0,0,0.07), 0 0 0 1.5px #F0E4D0',
+                      background: active
+                        ? `linear-gradient(145deg, ${option.g[0]}, ${option.g[1]})`
+                        : darkBg || 'white',
+                      boxShadow: active
+                        ? `0 8px 24px ${option.sh}, 0 2px 4px rgba(0,0,0,0.08)`
+                        : darkBg
+                          ? '0 4px 20px rgba(0,0,0,0.45), 0 0 0 1.5px rgba(255,255,255,0.08)'
+                          : '0 2px 10px rgba(0,0,0,0.07), 0 0 0 1.5px #F0E4D0',
                     }}
                   >
                     <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }} viewBox="0 0 80 60" preserveAspectRatio="xMidYMid slice">
@@ -1790,13 +1823,30 @@ export default function OnboardingPage() {
                       }}>✓</span>
                     )}
                     {isLocked && (
-                      <span style={{
-                        position: 'absolute', top: '6px', right: '6px', zIndex: 3,
-                        background: 'rgba(0,0,0,0.65)', borderRadius: '4px',
-                        padding: '2px 5px', fontSize: '0.6rem', fontWeight: '700',
-                        color: 'rgba(255,220,100,1)', letterSpacing: '0.04em',
-                        lineHeight: 1.3, textTransform: 'uppercase',
-                      }}>★ Sub</span>
+                      <div style={{
+                        position: 'absolute', inset: 0, zIndex: 2, borderRadius: 'inherit',
+                        background: 'rgba(8,12,28,0.70)',
+                        display: 'flex', flexDirection: 'column',
+                        alignItems: 'center', justifyContent: 'center', gap: '5px',
+                        padding: '4px 6px 10px',
+                      }}>
+                        <svg width="20" height="24" viewBox="0 0 20 24" fill="none">
+                          <rect x="1" y="11" width="18" height="12" rx="2.5"
+                            fill="rgba(255,255,255,0.88)"/>
+                          <path d="M5 11V7.5a5 5 0 0 1 10 0V11"
+                            stroke="rgba(255,255,255,0.88)" strokeWidth="2.2"
+                            strokeLinecap="round" fill="none"/>
+                          <circle cx="10" cy="17" r="2" fill="rgba(8,12,28,0.5)"/>
+                          <line x1="10" y1="17" x2="10" y2="19.5"
+                            stroke="rgba(8,12,28,0.5)" strokeWidth="1.8"
+                            strokeLinecap="round"/>
+                        </svg>
+                        <span style={{
+                          fontSize: '0.65rem', fontWeight: '700',
+                          color: 'rgba(255,255,255,0.80)', textAlign: 'center',
+                          letterSpacing: '0.02em', lineHeight: 1.2,
+                        }}>{option.label}</span>
+                      </div>
                     )}
                     <span style={{ position: 'relative', zIndex: 1, fontSize: '0.75rem', fontWeight: '800', lineHeight: 1.2, textAlign: 'center', color: (active || !!darkBg) ? 'rgba(255,255,255,1)' : '#0D183D', letterSpacing: '0.03em', textShadow: (active || !!darkBg) ? '0 1px 4px rgba(0,0,0,0.7), 0 0 8px rgba(0,0,0,0.4)' : '0 1px 3px rgba(255,255,255,0.9)' }}>
                       {option.label}
@@ -1823,14 +1873,29 @@ export default function OnboardingPage() {
             })()}
 
             {/* Add custom interest input */}
-            <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
-              <input type="text" style={{ ...inputStyle, flex: 1 }} placeholder="+ Add your own interest (e.g. Ballet)" value={state.customInterest}
-                onChange={(e) => setState({ ...state, customInterest: e.target.value })}
-                onKeyPress={(e) => e.key === 'Enter' && handleAddCustomInterest()} />
-              {state.customInterest.trim() && (
-                <button onClick={handleAddCustomInterest} className="btn-brand" style={{ padding: '0.65rem 1.25rem', whiteSpace: 'nowrap' }}>Add</button>
-              )}
-            </div>
+            {interestError && (
+              <p style={{ color: '#DC2626', fontSize: '0.8rem', marginBottom: '8px', fontWeight: '500' }}>{interestError}</p>
+            )}
+            {isFreeUser ? (
+              <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
+                <div style={{ flex: 1, position: 'relative' }}>
+                  <input
+                    type="text" disabled
+                    style={{ ...inputStyle, width: '100%', opacity: 0.55, cursor: 'not-allowed', backgroundColor: '#F2F4F8', paddingRight: '40px', boxSizing: 'border-box' }}
+                    placeholder="Subscribe to add your own interest" />
+                  <span style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', fontSize: '1rem', pointerEvents: 'none' }}>🔒</span>
+                </div>
+              </div>
+            ) : (
+              <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
+                <input type="text" style={{ ...inputStyle, flex: 1 }} placeholder="+ Add your own interest (e.g. Ballet)" value={state.customInterest}
+                  onChange={(e) => { setState({ ...state, customInterest: e.target.value }); setInterestError(''); }}
+                  onKeyPress={(e) => e.key === 'Enter' && handleAddCustomInterest()} />
+                {state.customInterest.trim() && (
+                  <button onClick={handleAddCustomInterest} className="btn-brand" style={{ padding: '0.65rem 1.25rem', whiteSpace: 'nowrap' }}>Add</button>
+                )}
+              </div>
+            )}
 
             {state.interests.length > 0 && state.interests.length < 2 && (
               <p style={{ color: '#FF6B35', marginBottom: '12px', fontSize: '0.875rem', fontWeight: '500' }}>Select at least 2 interests</p>
