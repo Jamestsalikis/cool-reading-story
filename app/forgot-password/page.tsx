@@ -15,23 +15,25 @@ export default function ForgotPasswordPage() {
     e.preventDefault();
     setLoading(true);
     setError('');
-    const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/auth/callback?type=recovery`,
-    });
-    if (error) {
-      setError(error.message);
-    } else {
-      setSent(true);
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/auth/callback?type=recovery`,
+      });
+      if (error) {
+        setError(error.message || 'Unable to send reset link. Please try again.');
+      } else {
+        setSent(true);
+      }
+    } catch {
+      setError('Something went wrong. Please try again.');
     }
     setLoading(false);
   };
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: '#FFF4E6', padding: '2rem' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '2px', marginBottom: '2.5rem', justifyContent: 'center' }}>
-        <span className="font-serif" style={{ fontSize: '1.75rem', color: '#0D183D' }}>Tale</span>
-        <span className="font-serif" style={{ fontSize: '1.75rem', color: '#FF6B35' }}>Pop</span>
-        <span style={{ background: '#FFB703', width: '7px', height: '7px', borderRadius: '50%', display: 'inline-block', marginLeft: '-3px', marginTop: '-14px' }} />
+      <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
+        <img src="/mood-3.png" alt="TalePop" style={{ height: '60px', width: 'auto' }} />
       </div>
       <div style={{ maxWidth: '400px', width: '100%', background: '#fff', border: '1px solid #F0E4D0', borderRadius: '16px', padding: '2.5rem' }}>
         {sent ? (
@@ -49,9 +51,13 @@ export default function ForgotPasswordPage() {
           <>
             <h1 className="font-serif" style={{ fontSize: '1.6rem', color: '#0D183D', marginBottom: '0.5rem', textAlign: 'center' }}>Reset your password</h1>
             <p style={{ color: '#5E6A7A', fontSize: '0.875rem', textAlign: 'center', marginBottom: '2rem' }}>
-              Enter your email and we'll send you a reset link.
+              Enter your email and we&apos;ll send you a reset link.
             </p>
-            {error && <div style={{ background: '#FEE2E2', borderRadius: '8px', padding: '0.75rem', marginBottom: '1.25rem', fontSize: '0.875rem', color: '#991B1B' }}>{error}</div>}
+            {error && (
+              <div style={{ background: '#FEE2E2', borderRadius: '8px', padding: '0.75rem', marginBottom: '1.25rem', fontSize: '0.875rem', color: '#991B1B' }}>
+                {error}
+              </div>
+            )}
             <form onSubmit={handleSubmit}>
               <div style={{ marginBottom: '1.25rem' }}>
                 <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 500, color: '#0D183D', marginBottom: '0.5rem' }}>Email address</label>
