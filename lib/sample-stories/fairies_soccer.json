@@ -1,0 +1,35 @@
+{
+  "interest": "Fairies + Soccer",
+  "title": "{{NAME}} and the Invisible Referee",
+  "moral": "When you play with honesty and heart, the game is always worth playing.",
+  "theme_emoji": "⚽",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sky-blue soccer jersey with a small star on the chest, white shorts, and sky-blue cleats — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} scored the goal that won the local cup and felt nothing but guilty.\n\nBecause he had seen something nobody else had: a tiny fairy on the goal line, no bigger than a finger, who had stuck her foot out and deflected the ball exactly one centimetre to the right of the keeper's dive.\n\nThe cup was in his hands. The crowd was cheering. The fairy was sitting on the goalpost crossbar, eating a sunflower seed and looking pleased with herself.\n\n{{NAME}} put the cup down.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sky-blue soccer jersey with a small star on the chest, white shorts, and sky-blue cleats — same child, same face, same exact outfit in every image. Football pitch with the goal in background, {{NAME}} holding a trophy but looking troubled rather than happy, the crowd cheering around him, on the goalpost crossbar a tiny fairy is just visible to the viewer, eating something. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "He got to her at half time by walking very casually to the goalpost and pretending to check his boot.\n\n\"You deflected my shot,\" he said, very quietly.\n\n\"I levelled the pitch,\" she said. \"Their goalkeeper got a lucky bounce in the semi-final. I balance things. That is my job.\"\n\n\"That's not how football works,\" said {{NAME}}.\n\n\"It's how fair works,\" she said. \"Which is more important?\"\n\nThis was an unexpectedly difficult question.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sky-blue soccer jersey with a small star on the chest, white shorts, and sky-blue cleats — same child, same face, same exact outfit in every image. {{NAME}} crouched at the goalpost pretending to check his boot, the tiny fairy sitting on the crossbar at his eye level, both in quiet intense conversation, the crowd visible at a distance. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "He thought about it through the second half.\n\nOn one hand: the goal had technically gone in. On the other hand: he'd felt the deflection. On the third hand (if he had one): the other team had gotten a lucky bounce.\n\nHe played the rest of the match very hard and very honestly, leaving the fairy out of it entirely.\n\nWith one minute left, he found himself one-on-one with the keeper. He could see the fairy on the crossbar, watching. He looked away from her.\n\nHe shot. Top corner. No help needed.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sky-blue soccer jersey with a small star on the chest, white shorts, and sky-blue cleats — same child, same face, same exact outfit in every image. Dynamic action shot, {{NAME}} striking the ball alone in front of goal, the keeper diving the wrong way, the ball heading for the top corner under its own power, the tiny fairy on the crossbar a small detail in background. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "After the match, the fairy landed on his hand.\n\n\"That second goal was all yours,\" she said.\n\n\"I know,\" said {{NAME}}. \"That's the point.\"\n\nShe cocked her head. \"You'd rather score honestly than win with help?\"\n\n\"If I win with help I didn't really prove anything,\" he said. \"I proved I can win with help. That's not the same thing.\"\n\nThe fairy was quiet for a moment. Then she said: \"You're the first player who's ever said that to me.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sky-blue soccer jersey with a small star on the chest, white shorts, and sky-blue cleats — same child, same face, same exact outfit in every image. {{NAME}} sitting on the grass after the match, the tiny fairy standing on his open palm, both looking at each other in mutual respect, golden late-afternoon light, teammates celebrating behind them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "She was gone by the time he got his medal.\n\n{{NAME}} walked home with the medal around his neck and his second goal replaying in his head: the moment before the shot when he looked away from the crossbar and decided to do it himself.\n\nThat was the goal he'd remember. Not the first one.\n\nIn bed that night, the medal on his pillow beside him, he stared at the ceiling and smiled.\n\nSomewhere outside, very faintly, he heard a sound like a tiny pair of hands clapping.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sky-blue soccer jersey with a small star on the chest, white shorts, and sky-blue cleats — same child, same face, same exact outfit in every image. {{NAME}} lying in bed with his medal on the pillow beside him, a contented smile on his face, warm golden bedroom lamp, the room quiet and safe. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

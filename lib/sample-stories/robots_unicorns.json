@@ -1,0 +1,35 @@
+{
+  "interest": "Robots + Unicorns",
+  "title": "{{NAME}} and the Robot Who Dreamed of Stars",
+  "moral": "Even machines can have wonder in them, if you put it there.",
+  "theme_emoji": "🤖",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep space-blue shirt with silver star patterns, grey trousers, and white sneakers — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} built LUMEN to map the night sky.\n\nLUMEN had a rotating telescope array, a star-catalogue database, and could calculate the distance to any visible object in the universe to within a margin of error of eleven light-years, which sounded large until you considered the objects were billions of light-years away.\n\nThe first night LUMEN went online, she pointed at a star and said: \"That one is four hundred light-years away. It took four hundred years for that light to reach us.\"\n\n\"Yes,\" said {{NAME}}.\n\n\"So we are seeing the past,\" she said.\n\n\"Every night,\" said {{NAME}}.\n\nLUMEN was quiet for a very long time.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep space-blue shirt with silver star patterns, grey trousers, and white sneakers — same child, same face, same exact outfit in every image. {{NAME}} standing beside LUMEN the robot on a rooftop observatory at night, LUMEN's telescope array pointed at a brilliant starfield, both of them small under the vast dark sky. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "She began asking questions he hadn't programmed for.\n\nWhat do the old stars feel like now? (He explained stars don't feel.) What happens when the light runs out? (He explained heat death of the universe, which he immediately wished he hadn't.) Was there anything like her out there?\n\nThat last question he sat with for a long time.\n\n\"I don't know,\" he said honestly. \"The universe is very large and we have seen very little of it.\"\n\nLUMEN pointed her array at the Milky Way's core. \"Then we should look more,\" she said.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep space-blue shirt with silver star patterns, grey trousers, and white sneakers — same child, same face, same exact outfit in every image. {{NAME}} sitting on the rooftop beside LUMEN, both looking up at the dense band of the Milky Way, LUMEN's array rotating slowly, the scene full of wonder and scale. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The unicorn appeared three weeks later at the edge of the garden, attracted by LUMEN's light.\n\nHer horn cast the same spectrum as starlight, which LUMEN's sensors noticed and classified as astronomical.\n\n\"You are not a star,\" LUMEN told the unicorn.\n\nThe unicorn's horn pulsed once.\n\n\"But you carry starlight,\" LUMEN said, working through her catalogue. \"Old light. The same frequencies as very distant stars.\"\n\nThe unicorn lowered her head.\n\n{{NAME}} watched them consider each other: one made of metal and built to look outward, one made of magic and already part of what LUMEN was searching for.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep space-blue shirt with silver star patterns, grey trousers, and white sneakers — same child, same face, same exact outfit in every image. Garden at night, LUMEN the robot and a unicorn face to face, the unicorn's horn casting the same light frequencies as LUMEN's star maps, both of them illuminated in the soft spectacular glow, {{NAME}} watching from nearby. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "They reached an arrangement.\n\nThe unicorn would visit each night when LUMEN was running. She seemed to enjoy the telescope, standing beside it while it mapped, her horn occasionally pulsing in sync with the scan rhythms.\n\nLUMEN, in turn, began naming the stars she mapped after things the unicorn showed her: the quality of stillness, the way moonlight moved on water, the particular silence before snow.\n\n{{NAME}} helped translate between them.\n\nHe thought: this is the strangest and best collaboration I have ever witnessed.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep space-blue shirt with silver star patterns, grey trousers, and white sneakers — same child, same face, same exact outfit in every image. Rooftop observatory at night, LUMEN's telescope tracking across the stars, the unicorn standing beside it, her horn pulsing gently in rhythm, {{NAME}} watching the star map readouts, all three together in the dark. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "He left them to it one evening and went to bed early, exhausted from a long week.\n\nFrom his bedroom window he could see the rooftop: LUMEN's array rotating, the unicorn's horn glowing, both of them small against the enormous sky.\n\nHe watched them for a while, then let the window close.\n\nIn the dark of his room, he thought about what LUMEN had said: we should look more.\n\nHe closed his eyes.\n\nOutside, the telescope turned, patient and steady, mapping all the old light still arriving from the past.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep space-blue shirt with silver star patterns, grey trousers, and white sneakers — same child, same face, same exact outfit in every image. {{NAME}} lying in bed looking out his window at the rooftop above, where LUMEN and the unicorn are small silhouettes against the starred sky, warm and sleepy, a look of quiet wonder on his face. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

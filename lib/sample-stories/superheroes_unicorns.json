@@ -1,0 +1,35 @@
+{
+  "interest": "Superheroes + Unicorns",
+  "title": "{{NAME}} and the Hero with a Silver Horn",
+  "moral": "Sometimes the most powerful thing you can offer is belief.",
+  "theme_emoji": "🦸",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep indigo cape over a white suit with a silver star, indigo boots, and silver gauntlets — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "The unicorn appeared in the city the day {{NAME}} failed his superhero assessment for the second time.\n\nHe had the cape. He had the training. He had the determination.\n\nWhat he lacked, according to three assessors, was the specific power required to register as an official hero. His ability: perfect recall, which they considered useful but insufficient.\n\nThe unicorn was standing outside the assessment building when he emerged. It looked at him with deep amber eyes.\n\n\"You too?\" he said.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep indigo cape over a white suit with a silver star, indigo boots, and silver gauntlets — same child, same face, same exact outfit in every image. Superhero assessment building exterior, {{NAME}} emerging in his indigo cape looking dejected, a white unicorn standing on the pavement outside meeting his gaze, the city busy around them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "Her name was Arc, she had a horn that could amplify any latent power threefold, and she had been looking for a suitable partner for two years.\n\n\"Every official hero already has more power than they need,\" she said. (She communicated in images and feelings that he translated to words with his perfect recall, each one exact.)\n\n\"The ones who need amplifying are the ones who aren't official yet.\"\n\n\"Me,\" said {{NAME}}.\n\n\"You,\" she confirmed. \"Perfect recall, amplified threefold, becomes something much larger. Shall I show you?\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep indigo cape over a white suit with a silver star, indigo boots, and silver gauntlets — same child, same face, same exact outfit in every image. {{NAME}} standing on a city rooftop with Arc the unicorn beside him, her horn glowing, the city spread out below them, both looking out at the urban landscape. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "With Arc's amplification, {{NAME}}'s perfect recall became something extraordinary.\n\nNot just memory: pattern recognition across every piece of information he had ever absorbed. He could look at a crisis situation and recall every similar scenario, every solution, every outcome from everything he'd ever read, heard, or experienced.\n\nIn his first real emergency (a multi-vehicle accident, blocked roads, two injured), he directed response vehicles along three routes nobody else had thought of, routes he recalled from a street map he'd glanced at two years ago.\n\nEveryone was out in six minutes.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep indigo cape over a white suit with a silver star, indigo boots, and silver gauntlets — same child, same face, same exact outfit in every image. {{NAME}} at the centre of an emergency scene, Arc's horn glowing as she touches it to his shoulder, {{NAME}} pointing with complete certainty in three directions at once, emergency vehicles responding, the situation being solved. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "He went back to the assessment board with the rescue report.\n\nThe three assessors looked at it, then at Arc, who was standing in the corridor because she had decided the lobby ceiling was too low.\n\n\"Your ability hasn't changed,\" said the lead assessor carefully.\n\n\"The application of it has,\" said {{NAME}}. \"With Arc, it becomes strategy. Recall plus pattern recognition at speed equals crisis navigation. That's useful.\"\n\nArc, in the corridor, made the sound of distant thunder that was her version of agreement.\n\nThey registered him. Official hero. Partner classification: unicorn.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep indigo cape over a white suit with a silver star, indigo boots, and silver gauntlets — same child, same face, same exact outfit in every image. {{NAME}} standing before three assessors at a formal table, Arc visible through the corridor window behind him, the official registration certificate being slid across the table, {{NAME}} reaching for it. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "He walked home in the evening with his official registration card in his pocket and Arc at his side, her horn occasionally illuminating the path ahead.\n\nHe thought about perfect recall, and how for years he had thought of it as a minor thing, not quite enough.\n\nNot the power. The way it was used. The partner who believed it could be more.\n\nHe got into bed and Arc stood in the garden below his window, her horn a soft silver thread in the dark.\n\n\"Same time tomorrow?\" he called.\n\nThe horn pulsed once: yes. See you then.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep indigo cape over a white suit with a silver star, indigo boots, and silver gauntlets — same child, same face, same exact outfit in every image. {{NAME}} in bed looking out his window at the garden below where Arc stands with her horn glowing softly silver, the room cosy and warm, a deep peaceful happiness on his face. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

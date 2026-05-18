@@ -1,0 +1,35 @@
+{
+  "interest": "Princesses + Unicorns",
+  "title": "{{NAME}} and the Unicorn Crown",
+  "moral": "Some gifts are only given to those who know they don't need them.",
+  "theme_emoji": "🦄",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver-white tunic with a violet sash, cream trousers, and silver-buckled boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "Every hundred years, a unicorn appeared in the kingdom and chose a companion.\n\nThe choosing was an enormous ceremony. Every princess, every noble, every important person in the kingdom stood in a long line in the palace meadow while the unicorn walked past.\n\n{{NAME}} was there as a page, which meant he stood at the very end holding the refreshment tray.\n\nThe unicorn walked the whole line. Past the princess. Past the nobles. Past everyone.\n\nThen it walked to the end, looked at {{NAME}}, and sat down.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver-white tunic with a violet sash, cream trousers, and silver-buckled boots — same child, same face, same exact outfit in every image. Wide palace meadow, a long formal line of richly dressed royals and nobles, a unicorn walking past them all, and at the very end {{NAME}} in a simple page's uniform holding a tray, the unicorn stopping before him and sitting down. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "There was considerable confusion.\n\n{{NAME}} was confused. The assembled royalty were confused. The royal unicorn scholar was very confused and consulting several books at once.\n\nPrincess Adelaide was not confused. She watched the unicorn watching {{NAME}} and nodded slowly.\n\n\"It's never been wrong,\" she said quietly.\n\n\"But I'm just a page,\" said {{NAME}}.\n\n\"The unicorn doesn't know that,\" said the princess. \"Or more likely, doesn't care.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver-white tunic with a violet sash, cream trousers, and silver-buckled boots — same child, same face, same exact outfit in every image. The meadow scene up close, {{NAME}} standing awkwardly with his tray as the unicorn sits calmly before him, royals murmuring in the background, Princess Adelaide watching with a calm knowing look. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The unicorn's name was Comet and she was, he discovered, absolutely sure about her decision.\n\nShe followed him to his small page's room and stood in the doorway, which was too small for her, so she waited outside while he moved things around.\n\nShe walked beside him on his errands. She stood outside the kitchens while he fetched bread. She waited outside the library while he returned books.\n\nBy the third day, he had stopped questioning it and started talking to her, which seemed to be all she'd wanted.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver-white tunic with a violet sash, cream trousers, and silver-buckled boots — same child, same face, same exact outfit in every image. {{NAME}} walking through palace corridors going about his page duties, the unicorn Comet walking beside him, too large for the space but utterly untroubled, the two of them in easy companionship. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The unicorn scholar told him the ceremony: in accepting the companion bond, he would receive the Unicorn Crown, a circlet of silver and magic.\n\n\"What does it do?\" {{NAME}} asked.\n\n\"It means the unicorn trusts you completely,\" said the scholar. \"The magic it grants is different for each companion.\"\n\nComet lowered her head and the crown appeared, simple and glowing.\n\n{{NAME}} put it on. For a moment he saw through Comet's eyes: the meadow vast and green, himself small and kind-faced, trustworthy.\n\n\"Oh,\" he said quietly. \"I see.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver-white tunic with a violet sash, cream trousers, and silver-buckled boots — same child, same face, same exact outfit in every image. Dramatic scene, {{NAME}} placing the glowing silver Unicorn Crown on his head, Comet's head bowed before him, a soft silver light emanating from both of them, Princess Adelaide and the court watching from a distance. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "Princess Adelaide found him in the meadow that evening, sitting with Comet's head resting in his lap.\n\n\"How do you feel?\" she asked.\n\n\"Like myself,\" said {{NAME}}. \"Just more sure of it.\"\n\nThe princess smiled. \"That is exactly what the crown does. It reflects what's already there.\"\n\nHe walked home later with the crown in his pocket, warm and small, and Comet standing at the meadow's edge watching him go.\n\nIn his room that night, he set the crown on his windowsill and fell asleep with moonlight on his face, full of a quiet certainty he had no name for.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver-white tunic with a violet sash, cream trousers, and silver-buckled boots — same child, same face, same exact outfit in every image. {{NAME}} lying in bed, the Unicorn Crown glowing softly on the windowsill in the moonlight, the room warm and cosy, a deep peaceful certainty on his sleeping face. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

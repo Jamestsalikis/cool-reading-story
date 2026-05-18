@@ -1,0 +1,35 @@
+{
+  "interest": "Dinosaurs + Soccer",
+  "title": "{{NAME}} and the Biggest Goalkeeper Ever",
+  "moral": "The most surprising teammates can become your greatest allies.",
+  "theme_emoji": "⚽",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a grass-green soccer jersey, dark shorts, and mud-caked green cleats — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "The brontosaurus appeared in the town park on the morning of the championship match, standing exactly where the goalposts were supposed to be.\n\nThe referee said the match was cancelled. The other team said the match was cancelled. {{NAME}}'s team looked at the enormous dinosaur, then at {{NAME}}.\n\n\"I have an idea,\" said {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a grass-green soccer jersey, dark shorts, and mud-caked green cleats — same child, same face, same exact outfit in every image. Wide shot of a park football pitch, an enormous friendly-looking Brontosaurus standing exactly where one goal should be, a crowd of children staring at it, {{NAME}} at the front looking thoughtful rather than panicked. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The dinosaur was, it turned out, extremely interested in the ball.\n\nEvery time it rolled toward its enormous feet, it nudged it back gently with a toe the size of a dustbin lid.\n\n\"What if,\" said {{NAME}} slowly, \"she's the goalkeeper?\"\n\nThe other team protested. But the referee, who had a sense of humour, noted that the rules technically did not specify that goalkeepers had to be human.\n\nThe dinosaur lowered her head and looked at {{NAME}} with one enormous amber eye.\n\n\"I'll give you signals,\" {{NAME}} told her. She blinked.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a grass-green soccer jersey, dark shorts, and mud-caked green cleats — same child, same face, same exact outfit in every image. {{NAME}} standing directly in front of the Brontosaurus's enormous lowered head, both looking at each other at close range, the football pitch behind them, teammates watching with a mix of uncertainty and excitement. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The match was extraordinary.\n\nThe dinosaur blocked every shot simply by existing in the goalmouth. But she also required strategic management: she only moved if {{NAME}} pointed, and she moved very slowly, so timing was everything.\n\n{{NAME}} spent the entire match directing her like an air traffic controller, calling \"left\" and \"right\" while also playing midfield.\n\nBy the final whistle his voice was gone, his lungs were empty, and his team had won four-nil.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a grass-green soccer jersey, dark shorts, and mud-caked green cleats — same child, same face, same exact outfit in every image. Dynamic action shot, {{NAME}} pointing urgently while the Brontosaurus slowly shifts sideways to block an incoming shot, the ball bouncing off her enormous side, the crowd visible in ecstasy. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "In the confusion of celebrating, {{NAME}} noticed the dinosaur was looking at him with an expression he could only describe as pleased.\n\nHe walked up to her and patted the side of her enormous nose.\n\nShe made a sound like distant thunder, then lowered her head and very gently nudged him sideways, once, the way a dog nuzzles a hand.\n\n\"Good game,\" said {{NAME}}.\n\nAnother distant-thunder sound. He was beginning to understand this meant you too.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a grass-green soccer jersey, dark shorts, and mud-caked green cleats — same child, same face, same exact outfit in every image. {{NAME}} reaching up to pat the enormous friendly nose of the Brontosaurus, the dinosaur's eye warm and close, late afternoon golden light, teammates celebrating in the background. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "The dinosaur wandered off at dusk, back toward the distant hills, the ground trembling softly with each step.\n\n{{NAME}} sat on the field and watched until she disappeared.\n\nHe walked home through the quiet evening with the championship trophy under his arm, his voice still gone, his knees still grass-stained.\n\nHe was almost asleep when he heard it: a low rumble in the distance, too regular to be thunder, rolling gently through the night.\n\nHe smiled and pulled the blanket up.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a grass-green soccer jersey, dark shorts, and mud-caked green cleats — same child, same face, same exact outfit in every image. {{NAME}} tucked in bed, trophy on his bedside table, peaceful smile on his face, a low warm golden glow from the lamp, the room cosy and settled. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

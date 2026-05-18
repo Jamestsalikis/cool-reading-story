@@ -1,0 +1,35 @@
+{
+  "interest": "Soccer + Unicorns",
+  "title": "{{NAME}} and the Unicorn Who Played in Goal",
+  "moral": "The most magical things often come to you when you stop looking and just play.",
+  "theme_emoji": "🦄",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a turquoise soccer jersey with a silver star, white shorts, and turquoise cleats — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} was practising penalty kicks alone in the park when the unicorn walked onto the pitch.\n\nShe stood in the goal and looked at him.\n\nHer horn was the colour of starlight and her coat was white-silver and her eyes were the patient expression of someone who had been waiting for a while.\n\n{{NAME}} looked at her. Looked at his ball. Looked back at her.\n\n\"Are you going to move?\" he asked.\n\nShe did not move.\n\n\"Right,\" said {{NAME}}. \"Let's see it then.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a turquoise soccer jersey with a silver star, white shorts, and turquoise cleats — same child, same face, same exact outfit in every image. A park football pitch, {{NAME}} standing at the penalty spot ball at his feet, staring at a unicorn who is standing calmly in the goal with no intention of moving, both regarding each other. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "She was extraordinary in goal.\n\nNot because she was fast or could dive: she was neither fast nor a diver. She simply stood wherever the ball was going to be before it went there.\n\nPenalty after penalty hit her side, her flank, her nose (once). She absorbed them all with serene indifference.\n\n{{NAME}} stopped after the twentieth kick.\n\n\"How do you do that?\" he asked.\n\nShe touched the ground with one hoof, marking a spot. Then she tapped his boot.\n\nHe looked at the spot she'd touched. It was exactly where he'd been aiming without realising it.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a turquoise soccer jersey with a silver star, white shorts, and turquoise cleats — same child, same face, same exact outfit in every image. {{NAME}} at the penalty spot looking down at the spot on the grass the unicorn just touched with her hoof, realisation on his face, the unicorn watching him with calm amusement. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "She was teaching him, he realised.\n\nEvery practice session, she stood in goal and showed him not what he thought he was doing, but what he was actually doing: the unconscious lean, the shoulder that telegraphed direction, the foot angle that was invisible to him but obvious to her.\n\nHe started changing things. Hid his weight. Changed his run-up. Learned to shoot before his body had committed to a direction.\n\nAfter three weeks, he put one past her.\n\nJust one. But her ears went up and she made a sound he'd never heard her make before: something very like pride.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a turquoise soccer jersey with a silver star, white shorts, and turquoise cleats — same child, same face, same exact outfit in every image. {{NAME}} watching the ball roll into the corner of the net past the unicorn, who is for once looking surprised, both of them in the moment of a first success, sunlight and joy. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "He brought his teammates to practice with her.\n\nNot one of them scored for two full sessions. Then, one by one, as she showed each of them their own unconscious tells, they began to figure it out.\n\nBy the end of the month, his team had the best penalty record in the local league.\n\n\"We have a secret weapon,\" his teammate Kiri said.\n\n\"She's not a weapon,\" said {{NAME}}. \"She's a teacher.\"\n\nThe unicorn, from the goal, inclined her head.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a turquoise soccer jersey with a silver star, white shorts, and turquoise cleats — same child, same face, same exact outfit in every image. {{NAME}}'s whole team arrayed on the pitch, the unicorn in goal watching them all practice penalties, the team energised and focused, golden afternoon training light. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "The night before the championship final, {{NAME}} went to the park alone.\n\nThe unicorn was there, standing in the goal in the dark, her horn casting a soft silver light on the penalty spot.\n\nHe sat on the grass across from her and they stayed like that for a while, not practising, just being there.\n\n\"Thanks,\" he said finally.\n\nShe walked across the pitch and stood beside him, looking up at the stars.\n\nHe went home steady and calm, and slept a dreamless sleep, and in the morning he scored the winning penalty without thinking about it at all.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a turquoise soccer jersey with a silver star, white shorts, and turquoise cleats — same child, same face, same exact outfit in every image. {{NAME}} asleep in bed, the morning light beginning, calm and completely rested, the turquoise jersey on the chair ready for match day, peaceful and sure. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

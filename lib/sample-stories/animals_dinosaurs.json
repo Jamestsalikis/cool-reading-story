@@ -1,0 +1,35 @@
+{
+  "interest": "Animals + Dinosaurs",
+  "title": "{{NAME}} and the Dinosaur Who Made a Friend",
+  "moral": "Even the biggest, scariest-looking creatures just want someone to play with.",
+  "theme_emoji": "🦕",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a khaki explorer shirt, brown cargo shorts, and sturdy tan boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} had read every dinosaur book in the library, but nothing prepared him for the morning he found giant three-toed footprints leading from the river into the forest behind his house.\n\nEach print was as wide as a dinner table. Fresh mud was still oozing back into the edges.\n\n\"A real one,\" he breathed. Then he did the bravest thing he could think of: he followed them.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a khaki explorer shirt, brown cargo shorts, and sturdy tan boots — same child, same face, same exact outfit in every image. Wide forest path at dawn, {{NAME}} kneeling beside an enormous three-toed dinosaur footprint filled with muddy water, mouth open in astonishment, sunlight filtering through tall trees ahead. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "He found it in a clearing: a young Brachiosaurus, not much bigger than a school bus, with enormous brown eyes and a neck that bent in a graceful curve to sniff at a patch of ferns.\n\nBeside it, a family of rabbits sat completely unbothered.\n\nThe dinosaur looked at {{NAME}} and sneezed, scattering fern fronds everywhere. The rabbits hopped one step sideways, then went back to eating.\n\n\"You're not scary at all,\" {{NAME}} said, surprised.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a khaki explorer shirt, brown cargo shorts, and sturdy tan boots — same child, same face, same exact outfit in every image. Forest clearing, {{NAME}} face-to-face with a young Brachiosaurus whose long neck curves down toward him, the dinosaur's enormous warm brown eye directly level with {{NAME}}'s face, both looking curious at each other, a cluster of rabbits nibbling grass nearby. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The Brachiosaurus wanted to play, but had no idea how.\n\nIt tried nudging {{NAME}} with its nose. Too hard: he flew sideways into a fern bush.\n\nIt tried lying down. A tree fell over.\n\n\"Okay,\" said {{NAME}}, picking leaf bits from his hair. \"Let me teach you. Watch the rabbits. They chase each other. Ready?\"\n\nHe ran. The Brachiosaurus thundered after him, shaking the earth with every step, honking with joy, while rabbits scattered in all directions.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a khaki explorer shirt, brown cargo shorts, and sturdy tan boots — same child, same face, same exact outfit in every image. Dynamic action shot, {{NAME}} sprinting through the forest laughing, the young Brachiosaurus lumbering joyfully behind him with neck outstretched, birds bursting from branches, leaves flying everywhere. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "By afternoon, they had invented a game: {{NAME}} would hide behind a tree, and the Brachiosaurus would use its long neck to find him by sniffing, like a very large, very slow game of hide and seek.\n\nThe animals gathered to watch. Squirrels perched on the Brachiosaurus's back. A fox sat on a log judging proceedings with great seriousness.\n\n\"You've never lost,\" {{NAME}} told the dinosaur. \"Not once.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a khaki explorer shirt, brown cargo shorts, and sturdy tan boots — same child, same face, same exact outfit in every image. {{NAME}} peeking out from behind a wide oak tree, the Brachiosaurus's enormous snout just inches away looking triumphant, squirrels riding on the dinosaur's back, a fox watching from a log, golden afternoon light through the canopy. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "When the sun turned orange and the fireflies began their first slow blinks, the Brachiosaurus lay down in the clearing with a long, satisfied sigh.\n\nThe rabbits nestled against its side. The squirrels tucked in near its neck. The fox curled by its tail.\n\n{{NAME}} leaned against its warm flank and looked up at the first star.\n\n\"Same time tomorrow?\" he asked.\n\nThe Brachiosaurus made a deep, gentle rumble that rolled through the ground and up through his back and felt exactly like yes.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a khaki explorer shirt, brown cargo shorts, and sturdy tan boots — same child, same face, same exact outfit in every image. Twilight clearing, {{NAME}} leaning against the side of a gently sleeping Brachiosaurus, surrounded by rabbits, squirrels, and a fox all nestled in, warm golden light fading, fireflies beginning to glow, a single bright star above. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

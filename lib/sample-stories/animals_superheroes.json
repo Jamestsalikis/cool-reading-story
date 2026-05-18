@@ -1,0 +1,35 @@
+{
+  "interest": "Animals + Superheroes",
+  "title": "{{NAME}} and the Paw Patrol of Parkside",
+  "moral": "You don't need a cape to be someone's hero, just show up when they need you.",
+  "theme_emoji": "🦸",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a dark blue cape over a yellow star shirt, dark jeans, and blue trainers — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}}'s superpower was being extremely good at noticing things other people missed.\n\nHe noticed: the stray cat under the library steps who only came out for cheese-flavoured crackers. The injured pigeon in the park who held one wing slightly wrong. The old dog on Maple Street whose water bowl was always dry by noon.\n\nHe fixed what he could fix. He got a reputation.\n\nThat was how the animal shelter gave him his own key at age nine and called him: Guardian of Parkside.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a dark blue cape over a yellow star shirt, dark jeans, and blue trainers — same child, same face, same exact outfit in every image. Wide shot of {{NAME}} walking through a neighbourhood park in afternoon light, cape trailing behind him, a cat following at a distance, a pigeon on his shoulder, a small dog trotting beside him, all calm and in safe company. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The emergency came on a Thursday.\n\nA storm had flooded the lower part of Greystone Park where the small-animal dens were, and six different families needed relocating before the second rain band came in at midnight.\n\nThe shelter was full. The vet was an hour away.\n\n{{NAME}} pulled on his cape, packed his bag, and ran.\n\nWhat he found was a chaos of frightened rabbits, confused hedgehogs, and one extremely wet family of ducks who had technically been fine but objected to the principle of the whole situation.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a dark blue cape over a yellow star shirt, dark jeans, and blue trainers — same child, same face, same exact outfit in every image. {{NAME}} wading through flooded park path at twilight, cape floating on the water behind him, a frightened rabbit tucked under his arm, a hedgehog visible ahead on a raised root, storm clouds overhead, lantern light in his hand. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} worked until ten o'clock.\n\nHe built a temporary nest from a waterproof bag and dry leaves for the rabbit family. He carried the hedgehogs one by one to the park shelter shed. He negotiated with the ducks for twenty minutes before accepting that they were absolutely fine and had only staged a crisis for attention.\n\n\"You're fine,\" he told them sternly. They quacked.\n\nHe built the last nest by torchlight, knees wet, cape dripping, completely satisfied.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a dark blue cape over a yellow star shirt, dark jeans, and blue trainers — same child, same face, same exact outfit in every image. {{NAME}} on his knees in the dark park shelter shed, torch in hand, carefully arranging dry leaves into a rabbit nest, hedgehogs tucked nearby, wet cape hanging on the shed door, determined focus on his face. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "By eleven, every animal was settled.\n\nThe rabbits were snug. The hedgehogs were dry. The ducks had waddled back to their preferred spot and arranged themselves with dignity.\n\n{{NAME}} sat in the shed doorway and watched the rain start again, heavy and grey over the park.\n\nThe rabbit mother came to the door of her nest and looked at him.\n\n{{NAME}} nodded. \"You're safe,\" he said.\n\nShe went back inside.\n\nHe sat a while longer, listening to rain on the roof, feeling quietly enormous.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a dark blue cape over a yellow star shirt, dark jeans, and blue trainers — same child, same face, same exact outfit in every image. {{NAME}} sitting in the lit doorway of a wooden park shed, looking out at rain on the dark park, animals settled safely inside behind him, cape damp on his shoulders, peaceful and content expression. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "He got home at eleven thirty, soaking wet, and his mum wrapped him in a towel and made him cocoa without asking any questions, which was the best parenting he had ever witnessed.\n\nIn his room, cape on the chair, he lay in the warm dark.\n\nOutside, the rain drummed on. Inside, safe.\n\nHe thought about the rabbit mother looking at him from the nest door. That one look.\n\nHe closed his eyes, and just before sleep, he thought he heard something: very small, very faint, from somewhere out in the dark and the rain, a sound that might have been rabbits, warm and dry, safe.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a dark blue cape over a yellow star shirt, dark jeans, and blue trainers — same child, same face, same exact outfit in every image. {{NAME}} asleep in bed in a cosy golden-lit room, damp cape draped over a chair nearby, cocoa mug on the bedside table, rain visible on the window, the room warm and utterly safe. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "interest": "Fairies + Princesses",
+  "title": "{{NAME}} and the Royal Fairy Council",
+  "moral": "Great leaders listen to voices much smaller than their own.",
+  "theme_emoji": "🧚",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a forest-green tunic with silver trim, green trousers, and silver-buckled shoes — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} was sent to the Greenwood Court as the princess's page, which mostly involved carrying things and standing near doors.\n\nHe was very good at both. He was also very good at noticing things.\n\nWhat he noticed in the first week: tiny golden lights in the throne room rafters that weren't candles. Doors swinging open with no breeze. The princess always pausing before major decisions, tilting her head slightly, as if listening to something nobody else could hear.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a forest-green tunic with silver trim, green trousers, and silver-buckled shoes — same child, same face, same exact outfit in every image. Grand throne room interior, {{NAME}} standing near the door watching Princess Seraphine on her throne tilting her head slightly, high above her in the rafters tiny golden lights are visible that look nothing like candles. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "He found out the truth on a Thursday, when he was late delivering a message and cut through the garden maze.\n\nAt the maze's centre: a circle of fairies, no bigger than his hand, seated around a tiny round table. Across from them, sitting cross-legged on the grass in her best gown, was Princess Seraphine.\n\nThe fairies were all talking at once. The princess was taking notes.\n\n{{NAME}} stopped breathing.\n\nOne fairy looked directly at him. \"You,\" she said. \"Sit down. We need a second opinion.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a forest-green tunic with silver trim, green trousers, and silver-buckled shoes — same child, same face, same exact outfit in every image. Palace garden maze centre, {{NAME}} frozen in surprise, before him Princess Seraphine sitting cross-legged on the grass with a notepad, a circle of tiny fairies at a miniature table across from her, one fairy pointing at {{NAME}}. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The issue, it turned out, was a new law the princess was considering: a tax on riverside trade that seemed logical in the palace but would devastate the fairy settlements in the reed beds.\n\n{{NAME}} knew the reed beds. His grandmother had lived near them.\n\n\"The reeds flood in spring,\" he said carefully. \"The fairy settlements move up the bank. If the tax forces the traders to use the northern road, the reed bed communities lose half their food supply for three months.\"\n\nThe princess stopped writing. The fairies looked at him.\n\n\"How does he know that?\" one asked.\n\n\"He notices things,\" said the princess.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a forest-green tunic with silver trim, green trousers, and silver-buckled shoes — same child, same face, same exact outfit in every image. Close scene in the garden maze, {{NAME}} sitting cross-legged facing the fairy council with Princess Seraphine beside him, the fairies all attentive as he explains with careful gestures, afternoon light golden on the grass. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The council ran for two hours.\n\n{{NAME}} did not contribute often, but when he did, it was useful. He knew which roads flooded, which markets ran on what schedule, which human communities lived nearest to the fairy settlements.\n\nAt the end, the princess rewrote the law to exempt riverside traders for six months of each year.\n\nThe head fairy, whose name was something like the sound bells make in fog, reached up and put a single tiny hand on {{NAME}}'s finger.\n\n\"You may return next council,\" she said, which he understood was a high honour.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a forest-green tunic with silver trim, green trousers, and silver-buckled shoes — same child, same face, same exact outfit in every image. Dramatic scene, the tiny fairy leader reaching up to place one hand on {{NAME}}'s outstretched finger, a warm golden glow transferring between them, the princess watching with a warm smile, evening light falling on the garden. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "Walking home from the palace that evening, {{NAME}} felt the weight of the day settling in his bones: the good kind of tired.\n\nHe had carried messages all morning and changed a law all afternoon.\n\nIn his small room above the stables, he sat on his bed and looked at his finger where the fairy had touched it. A tiny golden ring, no bigger than a thread, was just visible in the lamplight.\n\nHe lay down and closed his eyes.\n\nSomewhere in the reed beds, he thought he could hear tiny voices: talking, planning, safe.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a forest-green tunic with silver trim, green trousers, and silver-buckled shoes — same child, same face, same exact outfit in every image. {{NAME}} lying in a simple cosy room above stables, holding his finger up to the lamplight to see the tiny golden ring, peaceful and content, the room warm, the lamp golden. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

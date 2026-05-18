@@ -1,0 +1,35 @@
+{
+  "interest": "Princesses + Superheroes",
+  "title": "{{NAME}} and Princess Valor of the Iron Shield",
+  "moral": "Strength is not just physical, it is the courage to do what is right when it is hard.",
+  "theme_emoji": "🦸",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a steel-blue tunic with a silver shield emblem, dark trousers, and armoured boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "Princess Valor was the only royal in the kingdom with a secret identity.\n\nBy day: princess, as expected. Excellent at treaties, terrible at dancing, kept a sword behind her throne that everyone pretended not to see.\n\nBy night: the Iron Shield, protector of the merchant quarter, distinguishable by her armour and the fact that she always left before anyone could say thank you.\n\n{{NAME}} was the only person who had figured this out, which was how he ended up as her unofficial logistics coordinator.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a steel-blue tunic with a silver shield emblem, dark trousers, and armoured boots — same child, same face, same exact outfit in every image. Narrow evening street in a city's merchant quarter, {{NAME}} watching from a doorway as a figure in silver-blue armour, the Iron Shield, vanishes around a corner, the connection between her and the princess visible in posture and bearing. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "His job: know the city. Know where trouble was likely before it started, because the princess couldn't be everywhere and {{NAME}} could move through the city like water, unhurried and unnoticed.\n\nHe kept a notebook. He talked to market stall owners, night watchmen, delivery crews. He built a picture of the city that was as good as any map.\n\n\"You're a spy,\" Princess Valor told him once.\n\n\"I'm a listener,\" {{NAME}} corrected. \"Very different.\"\n\nShe almost smiled.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a steel-blue tunic with a silver shield emblem, dark trousers, and armoured boots — same child, same face, same exact outfit in every image. {{NAME}} sitting in a market stall talking to an old vendor, notebook open on his knee, casual and relaxed but clearly gathering information, the city busy around him. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The real test came when a gang tried to shut down the southern market by intimidating all the traders.\n\n{{NAME}} had seen it coming for a week. He had also, quietly, arranged for every trader in the market to move their stalls two streets over on the same day, without explaining why, just suggesting it made business sense.\n\nWhen the gang arrived, the market was empty.\n\nAnd Princess Valor was waiting for them.\n\nShe had been there for an hour.\n\n\"Good information?\" she asked afterward.\n\n\"Good listener,\" said {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a steel-blue tunic with a silver shield emblem, dark trousers, and armoured boots — same child, same face, same exact outfit in every image. An empty market square at dusk, Princess Valor in armour standing at the centre facing a surprised gang, the traders conspicuously absent, {{NAME}} watching from the corner with a satisfied expression. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "After the confrontation, as the night watch arrived to deal with the aftermath, Princess Valor sat on a market step and took off her helmet.\n\n\"I've been doing this for two years,\" she said. \"Tonight was the first time the problem was solved before it became a fight.\"\n\n\"Preventing fights is better than winning them,\" said {{NAME}}.\n\n\"My father says heroes are measured by what they defeat,\" she said.\n\n\"I think they're measured by what they protect,\" said {{NAME}}.\n\nShe was quiet for a moment. \"I like your version better.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a steel-blue tunic with a silver shield emblem, dark trousers, and armoured boots — same child, same face, same exact outfit in every image. Princess Valor sitting on a market step, helmet off, talking to {{NAME}} who sits beside her, both in the warm lamplight of the now-peaceful street, a calm and honest conversation. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "He walked home thinking about the empty market square, the way the problem had not materialised because someone had listened carefully enough to see it coming.\n\nIn his room, he added the evening to his notebook and then closed it.\n\nProtection was mostly invisible. That was the point.\n\nHe turned off the lamp and lay in the dark, satisfied.\n\nSomewhere on the other side of the city, in a palace, a princess was setting aside her armour and thinking the same thought.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a steel-blue tunic with a silver shield emblem, dark trousers, and armoured boots — same child, same face, same exact outfit in every image. {{NAME}} lying in bed with his notebook closed on the bedside table, the room warm and dark, peaceful and satisfied expression, a sense of something important well-done. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

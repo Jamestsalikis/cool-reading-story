@@ -1,0 +1,35 @@
+{
+  "interest": "Fairies + Robots",
+  "title": "{{NAME}} and the Fairy Who Fixed the Machine",
+  "moral": "Magic and science are just two different ways of solving the same problems.",
+  "theme_emoji": "🧚",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright copper-orange shirt, silver-grey overalls, and sturdy work boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "The old mill on the edge of town had been broken for twenty years.\n\nThe gears were rusted, the waterwheel was stuck, and every engineer in the county had looked at it, shaken their head, and left.\n\n{{NAME}} had read about the mill in a history book. He visited one afternoon with his toolkit.\n\nWhen he reached the main gear mechanism, he found someone already there: a fairy, about the height of a matchstick, sitting inside the gear assembly with her sleeves rolled up.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright copper-orange shirt, silver-grey overalls, and sturdy work boots — same child, same face, same exact outfit in every image. Dark interior of an old stone mill, {{NAME}} shining his torch through the gear mechanism to reveal a tiny fairy with sleeves rolled up already working inside the rusted gears, looking up at him without surprise. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "Her name was Cogsworth, which she said was entirely her own idea and nobody else's business.\n\nShe had been trying to fix the mill for three years, she explained, but fairy magic was excellent at organic things (wood, water, living things) and less reliable on iron and steel.\n\n\"I can do the metal,\" said {{NAME}}. \"If you can do the water intake, the sluice is completely jammed with something I can't reach.\"\n\nCogsworth looked at him appraisingly. \"You'll have to do what I say.\"\n\n\"You'll have to do what I say too,\" said {{NAME}}.\n\nShe considered this. \"Fine.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright copper-orange shirt, silver-grey overalls, and sturdy work boots — same child, same face, same exact outfit in every image. {{NAME}} crouching at the old mill's gear mechanism, the tiny fairy Cogsworth perched on a gear at eye level, both looking at each other with matching expressions of businesslike assessment. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "They divided the work precisely.\n\nCogsworth sent golden threads of magic through the wooden parts of the sluice mechanism, coaxing warped planks back into shape, convincing blocked channels to flow again.\n\n{{NAME}} cleaned and oiled the iron gears methodically, removing rust flake by flake, checking each tooth, replacing three that had cracked.\n\nThey talked while they worked. Cogsworth had opinions on gear ratios. {{NAME}} had opinions on sluice angles. They argued productively for several hours.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright copper-orange shirt, silver-grey overalls, and sturdy work boots — same child, same face, same exact outfit in every image. Split-level scene in the mill, {{NAME}} working on the large gear assembly in the upper frame while below Cogsworth sends golden fairy light through the wooden sluice, the mill mechanism coming back to life piece by piece. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "At four o'clock, with the last gear cleaned and the last plank eased into place, {{NAME}} opened the water gate.\n\nFor a moment nothing happened.\n\nThen: the water came. The wheel turned. The gears caught, one by one, the sound of the mill filling up from silence into a deep, rhythmic hum.\n\nCogsworth landed on the top of the wheel and rode it all the way around once, both arms out, completely triumphant.\n\n{{NAME}} watched from the bank and felt the kind of joy that only comes from fixing something that was broken.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright copper-orange shirt, silver-grey overalls, and sturdy work boots — same child, same face, same exact outfit in every image. Dramatic scene at the old mill exterior, the waterwheel turning again, water flowing, {{NAME}} standing on the bank with arms raised in triumph, the tiny fairy riding the top of the turning wheel with arms spread wide. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "Cogsworth said goodbye at the mill door as the light turned golden.\n\nShe left him a gear no bigger than a thumbnail, made of a material that wasn't quite metal and wasn't quite wood, warm in his palm.\n\n\"For the next broken thing,\" she said.\n\nThat night, {{NAME}} put the tiny gear on his windowsill and watched it catch the last light.\n\nAcross town, the mill turned steadily in the dark. He could hear it if he opened his window: the sound of something fixed, doing its work, going on and on.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright copper-orange shirt, silver-grey overalls, and sturdy work boots — same child, same face, same exact outfit in every image. {{NAME}} in bed with his window cracked open, the tiny warm gear on the windowsill catching the moonlight, the room peaceful and cosy, {{NAME}} listening contentedly to the distant sound of the mill working. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}
