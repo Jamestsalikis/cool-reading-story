@@ -536,4 +536,30 @@ export default function StoryPage() {
           <button
             onClick={() => goToPage(currentPage - 1)}
             disabled={currentPage === 0}
-            style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'none', border: '2px solid rgba(255,255,255,0.25)', borderRadius: '12px', color: 'rgba(255,255,255,0.85)', padding: '0.75rem 1.25rem', cursor: currentPage === 0 ? 'not-allowed' : 'pointer', o
+            style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'none', border: '2px solid rgba(255,255,255,0.25)', borderRadius: '12px', color: 'rgba(255,255,255,0.85)', padding: '0.75rem 1.25rem', cursor: currentPage === 0 ? 'not-allowed' : 'pointer', opacity: currentPage === 0 ? 0.25 : 1, fontSize: '1rem', fontWeight: '600', minWidth: '90px', justifyContent: 'center' }}
+          >
+            <ChevronLeft size={20} /> Back
+          </button>
+          <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+            {pages.map((p, i) => (
+              <button key={i} onClick={() => goToPage(i)} style={{ width: i === currentPage ? '22px' : '7px', height: '7px', borderRadius: '4px', background: i === currentPage ? '#FF6B35' : (p.image_url ? 'rgba(255,255,255,0.4)' : 'rgba(255,255,255,0.18)'), border: 'none', cursor: 'pointer', transition: 'all 0.25s', padding: 0 }} />
+            ))}
+          </div>
+          {!isLastPage && (
+            <button
+              onClick={() => goToPage(currentPage + 1)}
+              style={{ display: 'flex', alignItems: 'center', gap: '6px', background: '#FF6B35', border: 'none', borderRadius: '12px', color: 'white', padding: '0.75rem 1.25rem', cursor: 'pointer', fontSize: '1rem', fontWeight: 700, minWidth: '90px', justifyContent: 'center' }}
+            >
+              Next <ChevronRight size={20} />
+            </button>
+          )}
+          {isLastPage && (
+            <Link href="/dashboard" style={{ display: 'flex', alignItems: 'center', gap: '6px', background: '#FF6B35', border: 'none', borderRadius: '12px', color: 'white', padding: '0.75rem 1.25rem', textDecoration: 'none', fontSize: '1rem', fontWeight: 700, minWidth: '90px', justifyContent: 'center' }}>
+              Library
+            </Link>
+          )}
+        </div>
+      </div>
+    </>
+  );
+}

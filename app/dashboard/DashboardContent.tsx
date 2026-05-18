@@ -968,4 +968,36 @@ export default function DashboardPage() {
                     <button disabled={deleteInput !== 'DELETE'} onClick={async () => {
                       const res = await fetch('/api/account/delete', { method: 'DELETE' });
                       if (res.ok) { await supabase.auth.signOut(); window.location.href = '/'; }
-                      else { setAccountMsg({ ok: false, text: 'Could not delete a
+                      else { setAccountMsg({ ok: false, text: 'Could not delete account. Please contact support.' }); setShowDeleteConfirm(false); }
+                    }} style={{ flex: 1, padding: '0.65rem', borderRadius: '8px', border: 'none', background: deleteInput === 'DELETE' ? '#cc2200' : '#e8a0a0', color: '#fff', cursor: deleteInput === 'DELETE' ? 'pointer' : 'default', fontWeight: '700', fontSize: '0.82rem' }}>
+                      Delete forever
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+
+          </div>
+        )}
+      </div>
+
+      {/* Mobile bottom nav */}
+      {isMobile && (
+        <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, height: '72px', background: '#fff', borderTop: '2px solid #F0E4D0', display: 'flex', justifyContent: 'space-around', alignItems: 'center', zIndex: 40 }}>
+          {navItems.map(({ id, label, icon: Icon }) => {
+            const active = activeNav === id;
+            return (
+              <button key={id} onClick={() => setActiveNav(id)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '3px', border: 'none', background: 'none', cursor: 'pointer', color: active ? '#FF6B35' : '#9CA8B4', padding: '8px 12px', flex: 1 }}>
+                <Icon size={22} />
+                <span style={{ fontSize: '0.6rem', fontWeight: active ? '700' : '500', letterSpacing: '0.04em', textTransform: 'uppercase' }}>{label}</span>
+              </button>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
+
+
