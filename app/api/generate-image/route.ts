@@ -15,7 +15,9 @@ const TALEPOP_STYLE_SUFFIX =
   'Pixar 3D CGI render, subsurface skin scattering, volumetric rim lighting, specular eye highlights, ' +
   'smooth rounded cartoon anatomy, large expressive eyes, vibrant saturated jewel-tone colours, ' +
   'shallow depth of field, warm cinematic lighting, magical storybook atmosphere, ' +
-  'professional Disney Pixar animated feature film quality. No text, no words, no letters in the image.';
+  'professional Disney Pixar animated feature film quality. ' +
+'Character always faces toward the viewer, face clearly visible and expressive, never shown from behind. ' +
+'No text, no words, no letters in the image.';
 
 // Derive a stable integer seed from a story UUID so all pages of one story
 // use the same Flux seed  -  improves visual consistency across illustrations.
