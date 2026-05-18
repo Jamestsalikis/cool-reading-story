@@ -97,6 +97,10 @@ export async function updateChild(childId: string, data: {
   hairColour: string;
   eyeColour: string;
   skinColour: string;
+  siblings: Person[];
+  friends: Person[];
+  petName: string;
+  petType: string;
   city: string;
   country: string;
   readingLevel: string;
@@ -111,7 +115,7 @@ export async function updateChild(childId: string, data: {
     imaginative: 'advanced',
   };
 
-  // Fetch current appearance to preserve fields we're not editing
+  // Fetch current appearance to preserve fields we're not editing (e.g. followUpAnswers)
   const { data: current } = await supabase
     .from('children')
     .select('appearance')
@@ -132,6 +136,10 @@ export async function updateChild(childId: string, data: {
         hairColour: data.hairColour,
         eyeColour: data.eyeColour,
         skinColour: data.skinColour,
+        siblings: data.siblings.filter(s => s.name.trim()),
+        friends: data.friends.filter(f => f.name.trim()),
+        petName: data.petName,
+        petType: data.petType,
         city: data.city,
         country: data.country,
       },
@@ -156,4 +164,3 @@ export async function getChildren() {
 
   return { children: children || [] };
 }
-
