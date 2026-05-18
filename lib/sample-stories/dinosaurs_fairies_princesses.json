@@ -1,0 +1,35 @@
+{
+  "interest": "Dinosaurs + Fairies + Princesses",
+  "title": "{{NAME}} and the Royal Prehistoric Gardens",
+  "moral": "The things we preserve for the future are the greatest gifts we give.",
+  "theme_emoji": "🦕",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep burgundy palace coat with gold leaf trim, cream trousers, and polished boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "The Royal Prehistoric Gardens had been established two hundred years ago when the kingdom's founders discovered that certain deep valleys held temporal echoes: patches of land where prehistoric creatures briefly appeared from time to time, seemingly from nowhere.\n\nPrincess Evangeline ran the gardens with the help of a fairy council who had been the official caretakers since the beginning.\n\nShe needed a new Royal Recorder: someone to document every prehistoric appearance, its duration, its species, and its condition.\n\n{{NAME}} applied. He was hired because of his handwriting, his animal knowledge, and the fact that he didn't faint when the Triceratops appeared during his interview.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep burgundy palace coat with gold leaf trim, cream trousers, and polished boots — same child, same face, same exact outfit in every image. Interview scene, {{NAME}} sitting calmly before Princess Evangeline at her official desk, in the window behind them a Triceratops has appeared in the gardens and is visible through the glass, everyone else alarmed except {{NAME}} who is quietly writing. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The work was extraordinary and precise.\n\nEvery appearance had a protocol: the fairy council detected them first and alerted him, he documented while they managed the perimeter to keep the animals calm.\n\nHe learned to distinguish species on sight. He learned which species were calm (most of them) and which were confused (Pterosaurs, in his experience, seemed personally offended by existing in a time that wasn't theirs).\n\nPrincess Evangeline reviewed his records each week.\n\n\"Your descriptions,\" she said, on the third week. \"They're exceptional. You make them real on the page.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep burgundy palace coat with gold leaf trim, cream trousers, and polished boots — same child, same face, same exact outfit in every image. {{NAME}} writing rapidly at his recording desk in a garden pavilion, a Pterosaur visible through the window in the grounds beyond, the fairy council working to manage it, Princess Evangeline watching his process. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The most significant appearance came in month four: a young Diplodocus, clearly unwell, remaining in the gardens for three days instead of the usual hours.\n\nThe fairy council used their healing magic, which worked on organic material from any era. Princess Evangeline directed care.\n\n{{NAME}} documented everything, including the methods the fairies used, which had never been properly recorded before.\n\n\"You're writing the manual,\" said the head fairy, reading over his shoulder.\n\n\"Somebody should,\" said {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep burgundy palace coat with gold leaf trim, cream trousers, and polished boots — same child, same face, same exact outfit in every image. The young Diplodocus in the garden being tended by fairies with healing golden light, Princess Evangeline directing, {{NAME}} crouching nearby writing observations with intense care, the remarkable scene captured in words. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The Diplodocus recovered and departed in a shimmer of temporal light.\n\nThe fairy council gathered to review the records afterward.\n\nThe head fairy said: \"In two hundred years of the Royal Prehistoric Gardens, we have never had a complete written record. We have memory and magic. You have given us documentation.\"\n\nPrincess Evangeline said: \"This will outlast all of us. Future keepers will know what we knew.\"\n\n{{NAME}} looked at his notebooks: four months of precise observation.\n\nHe thought: this is the best thing I've made.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep burgundy palace coat with gold leaf trim, cream trousers, and polished boots — same child, same face, same exact outfit in every image. {{NAME}} at his desk surrounded by his completed notebooks, Princess Evangeline and the fairy council gathered around, a moment of shared recognition of something genuinely important having been created. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "That evening, walking through the quiet gardens after the fairies had dimmed their lights, {{NAME}} stopped at the spot where the Diplodocus had stood.\n\nThe grass was slightly compressed still. A few large prints remained.\n\nHe crouched and put his hand in one.\n\nThen he stood and walked home, the notebooks under his arm, carrying two hundred years of future knowledge.\n\nIn bed, he fell asleep thinking about the Diplodocus and the print in the grass, and how the past didn't entirely go away if someone paid enough attention.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep burgundy palace coat with gold leaf trim, cream trousers, and polished boots — same child, same face, same exact outfit in every image. {{NAME}} asleep with his notebooks on the bedside table, the room cosy and lamplit, a look of quiet importance on his sleeping face. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

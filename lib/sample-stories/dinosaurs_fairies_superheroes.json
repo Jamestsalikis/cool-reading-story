@@ -1,0 +1,35 @@
+{
+  "interest": "Dinosaurs + Fairies + Superheroes",
+  "title": "{{NAME}} and the Ancient Emergency",
+  "moral": "Old wisdom and new power are most effective when they work together.",
+  "theme_emoji": "🦸",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a forest-green hero suit with amber-gold lightning trim, dark boots, and amber gloves — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "The temporal fault opened in the city centre on a Tuesday at noon.\n\nThrough it: three confused Stegosauruses and a Pachycephalosaurus who was already unhappy about something unrelated.\n\nThe city's heroes had the area evacuated in twelve minutes.\n\nThe problem now: getting four prehistoric dinosaurs back through a fault that was shrinking.\n\nThe Fairy Historical Council arrived simultaneously. They had been monitoring the fault for two weeks.\n\n\"We tried to tell someone,\" said the head fairy to {{NAME}}.\n\n\"I'm told now,\" said {{NAME}}. \"What do you know about the Pachycephalosaurus's mood?\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a forest-green hero suit with amber-gold lightning trim, dark boots, and amber gloves — same child, same face, same exact outfit in every image. City centre scene, three Stegosauruses standing bemused in a cleared street, a clearly irritated Pachycephalosaurus at a distance, {{NAME}} in his hero suit with the fairy council hovering at his shoulder. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The fairies knew: the Pachycephalosaurus was territorial and stressed by the unfamiliar environment, and would charge if it felt cornered.\n\n{{NAME}}'s power: electromagnetic fields, useful for large obstacles but possibly catastrophic near distressed prehistoric animals.\n\n\"Don't use the field,\" said the head fairy.\n\n\"I know,\" said {{NAME}}.\n\n\"Most heroes don't know,\" she said.\n\n\"Most heroes don't consult the Fairy Historical Council,\" he said. \"What does it respond well to?\"\n\n\"Open space. Familiar sounds. The smell of its era's vegetation.\"\n\n{{NAME}} thought for thirty seconds. Then he called the botanical garden.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a forest-green hero suit with amber-gold lightning trim, dark boots, and amber gloves — same child, same face, same exact outfit in every image. {{NAME}} crouching in consultation with the fairies while the Pachycephalosaurus paces in the background, both working out the solution, the city street cleared around them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The botanical garden had Cretaceous-era plant species in its prehistoric wing.\n\nWith permission, {{NAME}} borrowed a cart of them: ancient ferns, cycads, ginkgo branches.\n\nHe wheeled them toward the Pachycephalosaurus himself, slowly, leaving a trail of scent.\n\nThe dinosaur stopped pacing. Lifted its head. Followed.\n\nThe fairies simultaneously calmed the three Stegosauruses with light and sound frequencies from that era.\n\nAll four dinosaurs were within ten metres of the fault in forty minutes.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a forest-green hero suit with amber-gold lightning trim, dark boots, and amber gloves — same child, same face, same exact outfit in every image. {{NAME}} slowly pushing a cart of prehistoric plants toward the Pachycephalosaurus which is following the scent, fairies working calming magic on the Stegosauruses in the background, the temporal fault glowing ahead. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The Stegosauruses went through calmly.\n\nThe Pachycephalosaurus stopped at the fault edge. Turned. Looked at {{NAME}} from three metres away.\n\n{{NAME}} stood very still.\n\nThe Pachycephalosaurus made a sound like two rocks colliding, but quieter. Almost conversational.\n\nThen it walked through.\n\nThe fault closed.\n\nThe city was silent.\n\nThe head fairy landed on {{NAME}}'s shoulder. \"You didn't use the field.\"\n\n\"I didn't need to,\" he said. \"It just needed the right information.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a forest-green hero suit with amber-gold lightning trim, dark boots, and amber gloves — same child, same face, same exact outfit in every image. The fault closing, the Pachycephalosaurus having just stepped through, {{NAME}} standing in the cleared city street with the fairies, the absence of a problem that was just solved, quiet relief. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "He walked home through the city's empty-then-returning streets.\n\nThe carts of prehistoric plants had been returned. The fairies had dispersed. The heroes were writing their reports.\n\n{{NAME}} was thinking about the Pachycephalosaurus's sound at the fault edge.\n\nAlmost conversational. Something to say before leaving.\n\nIn bed, he lay in the dark wondering what it had meant.\n\nHe fell asleep before he worked it out, and dreamed in Cretaceous green.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a forest-green hero suit with amber-gold lightning trim, dark boots, and amber gloves — same child, same face, same exact outfit in every image. {{NAME}} asleep in a cosy room, dreaming expression, the room golden and warm, a slight satisfied smile. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

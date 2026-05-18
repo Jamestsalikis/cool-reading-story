@@ -1,0 +1,35 @@
+{
+  "interest": "Dinosaurs + Princesses + Soccer",
+  "title": "{{NAME}} and the Prehistoric Premier League",
+  "moral": "Every problem looks impossible until someone decides to solve it anyway.",
+  "theme_emoji": "⚽",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal crimson soccer jersey with a gold crown emblem, black shorts, and crimson-gold cleats — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "Princess Cora had a Pachycephalosaurus.\n\nThis was unusual. Most palaces had horses or dogs or ceremonial birds.\n\nHer Pachycephalosaurus was named Dome and had arrived during a temporal event three years ago and had, subsequently, declined to leave.\n\nDome's hobby was football.\n\nMore specifically: heading the ball with its extraordinary dome-shaped skull, which sent the ball to approximately any location it intended with perfect accuracy.\n\nPrincess Cora had just entered Dome in the Royal Junior Football Tournament as her team's striker.\n\nEveryone had concerns. {{NAME}} had a plan.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal crimson soccer jersey with a gold crown emblem, black shorts, and crimson-gold cleats — same child, same face, same exact outfit in every image. Palace courtyard, Princess Cora and Dome the Pachycephalosaurus, {{NAME}} assessing the situation with professional interest while other tournament teams stare from a distance. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The concerns were legitimate: Dome was four times the size of any other player, its heading precision was extraordinary, and the rules said nothing about dinosaur strikers because nobody had needed to think about it before.\n\n{{NAME}}'s plan: position Dome as a set-piece specialist only, bringing it on specifically for corners and free kicks, where its heading precision was most valuable and its size was least disruptive.\n\n\"The rest of the team plays normally,\" he told Princess Cora. \"Dome comes on for specific situations.\"\n\n\"Can Dome understand specific situations?\"\n\nHe looked at Dome, who was studying him with evident intelligence.\n\n\"Yes,\" he said.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal crimson soccer jersey with a gold crown emblem, black shorts, and crimson-gold cleats — same child, same face, same exact outfit in every image. {{NAME}} explaining the set-piece plan to Princess Cora with a tactics board, Dome looking at the board with intelligent interest, the palace grounds behind them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The tournament: three matches, six set-piece situations where Dome came on.\n\nDome headed six balls. Four were goals. One was a cross that led immediately to a goal. One hit the crossbar from thirty metres, which was honestly impressive.\n\nThe rest of the team, freed from worrying about set pieces, played their best football.\n\nOpposing teams had no precedent for marking a Pachycephalosaurus at corners and generally made it up as they went, with limited success.\n\n\"This is technically unprecedented,\" the tournament director told {{NAME}}.\n\n\"It's in the rules,\" said {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal crimson soccer jersey with a gold crown emblem, black shorts, and crimson-gold cleats — same child, same face, same exact outfit in every image. Match scene, Dome heading a corner kick perfectly into the goal, the goalkeeper nowhere near it, the team celebrating, Princess Cora watching with enormous satisfaction. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "They reached the final.\n\nThe opposing team had, in the break before the match, figured out how to mark Dome: assign two of their biggest players to shadow it at all set pieces.\n\n{{NAME}} anticipated this and modified the plan: Dome would draw the markers, {{NAME}} would take the corner to the far post instead.\n\nIt worked twice.\n\nFinal score: three-one.\n\nDome celebrated by headbutting the goalpost gently, which it had been told was not a foul in post-match celebrations, which was true.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal crimson soccer jersey with a gold crown emblem, black shorts, and crimson-gold cleats — same child, same face, same exact outfit in every image. Post-match celebration, the team lifting the small trophy, Dome the Pachycephalosaurus in the middle, Princess Cora beaming, {{NAME}} laughing at the goalpost incident. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "Walking home in the evening, {{NAME}} thought about Dome sitting precisely in the position it was needed, waiting with expert patience for the correct tactical moment.\n\nFor a creature from a hundred million years ago, Dome had an extremely sophisticated understanding of modern football strategy.\n\n\"You're adaptable,\" he told Dome, who was walking beside him. \"More than people think.\"\n\nDome made a sound like a bass drum.\n\nHe took it as agreement.\n\nIn bed that night, he fell asleep immediately, replaying the far-post corner that had won the final.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal crimson soccer jersey with a gold crown emblem, black shorts, and crimson-gold cleats — same child, same face, same exact outfit in every image. {{NAME}} asleep in bed, the tournament medal on the bedside table, deep and satisfied sleep, replaying the victory. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

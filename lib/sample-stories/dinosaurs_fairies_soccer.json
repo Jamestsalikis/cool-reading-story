@@ -1,0 +1,35 @@
+{
+  "interest": "Dinosaurs + Fairies + Soccer",
+  "title": "{{NAME}} and the Most Unusual Cup in History",
+  "moral": "Fairness matters more than victory, especially when nobody is watching.",
+  "theme_emoji": "⚽",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sky-blue soccer jersey with a tiny dinosaur emblem, white shorts, and sky-blue cleats — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "The Annual Cross-Realm Cup had been running for fifty years: a football tournament played on the meadow between the human town and the Thornwood, with teams from both.\n\nThis year: a dispute about the rules.\n\nThe fairy team had filed a complaint that the human team's boots gave unfair traction advantage. The human team had filed a complaint that the fairy team's ability to fly gave unfair aerial advantage.\n\nNeither complaint was wrong.\n\nThe referee, who was a very old Ankylosaurus who had been neutral arbitrator for thirty years, called for a rules committee.\n\n{{NAME}} was appointed chair.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sky-blue soccer jersey with a tiny dinosaur emblem, white shorts, and sky-blue cleats — same child, same face, same exact outfit in every image. An unusual formal scene: {{NAME}} at a small table between two groups, on one side the human football team, on the other tiny fairies hovering in formation, and at the head of the table an enormous ancient Ankylosaurus as referee. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The rules committee met three times.\n\n{{NAME}} discovered that the humans were right about aerial advantage (fairies had scored 40% of their goals through headers impossible for ground-bound players), and the fairies were right about boot traction (the pitch data showed humans covered significantly more ground in the same time).\n\n\"The solution,\" he said at the third meeting, \"is not to limit either side. It's to redesign the pitch to equalise the advantages.\"\n\nEveryone looked at him.\n\n\"The humans play on grass. The fairies play on a raised platform that restricts their flight height. Each plays at their strength but within limits.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sky-blue soccer jersey with a tiny dinosaur emblem, white shorts, and sky-blue cleats — same child, same face, same exact outfit in every image. {{NAME}} drawing a diagram of the new split-level pitch design, the human team leaning in on one side, fairies hovering interestedly on the other, the Ankylosaurus referee studying the diagram. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The modified pitch was built in four days, with the Ankylosaurus providing structural support for the raised platform, which it turned out was exactly what a creature of that size was excellent at.\n\nThe match was extraordinary: humans sprinting across the lower pitch, fairies darting around their elevated zone, with shared space in the middle where both could meet.\n\n{{NAME}} played centre midfield, which meant moving between levels.\n\nHe scored one goal on the lower pitch and assisted a fairy goal on the upper.\n\nHalf time: two all.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sky-blue soccer jersey with a tiny dinosaur emblem, white shorts, and sky-blue cleats — same child, same face, same exact outfit in every image. The extraordinary split-level match in full swing, {{NAME}} at the junction between platforms, fairies above and humans below, a dynamic cross-realm football match unlike anything seen before. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The game ended three all, which the Ankylosaurus declared the correct result for a fairness demonstration match.\n\nBoth teams looked uncertain about this.\n\n\"You wanted fair,\" said {{NAME}}. \"Fair means this time, the result matches the effort, not the advantage.\"\n\nBoth teams thought about it.\n\nThe fairy captain landed on {{NAME}}'s shoulder. \"The cross-realm rules stay?\"\n\n\"Every year,\" said {{NAME}}. \"Ask the referee.\"\n\nThe Ankylosaurus nodded once, which settled the matter.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sky-blue soccer jersey with a tiny dinosaur emblem, white shorts, and sky-blue cleats — same child, same face, same exact outfit in every image. Post-match scene, {{NAME}} with the fairy captain on his shoulder and the Ankylosaurus behind them, both teams surrounding, the unprecedented fair result acknowledged by all. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "Walking home, {{NAME}} thought about fairness and how hard it was to build from scratch when everyone had different advantages.\n\nNot impossible. Just specific.\n\nIn bed, he drew the split-level pitch design in his notebook.\n\nHe fell asleep before he finished it.\n\nIn the morning, the notebook was open to the half-finished page, and somewhere in the Thornwood, the fairies were practising the aerial game on their designated platform.\n\nEven the morning after, fairness needed maintaining.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sky-blue soccer jersey with a tiny dinosaur emblem, white shorts, and sky-blue cleats — same child, same face, same exact outfit in every image. {{NAME}} asleep with his notebook open to the pitch diagram, the room warm, a satisfied and peaceful expression. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}
