@@ -364,7 +364,7 @@ export async function POST(request: Request) {
 
     if (isFreeUser && isTrialInterest(primaryInterest)) {
       const appearance = (child.appearance || {}) as Record<string, string>;
-      const sampleStory = getSampleStory(primaryInterest, {
+      const sampleStory = getSampleStory(allInterests, {
         name: child.name,
         age: child.age,
         gender: child.gender,

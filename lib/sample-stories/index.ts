@@ -1,29 +1,28 @@
-import superheroes from './superheroes.json';
-import dinosaurs from './dinosaurs.json';
-import soccer from './soccer.json';
-import robots from './robots.json';
-import unicorns from './unicorns.json';
-import princesses from './princesses.json';
-import animals from './animals.json';
-import fairies from './fairies.json';
+import fs from 'fs';
+import path from 'path';
 
 export const TRIAL_INTERESTS = [
-  'Superheroes', 'Dinosaurs', 'Soccer', 'Robots',
-  'Unicorns', 'Princesses', 'Animals', 'Fairies',
+  'Animals', 'Dinosaurs', 'Fairies', 'Princesses',
+  'Robots', 'Soccer', 'Superheroes', 'Unicorns',
 ] as const;
 
 export type TrialInterest = typeof TRIAL_INTERESTS[number];
 
-const SAMPLE_STORIES: Record<TrialInterest, typeof superheroes> = {
-  Superheroes: superheroes,
-  Dinosaurs: dinosaurs,
-  Soccer: soccer,
-  Robots: robots,
-  Unicorns: unicorns,
-  Princesses: princesses,
-  Animals: animals,
-  Fairies: fairies,
-};
+export interface StoryPage {
+  page_number: number;
+  content: string;
+  image_prompt: string;
+}
+
+export interface SampleStory {
+  interest: string;
+  title: string;
+  moral: string;
+  theme_emoji: string;
+  word_count: number;
+  character_anchor: string;
+  pages: StoryPage[];
+}
 
 export interface ChildProfile {
   name: string;
@@ -33,42 +32,47 @@ export interface ChildProfile {
   eyeColour?: string;
 }
 
+// In-memory cache — populated on first use, persists for the serverless instance lifetime
+const storyCache = new Map<string, SampleStory | null>();
+
 /**
- * Returns a sample story personalised with the child's name and appearance.
- * Story text uses cached content (no Claude API call) but image prompts are
- * updated with the child's actual hair colour, eye colour, and gender so the
- * generated illustrations match the real child.
+ * Load a story JSON by key (e.g. "animals", "animals_dinosaurs", "animals_dinosaurs_fairies").
+ * Reads from disk once then caches in memory.
  */
-export function getSampleStory(interest: string, child: ChildProfile | string): typeof superheroes | null {
-  const story = SAMPLE_STORIES[interest as TrialInterest];
-  if (!story) return null;
+function loadStory(key: string): SampleStory | null {
+  if (storyCache.has(key)) return storyCache.get(key)!;
+  try {
+    const filePath = path.join(process.cwd(), 'lib', 'sample-stories', `${key}.json`);
+    const raw = fs.readFileSync(filePath, 'utf-8');
+    const story = JSON.parse(raw) as SampleStory;
+    storyCache.set(key, story);
+    return story;
+  } catch {
+    storyCache.set(key, null);
+    return null;
+  }
+}
 
-  // Support legacy string-only calls (just a name)
+function personalise(story: SampleStory, child: ChildProfile | string): SampleStory {
   const profile: ChildProfile = typeof child === 'string' ? { name: child } : child;
-
   let storyStr = JSON.stringify(story);
 
-  // 1. Replace child name placeholder
+  // 1. Replace name placeholder
   storyStr = storyStr.replace(/\{\{NAME\}\}/g, profile.name);
 
-  // 2. Personalise appearance in character_anchor and image_prompts.
-  //    Pattern: "with [anything] and [anything] eyes" covers all sample JSON
-  //    appearance descriptions regardless of hair style wording.
+  // 2. Personalise appearance — matches "with [hair desc] and [colour] eyes"
   if (profile.hairColour && profile.eyeColour) {
-    const hairDesc = `${profile.hairColour} hair`;
-    const eyeDesc = `${profile.eyeColour} eyes`;
     storyStr = storyStr.replace(
       /with [^,"\\]+ and [^,"\\]+ eyes/g,
-      `with ${hairDesc} and ${eyeDesc}`
+      `with ${profile.hairColour} hair and ${profile.eyeColour} eyes`
     );
   }
 
-  // 3. Personalise gender descriptor (young boy / young girl / young princess).
+  // 3. Personalise gender descriptor
   if (profile.gender) {
     const genderWord = profile.gender === 'Girl' ? 'girl' : profile.gender === 'Boy' ? 'boy' : null;
     if (genderWord) {
       storyStr = storyStr.replace(/young (boy|girl)/g, `young ${genderWord}`);
-      // Handle "young princess" / "young prince" for the Princesses story
       if (genderWord === 'boy') {
         storyStr = storyStr.replace(/young princess/g, 'young prince');
       }
@@ -78,8 +82,37 @@ export function getSampleStory(interest: string, child: ChildProfile | string): 
   return JSON.parse(storyStr);
 }
 
-export function isTrialInterest(interest: string): interest is TrialInterest {
-  return TRIAL_INTERESTS.includes(interest as TrialInterest);
+/**
+ * Returns a personalised sample story for the given interest(s).
+ *
+ * Accepts a single interest string (legacy) or an array of interests.
+ * For arrays, filters to trial interests, sorts alphabetically, and tries
+ * the best match with progressive fallback (3 interests -> 2 -> 1).
+ *
+ * Returns null if no matching cached story is found.
+ */
+export function getSampleStory(
+  interests: string | string[],
+  child: ChildProfile | string
+): SampleStory | null {
+  // Normalise: filter to trial interests, sort, cap at 3
+  const arr = (Array.isArray(interests) ? interests : [interests])
+    .filter(i => isTrialInterest(i))
+    .sort()
+    .slice(0, 3);
+
+  if (arr.length === 0) return null;
+
+  // Try exact match first, then progressively fewer interests
+  for (let n = arr.length; n >= 1; n--) {
+    const key = arr.slice(0, n).map(i => i.toLowerCase()).join('_');
+    const story = loadStory(key);
+    if (story) return personalise(story, child);
+  }
+
+  return null;
 }
 
-export default SAMPLE_STORIES;
+export function isTrialInterest(interest: string): interest is TrialInterest {
+  return (TRIAL_INTERESTS as readonly string[]).includes(interest);
+}
