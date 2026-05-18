@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import Anthropic from '@anthropic-ai/sdk';
 import { createClient } from '@/lib/supabase/server';
 import { checkGenerationAllowed, decrementStoryCount } from '@/lib/subscription';
-import { getSampleStory, isTrialInterest } from '@/lib/sample-stories/index';
+import { getSampleStory, isTrialInterest } from '@/lib/sample-stories/server';
 import { parseBody, generateStorySchema } from '@/lib/validation';
 
 // Extend Vercel function timeout to 60s (Pro plan) to allow time for image generation
