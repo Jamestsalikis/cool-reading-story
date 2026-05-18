@@ -1632,6 +1632,14 @@ export default function OnboardingPage() {
               })}
             </div>
 
+            {/* Premium upsell — always visible below tile grid */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', background: 'linear-gradient(135deg, #FFF4E6 0%, #FFF0E0 100%)', border: '1.5px solid #FFD4A8', borderRadius: '12px', padding: '12px 16px', marginBottom: '16px' }}>
+              <span style={{ fontSize: '1.25rem', flexShrink: 0 }}>⭐</span>
+              <p style={{ margin: 0, fontSize: '0.82rem', color: '#5E3A0A', lineHeight: 1.4 }}>
+                <strong style={{ color: '#C85A00' }}>Premium</strong> unlocks up to 5 interests, all locked tiles, and custom themes — so every story is uniquely theirs.
+              </p>
+            </div>
+
             {/* Custom interests added — shown above the input with X to remove */}
             {(() => {
               const builtInLabels = INTEREST_OPTIONS.map(o => o.label);
@@ -1648,9 +1656,9 @@ export default function OnboardingPage() {
               ) : null;
             })()}
 
-            {/* Add custom interest input */}
+            {/* Add custom interest input — premium only */}
             <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
-              <input type="text" style={{ ...inputStyle, flex: 1 }} placeholder="+ Add your own interest (e.g. Ballet)" value={state.customInterest}
+              <input type="text" style={{ ...inputStyle, flex: 1, opacity: 0.55, cursor: 'not-allowed' }} placeholder="⭐ Custom interests — Premium only (e.g. Ballet)" value={state.customInterest} disabled
                 onChange={(e) => setState({ ...state, customInterest: e.target.value })}
                 onKeyPress={(e) => e.key === 'Enter' && handleAddCustomInterest()} />
               {state.customInterest.trim() && (
@@ -1662,7 +1670,9 @@ export default function OnboardingPage() {
               <p style={{ color: '#741515', marginBottom: '12px', fontSize: '0.875rem', fontWeight: '500' }}>Select at least 1 interest</p>
             )}
             {state.interests.length >= 3 && (
-              <p style={{ color: '#6B5E4E', marginBottom: '12px', fontSize: '0.875rem', fontWeight: '500' }}>Maximum 3 interests selected</p>
+              <p style={{ color: '#C85A00', marginBottom: '12px', fontSize: '0.875rem', fontWeight: '500' }}>
+                Free plan limit reached — <a href="/pricing" style={{ color: '#C85A00', fontWeight: '700', textDecoration: 'underline' }}>upgrade to Premium</a> for up to 5 interests + all locked tiles
+              </p>
             )}
 
             <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
@@ -1856,22 +1866,4 @@ export default function OnboardingPage() {
                   const active = state.readingLevel === option.id;
                   return (
                     <button key={option.id} onClick={() => setState({ ...state, readingLevel: option.id })}
-                      style={{ ...chip(active), display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px', padding: '10px 20px' }}>
-                      <span>{option.label}</span>
-                      <span style={{ fontSize: '0.75rem', opacity: 0.75 }}>{option.sub}</span>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {submitError && (
-              <div style={{ color: '#991B1B', fontSize: '0.875rem', marginBottom: '16px', padding: '12px', background: '#FEE2E2', borderRadius: '8px' }}>{submitError}</div>
-            )}
-
-            <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-              <button onClick={handleNext} disabled={submitting} className="btn-brand"
-                style={{ flex: 1, padding: '0.75rem 1.75rem', opacity: submitting ? 0.7 : 1, cursor: submitting ? 'not-allowed' : 'pointer' }}>
-                {submitting ? 'Creating profile...' : `Create ${state.name || 'profile'}`}
-              </button>
-              <button onClick={han
+                      style={{ ...chip(active), display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2
