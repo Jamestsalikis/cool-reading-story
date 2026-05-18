@@ -1,0 +1,35 @@
+{
+  "interest": "Dinosaurs + Soccer + Superheroes",
+  "title": "{{NAME}} and the Cretaceous Cup",
+  "moral": "Courage is not the absence of surprise, it is acting well in spite of it.",
+  "theme_emoji": "⚽",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red hero-jersey hybrid with a silver football emblem, dark shorts, and red boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "The inter-dimensional challenge arrived as a hologram in the middle of {{NAME}}'s training session.\n\nA large, complicated-looking entity with nineteen limbs announced: it would leave the Earth-adjacent dimensions in peace if a representative human team could beat its team at the universal sport.\n\nThe universal sport, it turned out, was football.\n\nThe entity's team: six creatures with the bodies of Velociraptors but the tactical intelligence of championship players.\n\n\"The good news,\" said {{NAME}}'s team captain, \"is that we're good at football.\"\n\n\"The neutral news,\" said {{NAME}}, \"is that so are they.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red hero-jersey hybrid with a silver football emblem, dark shorts, and red boots — same child, same face, same exact outfit in every image. The football pitch with the hologram announcement visible, {{NAME}} and his team staring at the projection showing the six Raptor-like opponents, assessment and determination on every face. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "He studied the entity's team footage for three hours.\n\nRaptor-form meant: fast direction changes, low centre of gravity, three-directional peripheral vision, and a communication system between them that operated faster than human players could signal.\n\nThe weakness: they communicated through movement cues. If {{NAME}}'s team's movements were unpredictable, the communication advantage would reduce.\n\n\"We play chaos football,\" he told his team. \"Not random. Structured chaos. We have plays, but we don't signal them in advance. We react in real time.\"\n\nHis team looked at him.\n\n\"Aren't we always supposed to communicate?\" asked someone.\n\n\"Not today,\" said {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red hero-jersey hybrid with a silver football emblem, dark shorts, and red boots — same child, same face, same exact outfit in every image. Team meeting, {{NAME}} standing before the footage analysis, explaining the chaos strategy, his team listening with a mixture of uncertainty and trust. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The match was seventy minutes of the most intense football {{NAME}} had ever played.\n\nThe Raptor team was extraordinary: faster, stronger, and communicating with a precision that made their defensive shape almost impenetrable.\n\nBut the chaos strategy disrupted their prediction models. By the fourth time {{NAME}}'s team made a move the Raptor team hadn't anticipated, their coordination began to show small fractures: a half-second hesitation here, an overrun there.\n\nHalf time: one all.\n\n\"We're getting to them,\" said {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red hero-jersey hybrid with a silver football emblem, dark shorts, and red boots — same child, same face, same exact outfit in every image. Intense match action, {{NAME}} making an unexpected move that leaves a Raptor defender a half-second late, the chaos strategy creating the fractures in the defensive shape. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The winning goal came from a sequence none of them had planned.\n\n{{NAME}} lost the ball in midfield. His teammate Anya recovered it and, with three Raptor players closing, passed blindly backward to the only space available.\n\n{{NAME}} turned and found the ball at his feet in exactly the position he'd told his team to always be available for.\n\nOne touch. Shot.\n\nThe Raptor goalkeeper dove perfectly for the obvious angle.\n\nThe ball took a deflection from a divot in the turf and changed direction by six centimetres.\n\nGoal.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red hero-jersey hybrid with a silver football emblem, dark shorts, and red boots — same child, same face, same exact outfit in every image. The winning goal scene, {{NAME}}'s shot deflecting off a divot, the Raptor goalkeeper diving the wrong way by the margin of a single divot, the ball entering the net, the moment of astonishment. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "The entity accepted the result with a formality that suggested it didn't accept results often.\n\n{{NAME}} watched the Raptor team pass through the inter-dimensional portal. The last one paused at the edge and looked directly at him.\n\nFor one long moment, the Raptor held its gaze.\n\nThen it inclined its head: acknowledgement.\n\n{{NAME}} inclined his head in return.\n\nThe portal closed.\n\nIn bed that night, he thought about the deflection off the divot.\n\nSometimes the universe helped you. When you were ready for it.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red hero-jersey hybrid with a silver football emblem, dark shorts, and red boots — same child, same face, same exact outfit in every image. {{NAME}} in bed, smiling at the ceiling in the warm golden room, the memory of the Raptor's acknowledgement still with him, deeply content. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

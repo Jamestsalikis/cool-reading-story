@@ -1,0 +1,35 @@
+{
+  "interest": "Princesses + Robots + Unicorns",
+  "title": "{{NAME}} and the Enchanted Archive",
+  "moral": "The past is most valuable when it is preserved, shared, and brought to life.",
+  "theme_emoji": "🦄",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep wine-red scholar's coat with silver tech details, dark trousers, and leather boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "The Royal Archive held three thousand years of history.\n\nThe problem: ninety percent of it was inaccessible. Old language. Deteriorating materials. Indexing systems that had never been completed.\n\nPrincess Theodora had one year to make the archive publicly accessible before the Continental Historical Compact reviewed her kingdom's contribution.\n\nShe hired {{NAME}} to build the system. He hired SCRIBE: an archival robot with optical recognition and translation capability. And he contacted the unicorn Orin, who was known to carry historical memory.\n\n\"Three approaches,\" he told Princess Theodora. \"Technical, mechanical, and ancient.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep wine-red scholar's coat with silver tech details, dark trousers, and leather boots — same child, same face, same exact outfit in every image. The enormous Royal Archive, shelves disappearing into the distance, Princess Theodora and {{NAME}} standing at the entrance, SCRIBE beside them, and Orin the unicorn waiting at the far end. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "SCRIBE worked the mechanical layer: scanning, digitising, translating the bulk material.\n\n{{NAME}} worked the interpretation layer: reading what SCRIBE produced and identifying what was significant, what required context, what connected to other documents.\n\nOrin worked the living memory layer: for documents that referenced events whose context was lost to human history, she would touch her horn to the page and show what she remembered of that time.\n\nThe three of them moved through the archive section by section.\n\nIt was the most extraordinary reading of history {{NAME}} had ever experienced.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep wine-red scholar's coat with silver tech details, dark trousers, and leather boots — same child, same face, same exact outfit in every image. The three-layer archive work: SCRIBE scanning documents, {{NAME}} reading and contextualising, Orin with her horn touching a document and illuminating lost context, all working in the same direction. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "In the second week, they found a section nobody had been able to translate: a script that didn't match any known language.\n\nSCRIBE couldn't process it. {{NAME}} couldn't read it.\n\nOrin stood before it for three minutes.\n\nThen she showed him: a civilisation that had used this script, the sound of it spoken, the subjects it recorded.\n\n{{NAME}} used Orin's memory to build a translation key.\n\nSCRIBE processed it and translated forty-seven documents.\n\n\"You deciphered a lost language,\" said Princess Theodora.\n\n\"Orin remembered it,\" said {{NAME}}. \"I just wrote it down.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep wine-red scholar's coat with silver tech details, dark trousers, and leather boots — same child, same face, same exact outfit in every image. The key moment: Orin's horn touching the untranslatable document, {{NAME}} watching the memory-images and transcribing furiously, SCRIBE waiting to process the resulting translation key. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The archive opened on the last day of the year, fully indexed and publicly accessible.\n\nThirty thousand documents. Six languages. One recovered lost script.\n\nThe Continental Historical Compact gave the kingdom their highest contribution award.\n\nPrincess Theodora stood in the archive's main hall and said: \"We didn't just preserve history. We recovered it.\"\n\nOrin stood at the back of the hall. SCRIBE was at the archive entrance.\n\n{{NAME}} was at the catalogue index, adding the last three items.\n\nHe finished. Stood up. Looked around.\n\nDone.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep wine-red scholar's coat with silver tech details, dark trousers, and leather boots — same child, same face, same exact outfit in every image. The archive opening, Princess Theodora speaking in the full main hall, historians and visitors, Orin at the back, SCRIBE at the door, {{NAME}} completing the final catalogue entry. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "He walked home through the city carrying a copy of one of the translated lost-script documents.\n\nThree thousand years of history, now accessible. A language nobody knew, now known again.\n\nHe thought about Orin touching the page and showing him sound and shape and people.\n\nIn his room, he put the document on his desk and sat looking at it.\n\nThe unknown script. Now readable. A thing that had been silent for a long time, speaking again.\n\nHe fell asleep at the desk, the document in front of him, dreaming in languages he hadn't known before this week.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep wine-red scholar's coat with silver tech details, dark trousers, and leather boots — same child, same face, same exact outfit in every image. {{NAME}} asleep at his desk, the translated document before him, the room warm, a dreaming expression, learning and memory and recovery continuing even in sleep. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

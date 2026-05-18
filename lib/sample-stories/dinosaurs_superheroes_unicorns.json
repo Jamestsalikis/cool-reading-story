@@ -1,0 +1,35 @@
+{
+  "interest": "Dinosaurs + Superheroes + Unicorns",
+  "title": "{{NAME}} and the Three Forces",
+  "moral": "Ancient power, modern courage, and timeless magic are all needed in equal measure.",
+  "theme_emoji": "🦸",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep amber hero suit with fossil and star silver patterns, amber boots, and a silver cape — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "Three things happened simultaneously on the same Tuesday afternoon.\n\nFirst: a temporal fault opened over the city and a juvenile Triceratops came through, confused and lost.\n\nSecond: a unicorn named Aurelius, who had been working with the city hero squad for a year, felt the temporal disruption and arrived at the site before the heroes did.\n\nThird: {{NAME}}, on his way home from school, happened to be standing exactly at the fault site with his hero registration badge in his pocket and absolutely no backup.\n\nHe put the badge on.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep amber hero suit with fossil and star silver patterns, amber boots, and a silver cape — same child, same face, same exact outfit in every image. City street, {{NAME}} putting on his hero badge, behind him the Triceratops stands confused in the road, Aurelius the unicorn arriving from one direction, distant hero squad vehicles from another. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The immediate priority: the Triceratops was panicking. It charged twice, not aggressively but the way very large animals move when frightened, enormous and uncontrolled.\n\nAurelius stepped in front of it.\n\nUnicorns, apparently, carried the memory of a time when they and Triceratops had coexisted, and Aurelius emitted a specific frequency from his horn that the Triceratops's ancient instincts recognised as: large, calm, not a threat.\n\nThe Triceratops stopped.\n\nAurelius looked at {{NAME}}: now.\n\n{{NAME}} understood. He had three minutes of calm to work with.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep amber hero suit with fossil and star silver patterns, amber boots, and a silver cape — same child, same face, same exact outfit in every image. Aurelius the unicorn standing before the Triceratops, horn glowing with the recognition frequency, the Triceratops going still, {{NAME}} already moving with purpose. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "He used two minutes and forty seconds.\n\nThe hero squad arrived at the two-minute mark. {{NAME}} had already set up a soft barrier perimeter using the emergency equipment in the nearby road maintenance box.\n\nThe third hero on scene had a temporal containment field. They deployed it around the Triceratops with Aurelius still inside, still keeping it calm.\n\nThe field held. The Triceratops was contained, unharmed.\n\nThe squad leader looked at the perimeter, then at {{NAME}}.\n\n\"How long have you been on scene?\"\n\n\"About three minutes,\" said {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep amber hero suit with fossil and star silver patterns, amber boots, and a silver cape — same child, same face, same exact outfit in every image. The contained Triceratops inside the hero squad's field, Aurelius still calmly beside it, {{NAME}} at the perimeter with the squad leader looking at his pre-prepared setup, the scene managed. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The Triceratops was returned through the repaired fault with Aurelius accompanying it partway, horn maintaining the calming frequency until the creature was through.\n\n{{NAME}} watched the portal close from the perimeter.\n\nAurelius walked to him and stood before him for a moment, then put his horn briefly to the hero badge on {{NAME}}'s chest.\n\nThe squad leader said: \"That's an acknowledgement from a unicorn ally. Rare.\"\n\n\"We worked well together,\" said {{NAME}}.\n\n\"He's saying he noticed,\" she said.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep amber hero suit with fossil and star silver patterns, amber boots, and a silver cape — same child, same face, same exact outfit in every image. Aurelius touching his horn to {{NAME}}'s badge in acknowledgement, the squad leader watching with respectful interest, the scene cleared and calm around them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "He walked home in the late afternoon light, badge warm on his chest.\n\nHe thought about the three minutes: Aurelius's frequency, the dinosaur going still, himself moving into the space that required filling.\n\nThree very different things. Each exactly what the situation needed.\n\nIn bed that night, the badge on the bedside table, he closed his eyes.\n\nSomewhere in the city, Aurelius was working with the hero squad on tomorrow's problems.\n\nSomewhere in another time, a Triceratops was home.\n\nHe fell asleep warm.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep amber hero suit with fossil and star silver patterns, amber boots, and a silver cape — same child, same face, same exact outfit in every image. {{NAME}} asleep in bed, the badge on the bedside table with a faint warm glow, the room golden, a deep and earned rest. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

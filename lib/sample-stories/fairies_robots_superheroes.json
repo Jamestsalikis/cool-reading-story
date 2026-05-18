@@ -1,0 +1,35 @@
+{
+  "interest": "Fairies + Robots + Superheroes",
+  "title": "{{NAME}} and the Smallest Emergency Team",
+  "moral": "Scale doesn't determine importance, what you do with your capacity does.",
+  "theme_emoji": "🤖",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright copper hero suit with fairy-wing details on the shoulders, dark trousers, and copper boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "The Micro Emergency Response Team had one mandate: handle situations too small for the standard hero squads but too important to ignore.\n\nMembers: {{NAME}} (coordinator and field agent), NANO (a robot small enough to enter structures inaccessible to humans), and a fairy named Dust who could interface with any lock, sensor, or mechanism in existence.\n\nTheir first case: a class of students trapped in a school after the electronic locks failed during a system update.\n\n\"Forty-three students, ground floor, locked doors, no overide,\" said the dispatcher.\n\n\"On it,\" said {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright copper hero suit with fairy-wing details on the shoulders, dark trousers, and copper boots — same child, same face, same exact outfit in every image. {{NAME}} in his copper hero suit running toward a school building with NANO rolling beside him, Dust the fairy flying ahead, the school with mysteriously locked doors visible. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "Dust had every door open in eleven minutes.\n\nBut the process revealed something: the lock system failure had a pattern. Dust read it while working: not a random update failure. A deliberate intrusion, targeting the school's safety systems.\n\n\"Someone locked them in intentionally,\" said Dust, from inside the main lock panel.\n\n{{NAME}} processed this. \"The students first. Then we find the origin.\"\n\nNANO had already mapped the school's network through the ventilation system.\n\n\"I have the intrusion point,\" NANO reported. \"External, router seven.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright copper hero suit with fairy-wing details on the shoulders, dark trousers, and copper boots — same child, same face, same exact outfit in every image. Students emerging from the school, Dust hovering at the last lock, NANO returning from the ventilation system with data, {{NAME}} already thinking two steps ahead. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "They followed the intrusion trace: NANO navigating cable routes too small for any human, Dust interpreting signal signatures, {{NAME}} coordinating from outside.\n\nThe source: an automated testing system at the city's tech park that had been misconfigured to target occupied buildings.\n\nNot malicious. Negligent.\n\nNANO physically disconnected it. Dust patched the vulnerability.\n\nTime from intrusion discovery to resolution: twenty-three minutes.\n\nThe standard hero squad's cybersecurity team arrived at minute twenty-four and found the problem already solved.\n\n\"Who fixed this?\" they asked.\n\n\"Micro team,\" said {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright copper hero suit with fairy-wing details on the shoulders, dark trousers, and copper boots — same child, same face, same exact outfit in every image. {{NAME}} and the cybersecurity team at the tech park, NANO having just disconnected the faulty system, Dust hovering near the patched router, the standard team arriving to find everything handled. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The micro team got a commendation.\n\nThe standard hero guild posted it on its public board under the heading: Size is not the measure of impact.\n\nDust read it three times.\n\n\"They're talking about us,\" she said.\n\n\"Yes,\" said {{NAME}}.\n\n\"Hm,\" said Dust, in the particular way of someone who was pleased but wasn't going to say so.\n\nNANO's status light turned green, which {{NAME}} had programmed as its equivalent of satisfaction.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright copper hero suit with fairy-wing details on the shoulders, dark trousers, and copper boots — same child, same face, same exact outfit in every image. The three of them looking at the commendation on the hero guild board, NANO's green light, Dust's pleased-but-contained expression, {{NAME}} smiling. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "He walked home that evening thinking about scale.\n\nForty-three students. One faulty system. Twenty-three minutes.\n\nNot newsworthy, probably. Not dramatic. Nobody had been in danger of anything more than an uncomfortable afternoon.\n\nBut somebody had done it, and it mattered to the forty-three.\n\nIn bed, {{NAME}} thought: that's enough. That's always enough.\n\nNANO charged in the corner. Dust had left a tiny light on the windowsill, as she always did on good days.\n\nHe fell asleep watching it blink.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright copper hero suit with fairy-wing details on the shoulders, dark trousers, and copper boots — same child, same face, same exact outfit in every image. {{NAME}} asleep in bed, NANO charging in the corner with a steady green light, Dust's tiny windowsill light blinking steadily, the room warm and purposeful. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

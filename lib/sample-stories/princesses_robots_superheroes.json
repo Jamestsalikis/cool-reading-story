@@ -1,0 +1,35 @@
+{
+  "interest": "Princesses + Robots + Superheroes",
+  "title": "{{NAME}} and the Defence of Valoria",
+  "moral": "The best defence is the one that never has to be used because it prevented the crisis.",
+  "theme_emoji": "🤖",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a midnight blue hero suit with silver royal crest, dark armoured trousers, and blue-silver boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "Princess Valoria's kingdom had a defence system that was two hundred years old.\n\nIt was elegant, time-tested, and completely unprepared for the modern threats that had started appearing at the border: automated systems, drone swarms, things the old walls were not designed to stop.\n\n{{NAME}} was brought in as the system's modernisation lead. He was eleven years old and he had read the full defence architecture documentation in four days, which was something the two hundred year old architects had not anticipated.\n\n\"What's wrong with it?\" asked Princess Valoria.\n\n\"Nothing,\" said {{NAME}}. \"For the threats it was built for.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a midnight blue hero suit with silver royal crest, dark armoured trousers, and blue-silver boots — same child, same face, same exact outfit in every image. {{NAME}} reviewing the ancient defence system schematics with Princess Valoria, both looking at the detailed architectural plans, the kingdom visible through the window. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "He built SENTINEL: a detection and analysis system designed to interface with the existing infrastructure rather than replace it.\n\nThe old walls were fine. He added sensors to them.\n\nThe old towers were fine. He gave them detection arrays.\n\nSENTINEL processed everything the sensors reported and presented threat assessments in real time.\n\n\"It preserves what works,\" Princess Valoria said.\n\n\"The architecture is sound,\" said {{NAME}}. \"It just couldn't see fast enough. Now it can.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a midnight blue hero suit with silver royal crest, dark armoured trousers, and blue-silver boots — same child, same face, same exact outfit in every image. {{NAME}} installing SENTINEL sensors on the ancient stone walls, the old architecture enhanced by the new technology, Princess Valoria watching the first live display appear. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The first real test: SENTINEL detected an automated survey drone crossing the border at six in the morning.\n\nNot a threat. But it was in restricted airspace without authorisation.\n\nRather than the old response (defensive mobilisation, a process that took two hours), SENTINEL flagged it, identified it as civilian, and {{NAME}} sent a standard communication to the origin company before the princess's morning briefing.\n\nResolved in eleven minutes. Before anyone had raised an alert.\n\nPrincess Valoria read the report at breakfast.\n\n\"You prevented an incident,\" she said.\n\n\"SENTINEL detected it,\" said {{NAME}}. \"I prevented it.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a midnight blue hero suit with silver royal crest, dark armoured trousers, and blue-silver boots — same child, same face, same exact outfit in every image. Princess Valoria reading the report at breakfast, the drone incident resolved on paper, {{NAME}} on the other side of the table having handled it before she woke up. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The hero guild, who had been the kingdom's active defence for a century, came to review SENTINEL.\n\nThey expected competition.\n\nWhat {{NAME}} showed them: SENTINEL was designed to handle everything that didn't require heroes. To free them for what only they could do.\n\n\"You've taken eighty percent of our non-critical calls,\" said the guild commander.\n\n\"So you can focus on the twenty percent that matters,\" said {{NAME}}.\n\nThe guild commander looked at Princess Valoria.\n\n\"I like this kid,\" she said.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a midnight blue hero suit with silver royal crest, dark armoured trousers, and blue-silver boots — same child, same face, same exact outfit in every image. The hero guild reviewing the SENTINEL system, {{NAME}} presenting the data showing what it handles versus what it escalates, the guild commander's expression moving from skeptical to approving. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "He ate dinner with Princess Valoria on the last day of the installation.\n\n\"You've made the kingdom safer,\" she said. \"Without a single sword drawn.\"\n\n\"That's the goal,\" said {{NAME}}. \"Prevention is better than response.\"\n\n\"You sound like someone who's thought about this a lot.\"\n\n\"Since I was seven,\" he said. \"When I read about the original defence architecture.\"\n\nShe looked at him.\n\n\"Get some rest,\" she said. \"SENTINEL can watch tonight.\"\n\nHe slept the best sleep he'd had in a month.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a midnight blue hero suit with silver royal crest, dark armoured trousers, and blue-silver boots — same child, same face, same exact outfit in every image. {{NAME}} in deep, perfect sleep in the palace guest room, SENTINEL's status light steady on the display in the background, the kingdom safe outside, complete rest. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

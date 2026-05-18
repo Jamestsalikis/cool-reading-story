@@ -1,0 +1,35 @@
+{
+  "interest": "Princesses + Soccer + Superheroes",
+  "title": "{{NAME}} and the Invincible League",
+  "moral": "Power is most honourable when it chooses restraint.",
+  "theme_emoji": "⚽",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal gold and black soccer hero jersey, black shorts, and gold-black cleats — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "The Hero Football League had a problem.\n\nThe heroes in it had powers.\n\nThis sounds like an advantage. It was also, as {{NAME}} had been pointing out for two seasons, making the game less interesting.\n\nA striker with super-speed could outrun any defence. A goalkeeper with force fields could stop any shot. A midfielder who could freeze time had recently scored seventeen goals in one match before the referee retired on the spot.\n\nPrincess Mira, the league commissioner, called an emergency session.\n\nShe asked {{NAME}} to present the solution.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal gold and black soccer hero jersey, black shorts, and gold-black cleats — same child, same face, same exact outfit in every image. The emergency league session, Princess Mira at the head of the table, heroes seated around it, {{NAME}} standing at the front with his presentation, the time-frozen seventeen-goal match scoreboard visible on screen. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "{{NAME}}'s proposal: voluntary power limitation by category.\n\nSpeed limited to twice human maximum. Force fields during set plays only. Temporal abilities: banned entirely. Strength: applied to movement, not to hitting the ball.\n\n\"The point is the football,\" he said. \"Not the powers. The powers are supposed to make you good at football. They don't do that if they bypass it.\"\n\nPrincess Mira looked around the table.\n\n\"Objections?\"\n\nThe hero who had scored seventeen goals raised a hand.\n\n\"Anyone's objection other than him,\" she said.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal gold and black soccer hero jersey, black shorts, and gold-black cleats — same child, same face, same exact outfit in every image. The league session with {{NAME}}'s voluntary limitation proposal on the display, Princess Mira managing the room, the seventeen-goal hero looking sheepish. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The new-format season started three weeks later.\n\nWith limitations in place, the football was genuinely competitive: speed of twice-human was still superhuman, still spectacular, but it could be tracked and defended against.\n\n{{NAME}}'s own team: he had no powers. He had always played on skill and tactical intelligence alone.\n\nIn the new format, that was no longer a disadvantage.\n\nIn the first match of the new season, he scored twice. Against a team with three super-speed players.\n\nThe crowd made a noise he had never heard before at his goals.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal gold and black soccer hero jersey, black shorts, and gold-black cleats — same child, same face, same exact outfit in every image. Match scene, {{NAME}} scoring against super-speed defenders who are limited and therefore trackable, the crowd reaction, Princess Mira watching with satisfaction from the stand. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The hero who had scored seventeen games found, by week four, that he was enjoying the new format.\n\n\"It's harder,\" he told {{NAME}} after a match.\n\n\"Yes.\"\n\n\"It feels better when I score.\"\n\n\"Yes.\"\n\n\"I scored three times last week,\" he said. \"It felt like three times more than seventeen did before.\"\n\n{{NAME}} understood completely.\n\n\"That's what challenge is for,\" he said.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal gold and black soccer hero jersey, black shorts, and gold-black cleats — same child, same face, same exact outfit in every image. {{NAME}} and the previously dominant hero having a post-match conversation, a genuine meeting of understanding between them, both muddy from a real football match. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "The season ended with the most watched final in the league's history.\n\nPrincess Mira presented the trophy in the stadium.\n\n{{NAME}}'s team had finished third.\n\nBut he had scored nine goals, which was the most he had ever scored, and every one had been a real goal.\n\nIn bed that night, he replayed all nine.\n\nThe ninth was the best.\n\nHe fell asleep in the middle of replaying it and his dream picked up exactly where he left off, and the ball went in, and it was exactly as good as it had been.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal gold and black soccer hero jersey, black shorts, and gold-black cleats — same child, same face, same exact outfit in every image. {{NAME}} asleep and smiling, the golden dream of the ninth goal continuing, warm and content and deeply satisfied. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}
