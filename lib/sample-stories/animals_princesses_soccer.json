@@ -1,0 +1,35 @@
+{
+  "interest": "Animals + Princesses + Soccer",
+  "title": "{{NAME}} and the Kingdom Cup",
+  "moral": "When you play for something bigger than yourself, you find strength you didn't know you had.",
+  "theme_emoji": "⚽",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a golden soccer jersey with a crown emblem, dark green shorts, and golden cleats — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "The Kingdom Cup was played every five years: one team from each region of the realm, a tournament that mattered more than most things to most people.\n\n{{NAME}}'s team, the Valley Side, had never won.\n\nTheir new coach: Princess Cassia, who had played professionally before her coronation, and who arrived at the first training session with a notebook and two surprises.\n\nSurprise one: a conditioning programme that made grown adults cry.\n\nSurprise two: Finn, a border collie who was the best assistant coach anyone had ever seen.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a golden soccer jersey with a crown emblem, dark green shorts, and golden cleats — same child, same face, same exact outfit in every image. First training session, {{NAME}} and teammates looking at Princess Cassia in training gear holding a notebook, beside her an extremely alert border collie sitting perfectly still waiting for instructions. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "Finn had an ability no human coach could match: he could read a team's movement patterns in real time and bark exactly once when a player was in the wrong position.\n\nOne bark: adjust left. Two barks: adjust right. Three: come back.\n\nThe team learned Finn's system in two days.\n\nWith Finn on the sideline, their defensive structure became extraordinary: always correctly spaced, always in relation to the whole shape.\n\n\"How does the dog know that?\" asked one player.\n\n\"He was trained for sheep,\" said Princess Cassia. \"The principle is the same.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a golden soccer jersey with a crown emblem, dark green shorts, and golden cleats — same child, same face, same exact outfit in every image. Training scene with Finn the border collie on the sideline barking once at a player who immediately corrects their position, Princess Cassia watching with satisfaction, {{NAME}} in the middle of the action responding correctly. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The tournament came. Three matches in three days.\n\nIn the second match, down two goals at half time, Princess Cassia made one change: she told {{NAME}} to play further forward and trust Finn to cover the space he left.\n\n{{NAME}} had never played that far forward before.\n\nBut Finn barked once (go), so he went.\n\nTwo goals in the second half. Three-two.\n\nAfterward, he crouched down and put his hands on Finn's head.\n\n\"Thank you,\" he said.\n\nFinn licked his nose, which he took as professional acknowledgement.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a golden soccer jersey with a crown emblem, dark green shorts, and golden cleats — same child, same face, same exact outfit in every image. Match scene, {{NAME}} playing further forward than usual, scoring a goal, the crowd reacting, Finn visible on the sideline with Princess Cassia, the decisive moment of the match. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The final: close, hard, decided in the last five minutes.\n\n{{NAME}} scored the winner from a position he never would have been in before: high up the pitch, arriving late, making a run Finn had called with a single sharp bark two seconds earlier.\n\nThe ball went in.\n\nHe ran toward the sideline and the whole team ran with him, and Finn ran with all of them, barking continuously, which the referee allowed because the match was over.\n\nPrincess Cassia stood in the middle of the pitch and watched her team celebrate with complete satisfaction.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a golden soccer jersey with a crown emblem, dark green shorts, and golden cleats — same child, same face, same exact outfit in every image. Cup final celebration, {{NAME}} running toward the sideline after his winning goal, teammates and Finn running with him, Princess Cassia watching from the centre circle with a look of complete satisfaction, gold light everywhere. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "He walked home with the medal and the memory of the winning goal in perfect order.\n\nAt the park gate, Finn sat beside Princess Cassia watching him leave.\n\nFinn barked once.\n\n{{NAME}} stopped. Turned around. \"That means adjust left,\" he said.\n\n\"That means come back next season,\" said Princess Cassia.\n\nHe walked home smiling so hard his face hurt.\n\nIn bed, he lay with the medal on the pillow and closed his eyes, and heard it: Finn's bark in the last minute, and the crowd, and the ball going in.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a golden soccer jersey with a crown emblem, dark green shorts, and golden cleats — same child, same face, same exact outfit in every image. {{NAME}} in bed with the medal on his pillow, a huge smile even in sleep, the room warm and golden. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

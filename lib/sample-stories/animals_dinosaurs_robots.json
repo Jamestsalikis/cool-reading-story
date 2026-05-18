@@ -1,0 +1,35 @@
+{
+  "interest": "Animals + Dinosaurs + Robots",
+  "title": "{{NAME}} and the Rescue Team at the End of Time",
+  "moral": "The best rescue missions use every skill available, no matter how unexpected.",
+  "theme_emoji": "🦕",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright orange rescue jacket, dark blue trousers, and heavy-duty boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "The temporal disturbance hit at eight in the morning.\n\nWhen it cleared, the town park contained: twelve confused rabbits, four startled deer, one very alarmed fox, and a young Iguanodon who looked as though being displaced by sixty million years was not how she had planned her morning.\n\n{{NAME}} had been testing his rescue robot, ROVER, in the park at the time.\n\nRover beeped.\n\n\"I see it,\" said {{NAME}}. \"Rover, run assessment.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright orange rescue jacket, dark blue trousers, and heavy-duty boots — same child, same face, same exact outfit in every image. Wide park scene after the temporal disturbance, a young Iguanodon standing in the middle of the park looking confused, various frightened small animals scattered around, {{NAME}} standing with a robot at the ready, morning light. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "Assessment: the Iguanodon was confused, frightened, and hungry. The park animals were frightened of the Iguanodon. The temporal disturbance had created a window that would close in six hours.\n\nRover's solution: establish safe zones. Rover projected gentle coloured light corridors to guide the small animals away from the Iguanodon's space. The animals, surprisingly, followed the light.\n\n{{NAME}} approached the Iguanodon with food from a park maintenance shed: a wheelbarrow full of fresh-cut grass and tree branches.\n\nThe Iguanodon looked at the wheelbarrow. Looked at him. Ate everything.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright orange rescue jacket, dark blue trousers, and heavy-duty boots — same child, same face, same exact outfit in every image. {{NAME}} pushing a full wheelbarrow toward the Iguanodon, Rover projecting soft light corridors that rabbits and deer are following away from the area, the Iguanodon eyeing the wheelbarrow with keen interest. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The challenge: getting the Iguanodon back through the temporal window before it closed.\n\nRover calculated the window's location (northeast corner, near the old oak) and its remaining open time (four hours and declining).\n\nBut the Iguanodon didn't want to go near the oak. She had learned, in twenty minutes, that the fox lived under it.\n\n{{NAME}} moved the fox first, then had Rover project a path of light from the Iguanodon to the window, wide and clear and gentle.\n\nThe Iguanodon followed it slowly, sniffing at intervals.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright orange rescue jacket, dark blue trousers, and heavy-duty boots — same child, same face, same exact outfit in every image. Dynamic scene, Rover projecting a broad golden light path across the park, the Iguanodon walking along it slowly toward the shimmering temporal window near the old oak tree, {{NAME}} guiding from beside her. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "At the oak, she stopped and looked back.\n\n{{NAME}} stood thirty metres behind her. Rover beeped softly beside him.\n\nThe Iguanodon made a sound like a large cello note, low and round.\n\nRover translated: \"Uncertain. Possible query.\"\n\n\"It's all right,\" {{NAME}} said, louder than necessary since she almost certainly didn't understand the words. \"Your world is still there. It's waiting.\"\n\nShe looked at him for a long moment.\n\nThen she walked through the window and was gone.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright orange rescue jacket, dark blue trousers, and heavy-duty boots — same child, same face, same exact outfit in every image. Emotional scene at the park oak tree, the Iguanodon standing at the edge of the shimmering temporal window looking back at {{NAME}} and Rover, the moment before she steps through. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "The window closed with a sound like a very large door settling.\n\nThe animals gradually came back to the park: rabbits first, then the deer, then the fox who inspected the area under the oak with professional thoroughness.\n\n{{NAME}} sat on a bench with Rover beside him as the park returned to normal.\n\n\"Good job today,\" he told Rover.\n\nRover beeped twice.\n\nThat night, {{NAME}} lay in bed thinking about the Iguanodon's backward look at the window, and the cello sound, and Rover's uncertain translation, and he thought: I understood her anyway.\n\nHe fell asleep smiling.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright orange rescue jacket, dark blue trousers, and heavy-duty boots — same child, same face, same exact outfit in every image. {{NAME}} in bed, cosy and content, Rover's status light visible on the desk, the room warm and golden, a quiet smile on his face. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

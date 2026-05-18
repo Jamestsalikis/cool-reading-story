@@ -1,0 +1,35 @@
+{
+  "interest": "Animals + Princesses + Superheroes",
+  "title": "{{NAME}} and the Royal Wildlife Response Unit",
+  "moral": "A kingdom is measured by how it treats every creature within its borders.",
+  "theme_emoji": "🦸",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal purple hero suit with a gold animal print, knee-high gold boots, and a short purple cape — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "The Royal Wildlife Response Unit was Princess Mira's idea.\n\nEvery other kingdom had their heroes responding to human emergencies. Hers would have one additional mandate: wildlife emergencies, because in her experience, when animals were in crisis, everything connected to them was in crisis too.\n\n{{NAME}} was her first recruit. His power: perfect situational awareness, the ability to track every moving thing in a wide radius simultaneously.\n\n\"You can watch the whole scene at once?\" she asked.\n\n\"Always,\" said {{NAME}}. \"It gets crowded in my head at markets.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal purple hero suit with a gold animal print, knee-high gold boots, and a short purple cape — same child, same face, same exact outfit in every image. Royal palace courtyard, Princess Mira in her hero suit shaking hands with {{NAME}} in his purple hero suit, an official framing of a new partnership, animals of various types visible in the palace grounds beyond. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The first real call: a wildfire in the forest east of the city, moving fast, with at least four animal family groups in its path.\n\n{{NAME}}'s awareness spread across the forest: he could track every deer, every fox family, every bird flock simultaneously, the whole moving picture.\n\nHe called evacuation routes to Princess Mira in real time, who directed the evacuation ground team.\n\nFox family: north track, clear. Deer herd: river path, clear. Two rabbit warrens: west hollow, clear. Bird flock: already airborne, safe.\n\nFifteen minutes. Everything out.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal purple hero suit with a gold animal print, knee-high gold boots, and a short purple cape — same child, same face, same exact outfit in every image. Dramatic fire scene, {{NAME}} standing at a high point with eyes half-closed in concentration, pointing in multiple directions simultaneously, Princess Mira below relaying his directions to the animal evacuation team. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "Afterward, the forest ranger shook their hands.\n\n\"How did you know where they all were?\"\n\n\"I always know where everything is,\" said {{NAME}}.\n\n\"He means he tracked them in real time,\" said Princess Mira. \"Simultaneously. All of them.\"\n\nThe ranger looked at {{NAME}} with the particular expression of someone recalculating.\n\n\"I've been doing this for thirty years,\" she said slowly. \"I've never seen that.\"\n\n\"I've never used it at forest scale before,\" said {{NAME}}. \"The market practice was apparently useful.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal purple hero suit with a gold animal print, knee-high gold boots, and a short purple cape — same child, same face, same exact outfit in every image. Post-fire forest edge, the ranger and Princess Mira looking at {{NAME}} with identical impressed expressions, the evacuated animals settling in the safe zone behind them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The Unit grew: three more heroes, a support team, an agreement with the palace that wildlife emergencies had equal priority to any other.\n\n{{NAME}} trained each new member to use his awareness reports in real time, to trust the information even when it arrived faster than they expected.\n\n\"You have to be ready to act before you understand why,\" he told them. \"The why comes after.\"\n\nPrincess Mira, in the back of the training room, nodded.\n\nShe had been right about him.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal purple hero suit with a gold animal print, knee-high gold boots, and a short purple cape — same child, same face, same exact outfit in every image. Training room, {{NAME}} at the front explaining something to a group of heroes, Princess Mira watching approvingly from the back, the team attentive and engaged. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "He went home that evening via the forest, which had recovered faster than anyone expected from the fire.\n\nNew growth was already showing at the forest floor: tiny green things, finding the light through the opened canopy.\n\nIn the forest, an animal moved somewhere to his left. He tracked it without trying: fox, adult, unhurt, moving normally.\n\nHe let it go and walked home.\n\nIn bed, he closed his awareness down to the size of one room, one boy, one quiet night.\n\nIt was the part of the day he liked best.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal purple hero suit with a gold animal print, knee-high gold boots, and a short purple cape — same child, same face, same exact outfit in every image. {{NAME}} in bed with his eyes closed, the room golden and still, deeply at rest, the awareness powered down, just a boy in a comfortable room at peace. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

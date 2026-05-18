@@ -1,0 +1,35 @@
+{
+  "interest": "Animals + Fairies + Soccer",
+  "title": "{{NAME}} and the Enchanted Training Ground",
+  "moral": "The best training happens when you are fully present and open to learning.",
+  "theme_emoji": "⚽",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a vivid lime-green soccer jersey, white shorts, and lime-green-laced boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} had one problem with his football: his first touch.\n\nEverything else was good. His passing was clean. His positioning was smart. But the first touch, that moment of receiving the ball, was always a fraction off, the difference between a good play and a lost possession.\n\nHe was practising alone at the park at dusk when the fox sat down beside him, and the rabbit arrived, and the wood mouse perched on a fence post.\n\nThen the fairy arrived.\n\n\"We've been watching you,\" she said. \"We have a proposal.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a vivid lime-green soccer jersey, white shorts, and lime-green-laced boots — same child, same face, same exact outfit in every image. Dusk at a park football pitch, {{NAME}} looking up from his ball to find a fox sitting beside him, a rabbit nearby, and a tiny fairy hovering at eye level, the park settling into evening around them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The fairy's name was Wisp and she was the keeper of the forest training ground, a clearing deep in the wood where the grass was always the perfect height and the light was always exactly right for seeing.\n\nThe animals had been using it for centuries: deer practised jumping, foxes practised turning, rabbits practised acceleration.\n\n\"You can use it,\" Wisp said. \"We'll help. The fox understands first-touch better than any creature alive. Watch how he controls a moving object.\"\n\n{{NAME}} looked at the fox.\n\nThe fox looked back, radiating professional calm.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a vivid lime-green soccer jersey, white shorts, and lime-green-laced boots — same child, same face, same exact outfit in every image. {{NAME}} in a magical forest clearing with the most perfect grass and light, the fox demonstrating controlling a rolling pine cone with elegant precision, Wisp watching, the rabbit and mouse nearby. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "He trained every evening for three weeks.\n\nThe fox showed him weight distribution: where to put his foot, how to absorb pace into the ball without redirecting it away.\n\nThe rabbit showed him anticipation: arriving where the ball would be, not where it was.\n\nThe wood mouse showed him stillness: how being completely still for one second before the ball arrived cleared the mind perfectly for the action.\n\nWisp provided a supply of exactly-paced objects for him to practise on: pine cones, acorns, eventually the football itself.\n\nBy week three, his first touch was different.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a vivid lime-green soccer jersey, white shorts, and lime-green-laced boots — same child, same face, same exact outfit in every image. Dynamic training montage scene in the magical forest clearing, {{NAME}} practicing first touch with a football while the fox coaches his foot position, perfect golden training light, Wisp hovering above. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "His coach noticed immediately.\n\n\"What have you been doing differently?\" she asked at Saturday training.\n\n\"Extra sessions,\" said {{NAME}}. \"With a different trainer.\"\n\n\"Who?\"\n\n\"They prefer to stay anonymous,\" said {{NAME}}.\n\nIn the next match, he won three balls in the midfield in five minutes and converted two of them into clear chances. His coach watched him with an expression that was one part confused and two parts impressed.\n\nThe fox, he was sure, would have found this satisfying.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a vivid lime-green soccer jersey, white shorts, and lime-green-laced boots — same child, same face, same exact outfit in every image. Match scene, {{NAME}} controlling the ball with perfect first touch in a muddy midfield, opponents arriving a fraction too late, his confident expression, the ball exactly where he wants it. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "He went back to the forest clearing the evening after the match.\n\nThe fox, rabbit, and wood mouse were there. Wisp was there.\n\nHe sat in the perfect grass and simply said: \"Thank you.\"\n\nThe fox made a sound he hadn't heard it make before: low and warm, a kind of acknowledgement.\n\nWisp sat on his knee and they watched the last light leave the clearing together.\n\nHe walked home in the dark, the football under his arm, his feet already learning the ground from memory.\n\nIn his room, he fell asleep instantly, perfectly settled.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a vivid lime-green soccer jersey, white shorts, and lime-green-laced boots — same child, same face, same exact outfit in every image. {{NAME}} asleep in his room, football visible beside his bed, the room golden and still, completely at rest, a boy who has learned something real. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

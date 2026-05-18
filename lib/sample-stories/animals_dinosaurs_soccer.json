@@ -1,0 +1,35 @@
+{
+  "interest": "Animals + Dinosaurs + Soccer",
+  "title": "{{NAME}} and the Prehistoric Premier League",
+  "moral": "Every game is better when everyone gets to play.",
+  "theme_emoji": "⚽",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a muddy-red soccer jersey, dark shorts, and boots caked in prehistoric mud — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "The portal opened during regular park training, which meant {{NAME}} was already wearing his boots when a young Parasaurolophus and four confused woodland animals (two badgers, a rabbit, and a fox) arrived in the penalty area.\n\nThe Parasaurolophus looked at the football. The football looked back, in the way footballs do.\n\nThe Parasaurolophus nudged it with one foot.\n\nIt went perfectly into the top corner.\n\n\"Hm,\" said {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a muddy-red soccer jersey, dark shorts, and boots caked in prehistoric mud — same child, same face, same exact outfit in every image. Football training pitch, a Parasaurolophus looking at a football it has just accidentally kicked into the goal perfectly, {{NAME}} watching with a very specific expression, badgers and a fox standing around looking bemused. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "He organised a match immediately, because the portal clearly wasn't going anywhere and he had a pitch and everyone seemed to be here.\n\nTeams: {{NAME}}, the Parasaurolophus, the fox and one badger versus the other children from training, the rabbit and the second badger.\n\nThe Parasaurolophus was, as it turned out, a natural midfielder. The fox was an exceptional striker. The rabbit played defence by sitting directly in front of the goal and refusing to move.\n\n\"That's legal,\" said {{NAME}}, when someone objected.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a muddy-red soccer jersey, dark shorts, and boots caked in prehistoric mud — same child, same face, same exact outfit in every image. Chaotic joyful football match, the Parasaurolophus running with the ball, the fox in full stride, animals in various positions, children and dinosaur and animals all mixed together playing. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The match lasted ninety minutes, which is how long the portal stayed open.\n\nFinal score was impossible to determine because nobody could agree whether the rabbit counted as a wall or a player when the ball bounced off it and went in.\n\nBut the Parasaurolophus scored twice, clean and clear, with a technique that involved its crest: it would crouch slightly to direct the ball with the top of its head.\n\n{{NAME}} spent ten minutes just watching this.\n\n\"That's a technique I've never seen before,\" he said.\n\nThe fox tilted its head: obviously.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a muddy-red soccer jersey, dark shorts, and boots caked in prehistoric mud — same child, same face, same exact outfit in every image. The Parasaurolophus scoring a goal with its distinctive crest technique, the ball perfectly placed in the corner, {{NAME}} watching in pure amazement, animals and children celebrating around the goal. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "When the portal began glowing more brightly, {{NAME}} understood it was time.\n\nHe walked the Parasaurolophus to the portal edge, the fox and badgers and rabbit following naturally.\n\nThe Parasaurolophus turned at the threshold and looked at {{NAME}} with one large eye. Then it made a sound through its crest: a long, resonant note.\n\n\"Thank you for the match,\" said {{NAME}}.\n\nIt went through. The fox, badgers, and rabbit followed, having apparently decided the portal was the better option.\n\nThe pitch was empty.\n\n\"Fair enough,\" said {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a muddy-red soccer jersey, dark shorts, and boots caked in prehistoric mud — same child, same face, same exact outfit in every image. The Parasaurolophus stepping through the glowing portal with the fox and badgers behind it, {{NAME}} watching from the touchline, the empty football pitch beyond, a moment of goodbye. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "He walked home alone, football under his arm, replaying the crest technique.\n\nHe tried it in the hallway with a pillow. Unsuccessful.\n\nIn bed, he sketched the movement in his notebook: the crouch, the angle, the contact point.\n\nTomorrow, practice.\n\nHe fell asleep with the notebook open, the last page showing the crest technique diagram and one word underneath it: possible.\n\nSomewhere in the past, probably, a Parasaurolophus was doing the same thing.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a muddy-red soccer jersey, dark shorts, and boots caked in prehistoric mud — same child, same face, same exact outfit in every image. {{NAME}} asleep in bed with his notebook open to the technique diagram, the room warm and golden, a satisfied smile on his face, boots by the door still muddy. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "interest": "Animals + Robots + Superheroes",
+  "title": "{{NAME}} and the Wilderness Response Team",
+  "moral": "Heroism is not always visible, but it is always felt by those who needed it.",
+  "theme_emoji": "🤖",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a dark green rescue hero suit with amber sensor panels, dark boots, and amber gloves — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}}'s hero name was Ranger, and his team operated in places no other hero would go: the places without people, where the emergencies were wild and the victims couldn't report them.\n\nHis team: himself, SCOUT (a robot with advanced terrain navigation), and a network of animal contacts built over two years.\n\nThe crow network alone had saved three operations: crows remembered faces and locations with extraordinary precision and would lead him to the right spot every time.\n\nToday: a distress call from the crow network. Unknown nature. High meadow. Go now.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a dark green rescue hero suit with amber sensor panels, dark boots, and amber gloves — same child, same face, same exact outfit in every image. {{NAME}} in his green hero suit climbing a high meadow trail, SCOUT the terrain robot ahead scouting, two crows flying low beside him as guides, the high meadow landscape dramatic and wild. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The problem: a young brown bear had gotten its back leg tangled in old fencing wire, embedded in overgrown bracken. It had been there at least a day.\n\nThe bear was exhausted and frightened. SCOUT scanned the wire configuration and calculated the safest removal sequence.\n\nThe crow network had positioned two large ravens nearby to call if anyone approached.\n\n{{NAME}} crouched down and said, in his steadiest voice: \"I see what happened. I know how to fix it. It will take ten minutes. I need you to stay still.\"\n\nThe bear looked at him.\n\nThen it went still.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a dark green rescue hero suit with amber sensor panels, dark boots, and amber gloves — same child, same face, same exact outfit in every image. {{NAME}} crouching before the tangled young bear in bracken, voice and posture calm, SCOUT displaying the wire configuration analysis beside him, the bear exhausted but looking at {{NAME}} with a flicker of trust. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "SCOUT guided each cut with its analysis: this wire first, angle here, not that one yet.\n\n{{NAME}} worked slowly and precisely, talking to the bear throughout, his voice steady and low.\n\nWith the fifth cut, the last wire came free.\n\nThe bear lay still for a moment, then slowly pulled its leg toward itself and tested it.\n\nWeighted. Stood.\n\nWalked three steps.\n\n{{NAME}} sat back on his heels and let his breath out.\n\nSCOUT's status light: green.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a dark green rescue hero suit with amber sensor panels, dark boots, and amber gloves — same child, same face, same exact outfit in every image. The bear standing free of the wire, testing its leg, {{NAME}} sitting back watching with quiet relief, SCOUT showing a green status light, ravens visible in the trees above. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The bear stood for a long moment at the meadow edge.\n\nIt looked back at {{NAME}} once: a deep look, the kind that animals give when they have understood something about you.\n\nThen it was gone into the treeline.\n\n{{NAME}} sat in the meadow with SCOUT and the crows for a while after.\n\nHe radioed the operation in: \"Bear free and mobile. Wire removed. No further assistance required.\"\n\n\"Good work, Ranger.\"\n\n\"Whole team,\" he said. \"SCOUT and the crow network, specifically. Put them in the report.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a dark green rescue hero suit with amber sensor panels, dark boots, and amber gloves — same child, same face, same exact outfit in every image. {{NAME}} sitting in the high meadow with SCOUT beside him and two crows perched nearby, the treeline where the bear disappeared, afternoon light, a quiet moment after a successful operation. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "He walked back down the mountain in the long evening light.\n\nThe crows flew with him to the treeline, then peeled away.\n\nSCOUT rolled beside him in silent efficient mode.\n\nAt the road, {{NAME}} stopped and looked back up at the meadow, already small and unreachable.\n\nHe thought: up there, right now, a bear is walking on a leg that works.\n\nHe climbed in the truck.\n\nIn bed that night, SCOUT in the back room, the crow network somewhere in the dark trees, he fell asleep to the sound of a world that was, right now, slightly better than it had been this morning.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a dark green rescue hero suit with amber sensor panels, dark boots, and amber gloves — same child, same face, same exact outfit in every image. {{NAME}} asleep in bed, SCOUT charging in the corner of the room, the window showing a dark sky, a deep and complete rest, the quiet satisfaction of someone who has done exactly what they were supposed to do. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

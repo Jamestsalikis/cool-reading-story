@@ -1,0 +1,35 @@
+{
+  "interest": "Animals + Fairies + Unicorns",
+  "title": "{{NAME}} and the Night the Stars Came Down",
+  "moral": "Wonder is not something that happens to you, it is something you choose to notice.",
+  "theme_emoji": "🦄",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep midnight-blue shirt with tiny silver stars, dark trousers, and silver-buckled shoes — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "The fairies called it the Star Fall: once every hundred years, a piece of starlight descended to the valley and became a seed.\n\nWhatever grew from the seed had the quality of the star in it: warmth, light, the particular clarity of something very far away.\n\nIt was happening tonight, the head fairy had told {{NAME}}, and it required a witness who wasn't magical. Something about the mathematics of the universe needing a human perspective.\n\n\"I don't know what that means,\" said {{NAME}}.\n\n\"Neither do we entirely,\" the fairy admitted. \"Just come.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep midnight-blue shirt with tiny silver stars, dark trousers, and silver-buckled shoes — same child, same face, same exact outfit in every image. {{NAME}} at dusk at the edge of a valley, a tiny fairy on his shoulder pointing toward the valley, the sky above beginning to show extraordinary stars, the scene full of anticipation. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The valley at midnight was extraordinary.\n\nEvery animal had come: deer in groups, foxes in pairs, rabbits in their dozens, birds perched in every available tree. All of them still. All of them watching the sky.\n\nIn the valley centre, a white unicorn stood with her horn raised, acting as a receiver, the fairies said: the starlight would come to the horn first.\n\n{{NAME}} sat in the grass among the animals and waited.\n\nHe had never been somewhere so quiet with so many living things.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep midnight-blue shirt with tiny silver stars, dark trousers, and silver-buckled shoes — same child, same face, same exact outfit in every image. Wide valley at midnight, hundreds of animals arranged in still watching groups, the white unicorn at the centre with horn raised, fairies as tiny lights in the air, {{NAME}} among the animals, the sky brilliant above. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The star fell at one in the morning.\n\nNot a streak across the sky. A slow descent: a point of light that grew warmer and larger and, as it arrived, cast no shadows because it came from every direction at once.\n\nIt reached the unicorn's horn and paused there, spinning slowly, a ball of light the size of an apple.\n\nEvery animal in the valley made a sound at the same moment: a single, vast, compound note of pure experience.\n\nThen the unicorn lowered her horn to the earth and the light went in.\n\nSilence.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep midnight-blue shirt with tiny silver stars, dark trousers, and silver-buckled shoes — same child, same face, same exact outfit in every image. The dramatic peak moment: the unicorn lowering her horn to the earth, a warm glowing ball of starlight entering the ground, the valley bathed in impossible warm light from every direction, animals watching, {{NAME}}'s face filled with pure wonder. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "Where the light had entered, a small green shoot appeared immediately.\n\nThe fairies surrounded it, singing in frequencies {{NAME}} felt more than heard.\n\nThe animals began to move again, slowly, the extraordinary stillness breaking into ordinary midnight life.\n\nThe unicorn walked to {{NAME}} and stood before him. He felt the warmth coming off her horn.\n\n\"Why do you need a human witness?\" he asked again.\n\nShe touched her horn briefly to his chest, and he understood: because wonder shared is wonder doubled, and the universe needs as much of it as possible.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep midnight-blue shirt with tiny silver stars, dark trousers, and silver-buckled shoes — same child, same face, same exact outfit in every image. {{NAME}} standing before the white unicorn in the moonlit valley, her horn touching his chest with a gentle warm glow, the new shoot glowing faintly in the ground behind her, a moment of genuine understanding. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "He walked home as dawn began, still full of what he had seen.\n\nIn his room, he didn't sleep for a while. He sat at the window watching the sky change from black to grey to rose.\n\nHe thought about the animals going still. The starlight descending. The particular quiet of something that only happened once every hundred years.\n\nHe had been there. He had witnessed it.\n\nHe lay down finally and closed his eyes, and the warmth of the unicorn's horn seemed to remain in his chest, a small steady light he could feel when he breathed.\n\nHe fell asleep as the sun came up, still smiling.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep midnight-blue shirt with tiny silver stars, dark trousers, and silver-buckled shoes — same child, same face, same exact outfit in every image. {{NAME}} asleep in bed in early morning light, the room golden with sunrise, a peaceful smile on his face, a warmth visible even in sleep. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "interest": "Animals + Robots + Unicorns",
+  "title": "{{NAME}} and the Light That Measured Stars",
+  "moral": "Science and magic are both just ways of paying close attention.",
+  "theme_emoji": "🦄",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep blue observatory coat with silver buttons, dark trousers, and silver-tipped boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}}'s observatory was small: a converted garden shed with a roof that opened, a telescope older than his parents, and ATLAS, a robot he'd built to track and record astronomical data.\n\nATLAS had one enhancement {{NAME}} hadn't programmed: an interest in anomalies. Patterns that didn't fit the known data. Light that came from directions the charts said should be empty.\n\nAt three in the morning, ATLAS woke {{NAME}} with a single alert tone.\n\nThe anomaly: a moving light in the north field that registered as warm, organic, and approximately horse-shaped.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep blue observatory coat with silver buttons, dark trousers, and silver-tipped boots — same child, same face, same exact outfit in every image. {{NAME}} in his garden observatory at night, ATLAS beside him showing a display of an anomaly, both of them looking out the observatory window at a soft warm light in the field beyond. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The unicorn was there for three consecutive nights.\n\nHer horn cast light in the same spectral range as a specific class of young stars, which was why ATLAS kept classifying her as an astronomical object despite the horse shape.\n\nOn the third night, {{NAME}} went out to the field.\n\nShe was standing completely still, her horn aimed at a specific point in the sky.\n\nATLAS, which had followed him out, ran its sensors and said: \"She is tracking Wolf 359. It emitted an unusual pulse four days ago.\"\n\n{{NAME}} looked at the unicorn. \"Are you reading a star?\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep blue observatory coat with silver buttons, dark trousers, and silver-tipped boots — same child, same face, same exact outfit in every image. {{NAME}} in the field at night facing the unicorn, her horn aimed at a specific point in the brilliant starfield, ATLAS beside him with sensors extended, the extraordinary intimacy of this midnight meeting. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "She was, in her way, an observatory.\n\nHer horn was attuned to things ATLAS could detect but not interpret: not raw data but meaning, the quality of starlight, what it said about the source.\n\nThey developed a working method: ATLAS would identify anomalies, {{NAME}} would take measurements, and the unicorn would touch each object with her horn and show him, in the images-and-feeling way of unicorns, something about its nature.\n\nWolf 359's pulse: something like a breath, ATLAS translated.\n\n{{NAME}} added it to his notebook. Breathed.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep blue observatory coat with silver buttons, dark trousers, and silver-tipped boots — same child, same face, same exact outfit in every image. The unicorn touching her horn to ATLAS's sensor array, a soft golden exchange of light, {{NAME}} writing in his notebook beside them, the three of them working as a team in the field at midnight. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "His notebook from that month was unlike anything he'd written before.\n\nNormal astronomical data on one page. On the facing page: the unicorn's interpretation. The star that felt like a question. The nebula that tasted like first rain. The binary star system that hummed in a key that meant something specific in a language older than human music.\n\n\"Is this science?\" his astronomy teacher asked, reviewing his notes.\n\n\"I don't know what else to call it,\" said {{NAME}}.\n\n\"Neither do I,\" she said slowly, turning pages. \"But it's consistent and it's specific and I haven't seen some of these observations anywhere before.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep blue observatory coat with silver buttons, dark trousers, and silver-tipped boots — same child, same face, same exact outfit in every image. {{NAME}} and his astronomy teacher reviewing the notebook together, the teacher's expression moving from uncertain to genuinely fascinated, the dual-page spreads of data and unicorn-interpretation visible. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "The unicorn came until the autumn.\n\nOn her last night, she stood in the north field and did something she hadn't done before: she turned and looked at {{NAME}} for a long time, her horn pulsing once, twice.\n\nATLAS translated the pulse frequencies: familiar, returning.\n\nShe walked into the dark and was gone.\n\n{{NAME}} closed his observatory roof and sat on the step with ATLAS beside him, the notebook on his knee.\n\nHe looked up at Wolf 359.\n\nSomewhere out there, something had breathed.\n\nHe went inside, and fell asleep immediately, and dreamed of light.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep blue observatory coat with silver buttons, dark trousers, and silver-tipped boots — same child, same face, same exact outfit in every image. {{NAME}} asleep in bed, the observatory notebook on his bedside table, ATLAS's charging light soft in the room, stars visible through the window, a dreaming and peaceful expression. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

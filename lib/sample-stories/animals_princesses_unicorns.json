@@ -1,0 +1,35 @@
+{
+  "interest": "Animals + Princesses + Unicorns",
+  "title": "{{NAME}} and the Midnight Parliament",
+  "moral": "True councils make space for all voices, even the quietest.",
+  "theme_emoji": "🦄",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver-green tunic, dark green trousers, and boots with leaf engravings — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "The Midnight Parliament was the oldest institution in the kingdom, and almost nobody knew it existed.\n\nIt met once a month, at the full moon, in the palace's oldest courtyard.\n\nMembers: Princess Rowan (current chair), the unicorn Meridian (oldest living member), and representatives of every animal species in the kingdom.\n\n{{NAME}} had been appointed minutes secretary because of his handwriting, which was exceptionally clear, and because he was the only page who didn't make the badger delegate nervous.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver-green tunic, dark green trousers, and boots with leaf engravings — same child, same face, same exact outfit in every image. Old palace courtyard at full moon, an extraordinary assembly: animals of all sizes arranged in a circle, the unicorn Meridian standing tall, Princess Rowan at the head, and {{NAME}} at a small desk with pen and paper, moonlight on everything. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The parliament dealt with matters that concerned the whole kingdom: seasonal migrations that crossed human roads, water rights that affected fish populations upstream of farming settlements, forest edge agreements between logging and nesting seasons.\n\nMost humans didn't know these agreements existed.\n\nMost of what kept the kingdom in balance was negotiated in this courtyard by moonlight.\n\n{{NAME}} wrote very fast and very small and understood, over the first three months, that he was writing the most important documents in the kingdom.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver-green tunic, dark green trousers, and boots with leaf engravings — same child, same face, same exact outfit in every image. Close shot of {{NAME}} writing with focused concentration, the parliament in session around him, the badger delegate gesticulating, the deer delegate listening, Meridian the unicorn presiding, moonlight and torchlight. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "His most important contribution came in month four.\n\nA dispute between the river otter delegation and the farming community downstream had been stalled for eight months because neither side was using the same definition of water rights.\n\n{{NAME}} had been taking minutes for both. He noticed the misalignment.\n\nIn a pause, he raised his hand and read out the two different definitions side by side.\n\nSilence.\n\nThen the otter delegate said: \"Oh. We have been arguing about different things.\"\n\n\"Yes,\" said {{NAME}}, as gently as possible.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver-green tunic, dark green trousers, and boots with leaf engravings — same child, same face, same exact outfit in every image. {{NAME}} standing in the parliament circle reading from his notes, the otter delegation and the farming human representative both listening with sudden dawning understanding, Princess Rowan watching {{NAME}} approvingly. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The resolution took twenty minutes once everyone understood what they were actually discussing.\n\nMeridian the unicorn walked to {{NAME}} afterward and touched her horn briefly to his notepad.\n\n\"The minutes secretary who clarifies,\" she said.\n\n\"I just read back what was said,\" said {{NAME}}.\n\n\"In four months, no one has done that before you,\" she said.\n\nPrincess Rowan, signing the resolution: \"He'll be permanent secretary.\"\n\n{{NAME}} had not applied for this but found he was not opposed.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver-green tunic, dark green trousers, and boots with leaf engravings — same child, same face, same exact outfit in every image. After the parliament, Meridian's horn touching {{NAME}}'s notepad in a gesture of approval, Princess Rowan signing at the table, animals settling after the successful session. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "He walked home as the moon set, his minutes book under his arm.\n\nThirty-seven species represented. One hundred and twelve agenda items in four months. Forty-eight resolutions.\n\nNone of it visible during the day. The kingdom in balance because of meetings nobody knew about.\n\n{{NAME}} thought: this is what government looks like when it works.\n\nIn bed, he fell asleep with his pen still in his hand, and in his dreams he was still writing, fast and clear, keeping the perfect record of everything the kingdom said to itself in the dark.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver-green tunic, dark green trousers, and boots with leaf engravings — same child, same face, same exact outfit in every image. {{NAME}} asleep in bed with his pen still loosely held, the minutes book on his bedside table, moonlight fading from the window, a peaceful and purposeful sleep. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}
