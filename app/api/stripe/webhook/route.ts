@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import { createClient } from '@/lib/supabase/server';
+import { createAdminClient } from '@/lib/supabase/admin';
 
 export const dynamic = 'force-dynamic';
 
@@ -17,25 +17,25 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Invalid signature' }, { status: 400 });
   }
 
-  const supabase = await createClient();
+  // Use service-role client — webhook has no user session, anon key is blocked by RLS
+  const supabase = createAdminClient();
 
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object as Stripe.CheckoutSession;
     const userId = session.metadata?.supabase_user_id;
 
     if (session.mode === 'subscription' && userId && session.subscription) {
-      // Subscription activated
       const subscription = await stripe.subscriptions.retrieve(session.subscription as string);
-      await supabase.from('user_subscriptions').update({
+      const { error } = await supabase.from('user_subscriptions').update({
         status: 'subscribed',
         stripe_subscription_id: subscription.id,
+        stripe_customer_id: subscription.customer as string,
         current_period_end: new Date(subscription.current_period_end * 1000).toISOString(),
         updated_at: new Date().toISOString(),
       }).eq('user_id', userId);
+      if (error) console.error('Webhook DB error (checkout.session.completed):', error);
     } else if (session.mode === 'payment' && session.metadata?.purchase_type === 'extra_book' && userId) {
-      // One-time extra book purchase  -  grant an additional book for today
       await supabase.rpc('grant_extra_book_today', { uid: userId });
-      console.log(`Extra book granted for user ${userId}`);
     }
   }
 
@@ -44,11 +44,13 @@ export async function POST(request: Request) {
     const userId = subscription.metadata?.supabase_user_id;
     if (userId) {
       const status = subscription.status === 'active' ? 'subscribed' : 'cancelled';
-      await supabase.from('user_subscriptions').update({
+      const { error } = await supabase.from('user_subscriptions').update({
         status,
+        stripe_subscription_id: subscription.id,
         current_period_end: new Date(subscription.current_period_end * 1000).toISOString(),
         updated_at: new Date().toISOString(),
       }).eq('user_id', userId);
+      if (error) console.error('Webhook DB error (subscription.updated):', error);
     }
   }
 
@@ -56,14 +58,16 @@ export async function POST(request: Request) {
     const subscription = event.data.object as Stripe.Subscription;
     const userId = subscription.metadata?.supabase_user_id;
     if (userId) {
-      await supabase.from('user_subscriptions').update({
+      const { error } = await supabase.from('user_subscriptions').update({
         status: 'cancelled',
         stripe_subscription_id: null,
         current_period_end: null,
         updated_at: new Date().toISOString(),
       }).eq('user_id', userId);
+      if (error) console.error('Webhook DB error (subscription.deleted):', error);
     }
   }
 
   return NextResponse.json({ received: true });
 }
+
