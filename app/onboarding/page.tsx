@@ -222,7 +222,6 @@ export default function OnboardingPage() {
   const [nameError, setNameError] = useState('');
   const [interestError, setInterestError] = useState('');
   const [isFreeUser, setIsFreeUser] = useState(true); // assume free until confirmed
-  const [wantPersonalised, setWantPersonalised] = useState(false);
 
   // Check subscription status on mount
   useEffect(() => {
@@ -256,8 +255,8 @@ export default function OnboardingPage() {
       setNameError('');
       setState({ ...state, step: 3 });
     } else if (state.step === 3) {
-      // Free users who paid for personalised get follow-ups; free sample skips straight to step 5
-      setState({ ...state, step: (isFreeUser && !wantPersonalised) ? 5 : 4 });
+      // Free users skip follow-up questions (they get a cached sample); subscribers go through step 4
+      setState({ ...state, step: isFreeUser ? 5 : 4 });
     } else if (state.step === 4) {
       // Validate all follow-up answers for appropriate content
       const badAnswer = Object.values(state.followUpAnswers).find(v => v.trim() && !isContentAppropriate(v));
@@ -306,26 +305,7 @@ export default function OnboardingPage() {
           return;
         }
 
-        // Free user who paid for personalised  -  redirect to Stripe checkout.
-        // Webhook will grant 1 extra book; on return the dashboard auto-generates
-        // a real Claude story using the follow-up answers saved to the child profile.
-        if (isFreeUser && wantPersonalised) {
-          const res = await fetch('/api/stripe/checkout', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ plan: 'extra_book' }),
-          });
-          const data = await res.json();
-          if (data.url) {
-            window.location.href = data.url;
-            return;
-          }
-          setSubmitError('Could not start checkout. Please try again.');
-          setSubmitting(false);
-          return;
-        }
-
-        // Free sample or subscriber  -  generate immediately
+        // Always generate immediately and redirect to dashboard
         fetch('/api/generate-story', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -1902,38 +1882,20 @@ export default function OnboardingPage() {
             )}
 
             {isFreeUser ? (
-              /* Free users: choose between free sample or paid personalised story */
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                <div style={{ display: 'flex', gap: '10px' }}>
-                  <button
-                    onClick={() => { setWantPersonalised(false); handleNext(); }}
-                    disabled={state.interests.length < 2}
-                    style={{
-                      flex: 1, padding: '0.75rem 1rem', borderRadius: '10px',
-                      border: '1.5px solid #FF6B35', background: 'white', color: '#FF6B35',
-                      fontWeight: '600', fontSize: '0.875rem', cursor: state.interests.length < 2 ? 'not-allowed' : 'pointer',
-                      opacity: state.interests.length < 2 ? 0.5 : 1,
-                    }}>
-                    ✨ Free sample
-                  </button>
-                  <button
-                    onClick={() => { setWantPersonalised(true); handleNext(); }}
-                    disabled={state.interests.length < 2}
-                    className="btn-brand"
-                    style={{
-                      flex: 1, padding: '0.75rem 1rem', fontSize: '0.875rem',
-                      opacity: state.interests.length < 2 ? 0.5 : 1,
-                      cursor: state.interests.length < 2 ? 'not-allowed' : 'pointer',
-                    }}>
-                    ✍️ Personalise  -  A$0.99
-                  </button>
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <p style={{ fontSize: '0.75rem', color: '#5E6A7A', margin: 0 }}>
-                    Personalised adds your child&apos;s details and a unique story
-                  </p>
-                  <button onClick={handleBack} style={{ background: 'none', border: 'none', color: '#FF6B35', cursor: 'pointer', fontWeight: '500', padding: 0, fontSize: '0.875rem' }}>Back</button>
-                </div>
+              /* Free users: single button to generate free sample story */
+              <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+                <button
+                  onClick={handleNext}
+                  disabled={state.interests.length < 2}
+                  className="btn-brand"
+                  style={{
+                    flex: 1, padding: '0.75rem 1.75rem',
+                    opacity: state.interests.length < 2 ? 0.5 : 1,
+                    cursor: state.interests.length < 2 ? 'not-allowed' : 'pointer',
+                  }}>
+                  ✨ Generate my free story
+                </button>
+                <button onClick={handleBack} style={{ background: 'none', border: 'none', color: '#FF6B35', cursor: 'pointer', fontWeight: '500', padding: 0 }}>Back</button>
               </div>
             ) : (
               /* Subscribers: normal single next button */
@@ -2178,3 +2140,4 @@ export default function OnboardingPage() {
   );
 }
 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
