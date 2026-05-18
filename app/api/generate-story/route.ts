@@ -141,7 +141,7 @@ ANATOMY (non-negotiable):
 - The character always has exactly 2 arms, exactly 2 legs, exactly 2 feet, exactly 2 hands. Never more, never fewer.
 - Never show extra limbs, merged limbs, floating body parts, or distorted anatomy.
 - Clothing and fabric (capes, blankets, coats, dresses) must fall freely and NEVER connect to, merge with, or appear attached to a limb or body part.
-- Page 5 (bedtime): if the character is wearing a cape, it must be folded on the bed or hung aside — not connected to any body part while they sleep.
+- Page 5 (bedtime): if the character is wearing a cape, it must be folded on the bed or hung aside -- not connected to any body part while they sleep.
 
 CONSISTENCY (non-negotiable):
 - Start EVERY image_prompt with the character_anchor string  -  word for word, no changes
@@ -479,4 +479,31 @@ export async function POST(request: Request) {
         moral: storyData.moral,
         theme: storyData.theme_emoji,
         word_count: storyData.word_count,
-        reading_time_minutes: Math.ceil((storyData.word_c
+        reading_time_minutes: Math.ceil((storyData.word_count || 500) / 150),
+        pages: pagesForDB,
+        input_tokens: inputTokens,
+        output_tokens: outputTokens,
+        character_anchor: storyData.character_anchor || null,
+      })
+      .select()
+      .single();
+
+    if (storyError) {
+      console.error('Story save error:', storyError);
+      return NextResponse.json({ error: 'Failed to save story' }, { status: 500 });
+    }
+
+    // Decrement story count now that story is confirmed saved
+    await decrementStoryCount(supabase, user.id, paywallResult.reason, child_id);
+
+    return NextResponse.json({ story });
+  } catch (error) {
+    if (error instanceof Response) return error;
+
+    console.error('Story generation error:', error);
+    return NextResponse.json({ error: 'Story generation failed' }, { status: 500 });
+  }
+}
+
+
+
