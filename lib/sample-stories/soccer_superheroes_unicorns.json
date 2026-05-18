@@ -1,0 +1,35 @@
+{
+  "interest": "Soccer + Superheroes + Unicorns",
+  "title": "{{NAME}} and the Final That Lasted Forever",
+  "moral": "Some moments are so full they stay with you your whole life.",
+  "theme_emoji": "⚽",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a brilliant white hero soccer jersey with a golden unicorn emblem, white shorts, and gold-white cleats — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "The Hero Football Championship was played once every four years.\n\nFor most heroes, it was the match of their careers.\n\nFor {{NAME}}, it was his first.\n\nHe was the youngest player ever selected for the championship squad, on the recommendation of two people: the team's tactical analyst and Solari, a unicorn who had been watching the junior leagues for three years and had walked into the selection committee's office one morning and indicated, clearly, that she had a recommendation.\n\nThe selection committee had, after some discussion, accepted it.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a brilliant white hero soccer jersey with a golden unicorn emblem, white shorts, and gold-white cleats — same child, same face, same exact outfit in every image. {{NAME}} at the championship squad announcement, standing beside Solari the unicorn who is looking completely confident about her choice, the selection committee watching. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "Solari worked with {{NAME}} in the weeks before the final.\n\nShe didn't coach exactly. She watched, and sometimes touched her horn to his shoulder before a training session, and for ten minutes afterward, everything he did was clearer than usual: he could see the whole pitch, read the movements before they happened, feel the game's rhythm as something almost musical.\n\n\"What does that feel like when it fades?\" his teammate asked once.\n\n\"Like coming back from somewhere very clear,\" said {{NAME}}. \"And knowing I was there once. And knowing I can find it again.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a brilliant white hero soccer jersey with a golden unicorn emblem, white shorts, and gold-white cleats — same child, same face, same exact outfit in every image. Training session, Solari touching her horn to {{NAME}}'s shoulder, the clarity visible in his movements and positioning, his face utterly focused and present. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "Championship day: ninety thousand people in the stadium.\n\n{{NAME}} had never played in front of more than two thousand.\n\nHe stood at the centre circle before kick-off and felt the crowd noise as a physical weight.\n\nSolari was at the touchline. She touched her horn briefly to the wall.\n\nHe felt it from sixty metres: the clarity arriving, quieting the crowd noise, showing him the pitch as it actually was.\n\nHe breathed out.\n\n\"There,\" he said, to no one. \"Found it.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a brilliant white hero soccer jersey with a golden unicorn emblem, white shorts, and gold-white cleats — same child, same face, same exact outfit in every image. {{NAME}} at the centre circle, the enormous stadium around him, Solari at the touchline, the clarity arriving on his face as a look of complete calm readiness. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "He played the best match of his life.\n\nNot because he scored. He scored once, late, but the goal that won it was someone else's, an assist he had set up with a pass that found space nobody else had seen.\n\nBut he was everywhere the ball needed to go.\n\nThe tactical analyst said afterward: \"I've watched football for thirty years. That was complete.\"\n\nSolari was waiting for him outside the stadium.\n\nHe put his forehead briefly against hers.\n\n\"Thank you,\" he said.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a brilliant white hero soccer jersey with a golden unicorn emblem, white shorts, and gold-white cleats — same child, same face, same exact outfit in every image. {{NAME}} and Solari in the quiet outside the stadium after the final, foreheads touching briefly, the championship noise behind them, a private moment of gratitude. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "Walking home in the late evening, medal around his neck, he thought about the clarity.\n\nNot Solari's horn: he could find it without that now. She had shown him where it lived and how to get there.\n\nHe had it on his own tonight in the second half. All of it, without the touch.\n\nIn bed, medal on the pillow, he lay in the dark and thought: that's who I am when I'm exactly myself.\n\nHe fell asleep still feeling it.\n\nSomewhere in the park, Solari stood under the stars, and her horn was very bright.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a brilliant white hero soccer jersey with a golden unicorn emblem, white shorts, and gold-white cleats — same child, same face, same exact outfit in every image. {{NAME}} asleep with the championship medal, the room golden, a look of complete peace and self-knowledge, the best version of himself still present in his sleeping face. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

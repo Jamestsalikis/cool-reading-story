@@ -1,0 +1,35 @@
+{
+  "interest": "Princesses + Soccer + Unicorns",
+  "title": "{{NAME}} and the Golden Boot",
+  "moral": "The greatest trophies are not made of gold, they are made of what you gave to earn them.",
+  "theme_emoji": "⚽",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal blue and gold soccer jersey with a unicorn crest, blue shorts, and gold-tipped cleats — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "The Golden Boot was the kingdom's most prestigious football award, and it had not been given to a young player in forty years.\n\nPrincess Elara was on the selection committee. She had read every match report from the junior leagues that season.\n\nOne player stood out: a midfielder whose match data was exceptional but whose best work was invisible in the statistics. Setting things up. Creating space. Making others better.\n\nShe asked to see him play.\n\n{{NAME}} played without knowing he was being watched. He played the way he always played: for the team.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal blue and gold soccer jersey with a unicorn crest, blue shorts, and gold-tipped cleats — same child, same face, same exact outfit in every image. Princess Elara watching from the stands as {{NAME}} plays below, taking notes, observing the invisible work, the match in full swing. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The unicorn was the unexpected element.\n\nEvery match day, a unicorn appeared at the edge of the pitch and watched. Not the same spot: different positions, as if it was studying the match from different angles.\n\n\"What is that?\" asked Princess Elara's advisor.\n\n\"I don't know,\" she said. \"But it's watched every one of his matches for three months.\"\n\nAfter the match, {{NAME}} walked over to the unicorn and they stood together for a moment, not speaking, just existing in the same space.\n\n\"They know each other,\" said the advisor.\n\n\"Yes,\" said the princess.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal blue and gold soccer jersey with a unicorn crest, blue shorts, and gold-tipped cleats — same child, same face, same exact outfit in every image. After the match, {{NAME}} standing beside the unicorn at the pitch edge, Princess Elara watching from a distance, the quiet companionship between them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "She called {{NAME}} to her offices and asked directly: \"Tell me about the unicorn.\"\n\n\"She was at my first match,\" he said. \"Two years ago. I played terribly. She came back the next week. I played less terribly. She kept coming.\"\n\n\"Has she ever guided you?\"\n\n\"No. She watches. But knowing she's watching makes me play the way I want to play, not the way I think I should play. The difference is important.\"\n\nPrincess Elara thought about this for a long time.\n\n\"That's what the best audiences do,\" she said finally.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal blue and gold soccer jersey with a unicorn crest, blue shorts, and gold-tipped cleats — same child, same face, same exact outfit in every image. {{NAME}} and Princess Elara in conversation in her office, both thoughtful, the match data around them, the conversation genuine and important. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "She awarded him the Golden Boot at the season ceremony.\n\nIn her citation, she said: \"This player makes others better. His statistics don't show it. His matches do. A game is better for his presence in it, and so is any team.\"\n\nThe unicorn was at the ceremony, standing at the back of the hall.\n\nWhen {{NAME}} received the boot, the unicorn's horn pulsed once: gold, warm, brief.\n\n\"She approves,\" said someone near {{NAME}}.\n\n\"She approves every time,\" he said quietly. \"That's why I play the way I play.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal blue and gold soccer jersey with a unicorn crest, blue shorts, and gold-tipped cleats — same child, same face, same exact outfit in every image. The ceremony, {{NAME}} receiving the Golden Boot, Princess Elara presenting it, the unicorn's horn pulsing gold from the back of the hall, the moment complete. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "He walked home with the Golden Boot under his arm and the memory of the horn's pulse warm in his chest.\n\nTwo years of matches. One set of watching eyes that made him play his best.\n\nHe thought about what the princess had said: the best audiences make you better.\n\nHe put the boot on his shelf and lay in bed looking at it.\n\nThe unicorn was probably in the park meadow now, watching the stars.\n\nHe fell asleep feeling watched in the best possible way.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal blue and gold soccer jersey with a unicorn crest, blue shorts, and gold-tipped cleats — same child, same face, same exact outfit in every image. {{NAME}} asleep in bed with the Golden Boot visible on his shelf, the room warm and golden, deeply at peace. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

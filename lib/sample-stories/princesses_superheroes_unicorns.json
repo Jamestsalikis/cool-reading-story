@@ -1,0 +1,35 @@
+{
+  "interest": "Princesses + Superheroes + Unicorns",
+  "title": "{{NAME}} and the Kingdom's Three Powers",
+  "moral": "The realm is safest when its protectors trust each other completely.",
+  "theme_emoji": "🦸",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep royal burgundy hero coat with silver emblem, armoured dark trousers, and burgundy-silver boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "The kingdom of Ironhaven had three protective forces.\n\nThe Royal Guard (Princess Tamsin's authority). The Hero Corps (the professional hero organisation). And the unicorn Meridian (who worked independently but cooperated with both).\n\nFor three years, they had operated separately, aware of each other, never formally coordinating.\n\nUntil the storm.\n\nA catastrophic weather event hit the southern coast: flooding, evacuations needed, three different crises happening simultaneously.\n\n{{NAME}}, who worked as a communications specialist for all three, sent one message to all three at the same time:\n\nYou need each other right now.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep royal burgundy hero coat with silver emblem, armoured dark trousers, and burgundy-silver boots — same child, same face, same exact outfit in every image. {{NAME}} at his communications console, the three-way crisis visible on three different screens, sending the unified message, all three forces visible receiving it simultaneously. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The coordination happened faster than he'd expected.\n\nPrincess Tamsin directed the Royal Guard to the inland flooding, where organisation and resources were the primary need.\n\nThe Hero Corps handled the coastal rescue, where physical capability and fast action were required.\n\nMeridian moved between both zones: her horn's healing properties treating injuries, her presence calming panicked animals and sometimes people.\n\n{{NAME}} managed the communication between all three, relaying information across the three coordination systems simultaneously.\n\nHe hadn't slept in twenty-four hours. He didn't notice.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep royal burgundy hero coat with silver emblem, armoured dark trousers, and burgundy-silver boots — same child, same face, same exact outfit in every image. The multi-zone crisis response: Royal Guard organising the inland area, heroes at the coast in action, Meridian moving between zones, {{NAME}} at the centre keeping all three informed. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "At hour eighteen, the three forces met physically for the first time: a crossover point where the inland flooding met the coastal rescue zone.\n\nPrincess Tamsin, the Hero Corps commander, and Meridian stood in the same location, all looking at the same problem: a collapsed bridge blocking both zones' evacuation routes.\n\n{{NAME}} had sent them all to the same coordinates at the same time. On purpose.\n\n\"Was this planned?\" asked the Hero commander.\n\n\"I knew you'd all need to solve this one together,\" said {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep royal burgundy hero coat with silver emblem, armoured dark trousers, and burgundy-silver boots — same child, same face, same exact outfit in every image. The meeting at the collapsed bridge: Princess Tamsin, the Hero commander, and Meridian face to face for the first time, {{NAME}} beside them, the shared problem before them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The bridge took forty minutes.\n\nThree-way coordination: the Royal Guard stabilised the structure, the heroes moved it, Meridian's energy helped with the final lift.\n\nNone of them could have done it alone.\n\nAll of them knew it.\n\nPrincess Tamsin looked at the Hero commander afterward.\n\n\"We should have done this years ago.\"\n\n\"We weren't ready,\" he said.\n\n\"What changed?\"\n\nBoth of them looked at {{NAME}}.\n\n\"He made us ready,\" said Tamsin. \"By making sure we were in the right place at the right time.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep royal burgundy hero coat with silver emblem, armoured dark trousers, and burgundy-silver boots — same child, same face, same exact outfit in every image. Post-bridge moment, Princess Tamsin and the Hero commander in conversation, both looking at {{NAME}}, Meridian nearby, the three forces unified. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "He slept for twelve hours straight when it was over.\n\nBefore falling asleep, he had written one note: formal coordination protocol meeting, two weeks.\n\nBecause the storm had shown it was possible. And possible things needed to be made permanent.\n\nIn his sleep, he heard the radio chatter of three forces talking to each other, not through him, directly, the way it should have always been.\n\nHe slept through all of it and woke up satisfied.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep royal burgundy hero coat with silver emblem, armoured dark trousers, and burgundy-silver boots — same child, same face, same exact outfit in every image. {{NAME}} in a long deep sleep, the note visible on his desk, the room quiet and golden, twelve hours of earned rest. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}
