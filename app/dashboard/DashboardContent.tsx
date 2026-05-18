@@ -228,6 +228,10 @@ function EditChildModal({ child, palette, onClose, onSaved }: { child: ChildReco
   const [city, setCity] = useState((app.city as string) || '');
   const [country, setCountry] = useState((app.country as string) || '');
   const [readingLevel, setReadingLevel] = useState(() => { const m: Record<string,string> = { beginner:'simple', intermediate:'medium', advanced:'imaginative' }; return m[child.reading_level] || 'medium'; });
+  const [siblings, setSiblings] = useState<{name:string;nickname:string}[]>((app.siblings as {name:string;nickname:string}[]) || []);
+  const [friends, setFriends] = useState<{name:string;nickname:string}[]>((app.friends as {name:string;nickname:string}[]) || []);
+  const [petName, setPetName] = useState((app.petName as string) || '');
+  const [petType, setPetType] = useState((app.petType as string) || '');
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
   const toggleInterest = (i: string) => setInterests(prev => prev.includes(i) ? prev.filter(x => x !== i) : prev.length >= 5 ? prev : [...prev, i]);
@@ -242,7 +246,7 @@ function EditChildModal({ child, palette, onClose, onSaved }: { child: ChildReco
   const handleSave = async () => {
     if (!name.trim()) { setError('Name is required'); return; }
     setSaving(true);
-    const result = await updateChild(child.id, { name, age, gender, interests, skinColour, hairColour, eyeColour, city, country, readingLevel });
+    const result = await updateChild(child.id, { name, age, gender, interests, skinColour, hairColour, eyeColour, city, country, readingLevel, siblings, friends, petName, petType });
     if (result.error) { setError(result.error); setSaving(false); return; }
     onSaved(); onClose();
   };
@@ -317,6 +321,38 @@ function EditChildModal({ child, palette, onClose, onSaved }: { child: ChildReco
               {[{id:'simple',label:'Simple',sub:'3-5'},{id:'medium',label:'Medium',sub:'6-8'},{id:'imaginative',label:'Imaginative',sub:'9-12'}].map(o => (
                 <button key={o.id} onClick={() => setReadingLevel(o.id)} style={{ ...chip(readingLevel === o.id), display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '8px 14px' }}><span>{o.label}</span><span style={{ fontSize: '0.68rem', opacity: 0.75 }}>{o.sub}</span></button>
               ))}
+            </div>
+          </div>
+          {/* Siblings */}
+          <div>
+            <label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '8px' }}>Siblings <span style={{ fontWeight: 400, color: '#9CA3AF' }}>(optional)</span></label>
+            {siblings.map((s, i) => (
+              <div key={i} style={{ display: 'flex', gap: '8px', marginBottom: '8px', alignItems: 'center' }}>
+                <input style={{ ...inp, flex: 1 }} placeholder="Name" value={s.name} onChange={e => { const u = [...siblings]; u[i] = { ...u[i], name: e.target.value }; setSiblings(u); }} />
+                <input style={{ ...inp, flex: 1 }} placeholder="Nickname (optional)" value={s.nickname} onChange={e => { const u = [...siblings]; u[i] = { ...u[i], nickname: e.target.value }; setSiblings(u); }} />
+                <button onClick={() => setSiblings(siblings.filter((_, idx) => idx !== i))} style={{ background: 'none', border: '1.5px solid #F0E4D0', borderRadius: '8px', padding: '0.5rem 0.7rem', cursor: 'pointer', color: '#5E6A7A', fontSize: '1rem', flexShrink: 0 }}>×</button>
+              </div>
+            ))}
+            <button onClick={() => setSiblings([...siblings, { name: '', nickname: '' }])} style={{ fontSize: '0.82rem', color: palette.cover, background: 'none', border: `1.5px dashed ${palette.cover}`, borderRadius: '8px', padding: '0.45rem 1rem', cursor: 'pointer', fontWeight: '600' }}>+ Add sibling</button>
+          </div>
+          {/* Best friends */}
+          <div>
+            <label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '8px' }}>Best friends <span style={{ fontWeight: 400, color: '#9CA3AF' }}>(optional)</span></label>
+            {friends.map((f, i) => (
+              <div key={i} style={{ display: 'flex', gap: '8px', marginBottom: '8px', alignItems: 'center' }}>
+                <input style={{ ...inp, flex: 1 }} placeholder="Name" value={f.name} onChange={e => { const u = [...friends]; u[i] = { ...u[i], name: e.target.value }; setFriends(u); }} />
+                <input style={{ ...inp, flex: 1 }} placeholder="Nickname (optional)" value={f.nickname} onChange={e => { const u = [...friends]; u[i] = { ...u[i], nickname: e.target.value }; setFriends(u); }} />
+                <button onClick={() => setFriends(friends.filter((_, idx) => idx !== i))} style={{ background: 'none', border: '1.5px solid #F0E4D0', borderRadius: '8px', padding: '0.5rem 0.7rem', cursor: 'pointer', color: '#5E6A7A', fontSize: '1rem', flexShrink: 0 }}>×</button>
+              </div>
+            ))}
+            <button onClick={() => setFriends([...friends, { name: '', nickname: '' }])} style={{ fontSize: '0.82rem', color: palette.cover, background: 'none', border: `1.5px dashed ${palette.cover}`, borderRadius: '8px', padding: '0.45rem 1rem', cursor: 'pointer', fontWeight: '600' }}>+ Add friend</button>
+          </div>
+          {/* Pet */}
+          <div>
+            <label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '8px' }}>Pet <span style={{ fontWeight: 400, color: '#9CA3AF' }}>(optional)</span></label>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+              <input style={inp} placeholder="Pet name (e.g. Biscuit)" value={petName} onChange={e => setPetName(e.target.value)} />
+              <input style={inp} placeholder="Pet type (e.g. Dog)" value={petType} onChange={e => setPetType(e.target.value)} />
             </div>
           </div>
         </div>
