@@ -349,7 +349,8 @@ export async function POST(request: Request) {
     }
 
     // --- PRE-GENERATED TRIAL STORY SHORTCUT ---
-    // Free users get a static sample story for trial interests  -  no Claude API call.
+    // Free users get a static sample story for their FIRST book only — no Claude API call.
+    // Books 2 and 3 are AI-generated so each feels unique and personal.
     const { data: subData } = await supabase
       .from('user_subscriptions')
       .select('status, free_stories_remaining')
@@ -362,7 +363,14 @@ export async function POST(request: Request) {
     const allInterests = (child.interests || []) as string[];
     const primaryInterest = allInterests.find(i => isTrialInterest(i)) || allInterests[0] || '';
 
-    if (isFreeUser && isTrialInterest(primaryInterest)) {
+    // Only serve cached story if this child has no stories yet (first book only)
+    const { count: existingStoryCount } = await supabase
+      .from('stories')
+      .select('id', { count: 'exact', head: true })
+      .eq('child_id', child_id);
+    const isFirstBook = (existingStoryCount ?? 0) === 0;
+
+    if (isFreeUser && isTrialInterest(primaryInterest) && isFirstBook) {
       const appearance = (child.appearance || {}) as Record<string, string>;
       const sampleStory = getSampleStory(allInterests, {
         name: child.name,
