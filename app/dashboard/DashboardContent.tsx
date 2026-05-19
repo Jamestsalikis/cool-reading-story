@@ -399,7 +399,7 @@ export default function DashboardPage() {
   const [generateError, setGenerateError] = useState('');
   const [paywallReason, setPaywallReason] = useState<'free_exhausted' | 'monthly_limit' | 'no_subscription' | 'daily_limit' | null>(null);
   const [editingChild, setEditingChild] = useState<ChildRecord | null>(null);
-  const [sub, setSub] = useState<{ status: string; stories_this_month: number; stories_today: number; extra_books_today: number } | null>(null);
+  const [sub, setSub] = useState<{ status: string; stories_this_month: number; stories_today: number; extra_books_today: number; current_period_end: string | null } | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
   const [userEmail, setUserEmail] = useState('');
@@ -422,7 +422,7 @@ export default function DashboardPage() {
     if (user) { setUserEmail(user.email ?? ''); setUserId(user.id); }
     const { data: childrenData } = await supabase.from('children').select('*').order('created_at', { ascending: true });
     const { data: storiesData } = await supabase.from('stories').select('id, title, created_at, word_count, series_id, series_title, volume_number, pages, children(name, age)').order('created_at', { ascending: false });
-    const { data: subData } = await supabase.from('user_subscriptions').select('status, stories_this_month, stories_today, extra_books_today').eq('user_id', user?.id ?? '').single();
+    const { data: subData } = await supabase.from('user_subscriptions').select('status, stories_this_month, stories_today, extra_books_today, current_period_end').eq('user_id', user?.id ?? '').single();
     const { data: adminRow } = await supabase.from('admin_emails').select('email').eq('email', user?.email ?? '').maybeSingle();
     setSub(subData);
     setIsAdmin(!!adminRow);
@@ -905,6 +905,14 @@ export default function DashboardPage() {
                       <p style={{ color: '#5E6A7A', fontSize: '0.875rem' }}>Stories remaining this month</p>
                       <span style={{ fontWeight: '700', color: '#0D183D' }}>{booksRemainingThisMonth}</span>
                     </div>
+                    {sub?.current_period_end && (
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '4px', borderTop: '1px solid #F0E4D0', marginTop: '4px' }}>
+                        <p style={{ color: '#5E6A7A', fontSize: '0.875rem' }}>Next billing date</p>
+                        <span style={{ fontWeight: '600', color: '#0D183D', fontSize: '0.875rem' }}>
+                          {new Date(sub.current_period_end).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })}
+                        </span>
+                      </div>
+                    )}
                     {booksRemainingToday === 0 && (
                       <button onClick={() => setPaywallReason('daily_limit')}
                         style={{ marginTop: '4px', padding: '0.55rem 1rem', borderRadius: '8px', border: 'none', background: '#FF6B35', color: '#fff', cursor: 'pointer', fontWeight: '600', fontSize: '0.8rem' }}>
@@ -921,10 +929,16 @@ export default function DashboardPage() {
                 )}
               </div>
               {sub?.status === 'subscribed' ? (
-                <button onClick={async () => { const res = await fetch('/api/stripe/portal', { method: 'POST' }); const d = await res.json(); if (d.url) window.location.href = d.url; }}
-                  style={{ width: '100%', padding: '0.7rem', borderRadius: '10px', border: '1.5px solid #FF6B35', background: '#fff', color: '#FF6B35', cursor: 'pointer', fontWeight: '600', fontSize: '0.875rem' }}>
-                  Manage billing
-                </button>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <button onClick={async () => { const res = await fetch('/api/stripe/portal', { method: 'POST' }); const d = await res.json(); if (d.url) window.location.href = d.url; }}
+                    style={{ width: '100%', padding: '0.7rem', borderRadius: '10px', border: '1.5px solid #FF6B35', background: '#fff', color: '#FF6B35', cursor: 'pointer', fontWeight: '600', fontSize: '0.875rem' }}>
+                    Manage billing
+                  </button>
+                  <button onClick={async () => { const res = await fetch('/api/stripe/portal', { method: 'POST' }); const d = await res.json(); if (d.url) window.location.href = d.url; }}
+                    style={{ width: '100%', padding: '0.7rem', borderRadius: '10px', border: '1.5px solid #E5E7EB', background: '#fff', color: '#9CA3AF', cursor: 'pointer', fontWeight: '500', fontSize: '0.8rem' }}>
+                    Cancel subscription
+                  </button>
+                </div>
               ) : isAdmin ? null : (
                 <button onClick={() => setPaywallReason('free_exhausted')}
                   style={{ width: '100%', padding: '0.7rem', borderRadius: '10px', border: 'none', background: '#FF6B35', color: '#fff', cursor: 'pointer', fontWeight: '600', fontSize: '0.875rem' }}>
