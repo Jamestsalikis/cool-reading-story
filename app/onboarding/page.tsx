@@ -1,10 +1,33 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { createChild } from '@/lib/supabase/child-actions';
-import Fable, { type FablePose } from '@/components/Fable';
+import { createClient } from '@/lib/supabase/client';
+import { TRIAL_INTERESTS } from '@/lib/sample-stories/index';
+
+// Content filter — block inappropriate terms for a children's app
+const BLOCKED_TERMS = [
+  // Profanity
+  'fuck', 'shit', 'bitch', 'bastard', 'piss', 'cock', 'cunt', 'whore', 'slut', 'twat', 'arse',
+  // Sexual / anatomy slang
+  'dick', 'penis', 'vagina', 'pussy', 'boob', 'tit', 'nude', 'naked', 'sex', 'porn', 'erotic',
+  // Adult themes called out by team
+  'gay', 'lesbian', 'trans', 'queer', 'lgbt', 'mardi gras', 'stripper', 'strip club',
+  // Drugs / alcohol
+  'weed', 'marijuana', 'cocaine', 'heroin', 'alcohol', 'drugs',
+  // Violence / hate
+  'murder', 'rape', 'nazi', 'racist', 'terrorist',
+];
+
+function isContentAppropriate(text: string): boolean {
+  const lower = text.toLowerCase();
+  return !BLOCKED_TERMS.some(term => {
+    if (term.includes(' ')) return lower.includes(term);
+    return new RegExp(`\b${term}\b`, 'i').test(lower);
+  });
+}
 
 type Person = { name: string; nickname: string };
 
@@ -18,6 +41,7 @@ type OnboardingState = {
   followUpAnswers: Record<string, string>; // key: "Interest::Question"
   hairColour: string;
   eyeColour: string;
+  skinColour: string;
   siblings: Person[];
   friends: Person[];
   petName: string;
@@ -58,7 +82,7 @@ const INTEREST_OPTIONS = [
   { emoji: '🚗', label: 'Cars & Trucks', g: ['#DC2626','#F97316'], sh: 'rgba(220,38,38,0.40)' },
 ];
 
-// 2 questions per interest — specific enough to give Claude vivid details
+// 2 questions per interest  -  specific enough to give Claude vivid details
 const FOLLOW_UP_QUESTIONS: Record<string, { q: string; placeholder: string }[]> = {
   'Superheroes':  [
     { q: 'If you could have one superpower, what would it be?',   placeholder: 'e.g. Flying, invisibility, super speed' },
@@ -113,7 +137,7 @@ const FOLLOW_UP_QUESTIONS: Record<string, { q: string; placeholder: string }[]> 
     { q: 'Which planet would you visit first?',                   placeholder: 'e.g. Saturn, a made-up one with candy rings' },
   ],
   'Robots': [
-    { q: "What's your robot's name and what can it do?",          placeholder: 'e.g. RoboMax — makes pancakes and tells jokes' },
+    { q: "What's your robot's name and what can it do?",          placeholder: 'e.g. RoboMax  -  makes pancakes and tells jokes' },
     { q: 'Would your robot be big or small, silly or serious?',   placeholder: 'e.g. Tiny and very sarcastic' },
   ],
   'Science': [
@@ -146,7 +170,7 @@ const FOLLOW_UP_QUESTIONS: Record<string, { q: string; placeholder: string }[]> 
   ],
   'Swimming': [
     { q: "What's your favourite stroke?",                         placeholder: 'e.g. Freestyle, butterfly' },
-    { q: 'Do you prefer the pool or the ocean?',                  placeholder: 'e.g. The ocean — it feels like an adventure' },
+    { q: 'Do you prefer the pool or the ocean?',                  placeholder: 'e.g. The ocean  -  it feels like an adventure' },
   ],
   'Art': [
     { q: "What's your favourite thing to draw or paint?",         placeholder: 'e.g. Dragons, rainbows, portraits of my dog' },
@@ -158,7 +182,7 @@ const FOLLOW_UP_QUESTIONS: Record<string, { q: string; placeholder: string }[]> 
   ],
   'Cooking': [
     { q: "What's your favourite thing to cook or bake?",          placeholder: 'e.g. Chocolate chip cookies, pancakes' },
-    { q: 'If you had your own restaurant, what would it be called and serve?', placeholder: 'e.g. "Princess Kitchen" — only desserts' },
+    { q: 'If you had your own restaurant, what would it be called and serve?', placeholder: 'e.g. "Princess Kitchen"  -  only desserts' },
   ],
   'Dolls': [
     { q: "What are your favourite dolls' names?",                 placeholder: 'e.g. Bella, Princess Rose, Captain Tiny' },
@@ -166,7 +190,7 @@ const FOLLOW_UP_QUESTIONS: Record<string, { q: string; placeholder: string }[]> 
   ],
   'Cars & Trucks': [
     { q: "What's your dream car or truck?",                       placeholder: 'e.g. A red race car, a giant monster truck' },
-    { q: 'Would you rather drive a race car, a monster truck, or a fire engine?', placeholder: 'e.g. Monster truck — so I can crush everything' },
+    { q: 'Would you rather drive a race car, a monster truck, or a fire engine?', placeholder: 'e.g. Monster truck  -  so I can crush everything' },
   ],
 };
 
@@ -182,6 +206,7 @@ export default function OnboardingPage() {
     followUpAnswers: {},
     hairColour: '',
     eyeColour: '',
+    skinColour: '',
     siblings: [],
     friends: [],
     petName: '',
@@ -195,6 +220,24 @@ export default function OnboardingPage() {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
   const [nameError, setNameError] = useState('');
+  const [interestError, setInterestError] = useState('');
+  const [isFreeUser, setIsFreeUser] = useState(true); // assume free until confirmed
+
+  // Check subscription status on mount
+  useEffect(() => {
+    const checkSub = async () => {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+      const { data } = await supabase
+        .from('user_subscriptions')
+        .select('status')
+        .eq('user_id', user.id)
+        .single();
+      setIsFreeUser(!data || data.status !== 'subscribed');
+    };
+    checkSub();
+  }, []);
 
   // Build the list of follow-up questions from selected interests
   const followUpSections = state.interests
@@ -208,11 +251,19 @@ export default function OnboardingPage() {
   const handleNext = async () => {
     if (state.step === 2) {
       if (!state.name.trim()) { setNameError("Please enter your child's name"); return; }
+      if (!isContentAppropriate(state.name)) { setNameError("This name is not appropriate for a children\'s app. Please choose a different name."); return; }
       setNameError('');
       setState({ ...state, step: 3 });
     } else if (state.step === 3) {
-      setState({ ...state, step: 4 });
+      // Free users skip follow-up questions (they get a cached sample); subscribers go through step 4
+      setState({ ...state, step: isFreeUser ? 5 : 4 });
     } else if (state.step === 4) {
+      // Validate all follow-up answers for appropriate content
+      const badAnswer = Object.values(state.followUpAnswers).find(v => v.trim() && !isContentAppropriate(v));
+      if (badAnswer) {
+        alert("One of your answers contains content that isn\'t appropriate for a children\'s app. Please review your answers and try again.");
+        return;
+      }
       setState({ ...state, step: 5 });
     } else {
       setSubmitting(true);
@@ -234,6 +285,7 @@ export default function OnboardingPage() {
           followUpAnswers: followUpList,
           hairColour: state.hairColour,
           eyeColour: state.eyeColour,
+          skinColour: state.skinColour,
           siblings: state.siblings,
           friends: state.friends,
           petName: state.petName,
@@ -244,11 +296,16 @@ export default function OnboardingPage() {
         });
 
         if (result.error || !result.child) {
-          setSubmitError(result.error || 'Failed to save profile');
+          if (result.error === 'subscription_required') {
+            setSubmitError('A subscription is required to add more than one child profile. Please subscribe from your dashboard.');
+          } else {
+            setSubmitError(result.error || 'Failed to save profile');
+          }
           setSubmitting(false);
           return;
         }
 
+        // Always generate immediately and redirect to dashboard
         fetch('/api/generate-story', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -268,19 +325,28 @@ export default function OnboardingPage() {
   };
 
   const handleInterestToggle = (label: string) => {
+    // Free users can only pick trial interests
+    if (isFreeUser && !TRIAL_INTERESTS.includes(label as typeof TRIAL_INTERESTS[number])) return;
     setState((prev) => ({
       ...prev,
       interests: prev.interests.includes(label)
         ? prev.interests.filter((i) => i !== label)
-        : prev.interests.length >= 3 ? prev.interests : [...prev.interests, label],
+        : prev.interests.length >= 5 ? prev.interests : [...prev.interests, label],
     }));
   };
 
   const handleAddCustomInterest = () => {
-    if (state.customInterest.trim() && state.interests.length < 3) {
+    const val = state.customInterest.trim();
+    if (!val) return;
+    if (!isContentAppropriate(val)) {
+      setInterestError("This content is not appropriate for a children\'s app. Please choose a different interest.");
+      return;
+    }
+    if (state.interests.length < 5) {
+      setInterestError('');
       setState((prev) => ({
         ...prev,
-        interests: [...prev.interests, state.customInterest.trim()],
+        interests: [...prev.interests, val],
         customInterest: '',
       }));
       setShowCustomInterest(false);
@@ -296,9 +362,9 @@ export default function OnboardingPage() {
 
   const inputStyle: React.CSSProperties = {
     width: '100%', padding: '0.65rem 0.875rem',
-    border: '1.5px solid #E8E0D0', borderRadius: '8px',
+    border: '1.5px solid #F0E4D0', borderRadius: '8px',
     fontSize: '0.95rem', outline: 'none',
-    backgroundColor: '#fff', color: '#1A1209',
+    backgroundColor: '#fff', color: '#0D183D',
   };
 
   const chipBase: React.CSSProperties = {
@@ -309,62 +375,48 @@ export default function OnboardingPage() {
 
   const chip = (active: boolean): React.CSSProperties => ({
     ...chipBase,
-    border: `1.5px solid ${active ? '#741515' : '#E8E0D0'}`,
-    backgroundColor: active ? '#741515' : '#fff',
-    color: active ? '#fff' : '#1A1209',
+    border: `1.5px solid ${active ? '#FF6B35' : '#F0E4D0'}`,
+    backgroundColor: active ? '#FF6B35' : '#fff',
+    color: active ? '#fff' : '#0D183D',
   });
 
-  const labelStyle: React.CSSProperties = { display: 'block', marginBottom: '8px', fontWeight: '500', color: '#1A1209', fontSize: '0.9rem' };
-  const optionalLabel: React.CSSProperties = { ...labelStyle, color: '#6B5E4E' };
+  const labelStyle: React.CSSProperties = { display: 'block', marginBottom: '8px', fontWeight: '500', color: '#0D183D', fontSize: '0.9rem' };
+  const optionalLabel: React.CSSProperties = { ...labelStyle, color: '#5E6A7A' };
 
   const TOTAL_STEPS = 4; // steps 2–5 = 4 visible dots
   const ProgressDots = () => (
     <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', marginBottom: '40px' }}>
       {[2, 3, 4, 5].map((s) => (
-        <div key={s} style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: state.step >= s ? '#741515' : '#E8E0D0', transition: 'background-color 0.3s' }} />
+        <div key={s} style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: state.step >= s ? '#FF6B35' : '#F0E4D0', transition: 'background-color 0.3s' }} />
       ))}
     </div>
   );
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#FAF7F0', padding: '32px 20px' }}>
+    <div style={{ minHeight: '100vh', backgroundColor: '#FFF4E6', padding: '32px 20px' }}>
       <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-        {/* Fable intro */}
-        {(() => {
-          const fableConfig: Record<number, { pose: FablePose; dialogue: string }> = {
-            2: { pose: 'welcome',  dialogue: "Hi, I'm Fable! I write personalised stories. Tell me about your child." },
-            3: { pose: 'writing',  dialogue: "Ooh, what do they love? The more I know, the better the story!" },
-            4: { pose: 'thinking', dialogue: "Perfect. I'm already getting ideas..." },
-            5: { pose: 'thinking', dialogue: "Almost ready. Just a few final details..." },
-          };
-          const cfg = fableConfig[state.step];
-          return cfg ? (
-            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '24px' }}>
-              <Fable pose={cfg.pose} dialogue={cfg.dialogue} size={120} />
-            </div>
-          ) : null;
-        })()}
+
 
         {/* ── Step 2: Name / Age / Gender ── */}
         {state.step === 2 && (
           <div>
             <ProgressDots />
-            <h1 className="font-serif" style={{ fontSize: '2rem', marginBottom: '8px', color: '#1A1209' }}>Tell us about your child</h1>
-            <p style={{ color: '#6B5E4E', marginBottom: '32px', fontSize: '0.95rem' }}>This is how they'll appear as the hero of every story</p>
+            <h1 className="font-serif" style={{ fontSize: '2rem', marginBottom: '8px', color: '#0D183D' }}>Tell us about your child</h1>
+            <p style={{ color: '#5E6A7A', marginBottom: '32px', fontSize: '0.95rem' }}>This is how they'll appear as the hero of every story</p>
 
             <div style={{ marginBottom: '24px' }}>
-              <label style={labelStyle}>Child's name <span style={{ color: '#741515' }}>*</span></label>
-              <input type="text" style={{ ...inputStyle, borderColor: nameError ? '#991B1B' : '#E8E0D0' }} placeholder="e.g. Leo" value={state.name}
+              <label style={labelStyle}>Child's name <span style={{ color: '#FF6B35' }}>*</span></label>
+              <input type="text" style={{ ...inputStyle, borderColor: nameError ? '#991B1B' : '#F0E4D0' }} placeholder="e.g. Leo" value={state.name}
                 onChange={(e) => { setState({ ...state, name: e.target.value }); setNameError(''); }} />
               {nameError && <p style={{ color: '#991B1B', fontSize: '0.8rem', marginTop: '6px' }}>{nameError}</p>}
             </div>
 
             <div style={{ marginBottom: '24px' }}>
-              <label style={labelStyle}>Age <span style={{ color: '#741515' }}>*</span></label>
+              <label style={labelStyle}>Age <span style={{ color: '#FF6B35' }}>*</span></label>
               <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                <button onClick={() => setState({ ...state, age: Math.max(3, state.age - 1) })} style={{ width: '44px', height: '44px', borderRadius: '8px', border: '1.5px solid #E8E0D0', backgroundColor: '#fff', cursor: 'pointer', fontSize: '1.25rem' }}>−</button>
+                <button onClick={() => setState({ ...state, age: Math.max(3, state.age - 1) })} style={{ width: '44px', height: '44px', borderRadius: '8px', border: '1.5px solid #F0E4D0', backgroundColor: '#fff', cursor: 'pointer', fontSize: '1.25rem' }}>−</button>
                 <span style={{ fontSize: '1.5rem', fontWeight: '600', minWidth: '40px', textAlign: 'center' }}>{state.age}</span>
-                <button onClick={() => setState({ ...state, age: Math.min(12, state.age + 1) })} style={{ width: '44px', height: '44px', borderRadius: '8px', border: '1.5px solid #E8E0D0', backgroundColor: '#fff', cursor: 'pointer', fontSize: '1.25rem' }}>+</button>
+                <button onClick={() => setState({ ...state, age: Math.min(12, state.age + 1) })} style={{ width: '44px', height: '44px', borderRadius: '8px', border: '1.5px solid #F0E4D0', backgroundColor: '#fff', cursor: 'pointer', fontSize: '1.25rem' }}>+</button>
               </div>
             </div>
 
@@ -379,7 +431,7 @@ export default function OnboardingPage() {
 
             <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
               <button onClick={handleNext} className="btn-brand" style={{ flex: 1, padding: '0.75rem 1.75rem' }}>Next step</button>
-              <Link href="/dashboard" style={{ color: '#741515', textDecoration: 'none', fontWeight: '500' }}>Back</Link>
+              <Link href="/dashboard" style={{ color: '#FF6B35', textDecoration: 'none', fontWeight: '500' }}>Back</Link>
             </div>
           </div>
         )}
@@ -388,8 +440,10 @@ export default function OnboardingPage() {
         {state.step === 3 && (
           <div>
             <ProgressDots />
-            <h1 className="font-serif" style={{ fontSize: '2rem', marginBottom: '8px', color: '#1A1209' }}>What does {state.name || 'your child'} love?</h1>
-            <p style={{ color: '#6B5E4E', marginBottom: '32px', fontSize: '0.95rem' }}>Pick 1 to 3 interests — these shape every story</p>
+            <h1 className="font-serif" style={{ fontSize: '2rem', marginBottom: '8px', color: '#0D183D' }}>What does {state.name || 'your child'} love?</h1>
+            <p style={{ color: state.interests.length >= 5 ? '#FF6B35' : '#5E6A7A', marginBottom: '32px', fontSize: '0.95rem' }}>
+              {state.interests.length >= 5 ? 'Maximum 5 selected. Remove one to swap.' : 'Pick 1 to 3 interests — these shape every story'}
+            </p>
 
             <style>{`
               .int-tile { transition: transform 0.18s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.18s ease; cursor: pointer; }
@@ -461,6 +515,11 @@ export default function OnboardingPage() {
               @keyframes it-star-blink { 0%,100%{opacity:0.9} 50%{opacity:0.08} }
               .it-star { animation: it-star-blink 2s ease-in-out infinite; }
             `}</style>
+            {isFreeUser && (
+              <div style={{ background: '#FFFBEB', border: '1px solid #D97706', borderRadius: '10px', padding: '0.75rem 1rem', marginBottom: '12px', fontSize: '0.8125rem', color: '#92400E', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <span><strong>Free trial:</strong> Choose from 8 sample interests. Subscribe to unlock all 27 themes and personalise your story fully.</span>
+              </div>
+            )}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))', gap: '10px', marginBottom: '16px' }}>
               {INTEREST_OPTIONS.map((option) => {
                 const active = state.interests.includes(option.label);
@@ -488,22 +547,22 @@ export default function OnboardingPage() {
                 const S = (props:{cx:number;cy:number;r:number;d:string}) => <circle cx={props.cx} cy={props.cy} r={props.r} fill="rgba(255,248,200,0.92)" className="it-star" style={{animationDelay:props.d}}/>;
                 const scene: Record<string, React.ReactNode> = {
                   'Space': (<>
-                    {/* Stars — opacity only (no scale/transform so they don't appear to move) */}
+                    {/* Stars  -  opacity only (no scale/transform so they don't appear to move) */}
                     {[{x:6,y:5,r:1.8},{x:19,y:3,r:1.1},{x:33,y:8,r:2.3},{x:50,y:4,r:1.4},{x:63,y:7,r:1.9},{x:75,y:5,r:1.1},
                       {x:10,y:22,r:1.3},{x:72,y:20,r:1.7},{x:4,y:40,r:1.5},{x:66,y:42,r:1.2},{x:40,y:52,r:1.7},{x:14,y:53,r:1.1},{x:78,y:48,r:1.4},{x:55,y:30,r:1.0},{x:27,y:32,r:0.9}
                     ].map(({x,y,r},i)=>(
                       <circle key={i} cx={x} cy={y} r={r} fill="rgba(255,250,220,0.95)" className="it-star" style={{animationDelay:`${i*0.19}s`}}/>
                     ))}
-                    {/* Hero star — same pure opacity blink */}
+                    {/* Hero star  -  same pure opacity blink */}
                     <circle cx="34" cy="8" r="2.8" fill="rgba(255,255,200,1)" className="it-star" style={{animationDelay:'0.7s'}}/>
-                    {/* Crescent moon — fixed position, no movement */}
+                    {/* Crescent moon  -  fixed position, no movement */}
                     <circle cx="62" cy="16" r="13" fill="rgba(255,235,140,0.97)"/>
                     <circle cx="68" cy="13" r="10.5" fill={active ? `rgba(${r1},${g1},${b1},1)` : '#0C0A2E'}/>
-                    {/* Rocket — flies straight left-to-right on hover */}
+                    {/* Rocket  -  flies straight left-to-right on hover */}
                     <g className="it-rocket-h">
                       {/* Body - horizontal ellipse */}
                       <ellipse cx="0" cy="32" rx="14" ry="6" fill="#EF4444"/>
-                      {/* Nose cone — points right */}
+                      {/* Nose cone  -  points right */}
                       <polygon points="14,32 8,26 8,38" fill="#F97316"/>
                       {/* Porthole */}
                       <circle cx="-3" cy="32" r="4.5" fill="#BFDBFE"/>
@@ -513,12 +572,12 @@ export default function OnboardingPage() {
                       <polygon points="-10,26 -16,18 -8,26" fill="#B91C1C"/>
                       {/* Bottom fin */}
                       <polygon points="-10,38 -16,46 -8,38" fill="#B91C1C"/>
-                      {/* Flame — at the back (left) */}
+                      {/* Flame  -  at the back (left) */}
                       <ellipse cx="-16" cy="32" rx="8"   ry="4.5" fill="rgba(251,146,60,0.95)"/>
                       <ellipse cx="-18" cy="32" rx="5.5" ry="3"   fill="rgba(253,224,71,0.95)"/>
                     </g>
                   </>),
-                  // ── SUPERHEROES — dark city, hero flies in & hovers ───────────
+                  // ── SUPERHEROES  -  dark city, hero flies in & hovers ───────────
                   'Superheroes': (<>
                     {/* Subtle stars in sky */}
                     <S cx={20} cy={6} r={1.2} d="0.1s"/><S cx={42} cy={4} r={1.5} d="0.5s"/><S cx={62} cy={7} r={1.0} d="0.9s"/>
@@ -531,19 +590,19 @@ export default function OnboardingPage() {
                     <rect x="48" y="35" width="10" height="25" fill="rgba(200,215,255,0.15)"/>
                     <rect x="56" y="26" width="14" height="34" fill="rgba(200,215,255,0.18)"/>
                     <rect x="68" y="34" width="9"  height="26" fill="rgba(200,215,255,0.13)"/>
-                    {/* Window lights — bright and visible */}
+                    {/* Window lights  -  bright and visible */}
                     {[[10,34],[10,40],[19,40],[25,35],[25,41],[49,37],[49,43],[57,28],[57,34],[57,40],[69,36],[69,42]].map(([x,y],i)=>(
                       <rect key={i} x={x} y={y} width="2.5" height="2" fill="rgba(255,230,100,0.95)" className="it-star" style={{animationDelay:`${i*0.18}s`}}/>
                     ))}
-                    {/* HERO — bigger, bolder, 2.4s cycle */}
+                    {/* HERO  -  bigger, bolder, 2.4s cycle */}
                     <g className="it-hero" style={{transformOrigin:'40px 27px'}}>
-                      {/* Cape — large, dramatic */}
+                      {/* Cape  -  large, dramatic */}
                       <path d="M35,22 Q16,27 14,40 Q24,33 33,37 Q30,28 35,22" fill="#DC2626"/>
                       {/* Body */}
                       <ellipse cx="41" cy="29" rx="7.5" ry="9.5" fill="#1D4ED8"/>
                       {/* Belt */}
                       <rect x="33.5" y="33" width="15" height="3" rx="1.5" fill="#FBBF24"/>
-                      {/* S shield — larger */}
+                      {/* S shield  -  larger */}
                       <circle cx="41" cy="27" r="4.5" fill="rgba(255,200,40,0.95)"/>
                       <text x="38.8" y="29.8" fontSize="6.5" fill="#1D4ED8" fontWeight="900">S</text>
                       {/* Head */}
@@ -562,7 +621,7 @@ export default function OnboardingPage() {
                       <line x1="41" y1="38" x2="36" y2="48" stroke="#1D4ED8" strokeWidth="4" strokeLinecap="round"/>
                     </g>
                   </>),
-                  // ── FANTASY — Disney-style castle with spires ────────────────
+                  // ── FANTASY  -  Disney-style castle with spires ────────────────
                   'Fantasy': (<>
                     <S cx={6} cy={3} r={1.1} d="0s"/><S cx={18} cy={2} r={0.8} d="0.35s"/>
                     <S cx={55} cy={4} r={1.3} d="0.7s"/><S cx={76} cy={6} r={1.0} d="0.5s"/>
@@ -575,7 +634,7 @@ export default function OnboardingPage() {
                     {/* Left tower */}
                     <rect x="15" y="33" width="13" height="27" fill="rgba(155,120,218,0.72)" rx="1"/>
                     <polygon points="21.5,16 15,33 28,33" fill="rgba(188,158,242,0.92)"/>
-                    {/* Main center tower — tallest & grandest */}
+                    {/* Main center tower  -  tallest & grandest */}
                     <rect x="31" y="23" width="18" height="37" fill="rgba(168,132,228,0.82)" rx="1"/>
                     <polygon points="40,1 33,23 47,23" fill="rgba(198,168,250,0.97)"/>
                     {/* Right tower */}
@@ -592,7 +651,7 @@ export default function OnboardingPage() {
                     ))}
                     {/* Grand arched gateway */}
                     <rect x="35" y="49" width="10" height="11" rx="5 5 0 0" fill="rgba(0,0,0,0.45)"/>
-                    {/* Glowing windows — warm amber glow */}
+                    {/* Glowing windows  -  warm amber glow */}
                     {[[8,36],[21.5,22],[40,10],[58.5,22],[72,36],[33,32],[40,32],[47,32],[21.5,40],[58.5,40]].map(([x,y],i)=>(
                       <rect key={i} x={(x as number)-1.5} y={(y as number)} width="3" height="4.5" rx="1.5" fill="rgba(255,215,90,0.92)" className="it-star" style={{animationDelay:`${i*0.14}s`}}/>
                     ))}
@@ -602,7 +661,7 @@ export default function OnboardingPage() {
                       <line key={i} x1="40" y1="1" x2={40+6*Math.cos(i*45*Math.PI/180)} y2={1+6*Math.sin(i*45*Math.PI/180)} stroke="rgba(255,215,60,0.55)" strokeWidth="1.1"/>
                     ))}
                   </>),
-                  // ── FAIRIES — fairy garden, flutters on hover ────────────────
+                  // ── FAIRIES  -  fairy garden, flutters on hover ────────────────
                   'Fairies': (<>
                     <S cx={6} cy={4} r={1.1} d="0s"/><S cx={20} cy={2} r={0.8} d="0.4s"/>
                     <S cx={58} cy={5} r={1.3} d="0.8s"/><S cx={72} cy={3} r={0.9} d="0.3s"/>
@@ -617,12 +676,12 @@ export default function OnboardingPage() {
                         <circle cx={x} cy={y} r="1.8" fill="rgba(255,240,100,0.95)" className="it-star" style={{animationDelay:`${i*0.3}s`}}/>
                       </g>
                     ))}
-                    {/* Resting fairy — gently bobs in idle */}
-                    <g className="it-bob" style={{transformOrigin:'40px 26px'}}>
-                      {/* Upper wings — large teardrop shape */}
+                    {/* Resting fairy  -  gently bobs in idle */}
+                    <g className="it-bob" style={{transformOrigin:'40px 26px', animationDelay:'0.0s'}}>
+                      {/* Upper wings  -  large teardrop shape */}
                       <path d="M40,20 Q28,10 24,20 Q28,28 40,24 Z" fill="rgba(200,160,255,0.38)" stroke="rgba(200,160,255,0.6)" strokeWidth="0.8"/>
                       <path d="M40,20 Q52,10 56,20 Q52,28 40,24 Z" fill="rgba(200,160,255,0.38)" stroke="rgba(200,160,255,0.6)" strokeWidth="0.8"/>
-                      {/* Lower wings — smaller */}
+                      {/* Lower wings  -  smaller */}
                       <path d="M40,26 Q30,22 27,30 Q32,34 40,30 Z" fill="rgba(220,180,255,0.28)" stroke="rgba(220,180,255,0.5)" strokeWidth="0.7"/>
                       <path d="M40,26 Q50,22 53,30 Q48,34 40,30 Z" fill="rgba(220,180,255,0.28)" stroke="rgba(220,180,255,0.5)" strokeWidth="0.7"/>
                       {/* Wing shimmer lines */}
@@ -636,7 +695,7 @@ export default function OnboardingPage() {
                       <polygon points="36,36 44,36 47,43 33,43" fill="rgba(255,100,200,0.8)"/>
                       {/* Head */}
                       <circle cx="40" cy="19" r="5.5" fill="rgba(255,210,185,0.97)"/>
-                      {/* Hair — flowing */}
+                      {/* Hair  -  flowing */}
                       <path d="M34.5,17 Q37,11 40,13.5 Q43,11 45.5,17" fill="rgba(180,100,255,0.92)"/>
                       <path d="M35,20 Q30,26 32,32" fill="none" stroke="rgba(180,100,255,0.7)" strokeWidth="2.5" strokeLinecap="round"/>
                       {/* Face */}
@@ -647,9 +706,9 @@ export default function OnboardingPage() {
                       <line x1="44" y1="28" x2="56" y2="18" stroke="rgba(200,175,80,0.9)" strokeWidth="1.8" strokeLinecap="round"/>
                       <circle cx="56" cy="18" r="3" fill="rgba(255,220,50,0.95)" className="it-pulse"/>
                     </g>
-                    {/* Fairy flutters across on hover — trailing sparkle dust */}
+                    {/* Fairy flutters across on hover  -  trailing sparkle dust */}
                     <g className="it-fairy-flutter" style={{transformOrigin:'20px 28px'}}>
-                      {/* Flying fairy — smaller, mid-flight pose */}
+                      {/* Flying fairy  -  smaller, mid-flight pose */}
                       <path d="M20,22 Q11,14 8,22 Q11,28 20,26 Z" fill="rgba(200,160,255,0.5)" stroke="rgba(200,160,255,0.7)" strokeWidth="0.7"/>
                       <path d="M20,22 Q29,14 32,22 Q29,28 20,26 Z" fill="rgba(200,160,255,0.5)" stroke="rgba(200,160,255,0.7)" strokeWidth="0.7"/>
                       <ellipse cx="20" cy="28" rx="3" ry="5" fill="rgba(255,130,220,0.9)"/>
@@ -661,112 +720,143 @@ export default function OnboardingPage() {
                       ))}
                     </g>
                   </>),
-                  // ── UNICORNS — full body prancing unicorn ────────────────────
+                  // ── UNICORNS  -  full body prancing unicorn ────────────────────
                   'Unicorns': (<>
                     <S cx={6} cy={4} r={1.2} d="0s"/><S cx={18} cy={2} r={0.8} d="0.35s"/>
                     <S cx={62} cy={5} r={1.4} d="0.7s"/><S cx={76} cy={3} r={1.0} d="0.4s"/>
-                    {/* Rainbow arcs */}
-                    {[['#F87171',55],['#FB923C',50],['#FCD34D',45],['#86EFAC',40],['#67E8F9',35],['#A78BFA',30]].map(([col,y],i)=>(
-                      <path key={i} d={`M4,${y} Q20,${(y as number)-8} 40,${y} Q60,${(y as number)+8} 76,${y}`} fill="none" stroke={col as string} strokeWidth="3" opacity="0.7"/>
+                    {/* Pine forest silhouette */}
+                    {[[5,22],[13,18],[66,20],[73,16]].map(([x,h],i)=>(
+                      <g key={i}>
+                        <rect x={x-1} y={60-h*0.28} width="2.5" height={h*0.28} fill="rgba(15,8,4,0.85)"/>
+                        <polygon points={`${x-7},${60-h*0.28} ${x+7},${60-h*0.28} ${x},${60-h}`} fill="rgba(8,45,15,0.82)"/>
+                        <polygon points={`${x-5},${60-h*0.52} ${x+5},${60-h*0.52} ${x},${60-h*1.1}`} fill="rgba(12,55,18,0.75)"/>
+                      </g>
                     ))}
-                    {/* Full body unicorn — side view, facing right, bobbing idle */}
-                    <g className="it-bob" style={{transformOrigin:'38px 30px'}}>
-                      {/* Tail — flowing left */}
-                      <path d="M22,32 Q12,28 8,22 Q10,32 14,36 Q10,38 12,44" fill="none" stroke="rgba(230,120,210,0.85)" strokeWidth="4" strokeLinecap="round"/>
-                      <path d="M22,32 Q10,36 8,44" fill="none" stroke="rgba(255,160,220,0.7)" strokeWidth="2.5" strokeLinecap="round"/>
-                      {/* Body */}
-                      <ellipse cx="38" cy="34" rx="18" ry="12" fill="rgba(240,225,255,0.97)"/>
+                    {/* Moon */}
+                    <circle cx="68" cy="9" r="7" fill="rgba(255,240,200,0.18)"/>
+                    <circle cx="68" cy="9" r="5" fill="rgba(255,240,210,0.40)"/>
+                    {/* Unicorn */}
+                    <g transform="translate(6,5) scale(0.78)">
+                    <g className="it-bob" style={{transformOrigin:'38px 35px', animationDelay:'0.15s'}}>
+                      {/* Tail  -  rainbow flowing */}
+                      <path d="M20,35 Q8,24 5,15 Q9,26 13,32" fill="none" stroke="rgba(255,90,200,0.92)" strokeWidth="5" strokeLinecap="round"/>
+                      <path d="M20,37 Q7,37 5,46 Q10,40 15,39" fill="none" stroke="rgba(170,70,255,0.88)" strokeWidth="4" strokeLinecap="round"/>
+                      <path d="M20,33 Q8,20 11,11 Q14,21 18,27" fill="none" stroke="rgba(60,215,255,0.82)" strokeWidth="3" strokeLinecap="round"/>
+                      {/* Body  -  big and round */}
+                      <ellipse cx="37" cy="37" rx="18" ry="11" fill="rgba(242,230,255,0.97)"/>
+                      {/* Back legs  -  thick polygons */}
+                      <polygon points="23,47 29,47 28,59 22,59" fill="rgba(228,215,252,0.97)"/>
+                      <polygon points="31,47 37,47 38,59 32,59" fill="rgba(228,215,252,0.95)"/>
+                      {/* Back hooves */}
+                      <ellipse cx="25" cy="59" rx="3.5" ry="2" fill="rgba(160,120,210,0.88)"/>
+                      <ellipse cx="35" cy="59" rx="3.5" ry="2" fill="rgba(160,120,210,0.88)"/>
                       {/* Neck */}
-                      <ellipse cx="52" cy="26" rx="7" ry="11" fill="rgba(240,225,255,0.97)" transform="rotate(-15,52,26)"/>
-                      {/* Mane */}
-                      <path d="M48,17 Q52,10 56,14 Q54,20 58,22 Q55,27 56,30" fill="none" stroke="rgba(220,100,200,0.9)" strokeWidth="4" strokeLinecap="round"/>
-                      <path d="M48,17 Q53,8 58,12 Q55,20 60,24" fill="none" stroke="rgba(255,150,220,0.7)" strokeWidth="2.5" strokeLinecap="round"/>
+                      <polygon points="48,27 55,29 59,17 52,14" fill="rgba(242,230,255,0.97)"/>
+                      {/* Mane  -  rainbow lush */}
+                      <path d="M52,14 Q55,5 53,1 Q49,7 47,15" fill="none" stroke="rgba(255,80,185,0.95)" strokeWidth="6" strokeLinecap="round"/>
+                      <path d="M55,16 Q60,7 57,2 Q53,9 51,17" fill="none" stroke="rgba(155,55,255,0.90)" strokeWidth="4.5" strokeLinecap="round"/>
+                      <path d="M58,19 Q64,11 62,5 Q57,12 55,20" fill="none" stroke="rgba(55,210,255,0.85)" strokeWidth="3.2" strokeLinecap="round"/>
                       {/* Head */}
-                      <ellipse cx="60" cy="20" rx="10" ry="8" fill="rgba(240,225,255,0.97)"/>
+                      <ellipse cx="63" cy="21" rx="10" ry="8" fill="rgba(242,230,255,0.97)"/>
                       {/* Snout */}
-                      <ellipse cx="68" cy="22" rx="5" ry="3.5" fill="rgba(235,215,255,0.97)"/>
-                      <circle cx="72" cy="23" r="1" fill="rgba(200,150,220,0.6)"/>
-                      {/* Eye */}
-                      <circle cx="62" cy="18" r="2.8" fill="rgba(80,40,120,0.95)"/>
-                      <circle cx="62.7" cy="17.3" r="1.1" fill="rgba(255,255,255,0.95)"/>
+                      <ellipse cx="72" cy="24" rx="5" ry="3.5" fill="rgba(235,218,255,0.97)"/>
+                      <circle cx="75" cy="25.5" r="1.1" fill="rgba(195,155,228,0.55)"/>
+                      {/* Eye  -  big expressive */}
+                      <circle cx="64" cy="19" r="3.8" fill="rgba(55,20,100,0.95)"/>
+                      <circle cx="65.2" cy="17.8" r="1.6" fill="rgba(255,255,255,0.95)"/>
+                      <circle cx="64.8" cy="17.2" r="0.7" fill="rgba(255,255,255,0.7)"/>
                       {/* Eyelashes */}
-                      {[-20,0,20].map((deg,i)=><line key={i} x1="62" y1="15.5" x2={62+3*Math.sin(deg*Math.PI/180)} y2={15.5-3*Math.cos(deg*Math.PI/180)} stroke="rgba(80,40,120,0.7)" strokeWidth="0.9"/>)}
-                      {/* Horn */}
-                      <polygon points="59,14 56,2 62,14" fill="rgba(255,205,50,0.97)"/>
-                      {[59,58.5,58,57.5].map((x,i)=><line key={i} x1={x} y1={14-i*3} x2={x+1.5} y2={14-i*3} stroke="rgba(220,160,30,0.5)" strokeWidth="0.7"/>)}
-                      {/* Legs — 4 legs in graceful prancing pose */}
-                      <line x1="30" y1="45" x2="28" y2="58" stroke="rgba(230,215,255,0.97)" strokeWidth="4" strokeLinecap="round"/>
-                      <line x1="36" y1="46" x2="34" y2="58" stroke="rgba(230,215,255,0.97)" strokeWidth="4" strokeLinecap="round"/>
-                      <line x1="46" y1="45" x2="48" y2="57" stroke="rgba(230,215,255,0.97)" strokeWidth="4" strokeLinecap="round"/>
-                      <line x1="52" y1="44" x2="55" y2="55" stroke="rgba(230,215,255,0.97)" strokeWidth="4" strokeLinecap="round"/>
-                      {/* Hooves */}
-                      {[[28,58],[34,58],[48,57],[55,55]].map(([x,y],i)=>(
-                        <ellipse key={i} cx={x} cy={y} rx="3" ry="2" fill="rgba(180,140,200,0.8)"/>
-                      ))}
+                      <line x1="61" y1="16" x2="59.5" y2="14" stroke="rgba(70,30,110,0.85)" strokeWidth="1.3" strokeLinecap="round"/>
+                      <line x1="64" y1="15" x2="63.5" y2="13" stroke="rgba(70,30,110,0.85)" strokeWidth="1.3" strokeLinecap="round"/>
+                      <line x1="67" y1="16" x2="67.5" y2="14" stroke="rgba(70,30,110,0.85)" strokeWidth="1.3" strokeLinecap="round"/>
+                      {/* Horn  -  tall gold */}
+                      <polygon points="61,14 59,0 67,13" fill="rgba(255,198,35,0.97)"/>
+                      <line x1="60.5" y1="11" x2="62.5" y2="11" stroke="rgba(215,145,15,0.6)" strokeWidth="0.9"/>
+                      <line x1="59.8" y1="8" x2="62" y2="8" stroke="rgba(215,145,15,0.6)" strokeWidth="0.9"/>
+                      <line x1="59.2" y1="5" x2="61.5" y2="5" stroke="rgba(215,145,15,0.6)" strokeWidth="0.9"/>
+                      <line x1="59" y1="2" x2="60.8" y2="2" stroke="rgba(215,145,15,0.6)" strokeWidth="0.9"/>
+                      {/* Front standing leg */}
+                      <polygon points="43,47 49,47 48,59 42,59" fill="rgba(228,215,252,0.97)"/>
+                      <ellipse cx="45" cy="59" rx="3.5" ry="2" fill="rgba(160,120,210,0.88)"/>
+                      {/* Front prancing leg  -  raised */}
+                      <polygon points="50,47 56,47 58,37 52,37" fill="rgba(228,215,252,0.97)"/>
+                      <polygon points="53,37 58,37 63,46 57,46" fill="rgba(228,215,252,0.95)"/>
+                      <ellipse cx="60" cy="46" rx="3.5" ry="2" fill="rgba(160,120,210,0.88)"/>
+                    </g>
                     </g>
                     {/* Sparkles */}
-                    {[{x:12,y:20},{x:6,y:32},{x:72,y:18},{x:78,y:30}].map(({x,y},i)=>(
-                      <circle key={i} cx={x} cy={y} r="2" fill="rgba(255,220,255,0.9)" className="it-star" style={{animationDelay:`${i*0.3}s`}}/>
+                    {[{x:8,y:24},{x:4,y:36},{x:74,y:18},{x:78,y:30}].map(({x,y},i)=>(
+                      <circle key={i} cx={x} cy={y} r="1.8" fill="rgba(255,220,255,0.9)" className="it-star" style={{animationDelay:`${i*0.3}s`}}/>
                     ))}
                   </>),
-                  // ── PRINCESSES — Disney princess in ballgown ─────────────────
+                  // ── PRINCESSES  -  Disney princess in ballgown ─────────────────
                   'Princesses': (<>
                     <S cx={6}  cy={3}  r={1.0} d="0s"/><S cx={68} cy={4}  r={1.2} d="0.5s"/>
                     <S cx={76} cy={14} r={0.9} d="0.8s"/><S cx={14} cy={18} r={0.8} d="0.3s"/>
-                    {/* Palace ballroom arch background */}
-                    <rect x="0" y="42" width="80" height="18" fill="rgba(180,130,40,0.3)"/>
-                    <path d="M20,42 Q40,30 60,42" fill="rgba(180,130,40,0.2)"/>
+                    {/* Castle silhouette */}
+                    <rect x="2"  y="30" width="14" height="28" fill="rgba(120,80,160,0.35)"/>
+                    <rect x="64" y="30" width="14" height="28" fill="rgba(120,80,160,0.35)"/>
+                    {[2,5,8,11].map((x,i)=><rect key={i} x={x} y={26} width={2} height={5} fill="rgba(120,80,160,0.45)"/>)}
+                    {[64,67,70,73].map((x,i)=><rect key={i} x={x} y={26} width={2} height={5} fill="rgba(120,80,160,0.45)"/>)}
                     {/* Chandelier */}
                     <line x1="40" y1="0" x2="40" y2="8" stroke="rgba(220,190,80,0.6)" strokeWidth="1"/>
                     <ellipse cx="40" cy="10" rx="8" ry="4" fill="rgba(200,170,60,0.4)"/>
                     {[0,1,2,3,4,5].map(i=><circle key={i} cx={33+i*3} cy={12} r="1.5" fill="rgba(255,230,100,0.9)" className="it-star" style={{animationDelay:`${i*0.2}s`}}/>)}
-                    {/* Princess figure — center stage */}
-                    <g className="it-bob" style={{transformOrigin:'40px 30px'}}>
-                      {/* Ballgown — layered skirt, Disney style */}
-                      <polygon points="40,32 20,60 60,60" fill="rgba(180,80,200,0.7)"/>
-                      <ellipse cx="40" cy="52" rx="22" ry="8" fill="rgba(200,100,220,0.6)"/>
-                      {/* Skirt sparkle decoration */}
-                      {[[28,44],[35,50],[45,50],[52,44],[32,56],[48,56]].map(([x,y],i)=>(
-                        <circle key={i} cx={x} cy={y} r="1.5" fill="rgba(255,220,255,0.8)" className="it-star" style={{animationDelay:`${i*0.2}s`}}/>
+                    {/* Princess figure */}
+                    <g className="it-bob" style={{transformOrigin:'40px 30px', animationDelay:'0.9s'}}>
+                      {/* Ballgown  -  3 layered tiers */}
+                      <polygon points="40,32 16,60 64,60" fill="rgba(180,80,200,0.75)"/>
+                      <polygon points="40,38 20,60 60,60" fill="rgba(200,100,220,0.65)"/>
+                      <ellipse cx="40" cy="56" rx="20" ry="5" fill="rgba(220,130,240,0.5)"/>
+                      {/* Gown sparkles */}
+                      {[[26,44],[30,52],[36,48],[44,50],[50,44],[54,52]].map(([x,y],i)=>(
+                        <circle key={i} cx={x} cy={y} r="1.8" fill="rgba(255,230,255,0.85)" className="it-star" style={{animationDelay:`${i*0.18}s`}}/>
                       ))}
                       {/* Bodice */}
-                      <ellipse cx="40" cy="30" rx="6" ry="8" fill="rgba(200,100,220,0.85)"/>
-                      {/* Gloved arms */}
+                      <ellipse cx="40" cy="30" rx="6" ry="8" fill="rgba(200,100,220,0.88)"/>
+                      {/* Gem necklace */}
+                      {[-4,-1,2,5].map((dx,i)=><circle key={i} cx={40+dx} cy={24} r="1.5" fill={['rgba(255,100,100,0.9)','rgba(100,180,255,0.9)','rgba(100,255,150,0.9)','rgba(255,200,50,0.9)'][i]}/>)}
+                      {/* Left gloved arm */}
                       <path d="M34,28 Q24,22 20,26" fill="none" stroke="rgba(255,200,210,0.9)" strokeWidth="3.5" strokeLinecap="round"/>
                       <circle cx="20" cy="26" r="2.5" fill="rgba(255,200,210,0.95)"/>
-                      <path d="M46,28 Q56,22 60,26" fill="none" stroke="rgba(255,200,210,0.9)" strokeWidth="3.5" strokeLinecap="round"/>
-                      <circle cx="60" cy="26" r="2.5" fill="rgba(255,200,210,0.95)"/>
+                      {/* Right arm holding wand */}
+                      <path d="M46,28 Q52,22 55,16" fill="none" stroke="rgba(255,200,210,0.9)" strokeWidth="3.5" strokeLinecap="round"/>
+                      <line x1="55" y1="16" x2="58" y2="8" stroke="rgba(200,180,60,0.92)" strokeWidth="2.5" strokeLinecap="round"/>
+                      <circle cx="59" cy="7" r="4.5" fill="rgba(255,220,80,0.92)" className="it-pulse"/>
+                      {[0,45,90,135,180,225,270,315].map((deg,i)=>(
+                        <line key={i} x1="59" y1="7" x2={59+8*Math.cos(deg*Math.PI/180)} y2={7+8*Math.sin(deg*Math.PI/180)} stroke="rgba(255,220,80,0.55)" strokeWidth="1.2" strokeLinecap="round"/>
+                      ))}
                       {/* Neck & head */}
                       <ellipse cx="40" cy="19" rx="1.8" ry="3" fill="rgba(255,210,185,0.97)"/>
                       <circle cx="40" cy="13" r="7" fill="rgba(255,210,185,0.97)"/>
-                      {/* Hair — long and elegant */}
+                      {/* Hair */}
                       <path d="M33,10 Q36,3 40,5 Q44,3 47,10" fill="rgba(200,140,50,0.95)"/>
                       <path d="M33,14 Q26,20 28,30" fill="none" stroke="rgba(200,140,50,0.8)" strokeWidth="3.5" strokeLinecap="round"/>
                       <path d="M47,14 Q54,20 52,30" fill="none" stroke="rgba(200,140,50,0.8)" strokeWidth="3.5" strokeLinecap="round"/>
-                      {/* Face details */}
+                      {/* Face */}
                       <circle cx="37.5" cy="13.5" r="1.3" fill="rgba(100,60,120,0.9)"/>
                       <circle cx="42.5" cy="13.5" r="1.3" fill="rgba(100,60,120,0.9)"/>
                       <path d="M37.5,16.5 Q40,19 42.5,16.5" fill="none" stroke="rgba(200,80,120,0.8)" strokeWidth="1.2" strokeLinecap="round"/>
-                      {/* Tiara / Crown */}
-                      <path d="M34,8 L36,3 L38,6 L40,1 L42,6 L44,3 L46,8" fill="none" stroke="rgba(255,220,40,0.95)" strokeWidth="2" strokeLinejoin="round"/>
-                      {/* Crown gems */}
-                      {[[36,3,'rgba(255,80,80,0.95)'],[40,1,'rgba(255,220,40,1)'],[44,3,'rgba(200,80,255,0.95)']].map(([x,y,col],i)=>(
-                        <circle key={i} cx={x as number} cy={y as number} r="2" fill={col as string} className="it-star" style={{animationDelay:`${i*0.25}s`}}/>
-                      ))}
+                      {/* Crown  -  5-point elaborate */}
+                      <polygon points="33,8 36,2 40,5.5 44,2 47,8" fill="rgba(255,200,40,0.97)"/>
+                      <rect x="33" y="7" width="14" height="3.5" rx="1" fill="rgba(240,180,30,0.95)"/>
+                      <circle cx="36" cy="3" r="2" fill="rgba(255,80,120,0.95)" className="it-pulse"/>
+                      <circle cx="40" cy="5.5" r="1.5" fill="rgba(100,200,255,0.9)"/>
+                      <circle cx="44" cy="3" r="2" fill="rgba(255,80,120,0.95)" className="it-pulse" style={{animationDelay:'0.5s'}}/>
                     </g>
                   </>),
-                  // ── PIRATES — tall ship on the dark sea ─────────────────────
+                  // ── PIRATES  -  tall ship on the dark sea ─────────────────────
                   'Pirates': (<>
-                    {/* Stars — fixed, opacity only */}
+                    {/* Stars  -  fixed, opacity only */}
                     <S cx={62} cy={4} r={1.3} d="0s"/><S cx={72} cy={10} r={1.0} d="0.4s"/><S cx={55} cy={2} r={1.5} d="0.8s"/><S cx={76} cy={18} r={0.9} d="0.6s"/>
                     {/* Crescent moon */}
                     <circle cx="10" cy="11" r="9" fill="rgba(255,235,145,0.92)"/>
                     <circle cx="14" cy="9"  r="7.5" fill="#071422"/>
-                    {/* Waves — dark ocean */}
+                    {/* Waves  -  dark ocean */}
                     <path d="M0,50 Q10,44 20,50 Q30,56 40,50 Q50,44 60,50 Q70,56 80,50" fill="rgba(20,50,130,0.45)" className="it-wave-y"/>
                     <path d="M0,56 Q10,50 20,56 Q30,62 40,56 Q50,50 60,56 Q70,62 80,56" fill="rgba(20,50,130,0.55)" className="it-wave-y" style={{animationDelay:'0.5s'}}/>
-                    {/* Ship — gently bobs on the water */}
-                    <g className="it-bob" style={{transformOrigin:'40px 40px'}}>
+                    {/* Ship  -  gently bobs on the water */}
+                    <g className="it-bob" style={{transformOrigin:'40px 40px', animationDelay:'1.1s'}}>
                       {/* Hull */}
                       <polygon points="20,38 60,38 56,50 24,50" fill="rgba(90,48,12,0.97)"/>
                       {/* Deck railing */}
@@ -796,13 +886,13 @@ export default function OnboardingPage() {
                       <circle cx="43" cy="3.5" r="1.6" fill="rgba(240,240,240,0.9)"/>
                       <line x1="41.4" y1="4.8" x2="43" y2="5.8" stroke="rgba(240,240,240,0.8)" strokeWidth="0.7"/>
                       <line x1="44.6" y1="4.8" x2="43" y2="5.8" stroke="rgba(240,240,240,0.8)" strokeWidth="0.7"/>
-                      {/* Pirate idle — always faintly visible so hover "reveal" is satisfying */}
+                      {/* Pirate idle  -  always faintly visible so hover "reveal" is satisfying */}
                       <g opacity="0.25">
                         <circle cx="40" cy="2.5" r="2.8" fill="rgba(215,168,112,1)"/>
                         <rect x="37" y="0.2" width="6" height="2" rx="0.5" fill="rgba(18,18,18,1)"/>
                         <rect x="37.5" y="4" width="5" height="5.5" rx="0.5" fill="rgba(25,25,80,1)"/>
                       </g>
-                      {/* Pirate on hover — bounces in then waves dramatically */}
+                      {/* Pirate on hover  -  bounces in then waves dramatically */}
                       <g className="it-pirate-appear" style={{transformOrigin:'40px 4px'}}>
                         {/* Body */}
                         <rect x="37.5" y="4" width="5" height="5.5" rx="0.5" fill="rgba(25,25,80,0.97)"/>
@@ -810,7 +900,7 @@ export default function OnboardingPage() {
                         <circle cx="40" cy="2.5" r="2.8" fill="rgba(215,168,112,0.97)"/>
                         {/* Pirate hat */}
                         <rect x="37" y="0.2" width="6" height="2" rx="0.5" fill="rgba(18,18,18,0.97)"/>
-                        {/* Waving arm — wide rotation */}
+                        {/* Waving arm  -  wide rotation */}
                         <g className="it-pirate-wave" style={{transformOrigin:'42.5px 5.5px'}}>
                           <line x1="42.5" y1="5.5" x2="49" y2="1.5" stroke="rgba(25,25,80,0.97)" strokeWidth="2" strokeLinecap="round"/>
                           <circle cx="49" cy="1.5" r="2" fill="rgba(215,168,112,0.97)"/>
@@ -820,46 +910,54 @@ export default function OnboardingPage() {
                       </g>
                     </g>
                   </>),
-                  // ── MAGIC — elegant wand with swirling energy ────────────────
+                  // ── MAGIC  -  elegant wand with swirling energy ────────────────
                   'Magic': (<>
-                    {/* Background sparkles */}
-                    {[{x:6,y:5},{x:15,y:30},{x:70,y:8},{x:74,y:32},{x:8,y:50},{x:75,y:52}].map(({x,y},i)=>(
-                      <circle key={i} cx={x} cy={y} r={1.4+i%2*0.5} fill={c(0.8)} className="it-star" style={{animationDelay:`${i*0.38}s`}}/>
+                    {/* Twinkling background stars */}
+                    {[{x:66,y:6,r:1.6},{x:76,y:24,r:1.2},{x:8,y:12,r:1.5},{x:4,y:46,r:1.2},{x:78,y:50,r:1.4}].map(({x,y,r},i)=>(
+                      <circle key={i} cx={x} cy={y} r={r} fill="rgba(255,210,80,0.85)" className="it-star" style={{animationDelay:`${i*0.42}s`}}/>
                     ))}
-                    {/* Wand pivots from handle base */}
-                    <g className="it-wand-swing" style={{transformOrigin:'35px 56px'}}>
-                      {/* Handle — carved wood with bands */}
-                      <rect x="29" y="48" width="12" height="16" rx="4" fill="rgba(75,38,8,0.97)"/>
-                      <rect x="29" y="51" width="12" height="2"  rx="1" fill="rgba(175,135,45,0.75)"/>
-                      <rect x="29" y="55" width="12" height="2"  rx="1" fill="rgba(175,135,45,0.75)"/>
-                      <rect x="29" y="59" width="12" height="2"  rx="1" fill="rgba(175,135,45,0.75)"/>
-                      {/* Guard / crosspiece */}
-                      <rect x="25" y="46" width="20" height="4" rx="2" fill="rgba(155,115,40,0.9)"/>
-                      {/* Shaft — tapered golden */}
-                      <path d="M35,46 L54,10" stroke="rgba(215,180,75,0.97)" strokeWidth="4" strokeLinecap="round"/>
-                      <path d="M35,46 L54,10" stroke="rgba(255,230,130,0.5)" strokeWidth="1.8" strokeLinecap="round"/>
-                      {/* Crystal orb at tip — glowing */}
-                      <circle cx="54" cy="9"  r="7"  fill={c(0.15)}/>
-                      <circle cx="54" cy="9"  r="4.5" fill={c(0.45)}/>
-                      <circle cx="54" cy="9"  r="3"   fill={c(0.92)} className="it-pulse"/>
-                      {/* 8-pointed star burst */}
-                      {[0,22.5,45,67.5,90,112.5,135,157.5,180,202.5,225,247.5,270,292.5,315,337.5].map((deg,i)=>(
-                        <line key={i} x1="54" y1="9" x2={54+(i%2===0?11:7)*Math.cos(deg*Math.PI/180)} y2={9+(i%2===0?11:7)*Math.sin(deg*Math.PI/180)} stroke={c(i%2===0?0.75:0.45)} strokeWidth={i%2===0?1.4:0.9} strokeLinecap="round"/>
+                    {/* WIZARD HAT  -  tall golden */}
+                    <polygon points="34,1 22,27 52,27" fill="rgba(210,162,18,0.97)"/>
+                    <polygon points="34,1 22,27 52,27" fill="rgba(255,220,70,0.22)"/>
+                    <ellipse cx="37" cy="27" rx="18" ry="5" fill="rgba(182,128,10,0.97)"/>
+                    {/* Star on hat */}
+                    <polygon points="34,7 35.4,11 39.4,11 36.2,13.5 37.6,17.5 34,15.2 30.4,17.5 31.8,13.5 28.6,11 32.6,11" fill="rgba(255,248,120,0.97)"/>
+                    {/* WIZARD FACE */}
+                    <circle cx="37" cy="35" r="7.5" fill="rgba(228,188,132,0.96)"/>
+                    <circle cx="34" cy="33.5" r="1.4" fill="rgba(45,15,75,0.92)"/>
+                    <circle cx="40" cy="33.5" r="1.4" fill="rgba(45,15,75,0.92)"/>
+                    <path d="M33.5,37 Q37,40 40.5,37" fill="none" stroke="rgba(140,80,40,0.82)" strokeWidth="1.4" strokeLinecap="round"/>
+                    {/* WIZARD ROBE */}
+                    <path d="M22,42 Q17,60 13,60 L58,60 Q56,42 50,42 Q44,40 37,42 Q30,40 22,42Z" fill="rgba(82,32,148,0.97)"/>
+                    <line x1="37" y1="43" x2="35" y2="59" stroke="rgba(125,80,210,0.35)" strokeWidth="2"/>
+                    {/* WAND ARM  -  sleeve extending right */}
+                    <path d="M50,50 Q60,44 66,36" fill="none" stroke="rgba(82,32,148,0.97)" strokeWidth="10" strokeLinecap="round"/>
+                    {/* Hand */}
+                    <circle cx="66" cy="36" r="5.5" fill="rgba(228,188,132,0.96)"/>
+                    {/* Wand shaft */}
+                    <line x1="66" y1="32" x2="72" y2="14" stroke="rgba(80,44,10,0.97)" strokeWidth="4" strokeLinecap="round"/>
+                    <line x1="66" y1="32" x2="72" y2="14" stroke="rgba(200,148,55,0.28)" strokeWidth="2" strokeLinecap="round"/>
+                    {/* Grip ring */}
+                    <line x1="63" y1="35" x2="70" y2="25" stroke="rgba(160,105,28,0.82)" strokeWidth="2.5" strokeLinecap="round"/>
+                    {/* MAGIC BURST at wand tip */}
+                    <g className="it-bob" style={{transformOrigin:'72px 14px',animationDelay:'0.7s'}}>
+                      <circle cx="72" cy="14" r="12" fill="rgba(195,145,255,0.1)"/>
+                      <circle cx="72" cy="14" r="7.5" fill="rgba(220,175,255,0.22)"/>
+                      <circle cx="72" cy="14" r="4.5" fill="rgba(245,208,255,0.6)"/>
+                      <circle cx="72" cy="14" r="2.6" fill="rgba(255,244,255,0.97)" className="it-pulse"/>
+                      {[0,45,90,135,180,225,270,315].map((deg,i)=>(
+                        <line key={i} x1="72" y1="14"
+                          x2={72+13*Math.cos(deg*Math.PI/180)}
+                          y2={14+13*Math.sin(deg*Math.PI/180)}
+                          stroke={i%2===0?"rgba(255,218,75,0.92)":"rgba(208,138,255,0.82)"}
+                          strokeWidth={i%2===0?2.2:1.4} strokeLinecap="round"/>
                       ))}
-                      {/* Swirling energy arcs — S-curves emanating from tip */}
-                      <path d="M54,9 Q48,2 40,10 Q32,18 36,28 Q40,36 34,42" fill="none" stroke={c(0.5)} strokeWidth="1.6" strokeLinecap="round" className="it-pulse"/>
-                      <path d="M54,9 Q62,3 68,12 Q74,22 68,30 Q62,36 66,44" fill="none" stroke={c(0.4)} strokeWidth="1.3" strokeLinecap="round" className="it-pulse" style={{animationDelay:'0.6s'}}/>
-                      {/* Orbiting energy beads */}
-                      {[0,1,2,3,4].map(i=>(
-                        <circle key={i} r="2.5" fill={c(0.92)} className="it-orbit" style={{transformOrigin:'54px 9px',animationDelay:`${i*0.22}s`}}/>
-                      ))}
-                      {/* Trail down shaft */}
-                      {[{x:51,y:16},{x:47,y:23},{x:43,y:31},{x:39,y:39}].map(({x,y},i)=>(
-                        <circle key={i} cx={x} cy={y} r={2.8-i*0.45} fill={c(0.62-i*0.1)} className="it-star" style={{animationDelay:`${i*0.22}s`}}/>
+                      {[{x:-8,y:-8},{x:5,y:-12},{x:12,y:2},{x:-12,y:4},{x:2,y:11}].map(({x,y},i)=>(
+                        <circle key={i} cx={72+x} cy={14+y} r={2.2} fill="rgba(255,228,78,0.9)" className="it-star" style={{animationDelay:`${i*0.22}s`}}/>
                       ))}
                     </g>
                   </>),
-                  // ── ALIENS — dark space encounter ───────────────────────────
+                  // ── ALIENS  -  dark space encounter ───────────────────────────
                   'Aliens': (<>
                     {/* Stars */}
                     {[{x:6,y:4,r:1.3},{x:18,y:2,r:0.9},{x:38,y:5,r:1.6},{x:54,y:3,r:1.1},{x:66,y:6,r:1.4},{x:74,y:14,r:1.0},{x:4,y:18,r:1.2},{x:76,y:28,r:0.8}].map(({x,y,r},i)=>(
@@ -869,7 +967,7 @@ export default function OnboardingPage() {
                     <circle cx="68" cy="10" r="9"  fill="rgba(0,180,80,0.25)"/>
                     <circle cx="68" cy="10" r="7"  fill="rgba(0,200,100,0.35)"/>
                     <ellipse cx="68" cy="10" rx="9" ry="3" fill="none" stroke="rgba(0,220,120,0.4)" strokeWidth="1.5" transform="rotate(-20,68,10)"/>
-                    {/* UFO — hovering */}
+                    {/* UFO  -  hovering */}
                     <ellipse cx="40" cy="20" rx="20" ry="9"  fill="rgba(0,180,80,0.35)"/>
                     <ellipse cx="40" cy="21" rx="14" ry="6"  fill="rgba(0,220,120,0.5)"/>
                     <ellipse cx="40" cy="19" rx="7"  ry="6"  fill="rgba(0,240,140,0.4)"/>
@@ -892,129 +990,152 @@ export default function OnboardingPage() {
                       <circle  cx="42" cy="39" r="1.5" fill="rgba(0,0,0,0.9)"/>
                     </g>
                   </>),
-                  // ── DINOSAURS — triceratops + brachiosaurus ──────────────────
+                  // ── DINOSAURS  -  triceratops + brachiosaurus ──────────────────
                   'Dinosaurs': (<>
-                    <S cx={8} cy={3} r={1.1} d="0s"/><S cx={24} cy={2} r={0.8} d="0.4s"/>
-                    <S cx={58} cy={4} r={1.3} d="0.7s"/>
-                    {/* Prehistoric trees — palm-like with large round tops */}
-                    {[[4,60],[8,60],[72,60],[76,60]].map(([x,y],i)=>(
+                    {/* Forest background  -  layered dark pines */}
+                    {[[0,28],[6,34],[68,30],[74,26]].map(([x,h],i)=>(
                       <g key={i}>
-                        <rect x={x+1} y={38} width={4} height={22} fill="rgba(80,50,15,0.7)" rx="2"/>
-                        <circle cx={x+3} cy={30} r={12+i%2*3} fill="rgba(20,140,50,0.55)"/>
-                        <circle cx={x+3} cy={26} r={9+i%2*2}  fill="rgba(30,160,60,0.55)"/>
+                        <rect x={x+1} y={60-h*0.28} width="3" height={h*0.28} fill="rgba(12,28,8,0.95)" rx="1"/>
+                        <polygon points={`${x+2.5-h*0.4},${60-h*0.28} ${x+2.5+h*0.4},${60-h*0.28} ${x+2.5},${60-h}`} fill="rgba(8,38,12,0.93)"/>
+                        <polygon points={`${x+2.5-h*0.3},${60-h*0.52} ${x+2.5+h*0.3},${60-h*0.52} ${x+2.5},${60-h*1.12}`} fill="rgba(10,48,14,0.85)"/>
                       </g>
                     ))}
+                    {/* Mid forest  -  slightly lighter */}
+                    {[[14,20],[20,24],[54,22],[60,18]].map(([x,h],i)=>(
+                      <g key={i}>
+                        <rect x={x+1} y={60-h*0.28} width="2.5" height={h*0.28} fill="rgba(14,36,10,0.88)" rx="1"/>
+                        <polygon points={`${x+2.5-h*0.35},${60-h*0.28} ${x+2.5+h*0.35},${60-h*0.28} ${x+2.5},${60-h}`} fill="rgba(12,48,16,0.82)"/>
+                      </g>
+                    ))}
+                    {/* Moon */}
+                    <circle cx="40" cy="8" r="8" fill="rgba(255,248,210,0.14)"/>
+                    <circle cx="40" cy="8" r="5" fill="rgba(255,248,210,0.38)"/>
                     {/* Ground */}
-                    <rect x="0" y="50" width="80" height="10" fill="rgba(20,80,20,0.45)"/>
-                    {/* Brachiosaurus (long neck) — background, eating from trees */}
-                    <g style={{opacity:0.75}}>
-                      {/* Body */}
-                      <ellipse cx="62" cy="44" rx="12" ry="8" fill="rgba(100,180,80,0.8)"/>
-                      {/* Long neck */}
-                      <path d="M62,36 Q60,25 58,14 Q60,8 64,10" fill="none" stroke="rgba(100,180,80,0.85)" strokeWidth="7" strokeLinecap="round"/>
-                      {/* Head */}
-                      <ellipse cx="64" cy="10" rx="7" ry="4" fill="rgba(100,180,80,0.88)"/>
-                      <circle cx="69" cy="9" r="1.5" fill="rgba(0,0,0,0.85)"/>
-                      {/* Eating leaves */}
-                      <ellipse cx="74" cy="12" rx="5" ry="3" fill="rgba(20,160,50,0.65)"/>
-                      {/* Tail */}
-                      <path d="M50,46 Q44,48 42,52" fill="none" stroke="rgba(100,180,80,0.8)" strokeWidth="5" strokeLinecap="round"/>
-                      {/* Legs (4) */}
-                      {[[56,50],[62,50],[68,50],[72,50]].map(([x,y],i)=>(
-                        <line key={i} x1={x} y1={y} x2={x+(i%2===0?-1:1)} y2={58} stroke="rgba(90,165,70,0.8)" strokeWidth="3.5" strokeLinecap="round"/>
+                    <rect x="0" y="53" width="80" height="7" fill="rgba(10,34,10,0.75)"/>
+                    {/* Ground ferns */}
+                    {[10,28,46,64].map((x,i)=>(
+                      <g key={i}>
+                        <path d={`M${x},53 Q${x-6},47 ${x-10},45`} fill="none" stroke="rgba(16,55,14,0.7)" strokeWidth="2" strokeLinecap="round"/>
+                        <path d={`M${x},53 Q${x+6},47 ${x+10},45`} fill="none" stroke="rgba(16,55,14,0.7)" strokeWidth="2" strokeLinecap="round"/>
+                      </g>
+                    ))}
+                    {/* Stegosaurus */}
+                    <g className="it-bob" style={{transformOrigin:'36px 40px', animationDelay:'0.2s'}}>
+                      {/* Tail  -  thick, curves left and up */}
+                      <path d="M18,42 Q8,38 4,30 Q3,25 6,24" fill="none" stroke="rgba(48,110,38,0.97)" strokeWidth="8" strokeLinecap="round"/>
+                      {/* Tail tip spike */}
+                      <polygon points="4,22 8,28 2,26" fill="rgba(35,85,28,0.95)"/>
+                      {/* Body  -  wide, low, fat */}
+                      <ellipse cx="36" cy="42" rx="20" ry="11" fill="rgba(52,118,42,0.97)"/>
+                      {/* Belly highlight */}
+                      <ellipse cx="36" cy="46" rx="13" ry="6" fill="rgba(68,145,55,0.35)"/>
+                      {/* Neck connecting to head */}
+                      <polygon points="50,34 56,36 60,28 54,26" fill="rgba(52,118,42,0.97)"/>
+                      {/* Head  -  small, angled forward-down */}
+                      <ellipse cx="60" cy="34" rx="9" ry="6" fill="rgba(52,118,42,0.97)"/>
+                      {/* Snout  -  beak-like */}
+                      <polygon points="67,35 74,38 72,42 65,40" fill="rgba(42,95,34,0.97)"/>
+                      {/* Eye  -  small, calm */}
+                      <circle cx="62" cy="31" r="2.8" fill="rgba(10,5,2,0.95)"/>
+                      <circle cx="63" cy="30" r="1.1" fill="rgba(255,255,255,0.8)"/>
+                      {/* Nostril */}
+                      <ellipse cx="70" cy="37" rx="1.4" ry="1" fill="rgba(28,68,22,0.7)"/>
+                      {/* 4 legs  -  thick pillars */}
+                      <polygon points="22,51 29,51 28,60 21,60" fill="rgba(44,100,35,0.97)"/>
+                      <polygon points="30,51 37,51 36,60 29,60" fill="rgba(44,100,35,0.95)"/>
+                      <polygon points="38,51 45,51 44,60 37,60" fill="rgba(44,100,35,0.97)"/>
+                      <polygon points="46,51 53,51 52,60 45,60" fill="rgba(44,100,35,0.95)"/>
+                      {/* Toe bumps on feet */}
+                      {[[24,60],[33,60],[41,60],[49,60]].map(([x,y],i)=>(
+                        <ellipse key={i} cx={x} cy={y} rx="4" ry="2" fill="rgba(36,84,28,0.9)"/>
+                      ))}
+                      {/* Back plates  -  iconic stego feature, amber/orange for contrast */}
+                      {[
+                        {x:22,y:32,h:9},
+                        {x:28,y:29,h:13},
+                        {x:34,y:27,h:16},
+                        {x:40,y:27,h:15},
+                        {x:46,y:29,h:12},
+                        {x:51,y:31,h:9},
+                      ].map(({x,y,h},i)=>(
+                        <polygon key={i}
+                          points={`${x},${y} ${x-h*0.45},${y+h*0.55} ${x},${y+h} ${x+h*0.45},${y+h*0.55}`}
+                          fill={i===2||i===3?"rgba(235,148,22,0.97)":"rgba(218,128,18,0.93)"}
+                        />
                       ))}
                     </g>
-                    {/* Triceratops — foreground, walking left to right */}
-                    <g className="it-walk" style={{transformOrigin:'20px 38px'}}>
-                      {/* Body */}
-                      <ellipse cx="20" cy="40" rx="14" ry="9" fill="rgba(120,160,80,0.92)"/>
-                      {/* Head (big with frill) */}
-                      <ellipse cx="32" cy="34" rx="10" ry="8" fill="rgba(120,160,80,0.92)"/>
-                      {/* Frill (the iconic bony collar) */}
-                      <ellipse cx="32" cy="28" rx="12" ry="7" fill="rgba(160,100,60,0.75)"/>
-                      {/* Frill pattern */}
-                      {[-8,-4,0,4,8].map((dx,i)=><circle key={i} cx={32+dx} cy={22} r="2" fill="rgba(200,120,70,0.6)"/>)}
-                      {/* Snout */}
-                      <ellipse cx="42" cy="36" rx="6" ry="4" fill="rgba(110,150,75,0.9)"/>
-                      {/* 3 Horns */}
-                      <polygon points="44,32 45,24 46,32" fill="rgba(220,200,160,0.9)"/>
-                      <polygon points="39,29 40,22 41,29" fill="rgba(220,200,160,0.9)"/>
-                      <polygon points="35,30 36,26 37,30" fill="rgba(220,200,160,0.8)"/>
-                      {/* Eye */}
-                      <circle cx="36" cy="34" r="2.5" fill="rgba(0,0,0,0.85)"/>
-                      <circle cx="36.5" cy="33.5" r="1" fill="rgba(255,255,150,0.9)"/>
-                      {/* 4 legs */}
-                      <line x1="14" y1="48" x2="12" y2="58" stroke="rgba(100,145,65,0.9)" strokeWidth="4" strokeLinecap="round"/>
-                      <line x1="20" y1="49" x2="18" y2="58" stroke="rgba(100,145,65,0.9)" strokeWidth="4" strokeLinecap="round"/>
-                      <line x1="26" y1="49" x2="28" y2="58" stroke="rgba(100,145,65,0.9)" strokeWidth="4" strokeLinecap="round"/>
-                      <line x1="32" y1="48" x2="34" y2="58" stroke="rgba(100,145,65,0.9)" strokeWidth="4" strokeLinecap="round"/>
-                      {/* Tail */}
-                      <path d="M6,42 Q-2,44 -6,40" fill="none" stroke="rgba(120,160,80,0.88)" strokeWidth="4" strokeLinecap="round"/>
-                    </g>
+                    {/* Fireflies */}
+                    {[{x:12,y:30},{x:62,y:22},{x:72,y:35},{x:8,y:44}].map(({x,y},i)=>(
+                      <circle key={i} cx={x} cy={y} r="1.5" fill="rgba(180,255,100,0.85)" className="it-star" style={{animationDelay:`${i*0.45}s`}}/>
+                    ))}
                   </>),
-                  // ── ANIMALS — safari with multiple animals ────────────────────
+                  // ── ANIMALS  -  safari with multiple animals ────────────────────
                   'Animals': (<>
                     <S cx={6} cy={3} r={1.0} d="0s"/><S cx={20} cy={2} r={0.8} d="0.4s"/>
-                    {/* Sunset */}
-                    <circle cx="68" cy="12" r="10" fill="rgba(255,160,50,0.45)"/>
-                    <circle cx="68" cy="12" r="7"  fill="rgba(255,185,60,0.65)"/>
+                    {/* Savannah sunset */}
+                    <circle cx="68" cy="14" r="12" fill="rgba(255,160,50,0.25)"/>
+                    <circle cx="68" cy="14" r="8"  fill="rgba(255,180,60,0.45)"/>
+                    <circle cx="68" cy="14" r="5"  fill="rgba(255,200,80,0.55)"/>
                     {/* Savannah ground */}
-                    <rect x="0" y="48" width="80" height="12" fill="rgba(30,100,20,0.45)"/>
-                    {/* Giraffe (background, right) */}
-                    <g style={{opacity:0.88}}>
-                      {/* Long neck */}
-                      <rect x="60" y="6" width="6" height="30" rx="3" fill="rgba(220,180,80,0.9)"/>
-                      {/* Giraffe head */}
-                      <ellipse cx="63" cy="5" rx="5" ry="4" fill="rgba(220,180,80,0.9)"/>
-                      <rect x="66" y="3" width="5" height="2" rx="1" fill="rgba(200,160,60,0.85)"/>
-                      <circle cx="67.5" cy="4" r="1" fill="rgba(0,0,0,0.8)"/>
-                      {/* Horns */}
-                      <line x1="62" y1="2" x2="62" y2="-1" stroke="rgba(180,140,50,0.8)" strokeWidth="1.5"/>
-                      <line x1="65" y1="2" x2="65" y2="-1" stroke="rgba(180,140,50,0.8)" strokeWidth="1.5"/>
-                      {/* Giraffe body */}
-                      <ellipse cx="63" cy="40" rx="9" ry="6" fill="rgba(220,180,80,0.85)"/>
-                      {/* Giraffe spots */}
-                      {[[59,35],[66,37],[61,42],[68,40]].map(([x,y],i)=><ellipse key={i} cx={x} cy={y} rx="2.5" ry="2" fill="rgba(160,110,20,0.6)"/>)}
-                      {/* Giraffe legs */}
-                      {[[57,44],[61,44],[65,44],[69,44]].map(([x,y],i)=><line key={i} x1={x} y1={y} x2={x} y2={56} stroke="rgba(200,160,60,0.9)" strokeWidth="2.5" strokeLinecap="round"/>)}
+                    <rect x="0" y="48" width="80" height="12" fill="rgba(25,90,15,0.4)"/>
+                    {/* Acacia tree */}
+                    <rect x="56" y="30" width="4" height="20" fill="rgba(80,50,20,0.6)" rx="1"/>
+                    <ellipse cx="58" cy="28" rx="12" ry="6" fill="rgba(25,100,25,0.5)"/>
+                    {/* Giraffe  -  background left */}
+                    <g style={{opacity:0.82}}>
+                      <rect x="10" y="8" width="5" height="28" rx="2.5" fill="rgba(220,175,70,0.9)"/>
+                      <ellipse cx="12.5" cy="7" rx="5" ry="4.5" fill="rgba(220,175,70,0.9)"/>
+                      <rect x="14" y="5" width="5" height="2.5" rx="1" fill="rgba(200,155,55,0.88)"/>
+                      <circle cx="16.5" cy="6" r="1" fill="rgba(0,0,0,0.82)"/>
+                      <line x1="12" y1="3" x2="12" y2="0" stroke="rgba(180,140,50,0.8)" strokeWidth="1.5"/>
+                      <line x1="14" y1="3" x2="14" y2="0" stroke="rgba(180,140,50,0.8)" strokeWidth="1.5"/>
+                      <ellipse cx="12.5" cy="38" rx="8" ry="6" fill="rgba(220,175,70,0.88)"/>
+                      {[[9,32],[13,32],[16,32],[19,32]].map(([x,y],i)=><rect key={i} x={x-1.5} y={y+10} width={3} height={16} rx="1.5" fill="rgba(200,155,55,0.9)"/>)}
+                      {[[9,28],[13,30],[17,29],[20,31]].map(([x,y],i)=><ellipse key={i} cx={x} cy={y} rx="2.5" ry="2" fill="rgba(155,100,15,0.55)"/>)}
                     </g>
-                    {/* Elephant (background, left) */}
-                    <g style={{opacity:0.8}}>
-                      <ellipse cx="14" cy="40" rx="11" ry="8" fill="rgba(120,110,120,0.75)"/>
-                      <ellipse cx="14" cy="30" rx="8"  ry="7" fill="rgba(120,110,120,0.75)"/>
-                      {/* Ear */}
-                      <ellipse cx="7" cy="30" rx="5" ry="7" fill="rgba(140,125,140,0.65)"/>
-                      {/* Trunk */}
-                      <path d="M18,35 Q22,40 20,48" fill="none" stroke="rgba(120,110,120,0.8)" strokeWidth="4" strokeLinecap="round"/>
-                      {/* Eye */}
-                      <circle cx="18" cy="28" r="1.8" fill="rgba(0,0,0,0.9)"/>
-                      {/* Tusk */}
-                      <path d="M20,33 Q26,34 24,38" fill="none" stroke="rgba(240,230,200,0.75)" strokeWidth="2" strokeLinecap="round"/>
-                      {/* Legs */}
-                      {[[8,46],[12,46],[16,46],[20,46]].map(([x,y],i)=><rect key={i} x={x-2} y={y} width={4} height={10} rx="2" fill="rgba(115,105,115,0.8)"/>)}
+                    {/* Elephant  -  background right */}
+                    <g style={{opacity:0.75}}>
+                      <ellipse cx="66" cy="40" rx="9" ry="7" fill="rgba(120,115,125,0.75)"/>
+                      <ellipse cx="66" cy="31" rx="7" ry="6.5" fill="rgba(120,115,125,0.75)"/>
+                      <ellipse cx="60" cy="31" rx="4.5" ry="6.5" fill="rgba(135,130,140,0.6)"/>
+                      <path d="M70,36 Q74,40 72,47" fill="none" stroke="rgba(120,115,125,0.82)" strokeWidth="4" strokeLinecap="round"/>
+                      <circle cx="70" cy="28" r="1.8" fill="rgba(0,0,0,0.88)"/>
+                      <path d="M72,34 Q77,35 75,39" fill="none" stroke="rgba(230,220,200,0.7)" strokeWidth="2" strokeLinecap="round"/>
+                      {[[60,45],[64,45],[68,45],[72,45]].map(([x,y],i)=><rect key={i} x={x-2} y={y} width={4} height={11} rx="2" fill="rgba(115,110,120,0.8)"/>)}
                     </g>
-                    {/* Zebra (foreground, center) */}
-                    <g className="it-bob" style={{transformOrigin:'40px 36px'}}>
-                      <ellipse cx="40" cy="40" rx="10" ry="7" fill="rgba(240,235,230,0.92)"/>
-                      <ellipse cx="40" cy="30" rx="7"  ry="6" fill="rgba(240,235,230,0.92)"/>
-                      {/* Zebra stripes */}
-                      {[-8,-4,0,4,8].map((dx,i)=><line key={i} x1={40+dx} y1={34} x2={40+dx+2} y2={47} stroke="rgba(20,20,20,0.6)" strokeWidth="1.8" strokeLinecap="round"/>)}
-                      {/* Head stripes */}
-                      {[-4,0,4].map((dx,i)=><line key={i} x1={40+dx} y1={25} x2={40+dx+1} y2={36} stroke="rgba(20,20,20,0.55)" strokeWidth="1.5" strokeLinecap="round"/>)}
-                      {/* Ear */}
-                      <ellipse cx="36" cy="25" rx="2.5" ry="4" fill="rgba(240,235,230,0.9)" transform="rotate(-15,36,25)"/>
-                      {/* Eye */}
-                      <circle cx="44" cy="30" r="2.5" fill="rgba(0,0,0,0.9)"/>
-                      <circle cx="44.5" cy="29.5" r="1" fill="rgba(255,255,255,0.9)"/>
-                      {/* Muzzle */}
-                      <ellipse cx="47" cy="33" rx="4" ry="3" fill="rgba(220,210,200,0.9)"/>
-                      {/* Legs */}
-                      {[[34,46],[38,46],[42,46],[46,46]].map(([x,y],i)=><line key={i} x1={x} y1={y} x2={x+(i%2===0?-1:1)} y2={56} stroke="rgba(200,195,190,0.9)" strokeWidth="3" strokeLinecap="round"/>)}
+                    {/* Lion  -  foreground center */}
+                    <g className="it-bob" style={{transformOrigin:'40px 36px', animationDelay:'0.8s'}}>
                       {/* Mane */}
-                      <path d="M36,25 Q38,18 40,22 Q40,16 42,20" fill="none" stroke="rgba(20,20,20,0.8)" strokeWidth="3" strokeLinecap="round"/>
+                      <circle cx="40" cy="28" r="14" fill="rgba(155,85,18,0.72)"/>
+                      {/* Body */}
+                      <ellipse cx="40" cy="42" rx="11" ry="8" fill="rgba(210,165,70,0.92)"/>
+                      {/* Head */}
+                      <circle cx="40" cy="27" r="10" fill="rgba(210,165,70,0.97)"/>
+                      {/* Eyes */}
+                      <circle cx="36" cy="26" r="2.2" fill="rgba(80,50,10,0.9)"/>
+                      <circle cx="44" cy="26" r="2.2" fill="rgba(80,50,10,0.9)"/>
+                      <circle cx="36.6" cy="25.4" r="0.8" fill="rgba(255,255,255,0.7)"/>
+                      <circle cx="44.6" cy="25.4" r="0.8" fill="rgba(255,255,255,0.7)"/>
+                      {/* Nose */}
+                      <ellipse cx="40" cy="30" rx="3" ry="2" fill="rgba(200,120,100,0.8)"/>
+                      <path d="M37.5,30 Q40,33.5 42.5,30" fill="none" stroke="rgba(180,100,80,0.7)" strokeWidth="1.2" strokeLinecap="round"/>
+                      {/* Whiskers */}
+                      {[[-12,-1],[-12,2],[12,-1],[12,2]].map(([dx,dy],i)=>(
+                        <line key={i} x1={40} y1={30+dy} x2={40+dx} y2={30+dy} stroke="rgba(255,255,255,0.55)" strokeWidth="0.9" strokeLinecap="round"/>
+                      ))}
+                      {/* Ears */}
+                      <ellipse cx="30" cy="18" rx="5" ry="5" fill="rgba(155,85,18,0.8)"/>
+                      <ellipse cx="50" cy="18" rx="5" ry="5" fill="rgba(155,85,18,0.8)"/>
+                      {/* Legs */}
+                      {[[32,48],[37,48],[43,48],[48,48]].map(([x,y],i)=>(
+                        <rect key={i} x={x-2} y={y} width={4} height={10} rx="2" fill="rgba(200,155,60,0.9)"/>
+                      ))}
+                      {/* Tail */}
+                      <path d="M51,42 Q58,38 60,44 Q62,48 58,50" fill="none" stroke="rgba(200,155,60,0.88)" strokeWidth="3" strokeLinecap="round"/>
+                      <circle cx="57" cy="51" r="4" fill="rgba(148,78,14,0.75)"/>
                     </g>
                   </>),
-                  // ── OCEAN — deep sea world ───────────────────────────────────
+                  // ── OCEAN  -  deep sea world ───────────────────────────────────
                   'Ocean': (<>
                     {/* Coral reef */}
                     {[[5,58],[14,54],[60,56],[72,52]].map(([x,y],i)=>(
@@ -1030,7 +1151,7 @@ export default function OnboardingPage() {
                     {[12,28,50,66].map((cx,i)=>(
                       <circle key={i} cx={cx} cy={18+i*5} r={2.2+i%2*0.8} fill="rgba(150,220,255,0.4)" className="it-up" style={{animationDelay:`${i*0.5}s`}}/>
                     ))}
-                    {/* Tropical fish — eye on right = swims forward left-to-right */}
+                    {/* Tropical fish  -  eye on right = swims forward left-to-right */}
                     <g className="it-swim">
                       {/* Body */}
                       <ellipse cx="0" cy="26" rx="12" ry="7" fill="rgba(255,120,0,0.95)"/>
@@ -1052,7 +1173,7 @@ export default function OnboardingPage() {
                       {[0,1,2,3,4].map(i=><line key={i} x1="66" y1="55" x2={66+8*Math.cos(i*72*Math.PI/180)} y2={55+8*Math.sin(i*72*Math.PI/180)} stroke="rgba(255,150,50,0.8)" strokeWidth="2.5" strokeLinecap="round"/>)}
                     </g>
                   </>),
-                  // ── NATURE — sunrise forest ──────────────────────────────────
+                  // ── NATURE  -  sunrise forest ──────────────────────────────────
                   'Nature': (<>
                     {/* Sunrise sky gradient effect */}
                     <ellipse cx="40" cy="0" rx="35" ry="22" fill="rgba(255,160,50,0.15)"/>
@@ -1085,7 +1206,7 @@ export default function OnboardingPage() {
                       <path key={i} d={`M${x},${y} Q${x+4},${y-3} ${x+8},${y}`} fill="none" stroke="rgba(0,0,0,0.4)" strokeWidth="1.2" strokeLinecap="round"/>
                     ))}
                   </>),
-                  // ── ROBOTS — dark robot workshop ─────────────────────────────
+                  // ── ROBOTS  -  dark robot workshop ─────────────────────────────
                   'Robots': (<>
                     {/* Circuit board traces */}
                     {[[5,20],[5,35],[75,22],[75,38]].map(([x,y],i)=>(
@@ -1099,7 +1220,7 @@ export default function OnboardingPage() {
                     {/* Antenna */}
                     <line x1="40" y1="7" x2="40" y2="9" stroke="rgba(100,200,255,0.8)" strokeWidth="2"/>
                     <circle cx="40" cy="5.5" r="2.5" fill="rgba(100,200,255,0.9)" className="it-star" style={{animationDelay:'0s'}}/>
-                    {/* Eyes — glowing */}
+                    {/* Eyes  -  glowing */}
                     <circle cx="35" cy="14" r="4" fill="rgba(0,0,0,0.5)"/>
                     <circle cx="35" cy="14" r="2.8" fill="rgba(0,220,180,0.9)" className="it-star" style={{animationDelay:'0s'}}/>
                     <circle cx="45" cy="14" r="4" fill="rgba(0,0,0,0.5)"/>
@@ -1126,7 +1247,7 @@ export default function OnboardingPage() {
                       {[0,1,2,3,4,5].map(i=><line key={i} x1="68" y1="42" x2={68+9*Math.cos(i*60*Math.PI/180)} y2={42+9*Math.sin(i*60*Math.PI/180)} stroke="rgba(100,150,220,0.4)" strokeWidth="1.5"/>)}
                     </g>
                   </>),
-                  // ── SCIENCE — glowing dark lab ───────────────────────────────
+                  // ── SCIENCE  -  glowing dark lab ───────────────────────────────
                   'Science': (<>
                     {/* Lab shelf */}
                     <line x1="0" y1="18" x2="80" y2="18" stroke="rgba(60,120,160,0.4)" strokeWidth="1.5"/>
@@ -1151,7 +1272,7 @@ export default function OnboardingPage() {
                     {/* Glow effect on flask */}
                     <ellipse cx="40" cy="46" rx="14" ry="8" fill="rgba(0,220,180,0.08)" className="it-pulse"/>
                   </>),
-                  // ── GAMING — dark arcade ─────────────────────────────────────
+                  // ── GAMING  -  dark arcade ─────────────────────────────────────
                   'Gaming': (<>
                     {/* Screen glow */}
                     <rect x="10" y="4"  width="60" height="48" rx="5" fill="rgba(80,40,180,0.25)" stroke="rgba(120,80,220,0.6)" strokeWidth="1.5"/>
@@ -1177,7 +1298,7 @@ export default function OnboardingPage() {
                       <rect x="24" y="31" width="2.5" height="3" rx="0.5" fill="rgba(200,160,100,0.9)"/>
                     </g>
                     {/* Enemy */}
-                    <g className="it-bob" style={{transformOrigin:'56px 24px'}}>
+                    <g className="it-bob" style={{transformOrigin:'56px 24px', animationDelay:'1.3s'}}>
                       <rect x="52" y="20" width="8" height="7" rx="1" fill="rgba(255,60,60,0.9)"/>
                       <rect x="50" y="18" width="4" height="3" rx="0.5" fill="rgba(255,60,60,0.9)"/>
                       <rect x="58" y="18" width="4" height="3" rx="0.5" fill="rgba(255,60,60,0.9)"/>
@@ -1190,7 +1311,7 @@ export default function OnboardingPage() {
                     <line x1="50" y1="50" x2="50" y2="54" stroke="rgba(150,120,200,0.6)" strokeWidth="1.2"/>
                     <line x1="48" y1="52" x2="52" y2="52" stroke="rgba(150,120,200,0.6)" strokeWidth="1.2"/>
                   </>),
-                  // ── SOCCER — sunny pitch ─────────────────────────────────────
+                  // ── SOCCER  -  sunny pitch ─────────────────────────────────────
                   'Soccer': (<>
                     {/* Sky */}
                     <rect x="0" y="0" width="80" height="28" fill="rgba(100,180,255,0.4)"/>
@@ -1217,7 +1338,7 @@ export default function OnboardingPage() {
                       <circle cx="50" cy="42" r="3.5" fill="rgba(0,0,0,0.15)"/>
                     </g>
                   </>),
-                  // ── FOOTBALL — night game under lights ──────────────────────
+                  // ── FOOTBALL  -  night game under lights ──────────────────────
                   'Football': (<>
                     {/* Field stripes */}
                     {[0,1,2,3,4].map(i=><rect key={i} x={i*16} y={0} width={8} height={60} fill={i%2===0?'rgba(20,100,30,0.8)':'rgba(18,90,26,0.8)'}/>)}
@@ -1238,209 +1359,245 @@ export default function OnboardingPage() {
                       {[0,1,2].map(i=><line key={i} x1={42+i*5} y1="21" x2={40+i*5} y2="39" stroke="rgba(255,255,255,0.35)" strokeWidth="1" transform="rotate(-20,48,30)"/>)}
                     </g>
                   </>),
-                  // ── GYMNASTICS — proper gymnast on beam ──────────────────────
+                  // ── GYMNASTICS  -  gymnast on balance beam ─────────────────
                   'Gymnastics': (<>
                     {/* Gym floor */}
-                    <rect x="0" y="50" width="80" height="10" fill="rgba(255,225,160,0.5)"/>
-                    {[0,1,2,3,4].map(i=><line key={i} x1={i*20} y1="50" x2={i*20} y2="60" stroke="rgba(200,160,80,0.25)" strokeWidth="1"/>)}
-                    <line x1="0" y1="50" x2="80" y2="50" stroke="rgba(200,160,80,0.5)" strokeWidth="1.5"/>
-                    {/* Balance beam + supports */}
-                    <rect x="12" y="37" width="56" height="3.5" rx="1.5" fill={c(0.75)}/>
-                    <rect x="19" y="40" width="5" height="10" rx="1" fill={c(0.55)}/>
-                    <rect x="56" y="40" width="5" height="10" rx="1" fill={c(0.55)}/>
-                    {/* Gymnast in arabesque pose on beam */}
-                    <g className="it-bob" style={{transformOrigin:'40px 25px'}}>
+                    <rect x="0" y="50" width="80" height="10" fill="rgba(255,225,160,0.3)"/>
+                    <line x1="0" y1="50" x2="80" y2="50" stroke="rgba(200,160,80,0.4)" strokeWidth="1.5"/>
+                    {/* Balance beam */}
+                    <rect x="6" y="47" width="68" height="3" rx="1.5" fill={c(0.85)}/>
+                    <rect x="14" y="50" width="4" height="4" rx="1" fill={c(0.5)}/>
+                    <rect x="62" y="50" width="4" height="4" rx="1" fill={c(0.5)}/>
+                    {/* Spotlight */}
+                    <polygon points="18,0 36,0 46,47 8,47" fill="rgba(255,220,150,0.05)"/>
+                    <circle cx="27" cy="2" r="5" fill="rgba(255,220,120,0.5)" className="it-pulse"/>
+                    {/* Gymnast  -  cream skin on dark bg */}
+                    <g className="it-bob" style={{transformOrigin:'27px 27px',animationDelay:'0.5s'}}>
+                      {/* Arabesque leg  -  raised behind, going right */}
+                      <polygon points="25,37 31,37 46,29 40,24" fill="rgba(232,205,178,0.97)"/>
+                      <ellipse cx="43" cy="26.5" rx="4.5" ry="2.5" fill="rgba(232,205,178,0.97)" transform="rotate(-22,43,27)"/>
                       {/* Standing leg */}
-                      <line x1="40" y1="37" x2="40" y2="26" stroke={c(0.8)} strokeWidth="4" strokeLinecap="round"/>
-                      {/* Body */}
-                      <rect x="36.5" y="20" width="7" height="10" rx="3" fill={c(0.85)}/>
+                      <polygon points="22,37 28,37 27,47 21,47" fill="rgba(232,205,178,0.97)"/>
+                      {/* Body leotard */}
+                      <ellipse cx="26" cy="27" rx="8" ry="9" fill={c(0.92)}/>
+                      <line x1="26" y1="18" x2="26" y2="36" stroke="rgba(255,255,255,0.28)" strokeWidth="2" strokeLinecap="round"/>
+                      {/* Wand arm  -  raised to top right */}
+                      <polygon points="26,19 31,20 40,9 35,8" fill="rgba(232,205,178,0.97)"/>
+                      <circle cx="37.5" cy="8.5" r="3.2" fill="rgba(232,205,178,0.97)"/>
+                      {/* Wand stick */}
+                      <line x1="40" y1="7" x2="50" y2="2" stroke="rgba(210,210,220,0.92)" strokeWidth="1.5" strokeLinecap="round"/>
+                      {/* Other arm  -  out to left */}
+                      <polygon points="21,24 26,28 13,33 11,29" fill="rgba(232,205,178,0.97)"/>
+                      <circle cx="10" cy="31" r="3.2" fill="rgba(232,205,178,0.97)"/>
                       {/* Head */}
-                      <circle cx="40" cy="15" r="6" fill={c(0.9)}/>
+                      <circle cx="27" cy="11" r="7" fill="rgba(232,205,178,0.97)"/>
+                      {/* Face */}
+                      <circle cx="24.5" cy="10" r="1.3" fill="rgba(70,35,20,0.88)"/>
+                      <circle cx="29.5" cy="10" r="1.3" fill="rgba(70,35,20,0.88)"/>
+                      <path d="M25,13.5 Q27,15.5 29,13.5" fill="none" stroke="rgba(190,85,75,0.75)" strokeWidth="1.2" strokeLinecap="round"/>
                       {/* Hair bun */}
-                      <circle cx="40" cy="9.5" r="3.5" fill={c(0.7)}/>
-                      {/* Arms up in a V */}
-                      <line x1="40" y1="22" x2="28" y2="14" stroke={c(0.85)} strokeWidth="3.5" strokeLinecap="round"/>
-                      <line x1="40" y1="22" x2="52" y2="14" stroke={c(0.85)} strokeWidth="3.5" strokeLinecap="round"/>
-                      {/* Raised leg behind (arabesque) */}
-                      <path d="M40,30 Q46,34 56,28" fill="none" stroke={c(0.8)} strokeWidth="3.5" strokeLinecap="round"/>
-                      {/* Leotard detail */}
-                      <ellipse cx="40" cy="26" rx="4" ry="3" fill={c(0.6)}/>
+                      <ellipse cx="27" cy="5" rx="5" ry="3.5" fill={c(0.88)}/>
+                      <circle cx="27" cy="4.5" r="2" fill={c(0.96)}/>
                     </g>
-                    {/* Score/stars */}
-                    {[{x:8,y:18},{x:72,y:18},{x:8,y:38},{x:72,y:38}].map(({x,y},i)=>(
-                      <circle key={i} cx={x} cy={y} r="2" fill={c(0.7)} className="it-star" style={{animationDelay:`${i*0.3}s`}}/>
+                    {/* Ribbon  -  multicolor flowing from wand tip */}
+                    <g className="it-ribbon" style={{transformOrigin:'50px 2px'}}>
+                      <path d="M50,2 Q63,12 59,25 Q55,38 66,46" fill="none" stroke="rgba(255,75,185,0.93)" strokeWidth="2.5" strokeLinecap="round"/>
+                      <path d="M50,2 Q68,10 72,24 Q75,38 66,48" fill="none" stroke="rgba(60,210,255,0.88)" strokeWidth="2" strokeLinecap="round"/>
+                      <path d="M50,2 Q60,8 64,20 Q68,33 60,42" fill="none" stroke="rgba(255,215,55,0.85)" strokeWidth="1.6" strokeLinecap="round"/>
+                    </g>
+                    {/* Stars */}
+                    {[[4,20],[68,20]].map(([x,y],i)=>(
+                      <g key={i}>{[0,7,14].map(dx=><circle key={dx} cx={x+dx} cy={y} r="2" fill={c(0.75)} className="it-star" style={{animationDelay:`${(i*3+dx/7)*0.2}s`}}/>)}</g>
                     ))}
-                    {/* Ribbon arc */}
-                    <path d="M8,28 Q20,10 35,22 Q50,34 62,18" fill="none" stroke={c(0.45)} strokeWidth="2" strokeLinecap="round" className="it-ribbon"/>
                   </>),
-                  // ── DANCING — ballet dancer in spotlight ──────────────────────
+                  // ── DANCING  -  dancer in spotlight ────────────────────────
                   'Dancing': (<>
                     {/* Stage floor */}
-                    <rect x="0" y="50" width="80" height="10" fill="rgba(60,20,90,0.55)"/>
-                    <line x1="0" y1="50" x2="80" y2="50" stroke="rgba(160,100,220,0.5)" strokeWidth="1.5"/>
+                    <rect x="0" y="50" width="80" height="10" fill="rgba(60,10,10,0.65)"/>
+                    <line x1="0" y1="50" x2="80" y2="50" stroke="rgba(200,80,80,0.5)" strokeWidth="1.5"/>
                     {/* Spotlight */}
-                    <circle cx="40" cy="3" r="7" fill="rgba(255,220,100,0.65)" className="it-pulse"/>
-                    <polygon points="35,3 45,3 52,50 28,50" fill="rgba(255,220,100,0.07)"/>
-                    {/* Stage glow circles */}
-                    <ellipse cx="40" cy="50" rx="25" ry="5" fill="rgba(255,200,100,0.08)"/>
-                    {/* Ballet dancer — elegant arabesque */}
-                    <g className="it-spin-f" style={{transformOrigin:'40px 28px'}}>
-                      {/* Standing leg — en pointe */}
-                      <line x1="40" y1="42" x2="40" y2="50" stroke={c(0.85)} strokeWidth="4" strokeLinecap="round"/>
-                      <ellipse cx="40" cy="50" rx="3" ry="1.5" fill={c(0.7)}/>{/* Pointe shoe */}
-                      {/* Body in tutu */}
-                      <rect x="36" y="30" width="8" height="14" rx="3.5" fill={c(0.88)}/>
-                      {/* Tutu skirt */}
-                      <ellipse cx="40" cy="42" rx="14" ry="5" fill={c(0.5)}/>
-                      <ellipse cx="40" cy="44" rx="12" ry="4" fill={c(0.4)}/>
-                      {/* Head */}
-                      <circle cx="40" cy="21" r="7" fill={c(0.9)}/>
-                      {/* Hair bun */}
-                      <circle cx="40" cy="14.5" r="4.5" fill={c(0.7)}/>
-                      {/* Tiara */}
-                      <path d="M36,13 L37.5,10 L40,12 L42.5,10 L44,13" fill="none" stroke="rgba(255,215,40,0.9)" strokeWidth="1.8" strokeLinejoin="round"/>
-                      {/* Raised arm — curved up */}
-                      <path d="M40,32 Q28,26 24,18" fill="none" stroke={c(0.88)} strokeWidth="4" strokeLinecap="round"/>
-                      <circle cx="24" cy="18" r="3" fill={c(0.85)"/>
-                      {/* Lower arm — out to side */}
-                      <path d="M40,32 Q54,28 58,32" fill="none" stroke={c(0.88)} strokeWidth="4" strokeLinecap="round"/>
-                      <circle cx="58" cy="32" r="3" fill={c(0.85)}/>
-                      {/* Raised leg — arabesque behind */}
-                      <path d="M40,44 Q48,38 58,30" fill="none" stroke={c(0.85)} strokeWidth="4" strokeLinecap="round"/>
+                    <circle cx="40" cy="2" r="8" fill="rgba(255,220,100,0.68)" className="it-pulse"/>
+                    <polygon points="34,2 46,2 54,50 26,50" fill="rgba(255,220,100,0.08)"/>
+                    <ellipse cx="40" cy="50" rx="26" ry="5" fill="rgba(255,200,100,0.09)"/>
+                    {/* DANCER  -  cream skin + bright dress for contrast on dark maroon */}
+                    <g className="it-bob" style={{transformOrigin:'40px 28px',animationDelay:'0.4s'}}>
+                      {/* Flared skirt  -  wide, bright */}
+                      <path d="M40,36 Q25,40 14,52 Q29,49 40,45 Q51,49 66,52 Q55,40 40,36" fill={c(0.88)}/>
+                      <path d="M40,38 Q27,42 18,52 Q31,49 40,45" fill={c(0.62)}/>
+                      {/* Skirt top/waist accent */}
+                      <ellipse cx="40" cy="36" rx="8" ry="3" fill={c(0.75)}/>
+                      {/* Body  -  cream for contrast */}
+                      <ellipse cx="40" cy="26" rx="7" ry="10" fill="rgba(248,218,158,0.97)"/>
+                      {/* Red dress bodice overlay */}
+                      <ellipse cx="40" cy="31" rx="7" ry="6" fill={c(0.80)}/>
+                      {/* Head  -  cream */}
+                      <circle cx="40" cy="12" r="8" fill="rgba(248,218,158,0.97)"/>
+                      {/* Hair up in bun */}
+                      <ellipse cx="40" cy="5" rx="5.5" ry="4.5" fill={c(0.68)}/>
+                      <circle cx="40" cy="5" r="2.5" fill={c(0.82)}/>
+                      {/* Face */}
+                      <circle cx="37" cy="11.5" r="1.5" fill={c(0.72)}/>
+                      <circle cx="43" cy="11.5" r="1.5" fill={c(0.72)}/>
+                      <path d="M37,14.5 Q40,17 43,14.5" fill="none" stroke={c(0.62)} strokeWidth="1.3" strokeLinecap="round"/>
+                      {/* Arm raised up  -  cream */}
+                      <path d="M34,22 Q23,16 19,7" fill="none" stroke="rgba(248,218,158,0.97)" strokeWidth="5.5" strokeLinecap="round"/>
+                      <circle cx="19" cy="7" r="4" fill="rgba(248,218,158,0.97)"/>
+                      {/* Arm out right  -  cream */}
+                      <path d="M46,24 Q57,26 64,21" fill="none" stroke="rgba(248,218,158,0.97)" strokeWidth="5" strokeLinecap="round"/>
+                      <circle cx="64" cy="21" r="3.5" fill="rgba(248,218,158,0.97)"/>
+                      {/* Legs  -  cream */}
+                      <line x1="37" y1="44" x2="32" y2="55" stroke="rgba(238,205,145,0.96)" strokeWidth="5" strokeLinecap="round"/>
+                      <ellipse cx="31" cy="56" rx="3.5" ry="2" fill={c(0.68)}/>
+                      <line x1="43" y1="44" x2="50" y2="54" stroke="rgba(238,205,145,0.94)" strokeWidth="4.5" strokeLinecap="round"/>
+                      <ellipse cx="50" cy="55" rx="3" ry="2" fill={c(0.62)}/>
                     </g>
-                    {/* Floating music notes */}
-                    {[10,24,56,70].map((x,i)=>(
+                    {/* Music notes */}
+                    {[8,22,56,70].map((x,i)=>(
                       <g key={i} className="it-up" style={{animationDelay:`${i*0.38}s`,transformOrigin:`${x}px 44px`}}>
                         <text x={x-5} y="44" fontSize="14" fill={c(0.85)}>♪</text>
                       </g>
                     ))}
                   </>),
-                  // ── KARATE — martial artist in proper gi ─────────────────────
+                  // ── KARATE  -  martial artist in proper gi ─────────────────────
                   'Karate': (<>
                     {/* Tatami mats */}
-                    {[0,1,2,3,4].map(i=><rect key={i} x={i*16} y={50} width={14} height={10} fill={c(0.1+i*0.025)} rx="1"/>)}
-                    <line x1="0" y1="50" x2="80" y2="50" stroke={c(0.5)} strokeWidth="2"/>
-                    {/* Belt rank board */}
-                    <rect x="58" y="3" width="18" height="10" rx="2" fill={c(0.35)}/>
-                    <rect x="60" y="5" width="14" height="6"  rx="1" fill="rgba(220,30,30,0.9)"/>
-                    {/* Karateka — full figure in gi, kick pose */}
-                    <g className="it-bob" style={{transformOrigin:'32px 28px'}}>
-                      {/* Head */}
-                      <circle cx="32" cy="10" r="7" fill={c(0.88)}/>
-                      {/* Headband */}
-                      <rect x="25" y="8.5" width="14" height="3.5" rx="1.5" fill="rgba(220,30,30,0.85)"/>
-                      {/* White gi top */}
-                      <polygon points="24,17 40,17 40,34 24,34" fill="rgba(240,235,225,0.9)"/>
-                      {/* Gi lapels */}
-                      <line x1="32" y1="17" x2="28" y2="34" stroke="rgba(200,190,175,0.6)" strokeWidth="1.5"/>
-                      <line x1="32" y1="17" x2="36" y2="34" stroke="rgba(200,190,175,0.6)" strokeWidth="1.5"/>
+                    {[0,1,2,3,4].map(i=><rect key={i} x={i*16} y={51} width={14} height={9} fill={c(0.1+i*0.02)} rx="1"/>)}
+                    <line x1="0" y1="51" x2="80" y2="51" stroke={c(0.45)} strokeWidth="1.5"/>
+                    {/* Ki aura  -  subtle background glow */}
+                    <g className="it-pulse" style={{transformOrigin:'36px 30px', opacity:0.5}}>
+                      {[0,36,72,108,144,180,216,252,288,324].map((deg,i)=>(
+                        <line key={i} x1="36" y1="30"
+                          x2={36+24*Math.cos(deg*Math.PI/180)}
+                          y2={30+24*Math.sin(deg*Math.PI/180)}
+                          stroke={i%2===0?"rgba(255,180,20,0.6)":"rgba(255,100,20,0.45)"}
+                          strokeWidth={i%2===0?1.8:1.2} strokeLinecap="round"/>
+                      ))}
+                    </g>
+                    {/* Karateka  -  guard stance, both feet grounded */}
+                    <g className="it-bob" style={{transformOrigin:'34px 32px', animationDelay:'0.6s'}}>
+                      {/* Back left leg */}
+                      <polygon points="22,45 29,45 27,59 20,59" fill="rgba(244,244,248,0.97)"/>
+                      <ellipse cx="23.5" cy="59" rx="5" ry="2.8" fill="rgba(228,188,132,0.95)"/>
+                      {/* Front right leg */}
+                      <polygon points="35,45 42,45 44,59 37,59" fill="rgba(244,244,248,0.97)"/>
+                      <ellipse cx="40.5" cy="59" rx="5" ry="2.8" fill="rgba(228,188,132,0.95)"/>
+                      {/* Gi body */}
+                      <path d="M19,22 L34,16 L49,22 L47,46 L21,46Z" fill="rgba(250,250,252,0.97)"/>
+                      <path d="M34,16 L26,42" stroke="rgba(175,175,188,0.5)" strokeWidth="1.8"/>
+                      <path d="M34,16 L42,42" stroke="rgba(175,175,188,0.5)" strokeWidth="1.8"/>
                       {/* Black belt */}
-                      <rect x="24" y="28" width="16" height="3" rx="1" fill="rgba(20,20,20,0.9)"/>
-                      {/* Gi trousers */}
-                      <rect x="25" y="34" width="13" height="16" rx="2" fill="rgba(235,230,220,0.9)"/>
-                      {/* Standing leg */}
-                      <line x1="30" y1="50" x2="30" y2="58" stroke={c(0.8)} strokeWidth="4.5" strokeLinecap="round"/>
-                      <ellipse cx="30" cy="59" rx="4" ry="2" fill={c(0.65)}/>
-                      {/* Kicking leg raised high */}
-                      <path d="M36,38 Q44,32 52,24" fill="none" stroke="rgba(235,230,220,0.9)" strokeWidth="4.5" strokeLinecap="round"/>
-                      <ellipse cx="53" cy="23" rx="4" ry="2.5" fill={c(0.7)} transform="rotate(-40,53,23)"/>
-                      {/* Striking arm forward */}
-                      <line x1="32" y1="24" x2="52" y2="20" stroke="rgba(240,235,225,0.95)" strokeWidth="4" strokeLinecap="round"/>
-                      <circle cx="53" cy="19.5" r="4" fill={c(0.8)}/>
-                      {/* Guard arm back */}
-                      <line x1="32" y1="24" x2="16" y2="28" stroke="rgba(240,235,225,0.9)" strokeWidth="4" strokeLinecap="round"/>
-                      <circle cx="15" cy="28.5" r="3.5" fill={c(0.75)}/>
+                      <rect x="19" y="41" width="30" height="5.5" rx="2.2" fill="rgba(8,8,12,0.97)"/>
+                      {/* Front guard arm  -  extended forward at chest height */}
+                      <polygon points="44,24 50,30 64,24 58,18" fill="rgba(244,244,248,0.97)"/>
+                      <circle cx="61" cy="21" r="5.5" fill="rgba(228,188,132,0.95)"/>
+                      {/* Back chamber arm  -  fist pulled to hip */}
+                      <polygon points="23,27 27,34 10,43 6,36" fill="rgba(244,244,248,0.97)"/>
+                      <circle cx="7" cy="39.5" r="5" fill="rgba(228,188,132,0.95)"/>
+                      {/* Head */}
+                      <circle cx="34" cy="9" r="9.5" fill="rgba(228,188,132,0.97)"/>
+                      {/* Red headband */}
+                      <rect x="24.5" y="5" width="19" height="5.5" rx="2.5" fill="rgba(212,25,25,0.95)"/>
+                      {/* Eyes  -  focused forward */}
+                      <circle cx="30" cy="9.5" r="1.7" fill="rgba(18,6,2,0.93)"/>
+                      <circle cx="38" cy="9.5" r="1.7" fill="rgba(18,6,2,0.93)"/>
+                      {/* Fierce brows */}
+                      <path d="M27.5,6.5 L32,8.2" stroke="rgba(55,22,4,0.82)" strokeWidth="1.8" strokeLinecap="round"/>
+                      <path d="M40.5,8.2 L36,6.5" stroke="rgba(55,22,4,0.82)" strokeWidth="1.8" strokeLinecap="round"/>
+                      {/* Determined mouth */}
+                      <path d="M31.5,13.5 L36.5,13.5" stroke="rgba(135,65,22,0.75)" strokeWidth="1.5" strokeLinecap="round"/>
                     </g>
-                    {/* Board breaking — energy flash */}
-                    <g className="it-flash" style={{transformOrigin:'60px 30px'}}>
-                      <rect x="56" y="18" width="9" height="24" rx="1" fill="rgba(175,115,55,0.85)"/>
-                      <line x1="56" y1="29" x2="65" y2="30" stroke="rgba(115,70,25,0.55)" strokeWidth="1"/>
-                      {/* Crack lines */}
-                      {[0,1,2,3].map(i=><line key={i} x1="60.5" y1={18+i*7} x2={57+i*2} y2={23+i*6} stroke="rgba(255,180,0,0.92)" strokeWidth="1.8"/>)}
-                      {/* Impact sparks */}
-                      {[0,1,2].map(i=><line key={i} x1="56" y1="28" x2={48-i*4} y2={22+i*6} stroke="rgba(255,200,50,0.85)" strokeWidth="1.5"/>)}
-                    </g>
+                    {/* Energy lines at guard fist */}
+                    <line x1="65" y1="16" x2="72" y2="12" stroke="rgba(255,200,40,0.65)" strokeWidth="2.2" strokeLinecap="round"/>
+                    <line x1="67" y1="22" x2="74" y2="21" stroke="rgba(255,180,30,0.45)" strokeWidth="1.6" strokeLinecap="round"/>
+                    <line x1="65" y1="27" x2="72" y2="28" stroke="rgba(255,160,20,0.32)" strokeWidth="1.3" strokeLinecap="round"/>
                   </>),
-                  // ── SWIMMING — competition pool ───────────────────────────────
+                  // ── SWIMMING  -  competition pool ───────────────────────────────
                   'Swimming': (<>
-                    {/* Scoreboard */}
-                    <rect x="18" y="1" width="44" height="16" rx="2" fill="rgba(15,15,35,0.85)"/>
-                    <text x="40" y="12" fontSize="8" fill="rgba(255,220,0,0.95)" textAnchor="middle" fontFamily="monospace" fontWeight="bold">01:24.5</text>
-                    {/* Pool edge / starting blocks */}
-                    <rect x="0" y="17" width="80" height="5" fill="rgba(180,180,200,0.85)"/>
+                    {/* Pool edge */}
+                    <rect x="0" y="16" width="80" height="6" fill="rgba(180,180,200,0.85)"/>
+                    {/* Starting blocks */}
                     {[6,19,32,45,58,71].map((x,i)=>(
-                      <g key={i}><rect x={x} y={13} width={8} height={5} rx="1" fill="rgba(160,160,180,0.8)"/>
-                      <rect x={x+1} y={11} width={6} height={3} rx="1" fill="rgba(140,140,160,0.7)"/></g>
+                      <g key={i}>
+                        <rect x={x} y={12} width={8} height={5} rx="1" fill="rgba(160,160,180,0.8)"/>
+                        <rect x={x+1} y={10} width={6} height={3} rx="1" fill="rgba(140,140,160,0.7)"/>
+                      </g>
                     ))}
                     {/* Pool water */}
                     <rect x="0" y="22" width="80" height="38" fill="rgba(0,90,200,0.65)"/>
-                    {/* Lane ropes — alternating orange/yellow */}
+                    {/* Lane ropes */}
                     {[13,26,39,52,65].map((x,i)=>(
                       <g key={i}>
                         <line x1={x} y1={22} x2={x} y2={60} stroke={i%2===0?'rgba(255,100,20,0.7)':'rgba(255,210,0,0.65)'} strokeWidth="1.8" strokeDasharray="3.5,3.5"/>
                         {[28,36,44,52].map((y,j)=><circle key={j} cx={x} cy={y} r="2.5" fill={i%2===0?'rgba(255,100,20,0.8)':'rgba(255,210,0,0.75)'}/>)}
                       </g>
                     ))}
-                    {/* Wave surface shimmer */}
+                    {/* Wave shimmer */}
                     <path d="M0,28 Q10,24 20,28 Q30,32 40,28 Q50,24 60,28 Q70,32 80,28" fill="rgba(180,220,255,0.2)" className="it-wave-y"/>
-                    {/* Water line ripples */}
                     <path d="M0,34 Q10,31 20,34 Q30,37 40,34 Q50,31 60,34 Q70,37 80,34" fill="rgba(100,180,255,0.12)" className="it-wave-y" style={{animationDelay:'0.4s'}}/>
-                    {/* Swimmer — full freestyle stroke */}
-                    <g className="it-swim">
+                    {/* Swimmer  -  FIXED in lane 3 (x=26 to x=39), bobbing not sliding */}
+                    <g className="it-bob" style={{transformOrigin:'32px 34px', animationDelay:'0.2s'}}>
                       {/* Body streamlined */}
-                      <rect x="-8" y="28" width="20" height="7" rx="3.5" fill="rgba(20,80,200,0.9)"/>
-                      {/* Head with cap & goggles */}
-                      <circle cx="4" cy="26" r="6" fill="rgba(230,185,140,0.97)"/>
-                      <ellipse cx="4" cy="22" rx="6" ry="3.5" fill="rgba(220,30,30,0.92)"/>
-                      <ellipse cx="1.5" cy="26" rx="2.2" ry="1.6" fill="rgba(30,140,255,0.85)"/>
-                      <ellipse cx="6.5" cy="26" rx="2.2" ry="1.6" fill="rgba(30,140,255,0.85)"/>
-                      <line x1="3" y1="26" x2="5" y2="26" stroke="rgba(20,100,200,0.7)" strokeWidth="0.9"/>
+                      <rect x="18" y="29" width="22" height="7" rx="3.5" fill="rgba(20,80,200,0.92)"/>
+                      {/* Head with cap */}
+                      <circle cx="30" cy="27" r="6" fill="rgba(230,185,140,0.97)"/>
+                      <ellipse cx="30" cy="23" rx="6" ry="3.5" fill="rgba(220,30,30,0.92)"/>
+                      {/* Goggles */}
+                      <ellipse cx="27.5" cy="27" rx="2.2" ry="1.6" fill="rgba(30,140,255,0.88)"/>
+                      <ellipse cx="33" cy="27" rx="2.2" ry="1.6" fill="rgba(30,140,255,0.88)"/>
+                      <line x1="29.5" y1="27" x2="31" y2="27" stroke="rgba(20,100,200,0.7)" strokeWidth="1"/>
                       {/* Legs kicking */}
-                      <path d="M-8,32 Q-12,36 -16,32" fill="none" stroke="rgba(230,185,140,0.9)" strokeWidth="3.5" strokeLinecap="round"/>
-                      <path d="M-8,32 Q-12,28 -16,34" fill="none" stroke="rgba(230,185,140,0.85)" strokeWidth="3" strokeLinecap="round"/>
-                      {/* Lead arm — out of water forward */}
-                      <path d="M10,28 Q16,20 22,22" fill="none" stroke="rgba(230,185,140,0.92)" strokeWidth="4" strokeLinecap="round"/>
-                      <circle cx="22" cy="22" r="3.5" fill="rgba(230,185,140,0.92)"/>
-                      {/* Water splash from arm entry */}
-                      <ellipse cx="20" cy="24" rx="6" ry="3" fill="rgba(200,235,255,0.5)"/>
-                      {/* Trailing arm recovering */}
-                      <path d="M-2,30 Q-8,24 -12,28" fill="none" stroke="rgba(230,185,140,0.8)" strokeWidth="3.5" strokeLinecap="round"/>
+                      <path d="M18,33 Q14,37 10,33" fill="none" stroke="rgba(230,185,140,0.9)" strokeWidth="3.5" strokeLinecap="round"/>
+                      <path d="M18,33 Q14,29 10,34" fill="none" stroke="rgba(230,185,140,0.85)" strokeWidth="3" strokeLinecap="round"/>
+                      {/* Lead arm  -  forward stroke */}
+                      <path d="M38,31 Q43,23 48,25" fill="none" stroke="rgba(230,185,140,0.92)" strokeWidth="4" strokeLinecap="round"/>
+                      <circle cx="48" cy="25" r="3.5" fill="rgba(230,185,140,0.92)"/>
+                      {/* Water splash */}
+                      <ellipse cx="46" cy="26" rx="5" ry="3" fill="rgba(200,235,255,0.5)"/>
+                      {/* Recovery arm */}
+                      <path d="M24,31 Q18,25 14,27" fill="none" stroke="rgba(230,185,140,0.8)" strokeWidth="3.5" strokeLinecap="round"/>
                     </g>
                   </>),
-                  // ── ART — painter at easel creating art ──────────────────────
+                  // ── ART  -  painter at easel creating art ──────────────────────
                   'Art': (<>
                     {/* Easel legs */}
                     <line x1="30" y1="8" x2="18" y2="58" stroke={c(0.6)} strokeWidth="2.5" strokeLinecap="round"/>
                     <line x1="50" y1="8" x2="62" y2="58" stroke={c(0.6)} strokeWidth="2.5" strokeLinecap="round"/>
                     <line x1="40" y1="46" x2="40" y2="58" stroke={c(0.55)} strokeWidth="2" strokeLinecap="round"/>
                     <line x1="22" y1="44" x2="58" y2="44" stroke={c(0.5)} strokeWidth="1.5"/>
-                    {/* Canvas on easel */}
+                    {/* Canvas */}
                     <rect x="22" y="6" width="36" height="38" rx="2" fill="rgba(255,252,245,0.97)" stroke={c(0.6)} strokeWidth="1.5"/>
-                    {/* Painting on canvas — landscape scene */}
-                    <rect x="23" y="7" width="34" height="16" rx="1" fill="rgba(135,200,255,0.7)"/>  {/* sky */}
-                    <ellipse cx="30" cy="15" rx="5" ry="3" fill="rgba(255,255,255,0.6)"/>  {/* cloud */}
-                    <ellipse cx="44" cy="13" rx="6" ry="3.5" fill="rgba(255,255,255,0.55)"/>
-                    <rect x="23" y="23" width="34" height="20" rx="1" fill="rgba(40,160,50,0.65)"/>  {/* grass */}
-                    <ellipse cx="32" cy="22" rx="7" ry="5" fill="rgba(30,140,40,0.7)"/>  {/* tree */}
-                    <rect x="31" y="25" width="3" height="18" fill="rgba(100,60,20,0.7)"/> {/* trunk */}
+                    {/* Painting on canvas */}
+                    <rect x="23" y="7" width="34" height="16" rx="1" fill="rgba(135,200,255,0.7)"/>
+                    <ellipse cx="30" cy="14" rx="5" ry="3" fill="rgba(255,255,255,0.6)"/>
+                    <ellipse cx="44" cy="12" rx="6" ry="3.5" fill="rgba(255,255,255,0.55)"/>
+                    <rect x="23" y="23" width="34" height="20" rx="1" fill="rgba(40,160,50,0.65)"/>
+                    <ellipse cx="32" cy="22" rx="7" ry="5" fill="rgba(30,140,40,0.72)"/>
+                    <rect x="31" y="25" width="3" height="18" fill="rgba(100,60,20,0.72)"/>
                     <ellipse cx="48" cy="24" rx="6" ry="4" fill="rgba(25,130,35,0.65)"/>
                     <rect x="47" y="27" width="3" height="16" fill="rgba(100,60,20,0.65)"/>
-                    {/* Brush stroke being painted */}
-                    <path className="it-draw" d="M24,36 Q32,30 42,34 Q50,38 54,32" fill="none" stroke="rgba(255,100,20,0.85)" strokeWidth="2.5" strokeDasharray="50" strokeLinecap="round"/>
-                    {/* Palette — round with colour blobs */}
-                    <ellipse cx="68" cy="44" rx="10" ry="12" fill="rgba(230,210,180,0.8)"/>
-                    <circle cx="68" cy="38" r="3" fill="none"/> {/* thumb hole */}
-                    <circle cx="62" cy="36" r="3" fill="rgba(255,80,80,0.85)"/>
-                    <circle cx="68" cy="34" r="3" fill="rgba(255,200,0,0.85)"/>
-                    <circle cx="74" cy="36" r="3" fill="rgba(50,180,50,0.85)"/>
-                    <circle cx="76" cy="43" r="3" fill="rgba(60,100,255,0.85)"/>
-                    <circle cx="72" cy="50" r="3" fill="rgba(200,60,200,0.85)"/>
-                    <circle cx="64" cy="50" r="3" fill="rgba(255,130,20,0.85)"/>
-                    {/* Paintbrush in hand */}
-                    <rect x="3" y="3" width="3.5" height="22" rx="1.5" fill={c(0.85)}/>
-                    <ellipse cx="4.5" cy="26" rx="3.5" ry="4.5" fill="rgba(255,80,20,0.92)"/>
+                    {/* Active brushstroke */}
+                    <path className="it-draw" d="M24,36 Q32,30 42,34 Q50,38 54,32" fill="none" stroke="rgba(255,100,20,0.9)" strokeWidth="3" strokeDasharray="50" strokeLinecap="round"/>
+                    {/* Hand + brush  -  arm coming in from right, brush tip at stroke end */}
+                    <g className="it-bob" style={{transformOrigin:'62px 18px', animationDelay:'1.0s'}}>
+                      {/* Arm */}
+                      <path d="M78,4 Q70,12 60,26 Q57,30 55,33" fill="none" stroke="rgba(230,185,145,0.95)" strokeWidth="5" strokeLinecap="round"/>
+                      {/* Brush handle */}
+                      <line x1="72" y1="6" x2="55" y2="33" stroke="rgba(130,90,40,0.9)" strokeWidth="3.5" strokeLinecap="round"/>
+                      {/* Ferrule */}
+                      <rect x="58" y="28" width="5" height="4" rx="1" fill="rgba(180,180,180,0.88)"/>
+                      {/* Bristles  -  paint-loaded orange */}
+                      <ellipse cx="55.5" cy="34.5" rx="2.5" ry="4.5" fill="rgba(255,100,20,0.92)"/>
+                    </g>
+                    {/* Palette */}
+                    <ellipse cx="10" cy="44" rx="9" ry="11" fill="rgba(230,210,180,0.8)"/>
+                    <circle cx="6"  cy="36" r="2.5" fill="rgba(255,80,80,0.85)"/>
+                    <circle cx="12" cy="34" r="2.5" fill="rgba(255,200,0,0.85)"/>
+                    <circle cx="16" cy="38" r="2.5" fill="rgba(50,180,50,0.85)"/>
+                    <circle cx="17" cy="45" r="2.5" fill="rgba(60,100,255,0.85)"/>
+                    <circle cx="12" cy="50" r="2.5" fill="rgba(200,60,200,0.85)"/>
+                    <circle cx="6"  cy="50" r="2.5" fill="rgba(255,130,20,0.85)"/>
                   </>),
-                  // ── MUSIC — dark concert hall ────────────────────────────────
+                  // ── MUSIC  -  dark concert hall ────────────────────────────────
                   'Music': (<>
                     {/* Spotlight */}
                     <circle cx="40" cy="3" r="6" fill="rgba(255,200,100,0.6)" className="it-pulse"/>
@@ -1462,98 +1619,114 @@ export default function OnboardingPage() {
                       </g>
                     ))}
                   </>),
-                  // ── COOKING — busy kitchen with food ──────────────────────────
+                  // ── COOKING  -  busy kitchen with food ──────────────────────────
                   'Cooking': (<>
                     {/* Kitchen counter */}
                     <rect x="0"  y="46" width="80" height="14" fill="rgba(100,70,30,0.65)"/>
                     <rect x="0"  y="44" width="80" height="4"  rx="1" fill="rgba(120,90,40,0.7)"/>
-                    {/* Stove / hob */}
-                    <rect x="8"  y="36" width="64" height="10" rx="3" fill="rgba(60,55,60,0.75)"/>
-                    {/* Burner flames */}
-                    {[22,42,62].map((x,i)=>(
-                      <g key={i}>
-                        <circle cx={x} cy={39} r="5" fill="none" stroke="rgba(60,55,60,0.8)" strokeWidth="1.2"/>
-                        <circle cx={x} cy={39} r="4" fill="rgba(255,100,20,0.35)" className="it-star" style={{animationDelay:`${i*0.3}s`}}/>
-                        <circle cx={x} cy={39} r="2" fill="rgba(255,180,50,0.5)" className="it-star" style={{animationDelay:`${i*0.3+0.2}s`}}/>
-                      </g>
-                    ))}
+                    {/* Chef figure  -  left */}
+                    <g className="it-bob" style={{transformOrigin:'14px 24px', animationDelay:'1.2s'}}>
+                      {/* Chef hat */}
+                      <ellipse cx="14" cy="7" rx="7" ry="3" fill="rgba(245,242,238,0.95)"/>
+                      <rect x="9" y="1" width="10" height="8" rx="1" fill="rgba(245,242,238,0.95)"/>
+                      <rect x="8" y="8.5" width="12" height="3" rx="1" fill="rgba(220,218,212,0.88)"/>
+                      {/* Head */}
+                      <circle cx="14" cy="17" r="6" fill="rgba(240,200,165,0.97)"/>
+                      <circle cx="12" cy="16.5" r="1.2" fill="rgba(80,50,20,0.9)"/>
+                      <circle cx="16" cy="16.5" r="1.2" fill="rgba(80,50,20,0.9)"/>
+                      <path d="M12,19 Q14,21 16,19" fill="none" stroke="rgba(180,80,80,0.7)" strokeWidth="1.2" strokeLinecap="round"/>
+                      {/* Chef coat */}
+                      <polygon points="8,23 20,23 22,44 6,44" fill="rgba(245,242,238,0.9)"/>
+                      {[27,32,37].map(y=><circle key={y} cx="14" cy={y} r="1.2" fill="rgba(200,195,190,0.7)"/>)}
+                      {/* Arms */}
+                      <path d="M8,28 Q2,30 2,36" fill="none" stroke="rgba(245,242,238,0.9)" strokeWidth="4" strokeLinecap="round"/>
+                      <path d="M20,28 Q26,24 28,20" fill="none" stroke="rgba(245,242,238,0.9)" strokeWidth="4" strokeLinecap="round"/>
+                      <circle cx="28" cy="20" r="3.5" fill="rgba(240,200,165,0.95)"/>
+                    </g>
                     {/* Large cooking pot */}
-                    <ellipse cx="40" cy="38" rx="18" ry="8" fill="rgba(70,55,55,0.85)"/>
-                    <rect x="22" y="24" width="36" height="16" rx="4" fill="rgba(80,62,62,0.9)"/>
-                    {/* Pot handles */}
-                    <path d="M22,30 Q14,30 14,34 Q14,38 22,38" fill="none" stroke="rgba(80,62,62,0.9)" strokeWidth="3.5" strokeLinecap="round"/>
-                    <path d="M58,30 Q66,30 66,34 Q66,38 58,38" fill="none" stroke="rgba(80,62,62,0.9)" strokeWidth="3.5" strokeLinecap="round"/>
-                    {/* Soup / stew in pot */}
-                    <ellipse cx="40" cy="24" rx="15" ry="5.5" fill="rgba(200,100,40,0.6)"/>
+                    <ellipse cx="46" cy="38" rx="18" ry="8" fill="rgba(70,55,55,0.85)"/>
+                    <rect x="28" y="24" width="36" height="16" rx="4" fill="rgba(80,62,62,0.9)"/>
+                    <path d="M28,30 Q20,30 20,34 Q20,38 28,38" fill="none" stroke="rgba(80,62,62,0.9)" strokeWidth="3.5" strokeLinecap="round"/>
+                    <path d="M64,30 Q72,30 72,34 Q72,38 64,38" fill="none" stroke="rgba(80,62,62,0.9)" strokeWidth="3.5" strokeLinecap="round"/>
+                    {/* Stew */}
+                    <ellipse cx="46" cy="24" rx="15" ry="5.5" fill="rgba(200,100,40,0.62)"/>
                     {/* Bubbles */}
-                    {[30,38,46,52].map((x,i)=>(
+                    {[36,44,52,58].map((x,i)=>(
                       <circle key={i} cx={x} cy={22-i%2*3} r="2.5" fill="rgba(230,130,50,0.65)" className="it-up" style={{animationDelay:`${i*0.28}s`}}/>
                     ))}
-                    {/* Ladle stirring */}
-                    <rect x="38.5" y="4" width="3" height="20" rx="1.5" fill="rgba(180,140,80,0.85)" className="it-stir" style={{transformOrigin:'40px 22px'}}/>
-                    <circle cx="40" cy="23" r="4" fill="none" stroke="rgba(180,140,80,0.85)" strokeWidth="2"/>
-                    {/* Steam rising */}
+                    {/* Ladle */}
+                    <rect x="44.5" y="4" width="3" height="20" rx="1.5" fill="rgba(180,140,80,0.85)" className="it-stir" style={{transformOrigin:'46px 22px'}}/>
+                    <circle cx="46" cy="23" r="4" fill="none" stroke="rgba(180,140,80,0.88)" strokeWidth="2"/>
+                    {/* Steam */}
                     {[0,1,2,3].map(i=>(
-                      <path key={i} className="it-up" d={`M${26+i*9},18 Q${24+i*9},10 ${28+i*9},4`} fill="none" stroke="rgba(255,230,200,0.45)" strokeWidth="2.2" strokeLinecap="round" style={{animationDelay:`${i*0.3}s`}}/>
+                      <path key={i} className="it-up" d={`M${30+i*9},18 Q${28+i*9},10 ${32+i*9},4`} fill="none" stroke="rgba(255,235,210,0.45)" strokeWidth="2.2" strokeLinecap="round" style={{animationDelay:`${i*0.3}s`}}/>
                     ))}
-                    {/* Vegetables / ingredients on counter */}
-                    <circle cx="10" cy="50" r="5" fill="rgba(255,60,60,0.8)"/>  {/* tomato */}
-                    <circle cx="10" cy="46" r="2.5" fill="rgba(30,160,30,0.7)"/> {/* stalk */}
-                    <ellipse cx="24" cy="50" rx="4" ry="5.5" fill="rgba(255,180,0,0.8)"/> {/* onion */}
-                    <path d="M20,44 Q24,42 28,44" fill="none" stroke="rgba(220,140,0,0.65)" strokeWidth="1.2"/>
-                    <ellipse cx="60" cy="51" rx="7" ry="4" fill="rgba(100,180,50,0.8)"/> {/* zucchini */}
-                    <ellipse cx="74" cy="50" rx="5" ry="5.5" fill="rgba(180,80,200,0.75)"/> {/* eggplant */}
+                    {/* Vegetables on counter */}
+                    <circle cx="10" cy="50" r="5" fill="rgba(255,60,60,0.8)"/>
+                    <circle cx="10" cy="46" r="2.5" fill="rgba(30,160,30,0.7)"/>
+                    <ellipse cx="24" cy="50" rx="4" ry="5.5" fill="rgba(255,180,0,0.8)"/>
+                    <ellipse cx="70" cy="50" rx="5" ry="5.5" fill="rgba(180,80,200,0.75)"/>
+                    <ellipse cx="60" cy="51" rx="7" ry="4" fill="rgba(100,180,50,0.8)"/>
                   </>),
-                  // ── DOLLS — Barbie-style dollhouse ────────────────────────────
+                  // ── DOLLS  -  Barbie-style dollhouse ────────────────────────────
                   'Dolls': (<>
-                    {/* Dollhouse structure */}
-                    {/* Roof */}
-                    <polygon points="8,22 40,4 72,22" fill="rgba(220,80,140,0.85)"/>
-                    <polygon points="8,22 40,4 40,22" fill="rgba(200,60,120,0.75)"/>
-                    {/* House walls */}
-                    <rect x="8"  y="22" width="64" height="38" fill="rgba(255,220,240,0.7)"/>
-                    {/* Center divider */}
-                    <line x1="40" y1="22" x2="40" y2="60" stroke="rgba(200,150,180,0.5)" strokeWidth="1"/>
-                    {/* Floor divider */}
-                    <line x1="8" y1="40" x2="72" y2="40" stroke="rgba(200,150,180,0.5)" strokeWidth="1"/>
-                    {/* Room windows / frames */}
-                    <rect x="10" y="24" width="28" height="15" rx="1" fill="rgba(255,240,250,0.4)" stroke="rgba(220,140,180,0.5)" strokeWidth="0.8"/>
-                    <rect x="42" y="24" width="28" height="15" rx="1" fill="rgba(255,240,250,0.4)" stroke="rgba(220,140,180,0.5)" strokeWidth="0.8"/>
-                    <rect x="10" y="42" width="28" height="16" rx="1" fill="rgba(255,240,250,0.4)" stroke="rgba(220,140,180,0.5)" strokeWidth="0.8"/>
-                    <rect x="42" y="42" width="28" height="16" rx="1" fill="rgba(255,240,250,0.4)" stroke="rgba(220,140,180,0.5)" strokeWidth="0.8"/>
-                    {/* Room contents */}
-                    {/* Top-left room: living room with sofa */}
-                    <ellipse cx="20" cy="36" rx="8" ry="3" fill="rgba(255,100,160,0.6)"/>  {/* sofa */}
-                    <rect x="12" y="32" width="16" height="5" rx="2" fill="rgba(255,120,170,0.7)"/>
-                    {/* Top-right room: bedroom with bed */}
-                    <rect x="44" y="32" width="24" height="6" rx="2" fill="rgba(140,180,255,0.65)"/>
-                    <rect x="44" y="30" width="8"  height="3" rx="1" fill="rgba(180,220,255,0.7)"/>  {/* pillow */}
-                    {/* Bottom-left room: dining */}
-                    <ellipse cx="24" cy="52" rx="8" ry="4" fill="rgba(220,180,100,0.6)"/>  {/* table */}
-                    {/* Bottom-right room: wardrobe */}
-                    <rect x="44" y="43" width="14" height="13" rx="1" fill="rgba(200,160,120,0.6)"/>
-                    <line x1="51" y1="43" x2="51" y2="56" stroke="rgba(180,140,100,0.5)" strokeWidth="0.8"/>
-                    {/* Front door */}
-                    <rect x="33" y="48" width="14" height="12" rx="2 2 0 0" fill="rgba(220,80,140,0.75)"/>
-                    <circle cx="44" cy="54" r="1.5" fill="rgba(255,220,50,0.9)"/>  {/* door handle */}
-                    {/* Barbie doll 1 — in living room */}
-                    <g style={{opacity:0.92}}>
-                      <circle cx="25" cy="28" r="3" fill="rgba(255,210,185,0.97)"/>
-                      <path d="M22,27 Q24,24 25,25 Q26,24 28,27" fill="rgba(255,200,50,0.9)"/>
-                      <polygon points="22,31 28,31 30,36 20,36" fill="rgba(255,80,160,0.85)"/>
-                    </g>
-                    {/* Barbie doll 2 — in bedroom */}
-                    <g style={{opacity:0.88}}>
-                      <circle cx="62" cy="27" r="3" fill="rgba(255,210,185,0.97)"/>
-                      <path d="M59,26 Q61,23 62,24 Q63,23 65,26" fill="rgba(180,120,220,0.9)"/>
-                      <polygon points="59,30 65,30 67,36 57,36" fill="rgba(200,100,255,0.8)"/>
-                    </g>
-                    {/* Stars / sparkles on roof */}
-                    {[{x:20,y:12},{x:40,y:8},{x:60,y:12}].map(({x,y},i)=>(
-                      <circle key={i} cx={x} cy={y} r="1.8" fill="rgba(255,220,100,0.9)" className="it-star" style={{animationDelay:`${i*0.3}s`}}/>
+                    {/* Glamour stars */}
+                    {[{x:6,y:4},{x:14,y:14},{x:66,y:6},{x:74,y:16},{x:4,y:28},{x:76,y:26}].map(({x,y},i)=>(
+                      <circle key={i} cx={x} cy={y} r={1.5+i%2*0.5} fill="rgba(255,200,220,0.85)" className="it-star" style={{animationDelay:`${i*0.3}s`}}/>
                     ))}
+                    {/* Wardrobe  -  left */}
+                    <rect x="4" y="8" width="18" height="50" rx="3" fill="rgba(220,80,150,0.32)"/>
+                    <line x1="13" y1="8" x2="13" y2="58" stroke="rgba(200,60,130,0.28)" strokeWidth="1"/>
+                    <path d="M9,16 Q6,18 5,22 Q9,24 9,26" fill="none" stroke="rgba(255,100,160,0.65)" strokeWidth="2.5" strokeLinecap="round"/>
+                    <path d="M17,16 Q20,18 21,22 Q17,24 17,26" fill="none" stroke="rgba(180,100,220,0.65)" strokeWidth="2.5" strokeLinecap="round"/>
+                    {/* Fashion Barbie doll  -  center */}
+                    <g className="it-bob" style={{transformOrigin:'48px 28px', animationDelay:'1.4s'}}>
+                      {/* Long blonde hair */}
+                      <path d="M42,14 Q36,20 33,32 Q35,42 39,50" fill="none" stroke="rgba(255,210,50,0.9)" strokeWidth="5" strokeLinecap="round"/>
+                      <path d="M42,14 Q37,18 34,28 Q36,38 41,48" fill="none" stroke="rgba(255,228,90,0.65)" strokeWidth="3" strokeLinecap="round"/>
+                      <path d="M54,14 Q60,20 63,32 Q61,42 57,50" fill="none" stroke="rgba(255,210,50,0.9)" strokeWidth="5" strokeLinecap="round"/>
+                      <path d="M54,14 Q59,18 62,28 Q60,38 55,48" fill="none" stroke="rgba(255,228,90,0.65)" strokeWidth="3" strokeLinecap="round"/>
+                      {/* Head */}
+                      <circle cx="48" cy="13" r="8" fill="rgba(255,215,185,0.97)"/>
+                      {/* Hair crown */}
+                      <path d="M40,10 Q44,4 48,6 Q52,4 56,10" fill="rgba(255,210,50,0.95)"/>
+                      {/* Eyes with lashes */}
+                      <circle cx="44.5" cy="12.5" r="1.8" fill="rgba(60,30,80,0.92)"/>
+                      <circle cx="51.5" cy="12.5" r="1.8" fill="rgba(60,30,80,0.92)"/>
+                      {[-2,0,2].map(dx=><line key={dx} x1={44.5+dx*0.4} y1={11} x2={44.5+dx*0.4} y2={9.5} stroke="rgba(40,20,60,0.8)" strokeWidth="0.8"/>)}
+                      {[-2,0,2].map(dx=><line key={dx+10} x1={51.5+dx*0.4} y1={11} x2={51.5+dx*0.4} y2={9.5} stroke="rgba(40,20,60,0.8)" strokeWidth="0.8"/>)}
+                      {/* Cheeks + lips */}
+                      <ellipse cx="44.5" cy="15" rx="2" ry="1" fill="rgba(255,140,160,0.8)"/>
+                      <ellipse cx="51.5" cy="15" rx="2" ry="1" fill="rgba(255,140,160,0.8)"/>
+                      <path d="M45.5,17.5 Q48,20 50.5,17.5" fill="none" stroke="rgba(220,80,120,0.88)" strokeWidth="1.3" strokeLinecap="round"/>
+                      {/* Neck */}
+                      <rect x="46.5" y="20" width="3" height="4" rx="1.5" fill="rgba(255,215,185,0.97)"/>
+                      {/* Fitted bodice */}
+                      <ellipse cx="48" cy="26" rx="5" ry="8" fill="rgba(220,50,140,0.88)"/>
+                      {/* Flared skirt */}
+                      <path d="M43,32 Q34,44 32,58 Q48,54 48,50 Q48,54 64,58 Q62,44 53,32 Z" fill="rgba(240,80,160,0.82)"/>
+                      <path d="M43,35 Q36,46 34,58 Q48,55 48,50" fill="rgba(255,120,180,0.5)"/>
+                      {/* Dress sparkles */}
+                      {[[38,38],[42,46],[48,41],[54,46],[58,38]].map(([x,y],i)=>(
+                        <circle key={i} cx={x} cy={y} r="1.5" fill="rgba(255,230,240,0.9)" className="it-star" style={{animationDelay:`${i*0.2}s`}}/>
+                      ))}
+                      {/* Arms */}
+                      <path d="M44,22 Q36,20 32,26" fill="none" stroke="rgba(255,215,185,0.95)" strokeWidth="3.5" strokeLinecap="round"/>
+                      <circle cx="32" cy="26" r="3" fill="rgba(255,215,185,0.97)"/>
+                      {/* Purse */}
+                      <rect x="27" y="23" width="8" height="7" rx="2" fill="rgba(255,180,50,0.85)"/>
+                      <path d="M29,23 Q31,19 33,23" fill="none" stroke="rgba(255,180,50,0.88)" strokeWidth="1.5"/>
+                      <path d="M52,22 Q60,20 64,26" fill="none" stroke="rgba(255,215,185,0.95)" strokeWidth="3.5" strokeLinecap="round"/>
+                      <circle cx="64" cy="26" r="3" fill="rgba(255,215,185,0.97)"/>
+                      {/* Legs */}
+                      <line x1="45" y1="54" x2="44" y2="60" stroke="rgba(255,215,185,0.95)" strokeWidth="3.5" strokeLinecap="round"/>
+                      <line x1="51" y1="54" x2="52" y2="60" stroke="rgba(255,215,185,0.95)" strokeWidth="3.5" strokeLinecap="round"/>
+                      {/* Heels */}
+                      <path d="M42,60 Q44,60 44,58" fill="none" stroke="rgba(220,50,140,0.85)" strokeWidth="2.2" strokeLinecap="round"/>
+                      <path d="M50,60 Q52,60 52,58" fill="none" stroke="rgba(220,50,140,0.85)" strokeWidth="2.2" strokeLinecap="round"/>
+                    </g>
                   </>),
-                  // ── CARS & TRUCKS — night highway ────────────────────────────
+                  // ── CARS & TRUCKS  -  night highway ────────────────────────────
                   'Cars & Trucks': (<>
                     {/* Night sky with stars */}
                     <S cx={12} cy={5}  r={1.2} d="0s"/><S cx={30} cy={3}  r={0.9} d="0.3s"/>
@@ -1565,7 +1738,7 @@ export default function OnboardingPage() {
                     <line x1="0" y1="59" x2="80" y2="59" stroke="rgba(255,255,255,0.5)" strokeWidth="2"/>
                     {/* Lane dashes */}
                     {[0,1,2,3].map(i=><rect key={i} x={i*22+2} y={46} width={14} height={2} rx="1" fill="rgba(255,220,0,0.8)"/>)}
-                    {/* Car zooming — with glowing headlights */}
+                    {/* Car zooming  -  with glowing headlights */}
                     <g className="it-car">
                       {/* Car body */}
                       <rect x="-5" y="38" width="34" height="12" rx="3" fill="rgba(220,50,50,0.95)"/>
@@ -1579,7 +1752,7 @@ export default function OnboardingPage() {
                       <circle cx="2"  cy="51" r="2.5" fill="rgba(100,100,100,0.8)"/>
                       <circle cx="22" cy="51" r="5" fill="rgba(20,20,20,0.95)"/>
                       <circle cx="22" cy="51" r="2.5" fill="rgba(100,100,100,0.8)"/>
-                      {/* Headlights — bright yellow cones */}
+                      {/* Headlights  -  bright yellow cones */}
                       <rect x="27" y="40" width="6" height="4" rx="1" fill="rgba(255,230,50,0.97)"/>
                       {/* Headlight beam */}
                       <polygon points="29,42 80,36 80,48" fill="rgba(255,230,50,0.06)"/>
@@ -1588,17 +1761,21 @@ export default function OnboardingPage() {
                     {[0,1,2,3].map(i=><line key={i} x1={62-i*8} y1={40+i*4} x2={80} y2={40+i*4} stroke="rgba(255,220,50,0.2)" strokeWidth="1" className="it-flash" style={{animationDelay:`${i*0.1}s`}}/>)}
                   </>),
                 };
+                const isLocked = isFreeUser && !TRIAL_INTERESTS.includes(option.label as typeof TRIAL_INTERESTS[number]);
                 return (
                   <button
                     key={option.label}
                     className="int-tile"
-                    onClick={() => handleInterestToggle(option.label)}
+                    onClick={() => {
+                      if (isFreeUser && !TRIAL_INTERESTS.includes(option.label as typeof TRIAL_INTERESTS[number])) return;
+                      handleInterestToggle(option.label);
+                    }}
                     style={{
                       display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end',
                       padding: '0 8px 12px',
                       borderRadius: '18px',
                       minHeight: '100px',
-                      cursor: 'pointer',
+                      cursor: isLocked ? 'not-allowed' : 'pointer',
                       border: 'none',
                       position: 'relative',
                       overflow: 'hidden',
@@ -1609,7 +1786,7 @@ export default function OnboardingPage() {
                         ? `0 8px 24px ${option.sh}, 0 2px 4px rgba(0,0,0,0.08)`
                         : darkBg
                           ? '0 4px 20px rgba(0,0,0,0.45), 0 0 0 1.5px rgba(255,255,255,0.08)'
-                          : '0 2px 10px rgba(0,0,0,0.07), 0 0 0 1.5px #E8E0D0',
+                          : '0 2px 10px rgba(0,0,0,0.07), 0 0 0 1.5px #F0E4D0',
                     }}
                   >
                     <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }} viewBox="0 0 80 60" preserveAspectRatio="xMidYMid slice">
@@ -1624,7 +1801,33 @@ export default function OnboardingPage() {
                         fontSize: '10px', color: 'white', fontWeight: '800', lineHeight: 1,
                       }}>✓</span>
                     )}
-                    <span style={{ position: 'relative', zIndex: 1, fontSize: '0.75rem', fontWeight: '800', lineHeight: 1.2, textAlign: 'center', color: (active || !!darkBg) ? 'rgba(255,255,255,1)' : '#1A1209', letterSpacing: '0.03em', textShadow: (active || !!darkBg) ? '0 1px 4px rgba(0,0,0,0.7), 0 0 8px rgba(0,0,0,0.4)' : '0 1px 3px rgba(255,255,255,0.9)' }}>
+                    {isLocked && (
+                      <div style={{
+                        position: 'absolute', inset: 0, zIndex: 2, borderRadius: 'inherit',
+                        background: 'rgba(8,12,28,0.70)',
+                        display: 'flex', flexDirection: 'column',
+                        alignItems: 'center', justifyContent: 'center', gap: '5px',
+                        padding: '4px 6px 10px',
+                      }}>
+                        <svg width="20" height="24" viewBox="0 0 20 24" fill="none">
+                          <rect x="1" y="11" width="18" height="12" rx="2.5"
+                            fill="rgba(255,255,255,0.88)"/>
+                          <path d="M5 11V7.5a5 5 0 0 1 10 0V11"
+                            stroke="rgba(255,255,255,0.88)" strokeWidth="2.2"
+                            strokeLinecap="round" fill="none"/>
+                          <circle cx="10" cy="17" r="2" fill="rgba(8,12,28,0.5)"/>
+                          <line x1="10" y1="17" x2="10" y2="19.5"
+                            stroke="rgba(8,12,28,0.5)" strokeWidth="1.8"
+                            strokeLinecap="round"/>
+                        </svg>
+                        <span style={{
+                          fontSize: '0.65rem', fontWeight: '700',
+                          color: 'rgba(255,255,255,0.80)', textAlign: 'center',
+                          letterSpacing: '0.02em', lineHeight: 1.2,
+                        }}>{option.label}</span>
+                      </div>
+                    )}
+                    <span style={{ position: 'relative', zIndex: 1, fontSize: '0.75rem', fontWeight: '800', lineHeight: 1.2, textAlign: 'center', color: (active || !!darkBg) ? 'rgba(255,255,255,1)' : '#0D183D', letterSpacing: '0.03em', textShadow: (active || !!darkBg) ? '0 1px 4px rgba(0,0,0,0.7), 0 0 8px rgba(0,0,0,0.4)' : '0 1px 3px rgba(255,255,255,0.9)' }}>
                       {option.label}
                     </span>
                   </button>
@@ -1632,56 +1835,90 @@ export default function OnboardingPage() {
               })}
             </div>
 
-            {/* Premium upsell — always visible below tile grid */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', background: 'linear-gradient(135deg, #FFF4E6 0%, #FFF0E0 100%)', border: '1.5px solid #FFD4A8', borderRadius: '12px', padding: '12px 16px', marginBottom: '16px' }}>
-              <span style={{ fontSize: '1.25rem', flexShrink: 0 }}>⭐</span>
+            {/* Premium upsell */}
+            <div style={{ display: 'flex', alignItems: 'center', background: 'linear-gradient(135deg, #FFF4E6 0%, #FFF0E0 100%)', border: '1.5px solid #FFD4A8', borderRadius: '12px', padding: '12px 16px', marginBottom: '16px' }}>
               <p style={{ margin: 0, fontSize: '0.82rem', color: '#5E3A0A', lineHeight: 1.4 }}>
-                <strong style={{ color: '#C85A00' }}>Premium</strong> unlocks up to 5 interests, all locked tiles, and custom themes — so every story is uniquely theirs.
+                <strong style={{ color: '#C85A00' }}>Premium</strong> unlocks up to 5 interests, all locked tiles, and custom themes.
               </p>
             </div>
 
-            {/* Custom interests added — shown above the input with X to remove */}
+            {/* Custom interests added  -  shown above the input with X to remove */}
             {(() => {
               const builtInLabels = INTEREST_OPTIONS.map(o => o.label);
               const customAdded = state.interests.filter(i => !builtInLabels.includes(i));
               return customAdded.length > 0 ? (
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '12px' }}>
                   {customAdded.map(interest => (
-                    <span key={interest} style={{ display: 'flex', alignItems: 'center', gap: '6px', background: '#FBF0F0', border: '1.5px solid #741515', borderRadius: '8px', padding: '0.4rem 0.8rem', fontSize: '0.85rem', color: '#741515', fontWeight: '600' }}>
+                    <span key={interest} style={{ display: 'flex', alignItems: 'center', gap: '6px', background: '#FFF0E6', border: '1.5px solid #FF6B35', borderRadius: '8px', padding: '0.4rem 0.8rem', fontSize: '0.85rem', color: '#FF6B35', fontWeight: '600' }}>
                       {interest}
-                      <button onClick={() => handleInterestToggle(interest)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#741515', padding: 0, fontSize: '1rem', lineHeight: 1, display: 'flex', alignItems: 'center' }}>×</button>
+                      <button onClick={() => handleInterestToggle(interest)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#FF6B35', padding: 0, fontSize: '1rem', lineHeight: 1, display: 'flex', alignItems: 'center' }}>×</button>
                     </span>
                   ))}
                 </div>
               ) : null;
             })()}
 
-            {/* Add custom interest input — premium only */}
-            <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
-              <input type="text" style={{ ...inputStyle, flex: 1, opacity: 0.55, cursor: 'not-allowed' }} placeholder="⭐ Custom interests — Premium only (e.g. Ballet)" value={state.customInterest} disabled
-                onChange={(e) => setState({ ...state, customInterest: e.target.value })}
-                onKeyPress={(e) => e.key === 'Enter' && handleAddCustomInterest()} />
-              {state.customInterest.trim() && (
-                <button onClick={handleAddCustomInterest} className="btn-brand" style={{ padding: '0.65rem 1.25rem', whiteSpace: 'nowrap' }}>Add</button>
-              )}
-            </div>
+            {/* Add custom interest input */}
+            {interestError && (
+              <p style={{ color: '#DC2626', fontSize: '0.8rem', marginBottom: '8px', fontWeight: '500' }}>{interestError}</p>
+            )}
+            {isFreeUser ? (
+              <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
+                <div style={{ flex: 1, position: 'relative' }}>
+                  <input
+                    type="text" disabled
+                    style={{ ...inputStyle, width: '100%', opacity: 0.55, cursor: 'not-allowed', backgroundColor: '#F2F4F8', paddingRight: '40px', boxSizing: 'border-box' }}
+                    placeholder="Subscribe to add your own interest" />
+                  <span style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', fontSize: '1rem', pointerEvents: 'none' }}>🔒</span>
+                </div>
+              </div>
+            ) : (
+              <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
+                <input type="text" style={{ ...inputStyle, flex: 1 }} placeholder="Custom interests — Premium only (e.g. Ballet)" disabled value={state.customInterest} style={{ opacity: 0.55, cursor: 'not-allowed' }}
+                  onChange={(e) => { setState({ ...state, customInterest: e.target.value }); setInterestError(''); }}
+                  onKeyPress={(e) => e.key === 'Enter' && handleAddCustomInterest()} />
+                {state.customInterest.trim() && (
+                  <button onClick={handleAddCustomInterest} className="btn-brand" style={{ padding: '0.65rem 1.25rem', whiteSpace: 'nowrap' }}>Add</button>
+                )}
+              </div>
+            )}
 
             {state.interests.length === 0 && (
-              <p style={{ color: '#741515', marginBottom: '12px', fontSize: '0.875rem', fontWeight: '500' }}>Select at least 1 interest</p>
+              <p style={{ color: '#FF6B35', marginBottom: '12px', fontSize: '0.875rem', fontWeight: '500' }}>Select at least 1 interest</p>
             )}
+
             {state.interests.length >= 3 && (
               <p style={{ color: '#C85A00', marginBottom: '12px', fontSize: '0.875rem', fontWeight: '500' }}>
                 Free plan limit reached — <a href="/pricing" style={{ color: '#C85A00', fontWeight: '700', textDecoration: 'underline' }}>upgrade to Premium</a> for up to 5 interests + all locked tiles
               </p>
             )}
 
-            <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-              <button onClick={handleNext} disabled={state.interests.length < 1} className="btn-brand"
-                style={{ flex: 1, padding: '0.75rem 1.75rem', opacity: state.interests.length < 1 ? 0.5 : 1, cursor: state.interests.length < 1 ? 'not-allowed' : 'pointer' }}>
-                Next step
-              </button>
-              <button onClick={handleBack} style={{ background: 'none', border: 'none', color: '#741515', cursor: 'pointer', fontWeight: '500', padding: 0 }}>Back</button>
-            </div>
+            {isFreeUser ? (
+              /* Free users: single button to generate free sample story */
+              <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+                <button
+                  onClick={handleNext}
+                  disabled={state.interests.length < 1}
+                  className="btn-brand"
+                  style={{
+                    flex: 1, padding: '0.75rem 1.75rem',
+                    opacity: state.interests.length < 1 ? 0.5 : 1,
+                    cursor: state.interests.length < 1 ? 'not-allowed' : 'pointer',
+                  }}>
+                  Generate my free story
+                </button>
+                <button onClick={handleBack} style={{ background: 'none', border: 'none', color: '#FF6B35', cursor: 'pointer', fontWeight: '500', padding: 0 }}>Back</button>
+              </div>
+            ) : (
+              /* Subscribers: normal single next button */
+              <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+                <button onClick={handleNext} disabled={state.interests.length < 1} className="btn-brand"
+                  style={{ flex: 1, padding: '0.75rem 1.75rem', opacity: state.interests.length < 1 ? 0.5 : 1, cursor: state.interests.length < 1 ? 'not-allowed' : 'pointer' }}>
+                  Next step
+                </button>
+                <button onClick={handleBack} style={{ background: 'none', border: 'none', color: '#FF6B35', cursor: 'pointer', fontWeight: '500', padding: 0 }}>Back</button>
+              </div>
+            )}
           </div>
         )}
 
@@ -1689,21 +1926,21 @@ export default function OnboardingPage() {
         {state.step === 4 && (
           <div>
             <ProgressDots />
-            <h1 className="font-serif" style={{ fontSize: '2rem', marginBottom: '8px', color: '#1A1209' }}>Let's get specific!</h1>
-            <p style={{ color: '#6B5E4E', marginBottom: '32px', fontSize: '0.95rem' }}>
+            <h1 className="font-serif" style={{ fontSize: '2rem', marginBottom: '8px', color: '#0D183D' }}>Let's get specific!</h1>
+            <p style={{ color: '#5E6A7A', marginBottom: '32px', fontSize: '0.95rem' }}>
               These details make {state.name || 'your child'}'s story feel like it was written just for them. Skip any you don't know.
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
               {followUpSections.map(({ interest, emoji, questions }) => (
-                <div key={interest} style={{ borderLeft: '3px solid #E8E0D0', paddingLeft: '16px' }}>
+                <div key={interest} style={{ borderLeft: '3px solid #F0E4D0', paddingLeft: '16px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
                     <span style={{
                       display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
                       width: '32px', height: '32px', borderRadius: '8px',
-                      background: '#F5F0E8', fontSize: '1.15rem', flexShrink: 0,
+                      background: '#FFF0E6', fontSize: '1.15rem', flexShrink: 0,
                     }}>{emoji}</span>
-                    <p style={{ fontWeight: '600', color: '#1A1209', margin: 0, fontSize: '0.95rem' }}>{interest}</p>
+                    <p style={{ fontWeight: '600', color: '#0D183D', margin: 0, fontSize: '0.95rem' }}>{interest}</p>
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                     {questions.map(({ q, placeholder }) => (
@@ -1724,10 +1961,10 @@ export default function OnboardingPage() {
 
               {/* Custom interests (no questions defined) */}
               {state.interests.filter(i => !FOLLOW_UP_QUESTIONS[i]).length > 0 && (
-                <div style={{ borderLeft: '3px solid #E8E0D0', paddingLeft: '16px' }}>
+                <div style={{ borderLeft: '3px solid #F0E4D0', paddingLeft: '16px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
-                    <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '32px', height: '32px', borderRadius: '8px', background: '#F5F0E8', fontSize: '1.15rem', flexShrink: 0 }}>⭐</span>
-                    <p style={{ fontWeight: '600', color: '#1A1209', margin: 0, fontSize: '0.95rem' }}>Other interests</p>
+                    <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '32px', height: '32px', borderRadius: '8px', background: '#FFF0E6', fontSize: '0.85rem', flexShrink: 0, fontWeight: '700', color: '#FF6B35' }}>+</span>
+                    <p style={{ fontWeight: '600', color: '#0D183D', margin: 0, fontSize: '0.95rem' }}>Other interests</p>
                   </div>
                   {state.interests.filter(i => !FOLLOW_UP_QUESTIONS[i]).map((interest) => (
                     <div key={interest} style={{ marginBottom: '12px' }}>
@@ -1749,7 +1986,7 @@ export default function OnboardingPage() {
 
             <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginTop: '32px' }}>
               <button onClick={handleNext} className="btn-brand" style={{ flex: 1, padding: '0.75rem 1.75rem' }}>Next step</button>
-              <button onClick={handleBack} style={{ background: 'none', border: 'none', color: '#741515', cursor: 'pointer', fontWeight: '500', padding: 0 }}>Back</button>
+              <button onClick={handleBack} style={{ background: 'none', border: 'none', color: '#FF6B35', cursor: 'pointer', fontWeight: '500', padding: 0 }}>Back</button>
             </div>
           </div>
         )}
@@ -1758,15 +1995,36 @@ export default function OnboardingPage() {
         {state.step === 5 && (
           <div>
             <ProgressDots />
-            <h1 className="font-serif" style={{ fontSize: '2rem', marginBottom: '8px', color: '#1A1209' }}>Almost there!</h1>
-            <p style={{ color: '#6B5E4E', marginBottom: '28px', fontSize: '0.95rem' }}>
+            <h1 className="font-serif" style={{ fontSize: '2rem', marginBottom: '8px', color: '#0D183D' }}>Almost there!</h1>
+            <p style={{ color: '#5E6A7A', marginBottom: '28px', fontSize: '0.95rem' }}>
               A few more details to make {state.name || 'their'} stories feel truly personal
             </p>
 
             {/* Appearance */}
             <div style={{ marginBottom: '24px' }}>
-              <p style={{ ...labelStyle, marginBottom: '12px' }}>Appearance <span style={{ color: '#9B8B7A', fontWeight: '400', fontSize: '0.8rem' }}>(optional)</span></p>
+              <p style={{ ...labelStyle, marginBottom: '12px' }}>Appearance <span style={{ color: '#5E6A7A', fontWeight: '400', fontSize: '0.8rem' }}>(optional)</span></p>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                <div>
+                  <label style={optionalLabel}>Skin colour</label>
+                  <div style={{ display: 'flex', gap: '10px', marginTop: '4px' }}>
+                    {[
+                      { label: 'White',      hex: '#F5D5B5' },
+                      { label: 'Tanned',     hex: '#C8956C' },
+                      { label: 'Semi Brown', hex: '#8D5524' },
+                      { label: 'Brown',      hex: '#4A2512' },
+                    ].map(({ label, hex }) => (
+                      <button key={label} type="button" title={label}
+                        onClick={() => setState({ ...state, skinColour: state.skinColour === label ? '' : label })}
+                        style={{
+                          width: '32px', height: '32px', borderRadius: '50%',
+                          background: hex, border: state.skinColour === label ? '3px solid #FF6B35' : '3px solid transparent',
+                          outline: state.skinColour === label ? '2px solid #FF6B35' : '2px solid #E0CDB8',
+                          outlineOffset: '2px', cursor: 'pointer', flexShrink: 0,
+                        }}
+                      />
+                    ))}
+                  </div>
+                </div>
                 <div>
                   <label style={optionalLabel}>Hair colour</label>
                   <input type="text" style={inputStyle} placeholder="e.g. Brown" value={state.hairColour} onChange={(e) => setState({ ...state, hairColour: e.target.value })} />
@@ -1780,7 +2038,7 @@ export default function OnboardingPage() {
 
             {/* Location */}
             <div style={{ marginBottom: '24px' }}>
-              <p style={{ ...labelStyle, marginBottom: '12px' }}>Where do they live? <span style={{ color: '#9B8B7A', fontWeight: '400', fontSize: '0.8rem' }}>(optional)</span></p>
+              <p style={{ ...labelStyle, marginBottom: '12px' }}>Where do they live? <span style={{ color: '#5E6A7A', fontWeight: '400', fontSize: '0.8rem' }}>(optional)</span></p>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                 <div>
                   <label style={optionalLabel}>City</label>
@@ -1795,7 +2053,7 @@ export default function OnboardingPage() {
 
             {/* Siblings */}
             <div style={{ marginBottom: '24px' }}>
-              <p style={{ ...labelStyle, marginBottom: '12px' }}>Siblings <span style={{ color: '#9B8B7A', fontWeight: '400', fontSize: '0.8rem' }}>(optional)</span></p>
+              <p style={{ ...labelStyle, marginBottom: '12px' }}>Siblings <span style={{ color: '#5E6A7A', fontWeight: '400', fontSize: '0.8rem' }}>(optional)</span></p>
               {state.siblings.length > 0 && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '10px' }}>
                   {state.siblings.map((s, i) => (
@@ -1805,20 +2063,20 @@ export default function OnboardingPage() {
                       <input type="text" style={inputStyle} placeholder="Nickname (optional)" value={s.nickname}
                         onChange={(e) => { const u = [...state.siblings]; u[i] = { ...u[i], nickname: e.target.value }; setState({ ...state, siblings: u }); }} />
                       <button onClick={() => setState({ ...state, siblings: state.siblings.filter((_, idx) => idx !== i) })}
-                        style={{ background: 'none', border: '1.5px solid #E8E0D0', borderRadius: '8px', width: '36px', height: '36px', cursor: 'pointer', color: '#9B8B7A', fontSize: '1rem', flexShrink: 0 }}>×</button>
+                        style={{ background: 'none', border: '1.5px solid #F0E4D0', borderRadius: '8px', width: '36px', height: '36px', cursor: 'pointer', color: '#5E6A7A', fontSize: '1rem', flexShrink: 0 }}>×</button>
                     </div>
                   ))}
                 </div>
               )}
               <button onClick={() => setState({ ...state, siblings: [...state.siblings, { name: '', nickname: '' }] })}
-                style={{ ...chipBase, border: '1.5px dashed #C8BEAA', backgroundColor: 'transparent', color: '#6B5E4E', width: '100%' }}>
+                style={{ ...chipBase, border: '1.5px dashed #F0E4D0', backgroundColor: 'transparent', color: '#5E6A7A', width: '100%' }}>
                 + Add sibling
               </button>
             </div>
 
             {/* Best friends */}
             <div style={{ marginBottom: '24px' }}>
-              <p style={{ ...labelStyle, marginBottom: '12px' }}>Best friends <span style={{ color: '#9B8B7A', fontWeight: '400', fontSize: '0.8rem' }}>(optional)</span></p>
+              <p style={{ ...labelStyle, marginBottom: '12px' }}>Best friends <span style={{ color: '#5E6A7A', fontWeight: '400', fontSize: '0.8rem' }}>(optional)</span></p>
               {state.friends.length > 0 && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '10px' }}>
                   {state.friends.map((f, i) => (
@@ -1828,20 +2086,20 @@ export default function OnboardingPage() {
                       <input type="text" style={inputStyle} placeholder="Nickname (optional)" value={f.nickname}
                         onChange={(e) => { const u = [...state.friends]; u[i] = { ...u[i], nickname: e.target.value }; setState({ ...state, friends: u }); }} />
                       <button onClick={() => setState({ ...state, friends: state.friends.filter((_, idx) => idx !== i) })}
-                        style={{ background: 'none', border: '1.5px solid #E8E0D0', borderRadius: '8px', width: '36px', height: '36px', cursor: 'pointer', color: '#9B8B7A', fontSize: '1rem', flexShrink: 0 }}>×</button>
+                        style={{ background: 'none', border: '1.5px solid #F0E4D0', borderRadius: '8px', width: '36px', height: '36px', cursor: 'pointer', color: '#5E6A7A', fontSize: '1rem', flexShrink: 0 }}>×</button>
                     </div>
                   ))}
                 </div>
               )}
               <button onClick={() => setState({ ...state, friends: [...state.friends, { name: '', nickname: '' }] })}
-                style={{ ...chipBase, border: '1.5px dashed #C8BEAA', backgroundColor: 'transparent', color: '#6B5E4E', width: '100%' }}>
+                style={{ ...chipBase, border: '1.5px dashed #F0E4D0', backgroundColor: 'transparent', color: '#5E6A7A', width: '100%' }}>
                 + Add friend
               </button>
             </div>
 
             {/* Pet */}
             <div style={{ marginBottom: '24px' }}>
-              <p style={{ ...labelStyle, marginBottom: '12px' }}>Pet <span style={{ color: '#9B8B7A', fontWeight: '400', fontSize: '0.8rem' }}>(optional)</span></p>
+              <p style={{ ...labelStyle, marginBottom: '12px' }}>Pet <span style={{ color: '#5E6A7A', fontWeight: '400', fontSize: '0.8rem' }}>(optional)</span></p>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                 <div>
                   <label style={optionalLabel}>Pet name</label>
@@ -1866,4 +2124,31 @@ export default function OnboardingPage() {
                   const active = state.readingLevel === option.id;
                   return (
                     <button key={option.id} onClick={() => setState({ ...state, readingLevel: option.id })}
-                      style={{ ...chip(active), display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2
+                      style={{ ...chip(active), display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px', padding: '10px 20px' }}>
+                      <span>{option.label}</span>
+                      <span style={{ fontSize: '0.75rem', opacity: 0.75 }}>{option.sub}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {submitError && (
+              <div style={{ color: '#991B1B', fontSize: '0.875rem', marginBottom: '16px', padding: '12px', background: '#FEE2E2', borderRadius: '8px' }}>{submitError}</div>
+            )}
+
+            <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+              <button onClick={handleNext} disabled={submitting} className="btn-brand"
+                style={{ flex: 1, padding: '0.75rem 1.75rem', opacity: submitting ? 0.7 : 1, cursor: submitting ? 'not-allowed' : 'pointer' }}>
+                {submitting ? 'Creating profile...' : `Create ${state.name || 'profile'}`}
+              </button>
+              <button onClick={handleBack} disabled={submitting}
+                style={{ background: 'none', border: 'none', color: '#FF6B35', cursor: 'pointer', fontWeight: '500', padding: 0 }}>Back</button>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
