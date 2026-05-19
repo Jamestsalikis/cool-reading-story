@@ -450,13 +450,10 @@ export default function DashboardPage() {
   }, []);
 
   const booksRemainingToday = sub?.status === 'subscribed' ? Math.max(0, 1 + (sub.extra_books_today ?? 0) - (sub.stories_today ?? 0)) : 0;
-  let booksRemainingThisMonth = 0;
-  let daysInMonth = 31;
-  if (sub?.status === 'subscribed') {
-    const now = new Date();
-    daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
-    booksRemainingThisMonth = (daysInMonth - now.getDate() + 1) - ((sub.stories_today ?? 0) > 0 ? 1 : 0);
-  }
+  // Actual stories-remaining counter (cap 15/month for premium users)
+  const booksRemainingThisMonth = sub?.status === 'subscribed'
+    ? Math.max(0, 15 - (sub.stories_this_month ?? 0))
+    : 0;
 
   // Per-child: which children have already received a story today?
   const todayStr = new Date().toISOString().split('T')[0];
@@ -647,7 +644,7 @@ export default function DashboardPage() {
                     {childrenAvailableToday}/{children.length} {children.length === 1 ? 'child' : 'children'} available today
                   </span>
                   <span style={{ fontSize: '0.75rem', fontWeight: '600', padding: '3px 10px', borderRadius: '20px', background: '#F5F3FF', color: '#6D28D9', border: '1px solid #DDD6FE' }}>
-                    {booksRemainingThisMonth}/{daysInMonth} stories remaining this month
+                    {booksRemainingThisMonth}/15 stories remaining this month
                   </span>
                 </>
               )}
@@ -998,6 +995,7 @@ export default function DashboardPage() {
     </div>
   );
 }
+
 
 
 
