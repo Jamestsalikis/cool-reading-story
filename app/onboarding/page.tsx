@@ -331,7 +331,7 @@ export default function OnboardingPage() {
       ...prev,
       interests: prev.interests.includes(label)
         ? prev.interests.filter((i) => i !== label)
-        : prev.interests.length >= 5 ? prev.interests : [...prev.interests, label],
+        : (isFreeUser ? prev.interests.length >= 3 : prev.interests.length >= 5) ? prev.interests : [...prev.interests, label],
     }));
   };
 
@@ -342,7 +342,7 @@ export default function OnboardingPage() {
       setInterestError("This content is not appropriate for a children\'s app. Please choose a different interest.");
       return;
     }
-    if (state.interests.length < 5) {
+    if (state.interests.length < (isFreeUser ? 3 : 5)) {
       setInterestError('');
       setState((prev) => ({
         ...prev,
@@ -441,8 +441,8 @@ export default function OnboardingPage() {
           <div>
             <ProgressDots />
             <h1 className="font-serif" style={{ fontSize: '2rem', marginBottom: '8px', color: '#0D183D' }}>What does {state.name || 'your child'} love?</h1>
-            <p style={{ color: state.interests.length >= 5 ? '#FF6B35' : '#5E6A7A', marginBottom: '32px', fontSize: '0.95rem' }}>
-              {state.interests.length >= 5 ? 'Maximum 5 selected. Remove one to swap.' : 'Pick 1 to 3 interests — these shape every story'}
+            <p style={{ color: (isFreeUser ? state.interests.length >= 3 : state.interests.length >= 5) ? '#FF6B35' : '#5E6A7A', marginBottom: '32px', fontSize: '0.95rem' }}>
+              {(isFreeUser ? state.interests.length >= 3 : state.interests.length >= 5) ? 'Maximum reached. Remove one to swap.' : 'Pick 1 to 3 interests — these shape every story'}
             </p>
 
             <style>{`
@@ -2143,12 +2143,4 @@ export default function OnboardingPage() {
                 {submitting ? 'Creating profile...' : `Create ${state.name || 'profile'}`}
               </button>
               <button onClick={handleBack} disabled={submitting}
-                style={{ background: 'none', border: 'none', color: '#FF6B35', cursor: 'pointer', fontWeight: '500', padding: 0 }}>Back</button>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
+                style={{ background: 'none', border: 'none', color: '#FF6B
