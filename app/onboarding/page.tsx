@@ -1887,12 +1887,6 @@ export default function OnboardingPage() {
               <p style={{ color: '#FF6B35', marginBottom: '12px', fontSize: '0.875rem', fontWeight: '500' }}>Select at least 1 interest</p>
             )}
 
-            {state.interests.length >= 3 && (
-              <p style={{ color: '#C85A00', marginBottom: '12px', fontSize: '0.875rem', fontWeight: '500' }}>
-                Free plan limit reached — <a href="/pricing" style={{ color: '#C85A00', fontWeight: '700', textDecoration: 'underline' }}>upgrade to Premium</a> for up to 5 interests + all locked tiles
-              </p>
-            )}
-
             {isFreeUser ? (
               /* Free users: single button to generate free sample story */
               <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
