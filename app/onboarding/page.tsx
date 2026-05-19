@@ -315,13 +315,26 @@ export default function OnboardingPage() {
           return;
         }
 
-        // Always generate immediately and redirect to dashboard
-        fetch('/api/generate-story', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ child_id: result.child.id }),
-        });
-
+        // Generate story, start page 1 image, then redirect to story viewer
+        try {
+          const storyRes = await fetch('/api/generate-story', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ child_id: result.child.id }),
+          });
+          const storyData = await storyRes.json();
+          const storyId = storyData?.story?.id;
+          if (storyId) {
+            // Fire page 1 image generation — story page handles the rest
+            fetch('/api/generate-image', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ story_id: storyId, page_number: 1 }),
+            });
+            router.push(`/stories/${storyId}`);
+            return;
+          }
+        } catch { /* fall through to dashboard on error */ }
         router.push('/dashboard');
       } catch {
         setSubmitError('Something went wrong. Please try again.');
