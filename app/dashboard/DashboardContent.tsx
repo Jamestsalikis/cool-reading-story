@@ -889,56 +889,29 @@ export default function DashboardPage() {
             <div>
               <h3 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.4rem', color: '#0D183D', fontWeight: '400', marginBottom: '16px' }}>Subscription</h3>
               <div style={{ background: '#fff', border: '1px solid #F0E4D0', borderRadius: '12px', padding: '20px', marginBottom: '12px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: sub?.status === 'subscribed' ? '12px' : '0' }}>
                   <p style={{ fontWeight: '600', color: '#0D183D', fontSize: '0.95rem' }}>Current plan</p>
                   <span style={{ fontSize: '0.75rem', fontWeight: '700', padding: '3px 10px', borderRadius: '20px', background: isAdmin ? '#EDE9FE' : sub?.status === 'subscribed' ? '#E6F4EC' : '#FFF0E6', color: isAdmin ? '#6D28D9' : sub?.status === 'subscribed' ? '#1a7a4a' : '#FF6B35' }}>
                     {isAdmin ? 'Admin' : sub?.status === 'subscribed' ? 'Active' : 'Free'}
                   </span>
                 </div>
-                {sub?.status === 'subscribed' ? (
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <p style={{ color: '#5E6A7A', fontSize: '0.875rem' }}>Stories available today</p>
-                      <span style={{ fontWeight: '700', color: booksRemainingToday > 0 ? '#1a7a4a' : '#FF6B35' }}>{booksRemainingToday}</span>
-                    </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <p style={{ color: '#5E6A7A', fontSize: '0.875rem' }}>Stories remaining this month</p>
-                      <span style={{ fontWeight: '700', color: '#0D183D' }}>{booksRemainingThisMonth}</span>
-                    </div>
-                    {sub?.current_period_end && (
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '4px', borderTop: '1px solid #F0E4D0', marginTop: '4px' }}>
-                        <p style={{ color: '#5E6A7A', fontSize: '0.875rem' }}>Next billing date</p>
-                        <span style={{ fontWeight: '600', color: '#0D183D', fontSize: '0.875rem' }}>
-                          {new Date(sub.current_period_end).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })}
-                        </span>
-                      </div>
-                    )}
-                    {booksRemainingToday === 0 && (
-                      <button onClick={() => setPaywallReason('daily_limit')}
-                        style={{ marginTop: '4px', padding: '0.55rem 1rem', borderRadius: '8px', border: 'none', background: '#FF6B35', color: '#fff', cursor: 'pointer', fontWeight: '600', fontSize: '0.8rem' }}>
-                        Add a story tonight - A$0.99
-                      </button>
-                    )}
+                {sub?.status === 'subscribed' && (
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <p style={{ color: '#5E6A7A', fontSize: '0.875rem' }}>Children on plan</p>
+                    <span style={{ fontWeight: '700', color: '#0D183D' }}>{children.length}</span>
                   </div>
-                ) : isAdmin ? (
-                  <p style={{ color: '#5E6A7A', fontSize: '0.875rem' }}>Unlimited access. All features enabled.</p>
-                ) : (
-                  <p style={{ color: '#5E6A7A', fontSize: '0.875rem' }}>
-                    {freeStoriesRemaining} free {(freeStoriesRemaining) === 1 ? 'story' : 'stories'} remaining. Subscribe for a new story every night.
+                )}
+                {!sub?.status && !isAdmin && (
+                  <p style={{ color: '#5E6A7A', fontSize: '0.875rem', marginTop: '8px' }}>
+                    {freeStoriesRemaining} free {freeStoriesRemaining === 1 ? 'story' : 'stories'} remaining. Subscribe for a new story every night.
                   </p>
                 )}
               </div>
               {sub?.status === 'subscribed' ? (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                  <button onClick={async () => { const res = await fetch('/api/stripe/portal', { method: 'POST' }); const d = await res.json(); if (d.url) window.location.href = d.url; }}
-                    style={{ width: '100%', padding: '0.7rem', borderRadius: '10px', border: '1.5px solid #FF6B35', background: '#fff', color: '#FF6B35', cursor: 'pointer', fontWeight: '600', fontSize: '0.875rem' }}>
-                    Manage billing
-                  </button>
-                  <button onClick={async () => { const res = await fetch('/api/stripe/portal', { method: 'POST' }); const d = await res.json(); if (d.url) window.location.href = d.url; }}
-                    style={{ width: '100%', padding: '0.7rem', borderRadius: '10px', border: '1.5px solid #E5E7EB', background: '#fff', color: '#9CA3AF', cursor: 'pointer', fontWeight: '500', fontSize: '0.8rem' }}>
-                    Cancel subscription
-                  </button>
-                </div>
+                <button onClick={async () => { const res = await fetch('/api/stripe/portal', { method: 'POST' }); const d = await res.json(); if (d.url) window.location.href = d.url; }}
+                  style={{ width: '100%', padding: '0.7rem', borderRadius: '10px', border: '1.5px solid #FF6B35', background: '#fff', color: '#FF6B35', cursor: 'pointer', fontWeight: '600', fontSize: '0.875rem' }}>
+                  Manage billing
+                </button>
               ) : isAdmin ? null : (
                 <button onClick={() => setPaywallReason('free_exhausted')}
                   style={{ width: '100%', padding: '0.7rem', borderRadius: '10px', border: 'none', background: '#FF6B35', color: '#fff', cursor: 'pointer', fontWeight: '600', fontSize: '0.875rem' }}>
