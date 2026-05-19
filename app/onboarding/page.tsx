@@ -231,6 +231,13 @@ export default function OnboardingPage() {
       const supabase = createClient();
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
+      // Admin accounts bypass subscription check — treat as premium
+      const { data: adminData } = await supabase
+        .from('admin_emails')
+        .select('email')
+        .eq('email', user.email)
+        .maybeSingle();
+      if (adminData) { setIsFreeUser(false); return; }
       const { data } = await supabase
         .from('user_subscriptions')
         .select('status')
