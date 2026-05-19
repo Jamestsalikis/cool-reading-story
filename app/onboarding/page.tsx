@@ -465,7 +465,7 @@ export default function OnboardingPage() {
             <ProgressDots />
             <h1 className="font-serif" style={{ fontSize: '2rem', marginBottom: '8px', color: '#0D183D' }}>What does {state.name || 'your child'} love?</h1>
             <p style={{ color: (isFreeUser ? state.interests.length >= 3 : state.interests.length >= 5) ? '#FF6B35' : '#5E6A7A', marginBottom: '32px', fontSize: '0.95rem' }}>
-              {(isFreeUser ? state.interests.length >= 3 : state.interests.length >= 5) ? 'Maximum reached. Remove one to swap.' : 'Pick 1 to 3 interests — these shape every story'}
+              {(isFreeUser ? state.interests.length >= 3 : state.interests.length >= 5) ? 'Maximum reached. Remove one to swap.' : `Pick 1 to ${isFreeUser ? 3 : 5} interests — these shape every story`}
             </p>
 
             <style>{`
