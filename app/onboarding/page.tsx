@@ -1899,7 +1899,7 @@ export default function OnboardingPage() {
                     opacity: state.interests.length < 1 ? 0.5 : 1,
                     cursor: state.interests.length < 1 ? 'not-allowed' : 'pointer',
                   }}>
-                  Generate my free story
+                  Next step
                 </button>
                 <button onClick={handleBack} style={{ background: 'none', border: 'none', color: '#FF6B35', cursor: 'pointer', fontWeight: '500', padding: 0 }}>Back</button>
               </div>
@@ -2134,7 +2134,7 @@ export default function OnboardingPage() {
             <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
               <button onClick={handleNext} disabled={submitting} className="btn-brand"
                 style={{ flex: 1, padding: '0.75rem 1.75rem', opacity: submitting ? 0.7 : 1, cursor: submitting ? 'not-allowed' : 'pointer' }}>
-                {submitting ? 'Creating profile...' : `Create ${state.name || 'profile'}`}
+                {submitting ? (isFreeUser ? 'Generating your story...' : 'Creating profile...') : (isFreeUser ? 'Generate my free story' : `Create ${state.name || 'profile'}`)}
               </button>
               <button onClick={handleBack} disabled={submitting}
                 style={{ background: 'none', border: 'none', color: '#FF6B35', cursor: 'pointer', fontWeight: '500', padding: 0 }}>Back</button>
