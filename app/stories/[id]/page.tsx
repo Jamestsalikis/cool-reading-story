@@ -181,7 +181,7 @@ export default function StoryPage() {
   const feedbackShown = useRef(false);
   const [locked, setLocked] = useState(false);
   const [subStatus, setSubStatus] = useState<string | null>(null);
-  const [freeStoriesRemaining, setFreeStoriesRemaining] = useState<number>(3);
+  const [freeStoriesRemaining, setFreeStoriesRemaining] = useState<number>(1);
   const supabase = createClient();
 
   // Feedback eligibility — called when reader reaches the last page
@@ -232,11 +232,11 @@ export default function StoryPage() {
             const { data: sub } = await supabase
               .from('user_subscriptions').select('status, free_stories_remaining').eq('user_id', user.id).single();
             const isActive = sub?.status === 'subscribed';
-            const hasFreeStories = (sub?.free_stories_remaining ?? 0) > 0;
-            if (!isActive && !hasFreeStories) { setLocked(true); setLoading(false); return; }
+            // Only lock cancelled (formerly-subscribed) users — free users can always view their stories
+            if (sub?.status === 'cancelled') { setLocked(true); setLoading(false); return; }
             // Track subscription state for feedback eligibility
             setSubStatus(sub?.status ?? null);
-            setFreeStoriesRemaining(sub?.free_stories_remaining ?? 3);
+            setFreeStoriesRemaining(sub?.free_stories_remaining ?? 1);
             // Record when we first see a premium subscription (for 7-day trigger)
             if (sub?.status === 'subscribed' && !localStorage.getItem('subscription_first_seen')) {
               localStorage.setItem('subscription_first_seen', new Date().toISOString());
@@ -563,3 +563,4 @@ export default function StoryPage() {
     </>
   );
 }
+
