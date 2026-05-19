@@ -400,6 +400,7 @@ export default function DashboardPage() {
   const [paywallReason, setPaywallReason] = useState<'free_exhausted' | 'monthly_limit' | 'no_subscription' | 'daily_limit' | null>(null);
   const [editingChild, setEditingChild] = useState<ChildRecord | null>(null);
   const [sub, setSub] = useState<{ status: string; stories_this_month: number; stories_today: number; extra_books_today: number } | null>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
   const [userEmail, setUserEmail] = useState('');
   const [userId, setUserId] = useState('');
@@ -422,7 +423,9 @@ export default function DashboardPage() {
     const { data: childrenData } = await supabase.from('children').select('*').order('created_at', { ascending: true });
     const { data: storiesData } = await supabase.from('stories').select('id, title, created_at, word_count, series_id, series_title, volume_number, pages, children(name, age)').order('created_at', { ascending: false });
     const { data: subData } = await supabase.from('user_subscriptions').select('status, stories_this_month, stories_today, extra_books_today').eq('user_id', user?.id ?? '').single();
+    const { data: adminRow } = await supabase.from('admin_emails').select('email').eq('email', user?.email ?? '').maybeSingle();
     setSub(subData);
+    setIsAdmin(!!adminRow);
     setChildren(childrenData || []);
     setStories(storiesData || []);
     setLoading(false);
@@ -614,7 +617,7 @@ export default function DashboardPage() {
           </div>
         )}
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
-          {sub && !isMobile && sub.status !== 'subscribed' && freeStoriesRemaining > 0 && (
+          {sub && !isMobile && sub.status !== 'subscribed' && freeStoriesRemaining > 0 && !isAdmin && (
             <span style={{ fontSize: '0.75rem', fontWeight: '700', padding: '4px 12px', borderRadius: '999px', background: '#FFF0E6', color: '#FF6B35' }}>
               {freeStoriesRemaining} free {freeStoriesRemaining === 1 ? 'story' : 'stories'} left
             </span>
@@ -648,7 +651,7 @@ export default function DashboardPage() {
                   </span>
                 </>
               )}
-              {sub && sub.status !== 'subscribed' && freeStoriesRemaining > 0 && (
+              {sub && sub.status !== 'subscribed' && freeStoriesRemaining > 0 && !isAdmin && (
                 <>
                   <span style={{ color: '#D1D5DB', fontSize: '0.8rem' }}>·</span>
                   <span style={{ fontSize: '0.75rem', fontWeight: '600', padding: '3px 10px', borderRadius: '20px', background: '#FFF7ED', color: '#C2410C', border: '1px solid #FED7AA' }}>
@@ -888,8 +891,8 @@ export default function DashboardPage() {
               <div style={{ background: '#fff', border: '1px solid #F0E4D0', borderRadius: '12px', padding: '20px', marginBottom: '12px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
                   <p style={{ fontWeight: '600', color: '#0D183D', fontSize: '0.95rem' }}>Current plan</p>
-                  <span style={{ fontSize: '0.75rem', fontWeight: '700', padding: '3px 10px', borderRadius: '20px', background: sub?.status === 'subscribed' ? '#E6F4EC' : '#FFF0E6', color: sub?.status === 'subscribed' ? '#1a7a4a' : '#FF6B35' }}>
-                    {sub?.status === 'subscribed' ? 'Active' : 'Free'}
+                  <span style={{ fontSize: '0.75rem', fontWeight: '700', padding: '3px 10px', borderRadius: '20px', background: isAdmin ? '#EDE9FE' : sub?.status === 'subscribed' ? '#E6F4EC' : '#FFF0E6', color: isAdmin ? '#6D28D9' : sub?.status === 'subscribed' ? '#1a7a4a' : '#FF6B35' }}>
+                    {isAdmin ? 'Admin' : sub?.status === 'subscribed' ? 'Active' : 'Free'}
                   </span>
                 </div>
                 {sub?.status === 'subscribed' ? (
@@ -909,6 +912,8 @@ export default function DashboardPage() {
                       </button>
                     )}
                   </div>
+                ) : isAdmin ? (
+                  <p style={{ color: '#5E6A7A', fontSize: '0.875rem' }}>Unlimited access. All features enabled.</p>
                 ) : (
                   <p style={{ color: '#5E6A7A', fontSize: '0.875rem' }}>
                     {freeStoriesRemaining} free {(freeStoriesRemaining) === 1 ? 'story' : 'stories'} remaining. Subscribe for a new story every night.
@@ -920,7 +925,7 @@ export default function DashboardPage() {
                   style={{ width: '100%', padding: '0.7rem', borderRadius: '10px', border: '1.5px solid #FF6B35', background: '#fff', color: '#FF6B35', cursor: 'pointer', fontWeight: '600', fontSize: '0.875rem' }}>
                   Manage billing
                 </button>
-              ) : (
+              ) : isAdmin ? null : (
                 <button onClick={() => setPaywallReason('free_exhausted')}
                   style={{ width: '100%', padding: '0.7rem', borderRadius: '10px', border: 'none', background: '#FF6B35', color: '#fff', cursor: 'pointer', fontWeight: '600', fontSize: '0.875rem' }}>
                   Subscribe - from A$9.99/month
