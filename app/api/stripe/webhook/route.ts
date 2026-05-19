@@ -18,15 +18,21 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Invalid signature' }, { status: 400 });
     }
 
-    console.log('Webhook event type:', event.type);
+    console.log('[webhook] event:', event.type);
 
-    const supabase = createAdminClient();
+    let supabase;
+    try {
+      supabase = createAdminClient();
+      console.log('[webhook] supabase client created');
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : String(err);
+      console.error('[webhook] createAdminClient failed:', msg);
+      return NextResponse.json({ error: 'createAdminClient failed: ' + msg }, { status: 500 });
+    }
 
     if (event.type === 'checkout.session.completed') {
       const session = event.data.object as Stripe.Checkout.Session;
       const userId = session.metadata?.supabase_user_id;
-      console.log('checkout.session.completed userId:', userId, 'mode:', session.mode);
-
       if (session.mode === 'subscription' && userId && session.subscription) {
         const subscription = await stripe.subscriptions.retrieve(session.subscription as string);
         const periodEnd = subscription.current_period_end
@@ -39,43 +45,39 @@ export async function POST(request: Request) {
           current_period_end: periodEnd,
           updated_at: new Date().toISOString(),
         }).eq('user_id', userId);
-        if (error) console.error('Webhook DB error (checkout.session.completed):', JSON.stringify(error));
-        else console.log('checkout.session.completed: DB updated OK for user', userId);
+        if (error) console.error('[webhook] DB error (checkout):', JSON.stringify(error));
       } else if (session.mode === 'payment' && session.metadata?.purchase_type === 'extra_book' && userId) {
         const { error } = await supabase.rpc('grant_extra_book_today', { uid: userId });
-        if (error) console.error('Webhook DB error (extra_book):', JSON.stringify(error));
+        if (error) console.error('[webhook] DB error (extra_book):', JSON.stringify(error));
       }
     }
 
     if (event.type === 'customer.subscription.updated') {
       const subscription = event.data.object as Stripe.Subscription;
       const userId = subscription.metadata?.supabase_user_id;
-      console.log('subscription.updated userId:', userId, 'status:', subscription.status, 'period_end:', subscription.current_period_end);
-
+      console.log('[webhook] subscription.updated userId:', userId);
       if (userId) {
         const status = subscription.status === 'active' ? 'subscribed' : 'cancelled';
         const periodEnd = subscription.current_period_end
           ? new Date(subscription.current_period_end * 1000).toISOString()
           : null;
-        console.log('Attempting DB update: status=', status, 'periodEnd=', periodEnd);
         const { error } = await supabase.from('user_subscriptions').update({
           status,
           stripe_subscription_id: subscription.id,
           current_period_end: periodEnd,
           updated_at: new Date().toISOString(),
         }).eq('user_id', userId);
-        if (error) console.error('Webhook DB error (subscription.updated):', JSON.stringify(error));
-        else console.log('subscription.updated: DB updated OK for user', userId);
-      } else {
-        console.log('subscription.updated: no userId in metadata, skipping');
+        if (error) {
+          console.error('[webhook] DB error (subscription.updated):', JSON.stringify(error));
+          return NextResponse.json({ error: 'DB update failed: ' + JSON.stringify(error) }, { status: 500 });
+        }
+        console.log('[webhook] subscription.updated: OK');
       }
     }
 
     if (event.type === 'customer.subscription.deleted') {
       const subscription = event.data.object as Stripe.Subscription;
       const userId = subscription.metadata?.supabase_user_id;
-      console.log('subscription.deleted userId:', userId);
-
       if (userId) {
         const { error } = await supabase.from('user_subscriptions').update({
           status: 'cancelled',
@@ -83,16 +85,16 @@ export async function POST(request: Request) {
           current_period_end: null,
           updated_at: new Date().toISOString(),
         }).eq('user_id', userId);
-        if (error) console.error('Webhook DB error (subscription.deleted):', JSON.stringify(error));
-        else console.log('subscription.deleted: DB updated OK for user', userId);
+        if (error) console.error('[webhook] DB error (subscription.deleted):', JSON.stringify(error));
       }
     }
 
     return NextResponse.json({ received: true });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : String(err);
-    const stack = err instanceof Error ? err.stack : '';
-    console.error('Webhook unhandled error:', message, stack);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    const stack = err instanceof Error ? (err.stack ?? '') : '';
+    console.error('[webhook] unhandled error:', message, stack);
+    return NextResponse.json({ error: message, stack: stack.split('
+').slice(0, 5) }, { status: 500 });
   }
 }
