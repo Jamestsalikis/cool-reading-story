@@ -46,6 +46,7 @@ type OnboardingState = {
   friends: Person[];
   petName: string;
   petType: string;
+  pets: { name: string; type: string }[];
   city: string;
   country: string;
   readingLevel: string;
@@ -211,6 +212,7 @@ export default function OnboardingPage() {
     friends: [],
     petName: '',
     petType: '',
+    pets: [],
     city: '',
     country: '',
     readingLevel: 'medium',
@@ -288,8 +290,9 @@ export default function OnboardingPage() {
           skinColour: state.skinColour,
           siblings: state.siblings,
           friends: state.friends,
-          petName: state.petName,
-          petType: state.petType,
+          petName: state.pets[0]?.name || state.petName,
+          petType: state.pets[0]?.type || state.petType,
+          pets: state.pets,
           city: state.city,
           country: state.country,
           readingLevel: state.readingLevel || 'medium',
@@ -2036,35 +2039,38 @@ export default function OnboardingPage() {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                 <div>
                   <label style={optionalLabel}>City</label>
-                  <input type="text" style={inputStyle} placeholder="e.g. Sydney" value={state.city} onChange={(e) => setState({ ...state, city: e.target.value })} />
+                  <input type="text" style={inputStyle} placeholder="" value={state.city} onChange={(e) => setState({ ...state, city: e.target.value })} />
                 </div>
                 <div>
                   <label style={optionalLabel}>Country</label>
-                  <input type="text" style={inputStyle} placeholder="e.g. Australia" value={state.country} onChange={(e) => setState({ ...state, country: e.target.value })} />
+                  <input type="text" style={inputStyle} placeholder="" value={state.country} onChange={(e) => setState({ ...state, country: e.target.value })} />
                 </div>
               </div>
             </div>
 
-            {/* Siblings */}
+            {/* Family */}
             <div style={{ marginBottom: '24px' }}>
-              <p style={{ ...labelStyle, marginBottom: '12px' }}>Siblings <span style={{ color: '#5E6A7A', fontWeight: '400', fontSize: '0.8rem' }}>(optional)</span></p>
+              <p style={{ ...labelStyle, marginBottom: '12px' }}>Family <span style={{ color: '#5E6A7A', fontWeight: '400', fontSize: '0.8rem' }}>(optional)</span></p>
               {state.siblings.length > 0 && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '10px' }}>
                   {state.siblings.map((s, i) => (
-                    <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr auto', gap: '8px', alignItems: 'center' }}>
+                    <div key={i} style={{ display: 'grid', gridTemplateColumns: '140px 1fr auto', gap: '8px', alignItems: 'center' }}>
+                      <select value={s.nickname || 'Brother'}
+                        onChange={(e) => { const u = [...state.siblings]; u[i] = { ...u[i], nickname: e.target.value }; setState({ ...state, siblings: u }); }}
+                        style={{ ...inputStyle, cursor: 'pointer' }}>
+                        {['Mum','Dad','Brother','Sister','Uncle','Aunt','Cousin'].map(r => <option key={r} value={r}>{r}</option>)}
+                      </select>
                       <input type="text" style={inputStyle} placeholder="Name" value={s.name}
                         onChange={(e) => { const u = [...state.siblings]; u[i] = { ...u[i], name: e.target.value }; setState({ ...state, siblings: u }); }} />
-                      <input type="text" style={inputStyle} placeholder="Nickname (optional)" value={s.nickname}
-                        onChange={(e) => { const u = [...state.siblings]; u[i] = { ...u[i], nickname: e.target.value }; setState({ ...state, siblings: u }); }} />
                       <button onClick={() => setState({ ...state, siblings: state.siblings.filter((_, idx) => idx !== i) })}
                         style={{ background: 'none', border: '1.5px solid #F0E4D0', borderRadius: '8px', width: '36px', height: '36px', cursor: 'pointer', color: '#5E6A7A', fontSize: '1rem', flexShrink: 0 }}>×</button>
                     </div>
                   ))}
                 </div>
               )}
-              <button onClick={() => setState({ ...state, siblings: [...state.siblings, { name: '', nickname: '' }] })}
+              <button onClick={() => setState({ ...state, siblings: [...state.siblings, { name: '', nickname: 'Brother' }] })}
                 style={{ ...chipBase, border: '1.5px dashed #F0E4D0', backgroundColor: 'transparent', color: '#5E6A7A', width: '100%' }}>
-                + Add sibling
+                + Add family member
               </button>
             </div>
 
@@ -2091,19 +2097,27 @@ export default function OnboardingPage() {
               </button>
             </div>
 
-            {/* Pet */}
+            {/* Pets */}
             <div style={{ marginBottom: '24px' }}>
-              <p style={{ ...labelStyle, marginBottom: '12px' }}>Pet <span style={{ color: '#5E6A7A', fontWeight: '400', fontSize: '0.8rem' }}>(optional)</span></p>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-                <div>
-                  <label style={optionalLabel}>Pet name</label>
-                  <input type="text" style={inputStyle} placeholder="e.g. Biscuit" value={state.petName} onChange={(e) => setState({ ...state, petName: e.target.value })} />
+              <p style={{ ...labelStyle, marginBottom: '12px' }}>Pets <span style={{ color: '#5E6A7A', fontWeight: '400', fontSize: '0.8rem' }}>(optional)</span></p>
+              {state.pets.length > 0 && (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '10px' }}>
+                  {state.pets.map((p, i) => (
+                    <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr auto', gap: '8px', alignItems: 'center' }}>
+                      <input type="text" style={inputStyle} placeholder="Name" value={p.name}
+                        onChange={(e) => { const u = [...state.pets]; u[i] = { ...u[i], name: e.target.value }; setState({ ...state, pets: u }); }} />
+                      <input type="text" style={inputStyle} placeholder="Type (e.g. Dog)" value={p.type}
+                        onChange={(e) => { const u = [...state.pets]; u[i] = { ...u[i], type: e.target.value }; setState({ ...state, pets: u }); }} />
+                      <button onClick={() => setState({ ...state, pets: state.pets.filter((_, idx) => idx !== i) })}
+                        style={{ background: 'none', border: '1.5px solid #F0E4D0', borderRadius: '8px', width: '36px', height: '36px', cursor: 'pointer', color: '#5E6A7A', fontSize: '1rem', flexShrink: 0 }}>×</button>
+                    </div>
+                  ))}
                 </div>
-                <div>
-                  <label style={optionalLabel}>Type of pet</label>
-                  <input type="text" style={inputStyle} placeholder="e.g. Dog" value={state.petType} onChange={(e) => setState({ ...state, petType: e.target.value })} />
-                </div>
-              </div>
+              )}
+              <button onClick={() => setState({ ...state, pets: [...state.pets, { name: '', type: '' }] })}
+                style={{ ...chipBase, border: '1.5px dashed #F0E4D0', backgroundColor: 'transparent', color: '#5E6A7A', width: '100%' }}>
+                + Add pet
+              </button>
             </div>
 
             {/* Reading level */}
