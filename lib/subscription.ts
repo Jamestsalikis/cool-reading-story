@@ -121,7 +121,16 @@ export async function decrementStoryCount(
         .eq('parent_id', userId);
     }
     // Decrement account-level free story counter
-    await supabase.rpc('decrement_free_stories_remaining', { uid: userId });
+    const { data: subRow } = await supabase
+      .from('user_subscriptions')
+      .select('free_stories_remaining')
+      .eq('user_id', userId)
+      .single();
+    const remaining = subRow?.free_stories_remaining ?? 0;
+    await supabase
+      .from('user_subscriptions')
+      .update({ free_stories_remaining: Math.max(0, remaining - 1) })
+      .eq('user_id', userId);
   }
   if (reason === 'subscribed') {
     await supabase.rpc('increment_stories_this_month', { uid: userId });
