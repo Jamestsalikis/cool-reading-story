@@ -2143,4 +2143,12 @@ export default function OnboardingPage() {
                 {submitting ? 'Creating profile...' : `Create ${state.name || 'profile'}`}
               </button>
               <button onClick={handleBack} disabled={submitting}
-                style={{ background: 'none', border: 'none', color: '#FF6B
+                style={{ background: 'none', border: 'none', color: '#FF6B35', cursor: 'pointer', fontWeight: '500', padding: 0 }}>Back</button>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
