@@ -252,42 +252,53 @@ export default function StoryPage() {
           setLoadingPages(new Set(pagesNeedingImages.map((p) => p.page_number)));
           (async () => {
             for (const page of pagesNeedingImages) {
-              let pollUrl: string | null = page.poll_url ?? null;
-              if (!pollUrl) {
+              // Helper: start (or restart) a Replicate prediction for this page
+              const startPrediction = async (): Promise<string | null> => {
                 try {
                   const res = await fetch('/api/generate-image', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ story_id: data.id, page_number: page.page_number }),
                   });
-                  if (res.ok) {
-                    const result = await res.json();
-                    pollUrl = result.poll_url ?? null;
-                  } else if (res.status === 429) {
-                    await new Promise((r) => setTimeout(r, 10000));
-                  }
+                  if (res.ok) return (await res.json()).poll_url ?? null;
+                  if (res.status === 429) await new Promise((r) => setTimeout(r, 10000));
                 } catch {}
-              }
+                return null;
+              };
+
+              // Use existing poll_url if present; otherwise kick off a new prediction
+              let pollUrl: string | null = page.poll_url ?? null;
+              if (!pollUrl) pollUrl = await startPrediction();
               if (!pollUrl) continue;
-              for (let i = 0; i < 30; i++) {
-                await new Promise((r) => setTimeout(r, 3000));
-                try {
-                  const res = await fetch('/api/poll-image', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ story_id: data.id, page_number: page.page_number, poll_url: pollUrl }),
-                  });
-                  const result = await res.json();
-                  if (result.status === 'succeeded' && result.image_url) {
-                    setStory((prev) => {
-                      if (!prev) return prev;
-                      return { ...prev, pages: prev.pages.map((p) => p.page_number === page.page_number ? { ...p, image_url: result.image_url } : p) };
+
+              let succeeded = false;
+              // Allow up to 2 attempts (handles stale/failed predictions from prior sessions)
+              for (let attempt = 0; attempt < 2 && !succeeded; attempt++) {
+                for (let i = 0; i < 30; i++) {
+                  await new Promise((r) => setTimeout(r, 3000));
+                  try {
+                    const res = await fetch('/api/poll-image', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ story_id: data.id, page_number: page.page_number, poll_url: pollUrl }),
                     });
-                    setLoadingPages((prev) => { const next = new Set(prev); next.delete(page.page_number); return next; });
-                    break;
-                  }
-                  if (result.status === 'failed') break;
-                } catch {}
+                    const result = await res.json();
+                    if (result.status === 'succeeded' && result.image_url) {
+                      setStory((prev) => {
+                        if (!prev) return prev;
+                        return { ...prev, pages: prev.pages.map((p) => p.page_number === page.page_number ? { ...p, image_url: result.image_url } : p) };
+                      });
+                      setLoadingPages((prev) => { const next = new Set(prev); next.delete(page.page_number); return next; });
+                      succeeded = true;
+                      break;
+                    }
+                    if (result.status === 'failed') {
+                      // Stale or failed prediction — start a fresh one on next attempt
+                      pollUrl = await startPrediction();
+                      break;
+                    }
+                  } catch {}
+                }
               }
               await new Promise((r) => setTimeout(r, 2000));
             }
@@ -563,4 +574,5 @@ export default function StoryPage() {
     </>
   );
 }
+
 
