@@ -104,6 +104,7 @@ export async function updateChild(childId: string, data: {
   city: string;
   country: string;
   readingLevel: string;
+  followUpAnswers?: { question: string; answer: string }[];
 }) {
   const supabase = await createClient();
   const { data: { user }, error: authError } = await supabase.auth.getUser();
@@ -142,6 +143,7 @@ export async function updateChild(childId: string, data: {
         petType: data.petType,
         city: data.city,
         country: data.country,
+        ...(data.followUpAnswers !== undefined ? { followUpAnswers: data.followUpAnswers } : {}),
       },
     })
     .eq('id', childId)
@@ -164,3 +166,4 @@ export async function getChildren() {
 
   return { children: children || [] };
 }
+
