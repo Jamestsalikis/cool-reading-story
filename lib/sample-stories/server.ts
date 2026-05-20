@@ -10,7 +10,7 @@ export { isTrialInterest } from './index';
 const storyCache = new Map<string, SampleStory | null>();
 
 /**
- * Load a story JSON by key (e.g. "animals", "animals_dinosaurs", "animals_dinosaurs_fairies").
+ * Load a story JSON by key (e.g. "animals_beginner", "animals_dinosaurs_intermediate").
  * Reads from disk once then caches in memory.
  */
 function loadStory(key: string): SampleStory | null {
@@ -72,7 +72,6 @@ function personalise(story: SampleStory, child: ChildProfile | string): SampleSt
   const sibling = profile.siblings?.[0];
   if (sibling?.name) {
     const sName = sibling.name;
-    // Replace generic sibling references with the actual name
     storyStr = storyStr
       .replace(/\\b(his|her|their) (older |younger |little |big )?(brother|sister)\\b/gi,
         (_, pronoun, mod, role) => `${pronoun} ${mod || ''}${role} ${sName}`.replace(/\\s+/g, ' '))
@@ -94,11 +93,12 @@ function personalise(story: SampleStory, child: ChildProfile | string): SampleSt
 }
 
 /**
- * Returns a personalised sample story for the given interest(s).
+ * Returns a personalised sample story for the given interest(s) and reading level.
  *
- * Accepts a single interest string (legacy) or an array of interests.
- * For arrays, filters to trial interests, sorts alphabetically, and tries
- * the best match with progressive fallback (3 interests -> 2 -> 1).
+ * Lookup order (most specific first):
+ *   1. {interests}_{level}.json  — e.g. animals_dinosaurs_beginner.json  (level-specific, preferred)
+ *   2. {interests}.json          — e.g. animals_dinosaurs.json            (generic fallback)
+ *   3. Progressive fallback on interest count (3 → 2 → 1) for both patterns above
  *
  * Returns null if no matching cached story is found.
  */
@@ -107,7 +107,7 @@ export function getSampleStory(
   child: ChildProfile | string,
   readingLevel?: string
 ): SampleStory | null {
-  // Normalise: filter to trial interests, sort, cap at 3
+  // Normalise: filter to trial interests, sort alphabetically, cap at 3
   const arr = (Array.isArray(interests) ? interests : [interests])
     .filter((i): i is TrialInterest => (TRIAL_INTERESTS as readonly string[]).includes(i))
     .sort()
@@ -115,33 +115,22 @@ export function getSampleStory(
 
   if (arr.length === 0) return null;
 
-  // Cap interest count by reading level so each age group gets a different story:
-  //   beginner   → up to 1 interest (simplest story)
-  //   intermediate → up to 2 interests
-  //   advanced   → up to 3 interests (most complex)
-  // Falls back to the uncapped count if level is unknown.
-  const levelCap: Record<string, number> = { beginner: 1, intermediate: 2, advanced: 3 };
-  const maxInterests = readingLevel ? (levelCap[readingLevel] ?? arr.length) : arr.length;
-  const capped = arr.slice(0, Math.min(arr.length, maxInterests));
-
-  // Build keys to try, in priority order:
-  //   1. level-specific files (e.g. animals_dinosaurs_beginner) — for future dedicated files
-  //   2. capped generic keys (different story per level via interest count)
-  //   3. full generic keys as final fallback
+  // Build keys to try, most specific first:
+  //   1. Level-specific files for each interest-count (animals_dinosaurs_beginner, animals_beginner, ...)
+  //   2. Generic files for each interest-count (animals_dinosaurs, animals, ...)
   const seen = new Set<string>();
   const keysToTry: string[] = [];
 
   const addKey = (k: string) => { if (!seen.has(k)) { seen.add(k); keysToTry.push(k); } };
 
+  // Level-specific first (most specific match wins)
   if (readingLevel) {
-    for (let n = capped.length; n >= 1; n--) {
-      addKey(capped.slice(0, n).map((i: string) => i.toLowerCase()).join('_') + `_${readingLevel}`);
+    for (let n = arr.length; n >= 1; n--) {
+      addKey(arr.slice(0, n).map((i: string) => i.toLowerCase()).join('_') + `_${readingLevel}`);
     }
   }
-  for (let n = capped.length; n >= 1; n--) {
-    addKey(capped.slice(0, n).map((i: string) => i.toLowerCase()).join('_'));
-  }
-  // Full 3-interest fallback (so advanced users never get nothing)
+
+  // Generic fallback
   for (let n = arr.length; n >= 1; n--) {
     addKey(arr.slice(0, n).map((i: string) => i.toLowerCase()).join('_'));
   }
@@ -153,5 +142,3 @@ export function getSampleStory(
 
   return null;
 }
-
-
