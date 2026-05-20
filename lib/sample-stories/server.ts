@@ -53,6 +53,28 @@ function personalise(story: SampleStory, child: ChildProfile | string): SampleSt
     }
   }
 
+  // 4. Personalise sibling references with actual names
+  const sibling = profile.siblings?.[0];
+  if (sibling?.name) {
+    const sName = sibling.name;
+    // Replace generic sibling references with the actual name
+    storyStr = storyStr
+      .replace(/\\b(his|her|their) (older |younger |little |big )?(brother|sister)\\b/gi,
+        (_, pronoun, mod, role) => `${pronoun} ${mod || ''}${role} ${sName}`.replace(/\\s+/g, ' '))
+      .replace(/\\b(his|her|their) sibling\\b/gi, (_, p) => `${p} sibling ${sName}`)
+      .replace(/\{\{SIBLING_NAME\}\}/g, sName);
+  }
+
+  // 5. Personalise friend references with actual names
+  const friend = profile.friends?.[0];
+  if (friend?.name) {
+    const fName = friend.name;
+    storyStr = storyStr
+      .replace(/\\b(his|her|their) (best )?friend\\b/gi,
+        (_, pronoun, best) => `${pronoun} ${best || ''}friend ${fName}`.replace(/\\s+/g, ' '))
+      .replace(/\{\{FRIEND_NAME\}\}/g, fName);
+  }
+
   return JSON.parse(storyStr);
 }
 
@@ -86,3 +108,4 @@ export function getSampleStory(
 
   return null;
 }
+
