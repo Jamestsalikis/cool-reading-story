@@ -17,6 +17,7 @@ const TALEPOP_STYLE_SUFFIX =
   'shallow depth of field, warm cinematic lighting, magical storybook atmosphere, ' +
   'professional Disney Pixar animated feature film quality. ' +
 'No floating limbs, no disconnected body parts, clean natural anatomy and proportions. ' +
+'Each animal and character has exactly one head — no duplicate or extra heads anywhere. ' +
 'No text, no words, no letters in the image.';
 
 // Derive a stable integer seed from a story UUID so all pages of one story
@@ -150,5 +151,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Failed' }, { status: 500 });
   }
 }
+
 
 
