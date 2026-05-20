@@ -236,6 +236,7 @@ function EditChildModal({ child, palette, onClose, onSaved }: { child: ChildReco
   const [friends, setFriends] = useState<{name:string;nickname:string}[]>((app.friends as {name:string;nickname:string}[]) || []);
   const [petName, setPetName] = useState((app.petName as string) || '');
   const [petType, setPetType] = useState((app.petType as string) || '');
+  const [followUpAnswers, setFollowUpAnswers] = useState<{question:string; answer:string}[]>((app.followUpAnswers as {question:string; answer:string}[] | undefined) || []);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
   const toggleInterest = (i: string) => setInterests(prev => prev.includes(i) ? prev.filter(x => x !== i) : prev.length >= 5 ? prev : [...prev, i]);
@@ -250,7 +251,7 @@ function EditChildModal({ child, palette, onClose, onSaved }: { child: ChildReco
   const handleSave = async () => {
     if (!name.trim()) { setError('Name is required'); return; }
     setSaving(true);
-    const result = await updateChild(child.id, { name, age, gender, interests, skinColour, hairColour, eyeColour, city, country, readingLevel, siblings, friends, petName, petType });
+    const result = await updateChild(child.id, { name, age, gender, interests, skinColour, hairColour, eyeColour, city, country, readingLevel, siblings, friends, petName, petType, followUpAnswers });
     if (result.error) { setError(result.error); setSaving(false); return; }
     onSaved(); onClose();
   };
@@ -359,28 +360,31 @@ function EditChildModal({ child, palette, onClose, onSaved }: { child: ChildReco
               <input style={inp} placeholder="Pet type (e.g. Dog)" value={petType} onChange={e => setPetType(e.target.value)} />
             </div>
           </div>
-          {/* Follow-up Q&A from onboarding — read-only display */}
-          {(() => {
-            const qas = (app.followUpAnswers as { question: string; answer: string }[] | undefined) || [];
-            const filled = qas.filter(qa => qa.answer?.trim());
-            if (!filled.length) return null;
-            return (
-              <div>
-                <label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '8px' }}>
-                  Story details <span style={{ fontWeight: 400, color: '#9CA3AF' }}>(from onboarding)</span>
-                </label>
-                <div style={{ background: '#FBF8F3', borderRadius: '10px', border: '1.5px solid #F0E4D0', padding: '12px 16px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                  {filled.map((qa, i) => (
-                    <div key={i}>
-                      <p style={{ fontSize: '0.75rem', fontWeight: '600', color: '#5E6A7A', marginBottom: '4px' }}>{qa.question}</p>
-                      <p style={{ fontSize: '0.875rem', color: '#0D183D', background: '#fff', borderRadius: '6px', border: '1.5px solid #F0E4D0', padding: '0.5rem 0.75rem' }}>{qa.answer}</p>
-                    </div>
-                  ))}
-                  <p style={{ fontSize: '0.7rem', color: '#9CA3AF', marginTop: '4px' }}>These answers shape future story generations. To update them, create a new child profile.</p>
-                </div>
+          {/* Follow-up Q&A — editable */}
+          {followUpAnswers.length > 0 && (
+            <div>
+              <label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '8px' }}>
+                Story details <span style={{ fontWeight: 400, color: '#9CA3AF' }}>(shapes future stories)</span>
+              </label>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                {followUpAnswers.map((qa, i) => (
+                  <div key={i}>
+                    <label style={{ fontSize: '0.75rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '4px' }}>{qa.question}</label>
+                    <textarea
+                      value={qa.answer}
+                      onChange={e => {
+                        const updated = [...followUpAnswers];
+                        updated[i] = { ...updated[i], answer: e.target.value };
+                        setFollowUpAnswers(updated);
+                      }}
+                      rows={2}
+                      style={{ ...inp, resize: 'vertical' as const, fontFamily: 'inherit' }}
+                    />
+                  </div>
+                ))}
               </div>
-            );
-          })()}
+            </div>
+          )}
         </div>
         <div style={{ display: 'flex', gap: '10px', marginTop: '24px' }}>
           <button onClick={onClose} style={{ flex: 1, padding: '0.7rem', border: '1.5px solid #F0E4D0', borderRadius: '8px', background: '#fff', color: '#5E6A7A', cursor: 'pointer', fontWeight: '600' }}>Cancel</button>
