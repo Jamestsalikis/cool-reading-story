@@ -24,14 +24,22 @@ export interface SampleStory {
   pages: StoryPage[];
 }
 
+export interface ChildPerson {
+  name: string;
+  nickname?: string;
+}
+
 export interface ChildProfile {
   name: string;
   age?: number;
   gender?: string;
   hairColour?: string;
   eyeColour?: string;
+  siblings?: ChildPerson[];
+  friends?: ChildPerson[];
 }
 
 export function isTrialInterest(interest: string): interest is TrialInterest {
   return (TRIAL_INTERESTS as readonly string[]).includes(interest);
 }
+
