@@ -35,6 +35,7 @@ export interface ChildProfile {
   gender?: string;
   hairColour?: string;
   eyeColour?: string;
+  skinColour?: string;
   siblings?: ChildPerson[];
   friends?: ChildPerson[];
 }
