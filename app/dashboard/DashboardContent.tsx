@@ -38,6 +38,10 @@ const pageStyles = `
     0%, 100% { opacity: 1; transform: scale(1); }
     50%       { opacity: 0.7; transform: scale(1.08); }
   }
+  @keyframes banner-slide-in {
+    0%   { opacity: 0; transform: translateY(-16px) scale(0.97); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+  }
 `;
 
 type Child = { id: string; name: string; age: number; interests: string[]; has_used_free_story?: boolean };
@@ -402,6 +406,7 @@ export default function DashboardPage() {
   const [sub, setSub] = useState<{ status: string; stories_this_month: number; stories_today: number; extra_books_today: number; current_period_end: string | null } | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [bookReady, setBookReady] = useState<{ storyId: string; childName: string } | null>(null);
   const [userEmail, setUserEmail] = useState('');
   const [userId, setUserId] = useState('');
   const [accountSection, setAccountSection] = useState<null | 'email' | 'password'>(null);
@@ -489,8 +494,8 @@ export default function DashboardPage() {
       if (!storyId) { await fetchData(); return; }
       // Refresh dashboard data then navigate — let story page handle all image generation
       await fetchData();
+      setBookReady({ storyId, childName: child?.name || '' });
       setShowConfetti(true);
-      router.push(`/stories/${storyId}`);
     } finally { setGenerating(null); generatingLock.current = false; }
   };
 
@@ -511,8 +516,8 @@ export default function DashboardPage() {
       if (!newStoryId) { await fetchData(); return; }
       // Refresh then navigate — story page handles all image generation
       await fetchData();
+      setBookReady({ storyId: newStoryId, childName });
       setShowConfetti(true);
-      router.push(`/stories/${newStoryId}`);
     } finally { setGenerating(null); generatingLock.current = false; }
   };
 
@@ -642,6 +647,32 @@ export default function DashboardPage() {
         {activeNav === 'stories' && (
           <>
             {generateError && <div style={{ background: '#FEE2E2', borderRadius: '10px', padding: '12px 16px', marginBottom: '24px', fontSize: '0.875rem', color: '#991B1B' }}>{generateError}</div>}
+
+            {bookReady && (
+              <div style={{ background: 'linear-gradient(135deg, #FF6B35 0%, #FFB703 100%)', borderRadius: '16px', padding: '20px 24px', marginBottom: '28px', display: 'flex', alignItems: 'center', gap: '16px', boxShadow: '0 8px 32px rgba(255,107,53,0.35)', animation: 'banner-slide-in 0.5s cubic-bezier(0.34,1.56,0.64,1)', position: 'relative' }}>
+                <div style={{ fontSize: '2.8rem', flexShrink: 0, lineHeight: 1 }}>📖</div>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <p style={{ fontFamily: 'Fredoka, cursive', fontSize: 'clamp(1.1rem, 3vw, 1.35rem)', color: '#fff', marginBottom: '4px', lineHeight: 1.2 }}>
+                    {bookReady.childName}&apos;s story is ready!
+                  </p>
+                  <p style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.85)' }}>
+                    Your new book has been written ✨ Tap to open it.
+                  </p>
+                </div>
+                <button
+                  onClick={() => { const id = bookReady.storyId; setBookReady(null); router.push(`/stories/${id}`); }}
+                  style={{ background: '#fff', color: '#FF6B35', border: 'none', borderRadius: '10px', padding: '0.65rem 1.4rem', fontWeight: '700', fontSize: '0.875rem', cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0, boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}
+                >
+                  Read now →
+                </button>
+                <button
+                  onClick={() => setBookReady(null)}
+                  style={{ position: 'absolute', top: '10px', right: '10px', background: 'rgba(255,255,255,0.25)', border: 'none', borderRadius: '50%', width: '22px', height: '22px', cursor: 'pointer', color: '#fff', fontSize: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '700', lineHeight: 1, padding: 0 }}
+                >
+                  ×
+                </button>
+              </div>
+            )}
 
             {loading ? (
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '16px', padding: '80px 0' }}>
@@ -963,6 +994,7 @@ export default function DashboardPage() {
     </div>
   );
 }
+
 
 
 
