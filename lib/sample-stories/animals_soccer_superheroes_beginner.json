@@ -1,0 +1,36 @@
+{
+  "interest": "Animals + Soccer + Superheroes",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Superhero Animals' Championship",
+  "moral": "Believing in yourself gives you the courage to try.",
+  "theme_emoji": "⚽",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright yellow superhero suit with a green star on the chest, a short green cape, and yellow and green soccer boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} arrived at the biggest soccer stadium ever. It sparkled with lights. Animals in superhero capes filled the seats. On the field, a team of super animals was warming up. A tiger in a red cape, a dolphin in a blue cape, and a bear in a purple cape. {{NAME}} was going to play with them.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright yellow superhero suit with a green star on the chest, a short green cape, and yellow and green soccer boots — same child, same face, same exact outfit in every image. Wide establishing shot of a massive glittering soccer stadium packed with animals wearing colourful superhero capes in the seats. {{NAME}} stands small on the edge of the bright green pitch looking up in awe. On the field, a tiger in a red cape, a dolphin in a blue cape, and a bear in a purple cape are stretching and warming up. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The tiger ran over. 'We need one more player,' said the tiger. {{NAME}} felt scared. 'What if I am not good enough?' {{NAME}} asked. The dolphin smiled a big smile. 'You are wearing a superhero suit,' said the dolphin. 'You CAN do it.'",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright yellow superhero suit with a green star on the chest, a short green cape, and yellow and green soccer boots — same child, same face, same exact outfit in every image. Close-up of {{NAME}}'s face showing a nervous but hopeful expression, eyebrows slightly furrowed. The friendly dolphin's face is beside {{NAME}} with a huge encouraging smile. The tiger stands behind with a thumbs-up. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The game started. The bear passed the ball to {{NAME}}. {{NAME}} ran fast. The cape flew behind. {{NAME}} kicked the ball as hard as possible. The ball sailed up, up, up. It curved through the air and hit the back of the net!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright yellow superhero suit with a green star on the chest, a short green cape, and yellow and green soccer boots — same child, same face, same exact outfit in every image. Dynamic action shot of {{NAME}} mid-kick, one foot extended forward, the green cape flying behind. The soccer ball is high in the air curving toward the goal. The bear, tiger, and dolphin cheer in the background. The stadium animals are on their feet in the stands. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The stadium roared. Every animal jumped up and cheered. The tiger lifted {{NAME}} up on its shoulders. The dolphin splashed with excitement. The bear danced a funny dance. {{NAME}} had scored the winning goal for the super team.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright yellow superhero suit with a green star on the chest, a short green cape, and yellow and green soccer boots — same child, same face, same exact outfit in every image. Emotional peak scene with dramatic golden spotlight from above. {{NAME}} sits triumphantly on the tiger's shoulders with both arms raised, cape streaming. The dolphin leaps into the air with joy, the bear dances with arms in the air. The packed stadium of animals cheers with capes waving. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "After the game, the team sat on the soft grass. The bear gave everyone a big warm hug. {{NAME}} lay back and looked up at the stars. It had been the best day ever. Goodnight, {{NAME}}. Sleep well. Tomorrow, the tiger says there is an even bigger match to play.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright yellow superhero suit with a green star on the chest, a short green cape, and yellow and green soccer boots — same child, same face, same exact outfit in every image. Warm cosy resolution scene in soft golden evening light. {{NAME}} lies sleepily in the green field grass, eyes half-closed and smiling. The tiger, dolphin, and bear sit around {{NAME}} in a close warm group. A soccer ball rests beside them. Stars begin to appear in the soft orange and pink sky above. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

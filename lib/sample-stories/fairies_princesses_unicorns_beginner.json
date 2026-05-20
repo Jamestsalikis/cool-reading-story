@@ -1,0 +1,36 @@
+{
+  "interest": "Fairies + Princesses + Unicorns",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Lost Fairy Lights",
+  "moral": "Small acts of kindness can light up the whole world.",
+  "theme_emoji": "🧚",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft rose-pink royal jacket with tiny golden fairy prints, cream trousers with gold piping, rose-pink boots with gold buckles, and a small golden crown on his head — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} was visiting the Fairy Kingdom. The Fairy Kingdom had tall mushroom houses and tiny bright lights. Every night the fairies lit up the sky with magic lights. But tonight the sky was dark and empty. A princess named Rose stood by the mushroom gate. She wore a deep blue dress and held a lantern. The fairies had lost all their lights.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft rose-pink royal jacket with tiny golden fairy prints, cream trousers with gold piping, rose-pink boots with gold buckles, and a small golden crown on his head — same child, same face, same exact outfit in every image. Wide establishing shot of a magical Fairy Kingdom with tall colourful mushroom houses and winding petal-covered paths under a dark night sky with no lights. {{NAME}} stands small at the entrance looking up at the empty dark sky. Princess Rose in a deep blue dress holds a single glowing lantern near the mushroom gate. Tiny fairies hover in the shadows looking sad and dim. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "Princess Rose told {{NAME}} the story. The fairy lights had rolled into the deep dark Wishing Well. Nobody dared go near it. Then a silver unicorn stepped out from behind a mushroom house. She had a glowing rose-gold horn and a white mane. \"I know the well,\" said the unicorn softly. \"I will show you the way.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft rose-pink royal jacket with tiny golden fairy prints, cream trousers with gold piping, rose-pink boots with gold buckles, and a small golden crown on his head — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}}'s face showing wide hopeful eyes. Princess Rose stands beside him with her lantern, pointing toward a dark stone Wishing Well in the background. A beautiful silver unicorn with a glowing rose-gold horn and white mane steps calmly out from behind a large mushroom, eyes kind and confident. Fairies watch from above with hopeful expressions. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The unicorn led them to the Wishing Well. Her rose-gold horn shone like a torch. {{NAME}} leaned over the edge. He could see dozens of tiny lights glowing at the bottom. He took a deep breath. He reached down carefully and scooped them all up. The lights burst into the air and flew back to the fairies.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft rose-pink royal jacket with tiny golden fairy prints, cream trousers with gold piping, rose-pink boots with gold buckles, and a small golden crown on his head — same child, same face, same exact outfit in every image. Dynamic action shot of {{NAME}} leaning carefully over the edge of the dark stone Wishing Well, hands outstretched reaching toward dozens of tiny glowing lights at the bottom. The silver unicorn stands close, rose-gold horn blazing to light up the well. Suddenly the lights burst upward in a brilliant shower of colour. Princess Rose reaches up with joy. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The fairies caught their lights. They flew up high and filled the whole sky with colour. Pink and gold and blue lights danced above the Kingdom. Princess Rose gasped. It was the most beautiful thing anyone had seen. Small acts of kindness can light up the whole world. The fairies all called {{NAME}}'s name with cheers.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft rose-pink royal jacket with tiny golden fairy prints, cream trousers with gold piping, rose-pink boots with gold buckles, and a small golden crown on his head — same child, same face, same exact outfit in every image. Emotional peak scene of the Fairy Kingdom fully illuminated with hundreds of pink, gold, and blue fairy lights dancing across the night sky. {{NAME}} stands looking upward with a huge beaming smile. Princess Rose in her blue dress has both hands on her cheeks in awe and delight. The silver unicorn stands proud and glowing. Fairies swoop and swirl through the blazing lights above. Dramatic radiant magical light everywhere. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "The fairies hung a special light above {{NAME}}'s head. It glowed soft and warm and pink. Princess Rose made warm berry cakes. The unicorn hummed a quiet song. Small acts of kindness can light up the whole world. {{NAME}} felt cosy and warm and sleepy. He closed his eyes with a big smile. He wondered if one of those fairy lights was made just for him.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft rose-pink royal jacket with tiny golden fairy prints, cream trousers with gold piping, rose-pink boots with gold buckles, and a small golden crown on his head — same child, same face, same exact outfit in every image. Warm cosy resolution scene in the Fairy Kingdom at night with gentle glowing lights above. {{NAME}} sits sleepily against the silver unicorn with a soft pink fairy light floating just above his head like a personal nightlight. Princess Rose in her blue dress sits nearby offering a plate of small berry cakes. Tiny fairies perch on mushroom houses around them, glowing softly and peacefully. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

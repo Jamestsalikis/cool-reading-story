@@ -1,0 +1,36 @@
+{
+  "interest": "Fairies + Robots",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Fairy Who Fixed Everything",
+  "moral": "When you ask for help and work together, even the biggest problems can be solved.",
+  "theme_emoji": "🧚",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright yellow t-shirt with a small robot printed on the front, sky-blue shorts, and white and orange sneakers — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} walked into the garden one morning. He saw a tiny robot sitting by the flowers. The little robot was making sad beeping sounds. Its left arm had fallen right off. {{NAME}} looked around the big sunny garden. He wondered how to help.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright yellow t-shirt with a small robot printed on the front, sky-blue shorts, and white and orange sneakers — same child, same face, same exact outfit in every image. Wide establishing shot of a large magical garden full of giant colourful flowers and sparkling air. {{NAME}} stands small in the distance near a garden path, looking at a tiny silver robot sitting on the ground beside a red flower, the robot's left arm lying beside it. Soft morning sunlight streams across the scene. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "A tiny fairy flew down from a pink flower. Her wings glittered like stars. She had a little tool belt around her waist. Her name was Pip. Pip smiled at {{NAME}}. She said, \"I can fix things! Do you want to help me?\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright yellow t-shirt with a small robot printed on the front, sky-blue shorts, and white and orange sneakers — same child, same face, same exact outfit in every image. Close-up of {{NAME}}'s face showing wide-eyed delight and a big open smile, with the tiny glittering fairy Pip hovering right in front of his nose, her sparkly wings catching the light, wearing a tiny orange tool belt. Bright garden colours fill the background. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} held the little robot gently. Pip buzzed around with her tiny spanner. She clicked and tightened and tapped. {{NAME}} passed her every little bolt she asked for. Clunk! The arm snapped back on. The robot beeped a happy sound.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright yellow t-shirt with a small robot printed on the front, sky-blue shorts, and white and orange sneakers — same child, same face, same exact outfit in every image. Dynamic action shot of {{NAME}} kneeling on the garden path, carefully holding the small silver robot in both hands while the tiny fairy Pip zooms around the robot with a glowing miniature spanner, sparks of fairy magic flying everywhere. Both {{NAME}} and Pip look focused and excited. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The little robot stood up tall. It waved both arms in the air. Then it hugged {{NAME}}'s finger. {{NAME}} felt very happy inside. Pip clapped her tiny hands. \"You helped!\" she said. \"You were so kind.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright yellow t-shirt with a small robot printed on the front, sky-blue shorts, and white and orange sneakers — same child, same face, same exact outfit in every image. Emotional peak moment with warm golden afternoon light flooding the garden. {{NAME}} kneels with his hand outstretched, the small silver robot hugging his finger with both repaired arms, its little round eyes glowing cheerfully. The fairy Pip hovers beside them clapping, surrounded by a soft halo of fairy sparkles. {{NAME}}'s face shows deep warmth and pride. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "That night, {{NAME}} went to bed with a big smile. He had helped a robot and met a fairy, all in one day. He closed his eyes slowly. He wondered if tomorrow Pip would let him borrow her tiny spanner. Goodnight, {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright yellow t-shirt with a small robot printed on the front, sky-blue shorts, and white and orange sneakers — same child, same face, same exact outfit in every image. Warm cosy resolution scene with soft golden light glowing from a bedside lamp. {{NAME}} lies in a cosy bed with a patterned robot-print duvet, eyes half-closed and smiling peacefully. The tiny silver robot sits on the windowsill waving goodnight, and a faint fairy glow drifts outside the window. The room feels snug and safe. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "interest": "Fairies + Robots + Unicorns",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Broken Rainbow Bridge",
+  "moral": "When we work together, we can fix anything.",
+  "theme_emoji": "🧚",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shimmery silver jacket with tiny star buttons, bright violet trousers, and sparkly rainbow-striped boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} walked into a glowing meadow.\nColourful fairies flew all around him.\nA silver robot beeped near a tall hill.\nA white unicorn stood by a broken bridge.\nThe rainbow bridge had lost all its colours.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shimmery silver jacket with tiny star buttons, bright violet trousers, and sparkly rainbow-striped boots — same child, same face, same exact outfit in every image. Wide establishing shot of a vast glowing meadow at golden hour, {{NAME}} is tiny in the centre looking up at a grand crumbling rainbow bridge in the distance, colourful fairies flutter high above him, a round silver robot stands to his left, and a white unicorn with a pearlescent horn grazes near the broken bridge, all characters look curious and a little worried. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "A tiny fairy named Pip flew to {{NAME}}.\n\"The bridge broke this morning,\" said Pip.\n{{NAME}}'s eyes went wide with surprise.\n\"Oh no!\" he said. \"The unicorns need it!\"\nHis mouth dropped open in surprise.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shimmery silver jacket with tiny star buttons, bright violet trousers, and sparkly rainbow-striped boots — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}}'s face showing wide-eyed surprise and delight, a tiny glowing fairy called Pip hovers right at his nose level with sparkling wings, the broken rainbow bridge is softly blurred in the background, {{NAME}}'s eyebrows are raised and his mouth is a little open in amazement. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The silver robot rolled up fast.\n\"I can fix it! I have paint!\" it said.\nThe fairies flew in circles, tossing colour dust.\n{{NAME}} helped carry the rainbow jars.\nThey all worked fast, fast, fast!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shimmery silver jacket with tiny star buttons, bright violet trousers, and sparkly rainbow-striped boots — same child, same face, same exact outfit in every image. Dynamic action shot of {{NAME}} running across the meadow carrying two large jars of glowing rainbow paint, the silver robot zooms ahead on its wheels with a paintbrush in one arm, fairies swoop and dive in arcing trails of coloured dust all around the broken bridge, the scene is energetic and joyful with motion lines showing speed. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The last colour was missing.\nNo one had pink!\n{{NAME}} looked at the unicorn.\nThe unicorn shook its mane and pink sparkles fell.\nThey had all the colours now!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shimmery silver jacket with tiny star buttons, bright violet trousers, and sparkly rainbow-striped boots — same child, same face, same exact outfit in every image. Emotional peak scene with dramatic warm lighting, {{NAME}} stands with both hands pressed to his cheeks in hopeful surprise, the white unicorn beside him shakes its glowing mane and a shower of pink sparkles rains down, the fairy Pip and the silver robot look on with wide hopeful eyes, the half-finished bridge glows behind them in the near-dark sky. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "The rainbow bridge shone again.\nAll the unicorns clip-clopped across it.\nPip gave {{NAME}} a tiny hug.\n\"Thank you for helping,\" she said.\n{{NAME}} smiled and closed his sleepy eyes.\nGoodnight, {{NAME}}. Sleep tight.\nIn the morning, maybe Pip will have a new secret to share.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shimmery silver jacket with tiny star buttons, bright violet trousers, and sparkly rainbow-striped boots — same child, same face, same exact outfit in every image. Warm cosy resolution scene bathed in soft golden light, {{NAME}} sits on a grassy hill looking sleepy and happy, the fully restored rainbow bridge glows gently behind him, the silver robot sits quietly beside him, the fairy Pip rests on his shoulder with tiny wings folded, and a line of unicorns walk peacefully across the bridge in the warm evening glow. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

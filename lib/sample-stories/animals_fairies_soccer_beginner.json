@@ -1,0 +1,36 @@
+{
+  "interest": "Animals + Fairies + Soccer",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Fairy Soccer Cup",
+  "moral": "When you cheer for others, everyone wins.",
+  "theme_emoji": "⚽",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a green soccer jersey with a small gold star, white soccer shorts, green soccer cleats, and white socks — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} found a tiny soccer field in the forest.\nThe field was no bigger than a rug.\nMice and frogs sat on little flower seats.\nTiny fairies in coloured jerseys kicked a ball.\nIt was the Fairy Soccer Cup!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a green soccer jersey with a small gold star, white soccer shorts, green soccer cleats, and white socks — same child, same face, same exact outfit in every image. Wide establishing shot of a magical forest clearing. A tiny perfectly formed soccer field sits in the middle, no bigger than a picnic blanket. Rows of tiny white mice and green frogs sit on flower petal seats around the edge. On the field, small fairies in bright red and blue jerseys kick a glowing pea-sized soccer ball. {{NAME}} stands at the edge of the forest, enormous compared to the tiny scene, peering in with wide, amazed eyes. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "{{NAME}} knelt down to look closer.\nA fairy with orange wings flew up to his nose.\n\"Will you be our referee?\" she asked.\n{{NAME}}'s mouth fell open with surprise.\n\"Me?\" he said. \"Yes!\" said the fairy.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a green soccer jersey with a small gold star, white soccer shorts, green soccer cleats, and white socks — same child, same face, same exact outfit in every image. Close-up of {{NAME}}'s face, kneeling at ground level, looking cross-eyed at a tiny fairy with bright orange wings hovering right in front of his nose. {{NAME}}'s mouth is open in a huge surprised grin. The fairy points a tiny hand at him with an expectant, excited expression. The tiny soccer field is blurred in the background behind them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The fairy gave him a tiny whistle.\n{{NAME}} blew it. Tweet!\nAll the fairies stopped and looked up at him.\nThen the game began again.\nThe ball went this way and that way, so fast.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a green soccer jersey with a small gold star, white soccer shorts, green soccer cleats, and white socks — same child, same face, same exact outfit in every image. Dynamic action shot looking down at the tiny fairy soccer field from {{NAME}}'s perspective. Fairies in red and blue jerseys sprint and leap across the miniature field, the glowing ball a bright blur. {{NAME}}'s massive green-socked feet are visible at the edges of the frame, and his enormous hand holds a tiny silver whistle to his smiling lips. Mice and frogs in the flower seats lean forward in excitement. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "A tiny fairy tripped and fell down.\nShe sat on the field and cried a little.\n{{NAME}} called out, \"You can do it! Get up!\"\nShe looked up at him and smiled.\nShe jumped up and kicked the winning goal!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a green soccer jersey with a small gold star, white soccer shorts, green soccer cleats, and white socks — same child, same face, same exact outfit in every image. Emotional peak scene. A small fairy with a blue jersey has just leapt back to her feet and is mid-kick, sending the glowing ball blazing into the tiny goal. The net ripples dramatically. {{NAME}} crouches beside the field, fists pumping, face lit with total joy and pride. The fallen fairy's face shows fierce, beaming determination. Mice and frogs explode off their seats in celebration. Golden light floods the forest clearing. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "The fairies danced and cheered.\nThey gave {{NAME}} a tiny gold cup.\nIt fit on the tip of his finger.\n{{NAME}} sat back against a big soft tree.\nHe felt proud and happy and very sleepy.\nGoodnight, {{NAME}}. Tomorrow the fairy team has a rematch and you are invited back.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a green soccer jersey with a small gold star, white soccer shorts, green soccer cleats, and white socks — same child, same face, same exact outfit in every image. Warm cosy resolution scene in the forest clearing at golden hour. {{NAME}} sits drowsily against a wide mossy tree trunk, eyes half-closed and smiling. A tiny golden trophy cup sits balanced on the tip of his index finger. Fairies dance and flutter in the warm golden air above the little soccer field. Mice and frogs sit contentedly on their flower seats. Soft golden light filters through the forest canopy. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

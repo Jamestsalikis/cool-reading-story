@@ -1,0 +1,36 @@
+{
+  "interest": "Dinosaurs",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Little Dinosaur Behind the Rock",
+  "moral": "A friendly smile can turn a scared heart into a happy one.",
+  "theme_emoji": "🦕",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright orange t-shirt with a small brown dinosaur print on the front, khaki green cargo shorts, and chunky red sneakers — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} walked through a big valley of tall green ferns. Giant rocks stood all around him. The ground was soft and muddy. Strange sounds came from far away. {{NAME}} looked and looked at everything around him. This place was very exciting.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright orange t-shirt with a small brown dinosaur print on the front, khaki green cargo shorts, and chunky red sneakers — same child, same face, same exact outfit in every image. Wide establishing shot of a prehistoric valley filled with enormous ferns and mossy boulders, with {{NAME}} walking as a small figure among it all, eyes wide with wonder, looking around at the giant landscape. Soft morning mist drifts between the giant plants. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "Behind a big grey rock, two little eyes looked out. They blinked at {{NAME}}. A tiny green dinosaur was hiding there. It had big round eyes and a small round body. It was shaking a little. It looked so scared.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright orange t-shirt with a small brown dinosaur print on the front, khaki green cargo shorts, and chunky red sneakers — same child, same face, same exact outfit in every image. Close-up of {{NAME}}'s face showing a look of pure delight and surprise as he spots something behind a rock, his mouth open in a happy gasp. The tiny green dinosaur peeks its head out from behind the edge of a large grey boulder, its big round eyes wide with nervousness. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} sat down on the soft ground. He held out his hand, very slowly. He did not move fast. He did not make any loud sounds. The little dinosaur took one step. Then two steps. Then it walked right up to {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright orange t-shirt with a small brown dinosaur print on the front, khaki green cargo shorts, and chunky red sneakers — same child, same face, same exact outfit in every image. Dynamic action scene showing the tiny green dinosaur mid-step, walking across the mossy ground toward {{NAME}} who sits with his hand outstretched and a big warm smile on his face, energy and movement in the dinosaur's cautious but excited walk. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The little dinosaur put its head into {{NAME}}'s hand. Its skin was smooth and cool. {{NAME}} gave it a gentle pat. The little dinosaur let out a happy little sound. They were friends now. Real friends.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright orange t-shirt with a small brown dinosaur print on the front, khaki green cargo shorts, and chunky red sneakers — same child, same face, same exact outfit in every image. Emotional peak scene with the tiny green dinosaur nuzzling its head into {{NAME}}'s open palm, {{NAME}}'s face glowing with joy and wonder, dramatic warm golden light flooding the valley around them, making the ferns glow bright green. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "{{NAME}} and the little dinosaur sat together as the sky turned pink. They watched the stars come out one by one. {{NAME}} felt warm and happy and sleepy. Being kind to someone shy is a special thing. {{NAME}} closed his eyes. And somewhere in the dark, a very big something moved slowly through the ferns.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright orange t-shirt with a small brown dinosaur print on the front, khaki green cargo shorts, and chunky red sneakers — same child, same face, same exact outfit in every image. Warm cosy resolution scene showing {{NAME}} sitting peacefully beside the small green dinosaur under a pink and purple evening sky, both looking up at the first glowing stars, {{NAME}}'s eyes heavy with sleep and a soft smile on his face, golden light bathing the whole scene. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

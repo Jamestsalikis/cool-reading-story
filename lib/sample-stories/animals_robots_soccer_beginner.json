@@ -1,0 +1,36 @@
+{
+  "interest": "Animals + Robots + Soccer",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Robot Goalie's Big Save",
+  "moral": "Working together as a team helps everyone win.",
+  "theme_emoji": "⚽",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright red soccer jersey with a yellow number five, green soccer shorts, and white and red soccer boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} arrived at the big green soccer field. Animals were on one team. A team of friendly robots was on the other. A lion, a monkey, and a parrot were ready to play. A tall blue robot stood in the goal. {{NAME}} was going to play with the animals.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright red soccer jersey with a yellow number five, green soccer shorts, and white and red soccer boots — same child, same face, same exact outfit in every image. Wide establishing shot of a large bright green soccer field under a sunny blue sky. {{NAME}} stands small at the edge of the field looking in. A lion, a monkey, and a colourful parrot stand together on one side in soccer kits. A tall friendly blue robot stands in the goal on the other side, arms wide open. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The monkey kicked the ball to {{NAME}}. {{NAME}} kicked it hard. But the ball went the wrong way! It landed in a puddle. The animals looked worried. {{NAME}} felt a little sad. 'Do not give up,' said the lion.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright red soccer jersey with a yellow number five, green soccer shorts, and white and red soccer boots — same child, same face, same exact outfit in every image. Close-up of {{NAME}}'s face showing a surprised and disappointed expression, mouth in a small sad curve and eyebrows raised. A muddy soccer ball sits in a puddle nearby. The friendly lion leans in close with an encouraging smile. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The robot goalie walked over. 'I can teach you,' said the robot. The robot showed {{NAME}} how to kick. 'Watch my foot. Point your toes down.' {{NAME}} tried again. The ball flew straight and fast. It zoomed right into the goal!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright red soccer jersey with a yellow number five, green soccer shorts, and white and red soccer boots — same child, same face, same exact outfit in every image. Dynamic action shot of {{NAME}} kicking a soccer ball with full energy, leg extended, body leaning forward. The bright blue robot stands beside {{NAME}} watching with glowing happy eyes. The soccer ball is mid-air flying toward the goal. The lion, monkey, and parrot cheer on the sideline with arms raised. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The crowd of animals cheered loudly. The parrot flew above and shouted, 'Goal! Goal! Goal!' The robot goalie clapped his big metal hands. Everyone ran to {{NAME}}. {{NAME}} had helped the team win the game.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright red soccer jersey with a yellow number five, green soccer shorts, and white and red soccer boots — same child, same face, same exact outfit in every image. Emotional peak scene with dramatic warm golden lighting. {{NAME}} stands in the centre of the field arms raised in triumph. The lion hugs {{NAME}} from the left, the monkey jumps with joy on the right. The colourful parrot flies overhead with wings spread wide. The blue robot claps large metal hands together, sparks of joy around it. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "After the game, everyone sat in the soft grass together. The robot made funny sounds that made the animals laugh. {{NAME}} leaned against the lion and closed tired eyes. Working together had been the best fun. Goodnight, {{NAME}}. Sleep well. Tomorrow, the robot wants to show you a secret trick.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright red soccer jersey with a yellow number five, green soccer shorts, and white and red soccer boots — same child, same face, same exact outfit in every image. Warm cosy resolution scene in soft golden evening light. {{NAME}} sits sleepily in the green grass leaning against the friendly lion. The blue robot sits nearby with glowing soft eyes. The monkey and parrot cuddle together beside them. A soccer ball rests on the grass in the foreground. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

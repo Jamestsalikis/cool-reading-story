@@ -1,0 +1,36 @@
+{
+  "interest": "Dinosaurs + Princesses",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Princess Who Rode a Dinosaur",
+  "moral": "Being brave means trying something new.",
+  "theme_emoji": "🦕",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep blue t-shirt with a gold dinosaur print, red shorts, and golden yellow sneakers — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} walked through the ancient forest near the castle. Tall trees stood like green towers. Old rocks had dinosaur footprints in them. Then he heard a roar. He heard a voice too. A princess called for help!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep blue t-shirt with a gold dinosaur print, red shorts, and golden yellow sneakers — same child, same face, same exact outfit in every image. Wide establishing shot of a dense ancient forest with massive old trees, mossy rocks, and dinosaur footprints pressed into the muddy ground. {{NAME}} stands small in the middle of the scene, looking ahead nervously. A pink castle is just visible through the trees in the background. A distant roar and a bright flash of royal purple suggest something is happening deeper in the forest. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "{{NAME}} found a princess named Rose. She was up on a rock. A big purple dinosaur sat below her. The dinosaur wagged his tail. He was friendly! But Rose was too scared to come down.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep blue t-shirt with a gold dinosaur print, red shorts, and golden yellow sneakers — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}} arriving at the scene, his face showing surprise and then a growing grin. Princess Rose stands on a mossy boulder, her sparkly violet dress and silver crown catching the light, arms crossed and eyes shut tight in fear. Below her, a large purple dinosaur with a big friendly grin and a wagging tail looks up hopefully. {{NAME}} points toward the dinosaur's kind smile. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} walked right up to the dinosaur. He patted the dinosaur on the nose. The dinosaur smiled and sat down low. {{NAME}} called up to Rose. He is safe. Try to be brave!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep blue t-shirt with a gold dinosaur print, red shorts, and golden yellow sneakers — same child, same face, same exact outfit in every image. Dynamic action shot of {{NAME}} confidently patting the big purple dinosaur on the nose. The dinosaur has lowered himself happily to the ground with a wide grin, tail wagging. Princess Rose is stepping down from the boulder very carefully, one tiny foot reaching for the ground, eyes now open with nervous determination. Bright forest light streams through the canopy above. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "Rose took a deep breath. She climbed onto the dinosaur's back. The dinosaur stood up slowly. Rose held on tight. Then she smiled the biggest smile. She was riding a dinosaur!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep blue t-shirt with a gold dinosaur print, red shorts, and golden yellow sneakers — same child, same face, same exact outfit in every image. Emotional peak scene flooded with dramatic golden sunlight breaking through the forest canopy. Princess Rose sits tall on the purple dinosaur's back, silver crown gleaming, violet dress flowing, face transformed into a huge joyful smile with arms spread wide. The purple dinosaur walks proudly and slowly with {{NAME}} jogging happily alongside, arms raised in celebration. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "Rose rode the dinosaur all the way home to the castle. She was not scared any more. Being brave means trying something new. Goodnight, {{NAME}}. Sleep well. Tomorrow Rose said the dinosaur wanted to show her something deep in the forest. Would {{NAME}} come too?",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep blue t-shirt with a gold dinosaur print, red shorts, and golden yellow sneakers — same child, same face, same exact outfit in every image. Warm cosy resolution scene in soft amber evening light outside the pink castle. {{NAME}} sits sleepily on the castle steps, eyes drooping softly. Princess Rose sits beside him, her violet dress folded neatly. The purple dinosaur lies curled up beside them both like a large warm pet, eyes closed contentedly. The sky is deep pink and gold. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

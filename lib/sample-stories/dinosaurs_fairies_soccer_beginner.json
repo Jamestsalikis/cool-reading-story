@@ -1,0 +1,36 @@
+{
+  "interest": "Dinosaurs + Fairies + Soccer",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Fairy Dinosaur Soccer Cup",
+  "moral": "Small or big, everyone has something special to give.",
+  "theme_emoji": "⚽",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright blue soccer jersey with a gold dinosaur badge, orange soccer shorts, and blue and orange soccer boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} arrived at a huge grassy valley. Giant dinosaurs were kicking a big round ball. Tiny fairies zipped above the field. They were playing soccer. One team was all big dinosaurs. The other team needed one more player. A little fairy flew to {{NAME}}. 'Please join us!' she said.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright blue soccer jersey with a gold dinosaur badge, orange soccer shorts, and blue and orange soccer boots — same child, same face, same exact outfit in every image. Wide establishing shot of a wide grassy valley with a soccer pitch marked with white lines. {{NAME}} stands small at the edge looking in with excitement. On the field, large colourful dinosaurs kick a huge soccer ball. Tiny fairies in small jerseys zoom above the pitch. One small fairy hovers right in front of {{NAME}} with wings beating fast and an inviting smile. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "{{NAME}} worried about playing with dinosaurs. They were so big. 'What if I am too small?' asked {{NAME}}. The fairy sat on {{NAME}}'s shoulder. 'I am tiny,' said the fairy, 'but I am the fastest one on the field.' {{NAME}} smiled. 'Then I can do it too,' said {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright blue soccer jersey with a gold dinosaur badge, orange soccer shorts, and blue and orange soccer boots — same child, same face, same exact outfit in every image. Close-up of {{NAME}}'s face showing a worried expression turning into a hopeful smile. A tiny fairy sits on {{NAME}}'s shoulder with a confident grin and wings folded. A large purple dinosaur walks past in the background. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The game started. The big dinosaurs stomped and kicked. The ground shook. But {{NAME}} was quick and nimble. The fairy flew high and called, 'Here! Here!' {{NAME}} kicked the ball up to the fairy. The fairy headered it into the goal with a burst of sparkles.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright blue soccer jersey with a gold dinosaur badge, orange soccer shorts, and blue and orange soccer boots — same child, same face, same exact outfit in every image. Dynamic action shot bursting with energy. {{NAME}} is mid-kick sending the soccer ball high into the air. The tiny fairy is above, heading the ball into the goal with an explosion of sparkles and golden light. Large dinosaurs stomp and chase in the background. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The whole valley shook with cheering. The dinosaurs stomped their feet in applause. The fairies flew loops above. {{NAME}} and the little fairy did a victory jump together. The biggest dinosaur lowered its head and gave {{NAME}} a gentle nose bump.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright blue soccer jersey with a gold dinosaur badge, orange soccer shorts, and blue and orange soccer boots — same child, same face, same exact outfit in every image. Emotional peak scene with dramatic golden sunlight. {{NAME}} and the tiny fairy jump into the air together in celebration at the centre of the field. A huge friendly dinosaur lowers its enormous head to gently bump {{NAME}} with its nose. Other dinosaurs stomp their feet. Fairies fly in victory loops above. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "After the game, {{NAME}} lay in the warm grass. A dinosaur sat like a mountain beside {{NAME}}. The fairies made tiny glowing lights above. The valley was quiet and peaceful. {{NAME}} yawned a very big yawn. Goodnight, {{NAME}}. Sleep well. Tomorrow, the fairy has a special flying training session planned just for you.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright blue soccer jersey with a gold dinosaur badge, orange soccer shorts, and blue and orange soccer boots — same child, same face, same exact outfit in every image. Warm cosy resolution scene in soft golden evening light. {{NAME}} lies sleepily in green grass, eyes almost closed. A massive friendly dinosaur sits like a warm mountain beside {{NAME}}. The tiny fairy perches on {{NAME}}'s knee. Other fairies make tiny glowing lights that float in the calm evening air. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

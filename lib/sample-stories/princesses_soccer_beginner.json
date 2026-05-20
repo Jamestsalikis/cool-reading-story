@@ -1,0 +1,36 @@
+{
+  "interest": "Princesses + Soccer",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Princess of the Pitch",
+  "moral": "Everyone deserves a fair chance to play, no matter who they are.",
+  "theme_emoji": "👸",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal purple soccer jersey with a gold crown badge, white shorts, and purple soccer boots with gold studs — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} arrived at the castle soccer field. The grass was very green and the goals were made of gold. A big game was about to start. But one team had no goalkeeper. Everyone looked around. Nobody wanted to play in goal.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal purple soccer jersey with a gold crown badge, white shorts, and purple soccer boots with gold studs — same child, same face, same exact outfit in every image. Wide establishing shot of a grand castle soccer field with perfectly green grass and two gleaming golden goalposts. Colourful flags and banners line the field. {{NAME}} stands small near one goalpost, looking around at groups of children huddled on the pitch. The castle towers rise dramatically in the background under a bright blue sky. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "A girl walked onto the field wearing a sparkly pink gown and a crown. She had a soccer ball under her arm. Her name was Princess Mira. She smiled at {{NAME}}. \"I will play if you play too!\" she said.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal purple soccer jersey with a gold crown badge, white shorts, and purple soccer boots with gold studs — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}} and Princess Mira standing side by side on the golden goalpost end of the field. Mira wears a sparkly pink ball gown and a delicate golden crown, a soccer ball tucked under her arm, smiling brightly at {{NAME}}. {{NAME}}'s face shows happy surprise. The sunny pitch stretches behind them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "Princess Mira played in goal. She leaped left and right. She stopped every single shot. {{NAME}} ran down the field and kicked the ball hard. It flew past the other keeper and into the net. Goal! Everyone cheered.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal purple soccer jersey with a gold crown badge, white shorts, and purple soccer boots with gold studs — same child, same face, same exact outfit in every image. Dynamic action shot of {{NAME}} mid-sprint on the golden castle pitch, leg swung forward having just kicked the soccer ball. The ball arcs through the air toward the opposite golden goal. In the background Princess Mira leaps sideways in the near goal, saving a different shot, her pink gown and crown making her unmistakable. The crowd of children on the sideline raises their hands. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The game ended. Both teams shook hands. Princess Mira took off her crown and passed it to {{NAME}}. \"You were the bravest player today,\" she said. {{NAME}} held the crown and felt his heart glow.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal purple soccer jersey with a gold crown badge, white shorts, and purple soccer boots with gold studs — same child, same face, same exact outfit in every image. Emotional peak scene at the centre of the castle pitch in warm late-afternoon golden light. Princess Mira places her golden crown gently on {{NAME}}'s head, both of them smiling warmly. The two teams stand in the background applauding. {{NAME}}'s face radiates pride and joy. The golden goalposts glow behind them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "{{NAME}} walked home with the crown in his hands. He set it on his shelf and got into bed. He smiled and closed his eyes. He wondered if Princess Mira would save his shot tomorrow. Goodnight, {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal purple soccer jersey with a gold crown badge, white shorts, and purple soccer boots with gold studs — same child, same face, same exact outfit in every image. Warm cosy resolution scene in a snug bedroom lit by soft golden lamplight. {{NAME}} lies in bed under a purple duvet with a crown pattern, eyes softly closed and smiling. On his bedside shelf the small golden crown catches the lamplight and glimmers. A soccer ball rests in the corner of the room. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

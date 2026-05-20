@@ -1,0 +1,36 @@
+{
+  "interest": "Animals + Fairies + Unicorns",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Unicorn's Missing Sparkle",
+  "moral": "You can always find something beautiful if you look with a kind heart.",
+  "theme_emoji": "🦄",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft pink t-shirt with a small unicorn silhouette, lilac shorts, and white high-top sneakers with gold laces — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} walked along a path of silver grass.\nThe moon was just coming up over the hill.\nOwls and foxes moved softly in the dark.\nA white unicorn stood alone in the clearing.\nHer horn was not glowing at all.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft pink t-shirt with a small unicorn silhouette, lilac shorts, and white high-top sneakers with gold laces — same child, same face, same exact outfit in every image. Wide establishing shot of a wide moonlit clearing edged by dark, soft trees. Silver-tipped grass glows in the gentle moonlight. {{NAME}} stands small at the path entrance, looking in wonder at the scene. A beautiful white unicorn stands alone in the centre of the clearing, her spiral horn completely dull and dark. A brown fox and a round-eyed owl watch quietly from the tree line. The mood is gentle and mysterious. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "{{NAME}} walked slowly up to the unicorn.\nShe had big sad silver eyes.\n\"My sparkle is gone,\" she said softly.\n\"Without it, the night flowers will not bloom.\"\n{{NAME}} felt a tug in his heart.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft pink t-shirt with a small unicorn silhouette, lilac shorts, and white high-top sneakers with gold laces — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}} standing gently in front of the white unicorn in the moonlit clearing. Their faces are close. The unicorn's large silver eyes are deep and sad. {{NAME}}'s face shows warm, heartfelt concern, one hand reaching carefully toward the unicorn's dull horn. Behind them, closed night flowers droop on their stems. Soft silver moonlight washes the scene. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "A little golden fairy flew down from the moon.\nShe looked at the unicorn's horn closely.\n\"The sparkle fell into the deep pond,\" she said.\nShe flew down and pulled it out.\nIt was a tiny glowing drop of light!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft pink t-shirt with a small unicorn silhouette, lilac shorts, and white high-top sneakers with gold laces — same child, same face, same exact outfit in every image. Dynamic action shot. A tiny golden fairy with wings like sunbeams dives down toward a still dark pond at the edge of the clearing. She plunges one tiny hand in and pulls out a brilliant glowing droplet of pure light, trailing sparkles. {{NAME}} stands beside the pond, leaning forward with wide eyes. The unicorn stretches her neck toward the fairy hopefully. The fox and owl lean in to watch. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The fairy pressed the sparkle back onto the horn.\nThe horn lit up with a bright warm glow.\nAll the night flowers burst into bloom.\nPink and gold flowers opened everywhere.\n{{NAME}} gasped. It was so beautiful.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft pink t-shirt with a small unicorn silhouette, lilac shorts, and white high-top sneakers with gold laces — same child, same face, same exact outfit in every image. Emotional peak scene in the moonlit clearing. The unicorn's horn blazes with brilliant warm golden-white light, sending shafts of radiance across the clearing. All around her, pink and gold night flowers burst dramatically open. The golden fairy floats with her arms wide, laughing with joy. {{NAME}} stands with both hands on his cheeks in absolute awe and delight, bathed in the magical glow. The fox and owl watch in wonder. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "The whole clearing glowed and smelled so sweet.\nThe fox and owl crept closer to see.\nThe unicorn nuzzled {{NAME}} with her soft nose.\nThe golden fairy rested on {{NAME}}'s shoulder.\nHe felt so happy and warm and very sleepy.\nGoodnight, {{NAME}}. Tomorrow the unicorn wants to show you where the sparkles come from.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft pink t-shirt with a small unicorn silhouette, lilac shorts, and white high-top sneakers with gold laces — same child, same face, same exact outfit in every image. Warm cosy resolution scene in the flower-filled clearing under a soft glowing moon. {{NAME}} sits drowsily in the blooming night flowers, the white unicorn nuzzling her glowing horn gently beside his cheek. The tiny golden fairy sits on his shoulder with folded wings. The brown fox and round owl sit close in the flowers. The whole scene glows with soft golden and silver light. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

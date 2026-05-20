@@ -1,0 +1,36 @@
+{
+  "interest": "Animals + Robots + Unicorns",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Robot Who Found Rainbow Friends",
+  "moral": "Friendship grows when you open your heart to someone new.",
+  "theme_emoji": "🤖",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright orange jacket with silver buttons, purple trousers, and shiny silver boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} walked into a meadow full of animals. Bunnies hopped in the clover. Foxes played near the stream. In the middle of the meadow stood a small yellow robot. The robot sat alone and watched the animals play. A white unicorn grazed nearby.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright orange jacket with silver buttons, purple trousers, and shiny silver boots — same child, same face, same exact outfit in every image. Wide establishing shot of a lush green meadow dotted with flowers. {{NAME}} stands small at the meadow's edge looking in. Bunnies hop in the foreground, foxes play near a sparkling stream on the left. A small friendly yellow robot sits alone in the middle of the meadow looking lonely. A white unicorn with a shimmering horn grazes peacefully on the right. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "{{NAME}} walked over to the robot. 'Why are you sitting alone?' asked {{NAME}}. 'The animals run away from me,' said the robot. 'They think I am scary.' {{NAME}} looked at the robot's kind face. 'You do not look scary to me,' said {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright orange jacket with silver buttons, purple trousers, and shiny silver boots — same child, same face, same exact outfit in every image. Close-up of {{NAME}}'s face showing a warm smile and kind eyes, leaning slightly forward. The small yellow robot sits in front of {{NAME}} looking up with dim sad eyes. A bunny peeks out nervously from behind a flower in the background. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The unicorn trotted over. Her horn began to glow pink. Magic sparkles floated onto the robot. The robot lit up with soft rainbow colours. The bunnies stopped. They looked. Then they hopped closer and closer. 'He is beautiful!' said one bunny.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright orange jacket with silver buttons, purple trousers, and shiny silver boots — same child, same face, same exact outfit in every image. Dynamic action shot full of energy. The white unicorn stands beside the small yellow robot with her glowing pink horn pointed toward it. Rainbow sparkles shower over the robot, making it glow with soft multicoloured light. {{NAME}} watches with delight. Bunnies and foxes rush forward with wide curious eyes. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The animals crowded around the glowing robot. A bunny jumped onto the robot's lap. A fox nudged the robot's hand with its nose. The robot laughed a big warm laugh. {{NAME}} clapped with joy. The unicorn nuzzled {{NAME}} softly.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright orange jacket with silver buttons, purple trousers, and shiny silver boots — same child, same face, same exact outfit in every image. Emotional peak scene with warm golden dramatic lighting. The glowing rainbow-coloured robot sits in the centre of the meadow with a bunny on its lap and a fox nuzzling its hand, both looking adored. {{NAME}} stands clapping joyfully beside the unicorn, who gently nuzzles {{NAME}}'s cheek. The robot's eyes glow with happiness. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "They all lay in the soft meadow grass together. The robot hummed a gentle song. The unicorn rested her head near {{NAME}}. The animals curled up close. {{NAME}} felt warm and happy. Goodnight, {{NAME}}. Sleep well. Tomorrow, the robot says it has a very special surprise for you.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright orange jacket with silver buttons, purple trousers, and shiny silver boots — same child, same face, same exact outfit in every image. Warm cosy resolution scene in soft golden evening light. {{NAME}} lies sleepily in the green meadow grass with eyes half-closed and a gentle smile. The small yellow robot sits close by humming, its light glowing softly. The white unicorn rests her head near {{NAME}}. Bunnies and a fox curl up together in the grass. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

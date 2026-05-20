@@ -1,0 +1,36 @@
+{
+  "interest": "Dinosaurs + Fairies + Superheroes",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Fairy Dinosaur's Sky Rescue",
+  "moral": "The bravest heroes listen to those who are small but wise.",
+  "theme_emoji": "🦸",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright red superhero suit with a gold dinosaur footprint emblem on the chest, a dark green cape, and red boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} soared over a prehistoric land. Tall volcanoes and giant ferns filled the ground below. Dinosaurs grazed in the valleys. A tiny fairy flew up next to {{NAME}}. 'Help!' said the fairy. 'A baby dinosaur is stuck on the high cliff and cannot get down.'",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright red superhero suit with a gold dinosaur footprint emblem on the chest, a dark green cape, and red boots — same child, same face, same exact outfit in every image. Wide establishing shot of a dramatic prehistoric landscape from above. {{NAME}} flies small against a big blue sky, cape streaming. Below are tall smoking volcanoes, giant ferns, and grazing dinosaurs. A tiny glowing fairy flies right beside {{NAME}}, mouth open calling for help. In the distance, a high rocky cliff has a small baby dinosaur stuck at the top. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "{{NAME}} flew toward the cliff. The baby dinosaur looked down with huge scared eyes. Its little legs shook. 'Do not worry,' called {{NAME}}. 'I am coming!' The tiny fairy flew alongside. 'Fly slowly,' she said. 'The wind is strong near the cliff.'",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright red superhero suit with a gold dinosaur footprint emblem on the chest, a dark green cape, and red boots — same child, same face, same exact outfit in every image. Close-up of {{NAME}}'s face showing determined bravery with kind eyes, flying toward the cliff. Beside {{NAME}}, the tiny fairy points and advises with a serious face. In the background, the small baby dinosaur clings to the clifftop with wide frightened eyes. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} slowed down, just as the fairy said. The wind was very strong. Step by step, {{NAME}} got closer. The baby dinosaur reached out a small claw. {{NAME}} grabbed it firmly. Then {{NAME}} lifted the baby dinosaur off the cliff and flew it safely to the ground.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright red superhero suit with a gold dinosaur footprint emblem on the chest, a dark green cape, and red boots — same child, same face, same exact outfit in every image. Dynamic action shot. {{NAME}} is mid-flight gripping the tiny claw of a small frightened baby dinosaur on the cliff edge. Strong wind blows the cape and the baby dinosaur's little frill sideways. The tiny fairy hovers close watching anxiously. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "They landed on the soft ground. A huge mother dinosaur came running. She made a loud happy roar and nuzzled her baby. The baby dinosaur jumped and chirped with joy. The fairy flew a loop around {{NAME}}'s head. 'You listened,' said the fairy. 'That is what made you a true hero.'",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright red superhero suit with a gold dinosaur footprint emblem on the chest, a dark green cape, and red boots — same child, same face, same exact outfit in every image. Emotional peak scene with warm dramatic golden light. The enormous mother dinosaur nuzzles her small baby on the ground, tears of relief on her face. {{NAME}} stands beside them smiling. The tiny fairy does a joyful loop around {{NAME}}'s head with a sparkling trail. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "{{NAME}} sat against the warm side of the mother dinosaur. The baby dinosaur curled up in {{NAME}}'s lap. The fairy rested on {{NAME}}'s shoulder. The great prehistoric land was quiet and golden. {{NAME}} felt proud and peaceful. Goodnight, {{NAME}}. Sleep well. Tomorrow, the fairy says she knows where a dragon egg is waiting to hatch.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright red superhero suit with a gold dinosaur footprint emblem on the chest, a dark green cape, and red boots — same child, same face, same exact outfit in every image. Warm cosy resolution scene bathed in soft golden light. {{NAME}} sits sleepily against the large mother dinosaur's side, eyes half-closed with a content smile. The tiny baby dinosaur sleeps curled in {{NAME}}'s lap. The small fairy rests on {{NAME}}'s shoulder with wings folded. The prehistoric landscape glows warm in soft evening gold. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

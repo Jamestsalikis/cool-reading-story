@@ -1,0 +1,36 @@
+{
+  "interest": "Robots",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Little Robot Who Lost His Beep",
+  "moral": "With patience and care, you can fix almost anything.",
+  "theme_emoji": "🤖",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver-grey t-shirt with a red robot face printed on the front, bright yellow shorts, and chunky white sneakers with blue velcro straps — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} was in his workshop full of cool tools and bits. Nuts and bolts were lined up in rows. Bright lights blinked on the walls. In the corner sat a small silver robot. The robot was very still. It made no sound at all.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver-grey t-shirt with a red robot face printed on the front, bright yellow shorts, and chunky white sneakers with blue velcro straps — same child, same face, same exact outfit in every image. Wide establishing shot of a bright colourful workshop filled with shelves of bolts, blinking lights, and fun gadgets, with {{NAME}} standing small in the middle of it all looking at a small silver robot sitting silently and motionlessly in the corner, {{NAME}}'s face full of curiosity. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "{{NAME}} walked over to the little robot. The robot's chest panel was open. A tiny round battery had fallen out. The robot's eyes were dark. It could not move or beep or blink. {{NAME}} felt very sorry for his little friend.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver-grey t-shirt with a red robot face printed on the front, bright yellow shorts, and chunky white sneakers with blue velcro straps — same child, same face, same exact outfit in every image. Close-up of {{NAME}}'s face showing a sad and caring expression as he crouches in front of the small silver robot, whose chest panel is open and whose eyes are dark, a tiny round battery visible on the floor nearby. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} picked up the tiny battery. He held it very carefully. He placed it back inside the little robot's chest. He closed the panel. He pressed the small red button on the robot's back. Click.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver-grey t-shirt with a red robot face printed on the front, bright yellow shorts, and chunky white sneakers with blue velcro straps — same child, same face, same exact outfit in every image. Dynamic action scene showing {{NAME}} pressing the small red button on the back of the little silver robot with one finger, his face full of focus and excitement, the robot's chest panel just snapped shut, energy and anticipation crackling in the air around them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The robot's eyes lit up bright blue. It beeped one long happy beep. Its arms went up in the air. It spun around on its little feet. The robot beeped again and again. It danced and beeped and blinked. {{NAME}} laughed out loud.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver-grey t-shirt with a red robot face printed on the front, bright yellow shorts, and chunky white sneakers with blue velcro straps — same child, same face, same exact outfit in every image. Emotional peak scene showing the little silver robot with bright glowing blue eyes spinning and dancing with arms raised, {{NAME}} laughing with absolute delight, dramatic flashes of blue and white light bursting from the robot's eyes and buttons, filling the workshop with colour. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "{{NAME}} and the little robot sat together on the workshop floor. The robot beeped softly, one small beep at a time. {{NAME}} felt warm and happy and sleepy. Being patient and caring makes good things happen. {{NAME}} closed his eyes. The robot gave one last quiet beep, and somewhere on the shelf, something began to glow.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver-grey t-shirt with a red robot face printed on the front, bright yellow shorts, and chunky white sneakers with blue velcro straps — same child, same face, same exact outfit in every image. Warm cosy resolution scene with {{NAME}} sitting on the workshop floor leaning gently against the small silver robot, both bathed in soft golden light from the workshop lamps, {{NAME}}'s eyes closing in peaceful sleepy contentment, the robot's eyes glowing a soft warm blue. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

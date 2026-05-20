@@ -1,0 +1,36 @@
+{
+  "interest": "Fairies + Robots + Superheroes",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Robot Who Needed a Friend",
+  "moral": "A true hero looks out for those who feel left out.",
+  "theme_emoji": "🤖",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright cobalt blue superhero suit with a silver winged fairy symbol on the chest, a short bright yellow cape with blue trim, cobalt blue gloves with silver fingers, and cobalt blue boots with yellow soles — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} was a superhero who flew through fairy forests. The fairy forest was full of glowing trees and singing flowers. Tiny fairies zipped from tree to tree, laughing. But at the edge of the forest, a small green robot sat alone. The robot had a sad drooping head. No fairy had stopped to say hello. {{NAME}} flew down to see.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright cobalt blue superhero suit with a silver winged fairy symbol on the chest, a short bright yellow cape with blue trim, cobalt blue gloves with silver fingers, and cobalt blue boots with yellow soles — same child, same face, same exact outfit in every image. Wide establishing shot of a magical glowing fairy forest with luminous trees in greens, golds, and purples. Tiny fairies zip between the branches laughing and trailing sparks. {{NAME}} flies down from the sky, small against the tall forest, yellow cape bright. At the very edge of the forest, a small green robot sits alone with head drooping. No fairies are near the robot. Contrast between the busy joyful forest and the lonely robot at the edge. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "{{NAME}} landed next to the robot. The robot said her name was Flick. Flick was sad because the fairies flew away whenever she came close. \"I make too much noise,\" said Flick quietly. Her gears made a soft clunk-clunk sound. {{NAME}}'s eyes were soft and kind. He sat down right next to her. \"I like your sound,\" said {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright cobalt blue superhero suit with a silver winged fairy symbol on the chest, a short bright yellow cape with blue trim, cobalt blue gloves with silver fingers, and cobalt blue boots with yellow soles — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}}'s face showing warm kind eyes and a gentle encouraging smile as he sits cross-legged on the ground right beside Flick the small green robot. Flick looks at him with uncertain hopeful eyes. The glowing fairy forest glitters softly in the background. One or two fairies peer curiously from behind a glowing tree. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} had an idea. He used his superhero voice to call out to the fairies. \"Come and listen!\" he said loudly. The fairies flew over slowly. Flick started to clunk and hum and beep a little song. The fairies stopped. They had never heard a song like this before. They began to dance to the robot music.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright cobalt blue superhero suit with a silver winged fairy symbol on the chest, a short bright yellow cape with blue trim, cobalt blue gloves with silver fingers, and cobalt blue boots with yellow soles — same child, same face, same exact outfit in every image. Dynamic action shot of Flick the small green robot clunking and humming a song, body vibrating with beeps and musical notes floating from her as colourful sound waves. A crowd of tiny fairies dances in the air all around her, wings fluttering to the rhythm, faces full of delight. {{NAME}} stands to one side with both arms spread wide and a grin of pure triumph. The forest glows extra bright. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The fairies loved Flick's music. They flew close and put tiny flower hats on her head. They held her hands. Flick's eyes glowed bright green with joy. She had never had friends before. A true hero looks out for those who feel left out. {{NAME}} felt a big warm glow in his chest.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright cobalt blue superhero suit with a silver winged fairy symbol on the chest, a short bright yellow cape with blue trim, cobalt blue gloves with silver fingers, and cobalt blue boots with yellow soles — same child, same face, same exact outfit in every image. Emotional peak scene in the glowing fairy forest. Flick the small green robot stands with bright green glowing eyes, covered in tiny flower hats and daisy chains placed by joyful fairies who hold her hands and flutter around her. {{NAME}} stands watching with a huge proud smile, one hand on his chest where a warm golden glow radiates. Dramatic warm forest light illuminates the scene. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "That night, Flick played a soft sleepy song for everyone. The fairies curled up on the glowing branches. {{NAME}} lay in the soft mossy grass. A true hero looks out for those who feel left out. {{NAME}} felt warm and happy and very sleepy. He closed his eyes slowly. He wondered if Flick knew a song about flying.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright cobalt blue superhero suit with a silver winged fairy symbol on the chest, a short bright yellow cape with blue trim, cobalt blue gloves with silver fingers, and cobalt blue boots with yellow soles — same child, same face, same exact outfit in every image. Warm cosy resolution scene in the magical fairy forest at night. {{NAME}} lies on soft glowing moss with drooping sleepy eyes, yellow cape spread softly beneath him. Flick the small green robot sits nearby playing a quiet humming tune, chest glowing a warm soft green. Tiny fairies are curled up sleeping on glowing branches all around. Soft starlight and gentle forest glow fill the scene. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

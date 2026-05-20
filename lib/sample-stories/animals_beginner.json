@@ -1,0 +1,36 @@
+{
+  "interest": "Animals",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Baby Bird Who Couldn't Fly",
+  "moral": "When you are gentle and kind, you help others find their wings.",
+  "theme_emoji": "🐦",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright green t-shirt with a yellow sun on the front, soft blue denim shorts, and white sneakers with orange laces — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} walked into the big green garden. Tall trees stood all around him. Flowers were red and yellow and pink. Then he heard a tiny sound. It was a small cry. It came from the soft green grass.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright green t-shirt with a yellow sun on the front, soft blue denim shorts, and white sneakers with orange laces — same child, same face, same exact outfit in every image. Wide establishing shot of a lush garden full of tall green trees and colourful flowers, with {{NAME}} standing small in the middle of it all, looking down at the grass with a curious expression on his face. A tiny baby bird sits in the grass near his feet. Warm morning sunlight filters through the leaves. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "{{NAME}} bent down slowly. A tiny baby bird sat in the grass. The little bird had a hurt wing. It could not fly up to its nest. {{NAME}}'s eyes went wide. He wanted to help the little bird.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright green t-shirt with a yellow sun on the front, soft blue denim shorts, and white sneakers with orange laces — same child, same face, same exact outfit in every image. Close-up of {{NAME}}'s face showing wide eyes full of surprise and care as he crouches down low, the tiny baby bird visible just below him in the soft green grass. His expression is gentle and worried. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} ran to find a soft leaf and a small twig. He made a cosy little nest on the ground. He picked up the baby bird so, so gently. He placed the bird inside the soft nest. The bird peeped and peeped with happiness.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright green t-shirt with a yellow sun on the front, soft blue denim shorts, and white sneakers with orange laces — same child, same face, same exact outfit in every image. Dynamic action shot of {{NAME}} carefully placing the tiny baby bird into a small cosy nest made of leaves and twigs on the garden ground, his arms stretched out, his face full of concentration and joy. Movement and energy in the scene, leaves flutter around him. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "A big bird flew down from the tree. It was the baby bird's mother. She looked at her baby, safe and warm. She looked at {{NAME}} and sang a beautiful song. {{NAME}} smiled the biggest smile. He had helped.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright green t-shirt with a yellow sun on the front, soft blue denim shorts, and white sneakers with orange laces — same child, same face, same exact outfit in every image. Emotional peak scene showing the mother bird landing beside the nest with wings spread wide, looking at {{NAME}} with warmth, while {{NAME}} stands close with a huge glowing smile on his face, golden afternoon light pouring down through the trees dramatically. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "{{NAME}} sat under the big tree. He felt warm and happy inside. The baby bird was safe now. {{NAME}} yawned a big sleepy yawn. Being kind makes your heart feel so good. He closed his eyes. Far away in the garden, something rustled in the leaves.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright green t-shirt with a yellow sun on the front, soft blue denim shorts, and white sneakers with orange laces — same child, same face, same exact outfit in every image. Warm cosy resolution scene with {{NAME}} sitting under a large tree in soft golden evening light, eyes drooping sleepily, a peaceful smile on his face, the baby bird and mother bird resting nearby in their nest. The whole garden glows with gentle amber light. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

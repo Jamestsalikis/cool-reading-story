@@ -1,0 +1,36 @@
+{
+  "interest": "Animals + Robots + Superheroes",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Robot Hero's Missing Cape",
+  "moral": "Being brave and helping others makes you a true hero.",
+  "theme_emoji": "🦸",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright blue superhero suit with a shiny red lightning bolt on the chest, a flowing red cape, and red boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} flew into Hero City. The city was full of tall buildings and bright lights. Animals lived in every window. A big friendly robot stood in the town square. The robot looked very sad. His shiny gold cape was gone.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright blue superhero suit with a shiny red lightning bolt on the chest, a flowing red cape, and red boots — same child, same face, same exact outfit in every image. Wide establishing shot of a bright colourful city with tall buildings decorated with animals in the windows. {{NAME}} is small, flying in from the sky above with cape streaming. A large friendly silver and gold robot stands in the city square below looking sad, with a missing cape showing bare bolts on its shoulders. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "{{NAME}} landed next to the robot. 'What happened?' asked {{NAME}}. 'A strong wind blew my cape away,' said the robot. 'Without my cape I cannot be a hero.' {{NAME}} looked at the robot's sad metal face. 'I will find it,' said {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright blue superhero suit with a shiny red lightning bolt on the chest, a flowing red cape, and red boots — same child, same face, same exact outfit in every image. Close-up of {{NAME}}'s face showing wide-eyed surprise and determined expression, chin raised with bravery. The robot's large sad metal face is beside {{NAME}}, with dim glowing eyes showing sorrow. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "A small squirrel ran up. 'I saw the cape!' said the squirrel. 'It is stuck at the top of the big tree!' {{NAME}} flew up fast. Higher and higher. The wind was strong. {{NAME}} grabbed the gold cape and pulled it free.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright blue superhero suit with a shiny red lightning bolt on the chest, a flowing red cape, and red boots — same child, same face, same exact outfit in every image. Dynamic action shot of {{NAME}} flying upward at full speed toward the top of a huge tree. A shiny gold cape is tangled in the highest branches. Strong wind blows leaves everywhere. A small squirrel watches from a branch below, pointing upward with excitement. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "{{NAME}} flew down and held out the gold cape. The robot's eyes lit up bright and yellow. He put on his cape and stood up tall. All the animals leaned out of their windows and cheered. The robot hugged {{NAME}} gently.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright blue superhero suit with a shiny red lightning bolt on the chest, a flowing red cape, and red boots — same child, same face, same exact outfit in every image. Emotional peak scene with dramatic golden light streaming down. {{NAME}} stands in front of the large robot, holding out the glowing gold cape with both hands. The robot's eyes blaze bright yellow with joy. Animals cheer from every window of the colourful buildings. The robot gently wraps one large metal arm around {{NAME}} in a careful hug. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "The robot put on his cape and flew a little loop in the sky. All the animals clapped. {{NAME}} sat on the robot's big shoulder, watching the lights of the city. It had been a wonderful day. Goodnight, {{NAME}}. Sleep well. Tomorrow, the robot wants to teach you a very special hero move.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright blue superhero suit with a shiny red lightning bolt on the chest, a flowing red cape, and red boots — same child, same face, same exact outfit in every image. Warm cosy resolution scene in soft golden evening light. {{NAME}} sits sleepily on the robot's broad shoulder, eyes half-closed and smiling. The robot floats gently above the city rooftops wearing the gold cape. Animals wave happily from their lit windows below. The sky glows warm orange and pink. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

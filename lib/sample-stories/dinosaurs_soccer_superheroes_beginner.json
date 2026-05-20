@@ -1,0 +1,36 @@
+{
+  "interest": "Dinosaurs + Soccer + Superheroes",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Super Dino Championship",
+  "moral": "True champions cheer for everyone, not just themselves.",
+  "theme_emoji": "⚽",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red superhero cape over a green soccer jersey with a gold star on the front, black soccer shorts, red and gold soccer boots, and a gold headband — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} was a superhero who loved soccer. Today was the big championship day. The stadium was huge and full of cheering fans. {{NAME}} ran onto the bright green pitch. A friendly blue dinosaur was on his team. They wore matching green jerseys. But the other team looked very big and fast.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red superhero cape over a green soccer jersey with a gold star on the front, black soccer shorts, red and gold soccer boots, and a gold headband — same child, same face, same exact outfit in every image. Wide establishing shot of an enormous bright soccer stadium packed with cheering colourful fans in the stands. {{NAME}} runs onto the vivid green pitch looking small against the vast stadium. A friendly large blue dinosaur in a matching green jersey stands beside him. The opposing team of large confident-looking players line up at the far end. Bright overhead stadium lights. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The game started fast. The other team scored a goal. {{NAME}}'s team felt very sad. The blue dinosaur's ears drooped down. {{NAME}} looked at his friend's sad face. He had an idea. \"We can do this,\" said {{NAME}}. \"We help each other.\" He used his superhero speed to chase the ball.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red superhero cape over a green soccer jersey with a gold star on the front, black soccer shorts, red and gold soccer boots, and a gold headband — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}}'s face showing bright determined eyes and an encouraging smile. The large friendly blue dinosaur stands just behind him with drooping sad ears and eyes. {{NAME}} has one hand on the dinosaur's arm in a gesture of support. The soccer pitch and bright stadium lights frame them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} zoomed across the pitch. His red cape streamed behind him. He passed the ball to the blue dinosaur. The dinosaur kicked it hard with his big foot. CRACK! The ball shot into the top corner of the net. GOAL! The crowd roared. {{NAME}} leapt up and punched the air.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red superhero cape over a green soccer jersey with a gold star on the front, black soccer shorts, red and gold soccer boots, and a gold headband — same child, same face, same exact outfit in every image. Dynamic action shot of the large friendly blue dinosaur mid-kick, enormous foot connecting with a soccer ball that rockets toward the goal net at lightning speed. {{NAME}} leaps high in the background with cape streaming and both fists punching the air in triumph. The packed stadium crowd in the background throws arms up in celebration. Motion lines trail behind the ball. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The final score was tied. Then the other team's best player fell and hurt her knee. Everyone went quiet. {{NAME}} ran to help her up. He gave her a big smile. She smiled back. True champions cheer for everyone, not just themselves. Both teams clapped for {{NAME}}'s kind heart.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red superhero cape over a green soccer jersey with a gold star on the front, black soccer shorts, red and gold soccer boots, and a gold headband — same child, same face, same exact outfit in every image. Emotional peak scene on the quiet sunlit soccer pitch. {{NAME}} kneels down and gently helps a girl player from the other team to her feet, both sharing warm smiles. The blue dinosaur stands nearby with a proud caring expression. Players from both teams stand around watching with moved, appreciative faces. Warm golden stadium light. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "After the game, both teams shared juice and fruit together. The blue dinosaur did a happy dance. Everyone laughed and cheered. True champions cheer for everyone, not just themselves. {{NAME}} felt warm and sleepy and full of joy. He closed his eyes with a smile. He wondered if the dinosaur had any new soccer tricks to show him.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red superhero cape over a green soccer jersey with a gold star on the front, black soccer shorts, red and gold soccer boots, and a gold headband — same child, same face, same exact outfit in every image. Warm cosy resolution scene at the edge of the soccer pitch after the game, bathed in soft golden light. {{NAME}} sits sleepily on the grass with a cup of juice, red cape draped around him. The large friendly blue dinosaur does a goofy little dance nearby making everyone laugh. Players from both teams sit together in a friendly group sharing food and smiling. Soft warm late-afternoon light. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

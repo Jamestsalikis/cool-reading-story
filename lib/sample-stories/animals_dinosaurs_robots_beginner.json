@@ -1,0 +1,36 @@
+{
+  "interest": "Animals + Dinosaurs + Robots",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Robot Who Could Not Roar",
+  "moral": "Everyone has something special they can do.",
+  "theme_emoji": "🤖",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver t-shirt with a red robot print, dark blue jeans, and bright yellow sneakers — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} walked into a big green jungle.\nTall trees touched the blue sky.\nColourful parrots flew overhead.\nA small silver robot stood by a tree.\nThe robot looked very sad.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver t-shirt with a red robot print, dark blue jeans, and bright yellow sneakers — same child, same face, same exact outfit in every image. Wide establishing shot of a lush green jungle with enormous trees reaching a bright blue sky. Colourful red and yellow parrots fly between the treetops. {{NAME}} stands small on a dirt path looking ahead. A small round silver robot with glowing blue eyes stands slumped against a tree trunk nearby, looking sad. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "{{NAME}} went over to the little robot.\n\"What is wrong?\" asked {{NAME}}.\n\"I want to roar like a dinosaur,\" said the robot.\n\"But all I can do is beep.\"\n{{NAME}}'s eyes went wide with an idea.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver t-shirt with a red robot print, dark blue jeans, and bright yellow sneakers — same child, same face, same exact outfit in every image. Close-up of {{NAME}} crouching down to be face-to-face with the small silver robot. {{NAME}}'s expression is warm and curious, one eyebrow raised with a bright idea forming. The robot's round blue eyes look downcast and forlorn. A colourful parrot perches on a branch just above them, tilting its head. Dappled jungle light filters through the leaves. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "Just then, a big blue dinosaur ran up.\nHe roared and roared very loudly.\nAll the animals ran away fast.\nThe robot beeped, beeped, beeped.\nThe animals stopped and came back to listen.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver t-shirt with a red robot print, dark blue jeans, and bright yellow sneakers — same child, same face, same exact outfit in every image. Dynamic action shot in the jungle clearing. A large bright-blue dinosaur roars dramatically in the background, mouth wide open. In the foreground, the small silver robot stands tall, chest panel open, beeping out a cheerful musical tune with visible sound-wave lines. {{NAME}} watches with a huge grin, arms spread wide. A group of jungle animals — parrots, a monkey, a rabbit — stop mid-run and turn back curiously. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The animals loved the robot's beeping music.\nThey danced in the soft jungle light.\nEven the big dinosaur started to sway.\n\"Your beeping is wonderful,\" said {{NAME}}.\nThe robot's eyes glowed bright and happy.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver t-shirt with a red robot print, dark blue jeans, and bright yellow sneakers — same child, same face, same exact outfit in every image. Emotional peak scene in the jungle clearing bathed in warm golden light. The small silver robot stands centre stage, eyes glowing brilliant gold, while jungle animals dance joyfully around it. The large blue dinosaur sways from side to side with a big happy grin. {{NAME}} claps his hands and laughs. Colourful parrots loop through the air above. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "The robot danced with all the animals.\nThe dinosaur sat down with a happy sigh.\nThe parrots sang along to the beeping.\n{{NAME}} leaned against the big soft dinosaur.\nHe felt warm and happy and very sleepy.\nGoodnight, {{NAME}}. Tomorrow the robot has a new song just for you.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver t-shirt with a red robot print, dark blue jeans, and bright yellow sneakers — same child, same face, same exact outfit in every image. Warm cosy resolution scene as soft golden evening light filters through the jungle canopy. {{NAME}} leans drowsily against the side of the big blue dinosaur, eyes half-closed and smiling. The small silver robot sits nearby, eyes glowing a gentle warm gold. Colourful parrots rest quietly on nearby branches. A monkey and a rabbit are curled up together in the foreground. Everything is peaceful and glowing. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

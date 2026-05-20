@@ -1,0 +1,36 @@
+{
+  "interest": "Fairies + Princesses + Robots",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Fairy Robot Festival",
+  "moral": "Everyone belongs, no matter how different they seem.",
+  "theme_emoji": "🧚",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shimmery sky-blue royal tunic with tiny fairy wings printed all over it, silver trousers, sky-blue boots with little silver buttons, and a small silver crown on his head — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} walked into the Fairy Festival garden. The garden had lanterns in every colour. Fairies flew all around dropping gold sparkles. A princess in a bright pink dress was handing out flowers. Then a small silver robot walked in through the gate. The robot looked around with big hopeful eyes. Nobody had invited a robot before.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shimmery sky-blue royal tunic with tiny fairy wings printed all over it, silver trousers, sky-blue boots with little silver buttons, and a small silver crown on his head — same child, same face, same exact outfit in every image. Wide establishing shot of a magical fairy festival garden glowing with hundreds of colourful lanterns hanging from trees. Tiny fairies zip through the air trailing gold sparkles. A princess in a bright pink dress hands flowers to guests. {{NAME}} stands small just inside the gate. A small silver robot with big round hopeful eyes stands hesitantly at the entrance. Warm evening festival light. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The robot said his name was Pip. Some fairies flew away from Pip. They had never seen a robot at the festival. Pip's eyes dimmed. He turned to go back through the gate. {{NAME}} looked at the princess. She had a kind face. Together they ran to Pip. \"Please stay,\" said {{NAME}}. \"You are welcome here.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shimmery sky-blue royal tunic with tiny fairy wings printed all over it, silver trousers, sky-blue boots with little silver buttons, and a small silver crown on his head — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}}'s face showing a warm open smile as he reaches out a hand toward Pip the small silver robot whose eyes have gone dim and sad. The princess in her bright pink dress steps beside {{NAME}} with an equally welcoming smile. Some fairies hover in the background looking curious and uncertain. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "Pip smiled again. His eyes glowed happy blue. He showed everyone his special trick. He could spin his arms very fast and blow soft golden bubbles into the air. The fairies flew through the bubbles and they turned into tiny stars. Everyone clapped and laughed. The festival had never been so magical.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shimmery sky-blue royal tunic with tiny fairy wings printed all over it, silver trousers, sky-blue boots with little silver buttons, and a small silver crown on his head — same child, same face, same exact outfit in every image. Dynamic action shot of Pip the small silver robot with both arms spinning fast, launching golden bubbles into the air. Fairies dive and swoop through the bubbles which burst into tiny glittering stars. {{NAME}} claps with a huge grin of delight. The princess in pink laughs and reaches up toward a floating star. The whole garden blazes with golden light and drifting sparkles. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The princess gave Pip a big flower crown. She placed it on his shiny silver head. It looked wonderful. The fairies flew in a circle around Pip, singing. Pip's chest glowed warm orange with happiness. Everyone belongs, no matter how different they seem. {{NAME}} felt his heart feel big and full.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shimmery sky-blue royal tunic with tiny fairy wings printed all over it, silver trousers, sky-blue boots with little silver buttons, and a small silver crown on his head — same child, same face, same exact outfit in every image. Emotional peak scene in the glowing festival garden. The princess in the bright pink dress carefully places a beautiful colourful flower crown on the head of Pip the small silver robot. Pip's chest glows warm orange. Fairies circle above in a joyful ring, trailing golden light. {{NAME}} stands close with a proud beaming smile. Warm dramatic lantern light all around. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "When the festival ended, they all sat under a glowing lantern tree. The fairies settled on the branches above. Pip hummed a soft sleepy tune. Everyone belongs, no matter how different they seem. {{NAME}} felt cosy and warm and very sleepy. He closed his eyes slowly. He wondered what new trick Pip might show them all next time.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shimmery sky-blue royal tunic with tiny fairy wings printed all over it, silver trousers, sky-blue boots with little silver buttons, and a small silver crown on his head — same child, same face, same exact outfit in every image. Warm cosy resolution scene under a beautiful lantern-covered tree in the quiet festival garden at night. {{NAME}} sits sleepily against the tree trunk with drooping eyes. Pip the small silver robot with flower crown sits nearby, chest glowing a soft warm orange and humming quietly. The princess in pink sits close with a gentle smile. Tiny fairies sleep curled up on the branches above. Soft golden lantern glow. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

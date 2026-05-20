@@ -1,0 +1,36 @@
+{
+  "interest": "Princesses + Superheroes + Unicorns",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Crown Lost in the Clouds",
+  "moral": "Being brave for someone else is the greatest thing of all.",
+  "theme_emoji": "👑",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal purple superhero suit with a gold crown badge, a flowing turquoise cape, and silver winged boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} soared above the clouds.\nBelow him sat a shining castle.\nA princess called up to him from the tower.\nHer golden crown had blown away in the wind.\nA white unicorn stood below looking up sadly.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal purple superhero suit with a gold crown badge, a flowing turquoise cape, and silver winged boots — same child, same face, same exact outfit in every image. Wide establishing shot of {{NAME}} flying small and high above a fluffy white cloudscape with a shining castle far below, the princess leans out of a tall tower window looking up with a hand raised in distress, a white unicorn with a silver mane stands at the castle base gazing upward, a glinting golden crown tumbles away in the clouds above {{NAME}}, the sky is a brilliant blue. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "{{NAME}} dove down to the princess.\n\"I will find your crown,\" he promised.\nThe princess smiled with grateful eyes.\n\"The unicorn can help you,\" she said.\n{{NAME}}'s eyes lit up with surprise.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal purple superhero suit with a gold crown badge, a flowing turquoise cape, and silver winged boots — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}} hovering at the tower window face to face with the princess, his expression warm and determined, the princess has grateful teary eyes and a hopeful smile, the turquoise cape flutters beside the stone tower wall. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The unicorn leaped into the sky.\n{{NAME}} held on to its mane.\nThey flew through fluffy white clouds.\nThe crown glinted up ahead.\n\"There!\" called {{NAME}}. \"I see it!\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal purple superhero suit with a gold crown badge, a flowing turquoise cape, and silver winged boots — same child, same face, same exact outfit in every image. Dynamic action shot of the white unicorn galloping through the sky with rainbow wings extended, {{NAME}} rides on its back holding the silver mane with one hand and pointing ahead with the other, his cape streams wildly, fluffy clouds rush past in a blur, and a glinting golden crown tumbles just within reach ahead of them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "{{NAME}} leaned out and grabbed the crown.\nThe wind pushed him back hard.\nBut he held on tight.\nThe unicorn steadied him with its wing.\nHe had it! He had the crown!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal purple superhero suit with a gold crown badge, a flowing turquoise cape, and silver winged boots — same child, same face, same exact outfit in every image. Emotional peak scene with dramatic bright blue sky and swirling wind, {{NAME}} leans far out from the unicorn's back stretching his arm to its absolute limit, fingers closing around the glinting golden crown, the unicorn's wing curls around him protectively, both their faces are fierce with effort and determination, golden light catches the crown. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "They flew back to the castle.\n{{NAME}} placed the crown on the princess's head.\nShe clapped her hands with joy.\nThe unicorn settled down in the soft grass.\n{{NAME}} curled up against its warm side.\nGoodnight, {{NAME}}. You were so brave.\nI wonder where the unicorn will fly you next time.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal purple superhero suit with a gold crown badge, a flowing turquoise cape, and silver winged boots — same child, same face, same exact outfit in every image. Warm cosy resolution scene in soft golden castle garden light, the white unicorn lies in lush green grass, {{NAME}} curled up against its side with drooping eyes and a peaceful smile, the princess sits nearby wearing her golden crown and looking happily at {{NAME}}, the castle glows warmly behind them in the fading light. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

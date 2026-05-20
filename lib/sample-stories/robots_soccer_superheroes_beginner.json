@@ -1,0 +1,36 @@
+{
+  "interest": "Robots + Soccer + Superheroes",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Robot Striker",
+  "moral": "Trusting your teammates makes you stronger together.",
+  "theme_emoji": "🤖",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a neon green superhero suit with a silver robot badge on the chest, a bold red cape, and sturdy black-and-red soccer boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} landed on a big rooftop soccer field.\nThe city stretched out far below.\nRobots in blue jerseys stood on one team.\nSuperheroes in red jerseys stood on the other.\n{{NAME}} was the last player they needed.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a neon green superhero suit with a silver robot badge on the chest, a bold red cape, and sturdy black-and-red soccer boots — same child, same face, same exact outfit in every image. Wide establishing shot of a futuristic rooftop soccer field high above a glittering city at sunset, {{NAME}} descends from the sky his cape spread wide, he is small against the vast skyline, a team of colourful robots in blue jerseys stands on one side of the field, a team of superheroes in red jerseys stands on the other, both teams look toward {{NAME}}. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "A tall robot rolled over to {{NAME}}.\n\"We need a striker,\" said the robot.\n{{NAME}}'s eyes lit up with surprise.\n\"I have never played with robots before,\" he said.\n\"You will be great,\" the robot beeped.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a neon green superhero suit with a silver robot badge on the chest, a bold red cape, and sturdy black-and-red soccer boots — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}}'s face showing wide bright eyes full of excitement, the tall blue-jersied robot stands right in front of him with a friendly glowing face, the rooftop field stretches behind them, {{NAME}}'s red cape flutters in the breeze. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The game kicked off with a loud whistle.\n{{NAME}} flew across the field.\nThe robot passed him the ball perfectly.\nHe landed, spun, and kicked hard.\nThe ball shot forward like a rocket!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a neon green superhero suit with a silver robot badge on the chest, a bold red cape, and sturdy black-and-red soccer boots — same child, same face, same exact outfit in every image. Dynamic action shot of {{NAME}} landing from a flying leap with one foot connecting with the soccer ball in a powerful strike, his cape explodes outward with the force, the tall robot right behind him with its arm extended having just made the perfect pass, speed lines and energy trails show the ball rocketing toward goal, the city glitters below. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The ball hit the post and bounced back.\n{{NAME}} missed!\nHe felt sad for a moment.\nThe robot put a hand on his shoulder.\n\"Try again,\" it said. \"I believe in you.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a neon green superhero suit with a silver robot badge on the chest, a bold red cape, and sturdy black-and-red soccer boots — same child, same face, same exact outfit in every image. Emotional peak scene with dramatic late golden light, {{NAME}} stands with drooping shoulders looking at the ground after the missed shot, the soccer ball rolls away from the goalpost in the background, the tall robot gently places one metal hand on {{NAME}}'s shoulder with a warm glowing expression, the moment is full of quiet encouragement and feeling. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "{{NAME}} tried again.\nThis time the ball went in.\nGoal!\nThe robots and the superheroes all cheered.\n{{NAME}} and the robot did a happy dance.\nGoodnight, {{NAME}}. Never give up.\nI wonder what position the robot will teach you next time.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a neon green superhero suit with a silver robot badge on the chest, a bold red cape, and sturdy black-and-red soccer boots — same child, same face, same exact outfit in every image. Warm cosy resolution scene on the rooftop field as the city lights twinkle below in the dusk, {{NAME}} sits on the grass with the tall robot beside him their arms around each other in celebration, both with wide happy expressions, superheroes and other robots gather around them cheerfully, the goal net bulges triumphantly in the background, everything glows warmly. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

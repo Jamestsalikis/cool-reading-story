@@ -1,0 +1,36 @@
+{
+  "interest": "Fairies + Princesses",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Fairy Princess Who Could Not Shine",
+  "moral": "You do not need to be perfect to be wonderful.",
+  "theme_emoji": "🧚",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft lavender t-shirt with a gold crown and sparkle print, rose pink shorts, and cream sneakers with gold laces — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} walked through the glittering fairy kingdom. Tiny castles sat inside big flowers. Sparkling streams ran between the petals. A princess fairy sat on a pink mushroom alone. She was the only fairy whose wings did not glow.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft lavender t-shirt with a gold crown and sparkle print, rose pink shorts, and cream sneakers with gold laces — same child, same face, same exact outfit in every image. Wide establishing shot of an enchanted fairy kingdom with tiny golden castles nestled inside enormous flowers, and sparkling streams winding between giant pink and purple petals. {{NAME}} stands small at the edge of the scene gazing in wonder. In the centre, a tiny fairy princess with a delicate crown and a pale pink dress sits alone on a large spotted mushroom. All around her other fairies flutter with brightly glowing wings but hers remain dim. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The fairy princess was called Glow. But Glow's wings had never glowed. All the other fairies shone bright. Glow thought something was wrong with her. She hid her wings under her cape.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft lavender t-shirt with a gold crown and sparkle print, rose pink shorts, and cream sneakers with gold laces — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}} crouching to eye level with the tiny fairy princess Glow on her mushroom. Glow is small enough to fit in his palm, wearing a pink dress, a tiny crown, and a little silver cape pulled tightly around her dull unlit wings. Her expression is sad and self-conscious. {{NAME}}'s face holds gentle warmth and curiosity. Soft warm flower-light surrounds them both. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} watched the other fairies. They glowed when they did something kind. He had an idea. He asked Glow to help him reach a flower that had fallen over. Glow flew down and lifted it up.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft lavender t-shirt with a gold crown and sparkle print, rose pink shorts, and cream sneakers with gold laces — same child, same face, same exact outfit in every image. Dynamic action shot of Glow the fairy princess straining with effort and a focused determined face as she lifts a drooping giant pink flower upright. {{NAME}} watches from behind with an excited secret smile, leaning forward. Small beads of golden light begin to appear at the edges of Glow's wings as if something is about to happen. The fairy kingdom sparkles around them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "Glow's wings lit up. Just a little at first. Then brighter and brighter. Glow looked back at her wings. Her eyes went wide. She had not known she could shine like this!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft lavender t-shirt with a gold crown and sparkle print, rose pink shorts, and cream sneakers with gold laces — same child, same face, same exact outfit in every image. Emotional peak scene with magical golden light radiating from Glow's wings in every direction. Glow floats in the air, her wings now blazing with warm pink and gold light. She twists to look back at them, her expression shifting from shock to pure wonder and joy. Her tiny crown glitters. {{NAME}} stands below with his arms in the air, face radiating pride and delight. The entire fairy kingdom glows in the warm light around them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "Glow glowed the brightest of all when she was kind. She flew and helped all day. You do not need to be perfect to be wonderful. Goodnight, {{NAME}}. Sleep well. Glow whispered that she had found a door in the oldest flower in the kingdom. What could be through it?",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft lavender t-shirt with a gold crown and sparkle print, rose pink shorts, and cream sneakers with gold laces — same child, same face, same exact outfit in every image. Warm cosy resolution scene in soft rose-gold and lavender evening light. {{NAME}} sits sleepily cross-legged on the ground in the fairy kingdom, eyes drooping gently. Tiny Glow the fairy princess hovers just in front of his face at eye level, her wings glowing a soft warm pink, smiling at him. Other fairies drift slowly overhead in a calm dreamy glow. Giant flowers close their petals softly around the scene as night falls. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

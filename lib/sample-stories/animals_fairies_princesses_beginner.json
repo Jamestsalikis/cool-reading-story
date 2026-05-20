@@ -1,0 +1,36 @@
+{
+  "interest": "Animals + Fairies + Princesses",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Fairy Princess of the Flower Hill",
+  "moral": "A small act of kindness can make someone's whole day bright.",
+  "theme_emoji": "🌸",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft lilac shirt with a small flower embroidery, cream trousers, and light brown sandals — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} climbed up a big, round flower hill.\nThe hill was covered in yellow and white flowers.\nBluebirds and butterflies flew all around.\nAt the very top sat a tiny princess.\nShe was so small. As small as a butterfly.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft lilac shirt with a small flower embroidery, cream trousers, and light brown sandals — same child, same face, same exact outfit in every image. Wide establishing shot of a large round hill blanketed in yellow and white flowers under a bright blue sky. {{NAME}} is small near the bottom of the hill, climbing upward. Bluebirds and orange-and-yellow butterflies flutter everywhere. At the very hilltop, barely visible, a tiny princess the size of a butterfly sits on a large flower, wearing a gown that sparkles with morning light. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "{{NAME}} reached the top and looked carefully.\nThe tiny princess had fairy wings.\nShe wore a dress the colour of roses.\n\"Oh!\" said {{NAME}}. He held very still.\nShe looked up and smiled at him.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft lilac shirt with a small flower embroidery, cream trousers, and light brown sandals — same child, same face, same exact outfit in every image. Close-up of {{NAME}}'s face at the hilltop, eyes enormous with delight, mouth in a silent 'oh'. In the foreground, incredibly close, the tiny fairy princess sits on a yellow flower petal. She wears a soft rose-pink gown and has delicate shimmering wings. She looks up at {{NAME}} with a bright, friendly smile. Everything is soft and magical, lit with golden morning light. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "\"My wand is lost in the tall grass,\" she said.\nWithout it, the flowers were turning grey.\nAll the animals looked very sad.\n{{NAME}} got down on his hands and knees.\nHe searched through every blade of grass.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft lilac shirt with a small flower embroidery, cream trousers, and light brown sandals — same child, same face, same exact outfit in every image. Dynamic action shot of {{NAME}} on his hands and knees in the tall green grass at the base of the flower hill, searching carefully and parting the grass blades with both hands. His expression is focused and determined. Nearby, bluebirds hop along the ground helping to look. Some flowers around the edges of the scene are fading to grey. The tiny fairy princess hovers anxiously above the grass. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "A little hedgehog sniffed at something shiny.\n{{NAME}} looked. It was the wand!\nHe picked it up so gently.\nHe held it out to the tiny princess.\nShe grabbed it and the flowers turned bright again.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft lilac shirt with a small flower embroidery, cream trousers, and light brown sandals — same child, same face, same exact outfit in every image. Emotional peak moment. {{NAME}} kneels in the grass, carefully holding out a tiny sparkling wand on the tip of one finger toward the fairy princess. The princess reaches out both small hands to take it. At the moment she touches it, a burst of colourful light radiates outward and flowers in the background flash back to vivid yellow, pink, and white. A small brown hedgehog sits proudly at the edge of the frame. Warm magical light fills the scene. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "All the flowers glowed bright and beautiful.\nThe bluebirds sang a happy song.\nThe tiny princess danced on her flower.\nShe waved her wand and {{NAME}} felt warm all over.\n{{NAME}} sat in the soft grass and felt very sleepy.\nGoodnight, {{NAME}}. Tomorrow the princess wants to show you her secret fairy palace.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft lilac shirt with a small flower embroidery, cream trousers, and light brown sandals — same child, same face, same exact outfit in every image. Warm cosy resolution scene on the flower hill in golden evening light. {{NAME}} sits drowsily in the soft grass surrounded by glowing yellow and white flowers. The tiny fairy princess dances on a large flower petal above him, waving her sparkling wand. Bluebirds perch softly on nearby blossoms. Butterflies drift slowly in the golden air. A hedgehog sits curled in a ball near {{NAME}}'s foot. Everything glows with gentle warmth. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "interest": "Animals + Dinosaurs + Superheroes",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Dinosaur Hero of the Valley",
+  "moral": "Being brave means helping others, even when it is hard.",
+  "theme_emoji": "🦸",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright yellow superhero cape with a red star, a red t-shirt, dark blue shorts, and red sneakers — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} ran through the tall green valley.\nHis yellow cape flapped in the wind.\nBirds and squirrels watched from the trees.\nA big red dinosaur stomped past.\nHe wore a cape too. A purple one.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright yellow superhero cape with a red star, a red t-shirt, dark blue shorts, and red sneakers — same child, same face, same exact outfit in every image. Wide establishing shot of a sweeping green valley with towering trees and a bright blue sky. {{NAME}} runs along a winding path, his yellow cape streaming behind him, looking tiny against the vast landscape. A large, friendly red dinosaur with a flowing purple cape stomps along the same path ahead of him. Colourful birds and bushy-tailed squirrels watch from the treetops. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "{{NAME}} ran up to the red dinosaur.\n\"Are you a superhero too?\" asked {{NAME}}.\nThe dinosaur turned and smiled.\n\"I try to be,\" he said softly.\n{{NAME}}'s eyes lit up with excitement.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright yellow superhero cape with a red star, a red t-shirt, dark blue shorts, and red sneakers — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}} looking up at the large red dinosaur with sparkling excited eyes and a huge grin. The red dinosaur bends his head down to meet {{NAME}}'s gaze, his purple cape folding gently around him, smiling warmly. Bright sunshine and blurry green trees fill the background. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "Then they heard a loud squeak.\nA little rabbit was stuck in a tall tree.\nShe was too scared to climb down.\nThe dinosaur stretched his long neck way up.\n{{NAME}} climbed onto the dinosaur's head to help.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright yellow superhero cape with a red star, a red t-shirt, dark blue shorts, and red sneakers — same child, same face, same exact outfit in every image. Dynamic action shot of the large red dinosaur stretching his long neck high up into a tall tree. {{NAME}} stands on the dinosaur's broad head, arms outstretched toward a tiny frightened rabbit clinging to a high branch. The rabbit's eyes are wide with fear but beginning to show hope. The yellow cape and purple cape both stream in the wind. Green leaves swirl around the scene. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "{{NAME}} reached out his hands.\nThe rabbit grabbed on tight.\n{{NAME}} lifted her down safely.\nThe rabbit hugged {{NAME}} very hard.\nThe birds and squirrels all cheered.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright yellow superhero cape with a red star, a red t-shirt, dark blue shorts, and red sneakers — same child, same face, same exact outfit in every image. Emotional peak moment bathed in bright golden light. {{NAME}} stands on the dinosaur's lowered head, cradling the small brown rabbit safely in his arms. The rabbit has her tiny arms wrapped tightly around {{NAME}}'s neck, eyes closed with relief. The red dinosaur looks up at them with a proud, warm expression. Colourful birds swoop joyfully and squirrels leap from branch to branch in celebration. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "The rabbit danced happily in the grass.\nThe squirrels brought everyone acorn snacks.\nThe dinosaur and {{NAME}} sat down to rest.\n\"Real heroes help,\" said the dinosaur.\n{{NAME}} felt proud and happy and very sleepy.\nGoodnight, {{NAME}}. Tomorrow there is a new animal who needs a superhero like you.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright yellow superhero cape with a red star, a red t-shirt, dark blue shorts, and red sneakers — same child, same face, same exact outfit in every image. Warm cosy resolution scene in the valley as soft golden evening light falls across the grass. {{NAME}} sits drowsily against the large red dinosaur's front leg, his yellow cape pooling gently around him. The little rabbit dances nearby. Squirrels scatter small acorns on the ground. Birds sit quietly on low branches. Everything glows with peaceful golden light. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "interest": "Robots + Soccer",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Robot Who Learned to Kick",
+  "moral": "Making mistakes is how we get better at the things we love.",
+  "theme_emoji": "🤖",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing an orange soccer jersey with a silver robot badge on the sleeve, navy shorts, and orange and white soccer boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} went to the park to practise soccer. He was all on his own. Then he saw a big silver robot standing by the goal. The robot had round blue eyes and springy legs. It was holding a soccer ball. It looked very hopeful.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing an orange soccer jersey with a silver robot badge on the sleeve, navy shorts, and orange and white soccer boots — same child, same face, same exact outfit in every image. Wide establishing shot of a large sunny park with a bright green soccer pitch and a white goal. {{NAME}} walks small along the pitch toward a tall shiny silver robot standing near the goal, holding a soccer ball under one arm and looking at {{NAME}} with big hopeful round blue eyes. The park feels open and inviting. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The robot tried to kick the ball. Its foot went too high. The ball spun sideways into a bush. The robot looked down at its feet. It beeped a sad sound. {{NAME}} ran to get the ball. \"It is okay,\" he said. \"Let us try again.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing an orange soccer jersey with a silver robot badge on the sleeve, navy shorts, and orange and white soccer boots — same child, same face, same exact outfit in every image. Close-up mid-shot of the silver robot looking down at its own feet with sad drooping blue eyes, while {{NAME}} stands right beside it, face warm and encouraging, one hand resting on the robot's arm. The soccer ball is visible in a nearby bush. Soft afternoon sunlight falls across them both. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} showed the robot how to swing its leg. Slowly, then faster. The robot tried again. Swing, kick! The ball flew straight and fast. It went right into the net. Clang! The robot jumped up and down and beeped with joy.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing an orange soccer jersey with a silver robot badge on the sleeve, navy shorts, and orange and white soccer boots — same child, same face, same exact outfit in every image. Dynamic action shot of the large silver robot mid-kick on the green pitch, its leg fully extended, the soccer ball blasting toward the goal. The net bulges as the ball hits it. {{NAME}} stands just behind the robot with both arms raised, cheering. The robot's round blue eyes glow bright with joy. Bright sunlight and motion blur on the ball. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "They played for a long time. The robot scored again and again. {{NAME}} cheered every single time. Then the sun began to go down. The robot held out one big silver hand. {{NAME}} gave it the best high five ever.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing an orange soccer jersey with a silver robot badge on the sleeve, navy shorts, and orange and white soccer boots — same child, same face, same exact outfit in every image. Emotional peak scene on the soccer pitch in warm orange sunset light. The silver robot extends one large flat palm. {{NAME}} leaps up to slap it in a huge high five, his face bursting with happiness. The goal stands behind them with the net still swaying. Long golden shadows stretch across the grass. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "{{NAME}} walked home in the orange sunset. He felt proud of his new robot friend. He got into bed and pulled up the covers tight. He wondered if the robot would remember all the goals tomorrow. Goodnight, {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing an orange soccer jersey with a silver robot badge on the sleeve, navy shorts, and orange and white soccer boots — same child, same face, same exact outfit in every image. Warm cosy resolution scene in a snug bedroom lit by a gentle golden lamp. {{NAME}} lies in bed under an orange duvet with small robot and soccer ball prints, eyes closed and smiling peacefully. On his windowsill a small toy silver robot stands beside a miniature soccer ball. Outside the window the park is bathed in soft moonlight. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

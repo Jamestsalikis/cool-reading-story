@@ -1,0 +1,36 @@
+{
+  "interest": "Animals + Soccer + Unicorns",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Unicorn Cup Miracle",
+  "moral": "When you cheer for others, the magic gets even bigger.",
+  "theme_emoji": "🦄",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright purple soccer jersey with a silver unicorn on the front, white soccer shorts, and purple and silver soccer boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} came to a beautiful field covered in rainbow flowers. In the middle was a glittering soccer pitch. Animals were gathered all around. A white unicorn stood at the centre of the field. She was getting ready for the big Unicorn Cup soccer match.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright purple soccer jersey with a silver unicorn on the front, white soccer shorts, and purple and silver soccer boots — same child, same face, same exact outfit in every image. Wide establishing shot of a magical field covered in rainbow flowers with a glittering soccer pitch in the centre. {{NAME}} stands small at the edge looking in with wide eyes. Rabbits, pandas, and hedgehogs fill the sidelines as spectators. A beautiful white unicorn with a glowing horn stands at the centre circle of the pitch, ready to play. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The unicorn trotted over to {{NAME}}. 'Will you play on my team?' she asked. {{NAME}} eyes went wide with surprise. 'Me? Really?' {{NAME}} said. The unicorn nodded. 'You have a kind heart,' she said. 'That is all you need.'",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright purple soccer jersey with a silver unicorn on the front, white soccer shorts, and purple and silver soccer boots — same child, same face, same exact outfit in every image. Close-up of {{NAME}}'s face showing total delighted surprise, mouth open in a happy gasp and eyes shining. The white unicorn's face is right beside {{NAME}}, eyes warm and kind, horn shimmering softly. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The match started. The other team was fast. A rabbit dribbled past everyone. Then the unicorn called to {{NAME}}. 'Pass it here!' {{NAME}} kicked the ball perfectly. The unicorn caught it and galloped. She kicked the ball with her hoof. It spun through rainbow sparkles and went into the goal.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright purple soccer jersey with a silver unicorn on the front, white soccer shorts, and purple and silver soccer boots — same child, same face, same exact outfit in every image. Dynamic action shot. {{NAME}} has just kicked the ball with full energy, body leaning forward. The white unicorn is mid-gallop receiving the pass, mane flying. The soccer ball trails rainbow sparkles as it heads toward the goal. Animal spectators on the sideline jump with excitement. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "GOAL! Rainbow light exploded from the net. The animals in the crowd went wild. The unicorn reared up and her horn shot a shower of coloured stars into the sky. She galloped back to {{NAME}} and they bumped hooves and hands together. They had won the Unicorn Cup!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright purple soccer jersey with a silver unicorn on the front, white soccer shorts, and purple and silver soccer boots — same child, same face, same exact outfit in every image. Emotional peak scene with dramatic rainbow light exploding from the goal behind them. The white unicorn rears up on her hind legs as coloured stars pour from her horn. {{NAME}} stands beside her with arms raised in triumph. Rabbits, pandas, and hedgehogs cheer wildly in the background. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "The unicorn lay down in the soft flowers after the game. {{NAME}} leaned against her warm side. The animals hummed a happy song. The stars came out one by one. {{NAME}} felt full of happiness. Goodnight, {{NAME}}. Sleep well. Tomorrow, the unicorn wants to show you a magical place only she knows.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright purple soccer jersey with a silver unicorn on the front, white soccer shorts, and purple and silver soccer boots — same child, same face, same exact outfit in every image. Warm cosy resolution scene bathed in soft golden light. {{NAME}} leans sleepily against the unicorn's side in a field of rainbow flowers, eyes half-closed. Rabbits, pandas, and a hedgehog nestle in the flowers nearby. A glittering trophy sits in the grass. Stars appear in a soft pink and purple sky. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

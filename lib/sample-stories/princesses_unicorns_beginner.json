@@ -1,0 +1,36 @@
+{
+  "interest": "Princesses + Unicorns",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Unicorn Crown",
+  "moral": "Sharing something special makes it even more wonderful.",
+  "theme_emoji": "👸",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a pastel pink tunic with gold trim, sky-blue trousers, and soft white shoes with tiny gold buckles — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} found a path made of pink stepping stones. He followed them into a meadow full of flowers. The flowers were every colour he knew. In the middle of the meadow stood a white unicorn. It had a crown of flowers on its head.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a pastel pink tunic with gold trim, sky-blue trousers, and soft white shoes with tiny gold buckles — same child, same face, same exact outfit in every image. Wide establishing shot of an enormous magical meadow bursting with flowers of every colour under a golden sky. A winding path of pink stepping stones leads through the flowers to the centre, where a tall white unicorn stands wearing a beautiful crown of woven flowers on its glowing silver horn. {{NAME}} is a small figure far back on the path, gazing ahead in wonder. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "A girl in a long pink gown walked up beside {{NAME}}. She had a little golden crown on her head. Her name was Princess Wren. She grabbed his hand. \"That unicorn lost her flower crown,\" she said. \"We made it for her!\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a pastel pink tunic with gold trim, sky-blue trousers, and soft white shoes with tiny gold buckles — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}} and Princess Wren standing together on the flower meadow path. Wren is in a flowing pink gown with a small golden crown, smiling and gripping {{NAME}}'s hand excitedly. Both their faces are lit up with happiness and purpose. The white unicorn is a glowing shape in the distance behind them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} and Princess Wren picked flowers together. Red ones, yellow ones, purple ones. They wove them into a big bright crown. It was the best crown they had ever made. Their hands were quick and busy and full of colour.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a pastel pink tunic with gold trim, sky-blue trousers, and soft white shoes with tiny gold buckles — same child, same face, same exact outfit in every image. Dynamic action shot of {{NAME}} and Princess Wren sitting together in the bright flower meadow, both leaning in with busy hands weaving a large colourful flower crown together. Flowers of red, yellow, and purple surround them. Both faces show concentration and delight. The scene is full of energy and bright vivid colour. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "{{NAME}} walked up to the unicorn slowly. He raised the flower crown up high. The unicorn dipped its horn. {{NAME}} placed the crown on carefully. The unicorn tossed its mane and the whole meadow glowed. Princess Wren gasped.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a pastel pink tunic with gold trim, sky-blue trousers, and soft white shoes with tiny gold buckles — same child, same face, same exact outfit in every image. Emotional peak scene in the glowing meadow. {{NAME}} stands on tiptoe, arms raised, carefully placing the vibrant flower crown onto the white unicorn's silver horn as the unicorn bends its head toward him. A burst of warm golden and rainbow light radiates outward from the unicorn across the whole meadow. Princess Wren stands just behind, hands clasped at her mouth in amazed joy. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "{{NAME}} walked home through the golden meadow. He felt happy and full of colour. He got into bed and closed his eyes slowly. He wondered what flowers the unicorn liked best. Goodnight, {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a pastel pink tunic with gold trim, sky-blue trousers, and soft white shoes with tiny gold buckles — same child, same face, same exact outfit in every image. Warm cosy resolution scene in a snug bedroom with soft golden lamplight. {{NAME}} lies in bed under a pink duvet scattered with tiny flower and unicorn patterns, eyes gently closed with a dreamy smile. On the windowsill a small bunch of colourful flowers sits in a little cup of water. Outside the window the meadow glows faintly in the moonlight. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

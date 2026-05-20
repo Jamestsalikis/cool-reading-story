@@ -1,0 +1,36 @@
+{
+  "interest": "Dinosaurs + Princesses + Superheroes",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Roaring Royal Rescue",
+  "moral": "Being brave and kind together makes any problem small.",
+  "theme_emoji": "🦕",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red superhero cape with a gold star, a shiny purple tunic with silver buttons, green trousers, and red boots with gold buckles — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} lived near a big, bright castle. The castle had tall pink towers and a golden gate. One morning, {{NAME}} put on his red superhero cape. He was ready for an adventure. A loud roar came from the forest. It was a friendly dinosaur! The dinosaur was crying big, wet tears. Something was very wrong.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red superhero cape with a gold star, a shiny purple tunic with silver buttons, green trousers, and red boots with gold buckles — same child, same face, same exact outfit in every image. Wide establishing shot of a magical pink castle with tall towers and a golden gate in the background. {{NAME}} stands small at the edge of a bright green forest, looking up at a large friendly green dinosaur with big round tearful eyes. Morning sunlight streams through tall trees. Both characters look surprised and curious. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "{{NAME}} ran up to the dinosaur. The dinosaur was called Dino. Dino pointed a big claw at the castle. \"Princess is stuck!\" said Dino. \"The castle gate is locked.\" {{NAME}}'s eyes went wide. He had to help! Being brave was what superheroes did. {{NAME}} felt his cape flutter in the wind.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red superhero cape with a gold star, a shiny purple tunic with silver buttons, green trousers, and red boots with gold buckles — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}}'s face showing wide-eyed surprise and determination, standing right beside Dino the large friendly green dinosaur. Dino points one big claw toward the pink castle in the background. {{NAME}}'s red cape flutters in the breeze. Both characters look worried but hopeful. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} grabbed Dino's tail and they ran fast. They zoomed past the tall pink towers. {{NAME}} used his superhero strength to push the golden gate. He pushed and pushed and pushed! The gate swung open with a big CLANG. They were inside the castle at last!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red superhero cape with a gold star, a shiny purple tunic with silver buttons, green trousers, and red boots with gold buckles — same child, same face, same exact outfit in every image. Dynamic action shot of {{NAME}} pushing hard against the huge golden castle gate, arms stretched wide, red cape streaming behind him. Dino the green dinosaur stands close, cheering with open mouth and excited eyes. The big gate swings open dramatically with golden sparks of light. Motion lines show speed and energy. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "Inside the castle was a princess. The princess wore a bright blue dress and a golden crown. She had been locked in all morning. She looked very sad. {{NAME}} and Dino walked in and the princess smiled. \"You saved me!\" she said. {{NAME}} smiled back. Helping someone feel happy felt wonderful.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red superhero cape with a gold star, a shiny purple tunic with silver buttons, green trousers, and red boots with gold buckles — same child, same face, same exact outfit in every image. Emotional peak scene inside the grand castle hall with tall glowing windows and warm golden light pouring in. The princess in a bright blue dress and golden crown reaches out her hands in joy toward {{NAME}}. Dino the green dinosaur peeks through the doorway, smiling wide. {{NAME}} stands tall with a big proud smile. Dramatic warm light highlights the happy reunion. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "That night, they all had a big, yummy feast. The princess, {{NAME}}, and Dino sat together. They laughed and ate and told stories. Being brave and kind together makes any problem small. {{NAME}} felt warm and sleepy and happy. He closed his eyes and smiled. He wondered, what other friends might need help tomorrow?",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red superhero cape with a gold star, a shiny purple tunic with silver buttons, green trousers, and red boots with gold buckles — same child, same face, same exact outfit in every image. Warm cosy resolution scene inside the castle dining hall bathed in soft golden candlelight. {{NAME}} sits sleepily at a round table beside the princess in her blue dress and Dino the green dinosaur. Empty plates and fruit bowls on the table. {{NAME}}'s eyes are half closed and he wears a contented smile, red cape draped softly around him. Soft glowing warmth fills the room. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "interest": "Animals + Princesses + Soccer",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Princess Who Played to Win",
+  "moral": "Do your best and never give up, no matter what.",
+  "theme_emoji": "⚽",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a gold soccer jersey with a small crown badge, purple soccer shorts, golden soccer cleats, and white socks — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} arrived at a wide royal soccer field.\nThe grass was bright and very green.\nHorses and lambs watched from the fence.\nA girl in a pink and gold jersey kicked a ball.\nIt was Princess Nora. She never missed a shot.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a gold soccer jersey with a small crown badge, purple soccer shorts, golden soccer cleats, and white socks — same child, same face, same exact outfit in every image. Wide establishing shot of a pristine royal soccer field with vivid green turf and golden goalposts. White horses and fluffy lambs line the white fence at the edges. Princess Nora, a girl with auburn hair in a flowing pink and gold jersey, kicks a ball powerfully in the background. {{NAME}} stands at the field entrance, small against the grand scene, watching with admiration. Bright blue sky overhead. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "Princess Nora ran up to {{NAME}}.\n\"Will you play against me?\" she asked.\n\"I need a real challenge.\"\n{{NAME}}'s eyes lit up bright.\n\"I will try my very best,\" he said.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a gold soccer jersey with a small crown badge, purple soccer shorts, golden soccer cleats, and white socks — same child, same face, same exact outfit in every image. Close-up mid-shot of Princess Nora and {{NAME}} facing each other on the soccer field. Nora stands with her hands on her hips, eyes bright and challenging, a friendly competitive grin on her face. {{NAME}} mirrors her posture with an equally bright and determined expression, fists clenched at his sides with enthusiasm. A black-and-white soccer ball rests on the turf between them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "They kicked and ran and dribbled fast.\nThe horses cheered with loud neighs.\nThe lambs baaed every time someone scored.\n{{NAME}} fell down once on the wet grass.\nHe got back up and ran even harder.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a gold soccer jersey with a small crown badge, purple soccer shorts, golden soccer cleats, and white socks — same child, same face, same exact outfit in every image. Dynamic action shot of {{NAME}} sprinting hard across the royal soccer field, leaning forward with complete determination, the ball at his foot. Princess Nora runs just behind him, equally fast and fierce. White horses toss their heads over the fence in excitement. Fluffy lambs bounce along the fence line. Motion lines show the speed and energy of the game. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "{{NAME}} lined up for the last kick.\nHis heart beat very fast.\nHe breathed in. He breathed out.\nKick! The ball flew into the corner of the net.\n\"Amazing!\" shouted Princess Nora.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a gold soccer jersey with a small crown badge, purple soccer shorts, golden soccer cleats, and white socks — same child, same face, same exact outfit in every image. Emotional peak scene. {{NAME}} has just kicked the ball, which is frozen in mid-air heading perfectly for the corner of the golden goal. His expression is one of fierce focused joy, one leg extended in a full powerful kick, golden cleats gleaming. Princess Nora stands behind him, eyes wide, one hand raised to her open mouth in amazed delight. The horses and lambs at the fence erupt in wild celebration. Dramatic golden light floods the scene. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "Princess Nora shook {{NAME}}'s hand warmly.\n\"You never gave up,\" she said. \"That is the best.\"\nThe lambs ran onto the field to celebrate.\nThe horses watched with soft, kind eyes.\n{{NAME}} sat in the cool grass and felt very sleepy.\nGoodnight, {{NAME}}. Tomorrow Princess Nora wants to teach you her secret move.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a gold soccer jersey with a small crown badge, purple soccer shorts, golden soccer cleats, and white socks — same child, same face, same exact outfit in every image. Warm cosy resolution scene on the royal soccer field at sunset. {{NAME}} sits drowsily in the cool green grass, smiling. Princess Nora sits beside him, her pink and gold jersey glowing in the sunset light. Fluffy white lambs gather around both of them, nestling in. White horses stand peacefully at the fence in the golden background. The soccer ball rests in the net of the goal behind them. Soft orange and pink sunset colours fill the sky. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

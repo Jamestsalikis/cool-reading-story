@@ -1,0 +1,36 @@
+{
+  "interest": "Fairies",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Fairy Who Lost Her Sparkle",
+  "moral": "Helping a friend find what they lost fills both your hearts with joy.",
+  "theme_emoji": "🧚",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft lilac t-shirt with a small gold star on the front, light grey shorts, and shiny silver sneakers with purple laces — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} walked into a meadow full of flowers. Tiny lights blinked all around the flowers. Butterflies flew here and there. It was a magical, wonderful place. Then {{NAME}} heard a very small cry. Someone needed help.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft lilac t-shirt with a small gold star on the front, light grey shorts, and shiny silver sneakers with purple laces — same child, same face, same exact outfit in every image. Wide establishing shot of a vast magical meadow filled with giant glowing flowers in pink, yellow, and blue, tiny lights floating in the air all around, with {{NAME}} standing small at the edge looking in with a face full of wonder. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "A tiny fairy sat on a flower. Her name was Pip. Pip's wings were dull and grey. She could not fly. She had lost her sparkle stone. Without it, her wings would not glow. {{NAME}}'s eyes went wide with surprise.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft lilac t-shirt with a small gold star on the front, light grey shorts, and shiny silver sneakers with purple laces — same child, same face, same exact outfit in every image. Close-up of {{NAME}}'s face showing wide surprised and caring eyes as he leans in to look at tiny Pip the fairy, who sits on a large pink flower petal with dull grey wings and a sad expression on her small face. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} looked all over the meadow. He looked under the red flowers. He looked behind the tall blue ones. He got down on his hands and knees. Then he saw it. A tiny pink stone glowing under a leaf.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft lilac t-shirt with a small gold star on the front, light grey shorts, and shiny silver sneakers with purple laces — same child, same face, same exact outfit in every image. Dynamic action scene showing {{NAME}} on his hands and knees among the towering flowers, reaching under a large green leaf, his face alight with excitement as a tiny pink glowing stone shines out from the darkness beneath it. Pip hovers anxiously nearby. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "{{NAME}} picked up the sparkle stone. He held it out to Pip on the tip of his finger. Pip touched it with both tiny hands. Her wings began to glow. They turned gold and pink and bright. Pip flew up into the air.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft lilac t-shirt with a small gold star on the front, light grey shorts, and shiny silver sneakers with purple laces — same child, same face, same exact outfit in every image. Emotional peak scene showing Pip the fairy flying up into the air with brilliantly glowing gold and pink wings, surrounded by bursts of sparkle light, while {{NAME}} looks up at her with a huge joyful smile, dramatic golden magical light flooding the meadow. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "Pip danced in the air above {{NAME}}. She left a trail of golden sparks. {{NAME}} laughed and felt warm all over. Helping a friend is the best feeling in the world. {{NAME}} yawned a big sleepy yawn. And somewhere nearby, another tiny light began to blink.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft lilac t-shirt with a small gold star on the front, light grey shorts, and shiny silver sneakers with purple laces — same child, same face, same exact outfit in every image. Warm cosy resolution scene with {{NAME}} lying back in the soft meadow grass, eyes drooping with sleepiness, a golden smile on his face, while Pip the fairy with glowing wings hovers just above him leaving a trail of soft golden sparks in the warm evening air. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

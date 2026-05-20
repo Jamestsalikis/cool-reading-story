@@ -1,0 +1,36 @@
+{
+  "interest": "Animals + Fairies",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Fairy Who Lost Her Wings",
+  "moral": "When you help a friend, good things come back to you.",
+  "theme_emoji": "🧚",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sky-blue t-shirt with a pink butterfly print, lilac shorts, and white sneakers with purple laces — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} walked into the flower meadow. Pink and yellow flowers grew everywhere. Little rabbits and butterflies played in the sun. Then {{NAME}} heard a tiny cry. A small fairy sat on a daisy. She looked very sad.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sky-blue t-shirt with a pink butterfly print, lilac shorts, and white sneakers with purple laces — same child, same face, same exact outfit in every image. Wide establishing shot of a vast sunny flower meadow filled with pink, yellow, and orange blooms. {{NAME}} stands small in the centre, looking down curiously at a tiny glowing fairy sitting on a large white daisy. Fluffy white rabbits and colourful butterflies dot the meadow all around. Bright blue sky with soft clouds above. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The fairy's name was Pip. Her wings had fallen off in the wind. Without her wings, Pip could not fly. {{NAME}} looked at Pip's sad face. He felt very sorry for her.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sky-blue t-shirt with a pink butterfly print, lilac shorts, and white sneakers with purple laces — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}} crouching down, his face full of kind concern, looking at tiny Pip the fairy standing on his open palm. Pip is a small fairy with pink hair, a green dress, and a tearful expression, her back bare where wings should be. Soft meadow light wraps around both of them warmly. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} looked all around the meadow. He asked the rabbits to help. He asked the butterflies to help. They all searched and searched. A fluffy rabbit found the wings under a big red flower!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sky-blue t-shirt with a pink butterfly print, lilac shorts, and white sneakers with purple laces — same child, same face, same exact outfit in every image. Dynamic action shot of {{NAME}} running through the bright meadow, rabbits hopping alongside him and butterflies swooping overhead in the search. In the foreground, a fluffy white rabbit triumphantly paws at a pair of sparkling translucent fairy wings tucked under a giant red poppy. Everyone's faces show excitement and energy. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "{{NAME}} gently picked up the wings. He walked slowly back to Pip. He held them out. Pip's eyes went wide. She put her wings back on. Would they work again?",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sky-blue t-shirt with a pink butterfly print, lilac shorts, and white sneakers with purple laces — same child, same face, same exact outfit in every image. Emotional peak scene with dramatic warm golden light. {{NAME}} holds out the sparkling fairy wings carefully in both hands toward Pip the fairy, who stands on a daisy with her eyes enormous and full of hope. The rabbits and butterflies crowd behind {{NAME}}, all holding their breath. A magical shimmer glows around the wings. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "Pip's wings glowed and snapped right back on. She flew up, up, up into the sky. She laughed and did a little spin. When you help a friend, good things come back to you. Goodnight, {{NAME}}. Sleep tight. Pip said she knew a secret fairy door in the old oak tree. What could be inside?",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sky-blue t-shirt with a pink butterfly print, lilac shorts, and white sneakers with purple laces — same child, same face, same exact outfit in every image. Warm cosy resolution scene in soft golden evening light. {{NAME}} sits sleepily in the meadow grass, eyes drooping happily, watching tiny Pip the fairy loop joyfully above his head leaving a trail of golden sparkles. Rabbits curl up beside him and butterflies rest gently on his knees. The sky glows pink and orange at sunset. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

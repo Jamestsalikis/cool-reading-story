@@ -1,0 +1,36 @@
+{
+  "interest": "Dinosaurs + Robots",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Robot Who Fixed the Dinosaur's Roar",
+  "moral": "A good friend helps you when something goes wrong.",
+  "theme_emoji": "🦖",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a grey t-shirt with an orange dinosaur and robot print, cobalt blue shorts, and bright green sneakers — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} walked into the dinosaur valley. Big rocky cliffs stood all around. Dinosaurs stomped and played in the flat valley below. A little silver robot sat on a rock and watched them. {{NAME}} waved to the robot.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a grey t-shirt with an orange dinosaur and robot print, cobalt blue shorts, and bright green sneakers — same child, same face, same exact outfit in every image. Wide establishing shot of a prehistoric valley with tall red rocky cliffs on both sides. Three colourful dinosaurs, one green, one orange, and one yellow, stomp happily in the flat grassy valley floor. {{NAME}} stands small at the valley entrance waving toward a small silver robot perched on a boulder nearby, watching the dinosaurs with glowing blue eyes. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The green dinosaur tried to roar. But no sound came out. He opened his mouth wide. Nothing. He tried again. Still nothing. He sat down and looked very sad. {{NAME}} went over to help.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a grey t-shirt with an orange dinosaur and robot print, cobalt blue shorts, and bright green sneakers — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}} standing in front of the large green dinosaur who has his mouth stretched wide open showing no sound is coming out. The dinosaur's eyes are watery and confused. {{NAME}}'s expression is full of focused concern, leaning forward as if listening hard. The small silver robot hops off the boulder nearby, its blue eyes alert and curious. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The robot ran up. He had a little tool in his hand. He looked inside the dinosaur's mouth carefully. He found a big rock stuck inside. He worked carefully to get it out.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a grey t-shirt with an orange dinosaur and robot print, cobalt blue shorts, and bright green sneakers — same child, same face, same exact outfit in every image. Dynamic action shot of the small silver robot leaning deep into the large green dinosaur's wide open mouth, using a glowing blue tool. The dinosaur sits perfectly still with eyes looking sideways nervously. {{NAME}} stands behind the robot, crouched in suspense, hands on knees, watching intently. Small blue energy sparks fly from the tool. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The robot pulled out a round grey rock. He held it up. Everyone stared. The green dinosaur took a big deep breath. Would his roar come back?",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a grey t-shirt with an orange dinosaur and robot print, cobalt blue shorts, and bright green sneakers — same child, same face, same exact outfit in every image. Emotional peak scene with dramatic light. The small silver robot holds up a large round grey rock triumphantly with both arms, its blue eyes gleaming with pride. The green dinosaur stands behind with chest puffed out and a huge hopeful expression, mouth slightly open. {{NAME}} watches from the side with his hands pressed together in suspense, eyes enormous. The orange and yellow dinosaurs lean in from behind, all watching breathlessly. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "ROAR! The loudest roar filled the whole valley. All the dinosaurs roared back with joy. A good friend helps you when something goes wrong. Goodnight, {{NAME}}. Sleep tight. The robot said he had one more tool in his bag. What could it fix next?",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a grey t-shirt with an orange dinosaur and robot print, cobalt blue shorts, and bright green sneakers — same child, same face, same exact outfit in every image. Warm cosy resolution scene in soft golden dusk light in the dinosaur valley. {{NAME}} sits sleepily against the green dinosaur's warm side, eyes drooping and smiling. The small silver robot sits beside {{NAME}}, its chest light glowing a warm amber. The orange and yellow dinosaurs are curled up nearby in the golden grass. Rocky cliffs glow orange and pink in the setting sun. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

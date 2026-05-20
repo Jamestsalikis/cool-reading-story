@@ -1,0 +1,36 @@
+{
+  "interest": "Dinosaurs + Princesses + Robots",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Robot Who Fixed the Princess's Dinosaur",
+  "moral": "Using your special skills to help others is always worthwhile.",
+  "theme_emoji": "🦕",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright coral-pink princess dress with silver buttons, a small silver crown, and coral and silver boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} walked up to a castle on top of a hill. The castle had a big moat and tall towers. In the courtyard, a princess sat next to her pet dinosaur. The dinosaur was very sad. His tail drooped on the ground. A small silver robot stood nearby with tools.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright coral-pink princess dress with silver buttons, a small silver crown, and coral and silver boots — same child, same face, same exact outfit in every image. Wide establishing shot of a large castle on a green hill with tall towers and a moat. {{NAME}} walks small up the hill toward the castle gates. In the castle courtyard visible through the open gate, a princess in a blue dress sits beside a large droopy-tailed sad dinosaur. A small silver robot with tools stands nearby looking at the dinosaur. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "{{NAME}} went into the courtyard. 'What happened?' asked {{NAME}}. 'My dinosaur hurt his tail,' said the princess. 'I do not know how to help him.' The robot beeped. 'I can fix this,' said the robot. {{NAME}} and the princess looked at the robot with hope.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright coral-pink princess dress with silver buttons, a small silver crown, and coral and silver boots — same child, same face, same exact outfit in every image. Close-up of {{NAME}}'s face showing wide-eyed hope and worry, looking at the robot. The small silver robot stands confidently between {{NAME}} and the princess in a blue dress. The princess looks at the robot with hopeful eyes. In the background the large sad dinosaur rests on the courtyard stones. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The robot got to work. It scanned the dinosaur's tail with a blue light. It pulled out a soft bandage and wrapped the tail carefully. The robot sang a soft little song while it worked. {{NAME}} helped hold the bandage. The dinosaur kept very still.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright coral-pink princess dress with silver buttons, a small silver crown, and coral and silver boots — same child, same face, same exact outfit in every image. Dynamic action shot of the robot working busily. The small silver robot wraps a bright white bandage around the large dinosaur's tail, blue scanning light glowing from its eyes. {{NAME}} kneels beside the dinosaur holding the bandage, concentrating hard. The dinosaur holds still with a patient face. The princess watches from nearby with clasped hands. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The dinosaur's tail wiggled. Then it wagged. The dinosaur stood up and did a big happy stomp. The whole courtyard shook. The princess cheered and hugged the robot. Then she hugged {{NAME}}. 'We fixed him together!' said the princess.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright coral-pink princess dress with silver buttons, a small silver crown, and coral and silver boots — same child, same face, same exact outfit in every image. Emotional peak scene with warm golden light flooding the courtyard. The large dinosaur stands tall with its bandaged tail wagging high in the air. The princess in her blue dress hugs the small silver robot with both arms. {{NAME}} stands beside them with arms raised in joy. Castle walls gleam in the warm light behind. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "That evening, {{NAME}}, the princess, and the robot sat on the castle steps. The dinosaur lay beside them like a big warm hill. The stars came out bright and clear. {{NAME}} leaned on the dinosaur and felt very happy. Goodnight, {{NAME}}. Sleep well. Tomorrow, the robot says it has built something brand new just for you.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright coral-pink princess dress with silver buttons, a small silver crown, and coral and silver boots — same child, same face, same exact outfit in every image. Warm cosy resolution scene in soft golden evening light. {{NAME}} leans sleepily against the large dinosaur's warm side on the castle steps, eyes half-closed. The princess in her blue dress sits on the other side. The small silver robot sits on a step below them. Stars glow in the purple evening sky above the castle towers. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

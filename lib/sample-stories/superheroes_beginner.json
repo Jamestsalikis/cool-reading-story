@@ -1,0 +1,36 @@
+{
+  "interest": "Superheroes",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Superpower That Really Mattered",
+  "moral": "The best superpower is noticing when someone needs your help.",
+  "theme_emoji": "🦸",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright cobalt blue superhero costume with a bold yellow lightning bolt on the chest, a short yellow cape, blue mask across his eyes, and blue boots with yellow soles — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} stood on top of a big hill. His yellow cape blew in the wind. The town was spread out below him. He could hear everything. That was his power. He could hear every tiny sound for miles and miles.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright cobalt blue superhero costume with a bold yellow lightning bolt on the chest, a short yellow cape, blue mask across his eyes, and blue boots with yellow soles — same child, same face, same exact outfit in every image. Wide establishing shot of {{NAME}} standing on the top of a tall green hill, his yellow cape blowing in the wind, looking out over a small colourful town spread below him under a bright blue sky, small and heroic against the vast scene, his expression brave and alert. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "{{NAME}} heard a small sound. It was soft and sad. Someone was crying nearby. He tilted his head. He listened harder. It was coming from the park below. A little girl was stuck up in a tall tree.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright cobalt blue superhero costume with a bold yellow lightning bolt on the chest, a short yellow cape, blue mask across his eyes, and blue boots with yellow soles — same child, same face, same exact outfit in every image. Close-up of {{NAME}}'s face showing a focused and concerned expression, one ear slightly turned, blue eyes sharp with attention as he listens carefully, a park with a tall tree visible in the soft background behind him. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} ran as fast as he could. He got to the park in no time. He climbed up the tall tree, branch by branch. The little girl was scared. He held out his hand. She held on tight. He helped her down safely.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright cobalt blue superhero costume with a bold yellow lightning bolt on the chest, a short yellow cape, blue mask across his eyes, and blue boots with yellow soles — same child, same face, same exact outfit in every image. Dynamic action scene showing {{NAME}} climbing high up in a large leafy tree, reaching out his hand to a small frightened girl on a branch, cape flying behind him, leaves swirling with movement and energy, both figures showing intense emotion. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The little girl's feet touched the soft green grass. She looked up at {{NAME}} with big happy eyes. She said thank you, thank you, thank you. {{NAME}} felt a warm glow in his chest. Better than any superpower was making someone feel safe.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright cobalt blue superhero costume with a bold yellow lightning bolt on the chest, a short yellow cape, blue mask across his eyes, and blue boots with yellow soles — same child, same face, same exact outfit in every image. Emotional peak scene with the little girl standing on the grass looking up at {{NAME}} with pure gratitude and relief, {{NAME}}'s chest glowing softly with warm golden light, dramatic beams of sunlight breaking through the tree canopy above them both, {{NAME}}'s face full of warmth and pride. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "{{NAME}} walked home under the stars. His cape floated behind him softly. He felt happy and good and peaceful. The best power is paying attention to others. {{NAME}} climbed into bed and closed his eyes. Far away in the dark sky, a tiny new star blinked on for the very first time.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright cobalt blue superhero costume with a bold yellow lightning bolt on the chest, a short yellow cape, blue mask across his eyes, and blue boots with yellow soles — same child, same face, same exact outfit in every image. Warm cosy resolution scene with {{NAME}} walking along a quiet street toward home under a soft starry sky, his cape drifting gently behind him, his posture relaxed and sleepy, warm golden light spilling from house windows onto the path, his face wearing a peaceful contented smile. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "interest": "Princesses + Robots + Soccer",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Princess Cup Final",
+  "moral": "When everyone plays their part, the team wins together.",
+  "theme_emoji": "👑",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal blue soccer jersey with a gold crown badge, silver shorts with a tiny robot patch, and deep blue soccer boots with gold laces — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} stepped onto the royal soccer field.\nThe field was inside a grand castle courtyard.\nA friendly princess waved from the stands.\nA small orange robot stood in goal.\nToday was the big Princess Cup Final!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal blue soccer jersey with a gold crown badge, silver shorts with a tiny robot patch, and deep blue soccer boots with gold laces — same child, same face, same exact outfit in every image. Wide establishing shot of a magnificent castle courtyard soccer field with stone walls draped in colourful banners, {{NAME}} is small near the centre of the field looking around in awe, a princess in a bright pink gown waves from a decorated balcony above, a small round orange robot stands ready in the goal, the scene is grand and festive. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The princess ran down to {{NAME}}.\n\"Our goalkeeper robot is broken,\" she said.\n{{NAME}}'s eyes went wide with surprise.\n\"Oh no!\" he said. \"The game starts soon!\"\nHe had to think fast.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal blue soccer jersey with a gold crown badge, silver shorts with a tiny robot patch, and deep blue soccer boots with gold laces — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}}'s face showing shock and surprise, the princess stands in front of him in her bright pink gown with a worried expression, the small orange robot leans crooked in the background sparking gently, the castle courtyard stretches behind them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} had a tool in his pocket.\nHe fixed the robot as fast as he could.\nTurn, click, snap! The robot beeped happily.\nThe princess cheered and the crowd roared.\nThe game began!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal blue soccer jersey with a gold crown badge, silver shorts with a tiny robot patch, and deep blue soccer boots with gold laces — same child, same face, same exact outfit in every image. Dynamic action shot of {{NAME}} crouched down tightening a panel on the small orange robot with a glowing blue tool, the robot's eyes light up brightly as it comes back to life, the princess claps her hands with delight behind him, spectators in the castle stands lean forward cheering, the scene bursts with energy and urgency. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The other team kicked the ball hard.\nIt flew toward the goal!\nThe robot jumped and stopped it.\n{{NAME}} got the ball and kicked it.\nGoal! The princess jumped for joy!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal blue soccer jersey with a gold crown badge, silver shorts with a tiny robot patch, and deep blue soccer boots with gold laces — same child, same face, same exact outfit in every image. Emotional peak scene with dramatic golden floodlight, the orange robot makes a spectacular diving save in the goal mouth, {{NAME}} sprints forward with determination and kicks the soccer ball in a powerful arc toward the opposite goal, the princess in the stands leaps to her feet with arms raised, golden sparkles burst around the ball. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "{{NAME}}'s team won the Princess Cup!\nThe princess put a gold medal around his neck.\nThe robot beeped a happy song.\nEveryone danced in the courtyard.\nGoodnight, {{NAME}}. You played so well today.\nMaybe the princess has a new challenge waiting for you tomorrow.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal blue soccer jersey with a gold crown badge, silver shorts with a tiny robot patch, and deep blue soccer boots with gold laces — same child, same face, same exact outfit in every image. Warm cosy resolution scene in soft golden castle torchlight, {{NAME}} sits on the grass of the courtyard field with a gold medal around his neck and a sleepy happy smile, the princess sits beside him in her pink gown looking cheerful, the small orange robot sits at {{NAME}}'s feet with its eyes glowing warmly, the castle walls are covered in celebration banners, everything is soft and content. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

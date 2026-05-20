@@ -1,0 +1,36 @@
+{
+  "interest": "Animals + Dinosaurs + Fairies",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Fairy Dinosaur Garden",
+  "moral": "When you are kind to nature, nature is kind to you.",
+  "theme_emoji": "🦕",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a leaf-green t-shirt with a small dinosaur print, bright orange shorts, and white sneakers with green laces — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} walked into a big, bright garden.\nThe flowers were tall and pink and purple.\nTiny lights floated between the petals.\nA little bunny hopped up to him.\n\"Hello,\" said the bunny. \"The fairies live here.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a leaf-green t-shirt with a small dinosaur print, bright orange shorts, and white sneakers with green laces — same child, same face, same exact outfit in every image. Wide establishing shot of a magical garden filled with giant pink and purple flowers, glowing golden fairy lights floating in the air. {{NAME}} stands small at the garden entrance, eyes wide with wonder. A small white bunny sits near his feet, looking up at him with a friendly smile. Warm afternoon sunlight fills the scene. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "{{NAME}} looked closer at a big flower.\nA tiny fairy sat on a pink petal.\nShe had wings like a dragonfly.\n\"Oh!\" said {{NAME}}. His eyes went very wide.\nThe fairy smiled and waved at him.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a leaf-green t-shirt with a small dinosaur print, bright orange shorts, and white sneakers with green laces — same child, same face, same exact outfit in every image. Close-up of {{NAME}}'s face, nose to nose with a tiny fairy perched on a large pink flower petal. {{NAME}}'s blue eyes are huge and sparkling with delight, mouth open in a happy gasp. The fairy has shimmering dragonfly wings and a golden dress, waving cheerfully. Soft glowing light surrounds the flower. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "Then the ground began to shake.\nBoom. Boom. Boom.\nA friendly little dinosaur ran into the garden.\nHis green scales were bright and shiny.\nHe knocked over three big flowers.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a leaf-green t-shirt with a small dinosaur print, bright orange shorts, and white sneakers with green laces — same child, same face, same exact outfit in every image. Dynamic wide shot of a small bright-green dinosaur with shiny scales bounding energetically into the magical garden, knocking over tall purple flowers. {{NAME}} leaps back in surprise but is smiling. The fairy zooms upward on her wings, laughing. The white bunny dashes to the side. Flowers and petals fly through the air. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The fairy looked very sad.\nHer garden was all messy now.\n\"I will help fix it,\" said {{NAME}}.\nHe stood the flowers back up, one by one.\nThe little dinosaur helped push the soil down.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a leaf-green t-shirt with a small dinosaur print, bright orange shorts, and white sneakers with green laces — same child, same face, same exact outfit in every image. Emotional mid-shot of {{NAME}} carefully standing a tall pink flower upright in the garden soil, his face determined and caring. The tiny fairy hovers nearby with tears drying on her cheeks, beginning to smile again. The small green dinosaur presses his nose gently to the soil beside a replanted flower. Warm golden late-afternoon light. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "Soon the garden looked beautiful again.\nThe fairy gave {{NAME}} a tiny glowing flower.\n\"Thank you,\" she said softly.\nThe bunny curled up next to {{NAME}}.\n{{NAME}} felt warm and happy and sleepy.\nGoodnight, {{NAME}}. Tomorrow the dinosaur wants to show you something deep in the magic woods.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a leaf-green t-shirt with a small dinosaur print, bright orange shorts, and white sneakers with green laces — same child, same face, same exact outfit in every image. Warm cosy resolution scene bathed in soft golden light. {{NAME}} sits sleepily among restored flowers, holding a tiny glowing flower blossom in his palm. The fairy floats gently above him, smiling with her wings folded softly. The white bunny is curled up against {{NAME}}'s side. The small green dinosaur sits nearby with a happy, gentle expression. Everything is peaceful and glowing. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

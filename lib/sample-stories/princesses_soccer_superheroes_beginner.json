@@ -1,0 +1,36 @@
+{
+  "interest": "Princesses + Soccer + Superheroes",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Royal Match to the Rescue",
+  "moral": "Anyone can be a hero when they try their hardest.",
+  "theme_emoji": "⚽",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright orange superhero cape with a gold crown logo, a white soccer jersey with a purple star, dark green shorts, and white-and-purple soccer boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} flew down to a royal soccer stadium.\nThe stadium was next to a tall pink castle.\nA princess stood in the middle of the field.\nShe wore her crown and her soccer boots.\nBut her team was missing three players!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright orange superhero cape with a gold crown logo, a white soccer jersey with a purple star, dark green shorts, and white-and-purple soccer boots — same child, same face, same exact outfit in every image. Wide establishing shot of a grand royal soccer stadium with a tall pink castle rising behind it, {{NAME}} descends from the sky with cape spread, small against the huge colourful arena, a princess stands on the field below him in a purple gown and soccer boots wearing a crown, the stadium seats are full of cheering spectators, three empty spots on the team bench are visible. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The princess ran to meet {{NAME}}.\n\"Will you play on my team?\" she asked.\n{{NAME}}'s eyes went wide and bright.\n\"Yes!\" he said with a big grin.\nHe had never played for a princess before.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright orange superhero cape with a gold crown logo, a white soccer jersey with a purple star, dark green shorts, and white-and-purple soccer boots — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}}'s face glowing with excitement and delight, the princess stands before him in her purple gown and crown with an eager hopeful smile, the stadium glows in the background, {{NAME}}'s eyes are bright and his grin is huge. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The game was fast and loud.\n{{NAME}} used his super speed to run.\nHe passed the ball to the princess.\nShe kicked it hard and low.\nIt flew straight toward the goal!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright orange superhero cape with a gold crown logo, a white soccer jersey with a purple star, dark green shorts, and white-and-purple soccer boots — same child, same face, same exact outfit in every image. Dynamic action shot of {{NAME}} at full sprint with his cape streaming, passing a fast rolling ball to the princess who winds up for a powerful kick, motion blur and speed lines everywhere, the crowd in the stands leans forward, the goal is in sight at the far end of the royal green field. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The goalkeeper jumped but missed.\nGoal!\nThe crowd roared and threw flowers.\nThe princess lifted {{NAME}} up in the air.\n\"You are our hero!\" she cheered.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright orange superhero cape with a gold crown logo, a white soccer jersey with a purple star, dark green shorts, and white-and-purple soccer boots — same child, same face, same exact outfit in every image. Emotional peak scene with golden floodlights blazing, the soccer ball bursts through the net in an explosion of light, the princess lifts {{NAME}} up on her shoulders with both arms while he beams with pride, the stadium crowd throws colourful flowers and confetti, the scene is joyful and triumphant. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "After the match they ate strawberry cake.\nThe princess gave {{NAME}} a royal medal.\n{{NAME}} felt so warm and proud.\nHe yawned a big sleepy yawn.\nGoodnight, {{NAME}}. Well done today.\nI wonder if the princess is planning a bigger game for next time.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright orange superhero cape with a gold crown logo, a white soccer jersey with a purple star, dark green shorts, and white-and-purple soccer boots — same child, same face, same exact outfit in every image. Warm cosy resolution scene in soft golden castle hall light, {{NAME}} sits at a long table with a slice of strawberry cake in front of him, a royal medal gleaming on his chest, the princess sits across from him still in her crown and gown, both looking happy and peaceful, petals from the match celebrations still drift gently in the air. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

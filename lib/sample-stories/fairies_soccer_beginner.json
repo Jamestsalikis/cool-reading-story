@@ -1,0 +1,36 @@
+{
+  "interest": "Fairies + Soccer",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Fairy Goal",
+  "moral": "Believing in yourself helps you do things you never thought you could.",
+  "theme_emoji": "🧚",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright green soccer jersey with a gold star on the chest, white soccer shorts, and bright blue soccer cleats with yellow laces — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} stood at the edge of a big green field. The soccer goal looked very far away. All the other children were kicking the ball so well. {{NAME}} was afraid to try. He sat down in the tall grass at the side.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright green soccer jersey with a gold star on the chest, white soccer shorts, and bright blue soccer cleats with yellow laces — same child, same face, same exact outfit in every image. Wide establishing shot of a large magical green soccer field under a bright blue sky with puffy clouds. {{NAME}} sits small and alone in the tall grass at the edge of the field, watching other children playing soccer in the distance near a big white goal. His expression shows worry and shyness. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "A little fairy landed on {{NAME}}'s knee. She had wings like flower petals. She wore a tiny soccer kit just like his. Her name was Flo. \"Why are you sitting here?\" she asked. {{NAME}}'s eyes went wide.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright green soccer jersey with a gold star on the chest, white soccer shorts, and bright blue soccer cleats with yellow laces — same child, same face, same exact outfit in every image. Close-up of {{NAME}}'s face showing absolute surprise and delight, his mouth open in a little O shape. The tiny fairy Flo perches on his knee, her petal-like wings spread wide, wearing a tiny matching green and gold soccer kit. The sunny field is softly blurred in the background. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "Flo flew around the ball and sprinkled golden dust on it. \"Now kick it!\" she called. {{NAME}} ran up fast and gave a big kick. The ball flew through the air. It zoomed right into the goal with a loud swish!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright green soccer jersey with a gold star on the chest, white soccer shorts, and bright blue soccer cleats with yellow laces — same child, same face, same exact outfit in every image. Dynamic action shot of {{NAME}} mid-kick on the soccer field, his leg swung high, a trail of golden fairy dust swirling around the ball as it rockets towards the goal. The tiny fairy Flo zooms alongside the ball, arms raised in excitement. The goal net bulges as the ball hits it. {{NAME}}'s face shows pure joy. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "All the children cheered. {{NAME}} looked down at Flo. She was clapping her tiny hands. \"You did that!\" Flo said. \"The dust just helped you feel brave.\" {{NAME}} smiled. He felt tall and strong.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright green soccer jersey with a gold star on the chest, white soccer shorts, and bright blue soccer cleats with yellow laces — same child, same face, same exact outfit in every image. Emotional peak with warm golden late-afternoon light on the soccer field. {{NAME}} stands proudly with both fists raised, surrounded by cheering children in the background. The tiny fairy Flo hovers right in front of his face, clapping and beaming. The goal stands behind them, the net still rippling. {{NAME}}'s face shows confidence and happiness. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "That night, {{NAME}} told Mum about the fairy and the goal. Mum smiled and tucked him in tight. {{NAME}} closed his eyes and smiled too. He wondered if Flo would be there tomorrow. Goodnight, {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright green soccer jersey with a gold star on the chest, white soccer shorts, and bright blue soccer cleats with yellow laces — same child, same face, same exact outfit in every image. Warm cosy resolution scene with soft golden lamplight in a snug bedroom. {{NAME}} lies in bed under a green and white striped duvet with a small soccer ball on the pillow beside him, eyes drooping shut and smiling. A faint speck of golden fairy light glimmers outside the dark window. The room feels peaceful and safe. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

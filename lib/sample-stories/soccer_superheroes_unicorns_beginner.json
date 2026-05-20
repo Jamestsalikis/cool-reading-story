@@ -1,0 +1,36 @@
+{
+  "interest": "Soccer + Superheroes + Unicorns",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Most Magical Match",
+  "moral": "Being a good sport means cheering for everyone, not just yourself.",
+  "theme_emoji": "⚽",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a vivid magenta superhero cape with a gold star, a sky blue soccer jersey with a silver unicorn horn logo, white shorts, and blue-and-gold soccer boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} flew down to a glowing soccer stadium.\nThe grass sparkled in all the colours of the rainbow.\nSuperheroes in coloured capes filled the stands.\nUnicorns in tiny soccer boots trotted on the field.\n{{NAME}} had never seen a match like this.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a vivid magenta superhero cape with a gold star, a sky blue soccer jersey with a silver unicorn horn logo, white shorts, and blue-and-gold soccer boots — same child, same face, same exact outfit in every image. Wide establishing shot of a vast glowing stadium with rainbow-coloured grass, {{NAME}} descends from the sky small against the enormous arena, the stands are packed with cheering superheroes in colourful capes, on the field below unicorns in tiny colourful soccer boots warm up by trotting and kicking a ball, the whole scene is electric with excitement. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "A golden unicorn trotted to {{NAME}}.\n\"Will you be our team captain?\" it asked.\n{{NAME}}'s mouth fell open wide.\n\"Me? Captain?\" he said.\n\"Yes,\" said the unicorn. \"We trust you.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a vivid magenta superhero cape with a gold star, a sky blue soccer jersey with a silver unicorn horn logo, white shorts, and blue-and-gold soccer boots — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}}'s face showing total stunned surprise and pure joy, the golden unicorn stands right in front of him with warm confident eyes and a gentle smile, a captain's armband gleams in the unicorn's mouth ready to be given, the glowing stadium field stretches behind them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The match started with a big kick.\n{{NAME}} flew across the field.\nHe passed the ball to the golden unicorn.\nThe unicorn dribbled past three players.\nThe crowd went wild!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a vivid magenta superhero cape with a gold star, a sky blue soccer jersey with a silver unicorn horn logo, white shorts, and blue-and-gold soccer boots — same child, same face, same exact outfit in every image. Dynamic action shot of {{NAME}} soaring low over the rainbow pitch with his cape spread, passing the ball down to the golden unicorn who weaves between three opposing players in a blur of speed, sparkles trail from the unicorn's hooves, the superhero crowd in the stands leans forward in frenzy. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The other team scored a goal.\n{{NAME}} could have felt angry.\nBut he clapped instead.\n\"Good kick,\" he said.\nThe unicorn looked at {{NAME}} and smiled wide.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a vivid magenta superhero cape with a gold star, a sky blue soccer jersey with a silver unicorn horn logo, white shorts, and blue-and-gold soccer boots — same child, same face, same exact outfit in every image. Emotional peak scene with warm mid-match stadium lighting, {{NAME}} stands on the pitch clapping toward the opposing team who have just scored, his expression is genuinely warm and sporting rather than upset, the golden unicorn beside him looks up at him with a wide proud smile, superheroes in the stands around them mirror his sportsmanship and cheer. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "{{NAME}}'s team scored the last goal and won.\nBut he ran to shake hands with everyone.\nThe superheroes and unicorns cheered for him.\nNot for winning, but for being kind.\n{{NAME}} sat on the rainbow grass, tired and happy.\nGoodnight, {{NAME}}. That was the best match ever.\nI wonder what adventure the golden unicorn has for you next time.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a vivid magenta superhero cape with a gold star, a sky blue soccer jersey with a silver unicorn horn logo, white shorts, and blue-and-gold soccer boots — same child, same face, same exact outfit in every image. Warm cosy resolution scene on the glowing rainbow grass as the stadium lights dim to a soft golden glow, {{NAME}} sits peacefully with the golden unicorn beside him, both looking sleepy and content, superheroes from both teams stand around them in a warm circle, the soccer ball rests nearby, petals and confetti drift softly in the evening air. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

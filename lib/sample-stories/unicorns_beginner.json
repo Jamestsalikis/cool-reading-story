@@ -1,0 +1,36 @@
+{
+  "interest": "Unicorns",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Unicorn at the Edge of the Rainbow Wood",
+  "moral": "True friendship starts with being gentle and giving someone time.",
+  "theme_emoji": "🦄",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft pink t-shirt with a small rainbow on the front, light purple shorts, and white sneakers with rainbow-coloured laces — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} walked to the edge of the Rainbow Wood. The trees were purple and gold and blue. The grass glowed with soft colours. Strange sweet flowers grew everywhere. {{NAME}} had never seen anything so magical. He walked in slowly.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft pink t-shirt with a small rainbow on the front, light purple shorts, and white sneakers with rainbow-coloured laces — same child, same face, same exact outfit in every image. Wide establishing shot of the Rainbow Wood with trees in shades of gold, violet, and teal, softly glowing multicoloured grass, and strange sweet flowers all around, with {{NAME}} standing tiny at the edge of it all, stepping in slowly with wide eyes full of wonder and amazement. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "Behind a big purple tree, something moved. {{NAME}} stopped walking. Two large shining eyes looked at him. A white unicorn stood in the shadows. Its horn shimmered with soft rainbow colours. But the unicorn backed away. It was very shy.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft pink t-shirt with a small rainbow on the front, light purple shorts, and white sneakers with rainbow-coloured laces — same child, same face, same exact outfit in every image. Close-up of {{NAME}}'s face showing total gentle wonder and delight as he stands still, eyes wide, spotting the beautiful white unicorn just visible behind a large purple tree, the unicorn's glimmering rainbow horn catching the soft light. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} sat down on the soft ground. He did not move. He did not make a sound. He waited and waited. Slowly, the unicorn took a small step. Then another step. Then it walked right up to {{NAME}} and sniffed his hair.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft pink t-shirt with a small rainbow on the front, light purple shorts, and white sneakers with rainbow-coloured laces — same child, same face, same exact outfit in every image. Dynamic action scene showing the white unicorn mid-step, walking cautiously but curiously across the glowing colourful grass toward {{NAME}} who is seated cross-legged on the ground with a patient gentle smile, rainbow light glinting off the unicorn's horn as it moves closer. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The unicorn put its soft nose on {{NAME}}'s cheek. Its horn lit up in a rainbow of colours. The whole wood glowed bright and warm. {{NAME}}'s heart felt like it was full to the top. He had made a brand new friend.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft pink t-shirt with a small rainbow on the front, light purple shorts, and white sneakers with rainbow-coloured laces — same child, same face, same exact outfit in every image. Emotional peak scene showing the white unicorn touching its glowing rainbow horn close to {{NAME}}'s face, both surrounded by an explosion of rainbow light and colour flooding the entire wood, {{NAME}}'s expression one of absolute pure joy and wonder, dramatic multicoloured light rays radiating outward. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "{{NAME}} leaned against the unicorn's soft warm side. The Rainbow Wood was quiet and peaceful. Tiny rainbow lights floated all around them. Good things come to those who are patient and gentle. {{NAME}} yawned and felt very sleepy. The unicorn's horn gave one soft last glow, and somewhere deep in the wood, a new path began to shimmer.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft pink t-shirt with a small rainbow on the front, light purple shorts, and white sneakers with rainbow-coloured laces — same child, same face, same exact outfit in every image. Warm cosy resolution scene with {{NAME}} leaning sleepily against the side of the white unicorn in the softly glowing Rainbow Wood, tiny rainbow lights floating gently in the warm air, the unicorn's horn radiating a soft gentle multicoloured glow, {{NAME}}'s eyes closing in peaceful happy sleepiness. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

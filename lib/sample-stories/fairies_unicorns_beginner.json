@@ -1,0 +1,36 @@
+{
+  "interest": "Fairies + Unicorns",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Lost Unicorn Foal",
+  "moral": "If you are gentle and patient, you can earn the trust of anyone.",
+  "theme_emoji": "🧚",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft lilac hoodie covered in tiny silver stars, lavender trousers, and white trainers with rainbow soles — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} walked into the Glitter Woods one afternoon. The trees sparkled with fairy dust. Rainbow mushrooms grew on every side. Then {{NAME}} saw something small hiding behind a tree. It had a tiny silver horn. It was a baby unicorn, all alone.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft lilac hoodie covered in tiny silver stars, lavender trousers, and white trainers with rainbow soles — same child, same face, same exact outfit in every image. Wide establishing shot of a large magical forest where the trees shimmer with fairy dust and rainbow-coloured mushrooms dot the glittering ground. {{NAME}} stands small on a mossy path, staring at a tiny white unicorn foal peeking timidly from behind a glowing tree trunk. The whole scene is dappled in soft violet and gold light. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "A small fairy landed on {{NAME}}'s shoulder. She had wings like butterfly glass. Her name was Dewdrop. She whispered, \"That baby unicorn is lost. She is scared. Be very, very gentle.\" {{NAME}} nodded slowly. His eyes were wide.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft lilac hoodie covered in tiny silver stars, lavender trousers, and white trainers with rainbow soles — same child, same face, same exact outfit in every image. Close-up of {{NAME}}'s face showing wonder and soft concern, his blue eyes wide and gentle. The tiny fairy Dewdrop perches on his shoulder, her transparent butterfly-like wings spread, leaning close to whisper in his ear. The blurry unicorn foal is just visible behind the glowing tree in the soft background. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} got down on his knees. He held out his hand very slowly. He did not make a sound. The tiny unicorn took one step, then another. Then she walked all the way to {{NAME}} and touched his hand with her nose. So soft!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft lilac hoodie covered in tiny silver stars, lavender trousers, and white trainers with rainbow soles — same child, same face, same exact outfit in every image. Dynamic action moment in the glittering forest clearing. {{NAME}} kneels low on the mossy ground, one hand gently outstretched, his expression calm and hopeful. The tiny white unicorn foal with a silver horn takes a step forward, nose stretching toward his hand, its mane shimmering with soft rainbow light. The fairy Dewdrop hovers nearby with clasped hands. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "Dewdrop blew a note on her tiny horn. A big white unicorn came galloping through the trees. It was the baby's mum! The baby ran to her and nuzzled close. The mum unicorn looked at {{NAME}} and bowed her head.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft lilac hoodie covered in tiny silver stars, lavender trousers, and white trainers with rainbow soles — same child, same face, same exact outfit in every image. Emotional peak scene in a glowing forest clearing. A large majestic white unicorn with a shimmering gold horn stands tall and bows its head gracefully toward {{NAME}}, who stands with eyes full of wonder and joy. The tiny unicorn foal nuzzles against its mother's leg. The fairy Dewdrop hovers above, surrounded by magical golden and violet light. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "{{NAME}} walked home as the stars came out. He felt warm and glad all the way to his toes. He got into bed and closed his eyes. He wondered if the baby unicorn had a name. Goodnight, {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft lilac hoodie covered in tiny silver stars, lavender trousers, and white trainers with rainbow soles — same child, same face, same exact outfit in every image. Warm cosy resolution scene with soft golden lamplight. {{NAME}} lies snuggled in bed under a lilac duvet printed with tiny unicorns and stars, eyes drooping shut, a peaceful smile on his face. Through the bedroom window, two faint unicorn shapes and a tiny fairy glow move through the starry night sky. The room is calm and magical. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "interest": "Princesses + Robots",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Princess Who Needed a Robot",
+  "moral": "Using your clever thinking can save the day for everyone.",
+  "theme_emoji": "👸",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shiny silver t-shirt with a gold crown printed on the front, royal blue trousers, and silver trainers with gold laces — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} found a big golden door in the park. He pushed it open and stepped through. He was inside a tall castle with pink stone walls. A princess ran toward him. She looked very worried. Something was wrong.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shiny silver t-shirt with a gold crown printed on the front, royal blue trousers, and silver trainers with gold laces — same child, same face, same exact outfit in every image. Wide establishing shot inside a grand magical castle with tall pink stone walls, soaring arched windows, and colourful banners. {{NAME}} stands small near a golden door he has just stepped through, looking around in amazement. In the distance a princess in a sparkly blue gown runs toward him with a worried expression. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The princess stopped in front of {{NAME}}. Her name was Princess Lumi. She had a golden crown and a sparkly blue dress. She said, \"My robot helper is broken! The big feast is today. Can you fix it?\" {{NAME}}'s eyes lit up.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shiny silver t-shirt with a gold crown printed on the front, royal blue trousers, and silver trainers with gold laces — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}} and Princess Lumi face to face. Lumi wears a sparkling blue gown and a golden crown, her expression urgent and hopeful. {{NAME}}'s face shows excitement and readiness. Behind them a large round robot sits slumped against a castle wall, its eyes dark and dim. Warm castle torchlight glows around them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} knelt beside the big round robot. He found a tiny loose wire on its back. He twisted it back into place very carefully. He pressed the big green button on its chest. Buzz! Click! The robot's eyes lit up bright blue.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shiny silver t-shirt with a gold crown printed on the front, royal blue trousers, and silver trainers with gold laces — same child, same face, same exact outfit in every image. Dynamic action shot inside the castle. {{NAME}} crouches behind the large round robot, pressing a big green button on its back with both hands. Sparks of electricity and golden light burst from the robot as it powers back on. Princess Lumi watches from the side with clasped hands and wide eyes. The robot's eyes begin to glow vivid blue. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The robot rolled into the kitchen fast. It stirred pots and set out plates. The great hall filled with the smell of good food. Princess Lumi clapped her hands. \"The feast is saved!\" she cried. She gave {{NAME}} a big hug.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shiny silver t-shirt with a gold crown printed on the front, royal blue trousers, and silver trainers with gold laces — same child, same face, same exact outfit in every image. Emotional peak scene in the castle great hall, warm golden candlelight glowing over a long feast table loaded with colourful food. The round robot rolls busily between the table and the kitchen. Princess Lumi hugs {{NAME}} in the foreground, both of them laughing with joy. Streamers of gold and blue hang from the vaulted ceiling. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "{{NAME}} walked home with a full tummy and a happy heart. He got into bed and pulled up the covers. He smiled as he closed his eyes. He wondered if Princess Lumi had saved him any cake. Goodnight, {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shiny silver t-shirt with a gold crown printed on the front, royal blue trousers, and silver trainers with gold laces — same child, same face, same exact outfit in every image. Warm cosy resolution scene in a snug bedroom lit by a soft golden lamp. {{NAME}} lies in bed under a blue duvet printed with crowns and gears, smiling with eyes gently closed. On his bedside table sits a tiny golden crown-shaped biscuit. Through the window the faint silhouette of a castle tower glows in the night. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "interest": "Animals + Unicorns",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Unicorn With a Muddy Horn",
+  "moral": "It is okay to ask for help when you need it.",
+  "theme_emoji": "🦄",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a white t-shirt with a rainbow unicorn print, pink shorts, and sparkly lilac sneakers — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} walked through the rainbow forest. The trees had pink and purple leaves. Little animals played in the soft grass. Then {{NAME}} heard a quiet sound. A unicorn sat alone by the river. She looked worried.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a white t-shirt with a rainbow unicorn print, pink shorts, and sparkly lilac sneakers — same child, same face, same exact outfit in every image. Wide establishing shot of an enchanted forest with pink and purple trees and a winding rainbow-coloured river. {{NAME}} stands small at the forest edge, looking toward a white unicorn sitting sadly by the riverbank. Small woodland animals, hedgehogs, deer, and colourful birds, dot the glowing forest floor around him. Soft magical light filters through the canopy. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The unicorn's horn was covered in mud. Her magic did not work without her clean horn. She had tried and tried to clean it. But she could not reach. She was too embarrassed to ask for help.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a white t-shirt with a rainbow unicorn print, pink shorts, and sparkly lilac sneakers — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}} standing face to face with the white unicorn, his expression warm and understanding. The unicorn has a large brown mud-covered horn, and her soft blue eyes look embarrassed and downcast. {{NAME}}'s eyes are wide with gentle kindness and his hand reaches toward her gently. Soft purple forest light surrounds them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} got water from the river. He found a big soft leaf. He called the little animals to help. They splashed and rubbed and scrubbed. The mud came off little by little.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a white t-shirt with a rainbow unicorn print, pink shorts, and sparkly lilac sneakers — same child, same face, same exact outfit in every image. Dynamic action shot of {{NAME}} scrubbing the unicorn's horn vigorously with a big green leaf. Water splashes and suds fly. A hedgehog scrubs the lower part with tiny paws, a deer holds a leaf full of water, and colourful birds splash from the river. The unicorn stands with squinted eyes and a small smile of relief. The forest is bright and energetic around them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The horn grew bright. It began to glow gold and pink. The unicorn held still. Everyone held their breath. Would the magic come back?",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a white t-shirt with a rainbow unicorn print, pink shorts, and sparkly lilac sneakers — same child, same face, same exact outfit in every image. Emotional peak scene with dramatic magical lighting. The unicorn's horn glows brilliantly gold and pink, sending light rays across the entire forest scene. {{NAME}} stands back with both hands over his mouth, eyes enormous with wonder. The animals all freeze in place, staring with held breath and huge hopeful eyes. The whole forest seems to glow around the unicorn. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "The unicorn's magic burst out in a rainbow. Flowers bloomed all over the forest. The animals jumped and danced. It is okay to ask for help when you need it. Goodnight, {{NAME}}. Sleep tight. The unicorn said her magic could open a door to somewhere wonderful. Where could it be?",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a white t-shirt with a rainbow unicorn print, pink shorts, and sparkly lilac sneakers — same child, same face, same exact outfit in every image. Warm cosy resolution scene glowing in soft golden and rainbow-tinged evening light. {{NAME}} leans sleepily against the unicorn's soft white side, eyes drooping and a contented smile on his face. The hedgehog, deer, and birds are nestled in the grass around them. Fresh colourful flowers bloom everywhere. A gentle rainbow arcs softly across the darkening purple sky above. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

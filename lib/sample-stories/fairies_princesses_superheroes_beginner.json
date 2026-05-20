@@ -1,0 +1,36 @@
+{
+  "interest": "Fairies + Princesses + Superheroes",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Vanishing Fairy Garden",
+  "moral": "Helping others uses the best superpower of all, your heart.",
+  "theme_emoji": "🧚",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright coral superhero suit with a golden fairy star symbol on the chest, a flowing emerald green cape with gold trim, coral boots with golden wings, and gold wristbands — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} was a superhero who could run very fast. One day he flew over a glowing pink forest. A princess stood at the forest edge. She was wearing a silver dress and a blue crown. She looked very worried. \"The fairy garden is disappearing!\" she called out. {{NAME}} looked down. The bright flowers were fading away one by one.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright coral superhero suit with a golden fairy star symbol on the chest, a flowing emerald green cape with gold trim, coral boots with golden wings, and gold wristbands — same child, same face, same exact outfit in every image. Wide establishing shot of a glowing pink and green forest from above. {{NAME}} descends from the sky, small against the vast magical forest, emerald cape streaming behind him. A princess in a silver dress and blue crown stands at the forest's edge looking up with a worried face. Flowers in the forest below are visibly fading to grey from the edges inward. Dramatic light and colour contrast between the fading and glowing areas. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "{{NAME}} landed next to the princess. The princess said her name was Sera. Sera showed {{NAME}} the fading flowers. The fairies had lost their singing voices. Without fairy songs, the garden could not grow. {{NAME}}'s eyes went wide. He looked at the tiny silent fairies. He had to think of something fast.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright coral superhero suit with a golden fairy star symbol on the chest, a flowing emerald green cape with gold trim, coral boots with golden wings, and gold wristbands — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}}'s face showing wide concerned eyes and a thinking frown. Princess Sera in her silver dress stands close pointing at several tiny fairies who sit silently on grey fading flowers, mouths closed and eyes downcast. Faded grey flowers contrast with one or two still-bright patches behind. Soft worried light. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} started to hum a happy song. He hummed loud and clear. Sera joined in and clapped. The fairies looked up. One fairy tried to hum too. Then another. Then all the fairies started to sing. Their voices filled the garden. The flowers glowed and grew tall and bright again. The garden was back!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright coral superhero suit with a golden fairy star symbol on the chest, a flowing emerald green cape with gold trim, coral boots with golden wings, and gold wristbands — same child, same face, same exact outfit in every image. Dynamic action shot of {{NAME}} standing tall with chest out, mouth wide open joyfully humming. Princess Sera claps beside him with a radiant smile. Fairies all around rise into the air singing, musical note sparkles streaming from them. Flowers explode back to brilliant vivid life all around in pinks, golds, and purples. Radiant light bursts from the centre of the garden outward. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The head fairy flew to {{NAME}}. She was tiny and wore a crown of yellow stars. \"You saved us,\" she said. \"But how?\" {{NAME}} smiled. \"I just shared what I had,\" he said. Sera hugged {{NAME}} tight. Helping others uses the best superpower of all, your heart. The whole garden glowed brighter than ever.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright coral superhero suit with a golden fairy star symbol on the chest, a flowing emerald green cape with gold trim, coral boots with golden wings, and gold wristbands — same child, same face, same exact outfit in every image. Emotional peak scene in the fully restored glowing fairy garden. The tiny head fairy in a yellow star crown hovers right in front of {{NAME}}'s face, looking at him with wonder and gratitude. Princess Sera in her silver dress wraps {{NAME}} in a warm side hug. Both have glowing happy faces. The garden blazes with vivid colour and warm golden light all around them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "That night the fairies sang {{NAME}} and Sera a soft lullaby. The flowers swayed in time. The garden smelled of warm honey and roses. Helping others uses the best superpower of all, your heart. {{NAME}} lay back in the soft grass and felt completely happy. He closed his eyes slowly. He wondered what song the fairies might teach him tomorrow.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright coral superhero suit with a golden fairy star symbol on the chest, a flowing emerald green cape with gold trim, coral boots with golden wings, and gold wristbands — same child, same face, same exact outfit in every image. Warm cosy resolution scene lying in a soft glowing fairy garden at night. {{NAME}} lies on his back on the grass, eyes gently closed, a peaceful smile on his face, emerald cape spread softly around him. Princess Sera sits nearby with a serene expression. Tiny fairies hover above in a gentle ring, mouths open in song, trailing soft golden notes and sparkles. Flowers sway softly in warm golden-pink light. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

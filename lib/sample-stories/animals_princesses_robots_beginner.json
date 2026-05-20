@@ -1,0 +1,36 @@
+{
+  "interest": "Animals + Princesses + Robots",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Princess's Robot Helper",
+  "moral": "Working together makes every job easier and more fun.",
+  "theme_emoji": "🤖",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a smart purple jacket over a white shirt, grey trousers, and shiny black shoes — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} arrived at a grand pink palace.\nLong banners of purple and gold hung high.\nPeacocks walked on the wide green lawn.\nA tall silver robot stood at the gate.\nHe was waiting for someone.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a smart purple jacket over a white shirt, grey trousers, and shiny black shoes — same child, same face, same exact outfit in every image. Wide establishing shot of a grand pink palace with tall golden spires. Purple and gold banners hang from every tower. Elegant peacocks strut across a wide emerald lawn. {{NAME}} stands small at the end of the path leading to the palace gate, where a tall, gleaming silver robot stands waiting with a polite upright posture. The sky is a perfect bright blue. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The robot bowed to {{NAME}}.\n\"Princess Mia needs help,\" said the robot.\n\"All the palace animals have run away.\"\n{{NAME}}'s eyes went wide.\nHe followed the robot inside quickly.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a smart purple jacket over a white shirt, grey trousers, and shiny black shoes — same child, same face, same exact outfit in every image. Close-up mid-shot of the tall silver robot bowing formally to {{NAME}} at the palace gate. The robot's rectangular face shows a friendly glowing expression. {{NAME}}'s face is wide-eyed and eager, already leaning forward as if about to run inside. The open palace gate reveals an empty ornate courtyard behind them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "Inside the palace garden, it was very quiet.\nPrincess Mia sat on a stone bench, very sad.\nHer rabbits, cats, and birds had all hid away.\nA loud clanging noise had scared them all.\n{{NAME}} and the robot called to the animals softly.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a smart purple jacket over a white shirt, grey trousers, and shiny black shoes — same child, same face, same exact outfit in every image. Dynamic action shot in a beautiful but quiet palace garden with tall hedgerows and a marble fountain. Princess Mia sits on a curved stone bench in a blue velvet gown, looking sad. {{NAME}} crouches near a rose bush calling gently, arms open invitingly. The tall silver robot kneels nearby, one arm extended softly toward a hiding white rabbit peeking from under the bush. Several more animals peer out from behind hedges and flowerpots. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "One by one the animals crept out.\nA white rabbit sat on {{NAME}}'s shoes.\nThe cats rubbed against the robot's legs.\nThe birds flew back to Princess Mia's arms.\nShe laughed out loud with joy.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a smart purple jacket over a white shirt, grey trousers, and shiny black shoes — same child, same face, same exact outfit in every image. Emotional peak scene in the sunlit palace garden. Princess Mia stands with two colourful birds perched on her outstretched arms, laughing with pure joy. Two tabby cats weave around the silver robot's legs affectionately. A fluffy white rabbit sits right on {{NAME}}'s black shoes, looking up at him. {{NAME}} looks down with a wide, delighted grin. Warm golden afternoon light fills the garden. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "The princess made everyone a warm honey cake.\nThe animals ate from little golden bowls.\nThe robot got a shiny bow around his middle.\n{{NAME}} sat in the soft garden grass.\nHe felt full and happy and very, very sleepy.\nGoodnight, {{NAME}}. Tomorrow Princess Mia has a new puzzle for you and the robot to solve.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a smart purple jacket over a white shirt, grey trousers, and shiny black shoes — same child, same face, same exact outfit in every image. Warm cosy resolution scene in the palace garden at golden hour. {{NAME}} sits drowsily in the soft garden grass surrounded by the white rabbit, two cats, and colourful birds all eating contentedly from tiny golden bowls. Princess Mia sits on the bench nearby, smiling warmly. The tall silver robot stands with a large shiny blue bow tied around his middle, looking quietly pleased. Everything glows in soft golden late-afternoon light. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}
