@@ -443,15 +443,25 @@ export default function DashboardPage() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const search = window.location.search;
-    if (search.includes('subscribed=true')) {
+    const params = new URLSearchParams(search);
+    if (params.get('subscribed') === 'true') {
       window.history.replaceState({}, '', '/dashboard');
       // Sync subscription from Stripe — fallback in case webhook was delayed
       fetch('/api/stripe/sync-subscription', { method: 'POST' })
         .then(() => fetchData())
         .catch(() => fetchData());
-    } else if (search.includes('extra_book=true')) {
+    } else if (params.get('extra_book') === 'true') {
       window.history.replaceState({}, '', '/dashboard');
       fetchData();
+    } else if (params.get('new_story')) {
+      // Coming from onboarding — show the book-ready banner
+      const storyId = params.get('new_story')!;
+      const childName = params.get('child_name') || '';
+      window.history.replaceState({}, '', '/dashboard');
+      fetchData().then(() => {
+        setBookReady({ storyId, childName: decodeURIComponent(childName) });
+        setShowConfetti(true);
+      });
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
