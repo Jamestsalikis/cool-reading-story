@@ -315,7 +315,7 @@ export default function OnboardingPage() {
           return;
         }
 
-        // Generate story, start page 1 image, then redirect to story viewer
+        // Generate story then go to dashboard — the banner will show "book ready"
         try {
           const storyRes = await fetch('/api/generate-story', {
             method: 'POST',
@@ -325,13 +325,8 @@ export default function OnboardingPage() {
           const storyData = await storyRes.json();
           const storyId = storyData?.story?.id;
           if (storyId) {
-            // Fire page 1 image generation — story page handles the rest
-            fetch('/api/generate-image', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ story_id: storyId, page_number: 1 }),
-            });
-            router.push(`/stories/${storyId}`);
+            // Navigate to dashboard with params — DashboardContent will show the book-ready banner
+            router.push(`/dashboard?new_story=${storyId}&child_name=${encodeURIComponent(state.name)}`);
             return;
           }
         } catch { /* fall through to dashboard on error */ }
@@ -2179,4 +2174,5 @@ export default function OnboardingPage() {
     </div>
   );
 }
+
 
