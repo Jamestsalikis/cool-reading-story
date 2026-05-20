@@ -487,20 +487,8 @@ export default function DashboardPage() {
       if (!res.ok) { setGenerateError(data.error || data.message || 'Something went wrong. Please try again.'); return; }
       const storyId = data.story?.id;
       if (!storyId) { await fetchData(); return; }
-      setGenerating(`painting-${childId}`);
-      try {
-        const imgRes = await fetch('/api/generate-image', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ story_id: storyId, page_number: 1 }) });
-        const imgData = await imgRes.json();
-        const pollUrl = imgData.poll_url;
-        if (pollUrl) {
-          for (let i = 0; i < 5; i++) {
-            await new Promise(r => setTimeout(r, 3000));
-            const pollRes = await fetch('/api/poll-image', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ story_id: storyId, page_number: 1, poll_url: pollUrl }) });
-            const pollData = await pollRes.json();
-            if (pollData.status === 'succeeded' || pollData.status === 'failed') break;
-          }
-        }
-      } catch { /* image pre-gen failed gracefully */ }
+      // Refresh dashboard data then navigate — let story page handle all image generation
+      await fetchData();
       setShowConfetti(true);
       router.push(`/stories/${storyId}`);
     } finally { setGenerating(null); generatingLock.current = false; }
@@ -521,20 +509,8 @@ export default function DashboardPage() {
       if (!res.ok) { setGenerateError(data.error || 'Something went wrong.'); return; }
       const newStoryId = data.story?.id;
       if (!newStoryId) { await fetchData(); return; }
-      setGenerating(`painting-${storyId}`);
-      try {
-        const imgRes = await fetch('/api/generate-image', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ story_id: newStoryId, page_number: 1 }) });
-        const imgData = await imgRes.json();
-        const pollUrl = imgData.poll_url;
-        if (pollUrl) {
-          for (let i = 0; i < 5; i++) {
-            await new Promise(r => setTimeout(r, 3000));
-            const pollRes = await fetch('/api/poll-image', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ story_id: newStoryId, page_number: 1, poll_url: pollUrl }) });
-            const pollData = await pollRes.json();
-            if (pollData.status === 'succeeded' || pollData.status === 'failed') break;
-          }
-        }
-      } catch { /* image pre-gen failed gracefully */ }
+      // Refresh then navigate — story page handles all image generation
+      await fetchData();
       setShowConfetti(true);
       router.push(`/stories/${newStoryId}`);
     } finally { setGenerating(null); generatingLock.current = false; }
@@ -987,6 +963,7 @@ export default function DashboardPage() {
     </div>
   );
 }
+
 
 
 
