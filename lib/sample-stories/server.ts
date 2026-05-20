@@ -42,6 +42,21 @@ function personalise(story: SampleStory, child: ChildProfile | string): SampleSt
     );
   }
 
+  // 2b. Inject skin tone into character_anchor (replaces any skin tone phrase)
+  if (profile.skinColour) {
+    const skinToneMap: Record<string, string> = {
+      White: 'fair/light skin',
+      Tanned: 'light tan skin',
+      'Semi Brown': 'warm medium-brown skin',
+      Brown: 'deep brown skin',
+    };
+    const skinDesc = skinToneMap[profile.skinColour] || `${profile.skinColour} skin`;
+    storyStr = storyStr.replace(
+      /\b(fair\/light skin|light tan skin|warm medium-brown skin|deep brown skin|[a-z]+ skin tone|[a-z]+ skin)\b/gi,
+      skinDesc
+    );
+  }
+
   // 3. Personalise gender descriptor
   if (profile.gender) {
     const genderWord = profile.gender === 'Girl' ? 'girl' : profile.gender === 'Boy' ? 'boy' : null;
@@ -89,7 +104,8 @@ function personalise(story: SampleStory, child: ChildProfile | string): SampleSt
  */
 export function getSampleStory(
   interests: string | string[],
-  child: ChildProfile | string
+  child: ChildProfile | string,
+  readingLevel?: string
 ): SampleStory | null {
   // Normalise: filter to trial interests, sort, cap at 3
   const arr = (Array.isArray(interests) ? interests : [interests])
@@ -99,13 +115,43 @@ export function getSampleStory(
 
   if (arr.length === 0) return null;
 
-  // Try exact match first, then progressively fewer interests
+  // Cap interest count by reading level so each age group gets a different story:
+  //   beginner   → up to 1 interest (simplest story)
+  //   intermediate → up to 2 interests
+  //   advanced   → up to 3 interests (most complex)
+  // Falls back to the uncapped count if level is unknown.
+  const levelCap: Record<string, number> = { beginner: 1, intermediate: 2, advanced: 3 };
+  const maxInterests = readingLevel ? (levelCap[readingLevel] ?? arr.length) : arr.length;
+  const capped = arr.slice(0, Math.min(arr.length, maxInterests));
+
+  // Build keys to try, in priority order:
+  //   1. level-specific files (e.g. animals_dinosaurs_beginner) — for future dedicated files
+  //   2. capped generic keys (different story per level via interest count)
+  //   3. full generic keys as final fallback
+  const seen = new Set<string>();
+  const keysToTry: string[] = [];
+
+  const addKey = (k: string) => { if (!seen.has(k)) { seen.add(k); keysToTry.push(k); } };
+
+  if (readingLevel) {
+    for (let n = capped.length; n >= 1; n--) {
+      addKey(capped.slice(0, n).map((i: string) => i.toLowerCase()).join('_') + `_${readingLevel}`);
+    }
+  }
+  for (let n = capped.length; n >= 1; n--) {
+    addKey(capped.slice(0, n).map((i: string) => i.toLowerCase()).join('_'));
+  }
+  // Full 3-interest fallback (so advanced users never get nothing)
   for (let n = arr.length; n >= 1; n--) {
-    const key = arr.slice(0, n).map((i: string) => i.toLowerCase()).join('_');
+    addKey(arr.slice(0, n).map((i: string) => i.toLowerCase()).join('_'));
+  }
+
+  for (const key of keysToTry) {
     const story = loadStory(key);
     if (story) return personalise(story, child);
   }
 
   return null;
 }
+
 
