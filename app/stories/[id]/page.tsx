@@ -372,7 +372,19 @@ export default function StoryPage() {
   const totalPages = pages.length;
   const page = pages[currentPage];
   const isLastPage = currentPage === totalPages - 1;
-  const paragraphs = page.content.split('\n\n').filter(Boolean);
+  // Split on double-newline (structured stories). If content has no \n\n,
+  // fall back to splitting on sentence boundaries (2 sentences per paragraph)
+  // so beginner stories don't display as a single wall of text.
+  const rawParas = page.content.split('\n\n').filter(Boolean);
+  const paragraphs = rawParas.length > 1
+    ? rawParas
+    : (page.content.match(/[^.!?]+[.!?]+["'\u201d]?\s*/g) || [page.content])
+        .reduce<string[]>((acc, sentence, i) => {
+          if (i % 2 === 0) acc.push(sentence.trim());
+          else acc[acc.length - 1] += ' ' + sentence.trim();
+          return acc;
+        }, [])
+        .filter(Boolean);
   const isThisPageGenerating = loadingPages.has(page.page_number);
 
   const illustrationEl = page.image_url ? (
@@ -574,5 +586,6 @@ export default function StoryPage() {
     </>
   );
 }
+
 
 
