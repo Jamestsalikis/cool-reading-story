@@ -26,14 +26,6 @@ const TALEPOP_STYLE_SUFFIX =
   'Each animal and character has exactly one head — no duplicate or extra heads anywhere. ' +
   'No text, no words, no letters in the image.';
 
-// Skin tone reinforcement — only applied for non-white skin to counter Flux's default bias
-// toward light-skinned characters. Injected just before the character anchor.
-const SKIN_TONE_MAP: Record<string, string> = {
-  Tanned: 'light tan skin',
-  'Semi Brown': 'warm medium-brown skin',
-  Brown: 'deep brown skin',
-};
-
 // Derive a stable integer seed from a story UUID so all pages of one story
 // use the same Flux seed  -  improves visual consistency across illustrations.
 function storyIdToSeed(storyId: string): number {
@@ -60,10 +52,13 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Replicate not configured' }, { status: 500 });
     }
 
-    // Fetch pages, character_anchor AND child appearance for skin tone reinforcement
+    // Fetch pages and character_anchor only.
+    // character_anchor already contains skin tone (baked in by generate-story).
+    // image_prompt also starts with character_anchor verbatim (per Claude's template),
+    // so we just need: STYLE PREFIX + image_prompt + STYLE SUFFIX.
     const { data: story } = await supabase
       .from('stories')
-      .select('pages, character_anchor, children(appearance)')
+      .select('pages, character_anchor')
       .eq('id', story_id)
       .eq('parent_id', user.id)
       .single();
@@ -78,28 +73,12 @@ export async function POST(request: Request) {
     const page = pages[pageIndex];
     if (!page.image_prompt) return NextResponse.json({ error: 'No image prompt' }, { status: 400 });
 
-    // Extract skin colour from child appearance (Supabase FK join may return array or object)
-    const childrenData = story.children;
-    const childData = Array.isArray(childrenData) ? childrenData[0] : childrenData;
-    const childAppearance = (childData as { appearance?: Record<string, string> } | null)?.appearance || {};
-    const skinColour = childAppearance.skinColour as string | undefined;
-    const skinDesc = skinColour ? SKIN_TONE_MAP[skinColour] : null;
-    // Inject skin tone reinforcement before character anchor for non-white skin.
-    // This fights Flux's default bias toward light-skinned characters.
-    const skinInstruction = skinDesc
-      ? `The child protagonist has ${skinDesc} — this must be clearly visible on their face and hands. `
-      : '';
-
-    // Build final prompt:
-    //   1. TALEPOP_STYLE_PREFIX — 3D CGI directive first (Flux weights early tokens most)
-    //   2. skinInstruction — explicit skin tone reinforcement (only for non-white)
-    //   3. character_anchor — locked character appearance from DB
-    //   4. page-specific scene description
-    //   5. TALEPOP_STYLE_SUFFIX — negative guardrails
-    const characterAnchor = story.character_anchor || '';
-    const finalPrompt = characterAnchor
-      ? `${TALEPOP_STYLE_PREFIX}${skinInstruction}${characterAnchor} ${page.image_prompt} ${TALEPOP_STYLE_SUFFIX}`
-      : `${TALEPOP_STYLE_PREFIX}${skinInstruction}${page.image_prompt} ${TALEPOP_STYLE_SUFFIX}`;
+    // Build final prompt.
+    // image_prompt already contains character_anchor at the start (Claude is instructed to copy
+    // it verbatim as the first line of every image_prompt). Adding characterAnchor separately
+    // would double it, bury the scene description, and cause "character portrait" images.
+    // Structure: STYLE (3D CGI first for Flux token weighting) → image_prompt (anchor + scene)
+    const finalPrompt = `${TALEPOP_STYLE_PREFIX}${page.image_prompt} ${TALEPOP_STYLE_SUFFIX}`;
 
     // Create prediction  -  retry once on 429 (rate limit) with a 5s backoff.
     // Two attempts x ~500ms each + 5s wait = ~6s worst case, within Hobby's 10s limit.
