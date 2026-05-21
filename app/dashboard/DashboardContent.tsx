@@ -1180,4 +1180,13 @@ export default function DashboardPage() {
             return (
               <button key={id} id={`tour-${id}-nav-mobile`} onClick={() => setActiveNav(id)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '3px', border: 'none', background: 'none', cursor: 'pointer', color: active ? '#FF6B35' : '#9CA8B4', padding: '8px 12px', flex: 1 }}>
                 <Icon size={22} />
-                <span style={{ fontSize: '0.6rem', fontWeight: active ? '700' : '500', letterSpacing: '0.04em', tex
+                <span style={{ fontSize: '0.6rem', fontWeight: active ? '700' : '500', letterSpacing: '0.04em', textTransform: 'uppercase' }}>{label}</span>
+              </button>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
