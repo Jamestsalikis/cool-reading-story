@@ -146,7 +146,7 @@ You MUST write a completely different story: different setting, different plot, 
 OUTFIT RULES: (a) Pick a specific, distinctive outfit that matches ${name}'s interests. (b) Name EVERY piece: top, bottom, shoes  -  each with a precise colour word. (c) Avoid generic combos like "blue shirt and brown pants"  -  use vivid specific colours like "cherry-red hoodie", "mustard-yellow overalls", "sky-blue sneakers". (d) The outfit is fixed for the whole book  -  never change it between pages.
 TEXT OUTFIT RULE: In the story content (page text), describe ${name}'s appearance ONLY using the outfit defined in the character_anchor. Do NOT invent different colours or clothing in the text that contradict the anchor (e.g. if the anchor says "cherry-red hoodie", the text must say "red hoodie" not "yellow hoodie").
 
-11. COMPANION ANCHOR: If the story features a recurring non-protagonist character (an animal, creature, magical being, or friend) who appears on 2 or more pages, define them in a `companion_anchor` field using this format:
+11. COMPANION ANCHOR: If the story features a recurring non-protagonist character (an animal, creature, magical being, or friend) who appears on 2 or more pages, define them in a 'companion_anchor' field using this format:
 "[species/type with specific colour e.g. 'a young Triceratops with bright green scales and short golden horns'], [size/build e.g. 'about the size of a car'], [1-2 distinctive features e.g. 'wearing a small red bandana around their neck'], same creature, same appearance in every image."
 COMPANION RULES: (a) Species/type must be 100% consistent across all pages - if page 1 has a Triceratops, every page must have a Triceratops, never a T-Rex or Brachiosaurus. (b) Colours and distinctive features are fixed for the whole book. (c) In every image_prompt where the companion appears, paste the companion_anchor after the character_anchor. (d) If no recurring non-protagonist character exists, set companion_anchor to an empty string "".
 
@@ -529,6 +529,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Story generation failed' }, { status: 500 });
   }
 }
+
 
 
 
