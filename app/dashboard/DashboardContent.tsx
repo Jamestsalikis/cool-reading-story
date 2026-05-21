@@ -97,6 +97,13 @@ function ProductTour({ steps, pendingStoryId, onDone }: {
   const PAD = 10;
   const TOOLTIP_W = 300;
 
+  // Lock body scroll while tour is active so spotlight position doesn't drift
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = prev; };
+  }, []);
+
   useEffect(() => {
     if (!current.targetId) {
       setSpotlightRect(null);
@@ -628,16 +635,47 @@ export default function DashboardPage() {
           // generate-image stores poll_url in DB; story page picks it up and goes
           // straight to polling instead of re-submitting to Replicate.
           void (async () => {
+            // Pre-generate AND fully poll all 5 images in background during tour.
+            // generate-image starts the Replicate prediction + saves poll_url to DB.
+            // poll-image polls until done, downloads, uploads to Supabase Storage,
+            // and saves image_url to DB  -  so images are ready when story page opens
+            // and page 1 image appears on the dashboard book cover.
             for (let _page = 1; _page <= 5; _page++) {
               try {
-                await fetch('/api/generate-image', {
+                // Step 1: Start prediction
+                const genRes = await fetch('/api/generate-image', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify({ story_id: storyId, page_number: _page }),
                 });
+                if (genRes.ok) {
+                  const genData = await genRes.json();
+                  const pollUrl = genData.poll_url;
+                  if (pollUrl) {
+                    // Step 2: Poll until image is uploaded to Supabase Storage
+                    for (let attempt = 0; attempt < 30; attempt++) {
+                      await new Promise(r => setTimeout(r, 2000));
+                      const pollRes = await fetch('/api/poll-image', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ story_id: storyId, page_number: _page, poll_url: pollUrl }),
+                      });
+                      if (!pollRes.ok) break;
+                      const pollData = await pollRes.json();
+                      if (pollData.status === 'succeeded') {
+                        // After page 1, refresh dashboard so cover image appears
+                        if (_page === 1) fetchData();
+                        break;
+                      }
+                      if (pollData.status === 'failed') break;
+                    }
+                  }
+                }
               } catch { /* story page handles regeneration on open */ }
-              await new Promise(r => setTimeout(r, 400));
+              await new Promise(r => setTimeout(r, 300));
             }
+            // Final refresh so all covers are up to date
+            fetchData();
           })();
         } else {
           // Tour already seen - go straight to the story
