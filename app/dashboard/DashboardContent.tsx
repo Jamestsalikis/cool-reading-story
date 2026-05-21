@@ -574,6 +574,7 @@ export default function DashboardPage() {
   const generatingLock = useRef(false);
   const [generatingName, setGeneratingName] = useState('');
   const [generateError, setGenerateError] = useState('');
+  const [dailyLimitChild, setDailyLimitChild] = useState<string | null>(null);
   const [paywallReason, setPaywallReason] = useState<'free_exhausted' | 'monthly_limit' | 'no_subscription' | 'daily_limit' | null>(null);
   const [editingChild, setEditingChild] = useState<ChildRecord | null>(null);
   const [sub, setSub] = useState<{ status: string; stories_this_month: number; stories_today: number; extra_books_today: number; current_period_end: string | null; has_seen_tour: boolean } | null>(null);
@@ -720,11 +721,12 @@ export default function DashboardPage() {
     generatingLock.current = true;
     const child = children.find(c => c.id === childId);
     setGeneratingName(child?.name || '');
-    setGenerating(`new-${childId}`); setGenerateError('');
+    setGenerating(`new-${childId}`); setGenerateError(''); setDailyLimitChild(null);
     try {
       const res = await fetch('/api/generate-story', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ child_id: childId }) });
       const data = await res.json();
       if (res.status === 402) { setPaywallReason(data.reason); return; }
+      if (res.status === 429) { const child = children.find(c => c.id === childId); setDailyLimitChild(child?.name || 'your child'); return; }
       if (!res.ok) { setGenerateError(data.error || data.message || 'Something went wrong. Please try again.'); return; }
       const storyId = data.story?.id;
       if (!storyId) { await fetchData(); return; }
@@ -741,11 +743,12 @@ export default function DashboardPage() {
     if (!storyRef) return;
     const childName = storyRef.children?.name || '';
     setGeneratingName(childName);
-    setGenerating(`sequel-${storyId}`); setGenerateError('');
+    setGenerating(`sequel-${storyId}`); setGenerateError(''); setDailyLimitChild(null);
     try {
       const res = await fetch('/api/generate-sequel', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ story_id: storyId }) });
       const data = await res.json();
       if (res.status === 402) { setPaywallReason(data.reason); return; }
+      if (res.status === 429) { const sr = stories.find(s => s.id === storyId); const chName = sr?.children?.name || 'your child'; setDailyLimitChild(chName); return; }
       if (!res.ok) { setGenerateError(data.error || 'Something went wrong.'); return; }
       const newStoryId = data.story?.id;
       if (!newStoryId) { await fetchData(); return; }
@@ -910,7 +913,7 @@ export default function DashboardPage() {
                     {childrenAvailableToday}/{children.length} {children.length === 1 ? 'child' : 'children'} available today
                   </span>
                   <span style={{ fontSize: '0.75rem', fontWeight: '600', padding: '3px 10px', borderRadius: '20px', background: '#F5F3FF', color: '#6D28D9', border: '1px solid #DDD6FE' }}>
-                    {booksRemainingThisMonth}/15 stories remaining this month
+                    1 story per child · resets midnight
                   </span>
                 </>
               )}
@@ -928,6 +931,16 @@ export default function DashboardPage() {
 
         {activeNav === 'stories' && (
           <>
+            {dailyLimitChild && (
+              <div style={{ background: '#FFF7ED', border: '1px solid #FED7AA', borderRadius: '10px', padding: '14px 18px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <span style={{ fontSize: '1.4rem' }}>🌙</span>
+                <div>
+                  <div style={{ fontWeight: '700', fontSize: '0.9rem', color: '#92400E', marginBottom: '2px' }}>{dailyLimitChild}&apos;s story for today is done!</div>
+                  <div style={{ fontSize: '0.82rem', color: '#B45309' }}>Each child gets one new story per day. A fresh story unlocks at midnight — or grab an extra one now for 99¢.</div>
+                </div>
+                <button onClick={() => setDailyLimitChild(null)} style={{ marginLeft: 'auto', background: 'none', border: 'none', cursor: 'pointer', color: '#B45309', fontSize: '1.1rem', padding: '4px', flexShrink: 0 }}>✕</button>
+              </div>
+            )}
             {generateError && <div style={{ background: '#FEE2E2', borderRadius: '10px', padding: '12px 16px', marginBottom: '24px', fontSize: '0.875rem', color: '#991B1B' }}>{generateError}</div>}
 
             {loading ? (
@@ -1249,4 +1262,5 @@ export default function DashboardPage() {
     </div>
   );
 }
+
 
