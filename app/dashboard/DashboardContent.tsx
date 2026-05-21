@@ -118,8 +118,8 @@ function ProductTour({ steps, pendingStoryId, onDone }: {
     const update = () => {
       const el = document.getElementById(current.targetId!);
       if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        setTimeout(() => setSpotlightRect(el.getBoundingClientRect()), 320);
+        el.scrollIntoView({ behavior: 'instant', block: 'center' });
+        setTimeout(() => setSpotlightRect(el.getBoundingClientRect()), 80);
       }
     };
     update();
