@@ -142,7 +142,7 @@ You MUST write a completely different story: different setting, different plot, 
 8. Make it feel uniquely written FOR ${name}  -  not a generic story with a name swapped in
 9. Split the story into exactly 5 pages. Each page should have 2-4 paragraphs of text.
 10. Before writing page prompts, define a CHARACTER ANCHOR using EXACTLY this format for the character_anchor field:
-"Pixar 3D CGI render, subsurface skin scattering, volumetric rim lighting, specular eye highlights, smooth rounded cartoon anatomy, large expressive eyes, vibrant saturated colours, professional Disney Pixar animated feature film quality. ${name}, a ${age}-year-old child with [EXACT SKIN TONE: e.g. 'fair/light skin' or 'warm brown skin' or 'deep brown skin'], [EXACT HAIR: colour + style e.g. 'curly auburn hair'], wearing [EXACT OUTFIT: name every piece with specific colours e.g. 'a bright cobalt-blue hoodie with a yellow star, forest-green cargo shorts, and orange high-top sneakers']  -  same character, same face, same exact outfit in every image."
+"Pixar 3D CGI render, subsurface skin scattering, volumetric rim lighting, specular eye highlights, smooth rounded cartoon anatomy, large expressive eyes, vibrant saturated colours, professional Disney Pixar animated feature film quality. ${name}, a ${age}-year-old child with ${skinDesc ?? 'fair/light skin'}, [EXACT HAIR: colour + style e.g. 'curly auburn hair'], wearing [EXACT OUTFIT: name every piece with specific colours e.g. 'a bright cobalt-blue hoodie with a yellow star, forest-green cargo shorts, and orange high-top sneakers']  -  same character, same face, same exact outfit in every image."
 OUTFIT RULES: (a) Pick a specific, distinctive outfit that matches ${name}'s interests. (b) Name EVERY piece: top, bottom, shoes  -  each with a precise colour word. (c) Avoid generic combos like "blue shirt and brown pants"  -  use vivid specific colours like "cherry-red hoodie", "mustard-yellow overalls", "sky-blue sneakers". (d) The outfit is fixed for the whole book  -  never change it between pages.
 
 CRITICAL IMAGE PROMPT RULES:
@@ -188,7 +188,7 @@ Return ONLY valid JSON, no markdown, no explanation:
   "moral": "The gentle lesson in one sentence",
   "theme_emoji": "One emoji representing the story theme",
   "word_count": estimated_total_word_count_as_number,
-  "character_anchor": "Pixar 3D CGI render, subsurface skin scattering, volumetric rim lighting, specular eye highlights, smooth rounded cartoon anatomy, large expressive eyes, vibrant saturated colours, professional Disney Pixar animated feature film quality. [NAME], a [AGE]-year-old child with [EXACT SKIN TONE e.g. fair/light skin OR warm brown skin], [EXACT HAIR COLOUR AND STYLE], wearing [EXACT OUTFIT: every piece named with specific vivid colours]  -  same character, same face, same exact outfit in every image.",
+  "character_anchor": "Pixar 3D CGI render, subsurface skin scattering, volumetric rim lighting, specular eye highlights, smooth rounded cartoon anatomy, large expressive eyes, vibrant saturated colours, professional Disney Pixar animated feature film quality. ${name}, a ${age}-year-old child with ${skinDesc ?? 'fair/light skin'}, [EXACT HAIR COLOUR AND STYLE], wearing [EXACT OUTFIT: every piece named with specific vivid colours]  -  same character, same face, same exact outfit in every image.",
   "pages": [
     {
       "page_number": 1,
