@@ -144,6 +144,11 @@ You MUST write a completely different story: different setting, different plot, 
 10. Before writing page prompts, define a CHARACTER ANCHOR using EXACTLY this format for the character_anchor field:
 "Pixar 3D CGI render, subsurface skin scattering, volumetric rim lighting, specular eye highlights, smooth rounded cartoon anatomy, large expressive eyes, vibrant saturated colours, professional Disney Pixar animated feature film quality. ${name}, a ${age}-year-old child with ${skinDesc ?? 'fair/light skin'}, [EXACT HAIR: colour + style e.g. 'curly auburn hair'], wearing [EXACT OUTFIT: name every piece with specific colours e.g. 'a bright cobalt-blue hoodie with a yellow star, forest-green cargo shorts, and orange high-top sneakers']  -  same character, same face, same exact outfit in every image."
 OUTFIT RULES: (a) Pick a specific, distinctive outfit that matches ${name}'s interests. (b) Name EVERY piece: top, bottom, shoes  -  each with a precise colour word. (c) Avoid generic combos like "blue shirt and brown pants"  -  use vivid specific colours like "cherry-red hoodie", "mustard-yellow overalls", "sky-blue sneakers". (d) The outfit is fixed for the whole book  -  never change it between pages.
+TEXT OUTFIT RULE: In the story content (page text), describe ${name}'s appearance ONLY using the outfit defined in the character_anchor. Do NOT invent different colours or clothing in the text that contradict the anchor (e.g. if the anchor says "cherry-red hoodie", the text must say "red hoodie" not "yellow hoodie").
+
+11. COMPANION ANCHOR: If the story features a recurring non-protagonist character (an animal, creature, magical being, or friend) who appears on 2 or more pages, define them in a `companion_anchor` field using this format:
+"[species/type with specific colour e.g. 'a young Triceratops with bright green scales and short golden horns'], [size/build e.g. 'about the size of a car'], [1-2 distinctive features e.g. 'wearing a small red bandana around their neck'], same creature, same appearance in every image."
+COMPANION RULES: (a) Species/type must be 100% consistent across all pages - if page 1 has a Triceratops, every page must have a Triceratops, never a T-Rex or Brachiosaurus. (b) Colours and distinctive features are fixed for the whole book. (c) In every image_prompt where the companion appears, paste the companion_anchor after the character_anchor. (d) If no recurring non-protagonist character exists, set companion_anchor to an empty string "".
 
 CRITICAL IMAGE PROMPT RULES:
 
@@ -155,6 +160,7 @@ ANATOMY (non-negotiable):
 
 CONSISTENCY (non-negotiable):
 - Start EVERY image_prompt with the character_anchor string  -  word for word, no changes
+- If a companion_anchor is defined, paste it immediately after the character_anchor in every image_prompt where that companion appears
 - The character must look identical in all 5 images: same face, same age (${age}), same exact outfit  -  never taller, never older, never different clothes
 - NEVER change the outfit between pages: if the anchor says "cherry-red hoodie and mustard-yellow shorts", every page must show exactly that
 - End every image prompt with: "No text, no words, no letters anywhere in the image."
@@ -189,10 +195,11 @@ Return ONLY valid JSON, no markdown, no explanation:
   "theme_emoji": "One emoji representing the story theme",
   "word_count": estimated_total_word_count_as_number,
   "character_anchor": "Pixar 3D CGI render, subsurface skin scattering, volumetric rim lighting, specular eye highlights, smooth rounded cartoon anatomy, large expressive eyes, vibrant saturated colours, professional Disney Pixar animated feature film quality. ${name}, a ${age}-year-old child with ${skinDesc ?? 'fair/light skin'}, [EXACT HAIR COLOUR AND STYLE], wearing [EXACT OUTFIT: every piece named with specific vivid colours]  -  same character, same face, same exact outfit in every image.",
+  "companion_anchor": "[IF story has a recurring creature/animal/friend: describe species+colour+size+1-2 fixed features. If no recurring companion, use empty string \"\"]",
   "pages": [
     {
       "page_number": 1,
-      "content": "Page text here  -  2-4 paragraphs",
+      "content": "First short paragraph (1-3 sentences).\n\nSecond short paragraph (1-3 sentences).\n\nThird short paragraph (1-3 sentences if needed).",
       "image_prompt": "[character_anchor copied verbatim] [3-5 sentences that describe THIS PAGE SPECIFICALLY: (1) the exact named location from this page's text e.g. 'a glowing crystal cave with purple stalactites dripping silver light', (2) the specific action the character is doing at this exact story moment e.g. 'leaping across a gap between two floating islands, arms outstretched, hair streaming behind', (3) any named creature, object, or character from this page e.g. 'a tiny dragon with emerald scales perched on her shoulder blowing a single spark', (4) the emotional expression on the character's face matching this page's mood]. No text, no words, no letters anywhere in the image."
     }
   ]
@@ -522,6 +529,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Story generation failed' }, { status: 500 });
   }
 }
+
 
 
 
