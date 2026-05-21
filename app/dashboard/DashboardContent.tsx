@@ -97,11 +97,17 @@ function ProductTour({ steps, pendingStoryId, onDone }: {
   const PAD = 10;
   const TOOLTIP_W = 300;
 
-  // Lock body scroll while tour is active so spotlight position doesn't drift
+  // Block user-initiated scroll during tour so spotlight doesn't drift,
+  // but use event listeners instead of overflow:hidden so that programmatic
+  // scrollIntoView still works for spotlighting off-screen elements.
   useEffect(() => {
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    return () => { document.body.style.overflow = prev; };
+    const prevent = (e: Event) => e.preventDefault();
+    window.addEventListener('wheel', prevent, { passive: false });
+    window.addEventListener('touchmove', prevent, { passive: false });
+    return () => {
+      window.removeEventListener('wheel', prevent);
+      window.removeEventListener('touchmove', prevent);
+    };
   }, []);
 
   useEffect(() => {
