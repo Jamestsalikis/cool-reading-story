@@ -612,7 +612,7 @@ export default function DashboardPage() {
       window.history.replaceState({}, '', '/dashboard');
       fetchData();
     } else if (params.get('new_story')) {
-      // Coming from onboarding — show confetti + product tour for first-timers
+      // Coming from onboarding - show confetti + product tour for first-timers
       const storyId = params.get('new_story')!;
       const childName = params.get('child_name') || '';
       window.history.replaceState({}, '', '/dashboard');
@@ -624,17 +624,23 @@ export default function DashboardPage() {
         if (!subData?.has_seen_tour) {
           setShowTour(true);
           // Pre-generate all 5 page images in background while user reads tour.
+          // Sequential with 400ms stagger to avoid Replicate rate limits.
           // generate-image stores poll_url in DB; story page picks it up and goes
           // straight to polling instead of re-submitting to Replicate.
-          for (let _page = 1; _page <= 5; _page++) {
-            fetch('/api/generate-image', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ story_id: storyId, page_number: _page }),
-            }).catch(() => {});
-          }
+          void (async () => {
+            for (let _page = 1; _page <= 5; _page++) {
+              try {
+                await fetch('/api/generate-image', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ story_id: storyId, page_number: _page }),
+                });
+              } catch { /* story page handles regeneration on open */ }
+              await new Promise(r => setTimeout(r, 400));
+            }
+          })();
         } else {
-          // Tour already seen — go straight to the story
+          // Tour already seen - go straight to the story
           router.push(`/stories/${storyId}`);
         }
       });
@@ -720,7 +726,7 @@ export default function DashboardPage() {
     }
   };
 
-  // Tour steps — defined here so they can reference pendingTourChildName
+  // Tour steps - defined here so they can reference pendingTourChildName
   const tourSteps: TourStep[] = [
     {
       title: pendingTourChildName ? `${pendingTourChildName}'s story is ready! 🎉` : 'Welcome to TalePop! 🎉',
@@ -729,7 +735,7 @@ export default function DashboardPage() {
     },
     {
       title: 'Your bookshelf',
-      body: "Every story lives here. Click any book cover to open it and read with your child — illustrations generate as you go.",
+      body: "Every story lives here. Click any book cover to open it and read with your child. Illustrations generate as you flip through.",
       targetId: 'tour-shelf',
     },
     {
@@ -738,14 +744,14 @@ export default function DashboardPage() {
       targetId: 'tour-new-story',
     },
     {
-      title: 'Children profiles',
-      body: "Head to Children to add more kids or update their details — interests, appearance, reading level — so every story feels truly personal.",
-      targetId: 'tour-children-nav',
+      title: 'Continue the series',
+      body: "Loved a story? Tap 'Next chapter' on any book to add a new volume. Each child can have up to 4 chapters, building their very own series.",
+      targetId: null,
     },
     {
-      title: 'Subscription',
-      body: `You have ${freeStoriesRemaining > 0 ? `${freeStoriesRemaining} free ${freeStoriesRemaining === 1 ? 'story' : 'stories'}` : 'stories'} to get started. Upgrade anytime for unlimited nightly books for every child.`,
-      targetId: 'tour-account-nav',
+      title: 'Children profiles',
+      body: "Head to Children to add more kids or update their details like interests, appearance, and reading level, so every story feels truly personal.",
+      targetId: 'tour-children-nav',
     },
   ];
 
@@ -1138,7 +1144,7 @@ export default function DashboardPage() {
               <p style={{ fontSize: '0.82rem', color: '#5E6A7A', marginBottom: '12px' }}>Share your code. Your friend gets <strong>10% off</strong> their first month.</p>
               <div style={{ background: '#fff', border: '1.5px solid #F0E4D0', borderRadius: '12px', padding: '16px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
                 <span style={{ fontFamily: 'monospace', fontSize: '1.15rem', fontWeight: '800', letterSpacing: '0.12em', color: '#FF6B35' }}>
-                  {userId ? `TALE-${userId.replace(/-/g,'').slice(0,8).toUpperCase()}` : '—'}
+                  {userId ? `TALE-${userId.replace(/-/g,'').slice(0,8).toUpperCase()}` : 'N/A'}
                 </span>
                 <button onClick={() => {
                   const code = `TALE-${userId.replace(/-/g,'').slice(0,8).toUpperCase()}`;
