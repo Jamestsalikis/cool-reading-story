@@ -563,7 +563,7 @@ export default function DashboardPage() {
   const [generateError, setGenerateError] = useState('');
   const [paywallReason, setPaywallReason] = useState<'free_exhausted' | 'monthly_limit' | 'no_subscription' | 'daily_limit' | null>(null);
   const [editingChild, setEditingChild] = useState<ChildRecord | null>(null);
-  const [sub, setSub] = useState<{ status: string; stories_this_month: number; stories_today: number; extra_books_today: number; current_period_end: string | null } | null>(null);
+  const [sub, setSub] = useState<{ status: string; stories_this_month: number; stories_today: number; extra_books_today: number; current_period_end: string | null; has_seen_tour: boolean } | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
   const [showTour, setShowTour] = useState(false);
@@ -589,13 +589,14 @@ export default function DashboardPage() {
     if (user) { setUserEmail(user.email ?? ''); setUserId(user.id); }
     const { data: childrenData } = await supabase.from('children').select('*').order('created_at', { ascending: true });
     const { data: storiesData } = await supabase.from('stories').select('id, title, created_at, word_count, series_id, series_title, volume_number, pages, children(name, age)').order('created_at', { ascending: false });
-    const { data: subData } = await supabase.from('user_subscriptions').select('status, stories_this_month, stories_today, extra_books_today, current_period_end').eq('user_id', user?.id ?? '').single();
+    const { data: subData } = await supabase.from('user_subscriptions').select('status, stories_this_month, stories_today, extra_books_today, current_period_end, has_seen_tour').eq('user_id', user?.id ?? '').single();
     const { data: adminRow } = await supabase.from('admin_emails').select('email').eq('email', user?.email ?? '').maybeSingle();
     setSub(subData);
     setIsAdmin(!!adminRow);
     setChildren(childrenData || []);
     setStories(storiesData || []);
     setLoading(false);
+    return { subData, userId: user?.id ?? '' };
   }, [supabase]);
 
   useEffect(() => {
@@ -615,12 +616,12 @@ export default function DashboardPage() {
       const storyId = params.get('new_story')!;
       const childName = params.get('child_name') || '';
       window.history.replaceState({}, '', '/dashboard');
-      fetchData().then(() => {
+      fetchData().then(({ subData }) => {
         const decodedName = decodeURIComponent(childName);
         setPendingTourStoryId(storyId);
         setPendingTourChildName(decodedName);
         setShowConfetti(true);
-        if (!localStorage.getItem('talepop_tour_done')) {
+        if (!subData?.has_seen_tour) {
           setShowTour(true);
         } else {
           // Tour already seen — go straight to the story
@@ -774,7 +775,7 @@ export default function DashboardPage() {
           pendingStoryId={pendingTourStoryId || undefined}
           onDone={(navigateTo) => {
             setShowTour(false);
-            localStorage.setItem('talepop_tour_done', '1');
+            supabase.from('user_subscriptions').update({ has_seen_tour: true }).eq('user_id', userId).then(() => {});
             if (navigateTo) router.push(navigateTo);
           }}
         />
@@ -1179,12 +1180,4 @@ export default function DashboardPage() {
             return (
               <button key={id} id={`tour-${id}-nav-mobile`} onClick={() => setActiveNav(id)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '3px', border: 'none', background: 'none', cursor: 'pointer', color: active ? '#FF6B35' : '#9CA8B4', padding: '8px 12px', flex: 1 }}>
                 <Icon size={22} />
-                <span style={{ fontSize: '0.6rem', fontWeight: active ? '700' : '500', letterSpacing: '0.04em', textTransform: 'uppercase' }}>{label}</span>
-              </button>
-            );
-          })}
-        </div>
-      )}
-    </div>
-  );
-}
+                <span style={{ fontSize: '0.6rem', fontWeight: active ? '700' : '500', letterSpacing: '0.04em', tex
