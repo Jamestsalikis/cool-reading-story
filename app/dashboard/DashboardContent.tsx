@@ -623,6 +623,16 @@ export default function DashboardPage() {
         setShowConfetti(true);
         if (!subData?.has_seen_tour) {
           setShowTour(true);
+          // Pre-generate all 5 page images in background while user reads tour.
+          // generate-image stores poll_url in DB; story page picks it up and goes
+          // straight to polling instead of re-submitting to Replicate.
+          for (let _page = 1; _page <= 5; _page++) {
+            fetch('/api/generate-image', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ story_id: storyId, page_number: _page }),
+            }).catch(() => {});
+          }
         } else {
           // Tour already seen — go straight to the story
           router.push(`/stories/${storyId}`);
