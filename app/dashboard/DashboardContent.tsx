@@ -38,9 +38,9 @@ const pageStyles = `
     0%, 100% { opacity: 1; transform: scale(1); }
     50%       { opacity: 0.7; transform: scale(1.08); }
   }
-  @keyframes banner-slide-in {
-    0%   { opacity: 0; transform: translateY(-16px) scale(0.97); }
-    100% { opacity: 1; transform: translateY(0) scale(1); }
+  @keyframes tour-fade-in {
+    0%   { opacity: 0; transform: scale(0.95) translateY(8px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
   }
 `;
 
@@ -80,6 +80,161 @@ function Confetti({ onDone }: { onDone: () => void }) {
     </div>
   );
 }
+
+// ── Product Tour ───────────────────────────────────────────────────────────────
+
+type TourStep = { title: string; body: string; targetId: string | null };
+
+function ProductTour({ steps, pendingStoryId, onDone }: {
+  steps: TourStep[];
+  pendingStoryId?: string;
+  onDone: (navigateTo?: string) => void;
+}) {
+  const [step, setStep] = useState(0);
+  const [spotlightRect, setSpotlightRect] = useState<DOMRect | null>(null);
+  const current = steps[step];
+  const isLast = step === steps.length - 1;
+  const PAD = 10;
+  const TOOLTIP_W = 300;
+
+  useEffect(() => {
+    if (!current.targetId) {
+      setSpotlightRect(null);
+      return;
+    }
+    const update = () => {
+      const el = document.getElementById(current.targetId!);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        setTimeout(() => setSpotlightRect(el.getBoundingClientRect()), 320);
+      }
+    };
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, [step, current.targetId]);
+
+  const goNext = () => {
+    if (isLast) onDone(pendingStoryId ? `/stories/${pendingStoryId}` : undefined);
+    else setStep(s => s + 1);
+  };
+  const goBack = () => setStep(s => s - 1);
+  const skip = () => onDone(pendingStoryId ? `/stories/${pendingStoryId}` : undefined);
+
+  // Tooltip positioning
+  let tooltipStyle: React.CSSProperties;
+  let arrowStyle: React.CSSProperties | null = null;
+
+  if (!spotlightRect) {
+    tooltipStyle = {
+      position: 'fixed', top: '50%', left: '50%',
+      transform: 'translate(-50%, -50%)', width: `${TOOLTIP_W}px`,
+    };
+  } else {
+    const sr = spotlightRect;
+    const belowY = sr.bottom + PAD + 16;
+    const aboveY = sr.top - PAD - 16;
+    const useBelow = belowY + 160 < window.innerHeight;
+    const centreX = Math.max(16, Math.min(window.innerWidth - TOOLTIP_W - 16, sr.left + sr.width / 2 - TOOLTIP_W / 2));
+    if (useBelow) {
+      tooltipStyle = { position: 'fixed', top: `${belowY}px`, left: `${centreX}px`, width: `${TOOLTIP_W}px` };
+      arrowStyle = { position: 'absolute', top: '-7px', left: `${sr.left + sr.width / 2 - centreX - 7}px`, width: 0, height: 0, borderLeft: '7px solid transparent', borderRight: '7px solid transparent', borderBottom: '7px solid #fff' };
+    } else {
+      tooltipStyle = { position: 'fixed', bottom: `${window.innerHeight - aboveY}px`, left: `${centreX}px`, width: `${TOOLTIP_W}px` };
+      arrowStyle = { position: 'absolute', bottom: '-7px', left: `${sr.left + sr.width / 2 - centreX - 7}px`, width: 0, height: 0, borderLeft: '7px solid transparent', borderRight: '7px solid transparent', borderTop: '7px solid #fff' };
+    }
+  }
+
+  return (
+    <>
+      {/* Overlay / spotlight */}
+      {spotlightRect ? (
+        <div style={{
+          position: 'fixed',
+          left: spotlightRect.left - PAD,
+          top: spotlightRect.top - PAD,
+          width: spotlightRect.width + PAD * 2,
+          height: spotlightRect.height + PAD * 2,
+          borderRadius: '14px',
+          zIndex: 600,
+          boxShadow: '0 0 0 9999px rgba(13,10,8,0.78)',
+          pointerEvents: 'none',
+          transition: 'all 0.3s ease',
+        }} />
+      ) : (
+        <div style={{
+          position: 'fixed', inset: 0,
+          background: 'rgba(13,10,8,0.78)',
+          zIndex: 599,
+        }} onClick={e => e.stopPropagation()} />
+      )}
+
+      {/* Tooltip card */}
+      <div style={{
+        ...tooltipStyle,
+        zIndex: 601,
+        background: '#fff',
+        borderRadius: '16px',
+        padding: '22px 22px 18px',
+        boxShadow: '0 24px 64px rgba(0,0,0,0.45)',
+        animation: 'tour-fade-in 0.28s cubic-bezier(0.34,1.56,0.64,1)',
+      }}>
+        {arrowStyle && <div style={{ position: 'relative' }}><div style={arrowStyle} /></div>}
+
+        {/* Header */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '10px' }}>
+          <h3 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.15rem', color: '#0D183D', lineHeight: 1.25, flex: 1, paddingRight: '8px' }}>
+            {current.title}
+          </h3>
+          <button onClick={skip} title="Skip tour" style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#C0C8D4', fontSize: '1.2rem', lineHeight: 1, padding: 0, flexShrink: 0, marginTop: '1px' }}>
+            <X size={16} />
+          </button>
+        </div>
+
+        <p style={{ fontSize: '0.875rem', color: '#5E6A7A', lineHeight: 1.6, marginBottom: '18px' }}>
+          {current.body}
+        </p>
+
+        {/* Footer */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          {/* Step dots */}
+          <div style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
+            {steps.map((_, i) => (
+              <div key={i} style={{
+                width: i === step ? '18px' : '6px',
+                height: '6px',
+                borderRadius: '3px',
+                background: i === step ? '#FF6B35' : '#E5E7EB',
+                transition: 'all 0.25s ease',
+              }} />
+            ))}
+          </div>
+
+          {/* Nav buttons */}
+          <div style={{ display: 'flex', gap: '8px' }}>
+            {step > 0 && (
+              <button onClick={goBack} style={{
+                padding: '0.5rem 1rem', border: '1.5px solid #F0E4D0', borderRadius: '8px',
+                background: '#fff', color: '#5E6A7A', cursor: 'pointer', fontSize: '0.8rem', fontWeight: '600',
+              }}>
+                Back
+              </button>
+            )}
+            <button onClick={goNext} style={{
+              padding: '0.5rem 1.3rem', border: 'none', borderRadius: '8px',
+              background: '#FF6B35', color: '#fff', cursor: 'pointer', fontSize: '0.82rem', fontWeight: '700',
+              boxShadow: '0 3px 10px rgba(255,107,53,0.35)',
+            }}>
+              {isLast ? (pendingStoryId ? 'Read my story →' : 'Done ✓') : 'Next →'}
+            </button>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+// ── BookCard ───────────────────────────────────────────────────────────────────
 
 function BookCard({ story, palette, onContinue }: { story: Story; palette: Palette; onContinue?: () => void }) {
   const router = useRouter();
@@ -193,7 +348,6 @@ function SeriesFan({ volumes, palette, onContinue }: { volumes: Story[]; palette
 type ShelfItem = { type: 'single'; story: Story } | { type: 'series'; seriesId: string; volumes: Story[] };
 
 function buildShelf(stories: Story[], childName: string): ShelfItem[] {
-  // Only include stories that have a generated cover image
   const mine = stories.filter(s => s.children?.name === childName);
   const seriesMap = new Map<string, Story[]>();
   const singles: Story[] = [];
@@ -360,7 +514,7 @@ function EditChildModal({ child, palette, onClose, onSaved }: { child: ChildReco
               <input style={inp} placeholder="Pet type (e.g. Dog)" value={petType} onChange={e => setPetType(e.target.value)} />
             </div>
           </div>
-          {/* Follow-up Q&A — editable */}
+          {/* Follow-up Q&A */}
           {followUpAnswers.length > 0 && (
             <div>
               <label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '8px' }}>
@@ -395,6 +549,8 @@ function EditChildModal({ child, palette, onClose, onSaved }: { child: ChildReco
   );
 }
 
+// ── Main dashboard ─────────────────────────────────────────────────────────────
+
 export default function DashboardPage() {
   const [activeNav, setActiveNav] = useState('stories');
   const [isMobile, setIsMobile] = useState(false);
@@ -410,7 +566,9 @@ export default function DashboardPage() {
   const [sub, setSub] = useState<{ status: string; stories_this_month: number; stories_today: number; extra_books_today: number; current_period_end: string | null } | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
-  const [bookReady, setBookReady] = useState<{ storyId: string; childName: string } | null>(null);
+  const [showTour, setShowTour] = useState(false);
+  const [pendingTourStoryId, setPendingTourStoryId] = useState('');
+  const [pendingTourChildName, setPendingTourChildName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [userId, setUserId] = useState('');
   const [accountSection, setAccountSection] = useState<null | 'email' | 'password'>(null);
@@ -446,7 +604,6 @@ export default function DashboardPage() {
     const params = new URLSearchParams(search);
     if (params.get('subscribed') === 'true') {
       window.history.replaceState({}, '', '/dashboard');
-      // Sync subscription from Stripe — fallback in case webhook was delayed
       fetch('/api/stripe/sync-subscription', { method: 'POST' })
         .then(() => fetchData())
         .catch(() => fetchData());
@@ -454,13 +611,21 @@ export default function DashboardPage() {
       window.history.replaceState({}, '', '/dashboard');
       fetchData();
     } else if (params.get('new_story')) {
-      // Coming from onboarding — show the book-ready banner
+      // Coming from onboarding — show confetti + product tour for first-timers
       const storyId = params.get('new_story')!;
       const childName = params.get('child_name') || '';
       window.history.replaceState({}, '', '/dashboard');
       fetchData().then(() => {
-        setBookReady({ storyId, childName: decodeURIComponent(childName) });
+        const decodedName = decodeURIComponent(childName);
+        setPendingTourStoryId(storyId);
+        setPendingTourChildName(decodedName);
         setShowConfetti(true);
+        if (!localStorage.getItem('talepop_tour_done')) {
+          setShowTour(true);
+        } else {
+          // Tour already seen — go straight to the story
+          router.push(`/stories/${storyId}`);
+        }
       });
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -472,12 +637,10 @@ export default function DashboardPage() {
   }, []);
 
   const booksRemainingToday = sub?.status === 'subscribed' ? Math.max(0, 1 + (sub.extra_books_today ?? 0) - (sub.stories_today ?? 0)) : 0;
-  // Actual stories-remaining counter (cap 15/month for premium users)
   const booksRemainingThisMonth = sub?.status === 'subscribed'
     ? Math.max(0, 15 - (sub.stories_this_month ?? 0))
     : 0;
 
-  // Per-child: which children have already received a story today?
   const todayStr = new Date().toISOString().split('T')[0];
   const childStoriesUsedToday = new Set(
     stories
@@ -486,8 +649,6 @@ export default function DashboardPage() {
       .filter(Boolean)
   );
   const childrenAvailableToday = children.filter(c => !childStoriesUsedToday.has(c.name)).length;
-
-  // Computed from per-child flag — each child gets 1 free story
   const freeStoriesRemaining = sub?.status === 'subscribed' ? 0 : children.filter(c => !c.has_used_free_story).length;
 
   const storiesByChild = (childId: string) => { const child = children.find(c => c.id === childId); if (!child) return []; return stories.filter(s => s.children?.name === child.name); };
@@ -506,10 +667,9 @@ export default function DashboardPage() {
       if (!res.ok) { setGenerateError(data.error || data.message || 'Something went wrong. Please try again.'); return; }
       const storyId = data.story?.id;
       if (!storyId) { await fetchData(); return; }
-      // Refresh dashboard data then navigate — let story page handle all image generation
       await fetchData();
-      setBookReady({ storyId, childName: child?.name || '' });
       setShowConfetti(true);
+      router.push(`/stories/${storyId}`);
     } finally { setGenerating(null); generatingLock.current = false; }
   };
 
@@ -528,10 +688,9 @@ export default function DashboardPage() {
       if (!res.ok) { setGenerateError(data.error || 'Something went wrong.'); return; }
       const newStoryId = data.story?.id;
       if (!newStoryId) { await fetchData(); return; }
-      // Refresh then navigate — story page handles all image generation
       await fetchData();
-      setBookReady({ storyId: newStoryId, childName });
       setShowConfetti(true);
+      router.push(`/stories/${newStoryId}`);
     } finally { setGenerating(null); generatingLock.current = false; }
   };
 
@@ -549,6 +708,35 @@ export default function DashboardPage() {
       setGenerateError('Could not start checkout. Please try again.');
     }
   };
+
+  // Tour steps — defined here so they can reference pendingTourChildName
+  const tourSteps: TourStep[] = [
+    {
+      title: pendingTourChildName ? `${pendingTourChildName}'s story is ready! 🎉` : 'Welcome to TalePop! 🎉',
+      body: "Your first personalised story has been written. Let us give you a quick tour so you know your way around.",
+      targetId: null,
+    },
+    {
+      title: 'Your bookshelf',
+      body: "Every story lives here. Click any book cover to open it and read with your child — illustrations generate as you go.",
+      targetId: 'tour-shelf',
+    },
+    {
+      title: 'Write new stories',
+      body: "Tap 'New story' whenever you want a fresh adventure. Each book is uniquely crafted around your child's interests, age, and reading level.",
+      targetId: 'tour-new-story',
+    },
+    {
+      title: 'Children profiles',
+      body: "Head to Children to add more kids or update their details — interests, appearance, reading level — so every story feels truly personal.",
+      targetId: 'tour-children-nav',
+    },
+    {
+      title: 'Subscription',
+      body: `You have ${freeStoriesRemaining > 0 ? `${freeStoriesRemaining} free ${freeStoriesRemaining === 1 ? 'story' : 'stories'}` : 'stories'} to get started. Upgrade anytime for unlimited nightly books for every child.`,
+      targetId: 'tour-account-nav',
+    },
+  ];
 
   const navItems = [
     { id: 'stories', label: 'Stories', icon: BookOpen },
@@ -579,6 +767,19 @@ export default function DashboardPage() {
         />
       )}
 
+      {/* Product tour */}
+      {showTour && (
+        <ProductTour
+          steps={tourSteps}
+          pendingStoryId={pendingTourStoryId || undefined}
+          onDone={(navigateTo) => {
+            setShowTour(false);
+            localStorage.setItem('talepop_tour_done', '1');
+            if (navigateTo) router.push(navigateTo);
+          }}
+        />
+      )}
+
       {generating && (
         <div style={{ position: 'fixed', inset: 0, background: 'rgba(13,10,8,0.93)', zIndex: 100, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '20px', padding: '24px' }}>
           <div style={{ fontSize: '4rem', animation: 'writing-pulse 1.4s ease-in-out infinite' }}>
@@ -604,7 +805,13 @@ export default function DashboardPage() {
             {navItems.map(({ id, label, icon: Icon }) => {
               const active = activeNav === id;
               return (
-                <button key={id} className="top-nav-tab" onClick={() => setActiveNav(id)} style={{ background: active ? '#0D183D' : 'transparent', color: active ? '#fff' : '#5E6A7A' }}>
+                <button
+                  key={id}
+                  id={`tour-${id}-nav`}
+                  className="top-nav-tab"
+                  onClick={() => setActiveNav(id)}
+                  style={{ background: active ? '#0D183D' : 'transparent', color: active ? '#fff' : '#5E6A7A' }}
+                >
                   <Icon size={15} />{label}
                 </button>
               );
@@ -662,32 +869,6 @@ export default function DashboardPage() {
           <>
             {generateError && <div style={{ background: '#FEE2E2', borderRadius: '10px', padding: '12px 16px', marginBottom: '24px', fontSize: '0.875rem', color: '#991B1B' }}>{generateError}</div>}
 
-            {bookReady && (
-              <div style={{ background: 'linear-gradient(135deg, #FF6B35 0%, #FFB703 100%)', borderRadius: '16px', padding: '20px 24px', marginBottom: '28px', display: 'flex', alignItems: 'center', gap: '16px', boxShadow: '0 8px 32px rgba(255,107,53,0.35)', animation: 'banner-slide-in 0.5s cubic-bezier(0.34,1.56,0.64,1)', position: 'relative' }}>
-                <div style={{ fontSize: '2.8rem', flexShrink: 0, lineHeight: 1 }}>📖</div>
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <p style={{ fontFamily: 'Fredoka, cursive', fontSize: 'clamp(1.1rem, 3vw, 1.35rem)', color: '#fff', marginBottom: '4px', lineHeight: 1.2 }}>
-                    {bookReady.childName}&apos;s story is ready!
-                  </p>
-                  <p style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.85)' }}>
-                    Your new book has been written ✨ Tap to open it.
-                  </p>
-                </div>
-                <button
-                  onClick={() => { const id = bookReady.storyId; setBookReady(null); router.push(`/stories/${id}`); }}
-                  style={{ background: '#fff', color: '#FF6B35', border: 'none', borderRadius: '10px', padding: '0.65rem 1.4rem', fontWeight: '700', fontSize: '0.875rem', cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0, boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}
-                >
-                  Read now →
-                </button>
-                <button
-                  onClick={() => setBookReady(null)}
-                  style={{ position: 'absolute', top: '10px', right: '10px', background: 'rgba(255,255,255,0.25)', border: 'none', borderRadius: '50%', width: '22px', height: '22px', cursor: 'pointer', color: '#fff', fontSize: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '700', lineHeight: 1, padding: 0 }}
-                >
-                  ×
-                </button>
-              </div>
-            )}
-
             {loading ? (
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '16px', padding: '80px 0' }}>
                 <div style={{ fontSize: '3rem', animation: 'writing-pulse 1.2s ease-in-out infinite' }}>📚</div>
@@ -707,9 +888,7 @@ export default function DashboardPage() {
                 {mostRecentStory && (
                   <div className="continue-card" onClick={() => router.push(`/stories/${mostRecentStory.id}`)}
                     style={{ borderRadius: '20px', overflow: 'hidden', position: 'relative', height: isMobile ? '180px' : '220px', cursor: 'pointer', boxShadow: '0 8px 32px rgba(0,0,0,0.18)', backgroundImage: 'url(/continue-bg.svg)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
-                    {/* Story cover blended into right side when available */}
                     {mostRecentCover && <div style={{ position: 'absolute', inset: 0, backgroundImage: `url(${mostRecentCover})`, backgroundSize: 'cover', backgroundPosition: 'center top', opacity: 0.35 }} />}
-                    {/* Left-to-right gradient keeps text readable */}
                     <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(30,10,0,0.82) 0%, rgba(20,6,0,0.55) 45%, rgba(0,0,0,0.08) 100%)' }} />
                     <div style={{ position: 'absolute', bottom: '24px', left: '28px' }}>
                       <p style={{ color: 'rgba(255,210,140,0.85)', fontSize: '0.68rem', fontWeight: '800', letterSpacing: '0.12em', marginBottom: '6px', textTransform: 'uppercase' }}>
@@ -735,7 +914,7 @@ export default function DashboardPage() {
                   const nextVolForChild = latestStory?.series_id ? (seriesStoriesForChild.length + 1) : 2;
 
                   return (
-                    <div key={child.id}>
+                    <div key={child.id} id={childIndex === 0 ? 'tour-shelf' : undefined}>
                       <div style={{ background: palette.light, borderRadius: '16px', padding: '16px 20px', marginBottom: '28px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
                           <span style={{ fontSize: '2.2rem', lineHeight: 1 }}>{palette.emoji}</span>
@@ -758,8 +937,12 @@ export default function DashboardPage() {
                               <Plus size={14} /> Extra story – 99¢
                             </button>
                           ) : (
-                            <button onClick={() => handleGenerateStory(child.id)} disabled={!!generating}
-                              style={{ padding: '0.6rem 1.2rem', borderRadius: '10px', border: `2px solid ${palette.cover}`, background: 'white', color: palette.cover, cursor: generating ? 'not-allowed' : 'pointer', fontWeight: '700', fontSize: '0.85rem', opacity: generating ? 0.6 : 1, display: 'flex', alignItems: 'center', gap: '6px' }}>
+                            <button
+                              id={childIndex === 0 ? 'tour-new-story' : undefined}
+                              onClick={() => handleGenerateStory(child.id)}
+                              disabled={!!generating}
+                              style={{ padding: '0.6rem 1.2rem', borderRadius: '10px', border: `2px solid ${palette.cover}`, background: 'white', color: palette.cover, cursor: generating ? 'not-allowed' : 'pointer', fontWeight: '700', fontSize: '0.85rem', opacity: generating ? 0.6 : 1, display: 'flex', alignItems: 'center', gap: '6px' }}
+                            >
                               <Plus size={14} /> New story
                             </button>
                           )}
@@ -841,14 +1024,12 @@ export default function DashboardPage() {
         {activeNav === 'account' && (
           <div style={{ maxWidth: '480px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
 
-            {/* ── Account info ── */}
             <div>
               <h3 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.4rem', color: '#0D183D', fontWeight: '400', marginBottom: '16px' }}>Account</h3>
               <div style={{ background: '#fff', border: '1px solid #F0E4D0', borderRadius: '12px', padding: '20px', marginBottom: '12px' }}>
                 <p style={{ fontSize: '0.72rem', color: '#5E6A7A', marginBottom: '4px', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Signed in as</p>
                 <p style={{ fontWeight: '600', color: '#0D183D', fontSize: '0.95rem' }}>{userEmail || (firstChild?.name ? `${firstChild.name}'s family` : 'Your account')}</p>
               </div>
-              {/* Change email / password toggles */}
               <div style={{ display: 'flex', gap: '10px', marginBottom: '12px' }}>
                 <button onClick={() => { setAccountSection(accountSection === 'email' ? null : 'email'); setAccountMsg(null); }}
                   style={{ flex: 1, padding: '0.65rem', borderRadius: '10px', border: '1.5px solid #F0E4D0', background: accountSection === 'email' ? '#FFF0E6' : '#fff', color: '#0D183D', cursor: 'pointer', fontWeight: '600', fontSize: '0.82rem' }}>
@@ -859,12 +1040,11 @@ export default function DashboardPage() {
                   Change password
                 </button>
               </div>
-              {/* Inline form */}
               {accountSection && (
                 <div style={{ background: '#FFF8F3', border: '1.5px solid #F0E4D0', borderRadius: '12px', padding: '16px', marginBottom: '12px' }}>
                   {accountSection === 'email' ? (
                     <>
-                      <p style={{ fontSize: '0.82rem', color: '#5E6A7A', marginBottom: '10px' }}>Enter a new email address. We'll send a confirmation link.</p>
+                      <p style={{ fontSize: '0.82rem', color: '#5E6A7A', marginBottom: '10px' }}>Enter a new email address. We&apos;ll send a confirmation link.</p>
                       <input type="email" placeholder="New email address" value={newEmail} onChange={e => setNewEmail(e.target.value)}
                         style={{ width: '100%', padding: '0.65rem 0.9rem', borderRadius: '8px', border: '1.5px solid #F0E4D0', fontSize: '0.875rem', outline: 'none', boxSizing: 'border-box' as const, marginBottom: '10px' }} />
                       <button disabled={accountLoading || !newEmail} onClick={async () => {
@@ -906,7 +1086,7 @@ export default function DashboardPage() {
               </button>
             </div>
 
-            {/* ── Subscription ── */}
+            {/* Subscription */}
             <div>
               <h3 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.4rem', color: '#0D183D', fontWeight: '400', marginBottom: '16px' }}>Subscription</h3>
               <div style={{ background: '#fff', border: '1px solid #F0E4D0', borderRadius: '12px', padding: '20px', marginBottom: '12px' }}>
@@ -941,7 +1121,7 @@ export default function DashboardPage() {
               )}
             </div>
 
-            {/* ── Referral code ── */}
+            {/* Referral */}
             <div>
               <h3 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.4rem', color: '#0D183D', fontWeight: '400', marginBottom: '8px' }}>Refer a friend 🎁</h3>
               <p style={{ fontSize: '0.82rem', color: '#5E6A7A', marginBottom: '12px' }}>Share your code. Your friend gets <strong>10% off</strong> their first month.</p>
@@ -997,7 +1177,7 @@ export default function DashboardPage() {
           {navItems.map(({ id, label, icon: Icon }) => {
             const active = activeNav === id;
             return (
-              <button key={id} onClick={() => setActiveNav(id)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '3px', border: 'none', background: 'none', cursor: 'pointer', color: active ? '#FF6B35' : '#9CA8B4', padding: '8px 12px', flex: 1 }}>
+              <button key={id} id={`tour-${id}-nav-mobile`} onClick={() => setActiveNav(id)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '3px', border: 'none', background: 'none', cursor: 'pointer', color: active ? '#FF6B35' : '#9CA8B4', padding: '8px 12px', flex: 1 }}>
                 <Icon size={22} />
                 <span style={{ fontSize: '0.6rem', fontWeight: active ? '700' : '500', letterSpacing: '0.04em', textTransform: 'uppercase' }}>{label}</span>
               </button>
@@ -1008,9 +1188,3 @@ export default function DashboardPage() {
     </div>
   );
 }
-
-
-
-
-
-
