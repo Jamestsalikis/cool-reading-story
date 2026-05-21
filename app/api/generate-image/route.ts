@@ -126,8 +126,9 @@ export async function POST(request: Request) {
               aspect_ratio: '2:3',
               output_format: 'webp',
               output_quality: 80,
-              // Deterministic seed per story keeps style/palette consistent across pages
-              seed: storyIdToSeed(story_id),
+              // Page-specific seed: same story + same page = same image on reload;
+              // different pages get different seeds so illustrations don't look identical.
+              seed: storyIdToSeed(story_id + '_p' + String(page_number)),
             },
           }),
         }
