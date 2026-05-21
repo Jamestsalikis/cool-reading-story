@@ -24,6 +24,7 @@ const TALEPOP_STYLE_PREFIX =
 const TALEPOP_STYLE_SUFFIX =
   'No floating limbs, no disconnected body parts, clean natural anatomy and proportions. ' +
   'Each animal and character has exactly one head — no duplicate or extra heads anywhere. ' +
+  'Every character and creature shown with their complete full body visible — no cropped torsos, no cut-off limbs, entire figure from head to feet or tail always in frame. ' +
   'No text, no words, no letters in the image.';
 
 // Derive a stable integer seed from a story UUID so all pages of one story
@@ -165,3 +166,4 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Failed' }, { status: 500 });
   }
 }
+
