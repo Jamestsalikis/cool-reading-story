@@ -73,6 +73,15 @@ export async function POST(request: Request) {
     const page = pages[pageIndex];
     if (!page.image_prompt) return NextResponse.json({ error: 'No image prompt' }, { status: 400 });
 
+    // Idempotency: if image is already generated or prediction already started, return early.
+    // Prevents duplicate Replicate predictions when pre-gen IIFE and story page race.
+    if (page.image_url) {
+      return NextResponse.json({ status: 'already_done', image_url: page.image_url, page_number });
+    }
+    if (page.poll_url) {
+      return NextResponse.json({ status: 'already_processing', poll_url: page.poll_url, page_number });
+    }
+
     // Build final prompt.
     // image_prompt already contains character_anchor at the start (Claude is instructed to copy
     // it verbatim as the first line of every image_prompt). Adding characterAnchor separately
