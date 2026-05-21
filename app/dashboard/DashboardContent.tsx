@@ -282,7 +282,7 @@ function BookCard({ story, palette, onContinue }: { story: Story; palette: Palet
         </div>
       </div>
       {onContinue && (
-        <button onClick={e => { e.stopPropagation(); onContinue(); }}
+        <button id="tour-next-chapter" onClick={e => { e.stopPropagation(); onContinue(); }}
           style={{ marginTop: '6px', padding: '0.4rem 1rem', borderRadius: '20px', border: 'none', background: '#FF6B35', color: '#fff', fontWeight: '700', fontSize: '0.72rem', cursor: 'pointer', boxShadow: '0 2px 8px rgba(255,107,53,0.35)' }}>
           Next chapter →
         </button>
@@ -746,7 +746,7 @@ export default function DashboardPage() {
     {
       title: 'Continue the series',
       body: "Loved a story? Tap 'Next chapter' on any book to add a new volume. Each child can have up to 4 chapters, building their very own series.",
-      targetId: null,
+      targetId: 'tour-next-chapter',
     },
     {
       title: 'Children profiles',
