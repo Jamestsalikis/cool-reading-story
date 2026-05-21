@@ -10,15 +10,29 @@ export const maxDuration = 30;
 
 const REPLICATE_API_TOKEN = process.env.REPLICATE_API_TOKEN;
 
-// TalePop visual style  -  appended to every Replicate prompt for consistent illustration style
-const TALEPOP_STYLE_SUFFIX =
-  'Pixar 3D CGI render, subsurface skin scattering, volumetric rim lighting, specular eye highlights, ' +
+// TalePop visual style — SPLIT into prefix (positive, goes FIRST for Flux token weighting)
+// and suffix (negative guardrails, goes last).
+// Placing the 3D CGI directive at position 0 in the token stream is the key fix for
+// page 1 rendering as 2D illustration — Flux weights early tokens most heavily.
+const TALEPOP_STYLE_PREFIX =
+  'Pixar 3D CGI animated film render, NOT 2D illustration, NOT flat art, NOT vector art, NOT cel shading. ' +
+  'Subsurface skin scattering, volumetric rim lighting, specular eye highlights, ' +
   'smooth rounded cartoon anatomy, large expressive eyes, vibrant saturated jewel-tone colours, ' +
   'shallow depth of field, warm cinematic lighting, magical storybook atmosphere, ' +
-  'professional Disney Pixar animated feature film quality. ' +
-'No floating limbs, no disconnected body parts, clean natural anatomy and proportions. ' +
-'Each animal and character has exactly one head — no duplicate or extra heads anywhere. ' +
-'No text, no words, no letters in the image.';
+  'professional Disney Pixar animated feature film quality. ';
+
+const TALEPOP_STYLE_SUFFIX =
+  'No floating limbs, no disconnected body parts, clean natural anatomy and proportions. ' +
+  'Each animal and character has exactly one head — no duplicate or extra heads anywhere. ' +
+  'No text, no words, no letters in the image.';
+
+// Skin tone reinforcement — only applied for non-white skin to counter Flux's default bias
+// toward light-skinned characters. Injected just before the character anchor.
+const SKIN_TONE_MAP: Record<string, string> = {
+  Tanned: 'light tan skin',
+  'Semi Brown': 'warm medium-brown skin',
+  Brown: 'deep brown skin',
+};
 
 // Derive a stable integer seed from a story UUID so all pages of one story
 // use the same Flux seed  -  improves visual consistency across illustrations.
@@ -46,10 +60,10 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Replicate not configured' }, { status: 500 });
     }
 
-    // Fetch pages AND character_anchor together — anchor locks character appearance across all pages
+    // Fetch pages, character_anchor AND child appearance for skin tone reinforcement
     const { data: story } = await supabase
       .from('stories')
-      .select('pages, character_anchor')
+      .select('pages, character_anchor, children(appearance)')
       .eq('id', story_id)
       .eq('parent_id', user.id)
       .single();
@@ -64,17 +78,28 @@ export async function POST(request: Request) {
     const page = pages[pageIndex];
     if (!page.image_prompt) return NextResponse.json({ error: 'No image prompt' }, { status: 400 });
 
+    // Extract skin colour from child appearance (Supabase FK join may return array or object)
+    const childrenData = story.children;
+    const childData = Array.isArray(childrenData) ? childrenData[0] : childrenData;
+    const childAppearance = (childData as { appearance?: Record<string, string> } | null)?.appearance || {};
+    const skinColour = childAppearance.skinColour as string | undefined;
+    const skinDesc = skinColour ? SKIN_TONE_MAP[skinColour] : null;
+    // Inject skin tone reinforcement before character anchor for non-white skin.
+    // This fights Flux's default bias toward light-skinned characters.
+    const skinInstruction = skinDesc
+      ? `The child protagonist has ${skinDesc} — this must be clearly visible on their face and hands. `
+      : '';
+
     // Build final prompt:
-    //   1. character_anchor (from DB — canonical appearance, never drifts between pages)
-    //   2. page-specific scene description
-    //   3. TalePop style suffix
-    //
-    // Injecting the stored anchor FIRST means the character description is always
-    // the same across all 5 pages, even if Claude slightly varied wording per page.
+    //   1. TALEPOP_STYLE_PREFIX — 3D CGI directive first (Flux weights early tokens most)
+    //   2. skinInstruction — explicit skin tone reinforcement (only for non-white)
+    //   3. character_anchor — locked character appearance from DB
+    //   4. page-specific scene description
+    //   5. TALEPOP_STYLE_SUFFIX — negative guardrails
     const characterAnchor = story.character_anchor || '';
     const finalPrompt = characterAnchor
-      ? `${characterAnchor} ${page.image_prompt} ${TALEPOP_STYLE_SUFFIX}`
-      : `${page.image_prompt} ${TALEPOP_STYLE_SUFFIX}`;
+      ? `${TALEPOP_STYLE_PREFIX}${skinInstruction}${characterAnchor} ${page.image_prompt} ${TALEPOP_STYLE_SUFFIX}`
+      : `${TALEPOP_STYLE_PREFIX}${skinInstruction}${page.image_prompt} ${TALEPOP_STYLE_SUFFIX}`;
 
     // Create prediction  -  retry once on 429 (rate limit) with a 5s backoff.
     // Two attempts x ~500ms each + 5s wait = ~6s worst case, within Hobby's 10s limit.
@@ -151,6 +176,3 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Failed' }, { status: 500 });
   }
 }
-
-
-
