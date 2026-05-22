@@ -222,10 +222,10 @@ export default function StoryPage() {
         .select('*, children(name, age)')
         .eq('id', id)
         .single();
+
       if (data) {
+        // Check subscription access — cancelled users lose library access
         const { data: { user } } = await supabase.auth.getUser();
-        if (user) {
-          ca: { user } } = await supabase.auth.getUser();
         if (user) {
           const { data: adminRow } = await supabase
             .from('admin_emails').select('email').eq('email', user.email ?? '').single();
@@ -248,7 +248,7 @@ export default function StoryPage() {
         setFavourite(data.is_favourite);
         const pages: Page[] = data.pages || [];
         const pagesNeedingImages = pages.filter((p) => p.image_prompt && !p.image_url);
-        if (pagesNeedingImages.length > 0 && !imageGenStarted.current) {
+        if (pagesNeedingImages.length > 0 && !imageGenStarted.curren4) {
           imageGenStarted.current = true;
           setLoadingPages(new Set(pagesNeedingImages.map((p) => p.page_number)));
           (async () => {
@@ -379,7 +379,7 @@ export default function StoryPage() {
   const rawParas = page.content.split('\n\n').filter(Boolean);
   const paragraphs = rawParas.length > 1
     ? rawParas
-    : (page.content.match(/[^.!?]+[.!?]+["'
+    : (page.content.match(/[^.!?]+[.!?]+["'”]?\s*/g) || [page.content])
         .reduce<string[]>((acc, sentence, i) => {
           if (i % 2 === 0) acc.push(sentence.trim());
           else acc[acc.length - 1] += ' ' + sentence.trim();
@@ -412,7 +412,7 @@ export default function StoryPage() {
           {paragraphs.map((para, i) => <p key={i}>{para}</p>)}
         </div>
         {isLastPage && story.moral && (
-          <div style={{ borderLeft: '3px<div style={{ borderLeft: '3px solid #FF6B35', paddingLeft: '16px', marginTop: '18px', color: '#5E6A7A', fontStyle: 'italic', fontFamily: 'Lora, Fredoka, cursive', fontSize: '0.9rem', lineHeight: 1.7 }}>
+          <div style={{ borderLeft: '3px solid #FF6B35', paddingLeft: '16px', marginTop: '18px', color: '#5E6A7A', fontStyle: 'italic', fontFamily: 'Lora, Fredoka, cursive', fontSize: '0.9rem', lineHeight: 1.7 }}>
             {story.moral}
           </div>
         )}
