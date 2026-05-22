@@ -5,30 +5,32 @@ import { parseBody, generateImageSchema } from '@/lib/validation';
 // Starts a Replicate prediction and returns immediately.
 // If Replicate finishes within 8s (fast path), saves to DB and returns image_url.
 // Otherwise returns { status: 'processing', prediction_id, poll_url } for the
-// frontend to poll via /api/poll-image  -  keeps this function well under Vercel's limit.
+// frontend to poll via /api/poll-image - keeps this function well under Vercel's limit.
 export const maxDuration = 30;
 
 const REPLICATE_API_TOKEN = process.env.REPLICATE_API_TOKEN;
 
-// TalePop visual style — SPLIT into prefix (positive, goes FIRST for Flux token weighting)
-// and suffix (negative guardrails, goes last).
-// Placing the 3D CGI directive at position 0 in the token stream is the key fix for
-// page 1 rendering as 2D illustration — Flux weights early tokens most heavily.
+// TalePop LoRA model — trained on 30 Pixar/Disney 3D animation style images.
+// Trigger word TALEPOP must appear in every prompt to activate the LoRA style.
+const TALEPOP_MODEL_VERSION = 'ed9efee4f91699baee3016842252c496041cff8151ade67273167d4a66e02432';
+
+// TalePop visual style — TALEPOP trigger word goes FIRST to activate LoRA,
+// followed by 3D CGI directive at position 0 for Flux token weighting.
 const TALEPOP_STYLE_PREFIX =
-  'Pixar 3D CGI animated film render, NOT 2D illustration, NOT flat art, NOT vector art, NOT cel shading. ' +
-  'Subsurface skin scattering, volumetric rim lighting, specular eye highlights, ' +
-  'smooth rounded cartoon anatomy, large expressive eyes, vibrant saturated jewel-tone colours, ' +
-  'shallow depth of field, warm cinematic lighting, magical storybook atmosphere, ' +
-  'professional Disney Pixar animated feature film quality. ';
+'TALEPOP, Pixar 3D CGI animated film render, NOT 2D illustration, NOT flat art, NOT vector art, NOT cel shading. ' +
+'Subsurface skin scattering, volumetric rim lighting, specular eye highlights, ' +
+'smooth rounded cartoon anatomy, large expressive eyes, vibrant saturated jewel-tone colours, ' +
+'shallow depth of field, warm cinematic lighting, magical storybook atmosphere, ' +
+'professional Disney Pixar animated feature film quality. ';
 
 const TALEPOP_STYLE_SUFFIX =
-  'No floating limbs, no disconnected body parts, clean natural anatomy and proportions. ' +
-  'Each animal and character has exactly one head — no duplicate or extra heads anywhere. ' +
-  'Every character and creature shown with their complete full body visible — no cropped torsos, no cut-off limbs, entire figure from head to feet or tail always in frame. ' +
-  'No text, no words, no letters in the image.';
+'No floating limbs, no disconnected body parts, clean natural anatomy and proportions. ' +
+'Each animal and character has exactly one head — no duplicate or extra heads anywhere. ' +
+'Every character and creature shown with their complete full body visible — no cropped torsos, no cut-off limbs, entire figure from head to feet or tail always in frame. ' +
+'No text, no words, no letters in the image.';
 
 // Derive a stable integer seed from a story UUID so all pages of one story
-// use the same Flux seed  -  improves visual consistency across illustrations.
+// use the same Flux seed - improves visual consistency across illustrations.
 function storyIdToSeed(storyId: string): number {
   let hash = 0;
   for (let i = 0; i < storyId.length; i++) {
@@ -84,13 +86,11 @@ export async function POST(request: Request) {
     }
 
     // Build final prompt.
-    // image_prompt already contains character_anchor at the start (Claude is instructed to copy
-    // it verbatim as the first line of every image_prompt). Adding characterAnchor separately
-    // would double it, bury the scene description, and cause "character portrait" images.
-    // Structure: STYLE (3D CGI first for Flux token weighting) → image_prompt (anchor + scene)
+    // TALEPOP trigger word activates the LoRA style, followed by 3D CGI directive
+    // (early token position for Flux weighting), then the scene image_prompt.
     const finalPrompt = `${TALEPOP_STYLE_PREFIX}${page.image_prompt} ${TALEPOP_STYLE_SUFFIX}`;
 
-    // Create prediction  -  retry once on 429 (rate limit) with a 5s backoff.
+    // Create prediction - retry once on 429 (rate limit) with a 5s backoff.
     // Two attempts x ~500ms each + 5s wait = ~6s worst case, within Hobby's 10s limit.
     let prediction: { id?: string; urls?: { get: string }; error?: string } | null = null;
 
@@ -99,8 +99,9 @@ export async function POST(request: Request) {
         await new Promise(r => setTimeout(r, 5000)); // wait 5s before retry
       }
 
+      // Use versioned predictions endpoint for the TALEPOP LoRA model
       const createRes = await fetch(
-        'https://api.replicate.com/v1/models/black-forest-labs/flux-schnell/predictions',
+        'https://api.replicate.com/v1/predictions',
         {
           method: 'POST',
           headers: {
@@ -108,9 +109,9 @@ export async function POST(request: Request) {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
+            version: TALEPOP_MODEL_VERSION,
             input: {
               prompt: finalPrompt,
-              go_fast: true,
               num_outputs: 1,
               aspect_ratio: '2:3',
               output_format: 'webp',
@@ -166,4 +167,3 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Failed' }, { status: 500 });
   }
 }
-
