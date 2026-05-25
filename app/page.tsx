@@ -480,7 +480,7 @@ export default function Home() {
 
           {/* Left: copy + widget */}
           <div>
-            <h1 style={{ fontFamily: '"Fredoka One", "Arial Rounded MT Bold", cursive', fontWeight: 400, fontSize: 'clamp(2.4rem, 6vw, 4rem)', lineHeight: 1.08, color: '#0D183D', marginBottom: '1.25rem', letterSpacing: '0.02em', textShadow: '0 9px 22px rgba(8,14,34,0.24)' }}>
+            <h1 style={{ fontFamily: '"Baloo 2", cursive', fontWeight: 800, fontSize: 'clamp(2.4rem, 6vw, 4rem)', lineHeight: 1.08, color: '#0D183D', marginBottom: '1.25rem', letterSpacing: '0.01em', textShadow: '0 6px 18px rgba(8,14,34,0.18)' }}>
               Personalised Bedtime Stories<br />
               <span style={{ color: '#FF6B35' }}>Written Just for Your Child</span>
             </h1>
