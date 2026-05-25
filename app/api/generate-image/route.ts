@@ -39,6 +39,23 @@ function storyIdToSeed(storyId: string): number {
   return Math.abs(hash) % 2147483647; // keep within Replicate's int32 range
 }
 
+// Extract the character-specific line from character_anchor.
+// character_anchor is the full prompt preamble including generic Pixar style text
+// followed by the child's unique description (skin colour, hair, outfit).
+// TALEPOP_STYLE_PREFIX already covers the generic Pixar style, so we only
+// inject the child-specific line to avoid duplication and token bloat.
+const ANCHOR_SPLIT_MARKER = 'professional Disney Pixar animated feature film quality. ';
+
+function extractCharacterLine(characterAnchor: string | null): string {
+  if (!characterAnchor) return '';
+  const splitIdx = characterAnchor.indexOf(ANCHOR_SPLIT_MARKER);
+  if (splitIdx !== -1) {
+    return characterAnchor.slice(splitIdx + ANCHOR_SPLIT_MARKER.length).trim();
+  }
+  // Fallback: return the whole anchor if marker not found
+  return characterAnchor.trim();
+}
+
 export async function POST(request: Request) {
   try {
     const supabase = await createClient();
@@ -55,10 +72,10 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Replicate not configured' }, { status: 500 });
     }
 
-    // Fetch pages and character_anchor only.
-    // character_anchor already contains skin tone (baked in by generate-story).
-    // image_prompt also starts with character_anchor verbatim (per Claude's template),
-    // so we just need: STYLE PREFIX + image_prompt + STYLE SUFFIX.
+    // Fetch pages and character_anchor.
+    // character_anchor contains the child's exact skin tone, hair, and outfit —
+    // we extract the character-specific line and inject it explicitly into every
+    // image prompt so the model always renders the correct appearance.
     const { data: story } = await supabase
       .from('stories')
       .select('pages, character_anchor')
@@ -86,9 +103,12 @@ export async function POST(request: Request) {
     }
 
     // Build final prompt.
-    // TALEPOP trigger word activates the LoRA style, followed by 3D CGI directive
-    // (early token position for Flux weighting), then the scene image_prompt.
-    const finalPrompt = `${TALEPOP_STYLE_PREFIX}${page.image_prompt} ${TALEPOP_STYLE_SUFFIX}`;
+    // Structure: [TALEPOP style prefix] [character line: skin/hair/outfit] [scene image_prompt] [style suffix]
+    // The character line is extracted from character_anchor so skin colour, hair, and outfit
+    // are always explicitly present — regardless of whether Claude included them in image_prompt.
+    const characterLine = extractCharacterLine(story.character_anchor);
+    const characterFragment = characterLine ? `${characterLine} ` : '';
+    const finalPrompt = `${TALEPOP_STYLE_PREFIX}${characterFragment}${page.image_prompt} ${TALEPOP_STYLE_SUFFIX}`;
 
     // Create prediction - retry once on 429 (rate limit) with a 5s backoff.
     // Two attempts x ~500ms each + 5s wait = ~6s worst case, within Hobby's 10s limit.
