@@ -521,6 +521,22 @@ export async function POST(request: Request) {
     // Decrement story count now that story is confirmed saved
     await decrementStoryCount(supabase, user.id, paywallResult.reason, child_id);
 
+    // Fire background image generation — runs on Supabase even if the browser closes.
+    // We don't await this; the edge function responds immediately via waitUntil
+    // and continues generating all 5 page images server-side.
+    void fetch(
+      `${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/generate-story-images`,
+      {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`,
+          'apikey': process.env.SUPABASE_SERVICE_ROLE_KEY!,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ story_id: story.id, replicate_token: process.env.REPLICATE_API_TOKEN }),
+      }
+    ).catch(err => console.error('[generate-story] Image trigger failed:', err));
+
     return NextResponse.json({ story });
   } catch (error) {
     if (error instanceof Response) return error;
