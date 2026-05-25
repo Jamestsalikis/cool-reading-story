@@ -302,7 +302,7 @@ export default function Home() {
         "description": "AI-powered personalised bedtime story generator for children aged 3-10. Creates unique stories starring your child using their name, interests, friends and pet.",
         "offers": {
           "@type": "Offer",
-          "price": "7.99",
+          "price": "9.99",
           "priceCurrency": "AUD",
           "priceSpecification": {
             "@type": "RecurringPaymentSpecification",
@@ -674,7 +674,7 @@ export default function Home() {
 
             <div className="plan-card" style={{ background: '#FF6B35', color: 'white', position: 'relative' }}>
               <div style={{ position: 'absolute', top: '-15px', left: '50%', transform: 'translateX(-50%)', background: '#FFB703', color: '#0D183D', padding: '0.35rem 1.25rem', borderRadius: '999px', fontSize: '0.68rem', fontWeight: '900', whiteSpace: 'nowrap', letterSpacing: '0.04em' }}>
-                ⭐ BEST VALUE  -  SAVE 20%
+                ⭐ BEST VALUE  -  2 MONTHS FREE
               </div>
               <h3 className="font-serif" style={{ fontSize: '1.5rem', marginBottom: '0.4rem' }}>Annual</h3>
               <p style={{ opacity: 0.75, marginBottom: '1.5rem', fontSize: '0.9rem', fontWeight: 500 }}>Two months free</p>
@@ -682,7 +682,7 @@ export default function Home() {
                 <span style={{ fontSize: '3.25rem', fontWeight: 900, letterSpacing: '-0.02em' }}>24¢</span>
                 <span style={{ opacity: 0.85, fontSize: '0.85rem', fontWeight: 600 }}> per story</span>
               </div>
-              <p style={{ opacity: 0.65, fontSize: '0.75rem', marginBottom: '1.5rem', fontWeight: 500 }}>$95.88 billed annually, two months free</p>
+              <p style={{ opacity: 0.65, fontSize: '0.75rem', marginBottom: '1.5rem', fontWeight: 500 }}>$99.90 billed annually, two months free</p>
               <Link href="/signup?plan=annual" style={{ display: 'block', textAlign: 'center', padding: '0.9rem', background: 'white', borderRadius: '12px', color: '#FF6B35', textDecoration: 'none', fontWeight: '800', boxShadow: '0 4px 14px rgba(0,0,0,0.15)' }}>
                 Get the best deal &rarr;
               </Link>
@@ -690,7 +690,7 @@ export default function Home() {
                 Additional children: $3.99/month each
               </p>
               <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                {['Everything in Monthly', 'Priority story generation', 'Early access to new features', 'Save $24 per year'].map(f => (
+                {['Everything in Monthly', 'Priority story generation', 'Early access to new features', 'Save $19.98 per year'].map(f => (
                   <li key={f} style={{ display: 'flex', gap: '0.75rem', fontSize: '0.9rem', fontWeight: 500, alignItems: 'flex-start' }}>
                     <Check size={16} color="rgba(255,255,255,0.9)" style={{ flexShrink: 0, marginTop: '3px' }} />{f}
                   </li>
