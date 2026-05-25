@@ -5,9 +5,9 @@ import { checkGenerationAllowed, decrementStoryCount } from '@/lib/subscription'
 import { getSampleStory, isTrialInterest } from '@/lib/sample-stories/server';
 import { parseBody, generateStorySchema } from '@/lib/validation';
 
-// Vercel Hobby caps serverless functions at 10s. Claude Haiku completes story
-// generation in 3-6s reliably — Sonnet was intermittently timing out at 15-30s.
-// Haiku quality is excellent for children's bedtime stories and 10x cheaper.
+// Story text generation is handled by the Supabase Edge Function (generate-story-text).
+// This Next.js route only does fast work: auth, paywall, child data, sample story lookup.
+// For premium users needing fresh stories, it creates a placeholder and fires the edge fn.
 export const maxDuration = 10;
 
 const anthropic = new Anthropic({
@@ -454,7 +454,7 @@ export async function POST(request: Request) {
     }, previousTitles);
 
     const message = await anthropic.messages.create({
-      model: 'claude-haiku-4-5-20251001',
+      model: 'claude-sonnet-4-6',
       max_tokens: 4096,
       messages: [{ role: 'user', content: prompt }],
     });
