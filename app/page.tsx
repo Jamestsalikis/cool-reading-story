@@ -637,6 +637,25 @@ export default function Home() {
         </svg>
       </div>
 
+      {/* ─── Free Book CTA ─── */}
+      <section style={{ background: '#FF6B35', padding: '3.5rem 2rem', textAlign: 'center' }}>
+        <div style={{ maxWidth: '620px', margin: '0 auto' }}>
+          <div style={{ fontSize: '1.75rem', marginBottom: '0.5rem' }}>🎁</div>
+          <h2 className="font-serif" style={{ fontSize: 'clamp(1.6rem, 4vw, 2.5rem)', color: 'white', marginBottom: '0.75rem', lineHeight: 1.2, letterSpacing: '-0.01em' }}>
+            Sign up now — your first book is free
+          </h2>
+          <p style={{ color: 'rgba(255,255,255,0.88)', fontSize: '1rem', marginBottom: '1.75rem', fontWeight: 500, lineHeight: 1.6 }}>
+            No credit card needed. Create your child&apos;s first personalised story in under 60 seconds.
+          </p>
+          <Link href="/signup" style={{ display: 'inline-block', padding: '1rem 2.5rem', background: 'white', color: '#FF6B35', borderRadius: '12px', textDecoration: 'none', fontWeight: 800, fontSize: '1.05rem', boxShadow: '0 4px 20px rgba(0,0,0,0.18)', letterSpacing: '-0.01em' }}>
+            Get your free book →
+          </Link>
+          <p style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.6)', marginTop: '0.875rem', fontWeight: 500 }}>
+            No credit card · Cancel anytime
+          </p>
+        </div>
+      </section>
+
       {/* ─── Pricing ─── */}
       <section id="pricing" style={{ background: '#FFF4E6', padding: '3rem 2rem 6rem' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
