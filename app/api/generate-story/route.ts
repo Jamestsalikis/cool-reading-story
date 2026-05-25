@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import Anthropic from '@anthropic-ai/sdk';
 import { createClient } from '@/lib/supabase/server';
 import { checkGenerationAllowed, decrementStoryCount } from '@/lib/subscription';
 import { getSampleStory, isTrialInterest } from '@/lib/sample-stories/server';
@@ -9,10 +8,6 @@ import { parseBody, generateStorySchema } from '@/lib/validation';
 // This Next.js route only does fast work: auth, paywall, child data, sample story lookup.
 // For premium users needing fresh stories, it creates a placeholder and fires the edge fn.
 export const maxDuration = 10;
-
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
-});
 
 const REPLICATE_API_TOKEN = process.env.REPLICATE_API_TOKEN;
 
@@ -443,7 +438,7 @@ export async function POST(request: Request) {
       .limit(10);
     const previousTitles = (prevStories || []).map((s: { title: string }) => s.title).filter(Boolean);
 
-    // Generate story + page breakdown via Claude
+    // Build the prompt here (in Next.js where the helper lives)
     const prompt = buildPrompt({
       name: child.name,
       age: child.age,
@@ -453,81 +448,11 @@ export async function POST(request: Request) {
       reading_level: child.reading_level || 'intermediate',
     }, previousTitles);
 
-    const message = await anthropic.messages.create({
-      model: 'claude-sonnet-4-6',
-      max_tokens: 4096,
-      messages: [{ role: 'user', content: prompt }],
-    });
-
-    // Capture real token usage from the API response
-    const inputTokens  = message.usage.input_tokens;
-    const outputTokens = message.usage.output_tokens;
-    console.log(`Token usage  -  input: ${inputTokens}, output: ${outputTokens}, total: ${inputTokens + outputTokens}`);
-
-    const rawContent = message.content[0].type === 'text' ? message.content[0].text : '';
-
-    // Parse JSON response
-    let storyData: {
-      title: string;
-      moral: string;
-      theme_emoji: string;
-      word_count: number;
-      character_anchor?: string;
-      pages: { page_number: number; content: string; image_prompt: string }[];
-    };
-
-    try {
-      const cleaned = rawContent.replace(/^```json\n?/, '').replace(/\n?```$/, '').trim();
-      storyData = JSON.parse(cleaned);
-    } catch {
-      return NextResponse.json({ error: 'Failed to parse story from AI' }, { status: 500 });
-    }
-
-    // Save story immediately  -  image generation is handled separately by
-    // /api/generate-all-images (sequential, Replicate-rate-limit-safe).
-    // No Replicate calls here to avoid competing with that endpoint.
-    const pagesForDB = storyData.pages.map((page) => ({
-      ...page,
-      image_url: null,
-      poll_url: null,
-    }));
-
-    // Combine content for full story text
-    const fullContent = pagesForDB.map((p) => p.content).join('\n\n');
-
-    // Save story to DB including real token counts
-    const { data: story, error: storyError } = await supabase
-      .from('stories')
-      .insert({
-        child_id,
-        parent_id: user.id,
-        title: storyData.title,
-        content: fullContent,
-        moral: storyData.moral,
-        theme: storyData.theme_emoji,
-        word_count: storyData.word_count,
-        reading_time_minutes: Math.ceil((storyData.word_count || 500) / 150),
-        pages: pagesForDB,
-        input_tokens: inputTokens,
-        output_tokens: outputTokens,
-        character_anchor: storyData.character_anchor || null,
-      })
-      .select()
-      .single();
-
-    if (storyError) {
-      console.error('Story save error:', storyError);
-      return NextResponse.json({ error: 'Failed to save story' }, { status: 500 });
-    }
-
-    // Decrement story count now that story is confirmed saved
-    await decrementStoryCount(supabase, user.id, paywallResult.reason, child_id);
-
-    // Fire background image generation — runs on Supabase even if the browser closes.
-    // We don't await this; the edge function responds immediately via waitUntil
-    // and continues generating all 5 page images server-side.
-    void fetch(
-      `${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/generate-story-images`,
+    // Hand off to the Supabase Edge Function which calls Claude Sonnet with no timeout.
+    // The edge function inserts a placeholder story, responds immediately with story_id,
+    // then generates the full story + images in the background via EdgeRuntime.waitUntil.
+    const edgeRes = await fetch(
+      `${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/generate-story-text`,
       {
         method: 'POST',
         headers: {
@@ -535,11 +460,39 @@ export async function POST(request: Request) {
           'apikey': process.env.SUPABASE_SERVICE_ROLE_KEY!,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ story_id: story.id, replicate_token: process.env.REPLICATE_API_TOKEN }),
+        body: JSON.stringify({
+          prompt,
+          child_id,
+          parent_id: user.id,
+          anthropic_api_key: process.env.ANTHROPIC_API_KEY,
+          replicate_token: REPLICATE_API_TOKEN,
+        }),
       }
-    ).catch(err => console.error('[generate-story] Image trigger failed:', err));
+    );
 
-    return NextResponse.json({ story });
+    if (!edgeRes.ok) {
+      const errText = await edgeRes.text();
+      console.error('[generate-story] Edge function error:', errText);
+      return NextResponse.json({ error: 'Story generation failed' }, { status: 500 });
+    }
+
+    const { story_id } = await edgeRes.json();
+    if (!story_id) {
+      return NextResponse.json({ error: 'Story generation failed — no story ID returned' }, { status: 500 });
+    }
+
+    // Decrement story quota now that story record is confirmed created
+    await decrementStoryCount(supabase, user.id, paywallResult.reason, child_id);
+
+    // Return minimal story object — client navigates to /stories/{id} and polls for content
+    return NextResponse.json({
+      story: {
+        id: story_id,
+        title: 'Writing your story…',
+        pages: [],
+        children: { name: child.name, age: child.age },
+      },
+    });
   } catch (error) {
     if (error instanceof Response) return error;
 
