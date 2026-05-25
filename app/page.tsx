@@ -480,7 +480,7 @@ export default function Home() {
 
           {/* Left: copy + widget */}
           <div>
-            <h1 style={{ fontFamily: '"Fredoka One", Fredoka, cursive', fontWeight: 400, fontSize: 'clamp(2.4rem, 6vw, 4rem)', lineHeight: 1.08, color: '#0D183D', marginBottom: '1.25rem', letterSpacing: '0.02em' }}>
+            <h1 style={{ fontFamily: 'Nunito, sans-serif', fontWeight: 900, fontSize: 'clamp(2.4rem, 6vw, 4rem)', lineHeight: 1.08, color: '#0D183D', marginBottom: '1.25rem', letterSpacing: '-0.01em', textShadow: '0 6px 16px rgba(8,14,34,0.16)' }}>
               Personalised Bedtime Stories<br />
               <span style={{ color: '#FF6B35' }}>Written Just for Your Child</span>
             </h1>
@@ -545,7 +545,7 @@ export default function Home() {
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
             <h2 className="font-serif" style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', color: '#0D183D', marginBottom: '0.75rem', letterSpacing: '-0.01em' }}>
-              Personalised story books for Zara & Zak. No one else.
+              Personalised story books for Zak & Zoe. No one else.
             </h2>
             <p style={{ color: '#5E6A7A', fontSize: '0.95rem', fontWeight: 500, maxWidth: '500px', margin: '0 auto', lineHeight: 1.7 }}>
               Every personalised children’s story invented from scratch — their name, their adventure, their world.
@@ -556,9 +556,9 @@ export default function Home() {
             <div style={{ background: 'linear-gradient(135deg, #0D183D 0%, #1496A6 100%)', padding: '1.75rem 2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
               <div>
                 <h3 className="font-serif" style={{ fontSize: 'clamp(1rem, 2.5vw, 1.4rem)', color: 'white', lineHeight: 1.25 }}>
-                  Zara, Zak and the Kingdom Beyond the Mist
+                  Zak, Zoe and the Kingdom Beyond the Mist
                 </h3>
-                <p style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.45)', fontWeight: 500, marginTop: '5px' }}>Written for Zara & Zak</p>
+                <p style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.45)', fontWeight: 500, marginTop: '5px' }}>Written for Zak & Zoe</p>
               </div>
               <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
                 {['Age 7 & 9', 'Dragon', 'Unicorn'].map(t => (
@@ -581,14 +581,14 @@ export default function Home() {
             <div style={{ padding: '2rem 2rem 2.5rem' }}>
               <p style={{ fontSize: '1rem', color: '#0D183D', lineHeight: 1.9, fontWeight: 500, marginBottom: '1rem' }}>
                 <strong style={{ color: '#FF6B35', fontSize: '1.8rem', float: 'left', lineHeight: 1, marginRight: '6px', marginTop: '4px', fontFamily: 'Fredoka, cursive' }}>Z</strong>
-                ara and her brother Zak had been walking through the mist for what felt like hours when the castle appeared  -  impossibly tall, purple-turreted, glowing at every window as if someone inside had been expecting them.
+                ak and his sister Zoe had been walking through the mist for what felt like hours when the castle appeared  -  impossibly tall, purple-turreted, glowing at every window as if someone inside had been expecting them.
               </p>
               <p style={{ fontSize: '1rem', color: '#0D183D', lineHeight: 1.9, fontWeight: 500, marginBottom: '1.5rem' }}>
                 A dragon landed on the drawbridge. It was green, about the size of a large horse, and it was wearing a very small hat. Behind it, a unicorn peered around the tower with enormous golden eyes.
               </p>
               <div style={{ borderLeft: '3px solid #1496A6', paddingLeft: '1.25rem', color: '#5E6A7A', fontSize: '0.9rem', fontStyle: 'italic', lineHeight: 1.8 }}>
                 &ldquo;We&apos;ve been waiting,&rdquo; said the dragon.<br />
-                Zak looked at Zara. Zara looked at Zak.<br />
+                Zak looked at Zoe. Zoe looked at Zak.<br />
                 &ldquo;The kingdom only appears for the right children,&rdquo; said the dragon. &ldquo;And you are exactly right.&rdquo;
               </div>
               <div style={{ marginTop: '1.75rem', paddingTop: '1.5rem', borderTop: '1px solid #F0E4D0', display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
