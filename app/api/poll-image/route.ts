@@ -28,7 +28,8 @@ export async function POST(request: Request) {
     });
 
     if (!pollRes.ok) {
-      return NextResponse.json({ status: 'error', error: 'Poll request failed' }, { status: 500 });
+      // Return 'failed' so the client retries with a fresh prediction (expired URL etc.)
+      return NextResponse.json({ status: 'failed', error: `Poll request failed: ${pollRes.status}` });
     }
 
     const polled = await pollRes.json();
