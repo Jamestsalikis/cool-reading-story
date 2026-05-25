@@ -656,8 +656,7 @@ export default function Home() {
                 <span style={{ fontSize: '3.25rem', fontWeight: 900, color: '#FF6B35', letterSpacing: '-0.02em' }}>33¢</span>
                 <span style={{ color: '#9CA8B4', fontSize: '0.85rem', fontWeight: 600 }}> per story</span>
               </div>
-              <p style={{ fontSize: '0.95rem', color: '#5E6A7A', fontWeight: 600, marginBottom: '0.25rem' }}>$9.99 / month</p>
-              <p style={{ fontSize: '0.75rem', color: '#9CA8B4', fontWeight: 500, marginBottom: '1.5rem' }}>Less than a coffee. An entire book.</p>
+              <p style={{ fontSize: '0.95rem', color: '#5E6A7A', fontWeight: 600, marginBottom: '1.5rem' }}>$9.99 / month</p>
               <Link href="/signup" style={{ display: 'block', textAlign: 'center', padding: '0.9rem', background: '#FF6B35', borderRadius: '12px', color: 'white', textDecoration: 'none', fontWeight: '800', boxShadow: '0 4px 14px rgba(255,107,53,0.3)' }}>
                 Subscribe monthly &rarr;
               </Link>
@@ -683,7 +682,6 @@ export default function Home() {
                 <span style={{ fontSize: '3.25rem', fontWeight: 900, letterSpacing: '-0.02em' }}>24¢</span>
                 <span style={{ opacity: 0.85, fontSize: '0.85rem', fontWeight: 600 }}> per story</span>
               </div>
-              <p style={{ fontSize: '0.95rem', fontWeight: 600, marginBottom: '0.25rem', opacity: 0.9 }}>$7.99 / month</p>
               <p style={{ opacity: 0.65, fontSize: '0.75rem', marginBottom: '1.5rem', fontWeight: 500 }}>$95.88 billed annually, two months free</p>
               <Link href="/signup?plan=annual" style={{ display: 'block', textAlign: 'center', padding: '0.9rem', background: 'white', borderRadius: '12px', color: '#FF6B35', textDecoration: 'none', fontWeight: '800', boxShadow: '0 4px 14px rgba(0,0,0,0.15)' }}>
                 Get the best deal &rarr;
