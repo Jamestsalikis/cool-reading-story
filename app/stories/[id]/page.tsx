@@ -222,7 +222,7 @@ export default function StoryPage() {
   const [loadingPages, setLoadingPages] = useState<Set<number>>(new Set());
   const [showFeedback, setShowFeedback] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
-  const imageGenStarted = useRef(false);
+  const imagePollRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const feedbackShown = useRef(false);
   const [locked, setLocked] = useState(false);
   const [subStatus, setSubStatus] = useState<string | null>(null);
@@ -280,63 +280,44 @@ export default function StoryPage() {
         setFavourite(data.is_favourite);
         const pages: Page[] = data.pages || [];
         const pagesNeedingImages = pages.filter((p) => p.image_prompt && !p.image_url);
-        if (pagesNeedingImages.length > 0 && !imageGenStarted.current) {
-          imageGenStarted.current = true;
+        if (pagesNeedingImages.length > 0) {
           setLoadingPages(new Set(pagesNeedingImages.map((p) => p.page_number)));
-          (async () => {
-            for (const page of pagesNeedingImages) {
-              const startPrediction = async (): Promise<string | null> => {
-                try {
-                  const res = await fetch('/api/generate-image', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ story_id: data.id, page_number: page.page_number }),
-                  });
-                  if (res.ok) return (await res.json()).poll_url ?? null;
-                  if (res.status === 429) await new Promise((r) => setTimeout(r, 10000));
-                } catch {}
-                return null;
-              };
 
-              let pollUrl: string | null = page.poll_url ?? null;
-              if (!pollUrl) pollUrl = await startPrediction();
-              if (!pollUrl) continue;
+          // Kick off server-side generation — the edge function runs on Supabase
+          // infrastructure and continues even if the user closes the browser.
+          fetch('/api/trigger-images', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ story_id: data.id }),
+          }).catch(() => {});
 
-              let succeeded = false;
-              for (let attempt = 0; attempt < 2 && !succeeded; attempt++) {
-                for (let i = 0; i < 30; i++) {
-                  await new Promise((r) => setTimeout(r, 3000));
-                  try {
-                    const res = await fetch('/api/poll-image', {
-                      method: 'POST',
-                      headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify({ story_id: data.id, page_number: page.page_number, poll_url: pollUrl }),
-                    });
-                    const result = await res.json();
-                    if (result.status === 'succeeded' && result.image_url) {
-                      setStory((prev) => {
-                        if (!prev) return prev;
-                        return { ...prev, pages: prev.pages.map((p) => p.page_number === page.page_number ? { ...p, image_url: result.image_url } : p) };
-                      });
-                      setLoadingPages((prev) => { const next = new Set(prev); next.delete(page.page_number); return next; });
-                      succeeded = true;
-                      break;
-                    }
-                    if (result.status === 'failed') {
-                      pollUrl = await startPrediction();
-                      break;
-                    }
-                  } catch {}
-                }
+          // Poll Supabase every 5s for image_url updates.
+          // As each image is saved by the edge function, it appears here automatically.
+          if (imagePollRef.current) clearInterval(imagePollRef.current);
+          imagePollRef.current = setInterval(async () => {
+            const { data: fresh } = await supabase
+              .from('stories')
+              .select('pages')
+              .eq('id', id)
+              .single();
+            if (fresh?.pages) {
+              setStory((prev) => prev ? { ...prev, pages: fresh.pages } : prev);
+              const stillMissing = fresh.pages.filter((p: Page) => p.image_prompt && !p.image_url);
+              setLoadingPages(new Set(stillMissing.map((p: Page) => p.page_number)));
+              if (stillMissing.length === 0) {
+                clearInterval(imagePollRef.current!);
+                imagePollRef.current = null;
               }
-              await new Promise((r) => setTimeout(r, 2000));
             }
-          })();
+          }, 5000);
         }
       }
       setLoading(false);
     }
     fetchStory();
+    return () => {
+      if (imagePollRef.current) clearInterval(imagePollRef.current);
+    };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
