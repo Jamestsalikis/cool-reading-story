@@ -1053,7 +1053,7 @@ export default function DashboardPage() {
           <div style={{ maxWidth: '560px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '28px' }}>
               <h3 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.4rem', color: '#0D183D', fontWeight: '400' }}>Children</h3>
-              {sub?.status === 'subscribed' ? (
+              {sub?.status === 'subscribed' || isAdmin ? (
                 <Link href="/onboarding" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '0.55rem 1.1rem', background: '#0D183D', color: '#fff', borderRadius: '8px', textDecoration: 'none', fontWeight: '600', fontSize: '0.8rem' }}>
                   <Plus size={14} /> Add child
                 </Link>
@@ -1182,7 +1182,7 @@ export default function DashboardPage() {
                   </p>
                 )}
               </div>
-              {sub?.status === 'subscribed' ? (
+              {sub?.status === 'subscribed' || isAdmin ? (
                 <button onClick={async () => { const res = await fetch('/api/stripe/portal', { method: 'POST' }); const d = await res.json(); if (d.url) window.location.href = d.url; }}
                   style={{ width: '100%', padding: '0.7rem', borderRadius: '10px', border: '1.5px solid #FF6B35', background: '#fff', color: '#FF6B35', cursor: 'pointer', fontWeight: '600', fontSize: '0.875rem' }}>
                   Manage billing
