@@ -5,8 +5,10 @@ import { checkGenerationAllowed, decrementStoryCount } from '@/lib/subscription'
 import { getSampleStory, isTrialInterest } from '@/lib/sample-stories/server';
 import { parseBody, generateStorySchema } from '@/lib/validation';
 
-// Extend Vercel function timeout to 60s (Pro plan) to allow time for image generation
-export const maxDuration = 60;
+// Vercel Hobby caps serverless functions at 10s. Claude Haiku completes story
+// generation in 3-6s reliably — Sonnet was intermittently timing out at 15-30s.
+// Haiku quality is excellent for children's bedtime stories and 10x cheaper.
+export const maxDuration = 10;
 
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
@@ -452,7 +454,7 @@ export async function POST(request: Request) {
     }, previousTitles);
 
     const message = await anthropic.messages.create({
-      model: 'claude-sonnet-4-6',
+      model: 'claude-haiku-4-5-20251001',
       max_tokens: 4096,
       messages: [{ role: 'user', content: prompt }],
     });
