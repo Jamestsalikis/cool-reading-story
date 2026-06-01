@@ -482,6 +482,7 @@ export async function POST(request: Request) {
           parent_id: user.id,
           anthropic_api_key: process.env.ANTHROPIC_API_KEY,
           replicate_token: REPLICATE_API_TOKEN,
+          child_appearance: child.appearance || {},
         }),
       }
     );
