@@ -16,7 +16,7 @@ export interface UserSub {
 }
 
 export type PaywallResult =
-  | { allowed: true; reason: 'admin' | 'free' | 'subscribed' }
+  | { allowed: true; reason: 'admin' | 'free' | 'subscribed' | 'extra_book' }
   | { allowed: false; reason: 'no_subscription' | 'free_exhausted' | 'monthly_limit' | 'daily_limit' };
 
 /**
@@ -91,10 +91,24 @@ export async function checkGenerationAllowed(
   // Free user — check account-level counter gate.
   // Per-child has_used_free_story gate is also enforced in the generate-story route.
   if (sub.status === 'free' || sub.status === 'cancelled') {
-    if ((sub.free_stories_remaining ?? 0) <= 0) {
-      return { allowed: false, reason: 'free_exhausted' };
+    // Reset extra_books_today if the day has rolled over
+    const today = new Date().toISOString().split('T')[0];
+    if (!sub.day_reset_date || sub.day_reset_date < today) {
+      await supabase
+        .from('user_subscriptions')
+        .update({ extra_books_today: 0, day_reset_date: today })
+        .eq('user_id', userId);
+      sub.extra_books_today = 0;
     }
-    return { allowed: true, reason: 'free' };
+
+    if ((sub.free_stories_remaining ?? 0) > 0) {
+      return { allowed: true, reason: 'free' };
+    }
+    // Free stories exhausted — check if they bought an extra book today
+    if ((sub.extra_books_today ?? 0) > 0) {
+      return { allowed: true, reason: 'extra_book' };
+    }
+    return { allowed: false, reason: 'free_exhausted' };
   }
 
   return { allowed: false, reason: 'no_subscription' };
@@ -107,10 +121,24 @@ export async function checkGenerationAllowed(
 export async function decrementStoryCount(
   supabase: SupabaseClient,
   userId: string,
-  reason: 'admin' | 'free' | 'subscribed',
+  reason: 'admin' | 'free' | 'subscribed' | 'extra_book',
   childId?: string
 ) {
   if (reason === 'admin') return;
+  if (reason === 'extra_book') {
+    // Decrement the purchased extra book slot
+    const { data: subRow } = await supabase
+      .from('user_subscriptions')
+      .select('extra_books_today')
+      .eq('user_id', userId)
+      .single();
+    const current = subRow?.extra_books_today ?? 0;
+    await supabase
+      .from('user_subscriptions')
+      .update({ extra_books_today: Math.max(0, current - 1) })
+      .eq('user_id', userId);
+    return;
+  }
   if (reason === 'free') {
     // Mark this child as having used their one free story
     if (childId) {
