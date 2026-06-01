@@ -345,31 +345,32 @@ export async function POST(request: Request) {
     }
 
     // Per-child daily limit: each child can only receive 1 story per day.
-    // This prevents a parent from using additional-child credits to generate
-    // multiple stories for the same child.
     // Exception: if the parent has purchased extra books today (99c each), those
-    // raise the daily ceiling and can be used for any child.
+    // raise the daily ceiling. When an extra book is consumed, decrement the counter.
+    let consumedExtraBook = false;
     if (paywallResult.reason === 'subscribed') {
       const { data: subRecord } = await supabase
         .from('user_subscriptions')
         .select('extra_books_today')
         .eq('user_id', user.id)
         .single();
-      const hasExtraBooks = (subRecord?.extra_books_today ?? 0) > 0;
-      if (!hasExtraBooks) {
-        const todayStart = new Date();
-        todayStart.setHours(0, 0, 0, 0);
-        const { count: storiesForChildToday } = await supabase
-          .from('stories')
-          .select('id', { count: 'exact', head: true })
-          .eq('child_id', child_id)
-          .gte('created_at', todayStart.toISOString());
-        if ((storiesForChildToday ?? 0) >= 1) {
+      const extraBooksAvailable = subRecord?.extra_books_today ?? 0;
+      const todayStart = new Date();
+      todayStart.setHours(0, 0, 0, 0);
+      const { count: storiesForChildToday } = await supabase
+        .from('stories')
+        .select('id', { count: 'exact', head: true })
+        .eq('child_id', child_id)
+        .gte('created_at', todayStart.toISOString());
+      if ((storiesForChildToday ?? 0) >= 1) {
+        if (extraBooksAvailable <= 0) {
           return NextResponse.json(
             { error: `${child.name} already has a story for today. Each child gets one story per day.` },
             { status: 429 }
           );
         }
+        // Using an extra book slot — flag for decrement after generation
+        consumedExtraBook = true;
       }
     }
 
@@ -440,6 +441,10 @@ export async function POST(request: Request) {
           return NextResponse.json({ error: 'Failed to save story' }, { status: 500 });
         }
         await decrementStoryCount(supabase, user.id, paywallResult.reason, child_id);
+        if (consumedExtraBook) {
+          const { data: sr } = await supabase.from('user_subscriptions').select('extra_books_today').eq('user_id', user.id).single();
+          await supabase.from('user_subscriptions').update({ extra_books_today: Math.max(0, (sr?.extra_books_today ?? 1) - 1) }).eq('user_id', user.id);
+        }
         return NextResponse.json({ story });
       }
     }
@@ -500,6 +505,10 @@ export async function POST(request: Request) {
 
     // Decrement story quota now that story record is confirmed created
     await decrementStoryCount(supabase, user.id, paywallResult.reason, child_id);
+    if (consumedExtraBook) {
+      const { data: sr } = await supabase.from('user_subscriptions').select('extra_books_today').eq('user_id', user.id).single();
+      await supabase.from('user_subscriptions').update({ extra_books_today: Math.max(0, (sr?.extra_books_today ?? 1) - 1) }).eq('user_id', user.id);
+    }
 
     // Return minimal story object — client navigates to /stories/{id} and polls for content
     return NextResponse.json({
