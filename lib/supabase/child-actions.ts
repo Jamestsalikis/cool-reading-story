@@ -17,6 +17,7 @@ export async function createChild(data: {
   friends: Person[];
   petName: string;
   petType: string;
+  petColour?: string;
   city: string;
   country: string;
   readingLevel: string;
@@ -77,6 +78,7 @@ export async function createChild(data: {
         followUpAnswers: data.followUpAnswers,
         petName: data.petName,
         petType: data.petType,
+        petColour: data.petColour || '',
         city: data.city,
         country: data.country,
       },
@@ -100,6 +102,7 @@ export async function updateChild(childId: string, data: {
   friends: Person[];
   petName: string;
   petType: string;
+  petColour?: string;
   city: string;
   country: string;
   readingLevel: string;
@@ -140,6 +143,7 @@ export async function updateChild(childId: string, data: {
         friends: data.friends.filter(f => f.name.trim()),
         petName: data.petName,
         petType: data.petType,
+        petColour: data.petColour || '',
         city: data.city,
         country: data.country,
         ...(data.followUpAnswers !== undefined ? { followUpAnswers: data.followUpAnswers } : {}),

@@ -48,19 +48,28 @@ function buildPrompt(child: {
     .filter(Boolean)
     .join(', ');
 
+  const petColour = appearance.petColour as string | null || null;
   const petDesc =
     appearance.petName && appearance.petType
-      ? `${name}'s beloved pet ${appearance.petType} named ${appearance.petName}`
+      ? `${name}'s beloved pet ${appearance.petType} named ${appearance.petName}${petColour ? ` (${petColour})` : ''}`
       : null;
 
-  const siblings: { name: string; nickname: string }[] = Array.isArray(appearance.siblings) ? appearance.siblings : [];
+  const siblings: { name: string; nickname: string; hairColour?: string }[] = Array.isArray(appearance.siblings) ? appearance.siblings : [];
   const siblingDesc = siblings.length > 0
-    ? siblings.map(s => s.nickname ? `${s.name} (nickname: ${s.nickname})` : s.name).join(', ')
+    ? siblings.map(s => {
+        const parts = [s.nickname ? `${s.name} (${s.nickname})` : s.name];
+        if (s.hairColour) parts.push(`${s.hairColour} hair`);
+        return parts.join(', ');
+      }).join(' | ')
     : null;
 
-  const friends: { name: string; nickname: string }[] = Array.isArray(appearance.friends) ? appearance.friends : [];
+  const friends: { name: string; nickname: string; hairColour?: string }[] = Array.isArray(appearance.friends) ? appearance.friends : [];
   const bestFriendDesc = friends.length > 0
-    ? friends.map(f => f.nickname ? `${f.name} (nickname: ${f.nickname})` : f.name).join(', ')
+    ? friends.map(f => {
+        const parts = [f.nickname ? `${f.name} (nickname: ${f.nickname})` : f.name];
+        if (f.hairColour) parts.push(`${f.hairColour} hair`);
+        return parts.join(', ');
+      }).join(' | ')
     : null;
 
   const locationDesc = [
@@ -147,6 +156,13 @@ TEXT OUTFIT RULE: In the story content (page text), describe ${name}'s appearanc
 "[species/type with specific colour e.g. 'a young Triceratops with bright green scales and short golden horns'], [size/build e.g. 'about the size of a car'], [1-2 distinctive features e.g. 'wearing a small red bandana around their neck'], same creature, same appearance in every image."
 COMPANION RULES: (a) Species/type must be 100% consistent across all pages - if page 1 has a Triceratops, every page must have a Triceratops, never a T-Rex or Brachiosaurus. (b) Colours and distinctive features are fixed for the whole book. (c) In every image_prompt where the companion appears, paste the companion_anchor after the character_anchor. (d) If no recurring non-protagonist character exists, set companion_anchor to an empty string "".
 
+12. SECONDARY CHARACTER APPEARANCE — siblings, friends, and pets must look VISUALLY DISTINCT from ${name} in every image prompt where they appear. Follow these rules:
+   - If a sibling/friend has a provided hair colour, use it EXACTLY in every image_prompt where they appear (e.g. "Max, a boy with straight brown hair").
+   - If no hair colour is provided, assign them a hair colour that is DIFFERENT from ${name}'s — and keep it consistent across all pages.
+   - Each sibling/friend MUST wear a different outfit colour scheme from ${name}'s character_anchor outfit. Choose a completely different palette.
+   - Pets: if a colour/description is provided (e.g. "golden, fluffy"), include it in every image_prompt where the pet appears.
+   - In every image_prompt where a sibling, friend, or pet appears, describe them with their specific hair/colour/outfit details so the image model renders them as distinct individuals.
+
 CRITICAL IMAGE PROMPT RULES:
 
 ANATOMY (non-negotiable):
@@ -197,7 +213,7 @@ Return ONLY valid JSON, no markdown, no explanation:
     {
       "page_number": 1,
       "content": "First short paragraph (1-3 sentences).\n\nSecond short paragraph (1-3 sentences).\n\nThird short paragraph (1-3 sentences if needed).",
-      "image_prompt": "[character_anchor copied verbatim] [3-5 sentences that describe THIS PAGE SPECIFICALLY: (1) the exact named location from this page's text e.g. 'a glowing crystal cave with purple stalactites dripping silver light', (2) the specific action the character is doing at this exact story moment e.g. 'leaping across a gap between two floating islands, arms outstretched, hair streaming behind', (3) any named creature, object, or character from this page e.g. 'a tiny dragon with emerald scales perched on her shoulder blowing a single spark', (4) the emotional expression on the character's face matching this page's mood]. No text, no words, no letters anywhere in the image."
+      "image_prompt": "[character_anchor copied verbatim] [3-5 sentences that describe THIS PAGE SPECIFICALLY: (1) the exact named location from this page's text e.g. 'a glowing crystal cave with purple stalactites dripping silver light', (2) the specific action the character is doing at this exact story moment e.g. 'leaping across a gap between two floating islands, arms outstretched, hair streaming behind', (3) if a sibling/friend/pet appears on this page: describe them by name with their specific hair colour and outfit colour so they look visually DIFFERENT from ${name} — e.g. 'beside them stands Max, a boy with straight brown hair wearing a green jacket and grey jeans', (4) the emotional expression on the character's face matching this page's mood]. No text, no words, no letters anywhere in the image."
     }
   ]
 }`;

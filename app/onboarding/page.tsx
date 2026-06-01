@@ -29,7 +29,7 @@ function isContentAppropriate(text: string): boolean {
   });
 }
 
-type Person = { name: string; nickname: string };
+type Person = { name: string; nickname: string; hairColour?: string };
 
 type OnboardingState = {
   step: number;
@@ -46,7 +46,7 @@ type OnboardingState = {
   friends: Person[];
   petName: string;
   petType: string;
-  pets: { name: string; type: string }[];
+  pets: { name: string; type: string; colour: string }[];
   city: string;
   country: string;
   readingLevel: string;
@@ -299,6 +299,7 @@ export default function OnboardingPage() {
           friends: state.friends,
           petName: state.pets[0]?.name || state.petName,
           petType: state.pets[0]?.type || state.petType,
+          petColour: state.pets[0]?.colour || '',
           pets: state.pets,
           city: state.city,
           country: state.country,
@@ -2069,7 +2070,7 @@ export default function OnboardingPage() {
               {state.siblings.length > 0 && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '10px' }}>
                   {state.siblings.map((s, i) => (
-                    <div key={i} style={{ display: 'grid', gridTemplateColumns: '140px 1fr auto', gap: '8px', alignItems: 'center' }}>
+                    <div key={i} style={{ display: 'grid', gridTemplateColumns: '130px 1fr 100px auto', gap: '8px', alignItems: 'center' }}>
                       <select value={s.nickname || 'Brother'}
                         onChange={(e) => { const u = [...state.siblings]; u[i] = { ...u[i], nickname: e.target.value }; setState({ ...state, siblings: u }); }}
                         style={{ ...inputStyle, cursor: 'pointer' }}>
@@ -2077,13 +2078,15 @@ export default function OnboardingPage() {
                       </select>
                       <input type="text" style={inputStyle} placeholder="Name" value={s.name}
                         onChange={(e) => { const u = [...state.siblings]; u[i] = { ...u[i], name: e.target.value }; setState({ ...state, siblings: u }); }} />
+                      <input type="text" style={inputStyle} placeholder="Hair colour" value={s.hairColour || ''}
+                        onChange={(e) => { const u = [...state.siblings]; u[i] = { ...u[i], hairColour: e.target.value }; setState({ ...state, siblings: u }); }} />
                       <button onClick={() => setState({ ...state, siblings: state.siblings.filter((_, idx) => idx !== i) })}
                         style={{ background: 'none', border: '1.5px solid #F0E4D0', borderRadius: '8px', width: '36px', height: '36px', cursor: 'pointer', color: '#5E6A7A', fontSize: '1rem', flexShrink: 0 }}>×</button>
                     </div>
                   ))}
                 </div>
               )}
-              <button onClick={() => setState({ ...state, siblings: [...state.siblings, { name: '', nickname: 'Brother' }] })}
+              <button onClick={() => setState({ ...state, siblings: [...state.siblings, { name: '', nickname: 'Brother', hairColour: '' }] })}
                 style={{ ...chipBase, border: '1.5px dashed #F0E4D0', backgroundColor: 'transparent', color: '#5E6A7A', width: '100%' }}>
                 + Add family member
               </button>
@@ -2095,18 +2098,20 @@ export default function OnboardingPage() {
               {state.friends.length > 0 && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '10px' }}>
                   {state.friends.map((f, i) => (
-                    <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr auto', gap: '8px', alignItems: 'center' }}>
+                    <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 100px auto', gap: '8px', alignItems: 'center' }}>
                       <input type="text" style={inputStyle} placeholder="Name" value={f.name}
                         onChange={(e) => { const u = [...state.friends]; u[i] = { ...u[i], name: e.target.value }; setState({ ...state, friends: u }); }} />
                       <input type="text" style={inputStyle} placeholder="Nickname (optional)" value={f.nickname}
                         onChange={(e) => { const u = [...state.friends]; u[i] = { ...u[i], nickname: e.target.value }; setState({ ...state, friends: u }); }} />
+                      <input type="text" style={inputStyle} placeholder="Hair colour" value={f.hairColour || ''}
+                        onChange={(e) => { const u = [...state.friends]; u[i] = { ...u[i], hairColour: e.target.value }; setState({ ...state, friends: u }); }} />
                       <button onClick={() => setState({ ...state, friends: state.friends.filter((_, idx) => idx !== i) })}
                         style={{ background: 'none', border: '1.5px solid #F0E4D0', borderRadius: '8px', width: '36px', height: '36px', cursor: 'pointer', color: '#5E6A7A', fontSize: '1rem', flexShrink: 0 }}>×</button>
                     </div>
                   ))}
                 </div>
               )}
-              <button onClick={() => setState({ ...state, friends: [...state.friends, { name: '', nickname: '' }] })}
+              <button onClick={() => setState({ ...state, friends: [...state.friends, { name: '', nickname: '', hairColour: '' }] })}
                 style={{ ...chipBase, border: '1.5px dashed #F0E4D0', backgroundColor: 'transparent', color: '#5E6A7A', width: '100%' }}>
                 + Add friend
               </button>
@@ -2118,18 +2123,20 @@ export default function OnboardingPage() {
               {state.pets.length > 0 && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '10px' }}>
                   {state.pets.map((p, i) => (
-                    <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr auto', gap: '8px', alignItems: 'center' }}>
+                    <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 110px auto', gap: '8px', alignItems: 'center' }}>
                       <input type="text" style={inputStyle} placeholder="Name" value={p.name}
                         onChange={(e) => { const u = [...state.pets]; u[i] = { ...u[i], name: e.target.value }; setState({ ...state, pets: u }); }} />
                       <input type="text" style={inputStyle} placeholder="Type (e.g. Dog)" value={p.type}
                         onChange={(e) => { const u = [...state.pets]; u[i] = { ...u[i], type: e.target.value }; setState({ ...state, pets: u }); }} />
+                      <input type="text" style={inputStyle} placeholder="Colour / look" value={p.colour || ''}
+                        onChange={(e) => { const u = [...state.pets]; u[i] = { ...u[i], colour: e.target.value }; setState({ ...state, pets: u }); }} />
                       <button onClick={() => setState({ ...state, pets: state.pets.filter((_, idx) => idx !== i) })}
                         style={{ background: 'none', border: '1.5px solid #F0E4D0', borderRadius: '8px', width: '36px', height: '36px', cursor: 'pointer', color: '#5E6A7A', fontSize: '1rem', flexShrink: 0 }}>×</button>
                     </div>
                   ))}
                 </div>
               )}
-              <button onClick={() => setState({ ...state, pets: [...state.pets, { name: '', type: '' }] })}
+              <button onClick={() => setState({ ...state, pets: [...state.pets, { name: '', type: '', colour: '' }] })}
                 style={{ ...chipBase, border: '1.5px dashed #F0E4D0', backgroundColor: 'transparent', color: '#5E6A7A', width: '100%' }}>
                 + Add pet
               </button>
