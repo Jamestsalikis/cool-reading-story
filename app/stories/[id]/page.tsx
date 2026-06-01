@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Heart, ChevronLeft, ChevronRight } from 'lucide-react';
-import Fable from '@/components/Fable';
 import { createClient } from '@/lib/supabase/client';
 import FeedbackModal from '@/components/FeedbackModal';
 
@@ -44,6 +43,9 @@ const bookStyles = `
   @keyframes shimmer {
     0%, 100% { opacity: 0.45; }
     50% { opacity: 0.95; }
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
   }
   @keyframes paintDot {
     0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
@@ -264,7 +266,10 @@ function IllustrationPlaceholder({ generating }: { generating: boolean; theme?: 
       display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '4px',
     }}>
       {generating ? (
-        <Fable pose="painting" dialogue="Painting your illustration..." size={110} />
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+          <div style={{ width: '32px', height: '32px', border: '3px solid rgba(116,21,21,0.15)', borderTopColor: 'rgba(116,21,21,0.6)', borderRadius: '50%', animation: 'spin 0.9s linear infinite' }} />
+          <span style={{ fontSize: '0.72rem', color: 'rgba(116,21,21,0.4)', fontStyle: 'italic' }}>Painting…</span>
+        </div>
       ) : (
         <svg width="48" height="38" viewBox="0 0 48 38" fill="none" opacity="0.2">
           <path d="M24 7C18 3 7 3 2 5v26c5-2 16-2 22 2 6-4 17-4 22-2V5C44 3 30 3 24 7z" stroke="#741515" strokeWidth="2" strokeLinejoin="round" fill="rgba(116,21,21,0.08)"/>
