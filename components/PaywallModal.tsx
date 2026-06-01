@@ -82,15 +82,15 @@ export default function PaywallModal({ reason, onClose }: Props) {
 
   // Standard subscription paywall
   const headings: Record<Exclude<Props['reason'], 'daily_limit'>, string> = {
-    free_exhausted: "You've used your 3 welcome stories",
+    free_exhausted: "You've used your free story",
     monthly_limit: "You've reached your stories this month",
     no_subscription: 'Subscribe to start generating stories',
   };
 
   const subtext: Record<Exclude<Props['reason'], 'daily_limit'>, string> = {
-    free_exhausted: 'Subscribe to keep generating personalised stories for your child — 1 new book every day.',
+    free_exhausted: 'Subscribe to unlock 1 personalised bedtime story every day — or grab a single book now for just 99¢.',
     monthly_limit: 'Your stories reset on the 1st. Subscribe to an annual plan for the best value.',
-    no_subscription: 'Unlock 1 personalised bedtime story per day for A$9.99/month.',
+    no_subscription: 'Subscribe to unlock 1 personalised bedtime story every day — or grab a single book now for just 99¢.',
   };
 
   return (
@@ -168,6 +168,34 @@ export default function PaywallModal({ reason, onClose }: Props) {
               <p style={{ fontSize: '0.72rem', color: '#9B8B7A' }}>per month</p>
             </div>
           </button>
+          {/* 99c single book — only for free_exhausted and no_subscription */}
+          {(reason === 'free_exhausted' || reason === 'no_subscription') && (
+            <>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', margin: '4px 0' }}>
+                <div style={{ flex: 1, height: '1px', background: '#F0E8DC' }} />
+                <span style={{ fontSize: '0.72rem', color: '#C8BEAA' }}>or</span>
+                <div style={{ flex: 1, height: '1px', background: '#F0E8DC' }} />
+              </div>
+              <button
+                onClick={() => handleCheckout('extra_book')}
+                disabled={!!loading}
+                style={{
+                  padding: '14px 20px', borderRadius: '12px', border: '1.5px solid #E8E0D0',
+                  background: '#FFFEF9', color: '#741515', cursor: loading ? 'not-allowed' : 'pointer',
+                  opacity: loading ? 0.7 : 1, width: '100%',
+                  display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                }}
+              >
+                <div style={{ textAlign: 'left' }}>
+                  <p style={{ fontWeight: '600', fontSize: '0.9rem', marginBottom: '2px' }}>
+                    {loading === 'extra_book' ? 'Redirecting...' : 'Just one book'}
+                  </p>
+                  <p style={{ fontSize: '0.78rem', color: '#9B8B7A' }}>One-time · no subscription</p>
+                </div>
+                <p style={{ fontWeight: '700', fontSize: '1rem', color: '#741515' }}>A$0.99</p>
+              </button>
+            </>
+          )}
         </div>
 
         <p style={{ fontSize: '0.75rem', color: '#C8BEAA', textAlign: 'center', marginBottom: '16px' }}>
