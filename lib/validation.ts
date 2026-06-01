@@ -34,7 +34,7 @@ export const generateAllImagesSchema = z.object({
 });
 
 export const checkoutSchema = z.object({
-  plan: z.enum(['monthly', 'annual', 'extra_book']),
+  plan: z.enum(['monthly', 'annual', 'extra_book', 'extra_child']),
   locale: z.string().max(20).optional().default('en-AU'),
 });
 

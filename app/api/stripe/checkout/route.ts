@@ -94,6 +94,35 @@ export async function POST(request: Request) {
       return NextResponse.json({ url: session.url });
     }
 
+
+    // $3.99/month recurring extra child slot
+    if (plan === 'extra_child') {
+      const session = await stripe.checkout.sessions.create({
+        customer: customerId,
+        mode: 'subscription',
+        payment_method_types: ['card'],
+        line_items: [
+          {
+            price_data: {
+              currency,
+              product_data: {
+                name: 'Extra Child',
+                description: 'Add one additional child profile ($3.99/month)',
+              },
+              unit_amount: 399,
+              recurring: { interval: 'month' },
+            },
+            quantity: 1,
+          },
+        ],
+        success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/dashboard?extra_child=true`,
+        cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/dashboard`,
+        metadata: { supabase_user_id: user.id, purchase_type: 'extra_child' },
+        subscription_data: { metadata: { supabase_user_id: user.id, purchase_type: 'extra_child' } },
+      });
+      return NextResponse.json({ url: session.url });
+    }
+
     // Subscription plans — pick price ID for user's currency
     const prices = PRICE_IDS[currency] || PRICE_IDS['aud'];
     const priceId = plan === 'annual' ? prices.annual : prices.monthly;

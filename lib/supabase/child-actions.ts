@@ -42,21 +42,20 @@ export async function createChild(data: {
   if (!adminRow) {
     const { data: subRow } = await supabase
       .from('user_subscriptions')
-      .select('status')
+      .select('status, extra_child_slots')
       .eq('user_id', user.id)
       .single();
 
-    const isSubscribed = subRow?.status === 'subscribed';
+    const extraSlots = subRow?.extra_child_slots ?? 0;
+    const maxChildren = 1 + extraSlots;
 
-    if (!isSubscribed) {
-      const { count: existingChildren } = await supabase
-        .from('children')
-        .select('id', { count: 'exact', head: true })
-        .eq('parent_id', user.id);
+    const { count: existingChildren } = await supabase
+      .from('children')
+      .select('id', { count: 'exact', head: true })
+      .eq('parent_id', user.id);
 
-      if ((existingChildren ?? 0) >= 1) {
-        return { error: 'subscription_required' };
-      }
+    if ((existingChildren ?? 0) >= maxChildren) {
+      return { error: 'extra_child_required' };
     }
   }
 

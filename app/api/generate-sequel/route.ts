@@ -62,11 +62,11 @@ export async function POST(request: Request) {
       }
     }
 
-    if (volumeNumber > 4) {
-      return NextResponse.json({ error: 'Series is complete (max 4 volumes)' }, { status: 400 });
+    if (volumeNumber > 3) {
+      return NextResponse.json({ error: 'Series is complete (max 3 volumes)' }, { status: 400 });
     }
 
-    const isFinalVolume = volumeNumber === 4;
+    const isFinalVolume = volumeNumber === 3;
 
     // Get series_id  -  create one if this is the first sequel
     const seriesId = sourceStory.series_id ?? sourceStory.id;

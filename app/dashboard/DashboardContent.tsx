@@ -577,7 +577,7 @@ export default function DashboardPage() {
   const [dailyLimitChild, setDailyLimitChild] = useState<string | null>(null);
   const [paywallReason, setPaywallReason] = useState<'free_exhausted' | 'monthly_limit' | 'no_subscription' | 'daily_limit' | null>(null);
   const [editingChild, setEditingChild] = useState<ChildRecord | null>(null);
-  const [sub, setSub] = useState<{ status: string; stories_this_month: number; stories_today: number; extra_books_today: number; current_period_end: string | null; has_seen_tour: boolean } | null>(null);
+  const [sub, setSub] = useState<{ status: string; stories_this_month: number; stories_today: number; extra_books_today: number; extra_child_slots: number; current_period_end: string | null; has_seen_tour: boolean } | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
   const [showTour, setShowTour] = useState(false);
@@ -603,7 +603,7 @@ export default function DashboardPage() {
     if (user) { setUserEmail(user.email ?? ''); setUserId(user.id); }
     const { data: childrenData } = await supabase.from('children').select('*').order('created_at', { ascending: true });
     const { data: storiesData } = await supabase.from('stories').select('id, title, created_at, word_count, series_id, series_title, volume_number, pages, children(name, age)').order('created_at', { ascending: false });
-    const { data: subData } = await supabase.from('user_subscriptions').select('status, stories_this_month, stories_today, extra_books_today, current_period_end, has_seen_tour').eq('user_id', user?.id ?? '').single();
+    const { data: subData } = await supabase.from('user_subscriptions').select('status, stories_this_month, stories_today, extra_books_today, extra_child_slots, current_period_end, has_seen_tour').eq('user_id', user?.id ?? '').single();
     const { data: adminRow } = await supabase.from('admin_emails').select('email').eq('email', user?.email ?? '').maybeSingle();
     setSub(subData);
     setIsAdmin(!!adminRow);
@@ -623,6 +623,9 @@ export default function DashboardPage() {
         .then(() => fetchData())
         .catch(() => fetchData());
     } else if (params.get('extra_book') === 'true') {
+      window.history.replaceState({}, '', '/dashboard');
+      fetchData();
+    } else if (params.get('extra_child') === 'true') {
       window.history.replaceState({}, '', '/dashboard');
       fetchData();
     } else if (params.get('new_story')) {
@@ -1053,18 +1056,29 @@ export default function DashboardPage() {
           <div style={{ maxWidth: '560px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '28px' }}>
               <h3 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.4rem', color: '#0D183D', fontWeight: '400' }}>Children</h3>
-              {sub?.status === 'subscribed' || isAdmin ? (
-                <Link href="/onboarding" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '0.55rem 1.1rem', background: '#0D183D', color: '#fff', borderRadius: '8px', textDecoration: 'none', fontWeight: '600', fontSize: '0.8rem' }}>
-                  <Plus size={14} /> Add child
-                </Link>
-              ) : (
-                <button
-                  onClick={() => setPaywallReason('free_exhausted')}
-                  style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '0.55rem 1.1rem', background: '#0D183D', color: '#fff', borderRadius: '8px', border: 'none', cursor: 'pointer', fontWeight: '600', fontSize: '0.8rem' }}
-                >
-                  <Plus size={14} /> Add child
-                </button>
-              )}
+              {(() => {
+                const extraSlots = sub?.extra_child_slots ?? 0;
+                const hasSlot = isAdmin || children.length < 1 + extraSlots;
+                if (hasSlot) {
+                  return (
+                    <Link href="/onboarding" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '0.55rem 1.1rem', background: '#0D183D', color: '#fff', borderRadius: '8px', textDecoration: 'none', fontWeight: '600', fontSize: '0.8rem' }}>
+                      <Plus size={14} /> Add child
+                    </Link>
+                  );
+                }
+                return (
+                  <button
+                    onClick={async () => {
+                      const res = await fetch('/api/stripe/checkout', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ plan: 'extra_child', locale: navigator.language || 'en-AU' }) });
+                      const data = await res.json();
+                      if (data.url) window.location.href = data.url;
+                    }}
+                    style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '0.55rem 1.1rem', background: '#0D183D', color: '#fff', borderRadius: '8px', border: 'none', cursor: 'pointer', fontWeight: '600', fontSize: '0.8rem' }}
+                  >
+                    <Plus size={14} /> Add child <span style={{ fontSize: '0.7rem', opacity: 0.75, marginLeft: '2px' }}>$3.99/mo</span>
+                  </button>
+                );
+              })()}
             </div>
             {children.length === 0 ? <p style={{ color: '#5E6A7A' }}>No children added yet.</p> : (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>

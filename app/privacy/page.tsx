@@ -2,7 +2,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy — TalePop',
+  title: 'Privacy Policy',
   description: "How TalePop collects, uses and protects your personal information and your child's data.",
 };
 

@@ -45,15 +45,25 @@ export async function POST(request: Request) {
 
       if (session.mode === 'subscription' && userId && session.subscription) {
         const sub = await stripe.subscriptions.retrieve(session.subscription as string);
-        const { error } = await supabase.from('user_subscriptions').update({
-          status: 'subscribed',
-          stripe_subscription_id: sub.id,
-          stripe_customer_id: sub.customer as string,
-          current_period_end: getPeriodEnd(sub),
-          updated_at: new Date().toISOString(),
-        }).eq('user_id', userId);
-        if (error) console.error('[webhook] DB error (checkout):', error.message);
-        else console.log('[webhook] checkout OK for user', userId);
+        const purchaseType = session.metadata?.purchase_type;
+
+        if (purchaseType === 'extra_child') {
+          // Increment extra child slot
+          const { error } = await supabase.rpc('increment_extra_child_slots', { uid: userId });
+          if (error) console.error('[webhook] DB error (extra_child checkout):', error.message);
+          else console.log('[webhook] extra_child slot added for user', userId);
+        } else {
+          // Regular subscription (monthly/annual)
+          const { error } = await supabase.from('user_subscriptions').update({
+            status: 'subscribed',
+            stripe_subscription_id: sub.id,
+            stripe_customer_id: sub.customer as string,
+            current_period_end: getPeriodEnd(sub),
+            updated_at: new Date().toISOString(),
+          }).eq('user_id', userId);
+          if (error) console.error('[webhook] DB error (checkout):', error.message);
+          else console.log('[webhook] checkout OK for user', userId);
+        }
       } else if (session.mode === 'payment' && session.metadata?.purchase_type === 'extra_book' && userId) {
         const { error } = await supabase.rpc('grant_extra_book_today', { uid: userId });
         if (error) console.error('[webhook] DB error (extra_book):', error.message);
@@ -84,14 +94,22 @@ export async function POST(request: Request) {
       console.log('[webhook] subscription.deleted — userId:', userId);
 
       if (userId) {
-        const { error } = await supabase.from('user_subscriptions').update({
-          status: 'cancelled',
-          stripe_subscription_id: null,
-          current_period_end: null,
-          updated_at: new Date().toISOString(),
-        }).eq('user_id', userId);
-        if (error) console.error('[webhook] DB error (sub.deleted):', error.message);
-        else console.log('[webhook] sub.deleted OK for user', userId);
+        const purchaseType = (sub.metadata as any)?.purchase_type;
+        if (purchaseType === 'extra_child') {
+          // Decrement extra child slot (min 0)
+          const { error } = await supabase.rpc('decrement_extra_child_slots', { uid: userId });
+          if (error) console.error('[webhook] DB error (extra_child cancel):', error.message);
+          else console.log('[webhook] extra_child slot removed for user', userId);
+        } else {
+          const { error } = await supabase.from('user_subscriptions').update({
+            status: 'cancelled',
+            stripe_subscription_id: null,
+            current_period_end: null,
+            updated_at: new Date().toISOString(),
+          }).eq('user_id', userId);
+          if (error) console.error('[webhook] DB error (sub.deleted):', error.message);
+          else console.log('[webhook] sub.deleted OK for user', userId);
+        }
       }
     }
   } catch (err) {
