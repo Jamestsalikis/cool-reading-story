@@ -513,7 +513,7 @@ export default function StoryPage() {
 
   const pages: Page[] = story.pages?.length > 0
     ? story.pages
-    : story.content.split('\n\n').filter(Boolean).map((para, i) => ({
+    : (story.content || '').split('\n\n').filter(Boolean).map((para, i) => ({
         page_number: i + 1,
         content: para,
         image_prompt: '',
@@ -521,9 +521,17 @@ export default function StoryPage() {
       }));
 
   const totalPages = pages.length;
-  const page = pages[currentPage];
+  const page = pages[currentPage] ?? pages[0];
+  if (!page) {
+    return (
+      <div style={{ minHeight: '100vh', backgroundColor: '#FAF7F0', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '16px' }}>
+        <p style={{ color: '#6B5E4E' }}>This story is still being written. Please check back in a moment.</p>
+        <a href="/dashboard" style={{ color: '#741515', textDecoration: 'underline', fontSize: '0.9rem' }}>Back to dashboard</a>
+      </div>
+    );
+  }
   const isLastPage = currentPage === totalPages - 1;
-  const paragraphs = page.content.split('\n\n').filter(Boolean);
+  const paragraphs = (page.content || '').split('\n\n').filter(Boolean);
   const isThisPageGenerating = loadingPages.has(page.page_number);
 
   // ---- Illustration element ----

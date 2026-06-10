@@ -28,6 +28,11 @@ export default function Error({
       <p style={{ color: '#5E6A7A', fontSize: '1rem', maxWidth: '420px', marginBottom: '28px', lineHeight: 1.6 }}>
         We hit an unexpected snag. Your stories are safe — this is just a temporary hiccup.
       </p>
+      {error?.message && (
+        <p style={{ color: '#9CA3AF', fontSize: '0.75rem', maxWidth: '420px', marginBottom: '16px', fontFamily: 'monospace', background: '#f3f4f6', padding: '8px 12px', borderRadius: '8px', wordBreak: 'break-all' }}>
+          {error.message}
+        </p>
+      )}
       <button
         onClick={reset}
         style={{
