@@ -778,6 +778,20 @@ export default function DashboardPage() {
   const storiesByChild = (childId: string) => { const child = children.find(c => c.id === childId); if (!child) return []; return stories.filter(s => s.children?.name === child.name); };
   const isSeriesComplete = (childId: string) => { const latest = storiesByChild(childId)[0]; if (!latest?.series_id) return false; return stories.filter(s => s.series_id === latest.series_id).some(s => s.volume_number === 4); };
 
+  // Poll the story row until the edge function has written the text (pages populated),
+  // so the full-screen "Writing..." overlay stays up until the book actually exists
+  // instead of clearing the instant the API returns its placeholder.
+  const waitForStoryText = async (storyId: string, timeoutMs = 60000) => {
+    const sb = createClient();
+    const start = Date.now();
+    while (Date.now() - start < timeoutMs) {
+      const { data } = await sb.from('stories').select('pages').eq('id', storyId).single();
+      if (data?.pages && Array.isArray(data.pages) && data.pages.length > 0) return true;
+      await new Promise((r) => setTimeout(r, 2000));
+    }
+    return false;
+  };
+
   const handleGenerateStory = async (childId: string) => {
     if (generatingLock.current) return;
     generatingLock.current = true;
@@ -793,9 +807,12 @@ export default function DashboardPage() {
       const storyId = data.story?.id;
       if (!storyId) { await fetchData(); return; }
       setWritingStoryIds(prev => new Set([...prev, storyId]));
+      // Keep the writing overlay up until the text is actually written, so we don't
+      // flash confetti + drop the user on the dashboard before the book exists.
+      await waitForStoryText(storyId);
       await fetchData();
       setShowConfetti(true);
-      // Stay on dashboard — polling effect will refresh shelf when text is ready
+      // Book is now text-ready and clickable; images keep loading via polling
     } finally { setGenerating(null); generatingLock.current = false; }
   };
 
@@ -816,9 +833,10 @@ export default function DashboardPage() {
       const newStoryId = data.story?.id;
       if (!newStoryId) { await fetchData(); return; }
       setWritingStoryIds(prev => new Set([...prev, newStoryId]));
+      await waitForStoryText(newStoryId);
       await fetchData();
       setShowConfetti(true);
-      // Stay on dashboard — polling effect will refresh shelf when text is ready
+      // Book is now text-ready and clickable; images keep loading via polling
     } finally { setGenerating(null); generatingLock.current = false; }
   };
 

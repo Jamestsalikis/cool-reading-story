@@ -39,7 +39,7 @@ export async function POST(request: Request) {
     const { data: { user }, error: authError } = await supabase.auth.getUser();
     if (authError || !user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
-    const { plan, locale } = await parseBody(request, checkoutSchema);
+    const { plan, locale, continue_story_id } = await parseBody(request, checkoutSchema);
 
     if (!process.env.STRIPE_SECRET_KEY) {
       return NextResponse.json({ error: 'Stripe not configured' }, { status: 500 });
@@ -87,8 +87,12 @@ export async function POST(request: Request) {
             quantity: 1,
           },
         ],
-        success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/dashboard?extra_book=true`,
-        cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/dashboard`,
+        success_url: continue_story_id
+          ? `${process.env.NEXT_PUBLIC_SITE_URL}/stories/${continue_story_id}?continue=1`
+          : `${process.env.NEXT_PUBLIC_SITE_URL}/dashboard?extra_book=true`,
+        cancel_url: continue_story_id
+          ? `${process.env.NEXT_PUBLIC_SITE_URL}/stories/${continue_story_id}`
+          : `${process.env.NEXT_PUBLIC_SITE_URL}/dashboard`,
         metadata: { supabase_user_id: user.id, purchase_type: 'extra_book' },
       });
       return NextResponse.json({ url: session.url });

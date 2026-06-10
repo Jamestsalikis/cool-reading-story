@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Heart, ChevronLeft, ChevronRight } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
@@ -322,6 +322,11 @@ export default function StoryPage() {
   const [showFeedback, setShowFeedback] = useState(false);
   const feedbackShown = useRef(false);
   const supabase = createClient();
+  const router = useRouter();
+  const [userCtx, setUserCtx] = useState<{ status: string; stories_today: number; extra_books_today: number; isAdmin: boolean } | null>(null);
+  const [continuing, setContinuing] = useState(false);
+  const continueLock = useRef(false);
+  const continueAutoStarted = useRef(false);
 
   // Fetch story + poll DB for image updates (server-side edge fn generates them)
   useEffect(() => {
@@ -389,6 +394,78 @@ export default function StoryPage() {
       }
     }
   };
+
+  // Load the viewer's subscription/admin context for the end-of-book CTA
+  useEffect(() => {
+    (async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+      const { data: adminRow } = await supabase.from('admin_emails').select('email').eq('email', user.email ?? '').maybeSingle();
+      const { data: subRow } = await supabase.from('user_subscriptions').select('status, stories_today, extra_books_today').eq('user_id', user.id).maybeSingle();
+      setUserCtx({
+        status: subRow?.status ?? 'free',
+        stories_today: subRow?.stories_today ?? 0,
+        extra_books_today: subRow?.extra_books_today ?? 0,
+        isAdmin: !!adminRow,
+      });
+    })();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Poll a story until its text (pages) is written, so the loading overlay stays up
+  const waitForText = async (storyId: string, timeoutMs = 60000) => {
+    const start = Date.now();
+    while (Date.now() - start < timeoutMs) {
+      const { data } = await supabase.from('stories').select('pages').eq('id', storyId).single();
+      if (data?.pages && Array.isArray(data.pages) && data.pages.length > 0) return true;
+      await new Promise((r) => setTimeout(r, 2000));
+    }
+    return false;
+  };
+
+  // Generate the next chapter (sequel) from this story, then open it when ready
+  const startSequel = async () => {
+    if (continueLock.current) return;
+    continueLock.current = true;
+    setContinuing(true);
+    try {
+      const res = await fetch('/api/generate-sequel', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ story_id: id }) });
+      const data = await res.json();
+      if (!res.ok) {
+        // paywall / daily limit / other — send to dashboard where the options live
+        if (res.status === 402 || res.status === 429) { router.push('/dashboard'); return; }
+        setContinuing(false); continueLock.current = false; return;
+      }
+      const newId = data.story?.id;
+      if (!newId) { setContinuing(false); continueLock.current = false; return; }
+      await waitForText(newId);
+      router.push(`/stories/${newId}`);
+    } catch {
+      setContinuing(false); continueLock.current = false;
+    }
+  };
+
+  // Buy the next chapter for 99c, returning to this page to auto-start it
+  const buyNextChapter = async () => {
+    try {
+      const res = await fetch('/api/stripe/checkout', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ plan: 'extra_book', continue_story_id: id, locale: typeof navigator !== 'undefined' ? navigator.language : 'en-AU' }) });
+      const data = await res.json();
+      if (data.url) window.location.href = data.url;
+    } catch { /* ignore */ }
+  };
+
+  // After a 99c purchase we return to /stories/[id]?continue=1 — auto-start the sequel
+  useEffect(() => {
+    if (continueAutoStarted.current || !story) return;
+    if (typeof window === 'undefined') return;
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('continue') === '1') {
+      continueAutoStarted.current = true;
+      window.history.replaceState({}, '', `/stories/${id}`);
+      void startSequel();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [story]);
 
   if (loading) {
     return (
@@ -503,6 +580,20 @@ export default function StoryPage() {
     <IllustrationPlaceholder generating={isThisPageGenerating} />
   );
 
+  // ---- End-of-book CTA helpers ----
+  const currentVol = story.volume_number ?? 1;
+  const seriesComplete = currentVol >= 3;
+  const canContinueNow = !!userCtx && (
+    userCtx.isAdmin ||
+    (userCtx.status === 'subscribed'
+      ? (1 + (userCtx.extra_books_today ?? 0) - (userCtx.stories_today ?? 0)) > 0
+      : (userCtx.extra_books_today ?? 0) > 0)
+  );
+  const ctaBox = { marginTop: '22px', padding: '18px', borderRadius: '14px', background: 'rgba(116,21,21,0.06)', border: '1px solid rgba(116,21,21,0.12)', textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'center' };
+  const ctaTitle = { fontFamily: 'Lora, Georgia, serif', fontWeight: 700, color: '#2C1A0E', fontSize: '1.05rem' };
+  const ctaText = { color: '#5a3a2a', fontSize: '0.85rem', lineHeight: 1.5, margin: 0 };
+  const ctaSecondaryBtn = { background: 'transparent', color: '#741515', border: '1.5px solid #741515', borderRadius: '10px', padding: '0.6rem 1.1rem', fontWeight: 700, cursor: 'pointer', fontSize: '0.9rem' };
+
   // ---- Text content element ----
   const textContentEl = (
     <div className="book-text-inner" style={{ position: 'relative' }}>
@@ -519,6 +610,35 @@ export default function StoryPage() {
         <div style={{ borderLeft: '3px solid #741515', paddingLeft: '16px', marginTop: '18px', color: '#5a3a2a', fontStyle: 'italic', fontFamily: 'Lora, Georgia, serif', fontSize: '0.9rem', lineHeight: 1.7 }}>
           {story.moral}
         </div>
+      )}
+      {isLastPage && userCtx && (
+        seriesComplete ? (
+          <div style={ctaBox}>
+            <div style={ctaTitle}>🎉 You finished the series!</div>
+            <p style={ctaText}>All three chapters are complete. Time to start a brand-new adventure.</p>
+            <Link href="/dashboard" className="btn-brand" style={{ textDecoration: 'none' }}>Back to library</Link>
+          </div>
+        ) : canContinueNow ? (
+          <div style={ctaBox}>
+            <div style={ctaTitle}>Want to know what happens next?</div>
+            <button onClick={startSequel} disabled={continuing} className="btn-brand">{continuing ? 'Writing the next chapter…' : 'Continue to the next chapter →'}</button>
+          </div>
+        ) : userCtx.status === 'subscribed' ? (
+          <div style={ctaBox}>
+            <div style={ctaTitle}>The next chapter unlocks at midnight</div>
+            <p style={ctaText}>Come back tomorrow for the next free chapter — or unlock it right now.</p>
+            <button onClick={buyNextChapter} className="btn-brand">Unlock the next chapter now — 99¢</button>
+          </div>
+        ) : (
+          <div style={ctaBox}>
+            <div style={ctaTitle}>Continue the adventure</div>
+            <p style={ctaText}>Subscribe for unlimited stories, or unlock just the next chapter now.</p>
+            <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', justifyContent: 'center' }}>
+              <button onClick={() => router.push('/dashboard')} className="btn-brand">Subscribe</button>
+              <button onClick={buyNextChapter} style={ctaSecondaryBtn}>Next chapter — 99¢</button>
+            </div>
+          </div>
+        )
       )}
       <div style={{ textAlign: 'center', marginTop: '18px', color: 'rgba(116,21,21,0.3)', fontSize: '0.78rem', fontFamily: 'Georgia, serif' }}>
         — {currentPage + 1} —
@@ -548,6 +668,15 @@ export default function StoryPage() {
   return (
     <>
       {showFeedback && <FeedbackModal onClose={() => setShowFeedback(false)} />}
+
+      {continuing && (
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(13,10,8,0.93)', zIndex: 1000, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '18px', padding: '24px' }}>
+          <style>{`@keyframes tp-spin{to{transform:rotate(360deg)}}`}</style>
+          <div style={{ width: 48, height: 48, border: '4px solid rgba(255,255,255,0.2)', borderTopColor: '#c4784a', borderRadius: '50%', animation: 'tp-spin 0.9s linear infinite' }} />
+          <p style={{ color: '#fff', fontFamily: 'Fredoka, cursive', fontSize: '1.1rem', textAlign: 'center', margin: 0 }}>Writing the next chapter for {story?.children?.name || 'your child'}…</p>
+          <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem', textAlign: 'center', maxWidth: '320px', margin: 0 }}>This takes a moment. We&apos;ll open the new book as soon as it&apos;s ready.</p>
+        </div>
+      )}
 
       {/* Print-only layout: all pages rendered for printing */}
       <div className="print-only">
