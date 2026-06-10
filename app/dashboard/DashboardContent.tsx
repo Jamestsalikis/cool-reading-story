@@ -606,8 +606,6 @@ export default function DashboardPage() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [accountMsg, setAccountMsg] = useState<{ ok: boolean; text: string } | null>(null);
   const [accountLoading, setAccountLoading] = useState(false);
-  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
-  const [deleteInput, setDeleteInput] = useState('');
   const [referralCopied, setReferralCopied] = useState(false);
   const router = useRouter();
   const supabase = createClient();
@@ -1289,34 +1287,7 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            <div>
-              {!showDeleteConfirm ? (
-                <button onClick={() => setShowDeleteConfirm(true)}
-                  style={{ width: '100%', padding: '0.7rem', borderRadius: '10px', border: '1.5px solid #cc2200', background: '#fff', color: '#cc2200', cursor: 'pointer', fontWeight: '600', fontSize: '0.875rem' }}>
-                  Delete my account
-                </button>
-              ) : (
-                <div style={{ background: '#FFF5F5', border: '1.5px solid #cc2200', borderRadius: '12px', padding: '16px' }}>
-                  <p style={{ fontSize: '0.875rem', color: '#cc2200', fontWeight: '600', marginBottom: '8px' }}>This will permanently delete your account, all children, and all stories. This cannot be undone.</p>
-                  <p style={{ fontSize: '0.82rem', color: '#5E6A7A', marginBottom: '10px' }}>Type <strong>DELETE</strong> to confirm:</p>
-                  <input type="text" placeholder="DELETE" value={deleteInput} onChange={e => setDeleteInput(e.target.value)}
-                    style={{ width: '100%', padding: '0.65rem 0.9rem', borderRadius: '8px', border: '1.5px solid #cc2200', fontSize: '0.875rem', outline: 'none', boxSizing: 'border-box' as const, marginBottom: '10px' }} />
-                  <div style={{ display: 'flex', gap: '10px' }}>
-                    <button onClick={() => { setShowDeleteConfirm(false); setDeleteInput(''); }}
-                      style={{ flex: 1, padding: '0.65rem', borderRadius: '8px', border: '1.5px solid #F0E4D0', background: '#fff', color: '#5E6A7A', cursor: 'pointer', fontWeight: '600', fontSize: '0.82rem' }}>
-                      Cancel
-                    </button>
-                    <button disabled={deleteInput !== 'DELETE'} onClick={async () => {
-                      const res = await fetch('/api/account/delete', { method: 'DELETE' });
-                      if (res.ok) { await supabase.auth.signOut(); window.location.href = '/'; }
-                      else { setAccountMsg({ ok: false, text: 'Could not delete account. Please contact support.' }); setShowDeleteConfirm(false); }
-                    }} style={{ flex: 1, padding: '0.65rem', borderRadius: '8px', border: 'none', background: deleteInput === 'DELETE' ? '#cc2200' : '#e8a0a0', color: '#fff', cursor: deleteInput === 'DELETE' ? 'pointer' : 'default', fontWeight: '700', fontSize: '0.82rem' }}>
-                      Delete forever
-                    </button>
-                  </div>
-                </div>
-              )}
-            </div>
+
 
           </div>
         )}
