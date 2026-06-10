@@ -6,28 +6,9 @@ import Link from 'next/link';
 import { createChild } from '@/lib/supabase/child-actions';
 import { createClient } from '@/lib/supabase/client';
 import { TRIAL_INTERESTS } from '@/lib/sample-stories/index';
+import { isContentAppropriate } from '@/lib/content-filter';
 
 // Content filter — block inappropriate terms for a children's app
-const BLOCKED_TERMS = [
-  // Profanity
-  'fuck', 'shit', 'bitch', 'bastard', 'piss', 'cock', 'cunt', 'whore', 'slut', 'twat', 'arse',
-  // Sexual / anatomy slang
-  'dick', 'penis', 'vagina', 'pussy', 'boob', 'tit', 'nude', 'naked', 'sex', 'porn', 'erotic',
-  // Adult themes called out by team
-  'gay', 'lesbian', 'trans', 'queer', 'lgbt', 'mardi gras', 'stripper', 'strip club',
-  // Drugs / alcohol
-  'weed', 'marijuana', 'cocaine', 'heroin', 'alcohol', 'drugs',
-  // Violence / hate
-  'murder', 'rape', 'nazi', 'racist', 'terrorist',
-];
-
-function isContentAppropriate(text: string): boolean {
-  const lower = text.toLowerCase();
-  return !BLOCKED_TERMS.some(term => {
-    if (term.includes(' ')) return lower.includes(term);
-    return new RegExp(`\b${term}\b`, 'i').test(lower);
-  });
-}
 
 type Person = { name: string; nickname: string; hairColour?: string };
 
@@ -309,6 +290,8 @@ export default function OnboardingPage() {
         if (result.error || !result.child) {
           if (result.error === 'subscription_required') {
             setSubmitError('A subscription is required to add more than one child profile. Please subscribe from your dashboard.');
+          } else if (result.error === 'inappropriate_content') {
+            setSubmitError("Some details entered aren't appropriate for a children's app. Please review the name and interests, then try again.");
           } else {
             setSubmitError(result.error || 'Failed to save profile');
           }

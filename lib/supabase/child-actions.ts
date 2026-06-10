@@ -1,6 +1,7 @@
 'use server';
 
 import { createClient } from './server';
+import { allContentAppropriate } from '../content-filter';
 
 type Person = { name: string; nickname: string };
 
@@ -26,6 +27,16 @@ export async function createChild(data: {
 
   const { data: { user }, error: authError } = await supabase.auth.getUser();
   if (authError || !user) return { error: 'Not authenticated' };
+
+  const contentToCheck = [
+    data.name,
+    ...data.interests,
+    ...(data.followUpAnswers?.map((f) => f.answer) ?? []),
+    ...data.siblings.map((s) => s.name),
+    ...data.friends.map((f) => f.name),
+    data.petName,
+  ];
+  if (!allContentAppropriate(contentToCheck)) return { error: 'inappropriate_content' };
 
   const readingLevelMap: Record<string, string> = {
     simple: 'beginner',
@@ -111,6 +122,16 @@ export async function updateChild(childId: string, data: {
   const supabase = await createClient();
   const { data: { user }, error: authError } = await supabase.auth.getUser();
   if (authError || !user) return { error: 'Not authenticated' };
+
+  const contentToCheck = [
+    data.name,
+    ...data.interests,
+    ...(data.followUpAnswers?.map((f) => f.answer) ?? []),
+    ...data.siblings.map((s) => s.name),
+    ...data.friends.map((f) => f.name),
+    data.petName,
+  ];
+  if (!allContentAppropriate(contentToCheck)) return { error: 'inappropriate_content' };
 
   const readingLevelMap: Record<string, string> = {
     simple: 'beginner',
