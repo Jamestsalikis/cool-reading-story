@@ -317,14 +317,16 @@ export default function StoryPage() {
   const [currentPage, setCurrentPage] = useState(0);
   const [direction, setDirection] = useState<'forward' | 'back'>('forward');
   const [animKey, setAnimKey] = useState(0);
-  // Set of page numbers currently having their image generated
+  // Set of page numbers whose images are still being generated server-side
   const [loadingPages, setLoadingPages] = useState<Set<number>>(new Set());
   const [showFeedback, setShowFeedback] = useState(false);
-  const imageGenStarted = useRef(false);
   const feedbackShown = useRef(false);
   const supabase = createClient();
 
+  // Fetch story + poll DB for image updates (server-side edge fn generates them)
   useEffect(() => {
+    let interval: ReturnType<typeof setInterval> | null = null;
+
     async function fetchStory() {
       const { data } = await supabase
         .from('stories')
@@ -337,81 +339,32 @@ export default function StoryPage() {
         setFavourite(data.is_favourite);
 
         const pages: Page[] = data.pages || [];
-        const pagesNeedingImages = pages.filter((p) => p.image_prompt && !p.image_url);
-
-        if (pagesNeedingImages.length > 0 && !imageGenStarted.current) {
-          imageGenStarted.current = true;
-          setLoadingPages(new Set(pagesNeedingImages.map((p) => p.page_number)));
-
-          // Sequential browser-driven generation — one image at a time.
-          // Each Vercel call is <1s (well within Hobby 10s limit).
-          // Only one Replicate prediction runs at a time — no 429 rate limits.
-          (async () => {
-            for (const page of pagesNeedingImages) {
-              // If a poll_url already exists in DB (from a previous session that was interrupted),
-              // resume polling it instead of creating a brand new prediction.
-              // This prevents generating a different image on every page refresh.
-              let pollUrl: string | null = page.poll_url ?? null;
-
-              if (!pollUrl) {
-                // No existing prediction — create one
-                try {
-                  const res = await fetch('/api/generate-image', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ story_id: data.id, page_number: page.page_number }),
-                  });
-                  if (res.ok) {
-                    const result = await res.json();
-                    pollUrl = result.poll_url ?? null;
-                  } else if (res.status === 429) {
-                    await new Promise((r) => setTimeout(r, 10000));
-                  }
-                } catch {}
+        const pending = pages.filter((p) => p.image_prompt && !p.image_url);
+        if (pending.length > 0) {
+          setLoadingPages(new Set(pending.map((p) => p.page_number)));
+          // Poll DB every 5s until all images are ready — edge fn writes them in background
+          interval = setInterval(async () => {
+            const { data: updated } = await supabase
+              .from('stories')
+              .select('pages')
+              .eq('id', id)
+              .single();
+            if (updated?.pages) {
+              const stillPending = updated.pages.filter((p: Page) => p.image_prompt && !p.image_url);
+              setLoadingPages(new Set(stillPending.map((p: Page) => p.page_number)));
+              setStory((prev) => prev ? { ...prev, pages: updated.pages } : prev);
+              if (stillPending.length === 0 && interval) {
+                clearInterval(interval);
+                interval = null;
               }
-
-              if (!pollUrl) continue;
-
-              // Poll until the image is ready
-              for (let i = 0; i < 30; i++) {
-                await new Promise((r) => setTimeout(r, 3000));
-                try {
-                  const res = await fetch('/api/poll-image', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ story_id: data.id, page_number: page.page_number, poll_url: pollUrl }),
-                  });
-                  const result = await res.json();
-                  if (result.status === 'succeeded' && result.image_url) {
-                    setStory((prev) => {
-                      if (!prev) return prev;
-                      return {
-                        ...prev,
-                        pages: prev.pages.map((p) =>
-                          p.page_number === page.page_number ? { ...p, image_url: result.image_url } : p
-                        ),
-                      };
-                    });
-                    setLoadingPages((prev) => {
-                      const next = new Set(prev);
-                      next.delete(page.page_number);
-                      return next;
-                    });
-                    break;
-                  }
-                  if (result.status === 'failed') break;
-                } catch {}
-              }
-
-              // Short pause between images — Replicate rate limit breathing room
-              await new Promise((r) => setTimeout(r, 2000));
             }
-          })();
+          }, 5000);
         }
       }
       setLoading(false);
     }
     fetchStory();
+    return () => { if (interval) clearInterval(interval); };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 

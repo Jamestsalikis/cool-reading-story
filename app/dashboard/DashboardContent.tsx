@@ -592,6 +592,7 @@ export default function DashboardPage() {
   const [editingChild, setEditingChild] = useState<ChildRecord | null>(null);
   const [sub, setSub] = useState<{ status: string; stories_this_month: number; stories_today: number; extra_books_today: number; extra_child_slots: number; current_period_end: string | null; has_seen_tour: boolean } | null>(null);
   const [writingStoryIds, setWritingStoryIds] = useState<Set<string>>(new Set());
+  const [imagePollingIds, setImagePollingIds] = useState<Set<string>>(new Set());
   const [isAdmin, setIsAdmin] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
   const [showTour, setShowTour] = useState(false);
@@ -712,7 +713,7 @@ export default function DashboardPage() {
 
   useEffect(() => { const check = () => setIsMobile(window.innerWidth < 768); check(); window.addEventListener('resize', check); return () => window.removeEventListener('resize', check); }, []);
   useEffect(() => { fetchData(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
-  // Poll for story text completion — keeps dashboard live while edge fn generates
+  // Phase 1: poll for story text — removes "Writing..." animation when pages arrive
   useEffect(() => {
     if (writingStoryIds.size === 0) return;
     const supabase = createClient();
@@ -726,6 +727,10 @@ export default function DashboardPage() {
           .single();
         if (data?.pages && Array.isArray(data.pages) && data.pages.length > 0) {
           setWritingStoryIds(prev => { const next = new Set(prev); next.delete(storyId); return next; });
+          // If cover image not yet ready, continue polling for it
+          if (!data.pages[0]?.image_url) {
+            setImagePollingIds(prev => new Set([...prev, storyId]));
+          }
           fetchData();
         }
       }
@@ -733,6 +738,27 @@ export default function DashboardPage() {
     return () => clearInterval(interval);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [writingStoryIds]);
+  // Phase 2: poll for cover image — refreshes shelf once server-side image is ready
+  useEffect(() => {
+    if (imagePollingIds.size === 0) return;
+    const supabase = createClient();
+    const interval = setInterval(async () => {
+      const ids = [...imagePollingIds];
+      for (const storyId of ids) {
+        const { data } = await supabase
+          .from('stories')
+          .select('id, pages')
+          .eq('id', storyId)
+          .single();
+        if (data?.pages?.[0]?.image_url) {
+          setImagePollingIds(prev => { const next = new Set(prev); next.delete(storyId); return next; });
+          fetchData();
+        }
+      }
+    }, 5000);
+    return () => clearInterval(interval);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [imagePollingIds]);
   useEffect(() => { const onFocus = () => fetchData(); window.addEventListener('focus', onFocus); return () => window.removeEventListener('focus', onFocus); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
