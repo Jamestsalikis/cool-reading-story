@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy',
+  alternates: { canonical: '/privacy' },
   description: "How TalePop collects, uses and protects your personal information and your child's data.",
 };
 

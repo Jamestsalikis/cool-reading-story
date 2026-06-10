@@ -514,7 +514,7 @@ export default function Home() {
               Begin their story
             </Link>
             <p style={{ fontSize: '0.8rem', color: '#9CA8B4', marginTop: '0.75rem', fontWeight: 500 }}>
-              3 free stories. No credit card. Cancel anytime.
+              1 free story. No credit card. Cancel anytime.
             </p>
             <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
               {['Ages 3–10', 'From 24¢ per story', 'Safe & ad-free'].map(b => (
@@ -618,7 +618,7 @@ export default function Home() {
             <p style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.45)', fontWeight: 700, letterSpacing: '0.06em' }}>LAST STORY DELIVERED</p>
           </div>
           {[
-            { n: '3', label: 'free stories to start' },
+            { n: '1', label: 'free story to start' },
             { n: '1/day', label: 'story per child' },
             { n: '24¢', label: 'per story' },
           ].map(s => (
@@ -923,7 +923,7 @@ export default function Home() {
             Their story is waiting to be told.
           </h2>
           <p style={{ color: 'rgba(255,255,255,0.55)', marginBottom: '2rem', fontSize: '1rem', lineHeight: 1.7, fontWeight: 500 }}>
-            2 minutes to set up. 3 free stories. Then from just 24¢ a story.
+            2 minutes to set up. 1 free story. Then from just 24¢ a story.
           </p>
           <Link href="/signup" style={{ display: 'inline-block', padding: '1.1rem 3rem', background: '#FF6B35', color: '#fff', borderRadius: '12px', textDecoration: 'none', fontWeight: '800', fontSize: '1.05rem', boxShadow: '0 4px 24px rgba(255,107,53,0.45)', letterSpacing: '-0.01em' }}>
             Begin their story

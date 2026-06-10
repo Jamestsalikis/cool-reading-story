@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     default: "Personalised Bedtime Stories for Kids | TalePop",
     template: "%s | TalePop"
   },
-  description: "Personalised bedtime stories and children's books written around your child — their name, interests, best friend and pet in every story. Ages 3–10. Start with 3 free stories.",
+  description: "Personalised bedtime stories and children's books written around your child — their name, interests, best friend and pet in every story. Ages 3–10. Start with 1 free story.",
   keywords: [
     "personalised bedtime stories",
     "personalised children's stories",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   category: "Children's Education",
   openGraph: {
     title: "TalePop - Personalised Bedtime Stories for Kids",
-    description: "Personalised bedtime stories and children's books written around your child — their name, interests, best friend and pet in every story. Ages 3–10. Start with 3 free stories.",
+    description: "Personalised bedtime stories and children's books written around your child — their name, interests, best friend and pet in every story. Ages 3–10. Start with 1 free story.",
     url: "https://www.talepopstories.com",
     siteName: "TalePop",
     images: [
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "TalePop - Personalised Bedtime Stories for Kids",
-    description: "Personalised bedtime stories starring your child. Their name, interests and friends woven into every story. Ages 3–10. Start with 3 free stories.",
+    description: "Personalised bedtime stories starring your child. Their name, interests and friends woven into every story. Ages 3–10. Start with 1 free story.",
     images: ["/hero-scene.jpg"],
   },
   robots: {

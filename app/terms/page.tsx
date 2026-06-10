@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Terms of Service',
+  alternates: { canonical: '/terms' },
   description: 'Terms and conditions governing use of TalePop\'s personalised children\'s story service.',
 };
 
