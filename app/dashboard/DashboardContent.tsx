@@ -30,6 +30,10 @@ const pageStyles = `
   .top-nav-tab:hover { background: rgba(13,24,61,0.08) !important; }
   .continue-card { transition: transform 0.2s ease, box-shadow 0.2s ease; }
   .continue-card:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,0,0,0.18) !important; }
+  @keyframes writingDot {
+    0%, 60%, 100% { opacity: 0.3; transform: scale(0.8); }
+    30% { opacity: 1; transform: scale(1); }
+  }
   @keyframes confetti-fall {
     0%   { transform: translateY(0px) rotate(0deg); opacity: 1; }
     100% { transform: translateY(110vh) rotate(540deg); opacity: 0; }
@@ -249,7 +253,7 @@ function ProductTour({ steps, pendingStoryId, onDone }: {
 
 // ── BookCard ───────────────────────────────────────────────────────────────────
 
-function BookCard({ story, palette, onContinue }: { story: Story; palette: Palette; onContinue?: () => void }) {
+function BookCard({ story, palette, onContinue, isWriting }: { story: Story; palette: Palette; onContinue?: () => void; isWriting?: boolean }) {
   const router = useRouter();
   const coverImage = story.pages?.[0]?.image_url;
   const tilt = getBookTilt(story.id);
@@ -260,7 +264,7 @@ function BookCard({ story, palette, onContinue }: { story: Story; palette: Palet
     <div style={{ transform: `rotate(${tilt}deg)`, transition: 'transform 0.2s ease', transformOrigin: 'bottom center' }}
       onMouseEnter={e => (e.currentTarget.style.transform = 'rotate(0deg) scale(1.04)')}
       onMouseLeave={e => (e.currentTarget.style.transform = `rotate(${tilt}deg) scale(1)`)}>
-      <div className="book-wrap" onClick={() => router.push(`/stories/${story.id}`)}
+      <div className="book-wrap" onClick={() => !isWriting && router.push(`/stories/${story.id}`)}
         style={{ perspective: '900px', cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <div style={{ position: 'relative', width: '140px', height: '196px', transformStyle: 'preserve-3d' }}>
           <div style={{ position: 'absolute', left: 0, top: 0, width: '18px', height: '100%', background: `linear-gradient(90deg, ${palette.spine} 0%, ${palette.cover} 100%)`, borderRadius: '3px 0 0 3px', zIndex: 3, boxShadow: 'inset -2px 0 5px rgba(0,0,0,0.3)' }} />
@@ -272,7 +276,16 @@ function BookCard({ story, palette, onContinue }: { story: Story; palette: Palet
             <div className="book-read-hint" style={{ position: 'relative', zIndex: 1, fontSize: '0.68rem', fontWeight: '700', color: palette.cover, letterSpacing: '0.06em', textTransform: 'uppercase' }}>Read</div>
           </div>
           <div className="book-cover-panel" style={{ position: 'absolute', left: '18px', top: 0, width: 'calc(100% - 18px)', height: '100%', background: palette.cover, borderRadius: '0 6px 6px 0', transformOrigin: 'left center', backfaceVisibility: 'hidden', zIndex: 2, overflow: 'hidden', boxShadow: '3px 3px 14px rgba(0,0,0,0.22)' }}>
-            {coverImage ? (
+            {isWriting ? (
+              <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '10px', background: palette.cover, padding: '12px' }}>
+                <div style={{ display: 'flex', gap: '5px' }}>
+                  {[0,1,2].map(i => (
+                    <div key={i} style={{ width: '7px', height: '7px', borderRadius: '50%', background: 'rgba(255,255,255,0.8)', animation: `writingDot 1.2s ease infinite ${i * 0.2}s` }} />
+                  ))}
+                </div>
+                <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '0.65rem', fontFamily: 'Fredoka, cursive', textAlign: 'center', lineHeight: 1.3 }}>Writing your story...</p>
+              </div>
+            ) : coverImage ? (
               <>
                 <div style={{ position: 'absolute', inset: 0, backgroundImage: `url(${coverImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.05) 55%, transparent 100%)' }} />
@@ -578,6 +591,7 @@ export default function DashboardPage() {
   const [paywallReason, setPaywallReason] = useState<'free_exhausted' | 'monthly_limit' | 'no_subscription' | 'daily_limit' | null>(null);
   const [editingChild, setEditingChild] = useState<ChildRecord | null>(null);
   const [sub, setSub] = useState<{ status: string; stories_this_month: number; stories_today: number; extra_books_today: number; extra_child_slots: number; current_period_end: string | null; has_seen_tour: boolean } | null>(null);
+  const [writingStoryIds, setWritingStoryIds] = useState<Set<string>>(new Set());
   const [isAdmin, setIsAdmin] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
   const [showTour, setShowTour] = useState(false);
@@ -698,6 +712,27 @@ export default function DashboardPage() {
 
   useEffect(() => { const check = () => setIsMobile(window.innerWidth < 768); check(); window.addEventListener('resize', check); return () => window.removeEventListener('resize', check); }, []);
   useEffect(() => { fetchData(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  // Poll for story text completion — keeps dashboard live while edge fn generates
+  useEffect(() => {
+    if (writingStoryIds.size === 0) return;
+    const supabase = createClient();
+    const interval = setInterval(async () => {
+      const ids = [...writingStoryIds];
+      for (const storyId of ids) {
+        const { data } = await supabase
+          .from('stories')
+          .select('id, pages')
+          .eq('id', storyId)
+          .single();
+        if (data?.pages && Array.isArray(data.pages) && data.pages.length > 0) {
+          setWritingStoryIds(prev => { const next = new Set(prev); next.delete(storyId); return next; });
+          fetchData();
+        }
+      }
+    }, 3000);
+    return () => clearInterval(interval);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [writingStoryIds]);
   useEffect(() => { const onFocus = () => fetchData(); window.addEventListener('focus', onFocus); return () => window.removeEventListener('focus', onFocus); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -733,9 +768,10 @@ export default function DashboardPage() {
       if (!res.ok) { setGenerateError(data.error || data.message || 'Something went wrong. Please try again.'); return; }
       const storyId = data.story?.id;
       if (!storyId) { await fetchData(); return; }
+      setWritingStoryIds(prev => new Set([...prev, storyId]));
       await fetchData();
       setShowConfetti(true);
-      router.push(`/stories/${storyId}`);
+      // Stay on dashboard — polling effect will refresh shelf when text is ready
     } finally { setGenerating(null); generatingLock.current = false; }
   };
 
@@ -755,9 +791,10 @@ export default function DashboardPage() {
       if (!res.ok) { setGenerateError(data.error || 'Something went wrong.'); return; }
       const newStoryId = data.story?.id;
       if (!newStoryId) { await fetchData(); return; }
+      setWritingStoryIds(prev => new Set([...prev, newStoryId]));
       await fetchData();
       setShowConfetti(true);
-      router.push(`/stories/${newStoryId}`);
+      // Stay on dashboard — polling effect will refresh shelf when text is ready
     } finally { setGenerating(null); generatingLock.current = false; }
   };
 
@@ -1035,9 +1072,9 @@ export default function DashboardPage() {
                           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '32px 20px', alignItems: 'flex-end', paddingBottom: '20px' }}>
                             {shelf.map(item =>
                               item.type === 'single'
-                                ? <BookCard key={item.story.id} story={item.story} palette={palette} onContinue={!generating ? () => handleContinueStory(item.story.id) : undefined} />
+                                ? <BookCard key={item.story.id} story={item.story} palette={palette} onContinue={!generating && !writingStoryIds.has(item.story.id) ? () => handleContinueStory(item.story.id) : undefined} isWriting={writingStoryIds.has(item.story.id)} />
                                 : item.volumes.length === 1
-                                  ? <BookCard key={item.seriesId} story={item.volumes[0]} palette={palette} onContinue={!generating ? () => handleContinueStory(item.volumes[0].id) : undefined} />
+                                  ? <BookCard key={item.seriesId} story={item.volumes[0]} palette={palette} onContinue={!generating && !writingStoryIds.has(item.volumes[0].id) ? () => handleContinueStory(item.volumes[0].id) : undefined} isWriting={writingStoryIds.has(item.volumes[0].id)} />
                                   : <SeriesFan key={item.seriesId} volumes={item.volumes} palette={palette} onContinue={item.volumes.length < 4 && !generating ? () => handleContinueStory(item.volumes[item.volumes.length - 1].id) : undefined} />
                             )}
                           </div>
