@@ -15,7 +15,14 @@ export const BLOCKED_TERMS = [
   // Adult themes called out by team
   'gay', 'lesbian', 'trans', 'queer', 'lgbt', 'mardi gras', 'stripper', 'strip club',
   // Drugs / alcohol
-  'weed', 'marijuana', 'cocaine', 'heroin', 'alcohol', 'drugs', 'meth', 'lsd', 'ecstasy', 'fentanyl',
+  'drug', 'drugs', 'alcohol', 'weed', 'marijuana', 'cannabis', 'hashish', 'bong',
+  'cocaine', 'crack cocaine', 'heroin', 'opium', 'opioid', 'opioids', 'morphine', 'codeine', 'methadone',
+  'meth', 'methamphetamine', 'crystal meth', 'crank', 'amphetamine', 'amphetamines',
+  'lsd', 'ecstasy', 'mdma', 'ketamine', 'pcp', 'angel dust', 'mescaline',
+  'psilocybin', 'shrooms', 'magic mushroom', 'magic mushrooms', 'dmt', 'ayahuasca',
+  'fentanyl', 'oxycodone', 'oxycontin', 'percocet', 'vicodin', 'xanax', 'valium', 'adderall',
+  'narcotic', 'narcotics', 'steroids', 'bath salts',
+  'vape', 'vaping', 'cigarette', 'cigarettes', 'tobacco', 'nicotine', 'smoking',
   // Violence / self-harm / hate
   'murder', 'kill', 'killing', 'stab', 'stabbing', 'behead', 'gore', 'torture', 'suicide', 'self harm', 'self-harm',
   'shoot', 'shooting', 'gun', 'guns', 'gunshot', 'lynch', 'massacre', 'genocide',
