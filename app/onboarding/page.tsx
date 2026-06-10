@@ -1893,7 +1893,7 @@ export default function OnboardingPage() {
               </div>
             ) : (
               <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
-                <input type="text" style={{ ...inputStyle, flex: 1 }} placeholder="Custom interests — Premium only (e.g. Ballet)" disabled value={state.customInterest} style={{ opacity: 0.55, cursor: 'not-allowed' }}
+                <input type="text" style={{ ...inputStyle, flex: 1 }} placeholder="Add your own interest (e.g. Ballet)" value={state.customInterest}
                   onChange={(e) => { setState({ ...state, customInterest: e.target.value }); setInterestError(''); }}
                   onKeyPress={(e) => e.key === 'Enter' && handleAddCustomInterest()} />
                 {state.customInterest.trim() && (
