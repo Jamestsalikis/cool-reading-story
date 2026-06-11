@@ -92,6 +92,17 @@ export async function POST(request: Request) {
       appearance.eyeColour ? `${appearance.eyeColour} eyes` : null,
     ].filter(Boolean).join(', ');
 
+    // Recurring cast (siblings/friends are humans; pet is its species) — used to
+    // lock each character's form so they don't morph between pages.
+    const seqSiblings = Array.isArray(appearance.siblings) ? appearance.siblings : [];
+    const seqFriends = Array.isArray(appearance.friends) ? appearance.friends : [];
+    const castList = [
+      ...seqSiblings.map((c: { name: string; hairColour?: string }) => `${c.name} (sibling, human child${c.hairColour ? `, ${c.hairColour} hair` : ''})`),
+      ...seqFriends.map((c: { name: string; hairColour?: string }) => `${c.name} (friend, human child${c.hairColour ? `, ${c.hairColour} hair` : ''})`),
+      ...(appearance.petName && appearance.petType ? [`${appearance.petName} (pet, a ${appearance.petColour ? appearance.petColour + ' ' : ''}${appearance.petType})`] : []),
+    ];
+    const castDesc = castList.join('; ');
+
     // Reuse Volume 1's character anchor so the hero looks identical across the whole
     // series and stays on the TALEPOP LoRA style. Fall back to a fresh Pixar-3D anchor
     // (same format the main story flow uses) if the source story has none.
@@ -122,6 +133,7 @@ Child profile:
 - Age: ${child.age}
 - Gender: ${child.gender} (use pronouns: ${pronouns.they}/${pronouns.them}/${pronouns.their})
 - Interests: ${(child.interests || []).join(', ')}
+${castDesc ? `- Recurring characters (keep identical every page): ${castDesc}` : ''}
 ${appearanceDesc ? `- Appearance: ${appearanceDesc}` : ''}
 ${appearance.city || appearance.country ? `- Lives in: ${[appearance.city, appearance.country].filter(Boolean).join(', ')}` : ''}
 
@@ -147,6 +159,11 @@ CHARACTER ANCHOR (copy verbatim at the start of every image_prompt — do not al
 After the anchor, add 2-4 sentences describing ONLY this page's scene and action (location, what is happening, who is present, the character's expression). Do not add any other art-style words.
 
 CRITICAL RULE: End every image_prompt with exactly this phrase: "No text, no words, no letters anywhere in the image."
+
+RECURRING CHARACTERS (this is the same series — keep every character identical across all pages):
+${castDesc ? `Recurring cast: ${castDesc}.` : ''}
+FORM LOCK (non-negotiable): every named character keeps ONE fixed form for the whole book. ${child.name}, siblings and friends are HUMAN children in every image. A pet is its stated animal species in every image. A story creature keeps ONE species. NEVER turn a character from a human into an animal or an animal into a human, and NEVER change an animal's species, between pages.
+For each recurring character, decide their fixed appearance once (humans: a hair colour and a fixed outfit in a palette different from ${child.name}; pets/creatures: species + colour + 1-2 fixed features) and paste that SAME description into every image_prompt where they appear. Do not restyle or re-colour them from page to page — identical repetition is what stops them morphing between images.
 
 IMPORTANT: The series is called "${seriesTitle}". Every volume title MUST start with "${seriesTitle}: " followed by a short subtitle (2-5 words) describing this chapter's specific adventure. Example: "${seriesTitle}: The Enchanted Map".
 

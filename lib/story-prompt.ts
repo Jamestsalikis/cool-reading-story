@@ -141,16 +141,12 @@ You MUST write a completely different story: different setting, different plot, 
 OUTFIT RULES: (a) Pick a specific, distinctive outfit that matches ${name}'s interests. (b) Name EVERY piece: top, bottom, shoes  -  each with a precise colour word. (c) Avoid generic combos like "blue shirt and brown pants"  -  use vivid specific colours like "cherry-red hoodie", "mustard-yellow overalls", "sky-blue sneakers". (d) The outfit is fixed for the whole book  -  never change it between pages.
 TEXT OUTFIT RULE: In the story content (page text), describe ${name}'s appearance ONLY using the outfit defined in the character_anchor. Do NOT invent different colours or clothing in the text that contradict the anchor (e.g. if the anchor says "cherry-red hoodie", the text must say "red hoodie" not "yellow hoodie").
 
-11. COMPANION ANCHOR: If the story features a recurring non-protagonist character (an animal, creature, magical being, or friend) who appears on 2 or more pages, define them in a 'companion_anchor' field using this format:
-"[species/type with specific colour e.g. 'a young Triceratops with bright green scales and short golden horns'], [size/build e.g. 'about the size of a car'], [1-2 distinctive features e.g. 'wearing a small red bandana around their neck'], same creature, same appearance in every image."
-COMPANION RULES: (a) Species/type must be 100% consistent across all pages - if page 1 has a Triceratops, every page must have a Triceratops, never a T-Rex or Brachiosaurus. (b) Colours and distinctive features are fixed for the whole book. (c) In every image_prompt where the companion appears, paste the companion_anchor after the character_anchor. (d) If no recurring non-protagonist character exists, set companion_anchor to an empty string "".
+11. CAST ANCHORS (recurring secondary characters): Identify every named non-protagonist who appears on 2 or more pages — siblings, friends, pets, and any story-invented companion. Define a single FIXED anchor for each and store them in the 'companion_anchor' field (one per line; empty string "" only if there are genuinely none). EACH character's FORM IS FIXED FOR THE WHOLE BOOK:
+   - Siblings and friends are HUMAN children. Format: "[Name], a human [boy/girl] child with [hair colour + style] hair, wearing [one fixed outfit with specific colours, a palette different from ${name}], same human child, same face and same outfit in every image."
+   - A pet is its stated animal species. Format: "[Name], a [colour] [species] (a real animal of this exact species, never a human), same animal, same breed and markings in every image."
+   - A story-invented creature/companion: "[species/type + specific colour], [size], [1-2 fixed features], same creature, same species in every image." Species never changes (a Triceratops is never later a T-Rex).
 
-12. SECONDARY CHARACTER APPEARANCE — siblings, friends, and pets must look VISUALLY DISTINCT from ${name} in every image prompt where they appear. Follow these rules:
-   - If a sibling/friend has a provided hair colour, use it EXACTLY in every image_prompt where they appear (e.g. "Max, a boy with straight brown hair").
-   - If no hair colour is provided, assign them a hair colour that is DIFFERENT from ${name}'s — and keep it consistent across all pages.
-   - Each sibling/friend MUST wear a different outfit colour scheme from ${name}'s character_anchor outfit. Choose a completely different palette.
-   - Pets: if a colour/description is provided (e.g. "golden, fluffy"), include it in every image_prompt where the pet appears.
-   - In every image_prompt where a sibling, friend, or pet appears, describe them with their specific hair/colour/outfit details so the image model renders them as distinct individuals.
+12. USING THE CAST ANCHORS: In EVERY image_prompt where one of these characters appears, paste that character's anchor VERBATIM (after the character_anchor). Describe them the SAME way every time — never restyle, re-colour, or change them page to page. Siblings/friends must wear a different outfit palette from ${name} so they read as distinct people. This verbatim repetition is what stops them morphing between images.
 
 CRITICAL IMAGE PROMPT RULES:
 
@@ -163,6 +159,7 @@ ANATOMY (non-negotiable):
 CONSISTENCY (non-negotiable):
 - Start EVERY image_prompt with the character_anchor string  -  word for word, no changes
 - If a companion_anchor is defined, paste it immediately after the character_anchor in every image_prompt where that companion appears
+- FORM LOCK (critical): every named character keeps ONE fixed form for the entire book. The hero, siblings and friends are HUMAN in every image; a pet or creature stays the SAME animal species in every image. NEVER turn a character from a human into an animal or an animal into a human, and NEVER change an animal's species, between pages.
 - The character must look identical in all 5 images: same face, same age (${age}), same exact outfit  -  never taller, never older, never different clothes
 - NEVER change the outfit between pages: if the anchor says "cherry-red hoodie and mustard-yellow shorts", every page must show exactly that
 - End every image prompt with: "No text, no words, no letters anywhere in the image."
@@ -202,7 +199,7 @@ Return ONLY valid JSON, no markdown, no explanation:
     {
       "page_number": 1,
       "content": "First short paragraph (1-3 sentences).\\n\\nSecond short paragraph (1-3 sentences).\\n\\nThird short paragraph (1-3 sentences if needed).",
-      "image_prompt": "[character_anchor copied verbatim] [3-5 sentences that describe THIS PAGE SPECIFICALLY: (1) the exact named location from this page's text e.g. 'a glowing crystal cave with purple stalactites dripping silver light', (2) the specific action the character is doing at this exact story moment e.g. 'leaping across a gap between two floating islands, arms outstretched, hair streaming behind', (3) if a sibling/friend/pet appears on this page: describe them by name with their specific hair colour and outfit colour so they look visually DIFFERENT from ${name} — e.g. 'beside them stands Max, a boy with straight brown hair wearing a green jacket and grey jeans', (4) the emotional expression on the character's face matching this page's mood]. No text, no words, no letters anywhere in the image."
+      "image_prompt": "[character_anchor copied verbatim] [3-5 sentences that describe THIS PAGE SPECIFICALLY: (1) the exact named location from this page's text e.g. 'a glowing crystal cave with purple stalactites dripping silver light', (2) the specific action the character is doing at this exact story moment e.g. 'leaping across a gap between two floating islands, arms outstretched, hair streaming behind', (3) if a sibling/friend/pet/companion appears on this page: paste their CAST ANCHOR verbatim — the SAME description every time, humans stay human and pets stay the same animal — e.g. 'beside them stands Max, a human boy with straight brown hair wearing a green jacket and grey jeans', (4) the emotional expression on the character's face matching this page's mood]. No text, no words, no letters anywhere in the image."
     }
   ]
 }`;
