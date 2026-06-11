@@ -33,19 +33,21 @@ export async function POST(request: Request) {
       if (body && typeof body.limit === 'number' && body.limit > 0) limit = body.limit;
     } catch { /* no body is fine */ }
 
-    // Find stories still pointing at expiring Replicate URLs.
-    const { data: stories, error } = await supabase
+    // Find stories still pointing at expiring Replicate URLs. We can't LIKE-filter a
+    // jsonb column via PostgREST, so fetch id+pages and match in JS (one-off admin scan).
+    const { data: rows, error } = await supabase
       .from('stories')
-      .select('id, title')
-      .like('pages', '%replicate.delivery%')
-      .limit(limit);
+      .select('id, title, pages');
 
     if (error) {
       console.error('[backfill-images] query error:', error.message);
       return NextResponse.json({ error: 'Query failed' }, { status: 500 });
     }
 
-    const targets = stories ?? [];
+    const targets = (rows ?? [])
+      .filter((s) => JSON.stringify(s.pages ?? []).includes('replicate.delivery'))
+      .slice(0, limit)
+      .map((s) => ({ id: s.id, title: s.title }));
     let triggered = 0;
 
     // Fire the edge function for each story. It responds immediately (waitUntil) and
