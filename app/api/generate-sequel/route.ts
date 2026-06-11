@@ -92,6 +92,13 @@ export async function POST(request: Request) {
       appearance.eyeColour ? `${appearance.eyeColour} eyes` : null,
     ].filter(Boolean).join(', ');
 
+    // Reuse Volume 1's character anchor so the hero looks identical across the whole
+    // series and stays on the TALEPOP LoRA style. Fall back to a fresh Pixar-3D anchor
+    // (same format the main story flow uses) if the source story has none.
+    const characterAnchor = (sourceStory.character_anchor && sourceStory.character_anchor.trim())
+      ? sourceStory.character_anchor.trim()
+      : `Pixar 3D CGI render, subsurface skin scattering, volumetric rim lighting, specular eye highlights, smooth rounded cartoon anatomy, large expressive eyes, vibrant saturated colours, professional Disney Pixar animated feature film quality. ${child.name}, a ${child.age}-year-old ${child.gender === 'Boy' ? 'boy' : child.gender === 'Girl' ? 'girl' : 'child'}${appearanceDesc ? ` with ${appearanceDesc}` : ''}, same character, same face, same exact outfit in every image.`;
+
     const prompt = `You are a master children's story writer. You are writing Volume ${volumeNumber} of a personalised bedtime picture book series.
 
 MANDATORY SAFETY RULES  -  these override everything else:
@@ -132,14 +139,14 @@ Requirements:
 6. ${isFinalVolume ? 'End with a warm, complete, satisfying conclusion  -  this is the final book in the series. Resolve the adventure fully. Give the characters and the child reader a proper farewell and a sense of wholeness. End on a cosy, peaceful bedtime note with no unresolved threads. No cliffhanger.' : 'End with a warm goodnight or goodbye that settles the child toward sleep  -  but weave in a single cliffhanger seed on the final page. Choose whichever style fits the story\'s plot and the child\'s interests most naturally:\n   - DISCOVERY: the hero notices something mysterious just as their eyes grow heavy (a glowing door, an unrecognised star, a sealed note slipped under the mat)\n   - VISITOR: a gentle knock, a shadow, or a distant voice calls from somewhere unknown  -  just as the story closes, before it is answered\n   - OBJECT: a character quietly passes the hero something (a torn map, a magical item, a tiny key) and whispers they will need it for what is coming, then the hero drifts off holding it\n   - NARRATOR TEASE: after the goodnight, the narrator speaks one warm line directly to the child: \"But little did [name] know... tomorrow would bring the biggest adventure yet.\"\n   The cliffhanger must feel like a natural part of the story, not bolted on at the end. Keep it gentle  -  curious and exciting, not scary. The page 5 image stays warm and sleepy; the hook lives in the words only.'}
 7. Use language appropriate for age ${child.age}: ${child.reading_level === 'beginner' ? 'short sentences, simple words' : child.reading_level === 'intermediate' ? 'flowing sentences, rich descriptions' : 'complex narrative, vivid imagery'}
 8. Split into exactly 5 pages, 2-4 paragraphs each
-9. For each page, write an image prompt. Copy the CHARACTER ANCHOR below word-for-word at the start, then describe only the scene action.
+9. For each page, write an image_prompt. Start it with the CHARACTER ANCHOR below copied word-for-word (do not change a single word), then add 2-4 sentences describing only this page's specific scene: the location, the action ${child.name} is doing, anyone else present, and ${child.name}'s expression.
 
-CHARACTER ANCHOR (copy verbatim at the start of every image prompt):
-"Premium illustrated children's picture book art, warm painterly style, bold ink outlines, expressive cartoon character with large bright eyes, jewel-tone palette of midnight navy and ocean teal and sunshine yellow and tangerine orange, magical golden atmospheric lighting, dreamy enchanted background. Main character: ${child.name}, a ${child.age}-year-old ${child.gender === 'Boy' ? 'boy' : child.gender === 'Girl' ? 'girl' : 'child'}${appearanceDesc ? ` with ${appearanceDesc}` : ''}, wearing ${child.gender === 'Girl' ? 'a bright colourful dress' : 'a blue t-shirt and dark jeans'}, same face and outfit in every scene, consistent cartoon character design."
+CHARACTER ANCHOR (copy verbatim at the start of every image_prompt — do not alter a single word; this keeps ${child.name} looking identical to the earlier books in the series):
+"${characterAnchor}"
 
-Then in 1-2 sentences describe only the scene action (what is happening, where, with whom).
+After the anchor, add 2-4 sentences describing ONLY this page's scene and action (location, what is happening, who is present, the character's expression). Do not add any other art-style words.
 
-CRITICAL RULE: End every image prompt with exactly this phrase: "No text, no words, no letters anywhere in the image."
+CRITICAL RULE: End every image_prompt with exactly this phrase: "No text, no words, no letters anywhere in the image."
 
 IMPORTANT: The series is called "${seriesTitle}". Every volume title MUST start with "${seriesTitle}: " followed by a short subtitle (2-5 words) describing this chapter's specific adventure. Example: "${seriesTitle}: The Enchanted Map".
 
@@ -153,7 +160,7 @@ Return ONLY valid JSON:
     {
       "page_number": 1,
       "content": "Page text  -  2-4 paragraphs",
-      "image_prompt": "Premium illustrated children's picture book art, warm painterly style, bold ink outlines, expressive cartoon character with large bright eyes, jewel-tone palette of midnight navy and ocean teal and sunshine yellow and tangerine orange, magical golden atmospheric lighting, dreamy enchanted background. Main character: [name], a [age]-year-old [boy/girl] with [appearance], wearing [outfit], same face and outfit in every scene, consistent cartoon character design. [Scene action]. No text, no words, no letters anywhere in the image."
+      "image_prompt": "${characterAnchor} [2-4 sentences describing only this page\'s scene and action]. No text, no words, no letters anywhere in the image."
     }
   ]
 }`;
@@ -204,6 +211,7 @@ Return ONLY valid JSON:
         series_id: seriesId,
         series_title: seriesTitle,
         volume_number: volumeNumber,
+        character_anchor: characterAnchor,
         input_tokens: inputTokens,
         output_tokens: outputTokens,
       })
