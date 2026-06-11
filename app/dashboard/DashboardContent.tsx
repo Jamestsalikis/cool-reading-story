@@ -874,7 +874,7 @@ export default function DashboardPage() {
     },
     {
       title: 'Continue the series',
-      body: "Loved a story? Tap 'Next chapter' on any book to add a new volume. Each child can have up to 4 chapters, building their very own series.",
+      body: "Loved a story? Tap 'Next chapter' on any book to add a new volume. Each child can have up to 3 chapters, building their very own series.",
       targetId: 'tour-next-chapter',
     },
     {
