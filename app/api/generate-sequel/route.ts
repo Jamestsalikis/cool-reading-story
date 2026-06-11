@@ -217,6 +217,30 @@ Return ONLY valid JSON:
 
     await decrementStoryCount(supabase, user.id, paywallResult.reason);
 
+    // Kick off background image generation via the same edge function the normal
+    // story flow uses. Sequels previously never triggered this, so their pages
+    // stayed image_url: null forever and images never loaded. The edge function
+    // responds immediately and keeps generating server-side (EdgeRuntime.waitUntil).
+    try {
+      const imgRes = await fetch(
+        `${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/generate-story-images`,
+        {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`,
+            'apikey': process.env.SUPABASE_SERVICE_ROLE_KEY!,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ story_id: newStory.id, replicate_token: process.env.REPLICATE_API_TOKEN }),
+        }
+      );
+      if (!imgRes.ok) {
+        console.error('[generate-sequel] image trigger non-OK:', imgRes.status, await imgRes.text());
+      }
+    } catch (err) {
+      console.error('[generate-sequel] image trigger failed:', err);
+    }
+
     return NextResponse.json({ story: newStory });
   } catch (error) {
     if (error instanceof Response) return error;
