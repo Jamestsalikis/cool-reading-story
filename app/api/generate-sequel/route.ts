@@ -1,12 +1,13 @@
 import { NextResponse } from 'next/server';
-import Anthropic from '@anthropic-ai/sdk';
 import { createClient } from '@/lib/supabase/server';
 import { checkGenerationAllowed, decrementStoryCount } from '@/lib/subscription';
 import { parseBody, generateSequelSchema } from '@/lib/validation';
 
-export const maxDuration = 60;
-
-const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+// Sequel TEXT generation is handled by the Supabase Edge Function (generate-story-text,
+// sequel mode) so it is NOT bound by the Vercel function timeout. This route only does
+// fast work: auth, paywall, per-child/volume checks, prompt building, then fires the
+// edge function and returns a story id. The client polls the new story until text is ready.
+export const maxDuration = 15;
 
 export async function POST(request: Request) {
   try {
@@ -22,7 +23,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'paywall', reason: paywallResult.reason }, { status: 402 });
     }
 
-    // Fetch the source story + child profile
+    // Fetch the story the user opened + child profile
     const { data: sourceStory } = await supabase
       .from('stories')
       .select('*, children(*)')
@@ -33,44 +34,58 @@ export async function POST(request: Request) {
     if (!sourceStory) return NextResponse.json({ error: 'Story not found' }, { status: 404 });
 
     const child = sourceStory.children;
-    const volumeNumber = (sourceStory.volume_number ?? 1) + 1;
+
+    // Identify the series and its CURRENT latest volume. We continue from the latest
+    // volume in the series, not whichever story the user happened to open. This is what
+    // stops "tap next chapter on Volume 1 twice" creating two Volume 2s.
+    const seriesId = sourceStory.series_id ?? sourceStory.id;
+    const { data: seriesRows } = await supabase
+      .from('stories')
+      .select('id, volume_number, pages, character_anchor, series_title, title')
+      .or(`series_id.eq.${seriesId},id.eq.${seriesId}`)
+      .eq('parent_id', user.id);
+
+    const candidates = (seriesRows && seriesRows.length > 0) ? seriesRows : [sourceStory];
+    const latestStory = candidates.reduce((a, b) =>
+      ((b.volume_number ?? 1) > (a.volume_number ?? 1) ? b : a)
+    );
+
+    const volumeNumber = (latestStory.volume_number ?? 1) + 1;
+    if (volumeNumber > 3) {
+      return NextResponse.json({ error: 'Series is complete (max 3 volumes)' }, { status: 400 });
+    }
+
+    const seriesTitle = sourceStory.series_title ?? latestStory.series_title ?? sourceStory.title;
 
     // Per-child daily limit: each child can only receive 1 story per day.
-    // Exception: if extra books have been purchased today, bypass the per-child limit
-    // (extra books raise the account ceiling and can be used for any child).
+    // Exception: if extra books have been purchased today, consume one to bypass the limit.
+    let consumedExtraBook = false;
     if (paywallResult.reason === 'subscribed') {
       const { data: subRecord } = await supabase
         .from('user_subscriptions')
         .select('extra_books_today')
         .eq('user_id', user.id)
         .single();
-      const hasExtraBooks = (subRecord?.extra_books_today ?? 0) > 0;
-      if (!hasExtraBooks) {
-        const todayStart = new Date();
-        todayStart.setHours(0, 0, 0, 0);
-        const { count: storiesForChildToday } = await supabase
-          .from('stories')
-          .select('id', { count: 'exact', head: true })
-          .eq('child_id', child.id)
-          .gte('created_at', todayStart.toISOString());
-        if ((storiesForChildToday ?? 0) >= 1) {
+      const extraBooksAvailable = subRecord?.extra_books_today ?? 0;
+      const todayStart = new Date();
+      todayStart.setHours(0, 0, 0, 0);
+      const { count: storiesForChildToday } = await supabase
+        .from('stories')
+        .select('id', { count: 'exact', head: true })
+        .eq('child_id', child.id)
+        .gte('created_at', todayStart.toISOString());
+      if ((storiesForChildToday ?? 0) >= 1) {
+        if (extraBooksAvailable <= 0) {
           return NextResponse.json(
             { error: `${child.name} already has a story for today. Each child gets one story per day.` },
             { status: 429 }
           );
         }
+        consumedExtraBook = true;
       }
     }
 
-    if (volumeNumber > 3) {
-      return NextResponse.json({ error: 'Series is complete (max 3 volumes)' }, { status: 400 });
-    }
-
     const isFinalVolume = volumeNumber === 3;
-
-    // Get series_id  -  create one if this is the first sequel
-    const seriesId = sourceStory.series_id ?? sourceStory.id;
-    const seriesTitle = sourceStory.series_title ?? sourceStory.title;
 
     const pronouns = child.gender === 'Girl'
       ? { they: 'she', them: 'her', their: 'her' }
@@ -78,13 +93,10 @@ export async function POST(request: Request) {
       ? { they: 'he', them: 'him', their: 'his' }
       : { they: 'they', them: 'them', their: 'their' };
 
-    const wordTarget = child.reading_level === 'beginner' ? 400
-      : child.reading_level === 'intermediate' ? 700 : 1000;
-
-    const previousSummary = sourceStory.pages
+    const previousSummary = latestStory.pages
       ?.map((p: { content: string }) => p.content)
       .join('\n\n')
-      .slice(0, 1500); // Keep prompt lean  -  first 1500 chars of previous story
+      .slice(0, 1500); // Keep prompt lean — first 1500 chars of the latest volume
 
     const appearance = child.appearance || {};
     const appearanceDesc = [
@@ -103,16 +115,18 @@ export async function POST(request: Request) {
     ];
     const castDesc = castList.join('; ');
 
-    // Reuse Volume 1's character anchor so the hero looks identical across the whole
+    // Reuse the series' character anchor so the hero looks identical across the whole
     // series and stays on the TALEPOP LoRA style. Fall back to a fresh Pixar-3D anchor
     // (same format the main story flow uses) if the source story has none.
-    const characterAnchor = (sourceStory.character_anchor && sourceStory.character_anchor.trim())
+    const characterAnchor = (latestStory.character_anchor && latestStory.character_anchor.trim())
+      ? latestStory.character_anchor.trim()
+      : (sourceStory.character_anchor && sourceStory.character_anchor.trim())
       ? sourceStory.character_anchor.trim()
       : `Pixar 3D CGI render, subsurface skin scattering, volumetric rim lighting, specular eye highlights, smooth rounded cartoon anatomy, large expressive eyes, vibrant saturated colours, professional Disney Pixar animated feature film quality. ${child.name}, a ${child.age}-year-old ${child.gender === 'Boy' ? 'boy' : child.gender === 'Girl' ? 'girl' : 'child'}${appearanceDesc ? ` with ${appearanceDesc}` : ''}, same character, same face, same exact outfit in every image.`;
 
     const prompt = `You are a master children's story writer. You are writing Volume ${volumeNumber} of a personalised bedtime picture book series.
 
-MANDATORY SAFETY RULES  -  these override everything else:
+MANDATORY SAFETY RULES — these override everything else:
 - Never generate sexual, romantic, adult, or suggestive content of any kind
 - Never generate violence, gore, horror, or frightening content
 - Never generate abusive, bullying, discriminatory, or hateful content
@@ -120,11 +134,11 @@ MANDATORY SAFETY RULES  -  these override everything else:
 - NEVER use em dashes in any text output, story content, titles, or prompts. Use commas, full stops, or rewrite the sentence instead
 
 TALEPOP BRAND VOICE & WRITING STYLE:
-- Warm, encouraging, and full of wonder  -  every sentence should feel like a hug
+- Warm, encouraging, and full of wonder — every sentence should feel like a hug
 - Speak to children with joy and delight; speak to the adventure with excitement
-- Celebrate imagination, curiosity, and confidence  -  the child is capable and brave
-- Titles: bold, exciting, and specific to the adventure (rendered in a large playful heading font  -  make them pop)
-- Story prose: smooth, flowing, natural rhythm  -  reads beautifully aloud at bedtime
+- Celebrate imagination, curiosity, and confidence — the child is capable and brave
+- Titles: bold, exciting, and specific to the adventure (rendered in a large playful heading font — make them pop)
+- Story prose: smooth, flowing, natural rhythm — reads beautifully aloud at bedtime
 - Use vivid sensory details: colours, sounds, smells, textures that bring the world to life
 - Avoid passive voice; keep the child actively doing, discovering, and choosing
 
@@ -143,12 +157,12 @@ ${previousSummary}
 """
 
 Requirements:
-1. This is a DIRECT continuation of the previous story  -  pick up where it left off or begin the next adventure the same characters would naturally go on
+1. This is a DIRECT continuation of the previous story — pick up where it left off or begin the next adventure the same characters would naturally go on
 2. Reference events, characters, or objects from the previous story naturally
 3. ${child.name} is still the hero with the same appearance and personality
-4. ${isFinalVolume ? 'This is the FINAL volume of the series  -  bring the overall adventure to a satisfying, complete conclusion. Give the series a proper ending with a meaningful resolution.' : 'Leave a natural story hook at the end that sets up one more adventure.'}
+4. ${isFinalVolume ? 'This is the FINAL volume of the series — bring the overall adventure to a satisfying, complete conclusion. Give the series a proper ending with a meaningful resolution.' : 'Leave a natural story hook at the end that sets up one more adventure.'}
 5. Include a warm, gentle moral lesson appropriate to this chapter
-6. ${isFinalVolume ? 'End with a warm, complete, satisfying conclusion  -  this is the final book in the series. Resolve the adventure fully. Give the characters and the child reader a proper farewell and a sense of wholeness. End on a cosy, peaceful bedtime note with no unresolved threads. No cliffhanger.' : 'End with a warm goodnight or goodbye that settles the child toward sleep  -  but weave in a single cliffhanger seed on the final page. Choose whichever style fits the story\'s plot and the child\'s interests most naturally:\n   - DISCOVERY: the hero notices something mysterious just as their eyes grow heavy (a glowing door, an unrecognised star, a sealed note slipped under the mat)\n   - VISITOR: a gentle knock, a shadow, or a distant voice calls from somewhere unknown  -  just as the story closes, before it is answered\n   - OBJECT: a character quietly passes the hero something (a torn map, a magical item, a tiny key) and whispers they will need it for what is coming, then the hero drifts off holding it\n   - NARRATOR TEASE: after the goodnight, the narrator speaks one warm line directly to the child: \"But little did [name] know... tomorrow would bring the biggest adventure yet.\"\n   The cliffhanger must feel like a natural part of the story, not bolted on at the end. Keep it gentle  -  curious and exciting, not scary. The page 5 image stays warm and sleepy; the hook lives in the words only.'}
+6. ${isFinalVolume ? 'End with a warm, complete, satisfying conclusion — this is the final book in the series. Resolve the adventure fully. Give the characters and the child reader a proper farewell and a sense of wholeness. End on a cosy, peaceful bedtime note with no unresolved threads. No cliffhanger.' : 'End with a warm goodnight or goodbye that settles the child toward sleep — but weave in a single cliffhanger seed on the final page. Choose whichever style fits the story\'s plot and the child\'s interests most naturally:\n   - DISCOVERY: the hero notices something mysterious just as their eyes grow heavy (a glowing door, an unrecognised star, a sealed note slipped under the mat)\n   - VISITOR: a gentle knock, a shadow, or a distant voice calls from somewhere unknown — just as the story closes, before it is answered\n   - OBJECT: a character quietly passes the hero something (a torn map, a magical item, a tiny key) and whispers they will need it for what is coming, then the hero drifts off holding it\n   - NARRATOR TEASE: after the goodnight, the narrator speaks one warm line directly to the child: \"But little did [name] know... tomorrow would bring the biggest adventure yet.\"\n   The cliffhanger must feel like a natural part of the story, not bolted on at the end. Keep it gentle — curious and exciting, not scary. The page 5 image stays warm and sleepy; the hook lives in the words only.'}
 7. Use language appropriate for age ${child.age}: ${child.reading_level === 'beginner' ? 'short sentences, simple words' : child.reading_level === 'intermediate' ? 'flowing sentences, rich descriptions' : 'complex narrative, vivid imagery'}
 8. Split into exactly 5 pages, 2-4 paragraphs each
 9. For each page, write an image_prompt. Start it with the CHARACTER ANCHOR below copied word-for-word (do not change a single word), then add 2-4 sentences describing only this page's specific scene: the location, the action ${child.name} is doing, anyone else present, and ${child.name}'s expression.
@@ -176,100 +190,70 @@ Return ONLY valid JSON:
   "pages": [
     {
       "page_number": 1,
-      "content": "Page text  -  2-4 paragraphs",
+      "content": "Page text — 2-4 paragraphs",
       "image_prompt": "${characterAnchor} [2-4 sentences describing only this page\'s scene and action]. No text, no words, no letters anywhere in the image."
     }
   ]
 }`;
 
-    const message = await anthropic.messages.create({
-      model: 'claude-sonnet-4-6',
-      max_tokens: 4096,
-      messages: [{ role: 'user', content: prompt }],
-    });
-
-    const inputTokens = message.usage.input_tokens;
-    const outputTokens = message.usage.output_tokens;
-    console.log(`Sequel tokens  -  input: ${inputTokens}, output: ${outputTokens}`);
-
-    const rawContent = message.content[0].type === 'text' ? message.content[0].text : '';
-    let storyData: {
-      title: string; moral: string; theme_emoji: string; word_count: number;
-      pages: { page_number: number; content: string; image_prompt: string }[];
-    };
-
-    try {
-      const cleaned = rawContent.replace(/^```json\n?/, '').replace(/\n?```$/, '').trim();
-      storyData = JSON.parse(cleaned);
-    } catch {
-      return NextResponse.json({ error: 'Failed to parse story from AI' }, { status: 500 });
-    }
-
-    const pagesForDB = storyData.pages.map((page) => ({ ...page, image_url: null, poll_url: null }));
-    const fullContent = pagesForDB.map((p) => p.content).join('\n\n');
-
-    // Update source story's series_id if this is the first sequel
+    // Promote the root story to a series on the first sequel.
     if (!sourceStory.series_id) {
-      await supabase.from('stories').update({ series_id: seriesId, series_title: seriesTitle, volume_number: 1 }).eq('id', story_id);
+      await supabase
+        .from('stories')
+        .update({ series_id: seriesId, series_title: seriesTitle, volume_number: sourceStory.volume_number ?? 1 })
+        .eq('id', seriesId);
     }
 
-    const { data: newStory, error: storyError } = await supabase
-      .from('stories')
-      .insert({
-        child_id: child.id,
-        parent_id: user.id,
-        title: storyData.title,
-        content: fullContent,
-        moral: storyData.moral,
-        theme: storyData.theme_emoji,
-        word_count: storyData.word_count,
-        reading_time_minutes: Math.ceil((storyData.word_count || 500) / 150),
-        pages: pagesForDB,
-        series_id: seriesId,
-        series_title: seriesTitle,
-        volume_number: volumeNumber,
-        character_anchor: characterAnchor,
-        input_tokens: inputTokens,
-        output_tokens: outputTokens,
-      })
-      .select()
-      .single();
-
-    if (storyError) {
-      console.error('Sequel save error:', storyError);
-      return NextResponse.json({ error: 'Failed to save story' }, { status: 500 });
-    }
-
-    await decrementStoryCount(supabase, user.id, paywallResult.reason);
-
-    // Kick off background image generation via the same edge function the normal
-    // story flow uses. Sequels previously never triggered this, so their pages
-    // stayed image_url: null forever and images never loaded. The edge function
-    // responds immediately and keeps generating server-side (EdgeRuntime.waitUntil).
-    try {
-      const imgRes = await fetch(
-        `${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/generate-story-images`,
-        {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`,
-            'apikey': process.env.SUPABASE_SERVICE_ROLE_KEY!,
-            'Content-Type': 'application/json',
+    // Hand off to the edge function (sequel mode). It inserts a placeholder carrying the
+    // series fields + reused anchor, returns the new story id immediately, then writes the
+    // text and fires image generation in the background — no Vercel timeout involved.
+    const edgeRes = await fetch(
+      `${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/generate-story-text`,
+      {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`,
+          'apikey': process.env.SUPABASE_SERVICE_ROLE_KEY!,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          prompt,
+          child_id: child.id,
+          parent_id: user.id,
+          anthropic_api_key: process.env.ANTHROPIC_API_KEY,
+          replicate_token: process.env.REPLICATE_API_TOKEN,
+          child_appearance: appearance,
+          sequel: {
+            series_id: seriesId,
+            series_title: seriesTitle,
+            volume_number: volumeNumber,
+            character_anchor: characterAnchor,
           },
-          body: JSON.stringify({ story_id: newStory.id, replicate_token: process.env.REPLICATE_API_TOKEN }),
-        }
-      );
-      if (!imgRes.ok) {
-        console.error('[generate-sequel] image trigger non-OK:', imgRes.status, await imgRes.text());
+        }),
       }
-    } catch (err) {
-      console.error('[generate-sequel] image trigger failed:', err);
+    );
+
+    if (!edgeRes.ok) {
+      const errText = await edgeRes.text();
+      console.error('[generate-sequel] Edge function error:', errText);
+      return NextResponse.json({ error: 'Sequel generation failed' }, { status: 500 });
     }
 
-    return NextResponse.json({ story: newStory });
+    const { story_id: newStoryId } = await edgeRes.json();
+    if (!newStoryId) {
+      return NextResponse.json({ error: 'Sequel generation failed — no story ID returned' }, { status: 500 });
+    }
+
+    // Decrement quota now that the story record is confirmed created.
+    await decrementStoryCount(supabase, user.id, paywallResult.reason, child.id);
+    if (consumedExtraBook) {
+      const { data: sr } = await supabase.from('user_subscriptions').select('extra_books_today').eq('user_id', user.id).single();
+      await supabase.from('user_subscriptions').update({ extra_books_today: Math.max(0, (sr?.extra_books_today ?? 1) - 1) }).eq('user_id', user.id);
+    }
+
+    return NextResponse.json({ story: { id: newStoryId, title: 'Writing the next chapter…', pages: [] } });
   } catch (error) {
     if (error instanceof Response) return error;
-
     console.error('Sequel generation error:', error);
     return NextResponse.json({ error: 'Sequel generation failed' }, { status: 500 });
   }

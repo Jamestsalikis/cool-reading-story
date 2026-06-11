@@ -413,7 +413,7 @@ export default function StoryPage() {
   }, []);
 
   // Poll a story until its text (pages) is written, so the loading overlay stays up
-  const waitForText = async (storyId: string, timeoutMs = 60000) => {
+  const waitForText = async (storyId: string, timeoutMs = 90000) => {
     const start = Date.now();
     while (Date.now() - start < timeoutMs) {
       const { data } = await supabase.from('stories').select('pages').eq('id', storyId).single();
