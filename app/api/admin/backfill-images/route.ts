@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
+import { createClient as createServiceClient } from '@supabase/supabase-js';
 
 export const maxDuration = 60;
 
@@ -27,6 +28,10 @@ export async function POST(request: Request) {
       .maybeSingle();
     if (!adminRow) return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
 
+    // Use a service-role client for the scan + trigger so we can heal EVERY user's
+    // poisoned stories, not just the admin's own (the SSR client above is RLS-scoped).
+    const admin = createServiceClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+
     let limit = 1000;
     try {
       const body = await request.json();
@@ -35,7 +40,7 @@ export async function POST(request: Request) {
 
     // Find stories still pointing at expiring Replicate URLs. We can't LIKE-filter a
     // jsonb column via PostgREST, so fetch id+pages and match in JS (one-off admin scan).
-    const { data: rows, error } = await supabase
+    const { data: rows, error } = await admin
       .from('stories')
       .select('id, title, pages');
 
