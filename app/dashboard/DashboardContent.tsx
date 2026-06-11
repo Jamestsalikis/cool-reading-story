@@ -7,6 +7,7 @@ import { BookOpen, Users, Settings, Plus, X } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import PaywallModal from '@/components/PaywallModal';
 import { updateChild } from '@/lib/supabase/child-actions';
+import { isContentAppropriate } from '@/lib/content-filter';
 
 const CHILD_PALETTES = [
   { cover: '#FF6B35', spine: '#CC4B1A', light: '#FFF0E6', emoji: '🦁' },
@@ -423,16 +424,28 @@ function EditChildModal({ child, palette, onClose, onSaved }: { child: ChildReco
   const [customInterestVal, setCustomInterestVal] = useState('');
   const handleAddCustom = () => {
     const val = customInterestVal.trim();
-    if (val && interests.length < 5 && !interests.includes(val)) {
+    if (!val) return;
+    if (!isContentAppropriate(val)) {
+      setError(`\u201c${val}\u201d isn\u2019t something we can use for a children\u2019s story. Please choose a different interest.`);
+      return;
+    }
+    if (interests.length < 5 && !interests.includes(val)) {
       setInterests(prev => [...prev, val]);
       setCustomInterestVal('');
+      setError('');
     }
   };
   const handleSave = async () => {
     if (!name.trim()) { setError('Name is required'); return; }
     setSaving(true);
     const result = await updateChild(child.id, { name, age, gender, interests, skinColour, hairColour, eyeColour, city, country, readingLevel, siblings, friends, petName, petType, followUpAnswers });
-    if (result.error) { setError(result.error); setSaving(false); return; }
+    if (result.error) {
+      setError(result.error === 'inappropriate_content'
+        ? "Some of these details aren\u2019t suitable for a children\u2019s story. Please review the name and interests, then try again."
+        : result.error);
+      setSaving(false);
+      return;
+    }
     onSaved(); onClose();
   };
   const inp: React.CSSProperties = { width: '100%', padding: '0.6rem 0.875rem', border: '1.5px solid #F0E4D0', borderRadius: '8px', fontSize: '0.9rem', outline: 'none', background: '#fff' };
@@ -472,7 +485,7 @@ function EditChildModal({ child, palette, onClose, onSaved }: { child: ChildReco
                   style={{ ...inp, flex: 1 }}
                   placeholder="Add a custom interest..."
                   value={customInterestVal}
-                  onChange={e => setCustomInterestVal(e.target.value)}
+                  onChange={e => { setCustomInterestVal(e.target.value); if (error) setError(''); }}
                   onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); handleAddCustom(); } }}
                 />
                 {customInterestVal.trim() && (
