@@ -9,7 +9,7 @@ function getStripe() {
   return new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2025-01-27.acacia' });
 }
 
-// Map locale → currency. Defaults to AUD.
+// Map locale â currency. Defaults to AUD.
 function currencyFromLocale(locale: string): 'aud' | 'usd' | 'cad' {
   const lower = locale.toLowerCase();
   if (lower === 'en-us' || lower.startsWith('en-us')) return 'usd';
@@ -51,7 +51,7 @@ export async function POST(request: Request) {
     // Get or create Stripe customer
     const { data: sub } = await supabase
       .from('user_subscriptions')
-      .select('stripe_customer_id')
+      .select('stripe_customer_id, status')
       .eq('user_id', user.id)
       .single();
 
@@ -68,7 +68,7 @@ export async function POST(request: Request) {
         .eq('user_id', user.id);
     }
 
-    // One-time 99c extra book purchase — currency-aware
+    // One-time 99c extra book purchase â currency-aware
     if (plan === 'extra_book') {
       const session = await stripe.checkout.sessions.create({
         customer: customerId,
@@ -82,7 +82,7 @@ export async function POST(request: Request) {
                 name: 'Extra Book',
                 description: 'One additional story book for today',
               },
-              unit_amount: 99, // 99 cents in local currency
+              unit_amount: (sub?.status === 'subscribed' || sub?.status === 'admin') ? 50 : 99, // 50c for subscribers, 99c otherwise
             },
             quantity: 1,
           },
@@ -127,7 +127,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ url: session.url });
     }
 
-    // Subscription plans — pick price ID for user's currency
+    // Subscription plans â pick price ID for user's currency
     const prices = PRICE_IDS[currency] || PRICE_IDS['aud'];
     const priceId = plan === 'annual' ? prices.annual : prices.monthly;
 
@@ -139,7 +139,7 @@ export async function POST(request: Request) {
       customer: customerId,
       mode: 'subscription',
       payment_method_types: ['card'],
-      line_items: [{ price: priceId, quantity: 1 }],
+      line_items: [{ price_data: { currency, product_data: { name: plan === 'annual' ? 'TalePop Annual' : 'TalePop Monthly' }, unit_amount: (({ aud: { monthly: 999, annual: 9900 }, cad: { monthly: 999, annual: 9900 }, usd: { monthly: 699, annual: 6900 } })[currency] || { monthly: 999, annual: 9900 })[plan === 'annual' ? 'annual' : 'monthly'], recurring: { interval: plan === 'annual' ? 'year' : 'month' } }, quantity: 1 }],
       success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/dashboard?subscribed=true`,
       cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/dashboard?cancelled=true`,
       metadata: { supabase_user_id: user.id },
