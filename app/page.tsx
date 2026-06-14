@@ -91,7 +91,7 @@ const S = `
 
   
 
-  /* Live-draw looping annotation — 4.5s cycle */
+  /* Live-draw looping annotation, 4.5s cycle */
   @keyframes draw-oval-loop {
     0%, 3.3%  { stroke-dashoffset: 520; }
     27.8%     { stroke-dashoffset: 0; }
@@ -371,7 +371,7 @@ export default function Home() {
           <Link href="/" style={{ textDecoration: 'none' }}>
             <img src="/mood-3.png" alt="TalePop - Personalised Bedtime Stories" style={{ height: '72px', width: 'auto' }} />
           </Link>
-          {/* Mobile-only: Start for free button + annotation — visible immediately on phone */}
+          {/* Mobile-only: Start for free button + annotation, visible immediately on phone */}
           <span className="nav-mobile-cta" style={{ position: 'relative', zIndex: 10 }}>
             <Link href="/signup" style={{ padding: '0.48rem 1rem', background: '#FF6B35', color: '#fff', borderRadius: '9px', textDecoration: 'none', fontWeight: '700', fontSize: '0.82rem', boxShadow: '0 2px 8px rgba(255,107,53,0.3)', position: 'relative', zIndex: 1, whiteSpace: 'nowrap' }}>
               Start for free
@@ -414,11 +414,11 @@ export default function Home() {
               <Link href="/signup" style={{ padding: '0.6rem 1.5rem', background: '#FF6B35', color: '#fff', borderRadius: '10px', textDecoration: 'none', fontWeight: '700', fontSize: '0.875rem', boxShadow: '0 2px 10px rgba(255,107,53,0.3)', position: 'relative', zIndex: 1 }}>
                 Start for free
               </Link>
-              {/* Hand-drawn "click here!" annotation — draws live on load */}
+              {/* Hand-drawn "click here!" annotation, draws live on load */}
               <svg viewBox="0 0 240 155" width="240" height="155"
                 style={{ position: 'absolute', top: '-48px', left: '-48px', pointerEvents: 'none', zIndex: 2, overflow: 'visible' }}
                 xmlns="http://www.w3.org/2000/svg">
-                {/* Wobbly oval — draws first (0.2s → 1.4s) */}
+                {/* Wobbly oval, draws first (0.2s → 1.4s) */}
                 <path d="M 18,52 C 15,24 42,6 120,4 C 198,2 216,26 216,52 C 216,80 196,96 120,98 C 44,100 16,80 18,52 Z"
                   stroke="#D93F00" strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round"
                   style={{
@@ -427,12 +427,12 @@ export default function Home() {
                     filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.10))'
                   }}
                 />
-                {/* Arrow curve — draws after oval (1.3s → 1.8s) */}
+                {/* Arrow curve, draws after oval (1.3s → 1.8s) */}
                 <path d="M 195,136 C 188,122 172,110 164,100"
                   stroke="#D93F00" strokeWidth="2.8" fill="none" strokeLinecap="round"
                   style={{ strokeDasharray: 65, strokeDashoffset: 65, animation: 'draw-arrow-loop 4.5s linear infinite' }}
                 />
-                {/* Arrowhead lines — appear after arrow (1.65s → 1.95s) */}
+                {/* Arrowhead lines, appear after arrow (1.65s → 1.95s) */}
                 <path d="M 164,100 L 174,102"
                   stroke="#D93F00" strokeWidth="2.8" fill="none" strokeLinecap="round"
                   style={{ strokeDasharray: 18, strokeDashoffset: 18, animation: 'draw-ah1-loop 4.5s linear infinite' }}
@@ -441,7 +441,7 @@ export default function Home() {
                   stroke="#D93F00" strokeWidth="2.8" fill="none" strokeLinecap="round"
                   style={{ strokeDasharray: 18, strokeDashoffset: 18, animation: 'draw-ah2-loop 4.5s linear infinite' }}
                 />
-                {/* "click here!" text — written left-to-right via clip wipe */}
+                {/* "click here!" text, written left-to-right via clip wipe */}
                 <defs>
                   <clipPath id="write-clip">
                     <rect x="112" y="130" height="28"
@@ -486,7 +486,7 @@ export default function Home() {
             </h1>
 
             <p style={{ fontSize: '1.05rem', color: '#5E6A7A', lineHeight: 1.75, marginBottom: '2rem', maxWidth: '440px', fontWeight: 500 }}>
-              Enter your child&apos;s name, interests and best friend — and we&apos;ll write them a personalised bedtime story that has never existed before. In under 60 seconds.
+              Enter your child&apos;s name, interests and best friend, and we&apos;ll write them a personalised bedtime story that has never existed before. In under 60 seconds.
             </p>
 
             {/* Name preview widget */}
@@ -548,7 +548,7 @@ export default function Home() {
               Personalised story books for Zak & Zoe. No one else.
             </h2>
             <p style={{ color: '#5E6A7A', fontSize: '0.95rem', fontWeight: 500, maxWidth: '500px', margin: '0 auto', lineHeight: 1.7 }}>
-              Every personalised children’s story invented from scratch — their name, their adventure, their world.
+              Every personalised children’s story invented from scratch, their name, their adventure, their world.
             </p>
           </div>
 
@@ -642,7 +642,7 @@ export default function Home() {
         <div style={{ maxWidth: '620px', margin: '0 auto' }}>
           <div style={{ fontSize: '1.75rem', marginBottom: '0.5rem' }}>🎁</div>
           <h2 className="font-serif" style={{ fontSize: 'clamp(1.6rem, 4vw, 2.5rem)', color: 'white', marginBottom: '0.75rem', lineHeight: 1.2, letterSpacing: '-0.01em' }}>
-            Sign up now — your first book is free
+            Sign up now, your first book is free
           </h2>
           <p style={{ color: 'rgba(255,255,255,0.88)', fontSize: '1rem', marginBottom: '1.75rem', fontWeight: 500, lineHeight: 1.6 }}>
             No credit card needed. Create your child&apos;s first personalised story in under 60 seconds.
@@ -746,7 +746,7 @@ export default function Home() {
               Two children. Two completely different stories.
             </h2>
             <p style={{ color: '#5E6A7A', fontWeight: 500, maxWidth: '500px', margin: '0 auto', lineHeight: 1.75, fontSize: '0.975rem' }}>
-              Their name, age, interests, friends and pet go into every personalised children’s story. What comes out is a unique kids book that has never been written before — and never will be again.
+              Their name, age, interests, friends and pet go into every personalised children’s story. What comes out is a unique kids book that has never been written before, and never will be again.
             </p>
           </div>
 
@@ -786,7 +786,7 @@ export default function Home() {
 
           <div className="trust-bar" style={{ marginTop: '3rem' }}>
             {[
-              { icon: <BookOpen size={18} color="#FF6B35" />, title: 'Your personalised story book library, always there', desc: 'Every story is saved. Re-read it tonight, next year, whenever — subscribe and it\'s always there.' },
+              { icon: <BookOpen size={18} color="#FF6B35" />, title: 'Your personalised story book library, always there', desc: 'Every story is saved. Re-read it tonight, next year, whenever, subscribe and it\'s always there.' },
               { icon: <Star size={18} color="#FFB703" />, title: 'Their world, front and centre', desc: 'Their interests shape the entire plot, not just the name.' },
               { icon: <Shield size={18} color="#6CC06C" />, title: 'Safe children’s stories for ages 3–10', desc: 'Every story crafted thoughtfully for kids aged 3–10.' },
               { icon: <Heart size={18} color="#FF6B35" />, title: 'No data sold. Ever.', desc: 'Your child\'s details are private. That\'s a promise.' },
@@ -850,7 +850,7 @@ export default function Home() {
           </div>
           <div className="three-col">
             {[
-              { num: '1', emoji: '✏️', title: 'Tell us about your child', desc: 'Their name, age, what makes them laugh, their best friend, their pet — the more you share, the richer their personalised story.', color: '#FF6B35' },
+              { num: '1', emoji: '✏️', title: 'Tell us about your child', desc: 'Their name, age, what makes them laugh, their best friend, their pet, the more you share, the richer their personalised story.', color: '#FF6B35' },
               { num: '2', emoji: '📖', title: 'We write their personalised story from scratch', desc: 'A unique 5-page illustrated adventure invented entirely around your child. No two TalePop personalised story books have ever been the same.', color: '#0D183D' },
               { num: '3', emoji: '🌙', title: 'Read their personalised bedtime story tonight', desc: 'Open it up, read it aloud, and watch their face when they realise the adventure is theirs.', color: '#1496A6' },
             ].map((step, i) => (
@@ -964,7 +964,7 @@ export default function Home() {
             <Link href="/login" style={{ color: 'rgba(255,255,255,0.35)', textDecoration: 'none', fontSize: '0.85rem', fontWeight: 500 }}>Sign in</Link>
           </div>
           <p style={{ color: 'rgba(255,255,255,0.2)', fontSize: '0.75rem', fontWeight: 400, textAlign: 'center', width: '100%', marginTop: '1rem', lineHeight: 1.6 }}>
-            TalePop creates personalised bedtime stories and children&apos;s books for kids aged 3–10. Every story is written from scratch — your child&apos;s name, interests and world woven into every page.
+            TalePop creates personalised bedtime stories and children&apos;s books for kids aged 3–10. Every story is written from scratch, your child&apos;s name, interests and world woven into every page.
           </p>
           <span style={{ color: 'rgba(255,255,255,0.2)', fontSize: '0.8rem', fontWeight: 500 }}>© {new Date().getFullYear()} TalePop</span>
         </div>
