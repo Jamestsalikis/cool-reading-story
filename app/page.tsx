@@ -683,7 +683,7 @@ export default function Home() {
                 Additional children: $3.99/month each
               </p>
               <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                {['A story every day', '1 child profile included', 'Story series (up to 3 volumes)', 'Beautifully illustrated pages', 'Cancel in one click'].map(f => (
+                {['A story every day', '1 child profile included', 'Story series (up to 3 volumes)', 'Extra books half price (50¢)', 'Beautifully illustrated pages', 'Cancel in one click'].map(f => (
                   <li key={f} style={{ display: 'flex', gap: '0.75rem', fontSize: '0.9rem', color: '#0D183D', fontWeight: 500, alignItems: 'flex-start' }}>
                     <Check size={16} color="#6CC06C" style={{ flexShrink: 0, marginTop: '3px' }} />{f}
                   </li>
@@ -701,7 +701,7 @@ export default function Home() {
                 <span style={{ fontSize: '3.25rem', fontWeight: 900, letterSpacing: '-0.02em' }}>24¢</span>
                 <span style={{ opacity: 0.85, fontSize: '0.85rem', fontWeight: 600 }}> per story</span>
               </div>
-              <p style={{ opacity: 0.65, fontSize: '0.75rem', marginBottom: '1.5rem', fontWeight: 500 }}>$99.90 billed annually, two months free</p>
+              <p style={{ opacity: 0.65, fontSize: '0.75rem', marginBottom: '1.5rem', fontWeight: 500 }}>$99 billed annually, two months free</p>
               <Link href="/signup?plan=annual" style={{ display: 'block', textAlign: 'center', padding: '0.9rem', background: 'white', borderRadius: '12px', color: '#FF6B35', textDecoration: 'none', fontWeight: '800', boxShadow: '0 4px 14px rgba(0,0,0,0.15)' }}>
                 Get the best deal &rarr;
               </Link>
@@ -709,7 +709,7 @@ export default function Home() {
                 Additional children: $3.99/month each
               </p>
               <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                {['Everything in Monthly', 'Priority story generation', 'Early access to new features', 'Save $19.98 per year'].map(f => (
+                {['Everything in Monthly', 'Priority story generation', 'Early access to new features', 'Save $20.88 per year'].map(f => (
                   <li key={f} style={{ display: 'flex', gap: '0.75rem', fontSize: '0.9rem', fontWeight: 500, alignItems: 'flex-start' }}>
                     <Check size={16} color="rgba(255,255,255,0.9)" style={{ flexShrink: 0, marginTop: '3px' }} />{f}
                   </li>
@@ -895,7 +895,7 @@ export default function Home() {
             },
             {
               q: 'Can I buy additional stories?',
-              a: "Yes. If you want a story outside your daily plan, you can buy individual stories for just 99¢ each. Great for gifting a cousin a story, or sneaking in a bonus read on a special night."
+              a: "Yes. If you want a story outside your daily plan, you can buy individual stories for just 99¢ each, or half price at just 50¢ when you're subscribed. Great for gifting a cousin a story, or sneaking in a bonus read on a special night."
             },
             {
               q: 'Can I actually cancel anytime?',
