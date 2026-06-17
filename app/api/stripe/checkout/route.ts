@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { createClient } from '@/lib/supabase/server';
 import { parseBody, checkoutSchema } from '@/lib/validation';
+import { currencyFromCountry, AMOUNTS } from '@/lib/pricing';
 
 export const dynamic = 'force-dynamic';
 
@@ -45,7 +46,10 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Stripe not configured' }, { status: 500 });
     }
 
-    const currency = currencyFromLocale(locale);
+    // Currency follows the visitor's country (matches the landing page), with
+    // browser locale as a fallback when the geo header is missing.
+    const ipCountry = request.headers.get('x-vercel-ip-country');
+    const currency = ipCountry ? currencyFromCountry(ipCountry) : currencyFromLocale(locale);
     const stripe = getStripe();
 
     // Get or create Stripe customer
@@ -113,7 +117,7 @@ export async function POST(request: Request) {
                 name: 'Extra Child',
                 description: 'Add one additional child profile ($3.99/month)',
               },
-              unit_amount: 399,
+              unit_amount: AMOUNTS[currency].extraChild,
               recurring: { interval: 'month' },
             },
             quantity: 1,
@@ -139,7 +143,7 @@ export async function POST(request: Request) {
       customer: customerId,
       mode: 'subscription',
       payment_method_types: ['card'],
-      line_items: [{ price_data: { currency, product_data: { name: plan === 'annual' ? 'TalePop Annual' : 'TalePop Monthly' }, unit_amount: (({ aud: { monthly: 999, annual: 9900 }, cad: { monthly: 999, annual: 9900 }, usd: { monthly: 699, annual: 6900 } })[currency] || { monthly: 999, annual: 9900 })[plan === 'annual' ? 'annual' : 'monthly'], recurring: { interval: plan === 'annual' ? 'year' : 'month' } }, quantity: 1 }],
+      line_items: [{ price_data: { currency, product_data: { name: plan === 'annual' ? 'TalePop Annual' : 'TalePop Monthly' }, unit_amount: AMOUNTS[currency][plan === 'annual' ? 'annual' : 'monthly'], recurring: { interval: plan === 'annual' ? 'year' : 'month' } }, quantity: 1 }],
       success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/dashboard?subscribed=true`,
       cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/dashboard?cancelled=true`,
       metadata: { supabase_user_id: user.id },

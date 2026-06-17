@@ -1103,7 +1103,7 @@ export default function DashboardPage() {
                           {sub?.status === 'subscribed' && childStoriesUsedToday.has(child.name) ? (
                             <button onClick={handleBuyExtraBook} disabled={!!generating}
                               style={{ padding: '0.6rem 1.2rem', borderRadius: '10px', border: '2px solid #FF6B35', background: '#FF6B35', color: '#fff', cursor: generating ? 'not-allowed' : 'pointer', fontWeight: '700', fontSize: '0.85rem', opacity: generating ? 0.6 : 1, display: 'flex', alignItems: 'center', gap: '6px' }}>
-                              <Plus size={14} /> Extra story – 99¢
+                              <Plus size={14} /> Extra story
                             </button>
                           ) : (
                             <button

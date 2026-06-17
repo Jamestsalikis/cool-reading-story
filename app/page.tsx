@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { X, Check, Shield, RefreshCw, Star, Heart, BookOpen } from 'lucide-react';
+import { DISPLAY, type PriceDisplay } from '@/lib/pricing';
 
 const S = `
   .hero-grid {
@@ -154,6 +155,14 @@ export default function Home() {
   const [minutesAgo, setMinutesAgo] = useState<number | null>(null);
   const [toast, setToast] = useState<{ city: string; country: string; flag: string } | null>(null);
   const [toastHiding, setToastHiding] = useState(false);
+  // Geolocation-based pricing: prices shown match the currency charged at checkout.
+  const [pricing, setPricing] = useState<PriceDisplay>(DISPLAY.aud);
+  useEffect(() => {
+    fetch('/api/geo')
+      .then(r => (r.ok ? r.json() : null))
+      .then(d => { if (d?.display) setPricing(d.display); })
+      .catch(() => {});
+  }, []);
   useEffect(() => {
     const start = Math.floor(Math.random() * 8) + 1;
     setMinutesAgo(start);
@@ -672,15 +681,15 @@ export default function Home() {
               <h3 className="font-serif" style={{ fontSize: '1.5rem', marginBottom: '0.4rem', color: '#0D183D' }}>Monthly</h3>
               <p style={{ color: '#9CA8B4', marginBottom: '1.5rem', fontSize: '0.9rem', fontWeight: 500 }}>Flexible, cancel anytime</p>
               <div style={{ marginBottom: '0.25rem' }}>
-                <span style={{ fontSize: '3.25rem', fontWeight: 900, color: '#FF6B35', letterSpacing: '-0.02em' }}>33¢</span>
+                <span style={{ fontSize: '3.25rem', fontWeight: 900, color: '#FF6B35', letterSpacing: '-0.02em' }}>{pricing.monthlyPerStory}</span>
                 <span style={{ color: '#9CA8B4', fontSize: '0.85rem', fontWeight: 600 }}> per story</span>
               </div>
-              <p style={{ fontSize: '0.95rem', color: '#5E6A7A', fontWeight: 600, marginBottom: '1.5rem' }}>$9.99 / month</p>
+              <p style={{ fontSize: '0.95rem', color: '#5E6A7A', fontWeight: 600, marginBottom: '1.5rem' }}>{pricing.symbol}{pricing.monthly} / month</p>
               <Link href="/signup" style={{ display: 'block', textAlign: 'center', padding: '0.9rem', background: '#FF6B35', borderRadius: '12px', color: 'white', textDecoration: 'none', fontWeight: '800', boxShadow: '0 4px 14px rgba(255,107,53,0.3)' }}>
                 Subscribe monthly &rarr;
               </Link>
               <p style={{ fontSize: '0.75rem', color: '#9CA8B4', textAlign: 'center', marginTop: '0.5rem', marginBottom: '1.25rem', fontWeight: 500 }}>
-                Additional children: $3.99/month each
+                Additional children: {pricing.symbol}{pricing.extraChild}/month each
               </p>
               <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                 {['A story every day', '1 child profile included', 'Story series (up to 3 volumes)', 'Extra books half price (50¢)', 'Beautifully illustrated pages', 'Cancel in one click'].map(f => (
@@ -698,18 +707,18 @@ export default function Home() {
               <h3 className="font-serif" style={{ fontSize: '1.5rem', marginBottom: '0.4rem' }}>Annual</h3>
               <p style={{ opacity: 0.75, marginBottom: '1.5rem', fontSize: '0.9rem', fontWeight: 500 }}>Two months free</p>
               <div style={{ marginBottom: '0.25rem' }}>
-                <span style={{ fontSize: '3.25rem', fontWeight: 900, letterSpacing: '-0.02em' }}>24¢</span>
+                <span style={{ fontSize: '3.25rem', fontWeight: 900, letterSpacing: '-0.02em' }}>{pricing.annualPerStory}</span>
                 <span style={{ opacity: 0.85, fontSize: '0.85rem', fontWeight: 600 }}> per story</span>
               </div>
-              <p style={{ opacity: 0.65, fontSize: '0.75rem', marginBottom: '1.5rem', fontWeight: 500 }}>$99 billed annually, two months free</p>
+              <p style={{ opacity: 0.65, fontSize: '0.75rem', marginBottom: '1.5rem', fontWeight: 500 }}>{pricing.symbol}{pricing.annual} billed annually, two months free</p>
               <Link href="/signup?plan=annual" style={{ display: 'block', textAlign: 'center', padding: '0.9rem', background: 'white', borderRadius: '12px', color: '#FF6B35', textDecoration: 'none', fontWeight: '800', boxShadow: '0 4px 14px rgba(0,0,0,0.15)' }}>
                 Get the best deal &rarr;
               </Link>
               <p style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.55)', textAlign: 'center', marginTop: '0.5rem', marginBottom: '1.25rem', fontWeight: 500 }}>
-                Additional children: $3.99/month each
+                Additional children: {pricing.symbol}{pricing.extraChild}/month each
               </p>
               <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                {['Everything in Monthly', 'Priority story generation', 'Early access to new features', 'Save $20.88 per year'].map(f => (
+                {['Everything in Monthly', 'Priority story generation', 'Early access to new features', `Save ${pricing.symbol}${pricing.annualSaving} per year`].map(f => (
                   <li key={f} style={{ display: 'flex', gap: '0.75rem', fontSize: '0.9rem', fontWeight: 500, alignItems: 'flex-start' }}>
                     <Check size={16} color="rgba(255,255,255,0.9)" style={{ flexShrink: 0, marginTop: '3px' }} />{f}
                   </li>
