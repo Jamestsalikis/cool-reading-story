@@ -106,3 +106,12 @@ body {
 @keyframes float   { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-8px); } }
 @keyframes fadeIn  { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
 @keyframes bubbleIn { from { opacity:0; transform:translateY(6px) scale(0.95); } to { opacity:1; transform:translateY(0) scale(1); } }
+
+/* ── Mobile safety nets ── */
+html, body { max-width: 100%; }
+body { overflow-x: hidden; }
+img, video { max-width: 100%; height: auto; }
+.hide-mobile { display: initial; }
+@media (max-width: 767px) {
+  .hide-mobile { display: none !important; }
+}

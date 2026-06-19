@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useIsMobile } from '@/lib/useIsMobile';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { createChild } from '@/lib/supabase/child-actions';
@@ -205,6 +206,7 @@ export default function OnboardingPage() {
   const [nameError, setNameError] = useState('');
   const [interestError, setInterestError] = useState('');
   const [isFreeUser, setIsFreeUser] = useState(true); // assume free until confirmed
+  const isMobile = useIsMobile();
 
   // Check subscription status on mount
   useEffect(() => {
@@ -2053,7 +2055,7 @@ export default function OnboardingPage() {
               {state.siblings.length > 0 && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '10px' }}>
                   {state.siblings.map((s, i) => (
-                    <div key={i} style={{ display: 'grid', gridTemplateColumns: '130px 1fr 100px auto', gap: '8px', alignItems: 'center' }}>
+                    <div key={i} style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '130px 1fr 100px auto', gap: '8px', alignItems: 'center' }}>
                       <select value={s.nickname || 'Brother'}
                         onChange={(e) => { const u = [...state.siblings]; u[i] = { ...u[i], nickname: e.target.value }; setState({ ...state, siblings: u }); }}
                         style={{ ...inputStyle, cursor: 'pointer' }}>
@@ -2081,7 +2083,7 @@ export default function OnboardingPage() {
               {state.friends.length > 0 && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '10px' }}>
                   {state.friends.map((f, i) => (
-                    <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 100px auto', gap: '8px', alignItems: 'center' }}>
+                    <div key={i} style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr 100px auto', gap: '8px', alignItems: 'center' }}>
                       <input type="text" style={inputStyle} placeholder="Name" value={f.name}
                         onChange={(e) => { const u = [...state.friends]; u[i] = { ...u[i], name: e.target.value }; setState({ ...state, friends: u }); }} />
                       <input type="text" style={inputStyle} placeholder="Nickname (optional)" value={f.nickname}
@@ -2106,7 +2108,7 @@ export default function OnboardingPage() {
               {state.pets.length > 0 && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '10px' }}>
                   {state.pets.map((p, i) => (
-                    <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 110px auto', gap: '8px', alignItems: 'center' }}>
+                    <div key={i} style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr 110px auto', gap: '8px', alignItems: 'center' }}>
                       <input type="text" style={inputStyle} placeholder="Name" value={p.name}
                         onChange={(e) => { const u = [...state.pets]; u[i] = { ...u[i], name: e.target.value }; setState({ ...state, pets: u }); }} />
                       <input type="text" style={inputStyle} placeholder="Type (e.g. Dog)" value={p.type}
