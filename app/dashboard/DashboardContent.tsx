@@ -126,7 +126,11 @@ function ProductTour({ steps, pendingStoryId, onDone }: {
         el.scrollIntoView({ behavior: 'instant', block: 'center' });
         setTimeout(() => {
           const r = el.getBoundingClientRect();
-          setSpotlightRect(r.width > 0 && r.height > 0 ? r : null);
+          if (r.width <= 0 || r.height <= 0) { setSpotlightRect(null); return; }
+          // Cap very tall targets so the highlight stays a visible box and the
+          // tooltip has room to sit on small screens.
+          const cappedH = Math.min(r.height, Math.round(window.innerHeight * 0.4));
+          setSpotlightRect(new DOMRect(r.left, r.top, r.width, cappedH));
         }, 80);
       } else {
         setSpotlightRect(null);
@@ -148,6 +152,7 @@ function ProductTour({ steps, pendingStoryId, onDone }: {
   let tooltipStyle: React.CSSProperties;
   let arrowStyle: React.CSSProperties | null = null;
 
+  const TOOLTIP_H = 210;
   if (!spotlightRect) {
     tooltipStyle = {
       position: 'fixed', top: '50%', left: '50%',
@@ -155,17 +160,26 @@ function ProductTour({ steps, pendingStoryId, onDone }: {
     };
   } else {
     const sr = spotlightRect;
-    const belowY = sr.bottom + PAD + 16;
-    const aboveY = sr.top - PAD - 16;
-    const useBelow = belowY + 160 < window.innerHeight;
-    const centreX = Math.max(16, Math.min(window.innerWidth - TOOLTIP_W - 16, sr.left + sr.width / 2 - TOOLTIP_W / 2));
-    if (useBelow) {
-      tooltipStyle = { position: 'fixed', top: `${belowY}px`, left: `${centreX}px`, width: `${TOOLTIP_W}px` };
-      arrowStyle = { position: 'absolute', top: '-7px', left: `${sr.left + sr.width / 2 - centreX - 7}px`, width: 0, height: 0, borderLeft: '7px solid transparent', borderRight: '7px solid transparent', borderBottom: '7px solid #fff' };
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const centreX = Math.max(16, Math.min(vw - TOOLTIP_W - 16, sr.left + sr.width / 2 - TOOLTIP_W / 2));
+    const arrowLeft = Math.max(14, Math.min(TOOLTIP_W - 28, sr.left + sr.width / 2 - centreX - 7));
+    const belowTop = sr.bottom + PAD + 16;
+    const aboveTop = sr.top - PAD - 16 - TOOLTIP_H;
+    let top: number;
+    if (belowTop + TOOLTIP_H < vh - 12) {
+      top = belowTop;
+      arrowStyle = { position: 'absolute', top: '-7px', left: `${arrowLeft}px`, width: 0, height: 0, borderLeft: '7px solid transparent', borderRight: '7px solid transparent', borderBottom: '7px solid #fff' };
+    } else if (aboveTop > 12) {
+      top = aboveTop;
+      arrowStyle = { position: 'absolute', bottom: '-7px', left: `${arrowLeft}px`, width: 0, height: 0, borderLeft: '7px solid transparent', borderRight: '7px solid transparent', borderTop: '7px solid #fff' };
     } else {
-      tooltipStyle = { position: 'fixed', bottom: `${window.innerHeight - aboveY}px`, left: `${centreX}px`, width: `${TOOLTIP_W}px` };
-      arrowStyle = { position: 'absolute', bottom: '-7px', left: `${sr.left + sr.width / 2 - centreX - 7}px`, width: 0, height: 0, borderLeft: '7px solid transparent', borderRight: '7px solid transparent', borderTop: '7px solid #fff' };
+      // Highlight too tall to fit tooltip above/below — pin above the bottom nav, no arrow
+      top = vh - TOOLTIP_H - 96;
+      arrowStyle = null;
     }
+    top = Math.max(12, Math.min(top, vh - TOOLTIP_H - 16));
+    tooltipStyle = { position: 'fixed', top: `${top}px`, left: `${centreX}px`, width: `${TOOLTIP_W}px` };
   }
 
   return (
