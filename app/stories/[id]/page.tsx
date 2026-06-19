@@ -111,9 +111,10 @@ const bookStyles = `
   .illus-wrap {
     position: relative;
     overflow: hidden;
+    background: #F5F0E8;
   }
   .illus-wrap img {
-    width: 100%; height: 100%; object-fit: cover; display: block;
+    width: 100%; height: 100%; object-fit: contain; display: block;
   }
   .corner-ornament {
     position: absolute;
@@ -156,12 +157,12 @@ const bookStyles = `
     .book-illus-col {
       margin-left: 28px;
       width: calc(100% - 28px);
-      aspect-ratio: 4 / 3;
+      aspect-ratio: 1 / 1;
     }
     .book-text-col {
       overflow-y: auto;
       /* Image height ≈ 75vw (4:3). Top bar ≈52px, nav ≈70px, margins ≈50px */
-      max-height: calc(100svh - 75vw - 175px);
+      max-height: calc(100svh - 90vw - 150px);
       min-height: 150px;
       -webkit-overflow-scrolling: touch;
       scroll-behavior: smooth;
@@ -326,6 +327,7 @@ export default function StoryPage() {
   const [userCtx, setUserCtx] = useState<{ status: string; stories_today: number; extra_books_today: number; isAdmin: boolean } | null>(null);
   const [continuing, setContinuing] = useState(false);
   const continueLock = useRef(false);
+  const touchStartRef = useRef<{ x: number; y: number } | null>(null);
   const continueAutoStarted = useRef(false);
 
   // Fetch story + poll DB for image updates (server-side edge fn generates them)
@@ -569,7 +571,7 @@ export default function StoryPage() {
     <img
       src={page.image_url}
       alt={`Page ${currentPage + 1} illustration`}
-      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+      style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
       onError={(e) => {
         // Replicate CDN URLs expire — hide the broken image and show placeholder
         (e.target as HTMLImageElement).style.display = 'none';
@@ -665,6 +667,23 @@ export default function StoryPage() {
     );
   }
 
+  const onBookTouchStart = (e: React.TouchEvent) => {
+    const t = e.changedTouches[0];
+    touchStartRef.current = { x: t.clientX, y: t.clientY };
+  };
+  const onBookTouchEnd = (e: React.TouchEvent) => {
+    const start = touchStartRef.current;
+    touchStartRef.current = null;
+    if (!start) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - start.x;
+    const dy = t.clientY - start.y;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      if (dx < 0 && currentPage < totalPages - 1) goToPage(currentPage + 1);
+      else if (dx > 0 && currentPage > 0) goToPage(currentPage - 1);
+    }
+  };
+
   return (
     <>
       {showFeedback && <FeedbackModal onClose={() => setShowFeedback(false)} />}
@@ -744,7 +763,9 @@ export default function StoryPage() {
         <div
           key={animKey}
           className={`book-page book-page-wide ${direction === 'forward' ? 'page-forward' : 'page-back'}`}
-          style={{ width: '100%', maxWidth: '640px', margin: '24px 16px 0', flex: 1 }}
+          style={{ width: '100%', maxWidth: '640px', margin: '24px 16px 0', flex: 1, touchAction: 'pan-y' }}
+          onTouchStart={onBookTouchStart}
+          onTouchEnd={onBookTouchEnd}
         >
           <div className="page-border" />
           {renderPageContent()}

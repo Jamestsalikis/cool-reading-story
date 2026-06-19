@@ -100,7 +100,7 @@ function ProductTour({ steps, pendingStoryId, onDone }: {
   const current = steps[step];
   const isLast = step === steps.length - 1;
   const PAD = 10;
-  const TOOLTIP_W = 300;
+  const TOOLTIP_W = typeof window !== 'undefined' ? Math.min(300, window.innerWidth - 32) : 300;
 
   // Block user-initiated scroll during tour so spotlight doesn't drift,
   // but use event listeners instead of overflow:hidden so that programmatic
@@ -121,10 +121,15 @@ function ProductTour({ steps, pendingStoryId, onDone }: {
       return;
     }
     const update = () => {
-      const el = document.getElementById(current.targetId!);
-      if (el) {
+      const el = document.getElementById(current.targetId!) || document.getElementById(current.targetId! + '-mobile');
+      if (el && el.getClientRects().length > 0) {
         el.scrollIntoView({ behavior: 'instant', block: 'center' });
-        setTimeout(() => setSpotlightRect(el.getBoundingClientRect()), 80);
+        setTimeout(() => {
+          const r = el.getBoundingClientRect();
+          setSpotlightRect(r.width > 0 && r.height > 0 ? r : null);
+        }, 80);
+      } else {
+        setSpotlightRect(null);
       }
     };
     update();
