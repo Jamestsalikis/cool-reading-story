@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "cap": "cap"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.88.0",
@@ -23,7 +24,10 @@
     "resend": "^6.11.0",
     "stripe": "^22.0.1",
     "three": "^0.184.0",
-    "zod": "^3.23.0"
+    "zod": "^3.23.0",
+    "@capacitor/android": "^8.4.1",
+    "@capacitor/core": "^8.4.1",
+    "@capacitor/ios": "^8.4.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -33,6 +37,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.3.6",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "@capacitor/cli": "^8.4.1"
   }
 }
