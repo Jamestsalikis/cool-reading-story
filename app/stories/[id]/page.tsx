@@ -33,12 +33,12 @@ const bookStyles = `
   @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
 
   @keyframes pageForward {
-    from { opacity: 0; transform: translateX(40px) scale(0.98); }
-    to   { opacity: 1; transform: translateX(0) scale(1); }
+    0%   { opacity: 0.25; transform: perspective(1600px) rotateY(-34deg) translateX(26px); box-shadow: -18px 0 28px rgba(0,0,0,0.28); }
+    100% { opacity: 1;    transform: perspective(1600px) rotateY(0deg) translateX(0);     box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
   }
   @keyframes pageBack {
-    from { opacity: 0; transform: translateX(-40px) scale(0.98); }
-    to   { opacity: 1; transform: translateX(0) scale(1); }
+    0%   { opacity: 0.25; transform: perspective(1600px) rotateY(34deg) translateX(-26px); box-shadow: 18px 0 28px rgba(0,0,0,0.28); }
+    100% { opacity: 1;    transform: perspective(1600px) rotateY(0deg) translateX(0);      box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
   }
   @keyframes shimmer {
     0%, 100% { opacity: 0.45; }
@@ -51,8 +51,11 @@ const bookStyles = `
     0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
     40% { opacity: 1; transform: scale(1); }
   }
-  .page-forward { animation: pageForward 0.4s cubic-bezier(0.25,0.46,0.45,0.94); }
-  .page-back    { animation: pageBack 0.4s cubic-bezier(0.25,0.46,0.45,0.94); }
+  .page-forward { transform-origin: left center; animation: pageForward 0.5s cubic-bezier(0.2,0.7,0.25,1); }
+  .page-back    { transform-origin: left center; animation: pageBack 0.5s cubic-bezier(0.2,0.7,0.25,1); }
+  @media (prefers-reduced-motion: reduce) {
+    .page-forward, .page-back { animation-duration: 0.01s; }
+  }
   .shimmer { animation: shimmer 1.8s ease infinite; }
   .paint-dot-1 { animation: paintDot 1.4s ease infinite 0s; }
   .paint-dot-2 { animation: paintDot 1.4s ease infinite 0.2s; }
