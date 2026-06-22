@@ -162,24 +162,22 @@ function ProductTour({ steps, pendingStoryId, onDone }: {
     const sr = spotlightRect;
     const vw = window.innerWidth;
     const vh = window.innerHeight;
+    const gap = PAD + 14;
     const centreX = Math.max(16, Math.min(vw - TOOLTIP_W - 16, sr.left + sr.width / 2 - TOOLTIP_W / 2));
     const arrowLeft = Math.max(14, Math.min(TOOLTIP_W - 28, sr.left + sr.width / 2 - centreX - 7));
-    const belowTop = sr.bottom + PAD + 16;
-    const aboveTop = sr.top - PAD - 16 - TOOLTIP_H;
-    let top: number;
-    if (belowTop + TOOLTIP_H < vh - 12) {
-      top = belowTop;
+    if (vh - sr.bottom >= TOOLTIP_H + 24) {
+      // Room below — anchor from the top, grows downward
+      tooltipStyle = { position: 'fixed', top: `${sr.bottom + gap}px`, left: `${centreX}px`, width: `${TOOLTIP_W}px` };
       arrowStyle = { position: 'absolute', top: '-7px', left: `${arrowLeft}px`, width: 0, height: 0, borderLeft: '7px solid transparent', borderRight: '7px solid transparent', borderBottom: '7px solid #fff' };
-    } else if (aboveTop > 12) {
-      top = aboveTop;
+    } else if (sr.top >= 120) {
+      // Room above — anchor from the BOTTOM so the box can never cover its target
+      tooltipStyle = { position: 'fixed', bottom: `${vh - sr.top + gap}px`, left: `${centreX}px`, width: `${TOOLTIP_W}px`, maxHeight: `${Math.max(160, sr.top - gap - 12)}px`, overflowY: 'auto' };
       arrowStyle = { position: 'absolute', bottom: '-7px', left: `${arrowLeft}px`, width: 0, height: 0, borderLeft: '7px solid transparent', borderRight: '7px solid transparent', borderTop: '7px solid #fff' };
     } else {
-      // Highlight too tall to fit tooltip above/below — pin above the bottom nav, no arrow
-      top = vh - TOOLTIP_H - 96;
+      // No room either side — centre it
+      tooltipStyle = { position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: `${TOOLTIP_W}px` };
       arrowStyle = null;
     }
-    top = Math.max(12, Math.min(top, vh - TOOLTIP_H - 16));
-    tooltipStyle = { position: 'fixed', top: `${top}px`, left: `${centreX}px`, width: `${TOOLTIP_W}px` };
   }
 
   return (
@@ -1102,7 +1100,7 @@ export default function DashboardPage() {
                   const nextVolForChild = latestStory?.series_id ? (seriesStoriesForChild.length + 1) : 2;
 
                   return (
-                    <div key={child.id} id={childIndex === 0 ? 'tour-shelf' : undefined}>
+                    <div key={child.id}>
                       <div style={{ background: palette.light, borderRadius: '16px', padding: '16px 20px', marginBottom: '28px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
                           <span style={{ fontSize: '2.2rem', lineHeight: 1 }}>{palette.emoji}</span>
@@ -1142,7 +1140,7 @@ export default function DashboardPage() {
                           No stories yet. Hit &quot;New story&quot; to write the first one!
                         </div>
                       ) : (
-                        <div style={{ background: `linear-gradient(to bottom, ${palette.light}88, ${palette.light}22)`, borderRadius: '16px 16px 0 0', padding: '24px 24px 0' }}>
+                        <div style={{ background: `linear-gradient(to bottom, ${palette.light}88, ${palette.light}22)`, borderRadius: '16px 16px 0 0', padding: '24px 24px 0' }} id={childIndex === 0 ? 'tour-shelf' : undefined}>
                           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '32px 20px', alignItems: 'flex-end', paddingBottom: '20px' }}>
                             {shelf.map(item =>
                               item.type === 'single'
