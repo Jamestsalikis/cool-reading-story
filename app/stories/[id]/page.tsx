@@ -221,6 +221,22 @@ const bookStyles = `
     }
   }
 
+  /* ---- SHORT LANDSCAPE (phones + small tablets rotated): fit the open book to the short viewport ---- */
+  @media (orientation: landscape) and (max-height: 760px) {
+    .no-print { padding-bottom: 60px !important; }
+    .book-page {
+      flex: none !important;
+      margin: 8px 16px 0 !important;
+      max-width: 1000px !important;
+      height: calc(100svh - 116px);
+    }
+    .book-page-layout { height: 100%; }
+    .book-illus-col { flex: 0 0 40%; }
+    .book-illus-col .illus-wrap { min-height: 0 !important; height: 100%; }
+    .book-text-col { min-height: 0; max-height: none !important; }
+    .book-text-inner { padding: 16px 20px 18px 20px !important; }
+  }
+
   /* ---- Print styles ---- */
   @media print {
     body { background: white !important; }
