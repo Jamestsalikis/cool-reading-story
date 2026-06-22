@@ -221,19 +221,41 @@ const bookStyles = `
     }
   }
 
-  /* ---- SHORT LANDSCAPE (phones + small tablets rotated): fit the open book to the short viewport ---- */
-  @media (orientation: landscape) and (max-height: 760px) {
-    .no-print { padding-bottom: 60px !important; }
+  /* ---- LANDSCAPE PHONES (short viewport): force a fit-to-screen open book, override stacked-mobile rules ---- */
+  @media (orientation: landscape) and (max-height: 600px) {
+    .no-print { padding-bottom: 54px !important; }
     .book-page {
       flex: none !important;
       margin: 8px 16px 0 !important;
       max-width: 1000px !important;
-      height: calc(100svh - 116px);
+      height: calc(100svh - 108px);
     }
-    .book-page-layout { height: 100%; }
-    .book-illus-col { flex: 0 0 40%; }
-    .book-illus-col .illus-wrap { min-height: 0 !important; height: 100%; }
-    .book-text-col { min-height: 0; max-height: none !important; }
+    .book-page-layout {
+      flex-direction: row !important;
+      align-items: stretch !important;
+      height: 100%;
+    }
+    .book-illus-col {
+      flex: 0 0 42% !important;
+      width: auto !important;
+      margin-left: 28px !important;
+      aspect-ratio: auto !important;
+      display: flex !important;
+      flex-direction: column;
+    }
+    .book-illus-col .illus-wrap {
+      flex: 1 !important;
+      width: 100% !important;
+      min-height: 0 !important;
+      height: auto !important;
+    }
+    .book-text-col {
+      flex: 1 !important;
+      overflow-y: auto !important;
+      min-height: 0 !important;
+      max-height: none !important;
+      border-left: 1px solid rgba(116,21,21,0.10);
+    }
     .book-text-inner { padding: 16px 20px 18px 20px !important; }
   }
 
