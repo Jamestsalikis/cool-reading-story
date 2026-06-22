@@ -171,6 +171,10 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    // Inside the native app (Capacitor) skip the social-proof toast: it reads as
+    // marketing in an installed app and can draw extra store-review scrutiny.
+    // No effect on the website (window.Capacitor only exists in the native shell).
+    if (typeof window !== 'undefined' && (window as { Capacitor?: unknown }).Capacitor) return;
     // Weighted by English-speaking population: USA ~65%, UK ~15%, AU ~10%, CA ~5%, NZ 2%, IE 2%, ZA 1%
     const locations = [
       // USA ~65 entries
