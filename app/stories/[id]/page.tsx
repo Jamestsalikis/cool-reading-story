@@ -32,13 +32,13 @@ type Story = {
 const bookStyles = `
   @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
 
-  @keyframes pageForward {
-    0%   { opacity: 0.25; transform: perspective(1600px) rotateY(-34deg) translateX(26px); box-shadow: -18px 0 28px rgba(0,0,0,0.28); }
-    100% { opacity: 1;    transform: perspective(1600px) rotateY(0deg) translateX(0);     box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+  @keyframes flipFwd {
+    0%   { transform: perspective(1800px) rotateY(0deg); }
+    100% { transform: perspective(1800px) rotateY(-178deg); }
   }
-  @keyframes pageBack {
-    0%   { opacity: 0.25; transform: perspective(1600px) rotateY(34deg) translateX(-26px); box-shadow: 18px 0 28px rgba(0,0,0,0.28); }
-    100% { opacity: 1;    transform: perspective(1600px) rotateY(0deg) translateX(0);      box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+  @keyframes flipBack {
+    0%   { transform: perspective(1800px) rotateY(0deg); }
+    100% { transform: perspective(1800px) rotateY(178deg); }
   }
   @keyframes shimmer {
     0%, 100% { opacity: 0.45; }
@@ -51,10 +51,21 @@ const bookStyles = `
     0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
     40% { opacity: 1; transform: scale(1); }
   }
-  .page-forward { transform-origin: left center; animation: pageForward 0.5s cubic-bezier(0.2,0.7,0.25,1); }
-  .page-back    { transform-origin: left center; animation: pageBack 0.5s cubic-bezier(0.2,0.7,0.25,1); }
+  .page-flip {
+    position: absolute; inset: 0; z-index: 6; pointer-events: none;
+    background: #FFFEF9; overflow: hidden;
+    border-radius: 4px 12px 12px 4px;
+    box-shadow: 0 0 34px rgba(0,0,0,0.30);
+    backface-visibility: hidden;
+  }
+  .page-flip::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(105deg, rgba(255,255,255,0) 45%, rgba(60,30,10,0.12) 100%);
+  }
+  .flip-fwd  { transform-origin: left center;  animation: flipFwd  0.6s cubic-bezier(0.42,0.04,0.22,1) forwards; }
+  .flip-back { transform-origin: right center; animation: flipBack 0.6s cubic-bezier(0.42,0.04,0.22,1) forwards; }
   @media (prefers-reduced-motion: reduce) {
-    .page-forward, .page-back { animation-duration: 0.01s; }
+    .page-flip { display: none; }
   }
   .shimmer { animation: shimmer 1.8s ease infinite; }
   .paint-dot-1 { animation: paintDot 1.4s ease infinite 0s; }
@@ -321,6 +332,7 @@ export default function StoryPage() {
   const [currentPage, setCurrentPage] = useState(0);
   const [direction, setDirection] = useState<'forward' | 'back'>('forward');
   const [animKey, setAnimKey] = useState(0);
+  const [flip, setFlip] = useState<{ dir: 'forward' | 'back'; img: string | null; key: number } | null>(null);
   // Set of page numbers whose images are still being generated server-side
   const [loadingPages, setLoadingPages] = useState<Set<number>>(new Set());
   const [showFeedback, setShowFeedback] = useState(false);
@@ -385,8 +397,12 @@ export default function StoryPage() {
   };
 
   const goToPage = (index: number) => {
-    setDirection(index > currentPage ? 'forward' : 'back');
+    if (index === currentPage) return;
+    const dir = index > currentPage ? 'forward' : 'back';
+    setDirection(dir);
     setAnimKey((k) => k + 1);
+    setFlip({ dir, img: story?.pages?.[currentPage]?.image_url ?? null, key: Date.now() });
+    setTimeout(() => setFlip(null), 620);
     setCurrentPage(index);
 
     // Show feedback modal when reaching the last page, once per week
@@ -764,14 +780,20 @@ export default function StoryPage() {
 
         {/* Book */}
         <div
-          key={animKey}
-          className={`book-page book-page-wide ${direction === 'forward' ? 'page-forward' : 'page-back'}`}
+          className="book-page book-page-wide"
           style={{ width: '100%', maxWidth: '640px', margin: '24px 16px 0', flex: 1, touchAction: 'pan-y' }}
           onTouchStart={onBookTouchStart}
           onTouchEnd={onBookTouchEnd}
         >
           <div className="page-border" />
           {renderPageContent()}
+          {flip && (
+            <div key={flip.key} className={`page-flip ${flip.dir === 'forward' ? 'flip-fwd' : 'flip-back'}`}>
+              {flip.img && (
+                <img src={flip.img} alt="" style={{ position: 'absolute', top: 0, left: '28px', width: 'calc(100% - 28px)', aspectRatio: '1 / 1', objectFit: 'contain', background: '#F5F0E8' }} />
+              )}
+            </div>
+          )}
         </div>
 
         {/* Navigation */}
