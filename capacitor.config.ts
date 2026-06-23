@@ -8,7 +8,7 @@ const config: CapacitorConfig = {
   server: {
     // The native shell loads the live TalePop web app.
     // To test against staging, change this to the staging URL and run `npx cap sync`.
-    url: 'https://www.talepopstories.com',
+    url: 'https://www.talepopstories.com/dashboard',
     cleartext: false,
   },
   ios: {
