@@ -700,7 +700,7 @@ export default function StoryPage() {
           <div style={ctaBox}>
             <div style={ctaTitle}>The next chapter unlocks at midnight</div>
             <p style={ctaText}>Come back tomorrow for the next free chapter — or unlock it right now.</p>
-            <button onClick={buyNextChapter} className="btn-brand">Unlock the next chapter now — 99¢</button>
+            <button onClick={buyNextChapter} className="btn-brand">Unlock the next chapter now for 99¢</button>
           </div>
         ) : (
           <div style={ctaBox}>
@@ -708,7 +708,7 @@ export default function StoryPage() {
             <p style={ctaText}>Subscribe for unlimited stories, or unlock just the next chapter now.</p>
             <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', justifyContent: 'center' }}>
               <button onClick={() => router.push('/dashboard')} className="btn-brand">Subscribe</button>
-              <button onClick={buyNextChapter} style={ctaSecondaryBtn}>Next chapter — 99¢</button>
+              <button onClick={buyNextChapter} style={ctaSecondaryBtn}>Next chapter 99¢</button>
             </div>
           </div>
         )
