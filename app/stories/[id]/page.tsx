@@ -53,7 +53,7 @@ const bookStyles = `
   }
   .page-flip {
     position: absolute; inset: 0; z-index: 6; pointer-events: none;
-    background: #FFFEF9; overflow: hidden;
+    background: #F4EDDD; overflow: hidden;
     border-radius: 4px 12px 12px 4px;
     box-shadow: 0 0 34px rgba(0,0,0,0.30);
     backface-visibility: hidden;
@@ -73,12 +73,20 @@ const bookStyles = `
   .paint-dot-3 { animation: paintDot 1.4s ease infinite 0.4s; }
 
   .book-page {
-    background: linear-gradient(175deg, #FFFEF9 0%, #FBF3E6 100%);
+    background-color: #F4EDDD;
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)' opacity='0.05'/%3E%3C/svg%3E"),
+      linear-gradient(175deg, #F8F2E4 0%, #EFE6D0 100%);
     box-shadow:
-      0 2px 4px rgba(0,0,0,0.08),
-      0 8px 24px rgba(0,0,0,0.12),
-      inset 0 0 0 1px rgba(0,0,0,0.04);
-    border-radius: 4px 12px 12px 4px;
+      0 5px 0 -1px #EFE7D2, 0 7px 3px -2px rgba(0,0,0,0.06),
+      0 10px 0 -2px #E9DFC8, 0 12px 3px -3px rgba(0,0,0,0.06),
+      0 15px 0 -4px #E3D9C0, 0 17px 4px -4px rgba(0,0,0,0.07),
+      0 -5px 0 -1px #EFE7D2,
+      0 -10px 0 -2px #E9DFC8,
+      0 -15px 0 -4px #E3D9C0,
+      0 24px 46px rgba(0,0,0,0.36),
+      inset 0 0 0 1px rgba(0,0,0,0.05);
+    border-radius: 6px 12px 12px 6px;
     position: relative;
     overflow: hidden;
   }
@@ -138,7 +146,7 @@ const bookStyles = `
   .illus-wrap::after {
     content: ''; position: absolute; left: 0; right: 0; bottom: 0;
     height: 13%; pointer-events: none; z-index: 2;
-    background: linear-gradient(to bottom, rgba(255,254,249,0), #FFFEF9);
+    background: linear-gradient(to bottom, rgba(244,237,221,0), #F4EDDD);
   }
   .corner-ornament {
     position: absolute;
@@ -359,16 +367,6 @@ function CornerOrnaments() {
         }} />
       ))}
     </>
-  );
-}
-
-function DecorativeRule() {
-  return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
-      <div style={{ flex: 1, height: '1px', background: 'linear-gradient(to right, rgba(116,21,21,0.15), transparent)' }} />
-      <span style={{ fontSize: '0.7rem', color: 'rgba(116,21,21,0.4)' }}>✦</span>
-      <div style={{ flex: 1, height: '1px', background: 'linear-gradient(to left, rgba(116,21,21,0.15), transparent)' }} />
-    </div>
   );
 }
 
@@ -666,7 +664,6 @@ export default function StoryPage() {
   // ---- Text content element ----
   const textContentEl = (
     <div className="book-text-inner" style={{ position: 'relative' }}>
-      <DecorativeRule />
       {currentPage === 0 && (
         <>
         <h2 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.5rem', color: '#2C1A0E', marginBottom: '10px', lineHeight: 1.25, fontWeight: 600 }}>
