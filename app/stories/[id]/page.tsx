@@ -73,7 +73,7 @@ const bookStyles = `
   .paint-dot-3 { animation: paintDot 1.4s ease infinite 0.4s; }
 
   .book-page {
-    background: #FFFEF9;
+    background: linear-gradient(175deg, #FFFEF9 0%, #FBF3E6 100%);
     box-shadow:
       0 2px 4px rgba(0,0,0,0.08),
       0 8px 24px rgba(0,0,0,0.12),
@@ -112,6 +112,11 @@ const bookStyles = `
     letter-spacing: 0.01em;
   }
   .story-text p { margin-bottom: 1.2em; }
+  .story-text p:first-of-type::first-letter {
+    font-size: 3.1em; line-height: 0.72; float: left;
+    font-family: 'Lora', Georgia, serif; font-weight: 700;
+    color: #D87E34; padding: 6px 10px 0 0;
+  }
 
   .page-border {
     position: absolute;
@@ -129,6 +134,11 @@ const bookStyles = `
   }
   .illus-wrap img {
     width: 100%; height: 100%; object-fit: contain; display: block;
+  }
+  .illus-wrap::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: 0;
+    height: 13%; pointer-events: none; z-index: 2;
+    background: linear-gradient(to bottom, rgba(255,254,249,0), #FFFEF9);
   }
   .corner-ornament {
     position: absolute;
@@ -658,9 +668,16 @@ export default function StoryPage() {
     <div className="book-text-inner" style={{ position: 'relative' }}>
       <DecorativeRule />
       {currentPage === 0 && (
-        <h2 style={{ fontFamily: 'Lora, Georgia, serif', fontSize: '1.45rem', color: '#2C1A0E', marginBottom: '18px', lineHeight: 1.3, fontWeight: 600 }}>
+        <>
+        <h2 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.5rem', color: '#2C1A0E', marginBottom: '10px', lineHeight: 1.25, fontWeight: 600 }}>
           {story.title}
         </h2>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', margin: '0 0 18px' }}>
+          <div style={{ flex: 1, height: '2px', background: 'linear-gradient(to right, rgba(208,170,96,0), #D0AA60)' }} />
+          <span style={{ color: '#D0AA60', fontSize: '0.8rem' }}>✦</span>
+          <div style={{ flex: 1, height: '2px', background: 'linear-gradient(to left, rgba(208,170,96,0), #D0AA60)' }} />
+        </div>
+        </>
       )}
       <div className="story-text">
         {paragraphs.map((para, i) => <p key={i}>{para}</p>)}
@@ -785,6 +802,10 @@ export default function StoryPage() {
       {/* Screen layout */}
       <div className="no-print" style={{ minHeight: '100vh', background: 'linear-gradient(160deg, #2C1810 0%, #1a0f08 100%)', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '0 0 100px' }}>
 
+        {page.image_url && (
+          <div aria-hidden="true" style={{ position: 'fixed', inset: 0, zIndex: 0, backgroundImage: `url(${page.image_url})`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'blur(64px) brightness(0.42) saturate(1.15)', transform: 'scale(1.25)', transition: 'background-image 0.4s ease' }} />
+        )}
+
         {/* Top Bar */}
         <div style={{
           width: '100%',
@@ -819,7 +840,7 @@ export default function StoryPage() {
         {/* Book */}
         <div
           className="book-page book-page-wide"
-          style={{ width: '100%', maxWidth: '640px', margin: '24px 16px 0', flex: 1, touchAction: 'pan-y' }}
+          style={{ width: '100%', maxWidth: '640px', margin: '24px 16px 0', flex: 1, touchAction: 'pan-y', position: 'relative', zIndex: 1 }}
           onTouchStart={onBookTouchStart}
           onTouchEnd={onBookTouchEnd}
         >
