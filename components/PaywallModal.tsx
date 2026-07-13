@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { verifyParent } from '@/lib/parentalGate';
 
 type Props = {
   reason: 'free_exhausted' | 'monthly_limit' | 'no_subscription' | 'daily_limit';
@@ -11,6 +12,7 @@ export default function PaywallModal({ reason, onClose }: Props) {
   const [loading, setLoading] = useState<'monthly' | 'annual' | 'extra_book' | null>(null);
 
   const handleCheckout = async (plan: 'monthly' | 'annual' | 'extra_book') => {
+    if (!(await verifyParent())) return;
     setLoading(plan);
     try {
       const res = await fetch('/api/stripe/checkout', {

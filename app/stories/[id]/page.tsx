@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { verifyParent } from '@/lib/parentalGate';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Heart, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -514,6 +515,7 @@ export default function StoryPage() {
 
   // Buy the next chapter for 99c, returning to this page to auto-start it
   const buyNextChapter = async () => {
+    if (!(await verifyParent())) return;
     try {
       const res = await fetch('/api/stripe/checkout', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ plan: 'extra_book', continue_story_id: id, locale: typeof navigator !== 'undefined' ? navigator.language : 'en-AU' }) });
       const data = await res.json();

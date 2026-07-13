@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback, useRef } from 'react';
+import { verifyParent } from '@/lib/parentalGate';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { BookOpen, Users, Settings, Plus, X } from 'lucide-react';
@@ -871,6 +872,7 @@ export default function DashboardPage() {
   };
 
   const handleBuyExtraBook = async () => {
+    if (!(await verifyParent())) return;
     try {
       const res = await fetch('/api/stripe/checkout', {
         method: 'POST',
@@ -1178,6 +1180,7 @@ export default function DashboardPage() {
                 return (
                   <button
                     onClick={async () => {
+                      if (!(await verifyParent())) return;
                       const res = await fetch('/api/stripe/checkout', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ plan: 'extra_child', locale: navigator.language || 'en-AU' }) });
                       const data = await res.json();
                       if (data.url) window.location.href = data.url;
@@ -1306,7 +1309,7 @@ export default function DashboardPage() {
                 )}
               </div>
               {sub?.status === 'subscribed' || isAdmin ? (
-                <button onClick={async () => { const res = await fetch('/api/stripe/portal', { method: 'POST' }); const d = await res.json(); if (d.url) window.location.href = d.url; }}
+                <button onClick={async () => { if (!(await verifyParent())) return; const res = await fetch('/api/stripe/portal', { method: 'POST' }); const d = await res.json(); if (d.url) window.location.href = d.url; }}
                   style={{ width: '100%', padding: '0.7rem', borderRadius: '10px', border: '1.5px solid #FF6B35', background: '#fff', color: '#FF6B35', cursor: 'pointer', fontWeight: '600', fontSize: '0.875rem' }}>
                   Manage billing
                 </button>
