@@ -8,6 +8,8 @@ import { BookOpen, Users, Settings, Plus, X } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import PaywallModal from '@/components/PaywallModal';
 import { updateChild } from '@/lib/supabase/child-client';
+import { generateStory, generateSequel } from '@/lib/generation-client';
+import { isNativeApp } from '@/lib/iap';
 import { isContentAppropriate } from '@/lib/content-filter';
 
 const CHILD_PALETTES = [
@@ -685,10 +687,10 @@ export default function DashboardPage() {
         if (!subData?.has_seen_tour) {
           setShowTour(true);
           // Pre-generate all 5 page images in background while user reads tour.
-          // Sequential with 400ms stagger to avoid Replicate rate limits.
-          // generate-image stores poll_url in DB; story page picks it up and goes
-          // straight to polling instead of re-submitting to Replicate.
-          void (async () => {
+          // Web only: these hit Next.js /api routes. In the native app the
+          // app-generate → generate-story-text → generate-story-images edge-fn
+          // chain produces images server-side, and the reader polls the DB for them.
+          if (!isNativeApp()) void (async () => {
             // Pre-generate AND fully poll all 5 images in background during tour.
             // generate-image starts the Replicate prediction + saves poll_url to DB.
             // poll-image polls until done, downloads, uploads to Supabase Storage,
@@ -830,9 +832,9 @@ export default function DashboardPage() {
     setGeneratingName(child?.name || '');
     setGenerating(`new-${childId}`); setGenerateError(''); setDailyLimitChild(null);
     try {
-      const res = await fetch('/api/generate-story', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ child_id: childId }) });
-      const data = await res.json();
-      if (res.status === 402) { setPaywallReason(data.reason); return; }
+      const res = await generateStory(childId);
+      const data = res.data;
+      if (res.status === 402) { setPaywallReason(data.reason as typeof paywallReason); return; }
       if (res.status === 429) { const child = children.find(c => c.id === childId); setDailyLimitChild(child?.name || 'your child'); return; }
       if (!res.ok) { setGenerateError(data.error || data.message || 'Something went wrong. Please try again.'); return; }
       const storyId = data.story?.id;
@@ -856,9 +858,9 @@ export default function DashboardPage() {
     setGeneratingName(childName);
     setGenerating(`sequel-${storyId}`); setGenerateError(''); setDailyLimitChild(null);
     try {
-      const res = await fetch('/api/generate-sequel', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ story_id: storyId }) });
-      const data = await res.json();
-      if (res.status === 402) { setPaywallReason(data.reason); return; }
+      const res = await generateSequel(storyId);
+      const data = res.data;
+      if (res.status === 402) { setPaywallReason(data.reason as typeof paywallReason); return; }
       if (res.status === 429) { const sr = stories.find(s => s.id === storyId); const chName = sr?.children?.name || 'your child'; setDailyLimitChild(chName); return; }
       if (!res.ok) { setGenerateError(data.error || 'Something went wrong.'); return; }
       const newStoryId = data.story?.id;

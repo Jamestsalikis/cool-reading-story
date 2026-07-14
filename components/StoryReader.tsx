@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Heart, ChevronLeft, ChevronRight } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
+import { generateSequel } from '@/lib/generation-client';
 import FeedbackModal from '@/components/FeedbackModal';
 
 type Page = {
@@ -496,8 +497,8 @@ export function StoryReader({ id }: { id: string }) {
     continueLock.current = true;
     setContinuing(true);
     try {
-      const res = await fetch('/api/generate-sequel', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ story_id: id }) });
-      const data = await res.json();
+      const res = await generateSequel(id);
+      const data = res.data;
       if (!res.ok) {
         // paywall / daily limit / other — send to dashboard where the options live
         if (res.status === 402 || res.status === 429) { router.push('/dashboard'); return; }

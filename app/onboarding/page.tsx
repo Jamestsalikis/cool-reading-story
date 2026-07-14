@@ -5,6 +5,7 @@ import { useIsMobile } from '@/lib/useIsMobile';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { createChild } from '@/lib/supabase/child-client';
+import { generateStory } from '@/lib/generation-client';
 import { createClient } from '@/lib/supabase/client';
 import { TRIAL_INTERESTS } from '@/lib/sample-stories/index';
 import { isContentAppropriate } from '@/lib/content-filter';
@@ -304,12 +305,8 @@ function OnboardingFlow() {
 
         // Generate story then go to dashboard — the banner will show "book ready"
         try {
-          const storyRes = await fetch('/api/generate-story', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ child_id: result.child.id }),
-          });
-          const storyData = await storyRes.json();
+          const storyRes = await generateStory(result.child.id);
+          const storyData = storyRes.data;
           const storyId = storyData?.story?.id;
           if (storyId) {
             // Navigate to dashboard with params — DashboardContent will show the book-ready banner
