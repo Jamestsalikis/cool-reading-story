@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { ArrowLeft, Heart, ChevronLeft, ChevronRight } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import FeedbackModal from '@/components/FeedbackModal';
+import { AuthGuard } from '@/components/AuthGuard';
 
 type Page = {
   page_number: number;
@@ -371,7 +372,7 @@ function CornerOrnaments() {
   );
 }
 
-export default function StoryPage() {
+function StoryReader() {
   const { id } = useParams<{ id: string }>();
   const [story, setStory] = useState<Story | null>(null);
   const [loading, setLoading] = useState(true);
@@ -926,5 +927,13 @@ export default function StoryPage() {
         </div>
       </div>
     </>
+  );
+}
+
+export default function StoryPage() {
+  return (
+    <AuthGuard>
+      <StoryReader />
+    </AuthGuard>
   );
 }

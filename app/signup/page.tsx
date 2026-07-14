@@ -2,9 +2,11 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { signUp, signInWithGoogle, resendVerificationEmail } from '@/lib/supabase/actions';
+import { signUp, signInWithGoogle, resendVerificationEmail } from '@/lib/supabase/auth-client';
+import { useRedirectIfAuthenticated } from '@/components/AuthGuard';
 
 export default function SignupPage() {
+  useRedirectIfAuthenticated();
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);

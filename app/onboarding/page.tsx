@@ -8,6 +8,7 @@ import { createChild } from '@/lib/supabase/child-actions';
 import { createClient } from '@/lib/supabase/client';
 import { TRIAL_INTERESTS } from '@/lib/sample-stories/index';
 import { isContentAppropriate } from '@/lib/content-filter';
+import { AuthGuard } from '@/components/AuthGuard';
 
 // Content filter — block inappropriate terms for a children's app
 
@@ -177,7 +178,7 @@ const FOLLOW_UP_QUESTIONS: Record<string, { q: string; placeholder: string }[]> 
   ],
 };
 
-export default function OnboardingPage() {
+function OnboardingFlow() {
   const router = useRouter();
   const [state, setState] = useState<OnboardingState>({
     step: 2,
@@ -2164,6 +2165,14 @@ export default function OnboardingPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function OnboardingPage() {
+  return (
+    <AuthGuard>
+      <OnboardingFlow />
+    </AuthGuard>
   );
 }
 
