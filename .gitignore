@@ -5,3 +5,9 @@ node_modules/
 .env*.local
 .vercel
 .DS_Store
+
+# Capacitor static-export build artifacts
+/out
+/.next-capacitor
+/.cap-build-stash
+/.cap-spike-stories
