@@ -289,6 +289,33 @@ app never exposed it). These are fixed in Phase 4 as a security batch:
 AI story, a sequel; images populate; paywall/daily limits behave. Simulator —
 same, hitting the deployed edge functions with no Next server involved.
 
+#### Phase 4 — implementation status (done in-repo)
+- ✅ `supabase/functions/app-generate/index.ts` — JWT-authed edge fn: auth →
+  paywall + per-child daily limit (service role) → server-side prompt → hands off
+  to `generate-story-text` (which writes text + fires images). Reads secrets from
+  function env.
+- ✅ `lib/generation-client.ts` — `generateStory`/`generateSequel` branch on
+  `isNativeApp()`: app → `app-generate`; web → existing `/api` routes (unchanged).
+  Wired into onboarding, dashboard, reader. Image pre-gen skipped on native
+  (edge-fn chain generates images; reader polls the DB).
+- ✅ `supabase/migrations/0001_app_security_lockdown.sql` — RLS remediation
+  (written, NOT applied — see sequencing note in the file).
+- ⚠️ Interim: free-user first book goes through AI (the static sample-story
+  shortcut is not yet ported to the edge fn). Reversible.
+
+#### Phase 4 — runbook to finish + test (your Mac)
+1. **Deploy the edge function** (from the repo, staging):
+   `supabase functions deploy app-generate --project-ref odttjvcphckewtmjpebc`
+2. **Set the function secrets** (values you already use on Vercel):
+   `supabase secrets set ANTHROPIC_API_KEY=... REPLICATE_API_TOKEN=... --project-ref odttjvcphckewtmjpebc`
+   (`SUPABASE_URL`/`ANON_KEY`/`SERVICE_ROLE_KEY` are injected automatically.)
+3. **Rebuild + run the app**: `./scripts/build-cap.sh && npx cap sync ios && npx cap run ios`
+   → log in, create a child, generate a story; images should stream in as you flip.
+4. **Security lockdown** (`0001_app_security_lockdown.sql`): apply ONLY after the
+   web `/api` counter writes move to the service role (or accept staging-web
+   breakage). The app path is unaffected (it writes via the service role already).
+5. Enable leaked-password protection in the Supabase dashboard.
+
 ### Phase 5 — Reader routing for static export (½–1 day)
 - Give the reader an app-friendly route that carries the id without a server
   (`/story?id=…` or hash), keeping `/stories/[id]` for the web. Update all
