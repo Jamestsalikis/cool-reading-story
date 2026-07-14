@@ -245,6 +245,34 @@ returns into the app.
 **Test:** create/edit a child and confirm the row is scoped to the user; attempt
 cross-account reads and confirm they're blocked.
 
+### RLS audit results (Phase 3, staging `odttjvcphckewtmjpebc`)
+
+RLS is enabled on all public tables and **data isolation is correct** — every
+policy on `children`, `stories`, `profiles`, `feedback`, and `user_subscriptions`
+(reads) is scoped by `auth.uid()`. The audit surfaced a **paywall-bypass class**
+that only becomes exploitable once the app talks to Supabase directly (the web
+app never exposed it). These are fixed in Phase 4 as a security batch:
+
+1. **[HIGH] Entitlement RPCs are client-callable.** `grant_extra_book_today`,
+   `increment_extra_child_slots`, `decrement_extra_child_slots`,
+   `decrement_free_stories`, `increment_stories_today`,
+   `increment_stories_this_month` are `SECURITY DEFINER` and `EXECUTE`-able by
+   `authenticated`/`anon`. A user could self-grant paid books/child-slots or
+   reset quotas. → Revoke EXECUTE from anon/authenticated once the edge function
+   (service role) is the sole caller. (Can't revoke earlier — the current web
+   `/api/generate-story` calls them via the user session.)
+2. **[HIGH] `user_subscriptions` UPDATE is not column-restricted.** A client
+   could set its own `status='subscribed'`. Only `has_seen_tour` is a legit
+   client write. → Column-level GRANT for `has_seen_tour`; edge function writes
+   status/counters via service role. Also add a server-side check (DB trigger or
+   edge fn) for the free-child limit currently enforced only in `child-client.ts`.
+3. **[MED] Storage `story-images` writes open to any authenticated user**
+   (INSERT/UPDATE not path-scoped). → Restrict writes to service role.
+4. **[LOW] Public bucket allows listing** all files. → Drop the broad listing
+   SELECT policy (object URLs still work).
+5. **[LOW] Leaked-password protection disabled** (Auth setting) — enable in the
+   Supabase dashboard.
+
 ### Phase 4 — Harden edge functions for direct client calls (2–3 days)  ← biggest
 - Move `ANTHROPIC_API_KEY`, `REPLICATE_API_TOKEN`, `SERVICE_ROLE_KEY` into
   **Supabase function secrets**; stop accepting them in the request body.
