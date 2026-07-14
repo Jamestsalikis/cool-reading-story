@@ -974,7 +974,7 @@ export default function DashboardPage() {
       )}
 
       {/* Top nav */}
-      <nav style={{ position: 'sticky', top: 0, zIndex: 50, background: '#FFF4E6', borderBottom: '2px solid #F0E4D0', padding: '0 1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '68px', gap: '12px' }}>
+      <nav style={{ position: 'sticky', top: 0, zIndex: 50, background: '#FFF4E6', borderBottom: '2px solid #F0E4D0', padding: 'var(--safe-top) calc(1.5rem + var(--safe-right)) 0 calc(1.5rem + var(--safe-left))', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 'calc(68px + var(--safe-top))', gap: '12px' }}>
         <a href="/" style={{ textDecoration: 'none', flexShrink: 0 }}>
           <img src="/mood-3.png" alt="TalePop" style={{ height: '52px', width: 'auto' }} />
         </a>
@@ -1346,7 +1346,7 @@ export default function DashboardPage() {
 
       {/* Mobile bottom nav */}
       {isMobile && (
-        <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, height: '72px', background: '#fff', borderTop: '2px solid #F0E4D0', display: 'flex', justifyContent: 'space-around', alignItems: 'center', zIndex: 40 }}>
+        <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, height: 'calc(72px + var(--safe-bottom))', paddingBottom: 'var(--safe-bottom)', background: '#fff', borderTop: '2px solid #F0E4D0', display: 'flex', justifyContent: 'space-around', alignItems: 'center', zIndex: 40 }}>
           {navItems.map(({ id, label, icon: Icon }) => {
             const active = activeNav === id;
             return (

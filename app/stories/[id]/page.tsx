@@ -540,10 +540,10 @@ export default function StoryPage() {
     return (
       <>
         <style>{bookStyles}</style>
-        <div style={{ minHeight: '100vh', background: 'linear-gradient(160deg, #2C1810 0%, #1a0f08 100%)', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '0 0 100px' }}>
+        <div style={{ minHeight: '100vh', background: 'linear-gradient(160deg, #2C1810 0%, #1a0f08 100%)', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '0 0 calc(100px + var(--safe-bottom))' }}>
 
           {/* Top bar — functional even while loading */}
-          <div style={{ width: '100%', padding: '14px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'sticky', top: 0, zIndex: 10, background: 'rgba(44,24,16,0.9)', backdropFilter: 'blur(8px)' }}>
+          <div style={{ width: '100%', padding: 'calc(14px + var(--safe-top)) calc(20px + var(--safe-right)) 14px calc(20px + var(--safe-left))', display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'sticky', top: 0, zIndex: 10, background: 'rgba(44,24,16,0.9)', backdropFilter: 'blur(8px)' }}>
             <Link href="/dashboard" style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'rgba(255,255,255,0.65)', textDecoration: 'none', fontSize: '0.875rem' }}>
               <ArrowLeft size={15} /> Library
             </Link>
@@ -590,7 +590,7 @@ export default function StoryPage() {
           </div>
 
           {/* Page nav skeleton */}
-          <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 20, background: 'rgba(44,24,16,0.95)', backdropFilter: 'blur(8px)', borderTop: '1px solid rgba(255,255,255,0.08)', padding: '12px 20px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+          <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 20, background: 'rgba(44,24,16,0.95)', backdropFilter: 'blur(8px)', borderTop: '1px solid rgba(255,255,255,0.08)', padding: '12px calc(20px + var(--safe-right)) calc(12px + var(--safe-bottom)) calc(20px + var(--safe-left))', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
             {[0, 1, 2, 3, 4].map(i => (
               <div key={i} style={{ width: i === 0 ? '22px' : '7px', height: '7px', borderRadius: '4px', background: i === 0 ? 'rgba(196,120,74,0.6)' : 'rgba(255,255,255,0.15)', transition: 'all 0.25s' }} />
             ))}
@@ -799,7 +799,7 @@ export default function StoryPage() {
       <style>{bookStyles}</style>
 
       {/* Screen layout */}
-      <div className="no-print" style={{ minHeight: '100vh', background: 'linear-gradient(160deg, #2C1810 0%, #1a0f08 100%)', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '0 0 100px' }}>
+      <div className="no-print" style={{ minHeight: '100vh', background: 'linear-gradient(160deg, #2C1810 0%, #1a0f08 100%)', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '0 0 calc(100px + var(--safe-bottom))' }}>
 
         {page.image_url && (
           <div aria-hidden="true" style={{ position: 'fixed', inset: 0, zIndex: 0, backgroundImage: `url(${page.image_url})`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'blur(64px) brightness(0.42) saturate(1.15)', transform: 'scale(1.25)', transition: 'background-image 0.4s ease' }} />
@@ -808,7 +808,7 @@ export default function StoryPage() {
         {/* Top Bar */}
         <div style={{
           width: '100%',
-          padding: '14px 20px',
+          padding: 'calc(14px + var(--safe-top)) calc(20px + var(--safe-right)) 14px calc(20px + var(--safe-left))',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -859,7 +859,7 @@ export default function StoryPage() {
           position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 20,
           background: 'rgba(44,24,16,0.95)', backdropFilter: 'blur(8px)',
           borderTop: '1px solid rgba(255,255,255,0.08)',
-          padding: '12px 20px',
+          padding: '12px calc(20px + var(--safe-right)) calc(12px + var(--safe-bottom)) calc(20px + var(--safe-left))',
           display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px',
         }}>
           <button
