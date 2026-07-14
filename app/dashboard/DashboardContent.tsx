@@ -143,11 +143,11 @@ function ProductTour({ steps, pendingStoryId, onDone }: {
   }, [step, current.targetId]);
 
   const goNext = () => {
-    if (isLast) onDone(pendingStoryId ? `/stories/${pendingStoryId}` : undefined);
+    if (isLast) onDone(pendingStoryId ? `/story?id=${pendingStoryId}` : undefined);
     else setStep(s => s + 1);
   };
   const goBack = () => setStep(s => s - 1);
-  const skip = () => onDone(pendingStoryId ? `/stories/${pendingStoryId}` : undefined);
+  const skip = () => onDone(pendingStoryId ? `/story?id=${pendingStoryId}` : undefined);
 
   // Tooltip positioning
   let tooltipStyle: React.CSSProperties;
@@ -283,7 +283,7 @@ function BookCard({ story, palette, onContinue, isWriting }: { story: Story; pal
     <div style={{ transform: `rotate(${tilt}deg)`, transition: 'transform 0.2s ease', transformOrigin: 'bottom center' }}
       onMouseEnter={e => (e.currentTarget.style.transform = 'rotate(0deg) scale(1.04)')}
       onMouseLeave={e => (e.currentTarget.style.transform = `rotate(${tilt}deg) scale(1)`)}>
-      <div className="book-wrap" onClick={() => !isWriting && router.push(`/stories/${story.id}`)}
+      <div className="book-wrap" onClick={() => !isWriting && router.push(`/story?id=${story.id}`)}
         style={{ perspective: '900px', cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <div style={{ position: 'relative', width: '140px', height: '196px', transformStyle: 'preserve-3d' }}>
           <div style={{ position: 'absolute', left: 0, top: 0, width: '18px', height: '100%', background: `linear-gradient(90deg, ${palette.spine} 0%, ${palette.cover} 100%)`, borderRadius: '3px 0 0 3px', zIndex: 3, boxShadow: 'inset -2px 0 5px rgba(0,0,0,0.3)' }} />
@@ -354,7 +354,7 @@ function SeriesFan({ volumes, palette, onContinue }: { volumes: Story[]; palette
           const isHovered = hoveredId === vol.id;
           const coverImage = vol.pages?.[0]?.image_url;
           return (
-            <div key={vol.id} onClick={() => router.push(`/stories/${vol.id}`)} onMouseEnter={() => setHoveredId(vol.id)} onMouseLeave={() => setHoveredId(null)}
+            <div key={vol.id} onClick={() => router.push(`/story?id=${vol.id}`)} onMouseEnter={() => setHoveredId(vol.id)} onMouseLeave={() => setHoveredId(null)}
               style={{ position: 'absolute', bottom: 0, left: '50%', width: '120px', height: '168px', cursor: 'pointer', transformOrigin: 'center bottom', transform: `translateX(-50%) rotate(${angles[i]}deg) translateY(${isHovered ? -20 : 0}px)`, transition: 'transform 0.25s cubic-bezier(0.34,1.56,0.64,1)', zIndex: isHovered ? 50 : i + 1, borderRadius: '3px 6px 6px 3px', overflow: 'hidden', boxShadow: isHovered ? '0 16px 36px rgba(0,0,0,0.35)' : '2px 4px 10px rgba(0,0,0,0.2)' }}>
               <div style={{ position: 'absolute', left: 0, top: 0, width: '13px', height: '100%', background: palette.spine, zIndex: 1, boxShadow: 'inset -2px 0 4px rgba(0,0,0,0.25)' }} />
               <div style={{ position: 'absolute', left: '13px', top: 0, width: 'calc(100% - 13px)', height: '100%', background: palette.cover, overflow: 'hidden' }}>
@@ -733,7 +733,7 @@ export default function DashboardPage() {
           })();
         } else {
           // Tour already seen - go straight to the story
-          router.push(`/stories/${storyId}`);
+          router.push(`/story?id=${storyId}`);
         }
       });
     }
@@ -1074,7 +1074,7 @@ export default function DashboardPage() {
 
                 {/* Continue reading hero */}
                 {mostRecentStory && (
-                  <div className="continue-card" onClick={() => router.push(`/stories/${mostRecentStory.id}`)}
+                  <div className="continue-card" onClick={() => router.push(`/story?id=${mostRecentStory.id}`)}
                     style={{ borderRadius: '20px', overflow: 'hidden', position: 'relative', height: isMobile ? '180px' : '220px', cursor: 'pointer', boxShadow: '0 8px 32px rgba(0,0,0,0.18)', backgroundImage: 'url(/continue-bg.svg)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
                     {mostRecentCover && <div style={{ position: 'absolute', inset: 0, backgroundImage: `url(${mostRecentCover})`, backgroundSize: 'cover', backgroundPosition: 'center top', opacity: 0.35 }} />}
                     <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(30,10,0,0.82) 0%, rgba(20,6,0,0.55) 45%, rgba(0,0,0,0.08) 100%)' }} />

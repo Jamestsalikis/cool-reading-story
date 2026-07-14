@@ -26,6 +26,7 @@ STASH_PATHS=(
   "app/sitemap.ts"          # SEO route handler (website only)
   "app/robots.ts"           # SEO route handler (website only)
   "app/icon.tsx"            # dynamic favicon route (app uses native icons)
+  "app/stories"             # /stories/[id] dynamic route (web only; app uses /story?id=)
 )
 
 STASH=".cap-build-stash"
