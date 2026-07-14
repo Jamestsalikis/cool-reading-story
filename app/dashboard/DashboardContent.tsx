@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import { BookOpen, Users, Settings, Plus, X } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import PaywallModal from '@/components/PaywallModal';
-import { updateChild } from '@/lib/supabase/child-actions';
+import { updateChild } from '@/lib/supabase/child-client';
 import { isContentAppropriate } from '@/lib/content-filter';
 
 const CHILD_PALETTES = [

@@ -17,7 +17,7 @@ const nextConfig: NextConfig = {
         images: { unoptimized: true },
         // Emit /login/index.html etc. so routes resolve under file:// in the webview.
         trailingSlash: true,
-        distDir: ".next-capacitor",
+        // Static site is written to ./out (default for output: export).
       }
     : {
         // Ensure sample story JSON files are included in serverless function bundles.

@@ -57,7 +57,16 @@ for p in "${STASH_PATHS[@]}"; do
 done
 
 echo "→ Building static export (BUILD_TARGET=capacitor)"
+# Clean build dirs first. NOTE: this uses the default .next dir, so the
+# Next dev server must be stopped during a capacitor build (they collide on
+# .next). The export is written to ./out.
+rm -rf .next out
 BUILD_TARGET=capacitor node_modules/.bin/next build
+
+if [ ! -d out ]; then
+  echo "✗ Export did not produce ./out — aborting" >&2
+  exit 1
+fi
 
 echo "→ Syncing export → capacitor/www"
 rm -rf capacitor/www

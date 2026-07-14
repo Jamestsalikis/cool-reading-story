@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useIsMobile } from '@/lib/useIsMobile';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { createChild } from '@/lib/supabase/child-actions';
+import { createChild } from '@/lib/supabase/child-client';
 import { createClient } from '@/lib/supabase/client';
 import { TRIAL_INTERESTS } from '@/lib/sample-stories/index';
 import { isContentAppropriate } from '@/lib/content-filter';
