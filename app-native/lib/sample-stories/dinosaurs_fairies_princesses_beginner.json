@@ -1,0 +1,36 @@
+{
+  "interest": "Dinosaurs + Fairies + Princesses",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Dinosaur Princess's Fairy Garden",
+  "moral": "The most beautiful places are made by sharing and caring.",
+  "theme_emoji": "🦕",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a long lavender princess dress with gold trim, a small rose-gold tiara, and lavender slippers with gold bows — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} stepped through a tall gate into a magic land. Tall ferns and giant flowers grew everywhere. Tiny fairies flew through the leaves. In the middle of the garden sat a small friendly dinosaur. She wore a sparkly pink crown. She was the Dinosaur Princess.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a long lavender princess dress with gold trim, a small rose-gold tiara, and lavender slippers with gold bows — same child, same face, same exact outfit in every image. Wide establishing shot of a lush magical garden with giant ferns and enormous colourful flowers. {{NAME}} stands small near a tall gate at the edge looking in with wonder. Tiny glowing fairies flit through the leaves. In the centre of the garden, a small friendly green dinosaur sits wearing a sparkly pink crown and looking happy. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The Dinosaur Princess stomped over. 'My garden needs more flowers,' she said sadly. 'The fairies are tired and cannot plant them all.' {{NAME}} looked at the empty patches in the soil. 'I can help,' said {{NAME}}. The fairies cheered and buzzed around {{NAME}}'s head.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a long lavender princess dress with gold trim, a small rose-gold tiara, and lavender slippers with gold bows — same child, same face, same exact outfit in every image. Close-up of {{NAME}}'s face showing a warm and excited smile, eyes bright with eagerness. The friendly green dinosaur princess stands in front with a hopeful look. Three tiny fairies buzz happily around {{NAME}}'s head with little wings glowing. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} and the dinosaur worked together. {{NAME}} dug little holes in the soil. The Dinosaur Princess used her big nose to push the seeds in deep. The fairies flew above and sprinkled magic dust. Flowers began to pop up everywhere. Pink, yellow, and blue blooms burst open.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a long lavender princess dress with gold trim, a small rose-gold tiara, and lavender slippers with gold bows — same child, same face, same exact outfit in every image. Dynamic action shot of planting in full swing. {{NAME}} kneels in the soil digging a hole with both hands. The small green dinosaur princess pushes a seed into the earth with her snout nearby. Three fairies fly above in formation sprinkling glittering magic dust. Pink, yellow, and blue flowers burst open in rapid succession around them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The garden exploded with colour. It was the most beautiful garden anyone had ever seen. The fairies sang with joy. The Dinosaur Princess looked at {{NAME}} with happy tears. 'You did this with me,' she said. She gave {{NAME}} a big gentle dinosaur hug.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a long lavender princess dress with gold trim, a small rose-gold tiara, and lavender slippers with gold bows — same child, same face, same exact outfit in every image. Emotional peak scene with dramatic warm golden light over the blooming garden. The small green dinosaur princess wraps her small arms gently around {{NAME}} in a hug, both smiling. Flowers of every colour fill every space. Fairies hover in the air around them singing with mouths open in joy. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "{{NAME}} and the Dinosaur Princess sat together as the sun went down. The fairies made little glowing lights float in the air. The garden was warm and sweet-smelling. {{NAME}} rested a tired head on the dinosaur's soft side. Goodnight, {{NAME}}. Sleep well. Tomorrow, the fairies want to show you the secret door at the back of the garden.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a long lavender princess dress with gold trim, a small rose-gold tiara, and lavender slippers with gold bows — same child, same face, same exact outfit in every image. Warm cosy resolution scene bathed in soft golden evening light. {{NAME}} rests sleepily against the small green dinosaur princess's side, eyes half-closed and smiling. Fairies float nearby as tiny glowing lanterns hover in the air. The colourful garden surrounds them in full bloom. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

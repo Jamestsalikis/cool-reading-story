@@ -1,0 +1,36 @@
+{
+  "interest": "Fairies + Superheroes",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Fairy Cape",
+  "moral": "Being kind is the most powerful superpower of all.",
+  "theme_emoji": "🧚",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bold red superhero costume with a lightning bolt on the chest, a short purple cape, and red boots with silver trim — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} loved superheroes more than anything. He wore his red cape every single day. One morning he walked into the park. The park was full of big, tall trees. Then he heard a very tiny cry from up high.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bold red superhero costume with a lightning bolt on the chest, a short purple cape, and red boots with silver trim — same child, same face, same exact outfit in every image. Wide establishing shot of a large magical park filled with enormous tall trees and soft sunlight filtering through the leaves. {{NAME}} stands small on a winding path far below the canopy, looking upward with curiosity. The park feels big and enchanting around him. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "A tiny fairy was stuck in a spiderweb high in a tree. She was tangled up tight. She had bright orange wings. Her name was Zara. She looked at {{NAME}} with big, hopeful eyes. \"Please help me!\" she called.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bold red superhero costume with a lightning bolt on the chest, a short purple cape, and red boots with silver trim — same child, same face, same exact outfit in every image. Close-up of {{NAME}}'s face tilted upward, his expression full of surprise and concern as he spots the tiny orange-winged fairy Zara tangled in a large silvery spiderweb high in a tree branch above him. The fairy looks down with big hopeful eyes. Dappled sunlight catches the web. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} climbed the tree as fast as he could. He reached up carefully and pulled each sticky thread away. He was very gentle so Zara would not get hurt. One by one the threads came free. Zara was free!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bold red superhero costume with a lightning bolt on the chest, a short purple cape, and red boots with silver trim — same child, same face, same exact outfit in every image. Dynamic action shot of {{NAME}} high up in the tree, perched on a thick branch, reaching out with a careful hand to peel back the silvery spiderweb strands around the tiny fairy Zara. His purple cape billows slightly. Zara's orange wings begin to flutter free. Both characters look intensely focused. Sunlight glints through the leaves. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "Zara flew up into the air. She spun around with joy. Then she touched {{NAME}}'s cape with her wand. The cape glowed bright gold for a moment. \"That is your kindness glow,\" she said. \"Real heroes are kind.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bold red superhero costume with a lightning bolt on the chest, a short purple cape, and red boots with silver trim — same child, same face, same exact outfit in every image. Emotional peak scene on the tree branch with warm golden magical light blazing outward from {{NAME}}'s cape where the tiny fairy Zara touches it with a glowing wand. The cape shimmers gold. {{NAME}}'s face is filled with awe and warmth. Zara spins joyfully in the air, her orange wings catching the light. Dramatic golden rays fan out across the scene. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "{{NAME}} climbed down slowly and walked home happy. He hung his cape on his chair for tomorrow. He snuggled under his duvet with a big smile. He wondered if his cape would glow again. Goodnight, {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bold red superhero costume with a lightning bolt on the chest, a short purple cape, and red boots with silver trim — same child, same face, same exact outfit in every image. Warm cosy resolution scene with soft golden lamplight in a snug bedroom. {{NAME}} lies in a cosy bed under a red duvet, eyes nearly closed, smiling softly. His purple cape hangs on a nearby chair, still giving off the faintest golden glow. Outside the window tiny fairy lights twinkle in the dark trees. The room feels safe and magical. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

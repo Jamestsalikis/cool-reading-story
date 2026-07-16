@@ -1,0 +1,35 @@
+{
+  "interest": "Dinosaurs + Robots",
+  "title": "{{NAME}} and the Time-Bot Who Met a T-Rex",
+  "moral": "Curiosity is how we make the impossible happen.",
+  "theme_emoji": "🦕",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a red and chrome-striped jacket, black cargo trousers, and silver-toed boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} had built TEMPO with one specific purpose: time observation.\n\nNot time travel, which was too complicated and also probably illegal. Just observation: a small probe that could slip through a temporal fold, take readings, and come back.\n\nThe first test, a quick jump to a Tuesday two weeks prior, worked perfectly.\n\nThe second test, aimed at 65 million years ago, also worked perfectly.\n\nTEMPO returned with data, a claw mark across its hull, and a thin layer of prehistoric mud.\n\n\"Excellent,\" said {{NAME}}. Then he looked at the claw mark more carefully.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a red and chrome-striped jacket, black cargo trousers, and silver-toed boots — same child, same face, same exact outfit in every image. {{NAME}} examining a small battered robot probe on his workshop bench, holding it up to the light, a long claw mark visible across its chrome hull, his expression shifting from pleased to very interested. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "He reviewed TEMPO's visual data on his tablet.\n\nA Cretaceous forest. Enormous tree ferns. The probe descending into a clearing.\n\nThen: the head of a T-Rex, very close, examining the probe with one enormous amber eye. The T-Rex had patted the probe once, hence the claw mark. Then it had stepped back and watched it with what could only be described as curiosity.\n\n{{NAME}} rewound the video. Watched the T-Rex's eye again.\n\n\"You weren't attacking it,\" he said aloud. \"You were investigating it.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a red and chrome-striped jacket, black cargo trousers, and silver-toed boots — same child, same face, same exact outfit in every image. {{NAME}} hunched over a tablet in the dim workshop, the screen showing a massive T-Rex eye filling the frame, {{NAME}}'s own wide eyes reflected in the glow, completely absorbed. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "He modified TEMPO with a speaker and sent it back.\n\nThis time he watched in real-time: the probe descending into the same clearing. The T-Rex appearing at the treeline, already alert, recognising the shape.\n\n{{NAME}} sent a sound through TEMPO's speaker: three short tones, low and clear.\n\nThe T-Rex tilted its enormous head.\n\n{{NAME}} sent the tones again.\n\nThe T-Rex replied with a low rumble that shook the probe's sensors.\n\nTEMPO translated it as: acknowledged.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a red and chrome-striped jacket, black cargo trousers, and silver-toed boots — same child, same face, same exact outfit in every image. Dynamic shot of the small silver robot TEMPO hovering in a prehistoric clearing, the enormous head of a T-Rex lowered toward it, both seemingly in conversation, ancient trees and ferns framing the extraordinary scene. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "They communicated for six minutes before {{NAME}} had to return TEMPO.\n\nIn those six minutes he learned: the T-Rex had seen three different temporal probes over its lifetime. It had investigated them all. It found them interesting but not dangerous.\n\nIt lived alone. It was approximately forty years old. It had explored most of its territory and found it sufficient.\n\nThen it sent one more sound before TEMPO left. TEMPO's translation program took a moment, then offered: come again.\n\n{{NAME}} sat back in his chair and stared at the ceiling.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a red and chrome-striped jacket, black cargo trousers, and silver-toed boots — same child, same face, same exact outfit in every image. {{NAME}} leaning back in his workshop chair staring at the ceiling, TEMPO on the bench beside him, the tablet displaying communication data readouts, a look of pure wonder on his face. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "He sat at the edge of his bed that night, reading back through the translation logs.\n\nA forty-year-old T-Rex. Had seen three probes. Remembered them all. Was curious enough to say: come again.\n\n{{NAME}} looked out at the night sky, thinking about how the universe was always larger than whatever box you tried to put it in.\n\nHe turned off his lamp and lay in the dark.\n\nOn his desk, TEMPO's status light blinked slowly, green, patient, ready.\n\nSomewhere across sixty-five million years, an enormous amber eye blinked in the dark of an ancient forest, and waited.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a red and chrome-striped jacket, black cargo trousers, and silver-toed boots — same child, same face, same exact outfit in every image. {{NAME}} lying peacefully in bed, the room dim, TEMPO on the desk with a small green light blinking softly, warm and cosy, a look of contented wonder on his face. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

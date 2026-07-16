@@ -1,0 +1,35 @@
+{
+  "interest": "Dinosaurs + Superheroes",
+  "title": "{{NAME}} and the Cretaceous Crusader",
+  "moral": "True heroism means helping others use their strengths, not just using your own.",
+  "theme_emoji": "🦸",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright crimson cape over a navy suit, red boots, and a gold shield emblem — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} had just received his Junior Hero badge when the portal opened in the city park.\n\nOut of it stepped a Pterodactyl the size of a hang-glider, wearing what appeared to be a custom-fitted vest and an expression of extreme competence.\n\n\"I am Talon,\" it said, in a voice that somehow came from the vocalisation unit strapped to its throat. \"I have been sent from the Cretaceous Emergency Response Unit. You have a villain problem. I am here to assist.\"\n\n{{NAME}} stared. \"We have a superheroes guild for that.\"\n\n\"They called us,\" said Talon.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright crimson cape over a navy suit, red boots, and a gold shield emblem — same child, same face, same exact outfit in every image. Wide park scene, {{NAME}} in his cape and emblem standing face-to-face with an enormous Pterodactyl wearing a professional-looking vest, the Pterodactyl's intelligent eyes level with {{NAME}}'s, a glowing portal closing behind it. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The villain, as it turned out, had taken the top three floors of City Hall and was using a device that could freeze everyone in place for sixty seconds at a time.\n\nThe adult superheroes kept getting frozen.\n\nTalon was too fast to freeze and too large to enter the building.\n\n{{NAME}} was small enough to get in through the service entrance, but once inside he'd be on his own.\n\n\"Not quite,\" said Talon. \"I can see through walls with thermal imaging. I'll guide you from outside. You go in. I'll be your eyes.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright crimson cape over a navy suit, red boots, and a gold shield emblem — same child, same face, same exact outfit in every image. {{NAME}} and Talon the Pterodactyl crouching behind a building, {{NAME}} listening intently as Talon points at the building with a wing tip, a plan being formed, dramatic city backdrop. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "It worked like a relay race.\n\nTalon called out locations and timing through a comm unit. {{NAME}} moved through the building while frozen heroes stood around him like statues, ducking and rolling between freeze bursts, using every second of movement to get closer.\n\n\"Thirty meters. Next freeze in eight seconds. Doorway on your left NOW,\" said Talon.\n\n{{NAME}} ran.\n\nHe got to the third floor with four seconds to spare, knocked the device off the table with his shield emblem, and everything unfroze at once.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright crimson cape over a navy suit, red boots, and a gold shield emblem — same child, same face, same exact outfit in every image. Dynamic action scene, {{NAME}} sprinting down a corridor past frozen hero statues, determined expression, the freeze device visible at the end of the hall, dramatic blue light, motion and urgency. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "Outside, every hero defrosted and looked around in confusion.\n\nThrough the window, {{NAME}} could see Talon circling overhead, enormous and magnificent against the sky.\n\nHe gave a thumbs up.\n\nTalon dipped one wing.\n\nThe guild director found {{NAME}} in the lobby five minutes later and said: \"That was the most efficient heroic operation I've witnessed in fifteen years.\"\n\n\"Thank Talon,\" said {{NAME}}. \"It was teamwork.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright crimson cape over a navy suit, red boots, and a gold shield emblem — same child, same face, same exact outfit in every image. {{NAME}} standing outside City Hall looking up at Talon the Pterodactyl circling majestically against a golden sky, arm raised in a thumbs up, defrosted heroes and a crowd behind him. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "Talon departed through the portal at sunset, giving {{NAME}} a formal Cretaceous salute before disappearing.\n\n{{NAME}} stood at the portal's closing edge and felt the warm air of an entirely different age drift through for one last second before it sealed.\n\nHe walked home with his cape over his arm and his comm unit still in his ear.\n\nIn his room, he set the comm on his desk and looked at it for a long moment.\n\nThen he heard it: one brief burst of static, and through it, the unmistakeable sound of ancient wings.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright crimson cape over a navy suit, red boots, and a gold shield emblem — same child, same face, same exact outfit in every image. {{NAME}} lying contentedly in bed, the comm unit on his desk with a small green light, his cape draped over the chair, warm golden lamp, peaceful smile on his face. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

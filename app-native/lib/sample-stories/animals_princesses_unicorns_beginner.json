@@ -1,0 +1,36 @@
+{
+  "interest": "Animals + Princesses + Unicorns",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Lost Unicorn's Sparkle",
+  "moral": "When you are kind and brave, you can help a friend shine again.",
+  "theme_emoji": "🦄",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a golden crown, a bright pink princess dress with silver stars, and sparkly purple shoes — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} walked into a big magical forest. The trees had pink flowers. Little rabbits and foxes played in the grass. In the middle of the forest was a pretty castle. A unicorn stood near the castle gate. The unicorn was all white, but her horn had lost its sparkle.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a golden crown, a bright pink princess dress with silver stars, and sparkly purple shoes — same child, same face, same exact outfit in every image. Wide shot of a magical pink forest with a tall castle in the background. {{NAME}} is small and stands at the edge of the forest path. Rabbits and foxes sit in the bright green grass. A white unicorn stands near the castle gate with a dull, grey, sparkle-less horn, looking sad. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "{{NAME}} ran up to the unicorn. The unicorn's eyes were full of tears. 'My sparkle is gone,' said the unicorn. 'I cannot make rainbows any more.' {{NAME}} felt very sad for her. 'I will help you find it,' said {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a golden crown, a bright pink princess dress with silver stars, and sparkly purple shoes — same child, same face, same exact outfit in every image. Close-up of {{NAME}}'s face showing wide-eyed surprise and gentle concern. The white unicorn's face is right beside {{NAME}}, with a single tear on her cheek and a dull grey horn. Both faces are soft and kind. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "A small bluebird flew down. 'I saw the sparkle!' said the bird. 'A big brown bear took it by mistake!' {{NAME}} and the unicorn ran fast through the forest. They found the bear sitting by a river. He had a bright glowing gem in his paw.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a golden crown, a bright pink princess dress with silver stars, and sparkly purple shoes — same child, same face, same exact outfit in every image. Dynamic action shot of {{NAME}} running through a bright colourful forest beside the white unicorn, both mid-stride with energy and excitement. A small bluebird flies ahead of them leading the way. A large friendly brown bear sits by a sparkling blue river in the distance, holding a glowing golden gem. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "{{NAME}} walked up to the bear. 'Excuse me,' said {{NAME}} kindly. 'That sparkle belongs to my friend the unicorn.' The bear looked at the gem. 'Oh! I did not know,' he said. He held it out with a big smile. {{NAME}} took the sparkle and put it back on the unicorn's horn.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a golden crown, a bright pink princess dress with silver stars, and sparkly purple shoes — same child, same face, same exact outfit in every image. Emotional peak scene with dramatic warm lighting. {{NAME}} reaches up to press a glowing golden gem onto the white unicorn's horn. The bear watches with a big joyful smile. The unicorn's eyes are wide with hope and happiness. Rainbow light begins to burst from the horn, lighting up the whole forest. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "The unicorn's horn blazed with rainbow light. All the animals cheered. The unicorn made a giant rainbow over the castle. {{NAME}} smiled and felt very happy. Being kind had saved the day. Goodnight, {{NAME}}. Sleep well. Tomorrow, the unicorn has a secret she wants to show you.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a golden crown, a bright pink princess dress with silver stars, and sparkly purple shoes — same child, same face, same exact outfit in every image. Warm cosy resolution scene bathed in soft golden light. {{NAME}} sits sleepily against the unicorn's side near the castle, eyes half-closed and smiling. Rabbits, foxes, and the bear gather around happily. A big rainbow arches over the castle in the background. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

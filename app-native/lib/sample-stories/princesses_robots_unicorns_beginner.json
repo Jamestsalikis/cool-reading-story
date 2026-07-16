@@ -1,0 +1,36 @@
+{
+  "interest": "Princesses + Robots + Unicorns",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Unicorn Who Couldn't Gallop",
+  "moral": "Helping a friend feel better is the kindest thing you can do.",
+  "theme_emoji": "🦄",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sapphire blue tunic with a gold crown print, rose pink trousers, and shiny copper boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} arrived at the royal unicorn stables.\nThe stables were behind a big pink castle.\nA friendly princess met him at the gate.\nA small yellow robot rolled up beside her.\nOne little unicorn sat alone and would not move.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sapphire blue tunic with a gold crown print, rose pink trousers, and shiny copper boots — same child, same face, same exact outfit in every image. Wide establishing shot of grand royal unicorn stables behind a large pink castle, {{NAME}} is small near the stable entrance looking around with wonder, a princess in a lavender gown stands at the gate gesturing warmly, a round yellow robot rolls beside her, a small white unicorn sits alone in a stall looking sad with its head drooped, the scene is colourful and full of warmth. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The princess knelt down by {{NAME}}.\n\"The unicorn hurt its leg,\" she said gently.\n{{NAME}}'s eyes went soft and wide.\n\"I want to help,\" he said.\nThe robot beeped and opened its chest door.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sapphire blue tunic with a gold crown print, rose pink trousers, and shiny copper boots — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}}'s face full of gentle concern and care, the princess kneels beside him with a soft worried expression in her lavender gown, the little yellow robot behind them has its chest door open revealing a glowing first-aid kit, the sad unicorn is visible in the soft-focused background. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The robot had a special healing wrap inside.\n{{NAME}} and the princess worked together.\nThey wrapped the unicorn's leg so gently.\nThe unicorn lifted its head and blinked.\n{{NAME}} patted it softly and smiled.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sapphire blue tunic with a gold crown print, rose pink trousers, and shiny copper boots — same child, same face, same exact outfit in every image. Dynamic action shot of {{NAME}} and the princess working together to carefully wrap a glowing bandage around the small unicorn's leg, the yellow robot holds out supplies, the unicorn lifts its head with a hopeful blinking expression, the scene is tender and full of movement and care, soft sparkling light comes from the healing wrap. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The unicorn stood up slowly.\nIt took one step, then two, then three.\n{{NAME}} held his breath.\nThen the unicorn galloped around the stable!\nEveryone clapped and laughed with happiness.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sapphire blue tunic with a gold crown print, rose pink trousers, and shiny copper boots — same child, same face, same exact outfit in every image. Emotional peak scene with bright warm light pouring through the stable windows, the small white unicorn gallops joyfully around the stable with its mane flying and tiny stars bursting from its hooves, {{NAME}} stands clapping with a huge beaming smile, the princess jumps up with delight, the little yellow robot spins around happily. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "The unicorn nuzzled {{NAME}} with its soft nose.\nThe princess gave him a warm hug.\nThe robot played a soft lullaby song.\n{{NAME}} smiled and closed his sleepy eyes.\nGoodnight, {{NAME}}. You were so kind today.\nMaybe the unicorn will take you for a ride tomorrow.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sapphire blue tunic with a gold crown print, rose pink trousers, and shiny copper boots — same child, same face, same exact outfit in every image. Warm cosy resolution scene in soft golden stable light, {{NAME}} sits on a bale of hay with the small white unicorn resting its head in his lap, his eyes drooping peacefully, the princess sits nearby with a warm smile, the little yellow robot glows softly in the corner, hay dust floats lazily in the golden air. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

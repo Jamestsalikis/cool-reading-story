@@ -1,0 +1,36 @@
+{
+  "interest": "Animals + Princesses + Superheroes",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Princess Who Saved the Forest",
+  "moral": "Kindness and bravery together can fix almost anything.",
+  "theme_emoji": "🌟",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red superhero cape with a gold star, a blue t-shirt, dark grey shorts, and red trainers with white soles — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} ran through a big green forest.\nHis red cape flew behind him.\nDeer and rabbits ran past him in a hurry.\nThey looked scared and very worried.\n\"What is wrong?\" called {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red superhero cape with a gold star, a blue t-shirt, dark grey shorts, and red trainers with white soles — same child, same face, same exact outfit in every image. Wide establishing shot of a tall, lush green forest with shafts of sunlight piercing the canopy. {{NAME}} runs along a wide forest path, his red cape streaming. All around him, deer, rabbits, and birds rush past in the opposite direction, their faces showing worry. {{NAME}} is small against the tall ancient trees. The mood is urgent but not frightening. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "A girl in a silver cape landed beside him.\nShe wore a tiara and bright blue armour.\nShe had a kind face and brave eyes.\n\"I am Princess Zara,\" she said.\n\"There is a big problem. Come with me!\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red superhero cape with a gold star, a blue t-shirt, dark grey shorts, and red trainers with white soles — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}} on the forest path, turning to face Princess Zara who has just landed beside him. Zara wears a gleaming silver superhero cape over vivid blue armour, a sparkling tiara on her dark hair, and has a determined but kind expression. {{NAME}}'s face shows instant admiration and readiness. Both of them face forward together with purpose. Dappled green forest light surrounds them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "A great thorn bush had grown over the forest stream.\nAnimals could not reach the cool water.\nThe deer were thirsty. The rabbits were too.\nZara pulled at the thorns with her strong hands.\n{{NAME}} pulled from the other side with all his might.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red superhero cape with a gold star, a blue t-shirt, dark grey shorts, and red trainers with white soles — same child, same face, same exact outfit in every image. Dynamic action shot. {{NAME}} and Princess Zara strain with all their might pulling apart a massive dark thorn bush that blocks a sparkling forest stream. {{NAME}} pulls from one side, face red and determined. Zara pulls from the other, silver cape flying, teeth gritted with effort. A crowd of thirsty deer, rabbits, and birds watches anxiously from behind them. The stream glimmers just beyond the thorns. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "With one last huge pull, the thorn bush broke apart.\nThe cool, clear water ran free again.\nThe animals rushed forward to drink.\nThe deer splashed. The rabbits dipped their noses.\nZara and {{NAME}} high-fived with big smiles.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red superhero cape with a gold star, a blue t-shirt, dark grey shorts, and red trainers with white soles — same child, same face, same exact outfit in every image. Emotional peak scene at the now-open forest stream. Sparkling clear water flows freely as deer splash and rabbits drink happily. Birds swoop low over the water. In the foreground, {{NAME}} and Princess Zara share a triumphant high-five, both laughing with huge relieved, proud smiles. Broken thorn branches lie harmlessly to the side. Warm golden light pours through the forest canopy. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "The animals drank and danced in the cool stream.\nA little deer came and licked {{NAME}}'s hand.\nZara put her silver cape around both their shoulders.\n\"You are a true hero,\" she said warmly.\n{{NAME}} sat down by the stream and felt very sleepy.\nGoodnight, {{NAME}}. Tomorrow Princess Zara says there is one more part of the forest that needs your help.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red superhero cape with a gold star, a blue t-shirt, dark grey shorts, and red trainers with white soles — same child, same face, same exact outfit in every image. Warm cosy resolution scene beside the gently flowing forest stream in golden evening light. {{NAME}} sits drowsily on the mossy bank, eyes half-closed. Princess Zara sits beside him, her silver cape draped warmly around both of their shoulders. A small deer gently nuzzles {{NAME}}'s hand. Rabbits and birds are gathered peacefully along the stream bank. The water sparkles softly in the golden light. Everything is calm and beautiful. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

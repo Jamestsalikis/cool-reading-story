@@ -1,0 +1,35 @@
+{
+  "interest": "Fairies + Princesses + Soccer",
+  "title": "{{NAME}} and the Enchanted League",
+  "moral": "Fair play is not just about rules, it is about the spirit behind them.",
+  "theme_emoji": "⚽",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shimmering aquamarine soccer jersey with small silver wings, white shorts, and aquamarine cleats — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "Princess Beatrix had reformed the Royal Football League on one principle: radical inclusion.\n\nNew entrants this season: four fairy teams, two animal-player teams, a junior heroes side, and the standard human league members.\n\nThe rules were being revised by a committee.\n\n{{NAME}} was on the committee.\n\nThe first problem on the agenda: the fairy teams could fly, which created issues around the offside rule, aerial possession, and the fundamental concept of staying on the ground.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shimmering aquamarine soccer jersey with small silver wings, white shorts, and aquamarine cleats — same child, same face, same exact outfit in every image. The football rules committee meeting, {{NAME}} at the table beside Princess Beatrix, on the other side representatives of the fairy teams hovering at table height, a stack of rulebook revisions before them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "Three days of committee work produced the Fairy Elevation Protocol: fairies could fly but must return to ground level before the ball crossed the goal line. Aerial ball-carrying was permitted within designated corridor zones.\n\nThe fairy representatives argued that this was complex. {{NAME}} argued that complexity served fairness.\n\n\"If your rules are simple but unfair, they're not good rules,\" he said.\n\nPrincess Beatrix was looking at him.\n\n\"He's right,\" she said. \"Complex and fair is better than simple and excluding.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shimmering aquamarine soccer jersey with small silver wings, white shorts, and aquamarine cleats — same child, same face, same exact outfit in every image. The rules committee at work, {{NAME}} pointing to a diagram of the Fairy Elevation Protocol, the fairy representatives studying it, Princess Beatrix following with approval. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The season's matches were extraordinary.\n\nFairy teams at full flight in the designated corridors, human teams learning to defend against aerial transition, animal teams that were technically human-ruled but played with instincts no one could anticipate.\n\nIn {{NAME}}'s own match against the leading fairy team, he scored his goal by predicting exactly when they would drop to ground level: that split second of vulnerability at the zone edge.\n\nHe had read the Protocol three times and found the gap.\n\n\"You used the rules to beat us,\" said the fairy captain afterward, not unhappily.\n\n\"That's what rules are for,\" said {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shimmering aquamarine soccer jersey with small silver wings, white shorts, and aquamarine cleats — same child, same face, same exact outfit in every image. Match scene, {{NAME}} scoring at the exact moment the fairy player drops to ground level at the zone edge, the gap in the protocol exploited perfectly, the fairy team's surprised respect. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The league finals were the most watched event in the kingdom's sporting history.\n\nPrincess Beatrix presented the trophy herself, to the winning fairy team, who had solved the ground-level requirement by training an aerial sprint that put them at ground level for exactly 0.4 seconds at the goal line.\n\n{{NAME}} had watched them develop this technique all season and found it admirable.\n\n\"They found the solution inside the rules,\" he told Princess Beatrix.\n\n\"As did you,\" she said. \"That's what makes a good league. Everyone finding their way within the same framework.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shimmering aquamarine soccer jersey with small silver wings, white shorts, and aquamarine cleats — same child, same face, same exact outfit in every image. Princess Beatrix presenting the trophy to the fairy team, {{NAME}} watching with genuine admiration, the inclusive league crowd behind them, a new tradition established. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "He walked home through the crowded post-match streets.\n\nIn the air above the city, small lights moved: fairy teams still playing informal games by lamplight.\n\nOn the park pitches, his own team was doing the same.\n\nThe rules had worked. The league had worked. Everyone had found their way within the same framework.\n\nIn bed, he could still hear the city, alive with the sound of a hundred different games being played under the same rules.\n\nHe fell asleep to that sound.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shimmering aquamarine soccer jersey with small silver wings, white shorts, and aquamarine cleats — same child, same face, same exact outfit in every image. {{NAME}} in bed with the window slightly open, the distant sounds of multiple games being played, the city alive, the room warm and golden. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

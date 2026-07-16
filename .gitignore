@@ -14,3 +14,7 @@ node_modules/
 
 # Generated Capacitor web bundle (produced by scripts/build-cap.sh)
 /capacitor/www
+
+# app-native build output
+/app-native/out
+/app-native/node_modules

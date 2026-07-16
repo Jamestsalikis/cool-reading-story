@@ -1,0 +1,36 @@
+{
+  "interest": "Animals + Dinosaurs",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Dinosaur Who Was Too Loud",
+  "moral": "Being kind and patient helps everyone feel better.",
+  "theme_emoji": "🦕",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright green t-shirt with a yellow dinosaur print, orange shorts, and red sneakers — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} walked into the big green jungle. The trees were tall and the leaves were wide. Little animals peeked out from behind the bushes. Then the ground began to shake. A giant dinosaur was coming!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright green t-shirt with a yellow dinosaur print, orange shorts, and red sneakers — same child, same face, same exact outfit in every image. Wide establishing shot of a lush green jungle with enormous leafy trees and colourful flowers. {{NAME}} stands small at the bottom of the scene, looking up with wide curious eyes. Tiny animals, a bunny, a parrot, and a monkey, peep out from behind bright green bushes. The ground shows small cracks, hinting something big is coming. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "ROAR! The dinosaur stomped out from behind a big tree. All the little animals ran away fast. {{NAME}} looked at the dinosaur. The dinosaur had very big eyes. He looked sad.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright green t-shirt with a yellow dinosaur print, orange shorts, and red sneakers — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}}'s face showing wide-eyed surprise mixed with gentle sympathy, standing in front of a large friendly green dinosaur with droopy sad eyes and a downturned mouth. Small animals are blurred in the background fleeing. Warm dappled jungle light falls on both faces. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} ran up to the dinosaur. He waved his arms. He called out to the little animals. He said, come back, the dinosaur is just sad! The animals stopped and turned around.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright green t-shirt with a yellow dinosaur print, orange shorts, and red sneakers — same child, same face, same exact outfit in every image. Dynamic action shot of {{NAME}} jumping and waving both arms high in a sunlit jungle clearing. Behind him the big friendly green dinosaur sits looking hopeful. The bunny, parrot, and monkey are mid-run but turning their heads back with curious expressions. Energy lines radiate from {{NAME}} showing movement. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The dinosaur was loud because he was lonely. He had no friends. The animals came back slowly. {{NAME}} held the bunny's paw. They walked right up to the big dinosaur together.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright green t-shirt with a yellow dinosaur print, orange shorts, and red sneakers — same child, same face, same exact outfit in every image. Emotional peak scene bathed in warm golden afternoon light. {{NAME}} gently holds a small white bunny's paw as they stand before the giant green dinosaur who leans down with hopeful teary eyes. The parrot and monkey stand close behind {{NAME}}, looking nervous but brave. Dramatic rays of golden light stream through jungle canopy above. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "Now the dinosaur had friends. He used a soft, quiet voice. The animals played all afternoon. Being kind and patient helps everyone feel better. Goodnight, {{NAME}}. Sleep well. Tomorrow the dinosaur whispered something secret. What could it be?",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright green t-shirt with a yellow dinosaur print, orange shorts, and red sneakers — same child, same face, same exact outfit in every image. Warm cosy resolution scene glowing in soft golden evening light. {{NAME}} sits sleepily against the friendly green dinosaur's large foot, eyes half-closed and smiling. The bunny snuggles in his lap, the parrot perches on his shoulder, and the monkey curls up nearby. Long soft shadows stretch across a peaceful jungle clearing as the sun sets orange and pink. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

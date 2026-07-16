@@ -1,0 +1,134 @@
+:root {
+  /* TalePop typography */
+  --font-heading: 'Fredoka', 'Arial Rounded MT Bold', cursive; /* Bambino-style: playful, rounded, hand-drawn character */
+  --font-body:    'Nunito', system-ui, sans-serif; /* Clean, rounded, easy to read  -  perfect for bedtime stories */
+  --brand:        #FF6B35;
+  --brand-dark:   #E85520;
+  --brand-navy:   #0D183D;
+  --teal:         #1496A6;
+  --sunshine:     #FFB703;
+  --cream:        #FFF4E6;
+  --cream-dark:   #FFE8CC;
+  --cream-border: #F0E4D0;
+  --text:         #0D183D;
+  --text-muted:   #5E6A7A;
+  --green:        #6CC06C;
+
+  /* Native safe-area insets (notch / status bar / home indicator).
+     Fall back to 0px on the web where env() is undefined. Used by fixed
+     top/bottom bars so nothing hides behind the notch or home indicator.
+     Requires viewport-fit=cover (set in app/layout.tsx). */
+  --safe-top:    env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left:   env(safe-area-inset-left, 0px);
+  --safe-right:  env(safe-area-inset-right, 0px);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-heading { font-family: var(--font-heading) !important; }
+.font-serif   { font-family: var(--font-heading) !important; } /* legacy alias */
+
+.btn-brand {
+  background: var(--brand);
+  color: white;
+  font-weight: 700;
+  padding: 0.75rem 1.75rem;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 0.9375rem;
+}
+.btn-brand:hover { background: var(--brand-dark); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--brand);
+  font-weight: 700;
+  padding: 0.75rem 1.75rem;
+  border-radius: 10px;
+  border: 2px solid var(--brand);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 0.9375rem;
+}
+.btn-outline:hover { background: var(--brand); color: white; }
+
+.card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(13,24,61,0.08);
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1.5px solid var(--cream-border);
+  border-radius: 10px;
+  font-size: 0.9375rem;
+  background: white;
+  color: var(--text);
+  transition: border-color 0.2s;
+  outline: none;
+  font-family: inherit;
+}
+.input:focus { border-color: var(--brand); }
+.input::placeholder { color: #B8C4D0; }
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--cream-border);
+  background: white;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  user-select: none;
+}
+.chip:hover { border-color: var(--brand); color: var(--brand); }
+.chip.active { border-color: var(--brand); background: var(--brand); color: white; }
+
+/* Shared keyframes */
+@keyframes spin    { to { transform: rotate(360deg); } }
+@keyframes pulse   { 0%,100% { opacity:1; } 50% { opacity:0.5; } }
+@keyframes float   { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-8px); } }
+@keyframes fadeIn  { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+@keyframes bubbleIn { from { opacity:0; transform:translateY(6px) scale(0.95); } to { opacity:1; transform:translateY(0) scale(1); } }
+
+/* ── Mobile safety nets ── */
+html, body { max-width: 100%; }
+body { overflow-x: hidden; }
+img, video { max-width: 100%; height: auto; }
+.hide-mobile { display: initial; }
+@media (max-width: 767px) {
+  .hide-mobile { display: none !important; }
+}
+
+/* ── Safe-area helpers ──
+   Add inset padding on top of any existing padding. Because these use
+   !important they win over inline padding on the fixed bars in the reader
+   and dashboard. Scoped so they only ADD the inset, not replace layout. */
+.safe-pt { padding-top:    var(--safe-top) !important; }
+.safe-pb { padding-bottom: var(--safe-bottom) !important; }
+.safe-px { padding-left: var(--safe-left) !important; padding-right: var(--safe-right) !important; }

@@ -1,0 +1,35 @@
+{
+  "interest": "Fairies + Unicorns",
+  "title": "{{NAME}} and the Garden at the World's Edge",
+  "moral": "The most beautiful places need the most careful caretakers.",
+  "theme_emoji": "🦄",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft white linen shirt with flower embroidery, pale blue trousers, and white canvas shoes — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "The invitation was written on a petal and slid under his door at midnight.\n\nIT SAID: COME TO THE GARDEN AT DAWN. BRING NOTHING. NEED NOTHING. JUST COME.\n\nIt was signed with two symbols: a small wing and a small spiral horn.\n\n{{NAME}} had read enough stories to know that this was either wonderful or a trap, and that the only way to find out was to go.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft white linen shirt with flower embroidery, pale blue trousers, and white canvas shoes — same child, same face, same exact outfit in every image. {{NAME}} sitting up in bed holding a glowing flower petal invitation up to the moonlight to read it, the window showing deep night outside, his expression moving from sleep to wonder. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The garden was at the end of the longest path in Whitewater Wood, behind a gate made of woven branches that parted when he touched it.\n\nInside: colours he didn't have names for. Flowers that hummed. Butterflies the size of his face. Light coming from no particular direction.\n\nAt the centre: a unicorn the colour of fresh snow, and on her back, sitting with the ease of someone who did this every day, a fairy wearing a crown of green light.\n\n\"You came,\" said the fairy. \"Good. We have a problem.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft white linen shirt with flower embroidery, pale blue trousers, and white canvas shoes — same child, same face, same exact outfit in every image. Wide magical garden scene at dawn, {{NAME}} standing inside the gate looking in wonder at an impossible garden full of glowing flowers and enormous butterflies, a white unicorn and a fairy with a green crown visible at the centre. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The problem was this: the garden was sick.\n\nNot visibly. But the fairy, whose name was Lumen, could feel it: the magical current that ran through the garden like a river had a blockage somewhere in the roots, and her magic was too small to find it, and the unicorn's magic was too large and would damage what it touched.\n\n\"What you need,\" said {{NAME}}, looking around carefully, \"is a size in between. Human scale.\"\n\n\"Precisely why we called you,\" said Lumen.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft white linen shirt with flower embroidery, pale blue trousers, and white canvas shoes — same child, same face, same exact outfit in every image. {{NAME}} kneeling in the garden with the fairy Lumen on his shoulder and the white unicorn watching, all three studying a patch of flowers that are subtly different from the glowing healthy ones nearby. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "He worked through the morning: on hands and knees, following Lumen's directions, checking each root junction for the blockage.\n\nHe found it at noon: a tangle of old magic, calcified into something like a knot, deep in the garden's central root system.\n\nLumen used her magic to loosen it. The unicorn used a single precise touch of her horn to dissolve it. {{NAME}} used his hands to clear the debris away.\n\nThe current began flowing again. The garden brightened. The humming of the flowers rose half a note.\n\n\"There it is,\" said Lumen, sounding deeply relieved.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft white linen shirt with flower embroidery, pale blue trousers, and white canvas shoes — same child, same face, same exact outfit in every image. Dramatic scene, {{NAME}} with both hands in garden roots, Lumen glowing golden above, the white unicorn's horn touching the spot with a precise silver light, the garden brightening around them all. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "Lumen gave him a seed as payment: small and dark and warm.\n\n\"Plant it anywhere,\" she said. \"Anywhere you love.\"\n\nThe white unicorn lowered her horn and touched his forehead once, very gently, and he saw the garden for a moment as they saw it: impossibly alive, impossibly precious.\n\nHe walked home through the wood feeling the seed warm in his pocket.\n\nIn his room that night, he put it in a small pot of soil on his windowsill and watched the moon rise over the wood.\n\nBy morning, a tiny glowing stem had appeared.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft white linen shirt with flower embroidery, pale blue trousers, and white canvas shoes — same child, same face, same exact outfit in every image. {{NAME}} lying in bed looking at his windowsill where a tiny glowing green stem is just visible in a pot of dark soil, the moon visible through the window, the room dim and cosy and peaceful. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "interest": "Robots + Unicorns",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Robot Who Found Magic",
+  "moral": "Magic is all around us when we open our eyes and our hearts.",
+  "theme_emoji": "🤖",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a mint-green t-shirt with a silver robot face print, white trousers, and mint-green trainers with silver details — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} and his small robot friend walked into the Shimmer Forest. The robot was called Clank. Clank had never seen a forest before. He kept looking all around. The trees glowed softly in pink and gold. Clank made a curious beep.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a mint-green t-shirt with a silver robot face print, white trousers, and mint-green trainers with silver details — same child, same face, same exact outfit in every image. Wide establishing shot of a large enchanted forest where the tall trees glow in soft pinks and golds and the ground is covered in sparkling moss. {{NAME}} and his small boxy silver robot Clank are tiny figures on a winding path deep inside the forest, both looking around in wonder. Magical light filters down through the glowing canopy above. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "Clank stopped walking. He said, \"What is that?\" A beautiful unicorn stepped out from behind the trees. It was white with a golden horn. It looked right at Clank. Clank's little green light on his chest blinked fast. He was amazed.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a mint-green t-shirt with a silver robot face print, white trousers, and mint-green trainers with silver details — same child, same face, same exact outfit in every image. Close-up of the small silver robot Clank facing a majestic white unicorn with a golden horn that has stepped from behind a glowing pink tree. Clank's chest-light blinks bright green with rapid excitement, his round eyes wide. {{NAME}} stands just behind Clank, his own face showing wonder and delight. Soft forest light wraps around all three. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The unicorn touched its horn to Clank's chest. A warm golden light spread all over Clank. Clank began to spin around slowly. His arms went up. He was dancing! {{NAME}} laughed and started dancing too.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a mint-green t-shirt with a silver robot face print, white trousers, and mint-green trainers with silver details — same child, same face, same exact outfit in every image. Dynamic action shot in the glowing forest. The white unicorn touches its golden horn gently to Clank's chest, sending waves of warm golden light across the robot's silver body. Clank spins with arms raised in a joyful dance, golden sparkles flying from him. {{NAME}} dances beside him, laughing with arms thrown wide. The whole forest floor shimmers with magical light. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The forest filled with music and light. Other small animals came to watch. Clank danced with the unicorn. Then Clank stopped and looked at {{NAME}}. \"Magic is real,\" Clank said softly. {{NAME}} nodded. \"It really is,\" he said.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a mint-green t-shirt with a silver robot face print, white trousers, and mint-green trainers with silver details — same child, same face, same exact outfit in every image. Emotional peak scene deep in the glowing forest, warm golden light flooding the scene from all around. Clank the robot and the white unicorn stand side by side, both facing {{NAME}}, the unicorn nuzzling toward Clank gently. Small forest animals, a bunny and a fox, watch from the sides. {{NAME}}'s face is full of awe and deep happiness. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "{{NAME}} and Clank walked home through the glowing trees. {{NAME}} tucked Clank in beside his bed. Then he got into bed himself and smiled. He wondered if Clank dreamed of unicorns. Goodnight, {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a mint-green t-shirt with a silver robot face print, white trousers, and mint-green trainers with silver details — same child, same face, same exact outfit in every image. Warm cosy resolution scene in a snug bedroom lit by golden lamplight. {{NAME}} lies in bed under a mint-green duvet with little silver robot prints, eyes half-closed and smiling. The small silver robot Clank sits on the floor beside the bed, its chest light glowing a gentle warm gold. Outside the window the faint shimmer of the magical forest glows on the horizon. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

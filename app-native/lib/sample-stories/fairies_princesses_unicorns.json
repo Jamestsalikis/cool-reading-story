@@ -1,0 +1,35 @@
+{
+  "interest": "Fairies + Princesses + Unicorns",
+  "title": "{{NAME}} and the Three Gifts",
+  "moral": "The most meaningful gifts are the ones that reveal who you truly are.",
+  "theme_emoji": "🦄",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silvery-white tunic with small fairy-wing and flower details in pale gold, white trousers, and silver shoes — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "In the kingdom of Lumen Vale, there was a tradition: when a child came of age, they received three gifts, one from each of the realm's great powers.\n\nA gift from the Princess (on behalf of the human realm). A gift from the Fairy High Council (on behalf of the magical realm). A gift from the unicorn elders (on behalf of the ancient realm).\n\nThe gifts were chosen by the givers based on what they perceived in the recipient.\n\n{{NAME}}'s ceremony was scheduled for a Tuesday, which felt ordinary for something this significant.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silvery-white tunic with small fairy-wing and flower details in pale gold, white trousers, and silver shoes — same child, same face, same exact outfit in every image. The ceremony chamber, grand and beautiful, Princess Sorrel preparing for the ceremony, tiny fairies arranging their gift, an ancient white unicorn waiting at the back, {{NAME}} standing at the centre. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "Princess Sorrel gave him a notebook bound in deep blue leather.\n\n\"You see what others miss,\" she said, formally. \"And you make sure it is not lost. This is for everything you will notice.\"\n\nThe head fairy gave him a lens no bigger than a thumbnail, set in a silver frame.\n\n\"It shows things as they are, not as they appear,\" she said. \"For when the truth is obscured.\"\n\nThen the unicorn elder came forward.\n\nShe was the oldest creature {{NAME}} had ever stood near: her horn pure white, her coat the colour of old stone.\n\nShe lowered her horn.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silvery-white tunic with small fairy-wing and flower details in pale gold, white trousers, and silver shoes — same child, same face, same exact outfit in every image. The sequence of gifts: the notebook in {{NAME}}'s hands, the tiny lens, and then the ancient unicorn elder lowering her horn toward him, the room holding its breath. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "When the unicorn's horn touched his forehead, he saw three things.\n\nFirst: himself, as he was. Exactly.\n\nSecond: himself, as he was becoming.\n\nThird: something he couldn't quite see yet, a direction rather than a picture, a feeling rather than an image.\n\nThe elder raised her horn.\n\n\"Her gift,\" said the head fairy quietly, \"is the gift of knowing your own path.\"\n\n{{NAME}} stood very still for a moment.\n\nThen he said: \"Thank you.\" He meant all three of them.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silvery-white tunic with small fairy-wing and flower details in pale gold, white trousers, and silver shoes — same child, same face, same exact outfit in every image. The moment after the unicorn's gift, {{NAME}} standing very still, something having genuinely changed in him, the three gift-givers watching, the room quiet and luminous. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "After the ceremony, Princess Sorrel asked him what he had seen.\n\n\"Myself,\" he said. \"Three times, three ways.\"\n\n\"Was it frightening?\"\n\n\"No,\" he said. \"It was clarifying.\"\n\nThe head fairy, overhearing, made a sound like small bells.\n\n\"That is the correct response,\" she said. \"Some people are frightened by their own reflection. You were interested.\"\n\n\"I was always going to be interested,\" said {{NAME}}.\n\nAll three of them looked at him.\n\n\"We know,\" said the princess. \"That's why we were there.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silvery-white tunic with small fairy-wing and flower details in pale gold, white trousers, and silver shoes — same child, same face, same exact outfit in every image. {{NAME}} in conversation with Princess Sorrel and the head fairy after the ceremony, the unicorn elder in the background, the three gifts in {{NAME}}'s hands, a sense of rightness. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "He walked home with the notebook, the lens, and the memory of the horn's touch.\n\nHe tried the lens on the way: held it up to the evening sky.\n\nThe stars through it were clearer and more numerous than he had ever seen them, and between the known constellations were faint configurations he had never been shown.\n\nHe put it away carefully.\n\nIn bed, the notebook on the table and the lens beside it, he lay in the dark and thought about the third thing he'd seen: the direction.\n\nHe closed his eyes and faced it.\n\nHe fell asleep going that way.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silvery-white tunic with small fairy-wing and flower details in pale gold, white trousers, and silver shoes — same child, same face, same exact outfit in every image. {{NAME}} asleep in bed, the blue notebook and tiny lens on the bedside table, the room warm and golden, sleeping with intention, facing a direction he has chosen. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

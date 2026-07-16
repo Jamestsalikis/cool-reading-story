@@ -1,0 +1,36 @@
+{
+  "interest": "Dinosaurs + Princesses + Unicorns",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Sparkle Valley Quest",
+  "moral": "When friends work together, every problem can be solved.",
+  "theme_emoji": "🦄",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shiny silver crown-shaped hair clip, a pink and gold royal tunic with small dinosaur prints on it, bright blue trousers, and white boots with pink stars — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} was playing in Sparkle Valley. The valley had rainbow flowers and glittery hills. A big friendly dinosaur stomped up the path. The dinosaur had green scales and kind brown eyes. Then a white unicorn galloped out of the trees. The unicorn had a golden horn and a pink mane. Something was wrong in the valley today.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shiny silver crown-shaped hair clip, a pink and gold royal tunic with small dinosaur prints on it, bright blue trousers, and white boots with pink stars — same child, same face, same exact outfit in every image. Wide establishing shot of Sparkle Valley with glittery rainbow hills and colourful flowers stretching far into the distance. {{NAME}} stands small in the middle of the valley looking around with wonder. A large friendly green dinosaur walks up the winding path on one side and a white unicorn with a golden horn and pink mane gallops in from a grove of sparkly trees on the other side. Bright cheerful morning light. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The unicorn said her name was Luna. Luna was very upset. \"The princess lost her crown,\" said Luna. \"It rolled into the big cave!\" {{NAME}} looked at the dark cave on the hill. It was big and dark and deep. His eyes went wide. But he was not afraid. He had two good friends beside him.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shiny silver crown-shaped hair clip, a pink and gold royal tunic with small dinosaur prints on it, bright blue trousers, and white boots with pink stars — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}}'s face showing wide eyes and a determined expression. Luna the white unicorn with golden horn and pink mane leans her head close to {{NAME}}, looking worried. The dark entrance of a big cave looms in the hill behind them. A friendly green dinosaur stands just to one side, looking concerned. Warm afternoon light. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "They all ran into the cave together. Luna lit the cave with her glowing golden horn. The dinosaur sniffed the ground and followed the smell. {{NAME}} spotted a sparkle in the dark. There it was! The golden crown was sitting on a rock. {{NAME}} grabbed it and held it high. Everyone cheered!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shiny silver crown-shaped hair clip, a pink and gold royal tunic with small dinosaur prints on it, bright blue trousers, and white boots with pink stars — same child, same face, same exact outfit in every image. Dynamic action shot deep inside the glowing cave. Luna the white unicorn lights the cave with her golden horn shining bright. The friendly green dinosaur sniffs along the rocky ground with wide excited eyes. {{NAME}} stretches up high on tiptoe on a flat rock, holding a sparkling golden crown triumphantly above his head with a huge grin. Golden light bounces off the cave walls. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "They ran back to the princess. The princess was waiting by her pink castle. She wore a long purple dress and looked very sad. When {{NAME}} held out her crown, she gasped. \"Oh thank you!\" she said. She put on her crown and hugged {{NAME}} tight. Luna and the dinosaur danced with joy.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shiny silver crown-shaped hair clip, a pink and gold royal tunic with small dinosaur prints on it, bright blue trousers, and white boots with pink stars — same child, same face, same exact outfit in every image. Emotional peak scene outside the grand pink castle with tall purple banners. The princess in a long purple dress kneels down and hugs {{NAME}} tightly, her face full of joy and relief. {{NAME}} smiles warmly. Luna the white unicorn rears up happily on two legs nearby. The friendly green dinosaur claps its little front arms together with delight. Dramatic warm golden sunset light. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "That evening, the princess made them all a warm strawberry cake. They sat on soft grass under the stars. Luna glowed softly. The dinosaur hummed a happy tune. When friends work together, every problem can be solved. {{NAME}} felt cosy and sleepy. He closed his eyes and smiled. He wondered if Luna knew any more secret caves.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shiny silver crown-shaped hair clip, a pink and gold royal tunic with small dinosaur prints on it, bright blue trousers, and white boots with pink stars — same child, same face, same exact outfit in every image. Warm cosy resolution scene on soft glowing grass outside the pink castle under a starry sky. {{NAME}} sits sleepily leaning gently against Luna the white unicorn who glows with a soft golden light. The princess in her purple dress sits beside them with a big strawberry cake. The friendly green dinosaur curls up close, eyes half shut. Soft warm stars and a crescent moon above. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

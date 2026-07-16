@@ -1,0 +1,35 @@
+{
+  "interest": "Animals + Superheroes + Unicorns",
+  "title": "{{NAME}} and the Last Wild Hero",
+  "moral": "The world's wild places need as many defenders as its cities.",
+  "theme_emoji": "🦸",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep teal hero cape over a white suit with silver wing details, teal boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "Most heroes protected cities.\n\n{{NAME}} protected the coast, specifically the cliffs and coves north of the lighthouse, where sea birds nested and seals hauled out and the wild things happened that nobody organised and nobody reported.\n\nHis partner: a unicorn named Tide, whose horn glowed blue-green like sea glass and who could walk on water, which was practically a superpower in this job.\n\nThey had been at it two years. They had stopped four oil spills (small), relocated six abandoned seal pups, and convinced a wandering cargo ship captain that the rocks he was about to hit were real.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep teal hero cape over a white suit with silver wing details, teal boots — same child, same face, same exact outfit in every image. Wide coastal scene, {{NAME}} in his teal cape running along clifftops above a wild sea, Tide the blue-green horned unicorn moving along the water's edge below, the coastline dramatic and alive. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The crisis: a pod of dolphins had followed a warm current north and were now cut off from their return route by an unusual cold barrier.\n\nTide read the water temperatures with her horn: the cold barrier was two kilometres wide. Too wide for the dolphins to pass without serious risk.\n\n\"Options?\" said {{NAME}}.\n\nTide showed him in images: a channel in the barrier that would open naturally in four days.\n\n\"We keep them comfortable for four days,\" said {{NAME}}. \"And we call in the marine station for food support.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep teal hero cape over a white suit with silver wing details, teal boots — same child, same face, same exact outfit in every image. {{NAME}} standing on a sea cliff looking down at a small pod of dolphins in the cove below, Tide at the cliff edge with her horn in the water taking readings, both assessing the situation. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "Four days of dolphin management.\n\nTide could communicate with them enough to keep them in the warm cove: a long, patient song from her horn that the dolphins responded to with a kind of reassured settling.\n\n{{NAME}} handled logistics: the marine station's fish supply, keeping boats away from the area, monitoring the cold barrier.\n\nOn day three, a seal pup arrived and joined the dolphins, apparently also waiting something out.\n\n\"Wildlife does not tell you its plans,\" {{NAME}} noted in his report.\n\nTide made the particular rippling sound that was her version of agreement.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep teal hero cape over a white suit with silver wing details, teal boots — same child, same face, same exact outfit in every image. Day three of the vigil, {{NAME}} sitting on the cove rocks while Tide stands in the shallow water, her horn glowing with a soft song, dolphins visible in the deeper water, a seal pup nearby. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "Day four: the barrier opened.\n\nTide read it first: a shift in the water's feel against her horn.\n\n\"Go,\" she said, in the way that unicorns say things.\n\nShe led the dolphins herself, walking into deeper water, her horn casting a clear blue-green line toward the open passage.\n\nThe dolphins followed. The seal pup followed the dolphins for one hundred metres, then peeled away toward its own destination.\n\n{{NAME}} watched from the cliff until every fin had disappeared.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep teal hero cape over a white suit with silver wing details, teal boots — same child, same face, same exact outfit in every image. Tide leading the dolphins into deep open water, her horn blazing blue-green, the dolphins following in a line, {{NAME}} watching from the cliff above, the sea vast and brilliant. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "He sat on the cliff as the sea settled back into its normal patterns.\n\nFour days. No coverage. No report in the news. The dolphins did not know what he and Tide had done and would not remember his face.\n\nHe thought: this is exactly what it's for.\n\nTide walked out of the water and shook herself and stood beside him.\n\nThey watched the horizon for a while.\n\nHe walked home along the cliff path as the sun went down, his cape damp with sea spray, absolutely satisfied.\n\nIn bed, he fell asleep to the sound of waves.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep teal hero cape over a white suit with silver wing details, teal boots — same child, same face, same exact outfit in every image. {{NAME}} asleep in his coastal home, the sound of waves implied, Tide visible through the window at the cliff's edge standing guard, the room warm and golden. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

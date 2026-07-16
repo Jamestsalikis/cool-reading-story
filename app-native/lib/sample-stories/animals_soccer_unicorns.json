@@ -1,0 +1,35 @@
+{
+  "interest": "Animals + Soccer + Unicorns",
+  "title": "{{NAME}} and the Pitch at the Edge of the Wood",
+  "moral": "The things we make beautiful are worth more than the things we make perfect.",
+  "theme_emoji": "⚽",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a forest-green and silver soccer jersey, dark shorts, and silver-trimmed cleats — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "The pitch at the edge of Whitewater Wood was the worst in the league: sloping, muddy in one corner, with a goalpost that listed slightly to the left.\n\nBut it was surrounded by old oaks and a stream ran alongside it, and the wood came right up to the touchline on the east side, and {{NAME}} loved it more than any stadium he'd ever visited.\n\nHe was practising alone one evening when the unicorn walked out of the wood and watched him.\n\nHe stopped. She didn't leave. He carried on.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a forest-green and silver soccer jersey, dark shorts, and silver-trimmed cleats — same child, same face, same exact outfit in every image. The imperfect pitch at the wood's edge, golden evening light, {{NAME}} practising with his ball, a unicorn having just emerged from the treeline watching him with calm interest. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "She came every evening for a week.\n\nOn the eighth day, she walked onto the pitch.\n\nShe didn't interfere with the ball. She just stood in various positions and the animals of the wood gradually joined her: rabbits along the east touchline, a badger near one goal, a fox at midfield.\n\n{{NAME}} kept practising and understood, without being told, that the pitch had two audiences: him and all of them.\n\nHe started playing for both.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a forest-green and silver soccer jersey, dark shorts, and silver-trimmed cleats — same child, same face, same exact outfit in every image. The pitch now with animals arranged along the touchlines, the unicorn standing in a position on the pitch, {{NAME}} playing with awareness of this extraordinary audience, the wood behind them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "His playing changed.\n\nNot tactically: genuinely. He started making choices based on what was beautiful rather than what was safe. The long ball into space when a short pass was available. The first-time volley when a controlled touch was safer.\n\nSome failed. But the ones that worked had a quality he couldn't name.\n\nThe unicorn would make a specific sound on the ones that worked: a low warm note that resonated in the wood's edge.\n\n\"You're a critic,\" he told her.\n\nShe made the note again.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a forest-green and silver soccer jersey, dark shorts, and silver-trimmed cleats — same child, same face, same exact outfit in every image. {{NAME}} mid-volley on the imperfect pitch, the ball arcing beautifully, the unicorn and animals watching, the wood frame the scene, the moment suspended in late afternoon gold. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "He brought his team to practise there.\n\nThey were confused at first by the animals and the unicorn.\n\nBut within an hour, something had shifted: they were playing for the wood as much as for the league, and the wood was receiving something from them.\n\nThe unicorn walked slowly between the groups, her horn catching the last light.\n\nAfter the session, his teammate said: \"I felt different playing here.\"\n\n\"Me too,\" said {{NAME}}. \"Every time.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a forest-green and silver soccer jersey, dark shorts, and silver-trimmed cleats — same child, same face, same exact outfit in every image. The team practising in the magical pitch, the unicorn walking slowly between them, animals along the touchlines, the whole scene full of a kind of joy that is specific to play in beautiful places. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "On the last evening before the league decided to resurface and rebuild the old pitch, {{NAME}} went alone.\n\nThe slope, the mud in the corner, the leaning goalpost. The oaks. The stream.\n\nThe unicorn came from the wood and stood beside him.\n\nThey stood together and looked at it until the light was completely gone.\n\nHe went home and in bed he thought: the new pitch will be level and the goals will be straight.\n\nIt will be better, probably.\n\nBut this was something else.\n\nHe fell asleep hearing the stream.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a forest-green and silver soccer jersey, dark shorts, and silver-trimmed cleats — same child, same face, same exact outfit in every image. {{NAME}} in bed, the room dim and warm, looking slightly wistful but peaceful, a small perfect memory held close, the sound of water implied in the stillness. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

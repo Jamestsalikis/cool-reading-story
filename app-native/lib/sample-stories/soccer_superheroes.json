@@ -1,0 +1,35 @@
+{
+  "interest": "Soccer + Superheroes",
+  "title": "{{NAME}} and the Match at the End of the World",
+  "moral": "The hardest games to win are the ones that matter most to others.",
+  "theme_emoji": "⚽",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a scarlet and gold soccer jersey with a hero emblem, black shorts, and gold-striped cleats — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} had two lives.\n\nIn one, he played for the school team and was a very good midfielder with a left foot that coaches called reliable, which was not exciting but was consistently useful.\n\nIn the other, he was Flicker: a low-powered superhero whose ability was speed bursts of three seconds, which was not long enough to fly anywhere or stop most emergencies but was exactly long enough to change the direction of a football match.\n\nHe kept these two lives very separate.\n\nThen someone found out both at once.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a scarlet and gold soccer jersey with a hero emblem, black shorts, and gold-striped cleats — same child, same face, same exact outfit in every image. Split composition: on the left {{NAME}} in soccer kit on a football pitch, on the right the same boy as Flicker in the hero emblem jersey in a city street, the two images merging at the centre. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The someone was Captain Meridian, the city's best superhero, who needed a favour.\n\nAn inter-dimensional entity had arrived on Earth with an unusual challenge: it would leave peacefully if a human team could beat it at football.\n\n\"Of course,\" said {{NAME}}.\n\n\"It plays by Earth rules but its team is twelve entities with the physical abilities of professional footballers with four legs,\" said Captain Meridian.\n\nA pause.\n\n\"What time?\" said {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a scarlet and gold soccer jersey with a hero emblem, black shorts, and gold-striped cleats — same child, same face, same exact outfit in every image. {{NAME}} in his Flicker hero suit standing in front of Captain Meridian, a towering experienced hero, with the city behind them and the distant shimmer of something unusual on the horizon. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The entity's team was extraordinary. Fast, relentless, tactically perfect.\n\n{{NAME}}'s team: four superheroes with limited football skills and a boy who was very reliable with his left foot.\n\nHe organised them with military precision, assigning positions based on powers rather than football roles: the hero who could stop time for one second became the goalkeeper (one second was enough to catch any shot), the hero who could duplicate herself covered both wings simultaneously.\n\n{{NAME}} played every ball through the middle, threading passes into the space that opened when the entity's team prepared for something unusual.\n\nAt half time: one all.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a scarlet and gold soccer jersey with a hero emblem, black shorts, and gold-striped cleats — same child, same face, same exact outfit in every image. Dynamic match scene against extraordinary alien-looking opponents, {{NAME}} threading a precise pass through a gap, Captain Meridian charging for the ball on the other side, the entity's team converging too late. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The winning goal came in the last minute.\n\nThe entity's goalkeeper had no blindspot except directly above its head, where its extra limbs couldn't quite reach.\n\n{{NAME}} ran the ball to the right, drew three defenders, then used his speed burst at the exact moment he released it: a chip so high it hung in the air for two full seconds.\n\nHis teammate with flight caught it and headed it straight down.\n\nThe goalkeeper tried. Almost made it.\n\nTwo one.\n\nThe entity stood at the centre circle for a long moment, then inclined its head: a bow.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a scarlet and gold soccer jersey with a hero emblem, black shorts, and gold-striped cleats — same child, same face, same exact outfit in every image. The winning goal moment, {{NAME}} mid-chip with a burst of speed, the ball arcing high in the air, the extraordinary alien goalkeeper stretching upward and just failing to reach it, dramatic golden light. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "Captain Meridian shook his hand on the pitch.\n\n\"Reliable,\" she said, which coming from her was the best compliment he had ever received.\n\nHe walked home alone, still in his Flicker suit, his football boots over his shoulder.\n\nIn bed that night, he thought about the entity's bow at the end.\n\nSomething that could travel between dimensions. Something that played football to settle disputes.\n\nMaybe, he thought, the universe wasn't so different from here.\n\nHe closed his eyes, smiling, and fell asleep still thinking about the chip.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a scarlet and gold soccer jersey with a hero emblem, black shorts, and gold-striped cleats — same child, same face, same exact outfit in every image. {{NAME}} lying in his bed in the cosy golden room, hero suit on the chair and football boots by the door, a broad smile on his face, peaceful and content. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

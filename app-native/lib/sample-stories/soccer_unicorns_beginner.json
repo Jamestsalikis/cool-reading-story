@@ -1,0 +1,36 @@
+{
+  "interest": "Soccer + Unicorns",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Unicorn Cup",
+  "moral": "Playing your best and having fun matters more than winning.",
+  "theme_emoji": "⚽",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sky-blue soccer jersey with a silver unicorn horn badge, white shorts, and sky-blue soccer boots with silver laces — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} found a special field behind the rainbow hill. The grass was bright green. The goalposts were made of purple crystal. And the players on the other team were unicorns. Real unicorns with boots on their hooves.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sky-blue soccer jersey with a silver unicorn horn badge, white shorts, and sky-blue soccer boots with silver laces — same child, same face, same exact outfit in every image. Wide establishing shot of a magical soccer field behind a rainbow-striped hill, brilliant green grass, and tall crystal purple goalposts catching the light. {{NAME}} stands small at the edge of the field, staring in wonder at the other end where several elegant unicorns in tiny soccer boots warm up with a soccer ball. The sky is vivid blue with gold-edged clouds. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "A white unicorn with a pink mane trotted up to {{NAME}}. She was wearing a rainbow-striped captain's band on her leg. She said, \"Will you be on our team? We need one more player!\" {{NAME}}'s mouth fell open.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sky-blue soccer jersey with a silver unicorn horn badge, white shorts, and sky-blue soccer boots with silver laces — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}} face to face with a white unicorn who has a flowing pink mane and a rainbow-striped captain's band on her foreleg. The unicorn looks at him warmly and hopefully. {{NAME}}'s mouth is open in delighted shock. The magical crystal goalposts shimmer in the background. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The game began. The unicorns were fast and strong. {{NAME}} ran as hard as he could. He got the ball. He dribbled past two players. He shot it hard. The ball hit the top corner of the crystal goal with a loud chime!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sky-blue soccer jersey with a silver unicorn horn badge, white shorts, and sky-blue soccer boots with silver laces — same child, same face, same exact outfit in every image. Dynamic action shot of {{NAME}} at full sprint on the magical field, leg fully extended, having just struck the ball. The ball flies in a glowing arc toward the tall purple crystal goal, trails of silver light behind it. Two opposing unicorn players leap to block but miss. {{NAME}}'s face blazes with determination and joy. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The final whistle blew. Both teams had scored the same. It was a draw. But everyone cheered anyway. The unicorn captain gave {{NAME}} a glittery trophy made of starlight. He held it up high and laughed.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sky-blue soccer jersey with a silver unicorn horn badge, white shorts, and sky-blue soccer boots with silver laces — same child, same face, same exact outfit in every image. Emotional peak scene at the centre of the magical soccer field in warm golden light. {{NAME}} holds a small sparkling trophy made of woven starlight above his head with both hands, laughing with pure joy. The white unicorn captain stands beside him, tossing her pink mane proudly. Other unicorns gather around celebrating. Crystal goalposts glow in the background. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "{{NAME}} walked home with the starlight trophy. He put it on his shelf where it kept on glowing. He got into bed and smiled. He wondered if the unicorns would want a rematch. Goodnight, {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sky-blue soccer jersey with a silver unicorn horn badge, white shorts, and sky-blue soccer boots with silver laces — same child, same face, same exact outfit in every image. Warm cosy resolution scene in a snug bedroom lit by soft golden lamplight. {{NAME}} lies in bed under a sky-blue duvet with small unicorn and soccer ball prints, eyes softly closed and smiling. On the shelf above him the glittering starlight trophy glows with a soft silver light. Outside the window the magical field is a faint glimmer on the horizon. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

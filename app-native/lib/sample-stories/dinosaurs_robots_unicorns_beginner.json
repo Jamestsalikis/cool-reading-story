@@ -1,0 +1,36 @@
+{
+  "interest": "Dinosaurs + Robots + Unicorns",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Glittery Robot Garden",
+  "moral": "Taking care of something beautiful is a gift to everyone.",
+  "theme_emoji": "🦄",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sparkly teal jacket covered in tiny silver robot prints, bright purple trousers, rainbow-striped wellington boots, and a shiny silver belt with a unicorn-horn buckle — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} found a magical garden one morning. The garden was full of silver flowers and rainbow trees. A friendly orange dinosaur was digging in the mud. A small yellow robot was watering the plants. But the garden's most special flower had lost all its sparkle. It was grey and drooping. Something had to be done.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sparkly teal jacket covered in tiny silver robot prints, bright purple trousers, rainbow-striped wellington boots, and a shiny silver belt with a unicorn-horn buckle — same child, same face, same exact outfit in every image. Wide establishing shot of a vast magical garden with silver-petalled flowers and rainbow-coloured trees. {{NAME}} stands small at the garden gate looking in with wonder. A friendly orange dinosaur digs in rich brown soil to one side. A small cheerful yellow robot waters plants with a silver watering can on the other side. In the centre, one large flower droops grey and dull. Bright morning light. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The yellow robot said her name was Zara. Zara was very sad about the flower. \"Only unicorn magic can fix it,\" said Zara. {{NAME}} looked around the garden. Then he heard a soft whinny from the trees. A white unicorn stepped out slowly. She had a silver horn and a blue mane. {{NAME}}'s eyes lit up with hope.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sparkly teal jacket covered in tiny silver robot prints, bright purple trousers, rainbow-striped wellington boots, and a shiny silver belt with a unicorn-horn buckle — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}}'s face lighting up with delight and hope. Zara the small yellow robot stands beside him looking hopeful too. A beautiful white unicorn with a silver horn and flowing blue mane steps gently out from between glowing rainbow trees in the background. The orange dinosaur peeks over {{NAME}}'s shoulder with wide curious eyes. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The unicorn touched her silver horn to the drooping flower. The flower glowed pink and gold. It grew taller and taller. Sparks flew into the air. The whole garden lit up bright. {{NAME}} clapped his hands. The orange dinosaur stomped with joy. Zara spun around and around in happy circles.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sparkly teal jacket covered in tiny silver robot prints, bright purple trousers, rainbow-striped wellington boots, and a shiny silver belt with a unicorn-horn buckle — same child, same face, same exact outfit in every image. Dynamic action shot of the white unicorn touching her silver horn to the large grey flower, which explodes into brilliant pink and gold light. Sparks and sparkles burst outward in all directions. {{NAME}} claps his hands with a huge thrilled grin. Zara the yellow robot spins with arms out, eyes blazing with joy. The orange dinosaur stomps both feet in excitement. Burst of magical radiant light from the flower's centre. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The garden was beautiful again. Every flower glowed and sparkled. {{NAME}} and Zara worked together to plant new seeds. The orange dinosaur used his big tail to dig neat rows. The unicorn walked slowly between the rows, making each seed glow. Taking care of something beautiful is a gift to everyone.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sparkly teal jacket covered in tiny silver robot prints, bright purple trousers, rainbow-striped wellington boots, and a shiny silver belt with a unicorn-horn buckle — same child, same face, same exact outfit in every image. Emotional peak scene in the fully restored magical garden with every flower glowing in vivid pinks, golds, and blues. {{NAME}} kneels in the soil carefully placing seeds with Zara the yellow robot beside him. The orange dinosaur uses its tail to create neat rows in the earth. The white unicorn walks gracefully between the rows, silver horn glowing, touching each seed with warm golden light. Dramatic warm afternoon light floods the garden. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "As the stars came out, the garden glowed softly. {{NAME}} sat on warm grass with all his friends. The flowers hummed a quiet tune. The unicorn rested her head on {{NAME}}'s lap. Taking care of something beautiful is a gift to everyone. {{NAME}} felt so cosy and sleepy. He wondered if there were more magic gardens hidden in the world.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sparkly teal jacket covered in tiny silver robot prints, bright purple trousers, rainbow-striped wellington boots, and a shiny silver belt with a unicorn-horn buckle — same child, same face, same exact outfit in every image. Warm cosy resolution scene in the magical garden at night under a soft starry sky. Glowing flowers cast a gentle multicoloured light. {{NAME}} sits sleepily on the grass with the white unicorn resting her blue-maned head gently on his lap. Zara the yellow robot sits close with a soft warm glow from her chest. The friendly orange dinosaur curls up nearby with eyes closed. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

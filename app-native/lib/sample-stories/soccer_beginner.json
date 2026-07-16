@@ -1,0 +1,36 @@
+{
+  "interest": "Soccer",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Goal That Took a Whole Team",
+  "moral": "When you pass to your friends, everyone gets to win together.",
+  "theme_emoji": "⚽",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red soccer jersey with a white number five on the back, white soccer shorts, red and white soccer socks, and white soccer boots with red stripes — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} ran onto the bright green soccer field. The crowd was cheering loudly. The sky was blue and the sun was warm. Big white goal posts stood at each end. Today was the big match. {{NAME}} wanted to score every goal himself.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red soccer jersey with a white number five on the back, white soccer shorts, red and white soccer socks, and white soccer boots with red stripes — same child, same face, same exact outfit in every image. Wide establishing shot of a large bright green soccer field under a sunny blue sky, with {{NAME}} running as a small figure onto the pitch, a cheering crowd visible in the background, white goal posts at either end, {{NAME}}'s face full of excitement and determination. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "{{NAME}} ran and ran with the ball. But the other team was fast. They blocked him every time. His friend Mia was open and waving. But {{NAME}} did not pass. He tried again alone. He missed again.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red soccer jersey with a white number five on the back, white soccer shorts, red and white soccer socks, and white soccer boots with red stripes — same child, same face, same exact outfit in every image. Close-up of {{NAME}}'s face showing a frustrated and puzzled expression as he stands on the field, his arms slightly out, the ball near his feet, while his teammate Mia waves from the side in a matching red jersey. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} looked at Mia. She smiled and pointed to the goal. {{NAME}} took a big breath. He kicked the ball hard to Mia. Mia ran, she kicked, and the ball flew straight into the net. GOAL. The crowd went wild.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red soccer jersey with a white number five on the back, white soccer shorts, red and white soccer socks, and white soccer boots with red stripes — same child, same face, same exact outfit in every image. Dynamic action scene showing {{NAME}} mid-kick, passing the ball with full force across the green pitch toward Mia who is leaping forward to strike it toward the goal, movement lines and energy bursting from the kick, both players full of energy and joy. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "Mia ran to {{NAME}} and jumped up with her arms wide. {{NAME}} caught her and they cheered together. All the teammates ran over. Everyone was hugging and laughing. {{NAME}} felt something better than scoring alone. He felt part of the team.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red soccer jersey with a white number five on the back, white soccer shorts, red and white soccer socks, and white soccer boots with red stripes — same child, same face, same exact outfit in every image. Emotional peak scene with {{NAME}} and Mia jumping and cheering together on the pitch, arms raised, surrounded by teammates all celebrating in red jerseys, dramatic golden light flooding the field, confetti in the air, {{NAME}}'s face radiating pure joy. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "After the game, {{NAME}} lay in the soft grass. He looked up at the big sky. The stars were starting to come out. When you share with your friends, everyone feels happy. {{NAME}} smiled his biggest smile. He yawned and closed his eyes. And somewhere on the dark field, the soccer ball rolled slowly all by itself.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red soccer jersey with a white number five on the back, white soccer shorts, red and white soccer socks, and white soccer boots with red stripes — same child, same face, same exact outfit in every image. Warm cosy resolution scene with {{NAME}} lying on the soft green grass of the soccer field, eyes drooping with sleepy happiness, looking up at a sky of soft gold and violet fading into early stars, a gentle smile on his face, the soccer ball resting peacefully beside him. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

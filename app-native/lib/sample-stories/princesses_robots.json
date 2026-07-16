@@ -1,0 +1,35 @@
+{
+  "interest": "Princesses + Robots",
+  "title": "{{NAME}} and the Princess Who Needed an Engineer",
+  "moral": "The greatest problem-solvers are the ones who ask good questions.",
+  "theme_emoji": "👑",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a navy blue engineer's coat with brass buttons, dark trousers, and polished brown boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "The message arrived by royal carrier pigeon, which was unusual, and was marked URGENT in red wax, which was more unusual, and smelled faintly of motor oil, which was extremely unusual for a royal document.\n\nHi. My name is Princess Theodora. My royal clockwork orchestra has stopped working. The royal ball is in three days. My mechanical advisor has quit. Please help. — T\n\n{{NAME}} had never been to a palace before. He packed his toolkit and took the bus.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a navy blue engineer's coat with brass buttons, dark trousers, and polished brown boots — same child, same face, same exact outfit in every image. {{NAME}} sitting on a bus holding a rolled royal letter with a red wax seal, toolkit between his feet, looking out the window at a palace visible on the horizon, expression ready and focused. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The clockwork orchestra was extraordinary: twelve mechanical musicians, each one intricate and exact, capable of playing any piece with perfect timing.\n\nThey had all stopped at precisely the same moment, mid-bar, in the middle of a waltz.\n\n{{NAME}} examined the nearest one carefully, then looked at all twelve, then walked the room thinking.\n\n\"What happened just before they stopped?\" he asked Princess Theodora.\n\n\"The lights went out briefly,\" she said. \"Just a flicker.\"\n\n\"Power surge,\" said {{NAME}}. \"They all share a timing circuit. One glitch froze them all.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a navy blue engineer's coat with brass buttons, dark trousers, and polished brown boots — same child, same face, same exact outfit in every image. Interior of a grand music room, twelve frozen mechanical musicians in elegant poses, {{NAME}} crouching to examine the closest one with a magnifying glass, Princess Theodora watching over his shoulder with anxious focus. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The timing circuit was deep in the floor beneath the orchestra, accessible through a panel behind the conductor's podium.\n\n{{NAME}} and Princess Theodora worked side by side: she held the torch and passed tools because she had read every manual the previous engineer had left, and he worked the circuit because he had small steady hands and could see what needed doing.\n\nThey were a good team. She anticipated what he would need two steps ahead. He told her why each step mattered.\n\nBy hour three, the timing crystal was reset.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a navy blue engineer's coat with brass buttons, dark trousers, and polished brown boots — same child, same face, same exact outfit in every image. {{NAME}} lying on his back in a hatch under the concert floor, Princess Theodora kneeling beside the opening holding a lamp and passing down a tool, both of them fully concentrated and working together. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The moment the circuit came back online, all twelve musicians began exactly where they had stopped: the middle bar of the waltz, as if three days had not passed.\n\nPrincess Theodora burst out laughing. Then she stood up very straight, composed herself, and said: \"That is the finest engineering I have witnessed.\"\n\n\"It was the finest torchholding,\" said {{NAME}}. \"I couldn't have found the crystal without you.\"\n\nShe smiled at him. \"You should stay and teach my next engineer.\"\n\n\"Three days?\" he said.\n\n\"Three weeks,\" she said firmly.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a navy blue engineer's coat with brass buttons, dark trousers, and polished brown boots — same child, same face, same exact outfit in every image. The music room brought back to life, all twelve mechanical musicians playing, {{NAME}} and Princess Theodora standing together listening, both smiling broadly, warm concert light on their faces. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "He stayed three weeks.\n\nThe princess turned out to be the best student he'd ever taught: she asked questions nobody else would have thought to ask, and remembered every answer perfectly.\n\nOn the last night before he went home, the orchestra played just for the two of them, a waltz that filled the empty ballroom.\n\n{{NAME}} lay in the palace guest room that night with his toolkit by the bed, listening to the distant music still drifting through the halls.\n\nHe was nearly asleep when he heard one last, perfect note: the orchestra finishing its piece, right on time.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a navy blue engineer's coat with brass buttons, dark trousers, and polished brown boots — same child, same face, same exact outfit in every image. {{NAME}} lying in a grand guest room bed, toolkit beside him, the room warm and golden, a distant soft musical sound implied, peaceful smile on his face. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

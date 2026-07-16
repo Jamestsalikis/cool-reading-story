@@ -1,0 +1,35 @@
+{
+  "interest": "Dinosaurs + Fairies",
+  "title": "{{NAME}} and the Fairy Who Remembered the Giants",
+  "moral": "Stories keep the past alive, and the past is full of wonders.",
+  "theme_emoji": "🦖",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep teal shirt with a fossil pattern, brown trousers, and worn leather boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} was digging in the riverbank when he found the tooth.\n\nIt was the size of his fist, ridged and ancient, and it glowed faintly, which teeth from the hardware store generally did not.\n\nHe dusted it off carefully. The glow pulsed once, like a heartbeat.\n\nThen a voice no louder than the sound of a moth's wing said: \"Oh. You found it.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep teal shirt with a fossil pattern, brown trousers, and worn leather boots — same child, same face, same exact outfit in every image. Wide river bank scene, {{NAME}} kneeling in the mud holding up a large glowing fossilised tooth toward the light, surprise on his face, a tiny spark of light visible in the air beside him. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The fairy's name was Thorn and she was eight hundred years old, which she mentioned several times.\n\n\"I've been looking for that for two centuries,\" she said, settling on {{NAME}}'s boot. \"It belonged to a Triceratops. They were my friends.\"\n\n{{NAME}} stared. \"You knew actual dinosaurs?\"\n\n\"I knew all of them. I was there at the end.\" She said it matter-of-factly, without drama. \"Now, will you return the tooth to its owner?\"\n\n\"Its owner is extinct,\" said {{NAME}}.\n\n\"Not entirely,\" said Thorn.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep teal shirt with a fossil pattern, brown trousers, and worn leather boots — same child, same face, same exact outfit in every image. {{NAME}} crouching on the riverbank, a tiny ancient-looking fairy in a moss-green dress sitting on his boot, looking up at him, the glowing tooth in his hands, the river flowing behind them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "She led him deep into a forest glade where the trees were so old they had grown into each other.\n\nAt the centre, partially buried in roots and moss, was a Triceratops skull as big as a car. Its horns were intact. Its eye sockets were full of glowing moss.\n\nThorn flew to it and placed her hands on the bone.\n\n{{NAME}} placed the tooth carefully back into the jaw where a socket waited for it.\n\nThe glow spread from the tooth through the whole skull, gold and slow, like sunrise.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep teal shirt with a fossil pattern, brown trousers, and worn leather boots — same child, same face, same exact outfit in every image. Deep forest glade, {{NAME}} carefully placing the glowing tooth into a massive moss-covered Triceratops skull, Thorn the fairy with hands outstretched casting golden light, the skull illuminated from within, ancient trees towering around them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The skull glowed, then settled into a warm amber hum.\n\nThorn told him about the Triceratops, whose name had been something like rumbling thunder: the way it had let her ride between its horns on summer evenings, the games they'd played, the storms they'd watched together from a high hill.\n\n{{NAME}} sat cross-legged on the ground and listened to an eight-hundred-year-old fairy remember her friends, and didn't say a word, because some stories deserve that kind of quiet.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep teal shirt with a fossil pattern, brown trousers, and worn leather boots — same child, same face, same exact outfit in every image. {{NAME}} sitting cross-legged in the glowing forest glade, listening intently, Thorn hovering before him with a soft golden glow, the Triceratops skull lit warmly behind her, ancient trees arching overhead. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "Thorn left before dawn, but she left him something: a tiny fossilised shell on a thread, and a note that said: ALL THE GIANTS ARE STILL HERE. YOU JUST HAVE TO KNOW WHERE TO LOOK.\n\n{{NAME}} hung the shell above his bed and lay looking at it in the dark, thinking about all the enormous things the world used to hold.\n\nHe closed his eyes.\n\nSomewhere in the forest, the skull glowed amber through the night, keeping eight-hundred-year-old memories warm.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep teal shirt with a fossil pattern, brown trousers, and worn leather boots — same child, same face, same exact outfit in every image. {{NAME}} lying in bed, the tiny fossilised shell pendant glowing gently above him, warm amber light in the dim bedroom, a peaceful and wondering expression on his face. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

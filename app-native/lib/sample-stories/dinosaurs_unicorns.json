@@ -1,0 +1,35 @@
+{
+  "interest": "Dinosaurs + Unicorns",
+  "title": "{{NAME}} and the Last Dragons of Dawn Valley",
+  "moral": "Old magic and old giants still have much to teach us, if we know how to listen.",
+  "theme_emoji": "🦕",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep emerald green shirt with silver buttons, grey trousers, and worn explorer boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "Dawn Valley was supposed to be extinct.\n\nThat is: the survey maps said nothing lived there. The geographers said the valley had been empty for thousands of years. The park rangers said the gates were locked and nobody went in.\n\nThe gates were locked. That part was true.\n\nBut on {{NAME}}'s map, drawn by his grandmother who had been a field naturalist for fifty years, there was a small note beside Dawn Valley in faded pencil: still there, if you know when to look.\n\nHe went at sunrise.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep emerald green shirt with silver buttons, grey trousers, and worn explorer boots — same child, same face, same exact outfit in every image. Wide shot of an ancient valley at dawn seen from above, {{NAME}} small against the vast landscape, squeezing through a gap in a stone gate, his grandmother's map in hand, golden light filling the valley below. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "Two things lived in Dawn Valley.\n\nFirst: a herd of young Brachiosaurus, their necks moving through the early mist like slow-motion fountains, feeding on the tops of enormous tree ferns.\n\nSecond, and considerably more surprising: a unicorn the colour of bone-white stone, old and quiet, with a horn that had gone silver-grey with age.\n\nThe unicorn stood at the centre of the herd. The Brachiosaurus moved around her without touching her, leaving a circle of quiet space.\n\nShe was, {{NAME}} realised, their keeper.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep emerald green shirt with silver buttons, grey trousers, and worn explorer boots — same child, same face, same exact outfit in every image. Valley floor at dawn, {{NAME}} stopping in astonishment as he sees the mist-filled scene before him: tall Brachiosaurus necks rising through fog, and at the centre, an ancient bone-white unicorn standing in a circle of stillness. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The unicorn's name, she showed him in a vision when he touched her horn, was a name that meant first morning.\n\nShe had been here since the valley was young. She had watched the dinosaurs and kept them safe. Her horn had no healing glow left in it, but it had something better: the sound it made when she walked kept the herd calm, kept predators at bay, kept the valley in its particular dreaming peace.\n\n\"You're their guardian,\" {{NAME}} said.\n\nShe touched his forehead with her horn, very gently.\n\nHe saw the valley as she saw it: a treasure that needed protecting.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep emerald green shirt with silver buttons, grey trousers, and worn explorer boots — same child, same face, same exact outfit in every image. {{NAME}} standing very still as the ancient bone-white unicorn touches her horn to his forehead, a soft silver glow transferring between them, Brachiosaurus grazing in the misty background, the entire scene suffused with ancient peaceful light. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "He spent the day in the valley, drawing everything in his notebook: the herd's routes, the food sources, the old unicorn's movements.\n\nThe Brachiosaurus grew used to him by noon and one young one, smaller than the rest, followed him around for two hours, nudging his notebook with its snout.\n\n\"I'll keep your secret,\" {{NAME}} told the unicorn as the sun began to lower. \"I promise.\"\n\nShe lowered her head once: a bow.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep emerald green shirt with silver buttons, grey trousers, and worn explorer boots — same child, same face, same exact outfit in every image. {{NAME}} sitting in a sunlit valley meadow drawing in his notebook, a young Brachiosaurus peering over his shoulder, the ancient unicorn standing watchfully nearby, golden afternoon light making everything glow. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "He found the gate again just as the light turned amber.\n\nAt home that night, he wrote three pages of notes, then closed his notebook and put it away.\n\nSome records were not for sharing.\n\nHe lay in the dark, thinking of the valley under its blanket of stars, the Brachiosaurus folded up in the mist, the old unicorn moving quietly between them.\n\nA first morning. Still going.\n\nHe closed his eyes, and slept better than he had in months.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep emerald green shirt with silver buttons, grey trousers, and worn explorer boots — same child, same face, same exact outfit in every image. {{NAME}} asleep in bed, notebook on his bedside table, the room warm and safe, a golden lamp casting gentle light, deep peaceful sleep on his face. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

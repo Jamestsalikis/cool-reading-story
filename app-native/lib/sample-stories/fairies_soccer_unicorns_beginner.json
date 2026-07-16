@@ -1,0 +1,36 @@
+{
+  "interest": "Fairies + Soccer + Unicorns",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Sparkling Goal",
+  "moral": "Believing in yourself helps you do your very best.",
+  "theme_emoji": "🦄",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sunshine yellow soccer jersey with a tiny fairy wing patch, sky blue shorts, and glittery gold-and-white soccer boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} stood on a magical soccer field.\nThe grass was soft and glowing green.\nTiny fairies flew over the goalposts.\nA beautiful unicorn stood near the goal.\n{{NAME}} had never seen anything so wonderful.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sunshine yellow soccer jersey with a tiny fairy wing patch, sky blue shorts, and glittery gold-and-white soccer boots — same child, same face, same exact outfit in every image. Wide establishing shot of a vast magical glowing green soccer field under a sky full of soft pastel clouds, {{NAME}} is small in the middle of the field gazing around with wonder, tiny fairies with colourful wings dart around the glowing goalposts, a beautiful white unicorn with a rainbow mane stands calmly near one goal, the whole scene feels warm and magical. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "A fairy called Wren landed on {{NAME}}'s shoulder.\n\"The unicorn needs your help,\" said Wren.\n{{NAME}}'s eyes went wide with surprise.\n\"Me?\" he said. \"I am just a little boy!\"\n\"Yes, you!\" said Wren with a big smile.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sunshine yellow soccer jersey with a tiny fairy wing patch, sky blue shorts, and glittery gold-and-white soccer boots — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}}'s face showing total surprise and delight, the tiny fairy Wren sits on his shoulder with green sparkling wings and a warm grin, {{NAME}}'s eyebrows are raised and his eyes are wide, the magical soccer field glows softly behind him. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The unicorn could not score a goal.\nIt kept missing every time.\n{{NAME}} ran up and showed it how.\nHe kicked the ball just right.\nThe fairies tossed shiny sparkles everywhere!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sunshine yellow soccer jersey with a tiny fairy wing patch, sky blue shorts, and glittery gold-and-white soccer boots — same child, same face, same exact outfit in every image. Dynamic action shot of {{NAME}} mid-kick sending a glowing soccer ball toward the goal with a perfect strike, the white unicorn watches eagerly beside him with its ears perked forward, fairies swoop and spin around the ball leaving trails of sparkling golden dust, the shot is full of energy and movement. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The ball flew into the net.\nGoal! The fairies cheered loudly.\nThe unicorn lowered its horn to {{NAME}}.\nA small star of light touched his hand.\n{{NAME}} felt warm and happy all over.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sunshine yellow soccer jersey with a tiny fairy wing patch, sky blue shorts, and glittery gold-and-white soccer boots — same child, same face, same exact outfit in every image. Emotional peak scene with bright golden light flooding the field, the glowing soccer ball bursts through the net in an explosion of sparkles, {{NAME}} stands with arms raised in joy, his face beaming with pride, the white unicorn gently touches its horn to his outstretched hand sending a little star of light, fairies erupt in a shower of colourful confetti above them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "The unicorn and {{NAME}} sat in the soft grass.\nThe fairies sang a quiet song.\nEveryone felt happy and full of joy.\n{{NAME}} yawned a big sleepy yawn.\nGoodnight, {{NAME}}. Dream sweet dreams.\nWonder what the unicorn will show you tomorrow.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sunshine yellow soccer jersey with a tiny fairy wing patch, sky blue shorts, and glittery gold-and-white soccer boots — same child, same face, same exact outfit in every image. Warm cosy resolution scene in soft golden evening light, {{NAME}} sits in the lush grass leaning gently against the white unicorn's side, his eyes drooping sleepily and a calm smile on his face, the fairy Wren rests on his knee with wings folded, the magical soccer field glows softly in the background, everything feels peaceful and warm. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

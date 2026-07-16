@@ -1,0 +1,36 @@
+{
+  "interest": "Princesses + Robots + Superheroes",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Castle in the Dark",
+  "moral": "Good friends help each other when things get scary.",
+  "theme_emoji": "👑",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a crimson superhero suit with a silver crown emblem on the chest, a flowing gold cape, and sturdy metallic silver boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} landed outside a big stone castle.\nThe castle lights had all gone out.\nA princess looked out from a dark tower.\nA tall silver robot stood at the gate.\nSomething had turned off all the power.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a crimson superhero suit with a silver crown emblem on the chest, a flowing gold cape, and sturdy metallic silver boots — same child, same face, same exact outfit in every image. Wide establishing shot of a large stone castle at dusk with all its windows dark and unlit, {{NAME}} stands small at the castle gate with his gold cape billowing, a princess peers from a dark tower window looking worried, a tall silver robot stands beside the main gate with its eyes dimly lit, the scene has a mysterious but not frightening mood. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The princess called down to {{NAME}}.\n\"The robot cannot fix it alone,\" she said.\n{{NAME}} looked up with a big surprised face.\n\"I will help!\" he said bravely.\nThe robot beeped a thank-you beep.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a crimson superhero suit with a silver crown emblem on the chest, a flowing gold cape, and sturdy metallic silver boots — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}} looking upward with wide eyes full of surprise and determination, the princess leans out of her dark tower window above smiling gratefully, the tall silver robot stands beside {{NAME}} with a hopeful blinking eye-light, the castle walls frame the scene. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} and the robot ran inside together.\nThey found the big power switch deep below.\n{{NAME}} used his super strength to pull it.\nThe robot pushed from the other side.\nThey pulled and pushed and pushed and pulled!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a crimson superhero suit with a silver crown emblem on the chest, a flowing gold cape, and sturdy metallic silver boots — same child, same face, same exact outfit in every image. Dynamic action shot of {{NAME}} and the tall silver robot working together in a stone underground chamber, {{NAME}} pulls a giant lever with both hands his cape swept out behind him, the robot presses the other side of the mechanism, sparks and energy crackle around the switch, both their faces are scrunched with effort and determination. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The switch clicked.\nAll the castle lights burst on at once.\nThe princess laughed with joy.\n{{NAME}} and the robot held up their hands.\nThe whole castle glowed warm and bright.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a crimson superhero suit with a silver crown emblem on the chest, a flowing gold cape, and sturdy metallic silver boots — same child, same face, same exact outfit in every image. Emotional peak scene with a dramatic burst of warm golden light flooding out of every castle window at once, {{NAME}} and the robot stand in the underground chamber with arms raised in triumph, their faces alight with joy and relief, the princess visible above through a window clapping her hands and laughing. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "The princess came down to thank {{NAME}}.\nThe robot made warm hot chocolate for them all.\nThey sat by the glowing fireplace together.\n{{NAME}} yawned a big happy yawn.\nGoodnight, {{NAME}}. You were so brave.\nI wonder what mystery hides in the next castle tower.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a crimson superhero suit with a silver crown emblem on the chest, a flowing gold cape, and sturdy metallic silver boots — same child, same face, same exact outfit in every image. Warm cosy resolution scene by a glowing stone fireplace inside the brightly lit castle hall, {{NAME}} sits in a large soft chair with drooping eyes and a peaceful smile, the princess sits across from him in her gown holding a warm mug, the silver robot stands nearby with a gentle glowing expression, the room is bathed in amber firelight. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

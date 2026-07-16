@@ -1,0 +1,35 @@
+{
+  "interest": "Animals + Fairies",
+  "title": "{{NAME}} and the Fairy Vet of Whispering Wood",
+  "moral": "Every living thing deserves care and gentleness.",
+  "theme_emoji": "🧚",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft green tunic, brown leggings, and leaf-green sneakers — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "The note appeared under {{NAME}}'s pillow one Tuesday night, written on a curled piece of bark in tiny silver letters:\n\nDEAR {{NAME}} — We need your help. The animals of Whispering Wood have taken ill and our healing magic is worn thin. Come at dawn. Come alone. Come quietly.\n\nIt was signed with a picture of a small glowing wing.\n\n{{NAME}} set his alarm for five o'clock.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft green tunic, brown leggings, and leaf-green sneakers — same child, same face, same exact outfit in every image. {{NAME}} sitting up in bed holding a tiny bark scroll toward his bedside lamp, eyes wide, the silver letters just visible, early morning darkness outside his window. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "At the wood's edge, a fairy no bigger than his thumb hovered at eye level, wings blurring like a hummingbird's.\n\n\"Fern,\" she said. \"We have a hedgehog with hiccups that won't stop, a squirrel with a splinter the size of a toothpick but enormous to us, and a fox cub with fur full of burrs.\"\n\n\"I can do all of those,\" said {{NAME}}.\n\nFern looked him up and down. \"Good. I'll provide the light.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft green tunic, brown leggings, and leaf-green sneakers — same child, same face, same exact outfit in every image. {{NAME}} crouching at the edge of a misty forest at dawn, a tiny glowing fairy hovering exactly at his eye level, the fairy's wings lit up like stained glass, the deep green wood behind her. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "They worked through the morning: {{NAME}}'s big steady hands and Fern's tiny bright magic working together.\n\nHe used a toothpick to remove the squirrel's splinter while Fern numbed the spot with a single golden spark.\n\nHe untangled the fox cub's fur burr by burr while Fern sang to keep it calm.\n\nFor the hiccupping hedgehog, they tried every remedy until {{NAME}} remembered that his grandmother cured hiccups by counting backwards from ten. It worked on the third try.\n\n\"How did you know?\" Fern asked, amazed.\n\n\"Grandmothers know everything,\" said {{NAME}} simply.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft green tunic, brown leggings, and leaf-green sneakers — same child, same face, same exact outfit in every image. {{NAME}} kneeling in a mossy glade, carefully removing a burr from a fluffy fox cub's tail, a tiny fairy hovering with both hands outstretched glowing gold, the fox cub looking blissfully relaxed. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "By noon, every patient was well.\n\nThe squirrel ran three circles around {{NAME}}'s boots in thanks. The fox cub licked his nose. The hedgehog gave him a solemn nod.\n\nFern landed on his shoulder and sat there, wings folded, in the particular way of someone deeply relieved.\n\n\"You have gentle hands for something so large,\" she said.\n\n{{NAME}} grinned. \"You have strong magic for something so small.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft green tunic, brown leggings, and leaf-green sneakers — same child, same face, same exact outfit in every image. {{NAME}} sitting cross-legged in a sunlit forest glade, a tiny fairy perched proudly on his shoulder, a healthy fox cub and hedgehog beside him, a squirrel on his knee, all basking in warm midday light. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "That evening, {{NAME}} sat at his bedroom window watching the last light fade from the sky.\n\nOn the windowsill, Fern had left something: a single oak leaf with a tiny droplet of golden magic sealed inside it like a snow globe. When he held it up, it showed tiny animals dancing in a firelit clearing.\n\n{{NAME}} set it carefully on his shelf and watched it glow until his eyes grew heavy.\n\nSomewhere in the dark, he was almost sure he heard the distant sound of small wings, and the faint, satisfied chitter of a healthy squirrel.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a soft green tunic, brown leggings, and leaf-green sneakers — same child, same face, same exact outfit in every image. {{NAME}} in bed, holding a tiny glowing oak leaf up to admire it, warm golden light from the leaf illuminating his peaceful face, the bedroom cosy and dim, his shelf with small treasures visible. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

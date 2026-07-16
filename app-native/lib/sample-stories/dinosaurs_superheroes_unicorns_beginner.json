@@ -1,0 +1,36 @@
+{
+  "interest": "Dinosaurs + Superheroes + Unicorns",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Volcano of Lost Magic",
+  "moral": "Being brave for someone else is the greatest power of all.",
+  "theme_emoji": "🦕",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright purple superhero suit with a silver dinosaur claw symbol on the chest, a flowing gold cape, purple gloves with gold knuckles, and purple boots with silver wings on the sides — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} was a superhero who flew over magical lands. Below him was a glowing pink volcano. Near the volcano lived a white unicorn called Pearl. Pearl had a rainbow horn and sky-blue wings. A big teal dinosaur guarded the path to the volcano. The volcano was rumbling. Something very important was stuck inside.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright purple superhero suit with a silver dinosaur claw symbol on the chest, a flowing gold cape, purple gloves with gold knuckles, and purple boots with silver wings on the sides — same child, same face, same exact outfit in every image. Wide establishing shot of a vast magical landscape with a glowing pink volcano in the centre, puffs of soft coloured smoke rising from its top. {{NAME}} flies high above, small against the enormous sky, gold cape streaming. A beautiful white unicorn with a rainbow horn and blue wings stands at the base of the volcano. A large friendly teal dinosaur guards the winding path. Vivid warm light from the glow of the volcano. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "{{NAME}} landed next to Pearl. Pearl was very upset. \"My magic star fell into the volcano,\" said Pearl. \"Without it, I cannot fly.\" Pearl's wings hung low and sad. The teal dinosaur said the volcano was too hot for anyone. {{NAME}}'s eyes went wide. He looked at his gold cape. He had an idea.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright purple superhero suit with a silver dinosaur claw symbol on the chest, a flowing gold cape, purple gloves with gold knuckles, and purple boots with silver wings on the sides — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}}'s face showing wide determined eyes and a thinking expression. Pearl the white unicorn with a rainbow horn stands beside him with wings hanging low and sad eyes. The large friendly teal dinosaur looms behind them both with a worried expression. The glowing pink volcano smokes gently in the background. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} wrapped his gold cape around himself like armour. He flew straight into the volcano's warm glow. It was bright and sparkly inside. He spotted Pearl's tiny shining star on a ledge. He grabbed it tight. Then he zoomed back out into the cool air. He landed safely with the star in his hand.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright purple superhero suit with a silver dinosaur claw symbol on the chest, a flowing gold cape, purple gloves with gold knuckles, and purple boots with silver wings on the sides — same child, same face, same exact outfit in every image. Dynamic action shot inside the glowing pink and gold volcano cavern. {{NAME}} zooms forward with gold cape wrapped tightly around him as a shield, reaching out one hand toward a tiny brilliant shining star on a rocky ledge. The cavern walls glow with warm pink light and golden sparks float all around. His face is determined and focused. Motion lines trail behind him. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "{{NAME}} held out the star to Pearl. Pearl touched it with her rainbow horn. Her wings spread wide and glowed all the colours of the rainbow. She rose into the air and flew a circle above them. The teal dinosaur clapped and roared. Being brave for someone else is the greatest power of all.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright purple superhero suit with a silver dinosaur claw symbol on the chest, a flowing gold cape, purple gloves with gold knuckles, and purple boots with silver wings on the sides — same child, same face, same exact outfit in every image. Emotional peak scene outside the volcano in warm dramatic light. {{NAME}} stands with hand outstretched, the tiny brilliant star glowing in his palm. Pearl the white unicorn touches it with her rainbow horn and her wings burst open in a brilliant explosion of every rainbow colour. She lifts into the air above them. The large teal dinosaur roars with joy and claps its arms together. Rays of rainbow light radiate outward across the sky. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "Pearl carried {{NAME}} and the dinosaur on one last gentle flight. They floated over soft glowing clouds. The volcano hummed quietly below. Being brave for someone else is the greatest power of all. {{NAME}} felt sleepy and warm up in the sky. He closed his eyes slowly. He wondered if Pearl might take him to the land above the clouds.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright purple superhero suit with a silver dinosaur claw symbol on the chest, a flowing gold cape, purple gloves with gold knuckles, and purple boots with silver wings on the sides — same child, same face, same exact outfit in every image. Warm cosy resolution scene floating gently above soft glowing pink and gold clouds at dusk. Pearl the white unicorn with full rainbow wings flies slowly and peacefully with {{NAME}} sitting sleepily on her back, gold cape draped softly around him. The large friendly teal dinosaur rides behind with a blissful smile. The glowing volcano is a tiny warm dot far below. Soft golden-pink sky. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

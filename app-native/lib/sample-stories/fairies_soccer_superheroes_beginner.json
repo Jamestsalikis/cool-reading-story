@@ -1,0 +1,36 @@
+{
+  "interest": "Fairies + Soccer + Superheroes",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Lost Magic Soccer Ball",
+  "moral": "Being kind and brave together makes anything possible.",
+  "theme_emoji": "⚽",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red superhero cape with a gold star, a cobalt blue soccer jersey with the number 1, green shorts, and red-and-white soccer boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} ran onto the big green soccer field.\nTiny fairies sat on the goalposts.\nA superhero flew high above the clouds.\nBut the magic soccer ball was gone!\nEveryone looked worried.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red superhero cape with a gold star, a cobalt blue soccer jersey with the number 1, green shorts, and red-and-white soccer boots — same child, same face, same exact outfit in every image. Wide establishing shot of a vast bright green soccer field under a sunny sky, {{NAME}} is small near the centre circle looking around with a worried expression, tiny glowing fairies perch on both goalposts, a caped superhero hovers far above in the blue sky, the goal nets flutter in the breeze but the field is empty with no ball in sight. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "A fairy called Luna zipped down to {{NAME}}.\n\"A wind storm blew the ball away,\" she said.\n{{NAME}} gasped and his eyes went wide.\n\"We must find it!\" he said.\nHis cape flapped in the breeze.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red superhero cape with a gold star, a cobalt blue soccer jersey with the number 1, green shorts, and red-and-white soccer boots — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}}'s face showing big surprised eyes and a determined smile, the tiny fairy Luna hovers right in front of his nose with glowing yellow wings, {{NAME}}'s red cape flaps behind him, the sunny soccer field stretches out softly behind them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The superhero zoomed across the sky.\n\"I see it!\" she called. \"It is in the tall tree!\"\n{{NAME}} ran as fast as he could.\nLuna sprinkled fairy dust on his boots.\nHis feet felt fast as lightning!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red superhero cape with a gold star, a cobalt blue soccer jersey with the number 1, green shorts, and red-and-white soccer boots — same child, same face, same exact outfit in every image. Dynamic action shot of {{NAME}} sprinting at full speed across the field with golden fairy dust trailing from his soccer boots, the fairy Luna flies alongside him leaving a glittering trail, the superhero above points down toward a giant oak tree at the edge of the field where a glowing soccer ball is wedged in the branches, motion lines show incredible speed. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The ball was very high up.\n{{NAME}} felt a little scared.\nBut the superhero held his hand.\n\"You can do it,\" she said.\n{{NAME}} climbed up and grabbed the ball!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red superhero cape with a gold star, a cobalt blue soccer jersey with the number 1, green shorts, and red-and-white soccer boots — same child, same face, same exact outfit in every image. Emotional peak scene with dramatic warm sunlight streaming through the tree branches, {{NAME}} reaches up bravely to grab the glowing soccer ball lodged in the high oak branches, the superhero hovers beside him with one hand gently supporting his back and a warm encouraging smile, the fairy Luna watches from a nearby branch with her hands clasped together in hope. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "{{NAME}} kicked the ball high into the sky.\nThe fairies cheered and the superhero clapped.\nEveryone played together on the field.\n{{NAME}} smiled his biggest smile.\nGoodnight, {{NAME}}. Sleep well.\nMaybe tomorrow the fairies will teach you a new magic kick.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red superhero cape with a gold star, a cobalt blue soccer jersey with the number 1, green shorts, and red-and-white soccer boots — same child, same face, same exact outfit in every image. Warm cosy resolution scene in soft golden late-afternoon light, {{NAME}} sits happily on the grass with the glowing soccer ball beside him, the superhero sits cross-legged nearby, and tiny fairies dance in the warm air around them all, the soccer field glows in the evening sun, everyone looks content and sleepy. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

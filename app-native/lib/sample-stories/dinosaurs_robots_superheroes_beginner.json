@@ -1,0 +1,36 @@
+{
+  "interest": "Dinosaurs + Robots + Superheroes",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Mighty Dino Robot Team",
+  "moral": "Every friend has something special they can give.",
+  "theme_emoji": "🤖",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright yellow superhero suit with a blue robot-head badge on the chest, a short blue cape with silver edges, yellow gloves with silver cuffs, and yellow boots with blue lightning bolts — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} was a superhero who loved adventures. One day he flew to a big city park. The park had tall trees and shiny paths. A large red robot was standing very still. A big purple dinosaur sat beside the robot. Both of them looked very worried. {{NAME}} landed softly on the grass. \"What is wrong?\" he asked.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright yellow superhero suit with a blue robot-head badge on the chest, a short blue cape with silver edges, yellow gloves with silver cuffs, and yellow boots with blue lightning bolts — same child, same face, same exact outfit in every image. Wide establishing shot of a big sunny city park with tall green trees and shiny winding paths. {{NAME}} glides down from the sky, cape billowing, landing small on the bright grass. A large boxy red robot stands very still with dim eyes. A big friendly purple dinosaur sits beside the robot looking worried. Blue sky and fluffy white clouds above. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The robot said his name was Rex. Rex had run out of power. \"My batteries are empty,\" said Rex sadly. The purple dinosaur said his name was Pip. Pip could not carry Rex alone. He was too heavy. {{NAME}}'s eyes went wide. This was a job for a superhero and his friends.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright yellow superhero suit with a blue robot-head badge on the chest, a short blue cape with silver edges, yellow gloves with silver cuffs, and yellow boots with blue lightning bolts — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}}'s face showing wide eyes and a look of focused determination. Rex the large boxy red robot stands with dim grey eyes and slumped shoulders just behind {{NAME}}. Pip the big friendly purple dinosaur crouches close with an anxious worried expression. Bright park setting with dappled sunlight. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} used his superhero speed. He zoomed to the power station and back. He brought a big shiny battery. He clicked it into Rex's back. BUZZ! WHIRR! Rex lit up bright red. His eyes glowed blue. Rex stood up tall and strong. He lifted his big arms and cheered. Pip roared with happiness.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright yellow superhero suit with a blue robot-head badge on the chest, a short blue cape with silver edges, yellow gloves with silver cuffs, and yellow boots with blue lightning bolts — same child, same face, same exact outfit in every image. Dynamic action shot of {{NAME}} pressing a large shiny glowing battery into the back panel of Rex the red robot. Sparks and blue energy crackle outward. Rex's eyes light up brilliant blue and both arms shoot upward in celebration. Pip the large purple dinosaur roars joyfully with mouth open wide, tail wagging. Motion lines and energy bolts radiate outward. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "Rex was so happy. He picked up {{NAME}} and Pip in his big arms. He carried them high above the park. They could see the whole city! Every friend has something special they can give. {{NAME}} had speed. Rex had strength. Pip had a warm heart. Together they were the best team.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright yellow superhero suit with a blue robot-head badge on the chest, a short blue cape with silver edges, yellow gloves with silver cuffs, and yellow boots with blue lightning bolts — same child, same face, same exact outfit in every image. Emotional peak scene high above the city park with a dramatic aerial view of rooftops and treetops below. Rex the large glowing red robot holds {{NAME}} in one big arm and Pip the friendly purple dinosaur in the other, all lifted high in the sky. {{NAME}} grins with pure delight, cape streaming behind him. Pip's eyes shine with wonder. Golden afternoon light floods the sky. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "Rex carried them gently back to the soft grass. They lay down under the tall park trees. The sun was going down. It was soft and warm and gold. Every friend has something special they can give. {{NAME}} felt happy and sleepy. He closed his heavy eyes slowly. He wondered what Rex might build for them tomorrow.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright yellow superhero suit with a blue robot-head badge on the chest, a short blue cape with silver edges, yellow gloves with silver cuffs, and yellow boots with blue lightning bolts — same child, same face, same exact outfit in every image. Warm cosy resolution scene on the soft park grass at sunset under tall leafy trees. {{NAME}} lies on his back with drowsy half-closed eyes, yellow cape spread softly beneath him. Rex the large red robot sits nearby, eyes glowing a gentle warm blue. Pip the purple dinosaur curls around them both like a protective nest. Soft golden sunset light filters through the tree leaves. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

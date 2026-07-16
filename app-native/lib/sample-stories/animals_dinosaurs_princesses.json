@@ -1,0 +1,35 @@
+{
+  "interest": "Animals + Dinosaurs + Princesses",
+  "title": "{{NAME}} and the Princess of the Prehistoric Park",
+  "moral": "Leadership means understanding what everything in your care needs, even if it is very large.",
+  "theme_emoji": "👑",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep forest green jacket with gold buttons, tan riding trousers, and high riding boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "Princess Elara had inherited the Royal Natural History Park at the age of nine and immediately made three decisions.\n\nOne: no more hunting, ever. Two: the park needed a proper veterinarian. Three: the Tyrannosaurus in the east paddock needed a name and it was going to be Gerald.\n\nShe hired {{NAME}} as junior keeper. His first day: the rabbits in the west meadow had chewed through the fence separating them from the Triceratops enclosure.\n\n\"Is that a problem?\" he asked.\n\n\"Gerald thinks so,\" said the princess. \"Gerald doesn't like surprises.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep forest green jacket with gold buttons, tan riding trousers, and high riding boots — same child, same face, same exact outfit in every image. Wide view of an extraordinary royal park with a Triceratops visible in one paddock and a T-Rex in the distance, {{NAME}} and Princess Elara standing at a broken fence looking at rabbits who have clearly been enjoying themselves in the wrong area. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "Gerald, it turned out, had very specific preferences.\n\nHe liked the east paddock. He liked eating at dawn and dusk. He liked being observed from a respectful distance. He did not like: rabbits in his peripheral vision, loud noises before breakfast, or the junior keeper forgetting to bring his morning enrichment item.\n\n{{NAME}} kept a notebook. Gerald's preferences took up six pages by the end of the first week.\n\n\"He's like a very large cat,\" {{NAME}} told the princess.\n\n\"Don't let him hear you say that,\" she said seriously.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep forest green jacket with gold buttons, tan riding trousers, and high riding boots — same child, same face, same exact outfit in every image. {{NAME}} writing in his notebook while Gerald the T-Rex observes from a distance with dignified suspicion, Princess Elara standing beside {{NAME}} looking professional, rabbits visible in the background. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The crisis came when three young deer wandered into Gerald's paddock through a drainage gap and couldn't find their way out.\n\nGerald was awake. Gerald was also, clearly, confused rather than aggressive: the deer were too small to be interesting and too numerous to ignore.\n\n{{NAME}} went in through the maintenance gate while Princess Elara created a distraction with Gerald's favourite enrichment object from outside.\n\nFive minutes. Three deer retrieved. Gerald: still watching, now holding his enrichment object, looking somewhat satisfied.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep forest green jacket with gold buttons, tan riding trousers, and high riding boots — same child, same face, same exact outfit in every image. Tense but not scary scene: {{NAME}} carefully herding three young deer toward the gate while in the background Gerald the T-Rex is distracted by Princess Elara waving something from outside the fence. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "By the end of the first month, {{NAME}} had mapped every animal's routine, needs, and personality.\n\nThe Triceratops liked being brushed. Gerald liked puzzles. The deer preferred not to be herded. The rabbits went wherever they liked regardless of fencing.\n\n\"You know all of them,\" said Princess Elara.\n\n\"That's the job,\" said {{NAME}}.\n\n\"Most keepers know the animals. You seem to know what they're thinking.\"\n\nHe looked out at Gerald, who was currently staring at a butterfly with great concentration.\n\n\"Some of them are easier to read than others,\" he said.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep forest green jacket with gold buttons, tan riding trousers, and high riding boots — same child, same face, same exact outfit in every image. {{NAME}} and Princess Elara looking out over the extraordinary park together, the Triceratops grazing peacefully, Gerald visible in the distance examining something small, animals settled throughout, golden afternoon light. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "On his way home each evening, {{NAME}} always stopped at Gerald's fence and said goodnight.\n\nGerald always watched him from the middle of the paddock, utterly still, until {{NAME}} was out of sight.\n\nHe found this comforting rather than ominous, which said something about how the first month had gone.\n\nIn bed that night, he looked up at the ceiling and thought about the deer rescued from the paddock, the rabbits causing manageable chaos, the princess writing policy changes in her royal notebook.\n\nHe fell asleep to the imagined sound of a very large creature settling in for the night.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep forest green jacket with gold buttons, tan riding trousers, and high riding boots — same child, same face, same exact outfit in every image. {{NAME}} sleeping peacefully in a warm cosy room, his keeper notebook on the bedside table, a small content smile on his face. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

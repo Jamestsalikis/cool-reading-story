@@ -1,0 +1,36 @@
+{
+  "interest": "Dinosaurs + Unicorns",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Dinosaur Who Found a Unicorn Egg",
+  "moral": "Taking care of something small is one of the best things you can do.",
+  "theme_emoji": "🦄",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a mint green t-shirt with a purple dinosaur and unicorn print, white shorts, and rainbow-striped sneakers — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} walked through a misty valley. Pink clouds floated low in the sky. Strange colourful plants grew everywhere. Then he saw a large blue dinosaur. The dinosaur was looking at something on the ground.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a mint green t-shirt with a purple dinosaur and unicorn print, white shorts, and rainbow-striped sneakers — same child, same face, same exact outfit in every image. Wide establishing shot of a magical misty valley with low pink clouds and tall luminous colourful plants glowing softly. {{NAME}} stands small in the scene walking toward a large blue dinosaur at the centre who has its head bent low, looking curiously at the ground. The landscape is both prehistoric and magical, with huge ferns alongside glowing rainbow flowers. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The dinosaur had found an egg. It was white with gold and purple swirls. It glowed a little. The dinosaur did not know what to do with it. He nudged it gently with his nose.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a mint green t-shirt with a purple dinosaur and unicorn print, white shorts, and rainbow-striped sneakers — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}} kneeling beside the large blue dinosaur, both staring at a beautiful egg on the mossy ground. The egg is white with swirling gold and purple patterns and glows with a soft inner light. {{NAME}}'s eyes are huge with wonder. The blue dinosaur nudges the egg very gently with one nostril, its expression tender and puzzled. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} knew the egg needed to stay warm. He gathered soft leaves. The big dinosaur curled around the egg. They sat together and kept it safe. They waited and waited.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a mint green t-shirt with a purple dinosaur and unicorn print, white shorts, and rainbow-striped sneakers — same child, same face, same exact outfit in every image. Dynamic action shot of {{NAME}} hurrying back with an armful of large soft bright green leaves, kneeling to tuck them around the glowing egg. The blue dinosaur has curled its large body in a circle around the egg, creating a warm nest. Both faces show concentrated caring purpose. Warm light from the egg glows onto their faces. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The egg began to crack. Gold light burst from the cracks. The dinosaur held very still. {{NAME}} held his breath. A tiny, wet, wobbly baby unicorn popped out of the egg!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a mint green t-shirt with a purple dinosaur and unicorn print, white shorts, and rainbow-striped sneakers — same child, same face, same exact outfit in every image. Emotional peak scene with dramatic golden light exploding outward from the cracking egg. A tiny white baby unicorn with a small gold horn, wobbly legs, and wide eyes tumbles out of the shell as fragments fly. {{NAME}} is frozen in delighted shock, both hands on his cheeks. The blue dinosaur leans in close, eyes glittering with awe and love. Golden sparks cascade through the misty valley air. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "The baby unicorn nuzzled the dinosaur's nose. The dinosaur was her first friend. Taking care of something small is one of the best things you can do. Goodnight, {{NAME}}. Sleep well. The baby unicorn had a tiny glow around her horn. What magic would she do first?",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a mint green t-shirt with a purple dinosaur and unicorn print, white shorts, and rainbow-striped sneakers — same child, same face, same exact outfit in every image. Warm cosy resolution scene in soft golden and lavender evening light. {{NAME}} sits sleepily in the mossy valley grass, eyes nearly closed and smiling softly. The blue dinosaur is curled in a large circle and the tiny baby unicorn sleeps in the warm hollow of the dinosaur's coil. {{NAME}} rests his chin on his hands watching them, looking utterly content. Stars flicker in the purple sky above. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

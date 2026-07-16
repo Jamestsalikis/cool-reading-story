@@ -1,0 +1,36 @@
+{
+  "interest": "Robots + Superheroes + Unicorns",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Sky Lab in Trouble",
+  "moral": "Sharing what makes you special helps everyone.",
+  "theme_emoji": "🤖",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a chrome silver superhero suit with a blue lightning bolt, a bright yellow cape, and sleek white rocket boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} flew up to a floating sky lab.\nThe lab was made of shiny silver panels.\nRobots inside flashed warning lights.\nA unicorn floated near the window.\nSomething had gone very wrong up there.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a chrome silver superhero suit with a blue lightning bolt, a bright yellow cape, and sleek white rocket boots — same child, same face, same exact outfit in every image. Wide establishing shot of a spectacular floating sky lab made of gleaming silver panels high in a sunset sky, {{NAME}} is small and far below it flying upward with his yellow cape spread, warning amber lights blink from the lab windows, a white unicorn with a glowing mane floats outside one porthole looking worried, puffy clouds surround the structure. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "{{NAME}} flew through the lab door.\nA big red robot met him inside.\n\"Our power crystal is cracked,\" it said.\n{{NAME}}'s eyes went wide with worry.\n\"I want to help fix it,\" he said firmly.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a chrome silver superhero suit with a blue lightning bolt, a bright yellow cape, and sleek white rocket boots — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}}'s face full of wide-eyed worry turning to determination, a large red robot with a round concerned face stands before him inside the shiny silver lab corridor, an amber warning light pulses above them casting dramatic colour, {{NAME}}'s yellow cape settles around him. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The unicorn floated in through the window.\nIts horn began to glow very bright.\nIt touched the cracked crystal.\n{{NAME}} used his super energy to help.\nThe crystal hummed and started to heal.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a chrome silver superhero suit with a blue lightning bolt, a bright yellow cape, and sleek white rocket boots — same child, same face, same exact outfit in every image. Dynamic action shot in the bright lab interior, the white unicorn floats in the zero-gravity space with its glowing horn pressed to a large cracked crystal in the centre of the room, {{NAME}} stands beside it with both hands outstretched pouring electric blue super energy into the crystal, the red robot watches in amazement, cracks in the crystal glow with healing light. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The crystal turned dark for one scary second.\n{{NAME}} pushed harder.\nHe gave everything he had.\nThe crystal blazed with golden light!\nAll the warning lights turned green at once.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a chrome silver superhero suit with a blue lightning bolt, a bright yellow cape, and sleek white rocket boots — same child, same face, same exact outfit in every image. Emotional peak scene with dramatic contrast between a moment of darkness and an eruption of golden light, {{NAME}} is at his most strained with eyes squeezed shut and hands pressed hard against the crystal, the unicorn beside him trembling with effort, then a blinding golden burst of light shoots from the crystal in all directions, the robot covers its eyes, every panel in the lab switches to green. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "The sky lab hummed and glowed again.\nThe robots danced a funny robot dance.\nThe unicorn floated softly to {{NAME}}.\nIt rested its head on his shoulder.\n{{NAME}} smiled and closed his eyes.\nGoodnight, {{NAME}}. You saved the lab today.\nI wonder what stars the unicorn can show you from up here.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a chrome silver superhero suit with a blue lightning bolt, a bright yellow cape, and sleek white rocket boots — same child, same face, same exact outfit in every image. Warm cosy resolution scene inside the now softly glowing sky lab with a large circular window showing a star-filled night sky, {{NAME}} sits against the lab wall with the unicorn resting its head on his shoulder, both looking sleepy and content, the red robot sits nearby with a glowing happy face, the whole lab pulses with a warm amber glow. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

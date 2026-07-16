@@ -1,0 +1,36 @@
+{
+  "interest": "Dinosaurs + Soccer",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Dinosaur Soccer Champions",
+  "moral": "Trying your hardest is always worth it.",
+  "theme_emoji": "⚽",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing an orange soccer jersey with the number 9, dark green soccer shorts, white socks, and blue soccer cleats — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} walked up to the biggest soccer field he had ever seen. The goals were enormous. The grass was bright green. Three big dinosaurs were warming up. They roared and kicked a giant ball. {{NAME}} wanted to play!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing an orange soccer jersey with the number 9, dark green soccer shorts, white socks, and blue soccer cleats — same child, same face, same exact outfit in every image. Wide establishing shot of a massive bright green soccer field with goals that are three times normal size. {{NAME}} stands tiny at the entrance, mouth open in awe. On the pitch, a blue dinosaur, a red dinosaur, and a yellow dinosaur kick a giant soccer ball. Their every step shakes the ground. Bright blue sky above and pennants around the pitch. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The dinosaurs saw {{NAME}} and stopped. The blue dinosaur shook his head. You are too small to play, he said. {{NAME}} felt sad. But he did not give up. He stood up very straight.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing an orange soccer jersey with the number 9, dark green soccer shorts, white socks, and blue soccer cleats — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}}'s face showing a flash of sadness quickly turning into determined courage, chin lifted and eyes firm. The large blue dinosaur looms in the background, looking uncertain. The red and yellow dinosaurs watch curiously behind. The green soccer pitch stretches behind them all. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} dribbled the ball between the big dinosaur feet. He was so fast they could not catch him. He ran and ran. He got to the goal and kicked hard. The ball flew in!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing an orange soccer jersey with the number 9, dark green soccer shorts, white socks, and blue soccer cleats — same child, same face, same exact outfit in every image. Dynamic action shot of {{NAME}} sprinting at full speed through the enormous legs of the three colourful dinosaurs, dribbling the giant soccer ball with incredible skill. Motion lines fly behind him. The three dinosaurs twist and turn trying to follow, faces shocked. The giant goal looms ahead with the ball just entering the net. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The blue dinosaur cheered very loud. The red and yellow dinosaurs stomped with joy. Now they all wanted {{NAME}} on their team. He had never been so happy.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing an orange soccer jersey with the number 9, dark green soccer shorts, white socks, and blue soccer cleats — same child, same face, same exact outfit in every image. Emotional peak scene with bright sunlight bursting across the field. {{NAME}} stands at the centre of the pitch with his arms raised high, face beaming with pride. The blue dinosaur roars joyfully above him, the red and yellow dinosaurs stomp and cheer on either side. The ground trembles with celebration and a burst of colourful confetti fills the air. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "They played soccer until the sun went down. {{NAME}} scored three goals that day. Trying your hardest is always worth it. Goodnight, {{NAME}}. Sleep well. The blue dinosaur promised to teach {{NAME}} his most powerful kick tomorrow. What would it feel like?",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing an orange soccer jersey with the number 9, dark green soccer shorts, white socks, and blue soccer cleats — same child, same face, same exact outfit in every image. Warm cosy resolution scene in soft golden twilight on the soccer field. {{NAME}} sits sleepily against the blue dinosaur's leg, eyes barely open, a huge happy smile on his face. The red and yellow dinosaurs sit nearby on the grass, all relaxed and content. The giant soccer ball rests at {{NAME}}'s feet. The sky is a warm orange and purple gradient. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

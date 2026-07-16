@@ -1,0 +1,35 @@
+{
+  "interest": "Animals + Princesses",
+  "title": "{{NAME}} and Princess Wren's Runaway Zoo",
+  "moral": "The best adventures happen when you help someone else with theirs.",
+  "theme_emoji": "🐾",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal blue jacket with gold buttons, dark trousers, and polished black boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "The princess arrived at {{NAME}}'s door on a Tuesday afternoon, looking remarkably unbothered for someone with a peacock on her head.\n\n\"I am Princess Wren,\" she announced. \"Three of my royal animals have escaped the palace and I need a tracking expert. My butler says you are the best in the neighbourhood.\"\n\n\"I'm nine,\" said {{NAME}}.\n\n\"Precisely,\" said the princess. \"Will you help or not?\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal blue jacket with gold buttons, dark trousers, and polished black boots — same child, same face, same exact outfit in every image. Front doorstep, {{NAME}} looking surprised at a girl in a rumpled tiara and elaborate dress standing at his door, a large shimmering peacock perched calmly on her head, the peacock's tail feathers cascading down her back. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The escaped animals were: one miniature horse who adored shiny things, one tortoise who had been walking since Tuesday and was now possibly in the next postcode, and one very clever monkey named Pip who had taken the royal television remote.\n\n{{NAME}} studied the clues methodically. Tiny hoofprints led toward the park fountain. Slow tortoise tracks went east.\n\nFrom the library on the corner came the unmistakeable sound of every channel changing at once.\n\n\"I know where to start,\" he said.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal blue jacket with gold buttons, dark trousers, and polished black boots — same child, same face, same exact outfit in every image. {{NAME}} crouching on a pavement examining tiny hoofprints, Princess Wren watching over his shoulder with her tiara askew, the peacock having relocated to a nearby postbox, afternoon sunlight on a busy neighbourhood street. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "They retrieved Pip from the library first (he had settled on a nature documentary and refused to change it), then found the miniature horse at the fountain wearing a stolen necklace.\n\nThe tortoise was harder. They found him at four o'clock, placidly making his way through the park rose garden.\n\n\"He escapes every Tuesday,\" Princess Wren admitted. \"I think he likes roses.\"\n\n\"Then grow some roses at the palace,\" said {{NAME}}.\n\nThe princess stared at him. \"That is the most obvious solution I have ever heard and I cannot believe my royal advisors didn't think of it.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal blue jacket with gold buttons, dark trousers, and polished black boots — same child, same face, same exact outfit in every image. Dynamic scene in a park rose garden, {{NAME}} gently lifting a tortoise while Princess Wren holds a small horse on a lead with Pip the monkey perched on her shoulder, roses in full bloom all around them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "Back at the palace gates, Princess Wren counted her animals: tortoise, horse, monkey, peacock. All present.\n\nShe turned to {{NAME}} with great dignity, adjusted her tiara, and said: \"You are officially appointed Royal Animal Tracker, First Class.\"\n\nShe pinned a gold badge to his jacket. It had a tiny pawprint on it.\n\n{{NAME}} looked at it. \"Do I get paid?\"\n\n\"You get invited to all the royal animal parties,\" said Princess Wren.\n\n\"Deal,\" said {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal blue jacket with gold buttons, dark trousers, and polished black boots — same child, same face, same exact outfit in every image. Palace gates in warm evening light, Princess Wren formally pinning a gold badge onto {{NAME}}'s jacket, both smiling, the animals arranged around them in a dignified royal group. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "{{NAME}} walked home as the street lights came on, his new badge catching the glow.\n\nPip the monkey had, at some point, slipped something into his jacket pocket. He found it now: the television remote.\n\n{{NAME}} laughed so hard he had to sit on a garden wall to recover.\n\nIn his room that night, he set the badge on his bedside table and lay in the dark, still smiling.\n\nDownstairs, the television switched on by itself. On the screen: a nature documentary about peacocks.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal blue jacket with gold buttons, dark trousers, and polished black boots — same child, same face, same exact outfit in every image. {{NAME}} in bed, peaceful and smiling, the gold pawprint badge glowing on his bedside table in warm lamplight, the room cosy and dim, contentment plain on his face. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

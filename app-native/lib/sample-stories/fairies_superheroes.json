@@ -1,0 +1,35 @@
+{
+  "interest": "Fairies + Superheroes",
+  "title": "{{NAME}} and the Smallest Sidekick",
+  "moral": "The person who notices what others miss is often the one who saves the day.",
+  "theme_emoji": "🧚",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep violet suit with silver gauntlets, a short silver cape, and silver boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} had been a junior superhero for three months and still hadn't solved a single crime on his own.\n\nHe'd helped with four. He'd contributed to seven. He'd mostly been useful at carrying things.\n\nThe problem: he couldn't fly, his strength was regular human strength, and his one actual power, being very observant, was hard to use in an emergency when things were already on fire.\n\nThen Mote arrived.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep violet suit with silver gauntlets, a short silver cape, and silver boots — same child, same face, same exact outfit in every image. {{NAME}} in his violet suit standing at the edge of a rooftop looking uncertain, the city below him, other superheroes flying past in the background, the night skyline behind him. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "Mote was a fairy, about the size of his thumb, with wings that made her invisible at speed and eyes that could see four times further than any human.\n\nShe had applied to every major superhero guild in the city. Nobody had taken her seriously.\n\n\"They see small,\" she said, landing on his shoulder. \"You see patterns. I see details. Together we'd see everything.\"\n\n\"Why me?\" asked {{NAME}}.\n\n\"Because you're the only one who looked at me when I knocked on their doors,\" she said simply.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep violet suit with silver gauntlets, a short silver cape, and silver boots — same child, same face, same exact outfit in every image. {{NAME}} on a rooftop at night, the tiny fairy Mote hovering at his eye level, wings beating so fast they're almost invisible, both of them illuminated by the city lights below. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "Their first real mission: a building evacuation where the exits had been blocked by smoke.\n\nMote flew through the smoke to map every person's location, feeding {{NAME}} exact positions through his earpiece. He directed firefighters from outside with pinpoint accuracy, telling them which windows, which rooms, which floors, faster than any scanner could.\n\nEvery person was out in eleven minutes. The previous record for that building was thirty.\n\nThe fire chief looked at {{NAME}} afterward. \"How did you know where everyone was?\"\n\n\"Good information,\" said {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep violet suit with silver gauntlets, a short silver cape, and silver boots — same child, same face, same exact outfit in every image. {{NAME}} directing firefighters at a burning building at night, one arm pointing with precision to a specific window, firefighters responding, Mote just visible as a tiny glow of light at his collar, dramatic emergency scene. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "After the mission, Mote sat on the rooftop wall and {{NAME}} sat beside her, both of them looking at the city.\n\n\"Eleven minutes,\" she said.\n\n\"Eleven minutes,\" he agreed.\n\n\"The guild director called me small today,\" she said.\n\n\"The guild director has never evacuated a building in eleven minutes,\" said {{NAME}}.\n\nMote looked at him for a moment, then made a sound that was her version of a laugh: like a tiny bell struck once.\n\n\"Same time tomorrow?\" she asked.\n\n\"Every day,\" said {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep violet suit with silver gauntlets, a short silver cape, and silver boots — same child, same face, same exact outfit in every image. {{NAME}} and Mote the fairy sitting side by side on a rooftop wall overlooking the city at night, the city lights below, both small against the vast skyline, companionable and content. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "At home, getting ready for bed, {{NAME}} looked in the mirror at his ordinary-sized self in his violet suit.\n\nObservation. Pattern recognition. A partner who could go where he couldn't.\n\nHe hung his cape up carefully.\n\nOn his windowsill, Mote had left a feather no bigger than a comma: one of hers, shimmering, catching the lamplight in a way that seemed like several colours at once.\n\nHe put it next to his silver gauntlets and went to sleep.\n\nOutside, barely audible, wings moved through the night air, quick and certain and invisible.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep violet suit with silver gauntlets, a short silver cape, and silver boots — same child, same face, same exact outfit in every image. {{NAME}} lying in bed, Mote's shimmering feather visible on the windowsill catching warm lamplight, his cape on a hook nearby, the room cosy and golden, his face peaceful and content. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

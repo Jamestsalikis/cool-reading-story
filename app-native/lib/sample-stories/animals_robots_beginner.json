@@ -1,0 +1,36 @@
+{
+  "interest": "Animals + Robots",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Robot Who Learned to Be Gentle",
+  "moral": "Being gentle and slow means you never hurt the ones you love.",
+  "theme_emoji": "🤖",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver t-shirt with a red robot print, bright blue shorts, and chunky yellow sneakers — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} lived near a big green field. Many animals played there every day. One morning, a little blue robot walked into the field. The animals had never seen a robot before. They looked very surprised.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver t-shirt with a red robot print, bright blue shorts, and chunky yellow sneakers — same child, same face, same exact outfit in every image. Wide establishing shot of a large sunny green field with rolling hills in the background. {{NAME}} stands small at the edge of the field looking toward the centre where a small boxy blue robot with round glowing yellow eyes has just walked in. Cows, sheep, and rabbits scatter to the edges of the field with wide astonished eyes. Bright blue sky and white clouds above. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The robot was called Beep. Beep wanted to play with the animals. But Beep moved too fast and too loud. The animals ran away. Beep's little light on his chest went dim. He was sad.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver t-shirt with a red robot print, bright blue shorts, and chunky yellow sneakers — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}} kneeling down to look at the small blue robot Beep, whose round yellow eyes are drooping and whose chest light has turned a dim grey. {{NAME}}'s face shows gentle understanding and warmth. Blurry animal tails disappear off the edges of the scene in the background. Soft morning light. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} had an idea. He took Beep's metal hand. He showed Beep how to walk slowly. He showed Beep how to make a soft, quiet sound. Beep tried very hard.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver t-shirt with a red robot print, bright blue shorts, and chunky yellow sneakers — same child, same face, same exact outfit in every image. Dynamic action shot of {{NAME}} holding Beep the small blue robot's silver hand, both of them tiptoeing in exaggerated slow motion across the green field. {{NAME}} presses one finger to his lips in a shhh gesture and grins. Beep copies the gesture with a tiny metal finger, eyes bright and eager. The grass bends softly as if in a gentle breeze. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "A little lamb stepped close to Beep. Beep held very still. Beep made a small, soft beep sound. The lamb sniffed Beep's shiny nose. Then the other animals came close too.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver t-shirt with a red robot print, bright blue shorts, and chunky yellow sneakers — same child, same face, same exact outfit in every image. Emotional peak scene with warm golden light pouring across the green field. A fluffy white lamb stretches its nose toward the little blue robot Beep who stands perfectly still, eyes glowing a soft gentle yellow and chest light glowing warm pink. {{NAME}} stands a step back with his hands clasped together, face full of hopeful excitement. Cows and rabbits lean in from behind curiously. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "Beep made new friends that day. He played gently with every animal. Being gentle and slow means you never hurt the ones you love. Goodnight, {{NAME}}. Sleep well. Beep whispered that he had a secret button on his back. What do you think it does?",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver t-shirt with a red robot print, bright blue shorts, and chunky yellow sneakers — same child, same face, same exact outfit in every image. Warm cosy resolution scene glowing in soft amber evening light. {{NAME}} sits in the green field with drooping sleepy eyes and a contented smile. Beep the blue robot sits beside him, chest light glowing a warm soft orange. A lamb is curled across both their laps, a rabbit leans against Beep's leg, and a small cow lies in the grass nearby. The sun sets in pink and gold on the horizon. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

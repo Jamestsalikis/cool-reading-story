@@ -1,0 +1,36 @@
+{
+  "interest": "Animals + Fairies + Robots",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Fairy Who Fixed the Robot",
+  "moral": "It is okay to ask for help when something is hard.",
+  "theme_emoji": "🤖",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright orange t-shirt with a small gear print, navy blue overalls, and chunky white trainers — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} found a big round robot in the park.\nThe robot sat under an old oak tree.\nHe was not moving at all.\nFluffy grey squirrels climbed over his arms.\nHis eyes were dim and dark.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright orange t-shirt with a small gear print, navy blue overalls, and chunky white trainers — same child, same face, same exact outfit in every image. Wide establishing shot of a sunny park with a large old oak tree. A round, chunky silver robot sits motionless against the tree trunk, his round eyes dim and dark. {{NAME}} stands small nearby, head tilted, looking at the robot curiously. Fluffy grey squirrels clamber cheerfully over the robot's still arms and shoulders. Fallen leaves and acorns scatter the ground. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "{{NAME}} patted the robot on the arm.\n\"Are you okay?\" he asked.\nThe robot gave a weak little flicker.\n\"My heart gear is broken,\" said the robot.\n{{NAME}} frowned. He did not know how to fix that.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright orange t-shirt with a small gear print, navy blue overalls, and chunky white trainers — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}} standing beside the seated robot, one hand patting the robot's round silver arm gently. {{NAME}}'s face shows concern and puzzlement, brow slightly furrowed. The robot's eyes emit a tiny weak flicker of dim blue light. A small chest panel on the robot shows a cracked gear shape glowing faintly. A grey squirrel sits watching from a branch above. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "A tiny green fairy zoomed down from the oak tree.\nShe had wings like a leaf and bright gold eyes.\n\"I can fix things!\" she said loudly.\nShe flew right inside the robot's chest panel.\nSparks and little lights flew out.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright orange t-shirt with a small gear print, navy blue overalls, and chunky white trainers — same child, same face, same exact outfit in every image. Dynamic action shot. A tiny bright-green fairy with leaf-shaped wings and shining gold eyes dive-bombs from the oak tree toward the robot. She zooms directly into an open panel on the robot's chest. Golden sparks and tiny coloured lights burst outward from the panel. {{NAME}} jumps back in surprise, eyes wide and mouth open in a huge delighted grin. Squirrels scatter off the robot's arms. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "Bang! Click! Whirr!\nThe fairy flew back out, covered in tiny sparks.\nThen the robot's eyes lit up bright blue.\nHe lifted both his arms up high.\n\"I am fixed!\" he said in a warm, deep voice.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright orange t-shirt with a small gear print, navy blue overalls, and chunky white trainers — same child, same face, same exact outfit in every image. Emotional peak scene. The round silver robot stands fully upright, both arms raised triumphantly, his eyes blazing vivid bright blue. The tiny green fairy hovers in front of his chest, dusting golden sparks from her wings, grinning widely. {{NAME}} stands with both fists raised in the air, laughing with absolute joy. The squirrels leap and the park fills with warm golden light. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "The robot walked slowly through the park.\nHe was gentle and careful around the animals.\nHe and the fairy bowed to each other.\n{{NAME}} held the robot's big warm hand.\nHe felt safe and happy and very sleepy.\nGoodnight, {{NAME}}. Tomorrow the fairy says the robot needs one more adventure with you.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright orange t-shirt with a small gear print, navy blue overalls, and chunky white trainers — same child, same face, same exact outfit in every image. Warm cosy resolution scene in the park at golden hour. {{NAME}} walks hand-in-hand with the large round silver robot, looking up at him sleepily, eyes half-closed and smiling. The tiny green fairy perches on the robot's shoulder, wings folded, looking content. Grey squirrels sit in a row on a nearby bench. The old oak tree is bathed in soft golden evening light. Everything is peaceful and warm. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

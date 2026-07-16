@@ -1,0 +1,35 @@
+{
+  "interest": "Animals + Dinosaurs + Fairies",
+  "title": "{{NAME}} and the Fairy Dinosaur Sanctuary",
+  "moral": "When ancient magic and modern kindness work together, anything can be healed.",
+  "theme_emoji": "🦕",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a mossy-green tunic with fern patterns, brown shorts, and bark-brown boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "The meadow behind the old quarry had been empty for years.\n\nThen, in one week: three hedgehogs moved in, a family of rabbits took up residence under the largest stone, and a young Stegosaurus the size of a garden shed began grazing on the far side.\n\n{{NAME}} stood at the fence and watched.\n\nOn his shoulder, a fairy no bigger than his thumb said: \"The ley line opened. It woke the old sanctuary. We've been waiting for this for two hundred years.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a mossy-green tunic with fern patterns, brown shorts, and bark-brown boots — same child, same face, same exact outfit in every image. Wide meadow scene, {{NAME}} leaning on a fence watching a young Stegosaurus grazing in the distance, rabbits and hedgehogs around the meadow, a tiny glowing fairy on his shoulder. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The sanctuary needed management: the Stegosaurus was eating everything, the rabbits were tunnelling under the hedgehog burrows, and three separate fairy healers were arguing about who had jurisdiction over which animal.\n\n\"All right,\" said {{NAME}}, who was nine years old and had read eighteen books about wildlife management. \"Zones.\"\n\nHe spent two days dividing the meadow into areas with a string and some sticks. The fairies contributed boundary markers made of woven light. The animals, gradually, respected them.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a mossy-green tunic with fern patterns, brown shorts, and bark-brown boots — same child, same face, same exact outfit in every image. {{NAME}} on his knees in the meadow, measuring with string, a fairy hovering nearby weaving a glowing boundary marker, the Stegosaurus watching from its designated zone with polite interest. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "His main job: the Stegosaurus's plates.\n\nThe plates ran hot when the dinosaur was stressed or ill, a fact the fairy healers had discovered but couldn't address because iron was involved and fairy magic didn't work well on iron.\n\n{{NAME}} made a cooling compress from river clay and applied it to two plates that were running hotter than the others.\n\nThe Stegosaurus sighed so deeply the ground trembled.\n\nThe nearest fairy said: \"That should have taken us a week.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a mossy-green tunic with fern patterns, brown shorts, and bark-brown boots — same child, same face, same exact outfit in every image. {{NAME}} carefully applying a clay compress to one of the Stegosaurus's back plates with his hands, the plate cooling from red-orange to normal, the Stegosaurus's expression relaxing, fairies watching from nearby flowers. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "After a month, the sanctuary had found its rhythm.\n\nThe fairies handled healing and boundary magic. The animals sorted themselves into a working community. {{NAME}} handled everything in between: the physical repairs, the diplomacy, the steady daily work.\n\nThe Stegosaurus, he noticed, had begun sleeping with one foot stretched toward wherever {{NAME}} was working. A proximity preference. A choice.\n\n\"She likes you best,\" said the head fairy.\n\n\"She knows I fixed the plates,\" said {{NAME}}.\n\n\"Same thing,\" said the fairy.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a mossy-green tunic with fern patterns, brown shorts, and bark-brown boots — same child, same face, same exact outfit in every image. Afternoon sanctuary scene, the Stegosaurus lying down nearby as {{NAME}} works on another task, her foot extended toward him, fairies busy at small tasks around the meadow, animals settled and content. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "The last thing {{NAME}} did each evening was a slow walk around the sanctuary perimeter, checking boundaries, checking animals, checking the Stegosaurus's plates.\n\nShe always walked the perimeter with him, matching his pace, which at her size meant very slow and very steady, while the fairies' boundary lights glowed soft gold in the dusk.\n\n{{NAME}} lay in bed that night listening to the meadow: crickets, small animals, the distant slow movement of something ancient.\n\nHe closed his eyes and fell asleep to the sound of it, and dreamed of green things growing.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a mossy-green tunic with fern patterns, brown shorts, and bark-brown boots — same child, same face, same exact outfit in every image. {{NAME}} in bed, warm and cosy, the window showing a distant soft golden glow from the meadow, the room quiet, a peaceful and content expression. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

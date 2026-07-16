@@ -1,0 +1,36 @@
+{
+  "interest": "Princesses",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Princess Whose Garden Went Quiet",
+  "moral": "Small acts of kindness can bring beauty back to the whole world.",
+  "theme_emoji": "👑",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal blue t-shirt with a small gold crown on the front, neat white shorts, and gold-buckle sandals — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} walked up to a big pink castle. It had tall towers and a shiny gate. There were lots of flower beds all around. But all the flowers had gone grey and droopy. The garden was very, very quiet. Something was wrong.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal blue t-shirt with a small gold crown on the front, neat white shorts, and gold-buckle sandals — same child, same face, same exact outfit in every image. Wide establishing shot of a grand pink castle with tall towers and a golden gate, surrounded by wilted grey flower beds, with {{NAME}} standing small at the entrance looking up at the castle with a puzzled and curious expression on his face. The sky above is soft and cloudy. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "A kind princess came to the gate. Her name was Rosa. She had a worried face. The flowers had stopped growing, she said. The bees were gone. Without bees, the flowers could not grow. {{NAME}} looked at her. He had an idea.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal blue t-shirt with a small gold crown on the front, neat white shorts, and gold-buckle sandals — same child, same face, same exact outfit in every image. Close-up shot of {{NAME}}'s face showing a bright spark of realisation in his blue eyes, a hopeful smile forming, standing at the castle gate across from Princess Rosa in her pale pink dress and simple gold crown, both of them in the foreground with the grey garden behind. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} found a patch of wild clover outside the castle. He picked bunches and bunches of it. He ran back and planted it all around the flower beds. Then bees began to come. One bee, then ten bees, then so many bees.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal blue t-shirt with a small gold crown on the front, neat white shorts, and gold-buckle sandals — same child, same face, same exact outfit in every image. Dynamic action scene of {{NAME}} running with armfuls of bright green clover, planting it energetically around the grey flower beds, bees beginning to swarm in buzzing around him, movement and joy filling the scene, Princess Rosa watching with wide hopeful eyes from the gate. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The bees got to work. One by one, the flowers started to wake up. They turned pink and yellow and bright red. The garden filled with colour and sweet smells. Princess Rosa clapped her hands. The whole kingdom cheered.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal blue t-shirt with a small gold crown on the front, neat white shorts, and gold-buckle sandals — same child, same face, same exact outfit in every image. Emotional peak scene with the castle garden erupting in vibrant colour, flowers blooming brilliantly in pink, yellow, and red, bees dancing in the air, Princess Rosa clapping with joy, {{NAME}} standing in the middle of it all beaming with pride, dramatic warm sunlight breaking through the clouds and flooding the garden. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "{{NAME}} and Princess Rosa sat in the beautiful garden. Flowers bloomed all around them. The air smelled so sweet. {{NAME}} felt very happy and very sleepy. Small kind things can make big beautiful things happen. His eyes grew heavy. Far away, a tower window began to glow with a soft and curious light.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal blue t-shirt with a small gold crown on the front, neat white shorts, and gold-buckle sandals — same child, same face, same exact outfit in every image. Warm cosy resolution scene with {{NAME}} and Princess Rosa sitting together among fully bloomed colourful flowers in the castle garden, bathed in soft golden sunset light, {{NAME}}'s eyes half closed in contentment and sleepiness, bees drifting lazily in the warm air. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "interest": "Dinosaurs + Superheroes",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Dinosaur Superhero Who Saved the Day",
+  "moral": "Everyone has a special power inside them.",
+  "theme_emoji": "🦕",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red superhero cape, a navy blue t-shirt with a silver lightning bolt, yellow shorts, and purple sneakers — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} stood on top of a big green hill. The town below looked tiny. Big fluffy clouds floated by. Then the ground shook hard. A dinosaur came running up the hill. He wore a cape. A purple superhero cape!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red superhero cape, a navy blue t-shirt with a silver lightning bolt, yellow shorts, and purple sneakers — same child, same face, same exact outfit in every image. Wide establishing shot of a tall green hill with a small town visible at the base far below. {{NAME}} stands small at the very top looking out bravely. A large green dinosaur with a billowing purple cape races up the hillside toward him, kicking up dust. Dramatic blue sky and white clouds behind them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The dinosaur's name was Rex. Rex wanted to be a superhero. But Rex did not think he had any special powers. He just felt big and clumsy. {{NAME}} looked at Rex and smiled.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red superhero cape, a navy blue t-shirt with a silver lightning bolt, yellow shorts, and purple sneakers — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}} looking up at Rex the large green dinosaur with a warm and knowing smile. Rex is hunched slightly, purple cape hanging off his shoulders, his face showing uncertainty and self-doubt, eyes looking down at his big feet. Both are on the grassy hilltop, capes rippling gently in the wind. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "Then they heard a cry. A big rock had rolled in front of the town gate. Nobody could get in or out. {{NAME}} tried to push it. It was too heavy. Rex walked down and pushed with all his might.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red superhero cape, a navy blue t-shirt with a silver lightning bolt, yellow shorts, and purple sneakers — same child, same face, same exact outfit in every image. Dynamic action shot of Rex the green dinosaur in full effort, purple cape streaming, both front legs pressed hard against an enormous grey boulder blocking the town gate. His face is scrunched with mighty effort. {{NAME}} pushes too from the side, sneakers digging into the dirt, red cape flying. People peer through the gate behind the boulder with relieved hopeful faces. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "Rex gave one last huge push. The rock rolled away. The town gate swung open. Everyone rushed out cheering. They cheered loudest for Rex. Rex stood up very tall. His cape blew in the wind.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red superhero cape, a navy blue t-shirt with a silver lightning bolt, yellow shorts, and purple sneakers — same child, same face, same exact outfit in every image. Emotional peak scene with golden sunlight blazing across the scene. Rex the green dinosaur stands tall and triumphant before the open town gate, purple cape billowing heroically in the wind. A crowd of cheering townsfolk streams out around him. {{NAME}} stands to the side pumping both fists in the air, face lit up with pure admiration and joy. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "Rex knew his power now. His great big strength was his superpower. Everyone has a special power inside them. Goodnight, {{NAME}}. Sleep tight. Rex whispered that he saw something else in the distance that might need a superhero. What could it be?",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright red superhero cape, a navy blue t-shirt with a silver lightning bolt, yellow shorts, and purple sneakers — same child, same face, same exact outfit in every image. Warm cosy resolution scene glowing in soft golden evening light outside the town. {{NAME}} sits sleepily on the grassy hillside, red cape wrapped around him. Rex the green dinosaur sits beside him, enormous but gentle, purple cape draped over both of them like a blanket. {{NAME}}'s eyes are soft and closing. Stars begin to appear in a deep blue and gold sky above. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

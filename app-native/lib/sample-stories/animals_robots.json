@@ -1,0 +1,35 @@
+{
+  "interest": "Animals + Robots",
+  "title": "{{NAME}} and the Robot Who Learned to Purr",
+  "moral": "The best inventions are made to help others feel less alone.",
+  "theme_emoji": "🤖",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver-grey hoodie with a pawprint patch, dark jeans, and white high-tops — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} built the robot for the animals at the rescue shelter down the road.\n\nThe shelter had more animals than volunteers, and the night shift was lonely for the cats and dogs and one elderly rabbit named Geoffrey who had been there two years and didn't like the dark.\n\nThe robot was small enough to walk the cages without getting in the way, with a heat-sensor chest panel that glowed warm orange and a speaker that played a heartbeat.\n\n{{NAME}} called it PATCH.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver-grey hoodie with a pawprint patch, dark jeans, and white high-tops — same child, same face, same exact outfit in every image. Wide shot of a bright garage workshop, {{NAME}} standing back to admire a small friendly robot with an orange glowing chest panel, surrounded by tools and blueprints, proud expression on his face. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The first night, PATCH trundled into the shelter and stopped in front of Geoffrey's hutch.\n\nThe old rabbit pressed his nose to the wire and sniffed. PATCH's chest light pulsed slowly, like breathing.\n\nGeoffrey settled down onto his paws. His nose kept twitching, but the rigid tense line of his back slowly softened.\n\n{{NAME}} watched through the window and felt something warm spread through his chest that had nothing to do with his hoodie.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver-grey hoodie with a pawprint patch, dark jeans, and white high-tops — same child, same face, same exact outfit in every image. {{NAME}} peering through a rain-streaked shelter window at night, inside the small robot PATCH visible through the glass with its orange chest glowing softly before a rabbit hutch, an elderly rabbit pressed against the wire looking calmer. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "By the third night, PATCH had developed its own method.\n\nFor the dogs: a slow back-and-forth rolling that mimicked being patted.\n\nFor the kittens: a high-frequency vibration of its chassis that was a very convincing purr.\n\nFor Geoffrey: just the steady heartbeat and warm light.\n\n{{NAME}} hadn't programmed any of this. PATCH had figured it out by watching what each animal responded to.\n\n\"You're learning,\" {{NAME}} said, amazed.\n\nPATCH beeped twice. {{NAME}} was starting to understand that meant yes.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver-grey hoodie with a pawprint patch, dark jeans, and white high-tops — same child, same face, same exact outfit in every image. Action shot inside the shelter, PATCH rolling between dog kennels with several dogs lying peacefully nearby, kittens curled close, warm orange glow lighting the space, {{NAME}} watching proudly from the doorway. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The shelter manager called {{NAME}}'s parents to say that since PATCH arrived, adoptions had gone up forty percent.\n\nAnimals that seemed too anxious for families were calmer. Geoffrey had stopped hiding. Two dogs who had stopped eating were eating again.\n\n{{NAME}} sat in the shelter that afternoon and watched PATCH navigate the room: patient, unhurried, stopping exactly where it was needed.\n\nHe thought: this is what good looks like.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver-grey hoodie with a pawprint patch, dark jeans, and white high-tops — same child, same face, same exact outfit in every image. Afternoon shelter interior, warm sunlight through windows, {{NAME}} sitting on a bench watching PATCH across the room tending to animals, dogs lounging peacefully, Geoffrey the rabbit hopping freely, golden light everywhere. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "That night, {{NAME}} went to say goodnight to PATCH before heading home.\n\nPATCH was in the corner with Geoffrey. The robot's chest light pulsed at the pace of a sleeping heartbeat. Geoffrey was pressed against its side, eyes closed, utterly peaceful.\n\n{{NAME}} crouched down and put his hand on PATCH's smooth shell. Warmth hummed back through his palm.\n\nHe walked home through the quiet street, looking up at the stars.\n\nSomewhere behind him, through the shelter walls, he could just hear it: a small, steady, mechanical purr.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver-grey hoodie with a pawprint patch, dark jeans, and white high-tops — same child, same face, same exact outfit in every image. Cosy shelter corner at night, {{NAME}} crouching to gently place a hand on PATCH's shell, Geoffrey the rabbit asleep against the robot's side, warm orange glow, both the boy and the robot at perfect peace. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

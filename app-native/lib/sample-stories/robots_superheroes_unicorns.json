@@ -1,0 +1,35 @@
+{
+  "interest": "Robots + Superheroes + Unicorns",
+  "title": "{{NAME}} and the Three Intelligences",
+  "moral": "Wisdom is not owned by any one kind of mind, it is shared between all of them.",
+  "theme_emoji": "🤖",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep violet hero suit with silver circuit and star details, violet-silver boots, and white gloves — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} had three advisors.\n\nFIRST: SAGE, a robot with the most comprehensive information database he had ever built, capable of processing and cross-referencing any known knowledge.\n\nSECOND: Valor, the unicorn who had been assigned to the hero district as a living historical memory, carrying two thousand years of precedent in her horn.\n\nTHIRD: his own judgment, which was eleven years old and had so far never been completely wrong.\n\nHis first major solo deployment: an ancient vault had been discovered under the city and nobody knew what was in it.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep violet hero suit with silver circuit and star details, violet-silver boots, and white gloves — same child, same face, same exact outfit in every image. {{NAME}} at the vault entrance with his three advisors: SAGE on one side, Valor on the other, the ancient sealed vault door before them, the city around them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "SAGE's assessment: the vault's age (approximately 1,800 years), construction materials (pre-modern alloy), and seal design (consistent with the historical Meridian civilization's secure storage protocols).\n\nValor's assessment: a memory-image from that era showed these vaults were typically built to protect things of cultural significance, not danger. The seal type meant: preserve, not contain.\n\nHis own assessment: the seal had a handprint on it.\n\n\"Someone put this here to be found eventually,\" he said. \"By a specific kind of person.\"\n\n\"What kind?\" asked SAGE.\n\n\"Someone who brought three kinds of intelligence,\" he said.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep violet hero suit with silver circuit and star details, violet-silver boots, and white gloves — same child, same face, same exact outfit in every image. The three assessments happening simultaneously: SAGE's data display, Valor with her horn touching the wall, {{NAME}} looking at the handprint with understanding. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "He put his hand on the print.\n\nSAGE monitored the structural response. Valor maintained contact with the wall, her horn pulsing. {{NAME}} held still.\n\nThe vault opened.\n\nInside: a library.\n\nNot scrolls or stone tablets. A living library: stored in a preservation medium that kept everything intact, every document from the Meridian civilization still readable.\n\n\"An entire civilisation's knowledge,\" said SAGE, already scanning.\n\n\"They kept it for us,\" said Valor.\n\n{{NAME}} stood in the doorway for a long moment before stepping in.\n\n\"We'd better start reading,\" he said.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep violet hero suit with silver circuit and star details, violet-silver boots, and white gloves — same child, same face, same exact outfit in every image. The vault door open, light from inside showing a preserved library, all three of them at the threshold, the extraordinary discovery ahead. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "They spent three days in the vault.\n\nSAGE processed the documents sequentially and built the catalogue.\n\nValor moved through the stacks, her horn occasionally matching a preserved page to a living memory.\n\n{{NAME}} read.\n\nNot all of it. Nobody could read all of it. But he read enough to understand that the Meridian civilization had solved problems similar to the ones his city faced now, and had written down everything they'd learned.\n\n\"They failed eventually,\" said SAGE.\n\n\"But they wrote down what they learned from failing,\" said {{NAME}}. \"That's the gift.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep violet hero suit with silver circuit and star details, violet-silver boots, and white gloves — same child, same face, same exact outfit in every image. Inside the vault, SAGE scanning, Valor moving through the stacks, {{NAME}} reading with intense focus, three kinds of intelligence working through two thousand years of knowledge. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "He sealed the vault on day four, having removed what was needed for the city's current challenges and left the rest for future need.\n\nOutside, he stood with SAGE and Valor in the evening light.\n\nA civilisation two thousand years gone. Three kinds of intelligence. A library kept waiting.\n\nHe thought: the people who built this vault knew that someday, someone like us would come.\n\nHe walked home with his notes and fell into bed without changing, and slept deeply, and dreamed of a library that went on forever.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep violet hero suit with silver circuit and star details, violet-silver boots, and white gloves — same child, same face, same exact outfit in every image. {{NAME}} asleep still in his hero suit, notes on the desk, the room warm, a dreaming expression, the library continuing in his sleep. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

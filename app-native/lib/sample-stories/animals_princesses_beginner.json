@@ -1,0 +1,36 @@
+{
+  "interest": "Animals + Princesses",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Princess Who Needed a Friend",
+  "moral": "True friends are kind to everyone, big or small.",
+  "theme_emoji": "👑",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal purple t-shirt with a gold crown print, dark blue shorts, and silver sneakers — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} walked up to a shiny pink castle. Tall towers reached up to the clouds. Colourful animals lived in the gardens. Birds sang in the rose bushes. But the castle was very, very quiet.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal purple t-shirt with a gold crown print, dark blue shorts, and silver sneakers — same child, same face, same exact outfit in every image. Wide establishing shot of a grand pink castle with tall golden towers reaching into a blue sky with fluffy white clouds. {{NAME}} stands small on the cobblestone path leading to the castle gates. Colourful birds perch in blooming rose bushes on either side, and a friendly deer peeks from behind a hedge. The castle windows glow softly but look empty and lonely. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "A princess sat alone by a fountain. Her name was Lily. She had a big gold crown and a pink dress. All the animals were scared of her crown. She had no one to play with.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal purple t-shirt with a gold crown print, dark blue shorts, and silver sneakers — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}} peering around a stone pillar, his eyes wide with surprise and sympathy. In the foreground Princess Lily, a girl with dark curly hair, a sparkling pink dress, and a large gold crown, sits alone on the edge of a marble fountain looking downcast. Animals peep nervously from behind flower beds in the background. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} walked right up to Princess Lily. He sat down next to her. He was not scared at all. He said, do you want to play with the animals? She jumped up and said yes!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal purple t-shirt with a gold crown print, dark blue shorts, and silver sneakers — same child, same face, same exact outfit in every image. Dynamic action shot of {{NAME}} striding boldly toward Princess Lily in the castle garden, arm outstretched in a friendly gesture and a big grin on his face. Lily leaps up from the fountain edge with her arms raised in delight, her crown glittering in the sunlight. Curious animals, a deer, two rabbits, and a bright parrot, begin tiptoeing forward from the flower beds. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "{{NAME}} showed the animals that Lily was kind. He let a rabbit jump into Lily's arms. The rabbit sniffed her nose. Then all the animals came running over. Lily laughed and laughed.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal purple t-shirt with a gold crown print, dark blue shorts, and silver sneakers — same child, same face, same exact outfit in every image. Emotional peak scene flooded with warm golden afternoon light streaming through castle garden arches. Princess Lily holds a fluffy white rabbit that touches its nose to hers, her face lit up with pure joy. {{NAME}} stands beside her beaming proudly. A deer, a parrot, and two more rabbits press in from all sides, ears perked and tails wagging. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "Lily was not lonely any more. She and {{NAME}} played with the animals all day. True friends are kind to everyone, big or small. Goodnight, {{NAME}}. Sleep well. Princess Lily said there was a hidden room in the castle full of something magical. What could it be?",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal purple t-shirt with a gold crown print, dark blue shorts, and silver sneakers — same child, same face, same exact outfit in every image. Warm cosy resolution scene bathed in soft rose-gold evening light. {{NAME}} sits sleepily on a stone bench in the castle garden beside Princess Lily, both leaning against each other with happy drowsy smiles. Animals are nestled all around them, the deer curled at their feet, birds perched on their shoulders, and a rabbit asleep in Lily's lap. The pink castle glows warmly in the background at dusk. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "interest": "Animals + Superheroes + Unicorns",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Unicorn's Super Rescue",
+  "moral": "Even the strongest hero needs a friend sometimes.",
+  "theme_emoji": "🦄",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright teal superhero suit with a gold star on the chest, a flowing gold cape, and gold boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} flew over a wide magical valley. Below were all kinds of animals. Elephants, parrots, and deer lived in the valley. A tall white unicorn with a shining horn stood on a hill. She was the guardian of the valley. Today something was wrong. A big grey cloud was stuck over the valley.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright teal superhero suit with a gold star on the chest, a flowing gold cape, and gold boots — same child, same face, same exact outfit in every image. Wide establishing shot of a vast magical green valley seen from above. {{NAME}} flies small against the sky, cape streaming behind. Below, elephants, parrots, and deer are visible. A tall white unicorn stands on a hill with a glowing horn. A large grey cloud hangs low over the valley, blocking the sun. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "{{NAME}} landed beside the unicorn. 'What is that cloud?' asked {{NAME}}. 'It is a sad cloud,' said the unicorn. 'It will not move. All the animals are cold and gloomy.' {{NAME}} looked up. The cloud was very big. {{NAME}} needed help.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright teal superhero suit with a gold star on the chest, a flowing gold cape, and gold boots — same child, same face, same exact outfit in every image. Close-up of {{NAME}}'s face looking upward with a surprised and worried expression. The white unicorn stands beside {{NAME}}, also looking up with a concerned frown. Above them, the massive grey cloud looms low and dark. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} flew up to the cloud. But the cloud was too big to push alone. The unicorn reared up and her horn blazed with golden light. She shot a beam of warm light into the cloud. {{NAME}} pushed from one side. Together they broke the cloud apart.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright teal superhero suit with a gold star on the chest, a flowing gold cape, and gold boots — same child, same face, same exact outfit in every image. Dynamic action shot full of energy. {{NAME}} is mid-air pushing hard against one side of the massive grey cloud, cape flying. Below on the hill, the white unicorn rears up with her horn blazing a beam of golden light into the cloud. The cloud is cracking apart with light bursting through the cracks. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "Sunlight burst through the valley. The animals cheered and danced below. The elephants trumpeted loudly. The parrots flew in bright loops. The deer leaped for joy. The unicorn and {{NAME}} floated down together. All the animals ran over to them.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright teal superhero suit with a gold star on the chest, a flowing gold cape, and gold boots — same child, same face, same exact outfit in every image. Emotional peak scene with dramatic brilliant sunlight flooding the valley. {{NAME}} and the white unicorn descend together from the sky side by side. Below, elephants raise their trunks in celebration, parrots fly in loops, and deer leap joyfully. The whole valley is golden and bright. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "The unicorn and {{NAME}} lay in the warm sunny grass. The parrots sang softly. A deer curled up close. The valley smelled like flowers. {{NAME}} yawned a big yawn. It had been a wonderful adventure. Goodnight, {{NAME}}. Sleep well. Tomorrow, the unicorn says she will fly with you to a place above the clouds.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright teal superhero suit with a gold star on the chest, a flowing gold cape, and gold boots — same child, same face, same exact outfit in every image. Warm cosy resolution scene in soft golden sunlight. {{NAME}} lies sleepily in warm green grass, gold cape spread beneath like a blanket, eyes half-closed. The white unicorn rests beside {{NAME}}. A deer curls up on the other side. Parrots perch quietly in the flowers nearby. The valley glows with warm afternoon light. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

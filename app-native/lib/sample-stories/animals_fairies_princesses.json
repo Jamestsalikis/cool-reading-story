@@ -1,0 +1,35 @@
+{
+  "interest": "Animals + Fairies + Princesses",
+  "title": "{{NAME}} and the Princess Who Listened to Everything",
+  "moral": "The wisest rulers are those who hear the voices others ignore.",
+  "theme_emoji": "🐾",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a leaf-green page's coat, cream trousers, and dark buckled shoes — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "Princess Sylvie had a gift that nobody knew about.\n\nShe could hear animals and fairies, not just their sounds, but their meaning. A dog's bark translated directly. A fairy's wing-song became words.\n\nShe told only {{NAME}}, her page, because he was the only person who didn't immediately try to monetise information.\n\n\"It must be useful,\" said {{NAME}}.\n\n\"It is,\" she said. \"It's also very loud at breakfast. The palace ravens have very strong opinions.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a leaf-green page's coat, cream trousers, and dark buckled shoes — same child, same face, same exact outfit in every image. Palace breakfast room, Princess Sylvie sitting at the table with her hands over her ears looking pained while ravens caw outside the window, {{NAME}} standing nearby trying not to laugh. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "Her first official use of the gift: a dispute between the palace bakers and a family of mice in the flour storeroom.\n\nThe bakers wanted the mice removed. The mice, as Princess Sylvie translated, were not eating the flour. They were managing a fungus that had started in the east wall and would ruin the entire supply within a month if untreated.\n\nThe bakers checked. The mice were right.\n\nThe mice stayed. The bakers gave them a dedicated shelf and a nightly portion of crumbs.\n\n\"How did you know?\" the head baker asked.\n\n\"I asked,\" said the princess simply.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a leaf-green page's coat, cream trousers, and dark buckled shoes — same child, same face, same exact outfit in every image. Palace storeroom, Princess Sylvie crouching before a group of mice speaking to them seriously, {{NAME}} beside her, the bakers watching in astonishment as the princess translates. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The fairy council came next.\n\nThey had been petitioning the palace for three years about the river toll that was damaging their reed-bed settlements. Every petition had been rejected because nobody had understood quite what they were saying.\n\nPrincess Sylvie sat with them for an afternoon and for the first time the entire council spoke and was heard.\n\n{{NAME}} took notes.\n\nBy evening, the river toll had been restructured.\n\nThe head fairy touched the princess's hand with one tiny finger and said: \"You are the first.\"\n\n\"I will not be the last,\" said the princess.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a leaf-green page's coat, cream trousers, and dark buckled shoes — same child, same face, same exact outfit in every image. Palace garden, Princess Sylvie cross-legged on the grass with a circle of fairies before her, {{NAME}} beside her writing in a notepad, the princess listening with complete attention, the fairies speaking and being heard. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "Her councillors were confused. The kingdom's animals seemed to know the princess by sight and regard her with unusual calm.\n\n\"It is because she hears them,\" {{NAME}} explained to the chief councillor.\n\n\"Hears what?\"\n\n\"What they need. What they know. What they're trying to say.\"\n\nThe councillor looked at the princess, who was at that moment having a detailed conversation with a palace cat about the draughts in the north wing.\n\n\"She'll be the best ruler we've had in fifty years,\" he said slowly.\n\n\"I know,\" said {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a leaf-green page's coat, cream trousers, and dark buckled shoes — same child, same face, same exact outfit in every image. Palace corridor, Princess Sylvie crouching to talk to a large tabby cat while the chief councillor watches with a dawning expression, {{NAME}} standing to one side with a knowing look. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "That night, returning home, {{NAME}} passed the palace gardens where birds were settling into the trees for the night.\n\nThe princess was there, sitting very still, listening to the evening chorus with her eyes closed.\n\nHe watched her for a moment: this girl surrounded by everything the kingdom had to say, patient enough to hear all of it.\n\nHe walked home thinking about what it would mean to lead that way.\n\nIn bed, he lay listening to the ordinary sounds of the street, trying to hear what they said.\n\nSomewhere in the quiet, he thought he caught it: the world, going about its business, saying: I am here. I am here.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a leaf-green page's coat, cream trousers, and dark buckled shoes — same child, same face, same exact outfit in every image. {{NAME}} in bed, window cracked open to the night sounds, lying still and listening, the room dim and warm, a look of gentle wonder on his face. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

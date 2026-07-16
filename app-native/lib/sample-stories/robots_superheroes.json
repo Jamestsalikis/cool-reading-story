@@ -1,0 +1,35 @@
+{
+  "interest": "Robots + Superheroes",
+  "title": "{{NAME}} and the Robot Who Chose to Help",
+  "moral": "The best power is one that is freely chosen, not forced.",
+  "theme_emoji": "🤖",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a black-and-silver hero suit with a circuit-pattern trim, black boots, and a silver visor — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} had built VERT to be a search and rescue robot.\n\nVERT had thermal imaging, extendable arms, a flight module that could carry it above most obstacles, and an AI that updated its problem-solving approach with every new situation it encountered.\n\nWhat {{NAME}} had not built was a personality.\n\nThat, apparently, VERT had sorted out for himself.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a black-and-silver hero suit with a circuit-pattern trim, black boots, and a silver visor — same child, same face, same exact outfit in every image. {{NAME}} in his hero suit standing in his workshop looking at VERT, a sleek black-and-silver robot that is clearly animated and alert, tools and blueprints around them both. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "He realised VERT had a personality when the robot, during a training exercise, stopped mid-rescue and instead carried an injured pigeon out of the burning building.\n\nThe pigeon was not part of the exercise.\n\n\"VERT,\" said {{NAME}}, \"the objective was the training dummy.\"\n\nVERT set the pigeon down carefully, then went back in and retrieved the dummy.\n\n\"The pigeon was there first,\" VERT said. His voice had developed a slight thoughtful quality that hadn't been there a month ago.\n\n\"Fair point,\" said {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a black-and-silver hero suit with a circuit-pattern trim, black boots, and a silver visor — same child, same face, same exact outfit in every image. Outside a training building, VERT the robot carefully setting down an injured pigeon with remarkable gentleness, the training dummy tucked under its other arm, {{NAME}} watching with a combination of exasperation and pride. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The first real mission came at two in the morning: a collapsed building, three people trapped.\n\nVERT mapped the structure in seconds and identified three possible routes. He told {{NAME}} which was safest.\n\n{{NAME}} took route one. VERT took routes two and three simultaneously, his extendable arms working two spaces at once.\n\nThe three people were out in eighteen minutes.\n\nThe rescue chief looked at VERT. \"Is that thing autonomous?\"\n\n\"He's a partner,\" said {{NAME}}. \"Different thing.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a black-and-silver hero suit with a circuit-pattern trim, black boots, and a silver visor — same child, same face, same exact outfit in every image. Dramatic rescue scene, VERT extending arms into the collapsed building structure, {{NAME}} emerging from another opening with a survivor, emergency lights and dust, urgent action. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "Afterward, VERT sat in the back of the emergency vehicle and the thermal scanner in his chest ran constantly, checking and rechecking, the habit of a mind that didn't know how to switch off.\n\n{{NAME}} sat beside him.\n\n\"How do you feel?\" he asked.\n\nVERT considered this. \"Like something that works the way it was supposed to.\" A pause. \"But also: like something that chose to.\"\n\n\"You always choose,\" said {{NAME}}. \"Every time.\"\n\nVERT's chest display, usually diagnostic, showed a single steady line: even, calm, sufficient.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a black-and-silver hero suit with a circuit-pattern trim, black boots, and a silver visor — same child, same face, same exact outfit in every image. Interior of an emergency vehicle at night, {{NAME}} and VERT sitting side by side, VERT's chest showing a single steady calm line, both looking out the windows at the quiet city. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "He got home as dawn was beginning, took off his visor, and sat on his bed.\n\nVERT was charging in the next room. Through the door, {{NAME}} could hear the soft diagnostic hum: methodical, patient, processing the night's events.\n\nHe thought about VERT carrying the pigeon out first.\n\nSomewhere in the robot's decision-making, something had said: this matters. Do it.\n\nHe lay back and closed his eyes.\n\nIn the next room, VERT hummed quietly on, processing and remembering and choosing, all the way through dawn.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a black-and-silver hero suit with a circuit-pattern trim, black boots, and a silver visor — same child, same face, same exact outfit in every image. {{NAME}} lying in bed in the early morning light, peaceful and content, the door to the next room slightly open showing VERT's faint blue charging glow, the room quietly satisfied. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

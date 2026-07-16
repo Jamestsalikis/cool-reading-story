@@ -1,0 +1,35 @@
+{
+  "interest": "Animals + Dinosaurs + Superheroes",
+  "title": "{{NAME}} and the Cretaceous Emergency Squad",
+  "moral": "The most effective team is one that uses every member's unique abilities.",
+  "theme_emoji": "🦸",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a dark green hero suit with amber markings, a short cape, and sturdy amber boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "The Crisis Response Guild had a problem.\n\nThey had received a distress signal from a temporal anomaly: a nest of Pterodactyl eggs had been displaced into the present day and were about to hatch in an industrial zone with no appropriate food or habitat.\n\nThe Guild's heroes were all in action elsewhere. Available assets: one junior hero ({{NAME}}), one rescue dog (Max), and three experienced woodland animal volunteers from the Park Ranger Program.\n\n\"Also,\" said the radio operator, \"a Stegosaurus has come through the same anomaly and seems stable but confused.\"\n\n{{NAME}} put on his cape. \"On my way.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a dark green hero suit with amber markings, a short cape, and sturdy amber boots — same child, same face, same exact outfit in every image. {{NAME}} in his green hero suit at the Guild's junior station, pulling on his cape, a large rescue dog beside him and three woodland animals (a badger, fox, and deer) ready at the door. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The eggs were in a loading bay: five of them, leathery and warm, beginning to move.\n\nThe Stegosaurus was in the car park, turning in slow circles and looking increasingly unhappy about concrete.\n\n{{NAME}} divided tasks: Max and the fox tracked the heat signatures of the eggs and confirmed all five were viable. The deer, tall enough to see the area, served as lookout. The badger began excavating a temporary nest area from a patch of earth nearby.\n\n{{NAME}} went to deal with the Stegosaurus.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a dark green hero suit with amber markings, a short cape, and sturdy amber boots — same child, same face, same exact outfit in every image. Industrial zone scene, {{NAME}} approaching the distressed Stegosaurus in the car park while in the background his team works on the egg nest, Max and the fox circling, the deer watching from a height. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The Stegosaurus needed ground under its feet and something familiar to smell.\n\nThe nearby park had both. {{NAME}} led it there with a steady voice and a piece of leafy branch, walking backwards slowly, keeping eye contact.\n\nThe Stegosaurus followed.\n\nIn the park, the moment its feet hit grass, it stopped, planted all four feet, and released a breath that sounded like a pressure valve opening.\n\n\"Okay,\" said {{NAME}}. \"Stay here. I'll come back.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a dark green hero suit with amber markings, a short cape, and sturdy amber boots — same child, same face, same exact outfit in every image. {{NAME}} walking backwards leading the Stegosaurus with a leafy branch, the dinosaur following toward the park, {{NAME}}'s calm steady expression, the park visible behind him. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "When he returned to the loading bay, all five eggs had hatched.\n\nFive tiny Pterodactyl chicks were being fed a combination of mealworms (from Max's emergency kit), small fish (that the fox had retrieved from a nearby ornamental pond), and something the badger had dug up that {{NAME}} decided not to examine too closely.\n\nThe chicks were noisy and demanding and already trying to flap their stub wings.\n\n\"How long until the return portal?\" {{NAME}} called.\n\n\"Thirty minutes,\" said the radio.\n\n\"We have thirty minutes of fish,\" said the fox, with professional confidence.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a dark green hero suit with amber markings, a short cape, and sturdy amber boots — same child, same face, same exact outfit in every image. {{NAME}} crouching among five tiny Pterodactyl chicks who are being fed by Max and the fox and the badger, organised chaos, the chicks flapping stub wings, everyone working with purpose. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "All five chicks and the Stegosaurus went through the return portal with seven minutes to spare.\n\n{{NAME}} stood at the closed portal with his team around him: Max panting happily, the fox cleaning its paw, the badger eating something, the deer looking distinguished.\n\n\"Good work,\" he told them.\n\nThe fox looked at him sideways, which he had come to understand meant you too.\n\nIn bed that night, he thought about the chick that had grabbed his finger and refused to let go until the portal opened.\n\nHe fell asleep smiling, his hand warm where it had held.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a dark green hero suit with amber markings, a short cape, and sturdy amber boots — same child, same face, same exact outfit in every image. {{NAME}} asleep in bed, the room warm and golden, his hand curled slightly open on the pillow, a deep and satisfied smile on his face. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

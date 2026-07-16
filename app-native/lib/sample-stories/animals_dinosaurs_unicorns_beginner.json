@@ -1,0 +1,36 @@
+{
+  "interest": "Animals + Dinosaurs + Unicorns",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Unicorn's Rainbow Path",
+  "moral": "When friends work together, they can find the way.",
+  "theme_emoji": "🦄",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sky-blue t-shirt with a rainbow stripe, purple shorts, and white sneakers with rainbow laces — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} walked through a meadow of soft flowers.\nThe sky was full of pink and gold clouds.\nA white unicorn trotted up to him.\nHer mane shimmered with every colour.\n\"I am lost,\" she said. \"Can you help me?\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sky-blue t-shirt with a rainbow stripe, purple shorts, and white sneakers with rainbow laces — same child, same face, same exact outfit in every image. Wide establishing shot of a sweeping meadow covered in soft pink, yellow, and violet flowers under a pastel sky filled with golden clouds. {{NAME}} stands small in the middle of the meadow, looking up at a graceful white unicorn with a shimmering rainbow mane who has just trotted up to him. Both look at each other with gentle, hopeful expressions. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "{{NAME}} looked at the unicorn closely.\nShe had big, worried purple eyes.\n\"I need to find the rainbow path home,\" she said.\n{{NAME}} felt so sorry for her.\n\"I will help you,\" he said with a nod.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sky-blue t-shirt with a rainbow stripe, purple shorts, and white sneakers with rainbow laces — same child, same face, same exact outfit in every image. Close-up of {{NAME}}'s face beside the unicorn's gentle face, both looking at each other with warm expressions. The unicorn's large purple eyes are soft and worried. {{NAME}}'s blue eyes are full of sympathy and determination, giving a reassuring nod. The shimmering rainbow mane fills part of the frame with vivid colour. Soft meadow light glows around them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "They walked to the edge of a dark forest.\nA huge green dinosaur blocked the path.\nHe roared and animals scattered away.\nThe unicorn touched the dinosaur with her horn.\nA rainbow burst out into the dark trees.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sky-blue t-shirt with a rainbow stripe, purple shorts, and white sneakers with rainbow laces — same child, same face, same exact outfit in every image. Dynamic action shot at the entrance to a dark dense forest. A large green dinosaur stands roaring, animals scattering around his feet. The white unicorn steps forward bravely, touching her glowing spiral horn to the dinosaur's side. An explosion of rainbow light and colour bursts outward, lighting up the dark forest path in vivid arching colours. {{NAME}} shields his eyes with one arm, smiling in amazement. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The rainbow calmed the big dinosaur down.\nHe blinked and smiled a slow, soft smile.\nThe rainbow path glowed bright before them.\n\"That is my way home!\" the unicorn cried.\nThe dinosaur stood aside to let them through.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sky-blue t-shirt with a rainbow stripe, purple shorts, and white sneakers with rainbow laces — same child, same face, same exact outfit in every image. Emotional peak scene at the edge of the forest. A brilliant arching rainbow path glows and stretches into the bright distance through the trees. The large green dinosaur stands to one side, now calm and smiling gently. The white unicorn rears up joyfully, rainbow mane flowing. {{NAME}} stands between them, arms wide, laughing with delight. Warm golden magical light pours along the rainbow path. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "The unicorn galloped along the rainbow path.\nShe looked back and waved her shining tail.\nThe dinosaur sat down beside {{NAME}}.\nThey watched the rainbow fade into the sky.\n{{NAME}} felt warm and happy and very sleepy.\nGoodnight, {{NAME}}. Tomorrow the unicorn says she will come back with a surprise for you.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sky-blue t-shirt with a rainbow stripe, purple shorts, and white sneakers with rainbow laces — same child, same face, same exact outfit in every image. Warm cosy resolution scene as soft golden evening light fills the meadow. {{NAME}} sits drowsily in the flowery grass beside the now-calm and friendly green dinosaur, both watching a fading rainbow in the pastel sunset sky. The white unicorn is a tiny glowing dot far away on the rainbow path, her shimmering tail just visible. Small woodland animals have returned and sit peacefully nearby. Everything is bathed in gentle golden warmth. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

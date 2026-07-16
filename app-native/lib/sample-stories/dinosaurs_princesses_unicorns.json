@@ -1,0 +1,35 @@
+{
+  "interest": "Dinosaurs + Princesses + Unicorns",
+  "title": "{{NAME}} and the Horn That Remembered Dinosaurs",
+  "moral": "History is most alive in the things that remember it.",
+  "theme_emoji": "🦄",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sage-green royal tunic with silver and bone-white trim, dark trousers, and sage boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "The unicorn's horn, when {{NAME}} first saw it, was different from others he'd read about: where most were pure silver or gold, this one had a banded quality, as if it contained layers, like rock strata.\n\nThe palace scholar said: \"She carries old light. Light from before the first recorded history. Nobody knows quite what it means.\"\n\nPrincess Rosalind said: \"She won't let most people near her horn. She let you near immediately.\"\n\n{{NAME}} looked at the unicorn. The unicorn looked back.\n\n\"May I?\" he asked.\n\nShe lowered her horn to him.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sage-green royal tunic with silver and bone-white trim, dark trousers, and sage boots — same child, same face, same exact outfit in every image. {{NAME}} reaching out to gently touch the extraordinary banded unicorn horn, the unicorn's head lowered, Princess Rosalind watching, the palace scholar visible in the background. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "When he touched it, he saw: a landscape so ancient it had no name. Trees thirty metres tall. A sky with a different quality of blue.\n\nAnd in that landscape: dinosaurs. Not distantly or impressionistically. Clearly, exactly, in motion, breathing.\n\nHe understood: the horn carried the visual memory of the time before the time before. Strata of history, each band a different era.\n\nHe touched the horn for thirty seconds. When he stepped back he could describe six species he had never studied.\n\n\"She was there,\" he said quietly. \"Or something in her lineage was there.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sage-green royal tunic with silver and bone-white trim, dark trousers, and sage boots — same child, same face, same exact outfit in every image. {{NAME}} with both hands on the banded horn, his face showing a vision, golden-amber light from the horn, Princess Rosalind and the scholar watching in wonder. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The princess had been trying to identify a set of footprints found in the old quarry: too large for anything in current records, too distinctive to ignore.\n\n{{NAME}} described the creatures from the horn's memory with as much detail as he could. The scholar cross-referenced them.\n\nThe footprints matched a species he had just seen in his vision: an Velociraptor variant, slightly larger than recorded specimens, from this specific region.\n\n\"There was a local population here,\" said the scholar, reading the match. \"We didn't know.\"\n\n\"She knew,\" said {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sage-green royal tunic with silver and bone-white trim, dark trousers, and sage boots — same child, same face, same exact outfit in every image. The scholar working at a desk comparing {{NAME}}'s description to footprint measurements, the match becoming clear, Princess Rosalind and {{NAME}} watching as the discovery takes shape. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The discovery was published in the Royal Natural History journal.\n\nThe unicorn was credited as a primary source, which the editor had initially refused and then reconsidered when presented with the undeniable match between the horn-memory description and the fossil record.\n\n\"How do you credit a unicorn as a source?\" the editor asked.\n\n\"Oral tradition,\" said {{NAME}}. \"Exceptionally old.\"\n\nPrincess Rosalind signed the paper. {{NAME}} signed it. The scholar signed it.\n\nThe unicorn, when the published copy was read aloud to her, lowered her horn once: acknowledged.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sage-green royal tunic with silver and bone-white trim, dark trousers, and sage boots — same child, same face, same exact outfit in every image. The published paper being read aloud to the unicorn, who is lowering her horn in acknowledgement, Princess Rosalind and {{NAME}} and the scholar present, a warm moment of a story completed. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "He walked home thinking about the vision in the horn: that ancient landscape with a different sky.\n\nThe information had been there all along. It had just needed someone to ask and someone else who was willing to remember.\n\nIn his room, he took out his sketchbook and drew from memory: the ancient forest, the quality of the light, the Velociraptor variant as he'd seen it.\n\nHe worked until his eyes were heavy.\n\nHe left the sketchbook open and fell asleep, and in his dreams the landscape was still there, green and ancient and alive.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a sage-green royal tunic with silver and bone-white trim, dark trousers, and sage boots — same child, same face, same exact outfit in every image. {{NAME}} asleep with his sketchbook open to a drawing of the ancient landscape, the room dim and warm, a dreaming expression, history still present. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "interest": "Animals + Soccer",
+  "title": "{{NAME}} and the World Cup of the Wildwood",
+  "moral": "When everyone plays to their own strengths, every team can win.",
+  "theme_emoji": "⚽",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright orange soccer jersey, navy shorts, and orange-and-white cleats — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} had lost every football match that season.\n\nNot because he was bad. But his team had six players and the other teams always had twelve and had practised more.\n\nSo when the animals of Pinewood Park challenged him to a match on Saturday morning, a sign scratched into the mud at the park gate, {{NAME}} said yes before he could think about it.\n\nThen he thought about it. The animals had drawn a football boot and a small badger wearing a headband.\n\n\"Fair enough,\" he said.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright orange soccer jersey, navy shorts, and orange-and-white cleats — same child, same face, same exact outfit in every image. Wide shot of a park gate at dawn, {{NAME}} reading a mud-scratched sign with a football boot and tiny badger drawing, the misty park beyond the gate, birds watching from fence posts. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The animal team arrived at nine sharp.\n\nGoalkeeper: a very round badger who could spread his considerable body across the full lower half of the goal.\n\nMidfielders: three rabbits who moved so fast they left afterimages.\n\nStriker: a fox who moved with such elegant precision it was almost unfair.\n\nDefence: two deer who were, collectively, about six feet tall.\n\n{{NAME}} looked at them. He looked at his team.\n\n\"Different problem, different solution,\" he said. \"Listen up.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright orange soccer jersey, navy shorts, and orange-and-white cleats — same child, same face, same exact outfit in every image. Football pitch in a park, {{NAME}} addressing his team while across the pitch the animal team stretches and warms up, the badger goalkeeper enormous and round in the animal goal, rabbits zipping about, a fox doing elegant stretches. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}}'s plan: use the animals' own approach against them.\n\nHe put Soren head-to-head with the fox, because Soren was best at mirroring an opponent's movement.\n\nHe told his defenders to aim every clearance at the rabbits, not away from them, because rabbits flinch at incoming balls.\n\nFor the badger goalkeeper: aim high every single time, because the badger's reach was horizontal perfection but his vertical was limited.\n\nAt half time: {{NAME}}'s team two, Animals two.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright orange soccer jersey, navy shorts, and orange-and-white cleats — same child, same face, same exact outfit in every image. Dynamic match shot, {{NAME}} mid-sprint down the pitch, ball at his feet, the fox defender mirroring him, the enormous badger goalkeeper crouched ready in the background, players everywhere. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "With two minutes left, {{NAME}} had the ball at the edge of the box.\n\nThe badger spread his arms. The deer loomed. The rabbits flanked.\n\n{{NAME}} paused. Everyone froze.\n\nThen he looked up, not at the goal, but at his teammate Maya cutting in from the left, completely unmarked, because every animal had watched him and forgotten to watch anyone else.\n\nHe passed. Maya shot. High corner.\n\nThe badger dove right. The ball went left. Three to two.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright orange soccer jersey, navy shorts, and orange-and-white cleats — same child, same face, same exact outfit in every image. Dramatic goalmouth scene, {{NAME}} pointing for Maya who is mid-shot at the high corner, the badger goalkeeper diving the wrong way, deer and rabbits too late to react, late afternoon golden light, dust rising from the pitch. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "After the final whistle, the fox trotted over and touched {{NAME}}'s hand with its nose, which he understood was a compliment of the highest order.\n\nThe badger gave him a dignified nod. The rabbits ran figure eights around his ankles.\n\nThey left {{NAME}} at the park gate as the sun went down, the forest swallowing them one by one.\n\n{{NAME}} walked home with muddy boots and a full heart, replaying Maya's goal in his head.\n\nIn the dark of his room, almost asleep, he heard it: the faint, far-off sound of a crowd of animals cheering.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright orange soccer jersey, navy shorts, and orange-and-white cleats — same child, same face, same exact outfit in every image. {{NAME}} lying in bed in a cosy dim room, boots visible by the door, peaceful smile on his face, warm golden bedside lamp, the room settled and quiet. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

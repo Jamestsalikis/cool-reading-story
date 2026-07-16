@@ -1,0 +1,35 @@
+{
+  "interest": "Animals + Fairies + Superheroes",
+  "title": "{{NAME}} and the Green Guard",
+  "moral": "The world needs heroes who protect the small and quiet things, not just the large and loud ones.",
+  "theme_emoji": "🦸",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a leafy-green hero suit with silver wing details, dark trousers, and forest-green boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}}'s hero name was Greenwatch, and his self-assigned mission was: urban nature.\n\nNot the big exciting emergencies. The overlooked ones: the starling flock disrupted by construction, the bee colony in the condemned building, the river otter family cut off from the water by a new fence.\n\nNobody gave him credit for these.\n\nHe was okay with that.\n\nThen the Thornwood Fairy Council contacted him and said: something bigger is coming.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a leafy-green hero suit with silver wing details, dark trousers, and forest-green boots — same child, same face, same exact outfit in every image. {{NAME}} in his green hero suit standing on a city rooftop at golden hour, birds landing on the ledge beside him naturally, the city below, a confident but understated hero. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The something bigger: a development company had acquired all the land around the Thornwood, a fifty-acre urban forest full of fairy settlements and established animal communities. Groundbreaking was in three days.\n\nThe Fairy Council had tried legal channels. The city records had tried. The animals had tried their own methods, which had been ineffective but creative.\n\n{{NAME}} listened to the full briefing, which took two hours because every fairy had a different account of the same events and all of them had to be heard.\n\n\"What do you actually need from me?\" he asked at the end.\n\n\"Documentation,\" said the head fairy. \"Nobody knows what's in the wood.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a leafy-green hero suit with silver wing details, dark trousers, and forest-green boots — same child, same face, same exact outfit in every image. {{NAME}} in the fairy council's tiny gathering spot in the Thornwood, sitting cross-legged listening to multiple fairies speaking at once, animals settled around the edges, autumn light through the trees. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "He spent two days in the Thornwood, documenting everything: every fairy settlement, every animal family, every protected plant species, with photographs and notes and maps.\n\nThe fox guided him through the densest parts. The badger showed him the ancient set that had been occupied continuously for sixty years. The fairy council illuminated sections of the canopy nobody had mapped before.\n\nHe found three species that should have been on the protected list but weren't, because nobody had looked.\n\nHe filed the documentation that evening.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a leafy-green hero suit with silver wing details, dark trousers, and forest-green boots — same child, same face, same exact outfit in every image. {{NAME}} in the forest taking careful notes, a fox guiding him along a path, fairies illuminating the canopy above, the badger showing him the old set, comprehensive and purposeful documentation. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The development was halted the following day, pending environmental review.\n\nThe review would take months. The protected species listing would take weeks. Combined: the Thornwood was safe for at least a year, probably longer.\n\n{{NAME}} stood at the Thornwood entrance as the review notice went up on the gate.\n\nEvery fairy in the wood came to the edge and hovered in a line.\n\nThe fox sat beside him.\n\nThe head fairy said, very formally: \"The Thornwood recognises Greenwatch as a friend.\"\n\n{{NAME}} didn't say anything, because there wasn't anything that needed saying.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a leafy-green hero suit with silver wing details, dark trousers, and forest-green boots — same child, same face, same exact outfit in every image. {{NAME}} standing at the Thornwood gate, the forest behind him full of tiny fairy lights lining the edge, the fox beside him, the official review notice on the gate, a quiet moment of genuine accomplishment. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "He walked home through the city in his hero suit, the documentation folder under his arm.\n\nThe city moved around him: busy and loud and entirely unaware of what had just been saved.\n\nHe thought: most heroism looks like this. Paperwork and patience and showing up when nobody is watching.\n\nIn bed, he lay looking at the ceiling.\n\nFrom somewhere across the city, probably his imagination, he heard it: the Thornwood settling into evening. Tiny lights. Small animals. The deep old hum of an intact place.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a leafy-green hero suit with silver wing details, dark trousers, and forest-green boots — same child, same face, same exact outfit in every image. {{NAME}} lying in bed in a cosy room, the documentation folder on the desk, warm lamp, a deep satisfied expression, at rest and at peace. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

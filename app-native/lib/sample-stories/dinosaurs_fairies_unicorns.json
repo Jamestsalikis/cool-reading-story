@@ -1,0 +1,35 @@
+{
+  "interest": "Dinosaurs + Fairies + Unicorns",
+  "title": "{{NAME}} and the Song at the Beginning",
+  "moral": "The oldest things carry the longest memories, and memory is a kind of magic.",
+  "theme_emoji": "🦕",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep violet shirt with a golden spiral pattern, dark trousers, and gold-tipped boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "The library's deepest room held a collection nobody was allowed into except the Keeper.\n\nThe Keeper was a fairy who had held the position for four hundred years, and she let {{NAME}} in because he was the first researcher in a decade who had asked the right question.\n\nThe right question: not what is in there, but what needs to be known from in there.\n\nShe took him to the oldest shelf: two items.\n\nA fossilised dinosaur tooth.\n\nA single hair from a unicorn's mane, preserved in amber.\n\n\"These are from the same day,\" she said.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep violet shirt with a golden spiral pattern, dark trousers, and gold-tipped boots — same child, same face, same exact outfit in every image. A deep ancient library room, {{NAME}} and a small very old fairy standing before the oldest shelf, holding the two ancient objects gently in the light, the room full of dust and wonder. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "She told him the story.\n\nFour hundred million years ago, give or take, when the last dinosaurs and the first unicorns had existed simultaneously for a brief window, there had been a meeting.\n\nNot an event. A moment: a Triceratops and a unicorn, alone at a water source, recognising each other across an enormous evolutionary distance.\n\nThe tooth was from the Triceratops, shed naturally. The unicorn had left a hair in its horn-scratch on a tree.\n\nA fairy had found both and kept them together.\n\n\"Why?\" asked {{NAME}}.\n\n\"Because some moments deserve a witness,\" she said.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep violet shirt with a golden spiral pattern, dark trousers, and gold-tipped boots — same child, same face, same exact outfit in every image. The fairy showing {{NAME}} an image in the amber: the Triceratops and unicorn at a water source, a small point of fairy light witnessing, {{NAME}}'s face lit by the ancient amber glow. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} spent three days studying both objects with the most careful instruments available.\n\nThe fairy provided the context he couldn't get from instruments: the quality of the meeting, what the creatures had communicated, the particular quality of that ancient still moment.\n\nHe wrote it down in the record book he was given specifically for this purpose.\n\n\"You're making it real again,\" said the fairy.\n\n\"It always was real,\" said {{NAME}}. \"I'm making it legible.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep violet shirt with a golden spiral pattern, dark trousers, and gold-tipped boots — same child, same face, same exact outfit in every image. {{NAME}} writing carefully in a new record book, the two ancient objects beside him, the fairy watching, the deep library around them, warm lamplight. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "On his last day, the fairy said: \"There is a living unicorn who carries a memory of that time. Not the memory, but an echo. A resonance.\"\n\nShe took him to the library garden.\n\nThe unicorn was old and white and very still. Her horn was silver-grey with age.\n\nWhen {{NAME}} held up the preserved hair, she went absolutely still for a long moment.\n\nThen her horn pulsed once, warm and ancient.\n\n\"She remembers the echo,\" said the fairy.\n\n{{NAME}} put the hair down gently.\n\n\"So do I now,\" he said.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep violet shirt with a golden spiral pattern, dark trousers, and gold-tipped boots — same child, same face, same exact outfit in every image. {{NAME}} in the library garden holding the preserved unicorn hair up toward the ancient white unicorn, her horn pulsing with a warm ancient light, the fairy watching from {{NAME}}'s shoulder. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "He walked home in the long autumn evening.\n\nA Triceratops and a unicorn, at a water source, a very long time ago. A fairy noticing and keeping what mattered. A record book now with one more entry.\n\nThe world was older than he could feel. The things that had lived in it were more various than he could imagine.\n\nSome of them had met and recognised each other.\n\nHe got into bed and looked at the ceiling.\n\nIn the dark, he felt it: the very faint resonance of something ancient, still carrying on.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep violet shirt with a golden spiral pattern, dark trousers, and gold-tipped boots — same child, same face, same exact outfit in every image. {{NAME}} lying in bed looking at the ceiling in a warm dark room, the sense of something ancient carried lightly, a look of quiet wonder, deeply at peace. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

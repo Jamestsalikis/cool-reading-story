@@ -1,0 +1,36 @@
+{
+  "interest": "Robots + Superheroes",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Robot Sidekick",
+  "moral": "The best teams look after each other, no matter what.",
+  "theme_emoji": "🤖",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright teal superhero suit with a silver lightning bolt on the chest, a dark navy cape with silver edges, and teal boots with silver soles — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} flew above the big city. His cape snapped in the wind. The city had tall towers and bright lights. Then he heard a crash far below. He looked down and saw a small robot stuck under a heavy rock. The robot could not move.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright teal superhero suit with a silver lightning bolt on the chest, a dark navy cape with silver edges, and teal boots with silver soles — same child, same face, same exact outfit in every image. Wide establishing shot of a gleaming futuristic city at day with tall colourful towers and flying vehicles. {{NAME}} is a small figure high in the sky, cape streaming behind him, looking down at the city below where a tiny robot is visible trapped under a large grey rock. The scale of the city makes {{NAME}} look small and determined. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "{{NAME}} landed next to the robot. The robot had yellow eyes and a kind face. It said in a small voice, \"I was trying to save a cat. The rock fell on me.\" {{NAME}} looked at the big heavy rock. He crouched down and got ready.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright teal superhero suit with a silver lightning bolt on the chest, a dark navy cape with silver edges, and teal boots with silver soles — same child, same face, same exact outfit in every image. Close-up of {{NAME}} crouching in front of the trapped robot, both faces close together. The robot has warm yellow glowing eyes and a gentle expression despite being pinned. {{NAME}}'s face shows focused determination and kindness. The large grey rock looms in the foreground. City buildings rise in the background. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} grabbed the rock with both hands. He used every bit of his superhero strength. The rock lifted up slowly. The robot rolled free. Then the robot reached up and helped push the rock away together. Crash! It landed far away.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright teal superhero suit with a silver lightning bolt on the chest, a dark navy cape with silver edges, and teal boots with silver soles — same child, same face, same exact outfit in every image. Dynamic action shot of {{NAME}} heaving a massive grey rock overhead, muscles strained, teeth gritted, his navy cape fanned out dramatically. The robot rolls free beside him, pushing up with both arms to help. Energy lines and dust burst outward from the effort. The yellow-eyed robot and {{NAME}} both strain together with intensity. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "A small orange cat jumped down from a wall and landed on the robot's head. It purred loudly. The robot's yellow eyes went soft with happiness. It looked at {{NAME}}. \"Thank you,\" it said quietly. {{NAME}} smiled the biggest smile.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright teal superhero suit with a silver lightning bolt on the chest, a dark navy cape with silver edges, and teal boots with silver soles — same child, same face, same exact outfit in every image. Emotional peak scene on the city street in warm golden afternoon light. The yellow-eyed robot sits upright with a fluffy orange cat perched on its head, its eyes glowing with soft happiness. {{NAME}} crouches beside the robot, smiling the widest smile, one hand resting on the robot's shoulder. The city glows warmly around them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "{{NAME}} flew slowly home as the stars came out. He felt good all over. He got into bed and pulled the covers up to his chin. He wondered if the robot and the cat were sleeping too. Goodnight, {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright teal superhero suit with a silver lightning bolt on the chest, a dark navy cape with silver edges, and teal boots with silver soles — same child, same face, same exact outfit in every image. Warm cosy resolution scene in a snug bedroom lit by a golden lamp. {{NAME}} lies in bed under a teal duvet printed with silver lightning bolts and small robot shapes, eyes gently closed and smiling. His navy cape hangs on the back of a chair. Through the window the city skyline glimmers under a starry sky. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

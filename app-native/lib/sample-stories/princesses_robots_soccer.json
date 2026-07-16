@@ -1,0 +1,35 @@
+{
+  "interest": "Princesses + Robots + Soccer",
+  "title": "{{NAME}} and the Royal Tactical System",
+  "moral": "The best strategies are built from data and wisdom in equal measure.",
+  "theme_emoji": "⚽",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal purple and silver soccer jersey, dark purple shorts, and silver-purple cleats — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "Princess Elara was certain her kingdom's national football team could win the Continental Cup.\n\nThe team was good. Their tactical data was excellent. What they lacked: a system that could use both simultaneously.\n\nShe hired {{NAME}} to build it.\n\n\"I need a robot that can analyse in real time and a human who can interpret what the robot says,\" she told him.\n\n\"I am both of those things,\" said {{NAME}}.\n\n\"I know,\" said Princess Elara. \"That's why I called you.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal purple and silver soccer jersey, dark purple shorts, and silver-purple cleats — same child, same face, same exact outfit in every image. Princess Elara's sports strategy room, maps and data displays on every wall, {{NAME}} standing before her being briefed on the Continental Cup challenge. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "He built TACTIS: a tactical analysis robot that processed match data faster than any human analyst and could model sixteen different opposition formations simultaneously.\n\nBut TACTIS, he designed deliberately, would never make tactical decisions.\n\nIt would only present options, ranked by probability of success, and wait.\n\n\"Why won't it decide?\" Princess Elara asked.\n\n\"Because the right decision depends on the players' state of mind, the weather, the crowd pressure, and about forty other things TACTIS can't feel,\" said {{NAME}}. \"It gives me everything I need. I make the call.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal purple and silver soccer jersey, dark purple shorts, and silver-purple cleats — same child, same face, same exact outfit in every image. {{NAME}} and Princess Elara looking at TACTIS's display showing ranked options with probability scores, the princess understanding the design philosophy. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The Continental Cup: six matches over ten days.\n\nTACTIS processed opposition footage overnight before each match. {{NAME}} reviewed the outputs at six AM and adjusted tactics. Princess Elara reviewed them at seven and asked the questions he hadn't thought of.\n\nThe team executed.\n\nBy the semi-final, they had beaten three ranked opponents by being consistently one tactical adjustment ahead of what was expected.\n\n\"They can't predict us,\" the team captain said.\n\n\"We predict them,\" said {{NAME}}. \"We react. That's the difference.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal purple and silver soccer jersey, dark purple shorts, and silver-purple cleats — same child, same face, same exact outfit in every image. Pre-match strategy session, {{NAME}} and Princess Elara briefing the team with TACTIS's analysis visible, the team focused and ready, the semi-final stadium in the background. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The final: one goal down at half time.\n\nTACTIS ran seventeen scenarios. The highest probability: maintain position, wait for the opposition to press, exploit the space behind.\n\n{{NAME}} looked at it for thirty seconds. Then he said: \"Higher risk option. Their goalkeeper has been slow to react when shots come from outside the box. Three of the seventeen scenarios show we can win faster.\"\n\nPrincess Elara said: \"Your call.\"\n\nHe made it.\n\nTwo goals in twelve minutes. Champions.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal purple and silver soccer jersey, dark purple shorts, and silver-purple cleats — same child, same face, same exact outfit in every image. The championship winning goal, {{NAME}} celebrating on the sideline with Princess Elara and TACTIS's display showing the outcome, the team running in triumph on the pitch. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "In the quiet of the locker room after, Princess Elara sat beside him.\n\n\"You overruled TACTIS at the critical moment,\" she said.\n\n\"TACTIS gave me seventeen scenarios,\" he said. \"I chose the eighteenth. Which it had flagged as possible but unlikely.\"\n\n\"Why?\"\n\n\"I felt it,\" he said. \"The goalkeeper's posture had changed. TACTIS measured it. I understood it.\"\n\nShe nodded slowly.\n\n\"That's what I built the system for,\" he said.\n\nIn bed that night, he fell asleep with the trophy's reflection on the ceiling.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal purple and silver soccer jersey, dark purple shorts, and silver-purple cleats — same child, same face, same exact outfit in every image. {{NAME}} asleep in the hotel room, trophy visible reflecting gold on the ceiling above him, a deep and earned rest. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

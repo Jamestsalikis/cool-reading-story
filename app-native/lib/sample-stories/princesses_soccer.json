@@ -1,0 +1,35 @@
+{
+  "interest": "Princesses + Soccer",
+  "title": "{{NAME}} and the Royal Football Tournament",
+  "moral": "The best teams are built on trust, not trophies.",
+  "theme_emoji": "⚽",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal purple soccer jersey with a small crown badge, white shorts, and purple cleats — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} was recruited to play in the Royal Invitational Tournament, which sounded impressive until he arrived and found out the other team was the Palace Guard: twelve enormous men who had all played football semi-professionally before becoming guards.\n\nHis team: himself, four kids from the village, and Princess Margaux, who had turned up in her best gown and announced she would play centre forward.\n\nEveryone looked at everyone else.\n\n\"I'm fast,\" said the princess, not waiting for objections. \"Let's train.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal purple soccer jersey with a small crown badge, white shorts, and purple cleats — same child, same face, same exact outfit in every image. Wide palace courtyard, {{NAME}} and four village kids looking at Princess Margaux in a royal gown who stands before them with her arms crossed and a determined expression, the imposing Palace Guard team warming up in the background. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "Princess Margaux was fast. Genuinely, embarrassingly fast.\n\nBut she had never played as part of a team before, and her natural instinct was to take the ball and solve the problem herself.\n\n\"Football isn't chess,\" {{NAME}} told her, after the third training session where she'd scored twice and lost the ball three times more. \"You can't solve it alone.\"\n\nShe stopped. Looked at him. \"Tell me what I'm missing.\"\n\nThis, {{NAME}} thought, is a person who actually wants to be good at things.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal purple soccer jersey with a small crown badge, white shorts, and purple cleats — same child, same face, same exact outfit in every image. Training session on a palace lawn, {{NAME}} talking earnestly to Princess Margaux who listens with intense focus, other players stretching nearby, the scene showing honest coaching. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "He taught her to look up. To see the whole pitch, not just the ball.\n\nThe tournament match was three days later. The Palace Guard played hard and fast. By half time, {{NAME}}'s team was two down.\n\nBut the Guard had not accounted for Princess Margaux's speed through the second half, or for the fact that she had spent three days learning to trust her teammates.\n\nShe set up three goals in twenty minutes, running channels, holding the ball until the last second, finding {{NAME}} exactly when he needed it.\n\nFinal score: three all.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal purple soccer jersey with a small crown badge, white shorts, and purple cleats — same child, same face, same exact outfit in every image. Dynamic match scene, Princess Margaux making a perfect through-ball pass with her gown billowing, {{NAME}} running onto it, the massive Palace Guard defenders a step too slow, the goal open ahead. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The draw was enough for {{NAME}}'s team to win on goal difference.\n\nPrincess Margaux held the small tournament trophy and looked at it for a long time.\n\n\"I've won things before,\" she said. \"Competitions where I was the best person. This is different.\"\n\n\"You weren't the best person this time,\" said {{NAME}}. \"We were.\"\n\nShe handed him the trophy.\n\n\"You keep it,\" she said. \"I'm keeping the feeling.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal purple soccer jersey with a small crown badge, white shorts, and purple cleats — same child, same face, same exact outfit in every image. {{NAME}} holding the small tournament trophy, Princess Margaux standing beside him looking not at the trophy but at him, both smiling, teammates behind them, warm late-afternoon light. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "On the road home, {{NAME}} held the trophy in his lap and replayed the match.\n\nThe pass Margaux had made in the 72nd minute, the one that had let him score the equaliser, had been perfect. She had seen the space before he had.\n\nIn his room that night, he put the trophy on his shelf and lay looking at it.\n\nHe was almost asleep when he heard something outside: the distant thump of someone practising free kicks in the palace courtyard, long after dark.\n\nHe smiled. Some people just couldn't stop.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal purple soccer jersey with a small crown badge, white shorts, and purple cleats — same child, same face, same exact outfit in every image. {{NAME}} asleep in bed, the trophy visible on the shelf behind him, the room warm and golden, peaceful smile on his face. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "interest": "Animals + Soccer + Superheroes",
+  "title": "{{NAME}} and the Match That Saved the Nature Reserve",
+  "moral": "Sometimes you fight for something not because you can win, but because it's worth fighting for.",
+  "theme_emoji": "⚽",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep green and gold hero-stripe soccer jersey, dark shorts, and gold-accented boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "The nature reserve was going to be turned into a shopping centre unless someone raised eighty thousand in thirty days.\n\nThe reserve's founder, old Mr Vance, had one idea: a charity football match. Heroes versus Legends. Celebrity names. Big crowd.\n\nHe needed someone to organise it.\n\nThe fox at the reserve entrance had been watching {{NAME}} for a week before Mr Vance found him. The fox had chosen, and Mr Vance trusted the fox's judgement implicitly.\n\n\"The fox picked you,\" Mr Vance said, by way of introduction.\n\n\"I'll do it,\" said {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep green and gold hero-stripe soccer jersey, dark shorts, and gold-accented boots — same child, same face, same exact outfit in every image. {{NAME}} meeting Mr Vance at the reserve entrance, the fox sitting between them like a formal intermediary, the reserve's trees and meadow visible behind the gate. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The organisation took three weeks.\n\n{{NAME}}'s hero contacts came through: four professional heroes agreed to play. His football network delivered six former league players. The animals of the reserve were, he discovered, an extremely effective promotion team: every creature that could carry a flyer apparently did so.\n\nThe squirrels deposited flyers on every park bench in the city. The crows left them on doorsteps. The fox sat in the high street with a poster propped against it that he maintained {{NAME}} had arranged but that he had arranged himself.\n\n\"You're a natural marketer,\" {{NAME}} told the fox.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep green and gold hero-stripe soccer jersey, dark shorts, and gold-accented boots — same child, same face, same exact outfit in every image. Busy city street, a fox sitting dignified beside a match poster, squirrels visible on park benches in the background near scattered flyers, {{NAME}} watching with a combination of amazement and respect. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The match itself: two thousand people turned up, which was a thousand eight hundred more than anyone expected.\n\nThe heroes played with enormous enthusiasm and technically imperfect football. The legends played with skill and the light competitive glint of people who still hate losing.\n\n{{NAME}} played too, in the reserve's team colours, and scored with a cross from the fox's position, which nobody understood except him.\n\nThe fox was not on the pitch. But it was watching from the reserve fence exactly where a winger would stand.\n\n\"I can see the angles from here,\" {{NAME}} explained later. Nobody believed him.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep green and gold hero-stripe soccer jersey, dark shorts, and gold-accented boots — same child, same face, same exact outfit in every image. Match scene, {{NAME}} scoring a goal with an unusual angled shot, heroes and legends on the pitch together, the crowd of two thousand visible, a celebratory atmosphere. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "Final total: ninety-four thousand.\n\nMr Vance sat on the bench beside {{NAME}} as the crowd cleared, the number on a printout in his hand.\n\n\"Fourteen thousand over target,\" he said. \"The reserve is safe.\"\n\nThe fox had entered the pitch at some point and was sitting on Mr Vance's other side with an air of someone who had expected this outcome all along.\n\n\"You trusted a fox's judgement,\" said {{NAME}}.\n\n\"The fox has better judgement than most people I know,\" said Mr Vance simply.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep green and gold hero-stripe soccer jersey, dark shorts, and gold-accented boots — same child, same face, same exact outfit in every image. {{NAME}} and Mr Vance sitting on the bench after the match, the fox between them, the printout with the final figure in Mr Vance's hand, the now-safe reserve visible beyond the pitch. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "He walked through the reserve as it closed at dusk.\n\nThe animals had returned to their usual routines: the deer in the east meadow, the birds settling, the fox somewhere ahead of him on the path.\n\nEvery one of them was here because the reserve existed.\n\nThe reserve existed because of thirty days of effort and a charity match and a fox's recommendation.\n\nHe walked home in the last light, the reserve gate closing behind him.\n\nIn bed, he slept deeply, and in his sleep he could hear it: the reserve at night, alive and continuing.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep green and gold hero-stripe soccer jersey, dark shorts, and gold-accented boots — same child, same face, same exact outfit in every image. {{NAME}} sleeping deeply in a warm cosy room, the sense of something well-saved, complete peace, the world outside safe and continuing. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

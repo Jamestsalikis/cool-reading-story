@@ -1,0 +1,35 @@
+{
+  "interest": "Dinosaurs + Princesses + Superheroes",
+  "title": "{{NAME}} and the Cretaceous Crisis",
+  "moral": "The most powerful forces in any situation are trust and clear thinking.",
+  "theme_emoji": "🦸",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a dark blue hero tunic with a gold dinosaur emblem, armoured dark trousers, and blue-gold boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "The temporal fault opened above the palace at midnight.\n\nFour Raptors, one Stegosaurus, and a very confused Pterodactyl fell through it.\n\nThe palace was evacuated in two minutes, which was efficient.\n\nThe problem: Princess Helene had refused to evacuate and was in the courtyard trying to reason with the Stegosaurus.\n\nThe hero squad that arrived found her doing a reasonable job of it, actually.\n\n{{NAME}}, the squad's youngest member, was the one who noticed: the princess wasn't just brave, she was effective.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a dark blue hero tunic with a gold dinosaur emblem, armoured dark trousers, and blue-gold boots — same child, same face, same exact outfit in every image. Palace courtyard at night, the Stegosaurus surrounded by emergency lights, Princess Helene speaking to it calmly from close range, heroes arriving and stopping in surprise at her effectiveness. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The Raptors were the greater problem: they were coordinated, intelligent, and had cornered three heroes at the east wall.\n\nBut {{NAME}} had reviewed his dinosaur data: Raptors responded to authority signals. A specific posture, maintained steadily, read as dominance.\n\nHe walked toward them. Steadily. Directly. Maintaining the posture.\n\nPrincess Helene appeared at his shoulder.\n\nTwo humans, authority posture, unwavering.\n\nThe Raptors backed toward the wall and held there, watching.\n\n\"How did you know that?\" said Princess Helene.\n\n\"Natural history library,\" said {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a dark blue hero tunic with a gold dinosaur emblem, armoured dark trousers, and blue-gold boots — same child, same face, same exact outfit in every image. {{NAME}} and Princess Helene side by side, both in authority posture, the four Raptors backed against the palace wall watching them, a tense but controlled standoff. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The Pterodactyl had gotten into the palace's map room and was methodically destroying the shelving.\n\nNot aggressively: it seemed fascinated by the paper.\n\n{{NAME}} entered the map room and, on a theory, presented it with the largest, most colourful map available.\n\nThe Pterodactyl examined it for four minutes, made a satisfied sound, folded its wings, and sat on it.\n\nPrincess Helene arrived behind {{NAME}}.\n\n\"It wanted something to land on,\" she said.\n\n\"Something significant,\" he said. \"Look: it chose the kingdom's original land survey.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a dark blue hero tunic with a gold dinosaur emblem, armoured dark trousers, and blue-gold boots — same child, same face, same exact outfit in every image. The Pterodactyl sitting contentedly on the large colourful map, wings folded, looking satisfied, {{NAME}} and Princess Helene watching from the doorway with matching expressions of amused relief. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The return portal was opened by the temporal team forty minutes later.\n\nThe Raptors went through calmly, as long as {{NAME}} and Princess Helene maintained their position until the last one was through.\n\nThe Stegosaurus walked through with the same dignity it had maintained throughout.\n\nThe Pterodactyl had to be redirected from the map room with considerable negotiation, ultimately leaving the land survey behind, which the palace archivist declared an extraordinary act of theft.\n\n\"It can't come back to answer charges,\" said {{NAME}} gently.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a dark blue hero tunic with a gold dinosaur emblem, armoured dark trousers, and blue-gold boots — same child, same face, same exact outfit in every image. The last Raptor stepping through the return portal, {{NAME}} and Princess Helene watching, the crisis resolved, the palace beginning to settle, the night sky clearing above. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "After the debrief, Princess Helene and {{NAME}} sat in the palace kitchen waiting for the all-clear.\n\nShe said: \"I was in the courtyard because I've read everything about prehistoric animals since I was five.\"\n\n\"That's exactly why I'm in this job,\" said {{NAME}}.\n\nShe looked at him. \"The hero program has an opening for a prehistoric specialist.\"\n\n\"I know,\" he said. \"I applied this morning. Before all this.\"\n\nShe almost laughed. \"Good timing.\"\n\nHe went home and slept for eleven hours straight.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a dark blue hero tunic with a gold dinosaur emblem, armoured dark trousers, and blue-gold boots — same child, same face, same exact outfit in every image. {{NAME}} in deep contented sleep in his bed, the room quiet and golden, completely at rest after an extraordinary night. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

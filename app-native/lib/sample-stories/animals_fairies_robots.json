@@ -1,0 +1,35 @@
+{
+  "interest": "Animals + Fairies + Robots",
+  "title": "{{NAME}} and the Clockwork Garden",
+  "moral": "The natural world and the mechanical world can help each other, if we connect them with care.",
+  "theme_emoji": "🧚",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a copper-and-green jacket with gear buttons, dark trousers, and copper-toed boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "The garden had been dying for two years.\n\nNobody could say exactly why: the soil was tested, the water was analysed, the plants were diagnosed. All results: normal. But the garden kept fading, the colours draining, the leaves losing their sheen.\n\nThe fairies in the old rose bush at the back of the garden knew why. They had been trying to tell someone for two years but nobody could hear them.\n\n{{NAME}} arrived with his newest robot, TEND, whose primary function was environmental monitoring. TEND's sensors could detect things no human instrument could measure.\n\nOn the first scan, TEND said: \"I am receiving non-standard signals from the rose bush.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a copper-and-green jacket with gear buttons, dark trousers, and copper-toed boots — same child, same face, same exact outfit in every image. A fading garden, {{NAME}} beside TEND the monitoring robot who is scanning the rose bush where tiny fairy lights are barely visible, the garden grey and tired around them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The fairies had been trying to signal that a deep water pipe had cracked four feet down, redirecting water away from the garden's root network.\n\nTEND confirmed the crack with its ground-penetration array.\n\n\"You understood that from their signals?\" {{NAME}} asked TEND.\n\n\"I cross-referenced the signal patterns with the soil moisture data,\" TEND said. \"The signals were consistent and directional. They were pointing at the same location repeatedly.\"\n\n{{NAME}} looked at the rose bush, where the faint lights pulsed urgently.\n\n\"They've been trying to tell us for two years,\" he said quietly.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a copper-and-green jacket with gear buttons, dark trousers, and copper-toed boots — same child, same face, same exact outfit in every image. {{NAME}} crouching beside the rose bush, TEND beside him displaying data, the fairy lights in the roses now bright and agitated, pointing toward the ground, {{NAME}}'s expression moving from understanding to concern. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "They dug together: {{NAME}} with a spade, TEND guiding precise depth with its sensors, the fairies hovering above the excavation in a tight anxious cluster.\n\nThe pipe was found at exactly four feet, the crack clear and obvious, a steady trickle of water running sideways through the clay.\n\nThe fairies flew into the excavation and used their magic on the surrounding soil: drawing moisture back toward the root zone, healing the micro-organism community that had collapsed.\n\nTEND calculated the new water distribution.\n\n{{NAME}} patched the pipe.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a copper-and-green jacket with gear buttons, dark trousers, and copper-toed boots — same child, same face, same exact outfit in every image. Dynamic action scene, {{NAME}} patching a pipe in an excavated trench while fairies fly around the root zone sending golden healing light into the soil, TEND standing above monitoring data. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "Three days later: colour returned to the garden.\n\nNot all at once. The roses first, then the older plants, then the lawn.\n\nTEND ran daily scans and reported each new improvement. The fairies seemed to appreciate the precision, pointing things out to TEND and watching as it recorded them.\n\n\"They're teaching you the garden,\" {{NAME}} said to TEND.\n\n\"I am learning it,\" TEND agreed. \"It is more complex than my initial models suggested.\"\n\nThe fairies made a sound like small bells. TEND recorded the frequency.\n\n\"That one means yes,\" said {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a copper-and-green jacket with gear buttons, dark trousers, and copper-toed boots — same child, same face, same exact outfit in every image. The garden now vibrant and recovering, {{NAME}} watching as TEND and the fairies seem to be working together near the roses, TEND's sensors and the fairies' lights interacting, the garden full of returning colour. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "{{NAME}} sat in the garden on the first evening it smelled right again: warm earth and green things and something older underneath, the base note of a healthy place.\n\nTEND sat beside him in standby mode, sensors still passively monitoring.\n\nThe fairies settled into the rose bush for the night, their lights dimming one by one.\n\n{{NAME}} watched the last light go out.\n\n\"Good work today,\" he told them.\n\nOne light pulsed once: small and warm.\n\nHe walked home through the healthy dark.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a copper-and-green jacket with gear buttons, dark trousers, and copper-toed boots — same child, same face, same exact outfit in every image. {{NAME}} in bed, the window open to the warm night air, the restored garden outside, peaceful and content, the room golden and settled. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

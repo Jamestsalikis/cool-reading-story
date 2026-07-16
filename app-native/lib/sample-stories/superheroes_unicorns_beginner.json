@@ -1,0 +1,36 @@
+{
+  "interest": "Superheroes + Unicorns",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Unicorn Who Lost Her Glow",
+  "moral": "A kind word from a friend can give you back your spark.",
+  "theme_emoji": "🦄",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep violet superhero suit with a gold horseshoe emblem on the chest, a bright yellow cape, and violet boots with gold soles — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} flew over the Rainbow Valley on his way home. His yellow cape shone in the sun. Far below he saw a unicorn sitting all alone on a hill. The unicorn was grey. She had no glow at all. That was very strange.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep violet superhero suit with a gold horseshoe emblem on the chest, a bright yellow cape, and violet boots with gold soles — same child, same face, same exact outfit in every image. Wide establishing shot of a sweeping Rainbow Valley with colourful stripes of meadow and a bright sky. {{NAME}} is a small flying figure high above, yellow cape streaming. Far below on a lone grey hill sits a dull grey unicorn with no magical glow, looking downward sadly. The contrast between the colourful valley and the grey unicorn is clear. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "{{NAME}} landed softly beside the unicorn. She had a dull silver horn and sad, tired eyes. Her mane was flat. {{NAME}} sat down next to her quietly. \"What happened to your glow?\" he asked gently. She looked at him.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep violet superhero suit with a gold horseshoe emblem on the chest, a bright yellow cape, and violet boots with gold soles — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}} sitting cross-legged on the grey hill beside the dull grey unicorn, both facing each other. {{NAME}}'s face is gentle and caring. The unicorn looks at him with tired, sad eyes, her flat mane hanging down. The valley glows colourfully in the background, making the grey unicorn look even more dull. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The unicorn said, \"I forgot how to be brave. I am scared to use my magic.\" {{NAME}} stood up. He took her hoof in his hand. \"I will fly with you,\" he said. \"We can be brave together.\" She lifted her head.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep violet superhero suit with a gold horseshoe emblem on the chest, a bright yellow cape, and violet boots with gold soles — same child, same face, same exact outfit in every image. Dynamic action moment on the hilltop. {{NAME}} stands tall and confident, holding the dull grey unicorn's hoof gently in both hands, looking her in the eyes with warm certainty. The unicorn lifts her head, and the very first faint flickers of colour begin to appear at the tips of her mane. The yellow cape billows in the breeze. The horizon glows with early magical light. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "They ran down the hill together. The unicorn leaped into the air. {{NAME}} flew right beside her. And then it happened. Her mane blazed into rainbow colours. Her horn glowed gold. She was beautiful again. She neighed with joy.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep violet superhero suit with a gold horseshoe emblem on the chest, a bright yellow cape, and violet boots with gold soles — same child, same face, same exact outfit in every image. Emotional peak scene in the open sky above the Rainbow Valley. {{NAME}} flies beside the now-glowing unicorn whose mane blazes in vivid rainbow colours and whose golden horn radiates brilliant light. Both are in motion, soaring upward side by side. Rainbow light bursts in all directions around the unicorn. {{NAME}}'s face shows absolute awe and happiness. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "They flew until the stars came out. The unicorn brought {{NAME}} home on her back. He slid off gently and waved goodbye. He got into bed feeling brave and warm. He wondered if the unicorn's glow would get even brighter tomorrow. Goodnight, {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep violet superhero suit with a gold horseshoe emblem on the chest, a bright yellow cape, and violet boots with gold soles — same child, same face, same exact outfit in every image. Warm cosy resolution scene in a snug bedroom glowing with soft golden lamplight. {{NAME}} lies in bed under a violet duvet with gold horseshoe and small unicorn prints, eyes sleepily closed and smiling. Outside the window the glowing rainbow unicorn stands in the moonlit garden, her mane shimmering gently, looking up at his window with a warm expression. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "interest": "Fairies + Soccer + Superheroes",
+  "title": "{{NAME}} and the Match of Two Worlds",
+  "moral": "When two very different worlds play together, both come away richer.",
+  "theme_emoji": "⚽",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a gold and emerald hero-soccer jersey, dark green shorts, and gold-emerald cleats — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "The Annual Cross-World Exhibition Match was the hero guild's most popular charity event.\n\nThis year's twist: the fairy team from Thornwood had challenged the junior heroes.\n\nFairy football was played by different rules: no offside, aerial possession allowed within one body-length of the fairy's own height, and the ball could be charmed once per half.\n\n{{NAME}} was the heroes' captain. The ball had been charmed three times in the pre-match warm-up, twice making it spin the wrong direction and once making it turn purple.\n\n\"It goes back to normal,\" the fairy captain assured him.\n\n\"Does it?\" said {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a gold and emerald hero-soccer jersey, dark green shorts, and gold-emerald cleats — same child, same face, same exact outfit in every image. Pre-match scene, {{NAME}} looking at a purple football with professional concern, the fairy captain hovering at his eye level looking slightly defensive, the two teams warming up behind them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "He spent the week before the match on rule analysis.\n\nThe fairy team's advantage: the charm. Used strategically, it could destabilise any set move.\n\nDefence against the charm: improvisation-based play, where the heroes practiced responding to random changes rather than set positions.\n\nOffence: the heroes' physical pace exceeded the fairies' in ground situations. If they could keep the ball on the ground and play fast, the aerial rule barely mattered.\n\n\"We play our game,\" he told the team. \"Fast. Ground. React to everything.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a gold and emerald hero-soccer jersey, dark green shorts, and gold-emerald cleats — same child, same face, same exact outfit in every image. Team meeting, {{NAME}} at the board explaining the strategy, the team focused and ready, the fairy team visible through the window practicing aerial moves. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "Match day: extraordinary.\n\nThe fairy team used the charm at the 34th minute when {{NAME}}'s team was about to score: the ball turned oval for thirty seconds, which was genuinely disorienting.\n\n{{NAME}}'s team adapted. You can still kick an oval ball if you adjust your foot angle.\n\nThe second charm came at the 67th minute and made the ball weightless for sixty seconds, drifting slowly wherever it pointed.\n\nThe fairy team thought this would cause chaos. What it actually caused was a slow-motion passing game that {{NAME}}'s team, calmer than expected, enjoyed enormously.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a gold and emerald hero-soccer jersey, dark green shorts, and gold-emerald cleats — same child, same face, same exact outfit in every image. The extraordinary match moment: weightless ball drifting in the air, heroes and fairies alike batting it gently, a slow-motion floating sequence that has become accidentally beautiful. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "Final score: three all.\n\nThe fairy captain and {{NAME}} shook hands at the centre circle.\n\n\"You adapted to the charm,\" she said. \"Both times.\"\n\n\"You had better aerial skills,\" he said. \"Three out of our four goals came from you ignoring our defenders and flying over them.\"\n\nThey looked at each other.\n\n\"Same time next year?\" she asked.\n\n\"With one change,\" said {{NAME}}. \"We get one charm too.\"\n\nShe considered this.\n\n\"Done,\" she said.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a gold and emerald hero-soccer jersey, dark green shorts, and gold-emerald cleats — same child, same face, same exact outfit in every image. {{NAME}} and the fairy captain shaking hands at the centre circle, equal respect, both teams gathered behind them, the charity event concluded with genuine sporting spirit. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "He walked home with his medal and the memory of the weightless ball drifting through the air.\n\nThe thing nobody planned: the slow-motion passing sequence during the second charm had been the most beautiful football he had ever played.\n\nNot despite the strange rules. Because of them.\n\nHe thought: sometimes the best games are the ones where you don't know exactly what's coming.\n\nIn bed, he lay smiling at the ceiling, turning the medal over in his hand.\n\nNext year, he was already planning what to do with his own charm.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a gold and emerald hero-soccer jersey, dark green shorts, and gold-emerald cleats — same child, same face, same exact outfit in every image. {{NAME}} in bed smiling at the ceiling, medal in his hand, the room warm and golden, already thinking ahead, content and alive. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

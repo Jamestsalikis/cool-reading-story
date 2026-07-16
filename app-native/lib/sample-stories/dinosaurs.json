@@ -1,0 +1,36 @@
+{
+  "interest": "Dinosaurs",
+  "gender": "boy",
+  "title": "{{NAME}} and the Egg in the Garden",
+  "moral": "Kindness finds its way home, no matter how far it has to travel.",
+  "theme_emoji": "🦕",
+  "word_count": 415,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a curious young boy with short black hair and warm brown eyes, wearing a green dinosaur-print t-shirt, khaki shorts, and muddy yellow boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} was digging in the garden when his spade hit something hard.\n\nHe brushed away the soil. It was enormous — bigger than a football, speckled green and gold, warm to the touch.\n\n\"That's not a rock,\" {{NAME}} whispered.\n\nVery carefully, he carried it inside and set it on a pile of towels in the laundry. He sat beside it all afternoon, just watching. Just before dinner, the egg cracked down the middle — and a tiny stegosaurus poked its wrinkled nose out and sneezed.",
+      "image_prompt": "{{NAME}}, a curious young boy with short black hair and warm brown eyes, wearing a green dinosaur-print t-shirt, khaki shorts, and muddy yellow boots — same child, same face, same exact outfit in every image. Kneeling in a sunny garden, holding a large speckled golden-green egg with both hands, eyes wide with amazement. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "{{NAME}} named him Spike.\n\nSpike had four sturdy legs, a row of bumpy orange plates down his back, and eyes the colour of pond water. He was about the size of a golden retriever and smelled like warm mud and grass.\n\nSpike followed {{NAME}} everywhere — up the hallway, around the kitchen, into the backyard. He knocked over the recycling bin twice and ate three of {{NAME}}'s socks. But {{NAME}} didn't mind. He had never had a friend quite like Spike before.",
+      "image_prompt": "{{NAME}}, a curious young boy with short black hair and warm brown eyes, wearing a green dinosaur-print t-shirt, khaki shorts, and muddy yellow boots — same child, same face, same exact outfit in every image. Walking through a sunny backyard with a small orange-plated stegosaurus trotting happily at his heels, both of them grinning. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "That night, Spike pressed his nose against the bedroom window and made a soft, low sound — like a question.\n\n{{NAME}} looked out. In the distance, past the park and the hill and the tall gum trees, there was a warm amber glow.\n\n\"You want to go home,\" said {{NAME}} quietly. It wasn't really a question.\n\nHe got his torch and his jacket. \"Okay, Spike. I'll take you.\"",
+      "image_prompt": "{{NAME}}, a curious young boy with short black hair and warm brown eyes, wearing a green dinosaur-print t-shirt, khaki shorts, and muddy yellow boots — same child, same face, same exact outfit in every image. Standing at a bedroom window at night with a small stegosaurus beside him, both looking at a distant golden glow beyond dark hills. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The glow led them to a hidden valley behind the hill — green and steaming, full of ferns taller than houses and the low rumble of dinosaurs settling for sleep.\n\nA large stegosaurus — easily four times the size of Spike — lifted her enormous head and made a sound like a cello. Spike ran to her and pressed his little nose under her chin.\n\n{{NAME}} stood very still and watched. His chest felt full of something warm and a little bit aching.",
+      "image_prompt": "{{NAME}}, a curious young boy with short black hair and warm brown eyes, wearing a green dinosaur-print t-shirt, khaki shorts, and muddy yellow boots — same child, same face, same exact outfit in every image. Standing at the edge of a glowing prehistoric valley at night, watching a small stegosaurus run joyfully toward a large mother stegosaurus among giant ferns. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "Spike's mother lowered her great head toward {{NAME}}. Very slowly, she pressed her warm forehead against his.\n\nThen Spike nuzzled {{NAME}}'s hand one last time. {{NAME}} scratched gently between his plates, and Spike let out a contented rumble that {{NAME}} felt all the way in his boots.\n\nWalking home under the stars, {{NAME}} held something tightly in his pocket — a single orange plate Spike had left behind, still warm.\n\nHe fell asleep with it on his bedside table, smiling.",
+      "image_prompt": "{{NAME}}, a curious young boy with short black hair and warm brown eyes, wearing a green dinosaur-print t-shirt, khaki shorts, and muddy yellow boots — same child, same face, same exact outfit in every image. Tucked in a cosy bed, eyes closed peacefully, a small glowing orange dinosaur plate sitting on the bedside table beside him. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

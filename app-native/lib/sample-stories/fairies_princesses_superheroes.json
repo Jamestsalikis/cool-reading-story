@@ -1,0 +1,35 @@
+{
+  "interest": "Fairies + Princesses + Superheroes",
+  "title": "{{NAME}} and the Three Crowns",
+  "moral": "True authority comes from earning trust, not from wearing a title.",
+  "theme_emoji": "🦸",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a forest-green and gold hero coat over dark trousers, gold-buckled boots, and a short green cape — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "Three forces governed the kingdom of Halcyon: Princess Maeve (royal authority), the Fairy High Council (magical authority), and the Hero Guild (protective authority).\n\nThey had not spoken directly for forty years.\n\nEach believed the others held too much power.\n\nThe result: a kingdom that worked in separate parts and barely at all as a whole.\n\n{{NAME}} was hired as the kingdom's first Liaison Officer, a title so new nobody knew what it meant.\n\n\"It means,\" he said carefully, \"that I talk to all three of you and none of you have to talk directly to each other until you want to.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a forest-green and gold hero coat over dark trousers, gold-buckled boots, and a short green cape — same child, same face, same exact outfit in every image. Three impressive spaces shown in sequence: the royal palace, the fairy council chambers, and the hero guild hall, each powerful and separate, with {{NAME}} as the small figure moving between them all. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The first six months: meetings. {{NAME}} in three offices, carrying what each side needed the others to know, carefully phrased, never distorted.\n\nHe developed a skill: finding the shared interest under the stated position.\n\nPrincess Maeve wanted stability. The Fairy Council wanted their settlements protected. The Hero Guild wanted clear operational boundaries.\n\nAll three were the same thing, he realised: they all wanted to know their domain was safe.\n\nHe wrote this down and presented it to all three simultaneously.\n\nThree separate sessions. Same document. Same words.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a forest-green and gold hero coat over dark trousers, gold-buckled boots, and a short green cape — same child, same face, same exact outfit in every image. {{NAME}} presenting the same document to three different groups in sequence, each group reading it, each group experiencing the same recognition, the shared interest becoming clear. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The first direct meeting of all three powers in forty years was low-key by design.\n\n{{NAME}} booked the smallest conference room in the neutral council building.\n\nPrincess Maeve arrived first. The head fairy arrived second (on a cloud of personal transportation). The guild commander arrived third.\n\nThey sat at a round table with no head.\n\n{{NAME}} sat in the corner with a notepad and didn't speak for the first twenty minutes.\n\nThen he said: \"You all said something similar to me. I thought you should hear it from each other.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a forest-green and gold hero coat over dark trousers, gold-buckled boots, and a short green cape — same child, same face, same exact outfit in every image. The meeting room, the three powers at the round table, {{NAME}} in the corner with his notepad, the room tense but not hostile, the beginning of a real conversation. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The meeting lasted three hours.\n\nBy the end, there was one joint statement and three separate commitments.\n\nThe joint statement: the kingdom's authority is shared and mutual.\n\nIt had taken forty years.\n\nOn the way out, Princess Maeve stopped beside {{NAME}}.\n\n\"You never claimed credit in there,\" she said.\n\n\"I didn't do it,\" said {{NAME}}. \"You three did. I just kept the path open until you were ready to walk down it.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a forest-green and gold hero coat over dark trousers, gold-buckled boots, and a short green cape — same child, same face, same exact outfit in every image. Post-meeting corridor, Princess Maeve pausing to speak to {{NAME}}, the head fairy and guild commander visible ahead in conversation, something that has never happened before happening naturally. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "He walked home through the kingdom as evening came.\n\nThree powers. Forty years of silence. Three hours of conversation.\n\nHe had been a liaison officer for six months and was eleven years old.\n\nIn bed, he thought about the round table with no head.\n\nThat had been the key. Nobody's seat was more important. The table arranged the conversation before anyone said a word.\n\nHe fell asleep thinking about tables.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a forest-green and gold hero coat over dark trousers, gold-buckled boots, and a short green cape — same child, same face, same exact outfit in every image. {{NAME}} asleep in bed, thinking expression lingering into sleep, the room warm, a quiet contentment of someone who has done something genuinely important. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "interest": "Unicorns",
+  "gender": "girl",
+  "title": "{{NAME}} and the Lost Foal",
+  "moral": "A gentle heart can find magic in the most ordinary places.",
+  "theme_emoji": "🦄",
+  "word_count": 405,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a gentle young girl with long curly auburn hair and violet eyes, wearing a lavender dress with tiny stars, white knee-high socks, and silver ballet flats — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} spotted the trail on a Tuesday evening — a line of tiny silver hoofprints glittering in the grass, leading from the garden gate all the way to the rose bushes.\n\nShe followed them very slowly, the way you move when you don't want to frighten something.\n\nUnder the tallest rosebush, tangled in a loop of thorny stem, was a unicorn foal. She was very small, pale gold, with a spiral horn no bigger than a pencil. She looked up at {{NAME}} with enormous dark eyes and made the tiniest sound imaginable.",
+      "image_prompt": "{{NAME}}, a gentle young girl with long curly auburn hair and violet eyes, wearing a lavender dress with tiny stars, white knee-high socks, and silver ballet flats — same child, same face, same exact outfit in every image. Kneeling beside a rosebush at dusk, discovering a tiny pale gold unicorn foal with a small spiral horn tangled gently in the thorny stems, both looking at each other with wide eyes. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "{{NAME}} sat very still and spoke in her quietest voice.\n\n\"Hello. I won't hurt you. I'm going to help.\"\n\nThe foal's ears flicked forward. She didn't pull away.\n\nVery carefully, {{NAME}} worked each thorn loose — one at a time, gentle as threading a needle. It took a long time. When the last thorn came free, the foal shook herself, sneezed a tiny shower of silver sparks, and stepped into {{NAME}}'s arms.\n\nShe weighed almost nothing at all, like holding a warm dream.",
+      "image_prompt": "{{NAME}}, a gentle young girl with long curly auburn hair and violet eyes, wearing a lavender dress with tiny stars, white knee-high socks, and silver ballet flats — same child, same face, same exact outfit in every image. Gently cradling a tiny glowing gold unicorn foal in her arms in a twilight garden, soft silver sparkles drifting from the foal's mane. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The foal nudged {{NAME}}'s hand and then turned, walking deeper into the garden.\n\n\"You want me to follow?\" asked {{NAME}}.\n\nThe foal looked back once — and {{NAME}} was sure she smiled.\n\nThey walked past the vegetable patch and the old stone wall and through a gap in the hedge {{NAME}} had never noticed before. On the other side was a meadow she had definitely never seen — wide and silver-lit, full of flowers that seemed to grow in slow motion.",
+      "image_prompt": "{{NAME}}, a gentle young girl with long curly auburn hair and violet eyes, wearing a lavender dress with tiny stars, white knee-high socks, and silver ballet flats — same child, same face, same exact outfit in every image. Following a tiny gold unicorn foal through a gap in a garden hedge into a magical silver-lit meadow full of glowing flowers at twilight. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "In the centre of the meadow, a herd of unicorns stood perfectly still, their horns catching the moonlight.\n\nThe largest one — pearl-white, mane like seafoam — stepped forward. The foal ran to her and disappeared under her neck, making a sound of pure relief.\n\nThe mother unicorn dipped her horn toward {{NAME}}. A soft light bloomed at the tip and drifted down like a petal, landing on {{NAME}}'s left hand.",
+      "image_prompt": "{{NAME}}, a gentle young girl with long curly auburn hair and violet eyes, wearing a lavender dress with tiny stars, white knee-high socks, and silver ballet flats — same child, same face, same exact outfit in every image. Standing in a moonlit meadow before a large pearl-white unicorn bowing its glowing horn toward her hand, the reunited foal nuzzling its mother nearby. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "{{NAME}} looked at her hand. A tiny star — no bigger than a freckle — was glowing softly on her palm.\n\nShe walked home through the hedge, and when she looked back, the gap was just a gap again. An ordinary gap.\n\nBut the star on her hand stayed. Even after her bath. Even after she got into bed and turned off the light.\n\nIn the dark, it glowed just enough to wish on.\n\n{{NAME}} made her wish, closed her hand gently, and fell fast asleep.",
+      "image_prompt": "{{NAME}}, a gentle young girl with long curly auburn hair and violet eyes, wearing a lavender dress with tiny stars, white knee-high socks, and silver ballet flats — same child, same face, same exact outfit in every image. Lying in a cosy bed in a dark room, eyes closed, one hand open on the pillow showing a tiny softly glowing star on her palm. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

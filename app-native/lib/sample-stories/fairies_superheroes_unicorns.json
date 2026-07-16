@@ -1,0 +1,35 @@
+{
+  "interest": "Fairies + Superheroes + Unicorns",
+  "title": "{{NAME}} and the Light Bringers",
+  "moral": "Light takes many forms, and all of them matter.",
+  "theme_emoji": "🦸",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shimmering white hero suit with gold and fairy-light details, white boots, and a golden cape — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "There was a district of the city that had been without proper lighting for three months.\n\nThe power infrastructure was complex, the repair timeline was long, and the residents had been living by candlelight and battery lamps.\n\nThe major hero squads were on bigger assignments.\n\n{{NAME}} visited the district and came home and called in two favours.\n\nFavour one: the fairy council, who could produce sustained bio-luminescent light under certain conditions.\n\nFavour two: Meridian, a unicorn whose horn could channel ambient energy into usable light.\n\nBetween three of them: enough to light a district.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shimmering white hero suit with gold and fairy-light details, white boots, and a golden cape — same child, same face, same exact outfit in every image. The dark district at night, {{NAME}} arriving with a tiny fairy on his shoulder and the unicorn Meridian walking beside him, all three of them bringing different kinds of light. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The fairy council provided floating light colonies: clusters of their natural glow, sustained by collective magical effort, hung at street lamp height throughout the district.\n\nMeridian walked the main street each evening and at her presence, ambient energy converted to warm glow: the district's emergency battery lights brightened, the street-level illumination increased, her horn's radius extending warmth for sixty metres in each direction.\n\n{{NAME}} coordinated placement, maintenance schedules, and communication with residents.\n\nDay one: the district had light again.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shimmering white hero suit with gold and fairy-light details, white boots, and a golden cape — same child, same face, same exact outfit in every image. The district now illuminated: fairy light colonies glowing at lamp height, Meridian's horn casting warmth along the main street, {{NAME}} arranging placement, residents visibly relieved. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The district residents began leaving things for the fairies: small dishes of honey, flower arrangements, sugar water in tiny cups. The fairies maintained the light colonies more brightly in response.\n\nChildren left paper drawings for Meridian, placed where she would walk. She stopped at each one.\n\n{{NAME}} kept the coordination running, troubleshooting when a fairy colony dimmed or Meridian's route needed adjusting.\n\nFor six weeks, the district was the best-lit area in the city.\n\nThe infrastructure repair team arrived finally and found people who had learned to give and receive care from unexpected sources.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shimmering white hero suit with gold and fairy-light details, white boots, and a golden cape — same child, same face, same exact outfit in every image. A warm scene of the district in light, children placing paper drawings for Meridian, residents leaving offerings for the fairies, {{NAME}} adjusting the coordination, the whole district a community again. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The official lights came back on in week seven.\n\nThe fairies held their colonies one extra night, a farewell.\n\nMeridian walked the main street for the last time and the existing street lamps stayed lit even after her horn's range ended, as though they had been tuned to a new brightness.\n\n{{NAME}} watched from a corner.\n\nThe district's residents were outside: standing at their doors, watching the transition from temporary light to permanent light, not rushing in.\n\nSavouring it.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shimmering white hero suit with gold and fairy-light details, white boots, and a golden cape — same child, same face, same exact outfit in every image. The district at the moment of transition, the official lights coming on while the fairy colonies still glow, Meridian on the main street, residents at their doors savouring the moment, {{NAME}} watching. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "He walked home through the lit city, the district behind him full of ordinary electricity.\n\nBut better than before. He knew it was better, though nothing had changed technically.\n\nThe people in it had learned something about receiving care.\n\nAnd the fairies and Meridian had learned something about the city.\n\nIn bed, he lay in the warm dark and thought about all the kinds of light there were.\n\nHe closed his eyes.\n\nSomewhere in the city, a district was still slightly brighter than the engineering explained.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shimmering white hero suit with gold and fairy-light details, white boots, and a golden cape — same child, same face, same exact outfit in every image. {{NAME}} asleep in bed, the room warm and golden, a gentle satisfied expression, the city glowing outside his window. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

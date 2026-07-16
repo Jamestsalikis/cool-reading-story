@@ -1,0 +1,35 @@
+{
+  "interest": "Animals + Dinosaurs + Unicorns",
+  "title": "{{NAME}} and the Valley Where Time Stood Still",
+  "moral": "Some places are precious because they are unspoiled, and protecting them is a gift to the future.",
+  "theme_emoji": "🦕",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shimmering blue-green tunic, silver-grey trousers, and forest-green boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "The valley had no name on any map.\n\n{{NAME}}'s grandmother had called it the Still Valley, and written only this: go once, look carefully, tell no one.\n\nHe went on a Saturday in early spring.\n\nIn the valley: a small herd of Brachiosaurus, grazing in morning mist. A family of red foxes watching from a rock. Rabbits everywhere. And at the valley's centre, still and white, a unicorn whose horn cast the light of stars.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shimmering blue-green tunic, silver-grey trousers, and forest-green boots — same child, same face, same exact outfit in every image. Wide panoramic shot of a hidden valley, {{NAME}} small at the edge looking in, Brachiosaurus necks rising through morning mist, foxes and rabbits visible, the unicorn a white light at the centre. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The unicorn's name was Lore and she was, she explained (in the way unicorns do, with images and feeling), the valley's keeper.\n\nShe had maintained the equilibrium for centuries: the Brachiosaurus needed the large ferns, the foxes needed the rabbits, the rabbits needed the grass, and all of them needed quiet and safety.\n\nHer concern: the valley was changing. A slow change, almost invisible, but she felt it.\n\n\"The spring came three days earlier this year,\" she said.\n\n{{NAME}} took out his notebook.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shimmering blue-green tunic, silver-grey trousers, and forest-green boots — same child, same face, same exact outfit in every image. {{NAME}} sitting cross-legged in the valley with the unicorn Lore standing nearby, notebook open, a Brachiosaurus visible in the background, the valley detailed and alive around them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "He spent three visits documenting: plant flowering times, animal behaviour, the temperature of the spring. Lore guided him to the places that had changed most.\n\nThe Brachiosaurus, meanwhile, had accepted him after the second visit, treating him with the particular casualness that very large creatures reserve for things that are obviously not a threat.\n\nOne young one followed him constantly, sniffing his notebook.\n\n\"He thinks it's food,\" said Lore.\n\n\"It's research,\" said {{NAME}}.\n\n\"He doesn't know the difference yet,\" said Lore.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shimmering blue-green tunic, silver-grey trousers, and forest-green boots — same child, same face, same exact outfit in every image. {{NAME}} taking measurements and notes in the valley, a young Brachiosaurus sniffing at his open notebook with enormous curiosity, Lore watching from nearby with patient amusement. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "His data showed: the valley's underground spring had shifted slightly, changing the water available to the ferns.\n\nFewer ferns meant less food for the Brachiosaurus. Less Brachiosaurus movement meant less ground disturbance. Less disturbance meant fewer rabbit burrows, which meant less habitat diversity.\n\nThe chain of connections was delicate and specific.\n\n\"We need to redirect the spring slightly,\" {{NAME}} said. \"Back to its original path.\"\n\nLore's horn glowed. She showed him where: a point where old rock had shifted.\n\nThey worked together: her magic, his hands.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shimmering blue-green tunic, silver-grey trousers, and forest-green boots — same child, same face, same exact outfit in every image. {{NAME}} moving rocks with careful strong hands in a stream bed, Lore's horn glowing to show him the direction, the spring beginning to shift back toward its original channel, ancient light and fresh water. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "By late afternoon, the spring flowed as it had.\n\n{{NAME}} sat on the valley edge and watched the Brachiosaurus move toward the ferns at the rerouted spring. The foxes settled. The rabbits emerged.\n\nLore stood beside him and her horn was quiet now, just silver in the evening air.\n\n\"You'll come back,\" she said. Not a question.\n\n\"Every spring,\" said {{NAME}}. \"To check.\"\n\nHe walked home as the stars came out, carrying his notebook full of the valley's secrets, and keeping them exactly as his grandmother had asked.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shimmering blue-green tunic, silver-grey trousers, and forest-green boots — same child, same face, same exact outfit in every image. {{NAME}} in bed, notebook on the bedside table, the room dim and golden, a deep peaceful look of someone who has done something quietly important, eyes closed. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

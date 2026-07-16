@@ -1,0 +1,36 @@
+{
+  "interest": "Soccer + Superheroes",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Super Save",
+  "moral": "You do not need powers to be a hero, just a brave heart.",
+  "theme_emoji": "⚽",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a vivid red soccer jersey with a yellow lightning bolt on the chest, black shorts, and red soccer boots with gold laces — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} loved two things. Soccer and superheroes. He kicked a ball against the wall every day. One afternoon the sky turned purple and sparkly. A flying figure came down fast. It crashed right into the soccer pitch.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a vivid red soccer jersey with a yellow lightning bolt on the chest, black shorts, and red soccer boots with gold laces — same child, same face, same exact outfit in every image. Wide establishing shot of a large outdoor soccer pitch under a dramatic purple and gold sky. {{NAME}} stands small near the touchline, a soccer ball at his feet, watching as a caped superhero figure crashes in a streak of sparkling light onto the pitch far ahead, sending up a ring of dust and sparkles. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "{{NAME}} ran to the figure. It was a superhero. She had a bright green cape and red boots. Her name was Captain Bolt. She sat up slowly. \"My flying power is out of charge,\" she said. {{NAME}} smiled. He had an idea.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a vivid red soccer jersey with a yellow lightning bolt on the chest, black shorts, and red soccer boots with gold laces — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}} crouching beside the superhero Captain Bolt who sits on the grass looking drained. Bolt wears a bright green cape and red boots, her expression tired but kind. {{NAME}}'s face is wide-eyed with excited recognition and a forming smile. The dusty pitch stretches around them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} showed Captain Bolt how to play soccer while she waited for her power to charge. They kicked and passed and ran up and down the pitch. Captain Bolt laughed for the first time in ages. She was really good at headers.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a vivid red soccer jersey with a yellow lightning bolt on the chest, black shorts, and red soccer boots with gold laces — same child, same face, same exact outfit in every image. Dynamic action shot of {{NAME}} and Captain Bolt playing soccer together on the pitch. Bolt leaps to head the ball, her green cape streaming, laughing with delight. {{NAME}} runs at full speed beside her, arms pumping, a huge grin on his face. The ball is in the air between them. Bright afternoon sunlight fills the scene. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "Captain Bolt's power came back. Her boots started to glow. She rose up off the ground slowly. She picked {{NAME}} up gently and flew him up high. He could see the whole city below. It was the most amazing thing ever.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a vivid red soccer jersey with a yellow lightning bolt on the chest, black shorts, and red soccer boots with gold laces — same child, same face, same exact outfit in every image. Emotional peak scene high in the air above the city. Captain Bolt flies confidently in her glowing green cape and red boots, holding {{NAME}} safely in her arms. {{NAME}}'s face is lit up with pure exhilaration and wonder. The soccer pitch and city are a tiny patchwork far below in warm golden light. The sky blazes with colour. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "Captain Bolt brought {{NAME}} back down softly. She gave him a big thumbs up. Then she zoomed away into the sky. {{NAME}} watched until she was just a dot. He got into bed smiling. He wondered if she would come back. Goodnight, {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a vivid red soccer jersey with a yellow lightning bolt on the chest, black shorts, and red soccer boots with gold laces — same child, same face, same exact outfit in every image. Warm cosy resolution scene in a snug bedroom lit by soft golden lamp. {{NAME}} lies in bed under a red duvet with yellow lightning bolts and tiny soccer balls printed on it, eyes softly closed and smiling. Outside the window a single streak of green light traces across the starry night sky, high above. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

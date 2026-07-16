@@ -1,0 +1,35 @@
+{
+  "interest": "Robots + Soccer + Superheroes",
+  "title": "{{NAME}} and the Robot That Played Fair",
+  "moral": "A machine is only as good as the values it was built with.",
+  "theme_emoji": "🤖",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a high-tech silver and red soccer hero jersey, dark red shorts, and silver-red cleats — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} had built FAIR specifically to be the most ethical referee in football history.\n\nEvery decision FAIR made was logged, explained, and reviewable. Its judgment system was built on three thousand pages of football rules, precedent, and ethics guidelines.\n\nFAIR's first season as official referee for the Hero Football League: zero disputed decisions.\n\nNot because everyone agreed with FAIR. Because FAIR was always right and always explained why.\n\n\"I hate this robot,\" said the hero who had scored the seventeen goals the previous season.\n\n\"You hate that it can't be argued with,\" said {{NAME}}.\n\n\"Same thing,\" he said.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a high-tech silver and red soccer hero jersey, dark red shorts, and silver-red cleats — same child, same face, same exact outfit in every image. FAIR the referee robot on the football pitch, making a decision that lights up its display with the rule citation, the hero with his arms up in protest, {{NAME}} watching from the sideline with quiet satisfaction. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The real test came in the semifinals.\n\n{{NAME}}'s team was playing. FAIR was refereeing.\n\nIn the 78th minute, with the score level, {{NAME}}'s teammate scored what appeared to be the winning goal.\n\nFAIR disallowed it. The ball had crossed the line by centimetres but FAIR's sensor had detected the crossbar contact first, a fraction too late.\n\n{{NAME}}'s team protested. {{NAME}} did not.\n\nHe had built FAIR to be exactly this. To be right when it was hardest for him personally.\n\n\"It's correct,\" he told his team. \"Play on.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a high-tech silver and red soccer hero jersey, dark red shorts, and silver-red cleats — same child, same face, same exact outfit in every image. FAIR disallowing the goal, {{NAME}}'s team protesting, {{NAME}} himself raising a hand to his team to accept the decision, the hardest moment of his own building. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "His team lost in extra time.\n\nAfterward, Princess Mira, the league commissioner, came to him.\n\n\"You built a referee that cost you the match.\"\n\n\"I built a referee that made the right call,\" said {{NAME}}.\n\n\"Are you glad you built it?\"\n\nHe thought about it honestly.\n\n\"Yes,\" he said. \"If I'd built it to favour my team, it would have been the worst thing I ever made. A referee that's only fair until it costs you something isn't fair at all.\"\n\nShe was quiet.\n\n\"You're going to be fine,\" she said.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a high-tech silver and red soccer hero jersey, dark red shorts, and silver-red cleats — same child, same face, same exact outfit in every image. {{NAME}} and Princess Mira in post-match conversation, honest and quiet, FAIR visible on the pitch behind them being shut down for the night. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "FAIR refereed the next four seasons.\n\nIn year three, it made a decision that cost the favourite team the championship. The stadium was furious.\n\nThe decision was correct. FAIR logged every sensor reading and the league reviewed them and confirmed it.\n\nThe furious stadium gradually accepted it.\n\nIn year four, the same team benefited from a FAIR decision that was also correct and also tight.\n\nThe stadium cheered.\n\n\"Same robot,\" someone said.\n\n\"Same rules,\" said {{NAME}}. \"That's the point.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a high-tech silver and red soccer hero jersey, dark red shorts, and silver-red cleats — same child, same face, same exact outfit in every image. Year four, the crowd cheering a FAIR decision that benefits the previously furious team, {{NAME}} watching with satisfaction, consistency proven. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "He sat in the empty stadium one evening after a match, FAIR in shutdown mode beside him.\n\nFour seasons. Three thousand decisions. Zero successfully disputed.\n\nHe put his hand on FAIR's chassis.\n\n\"Good work,\" he said.\n\nFAIR's status light blinked green, which was its running diagnostic.\n\nBut in the quiet of the empty stadium, it felt like something more.\n\nHe walked home through the night, satisfied with what he'd built and proud of what it had cost him.\n\nBoth things at once.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a high-tech silver and red soccer hero jersey, dark red shorts, and silver-red cleats — same child, same face, same exact outfit in every image. {{NAME}} walking home through the night, satisfied and content, the stadium lights behind him, a boy who built something genuinely good and held to it. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

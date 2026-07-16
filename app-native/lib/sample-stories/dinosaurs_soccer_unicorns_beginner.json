@@ -1,0 +1,36 @@
+{
+  "interest": "Dinosaurs + Soccer + Unicorns",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Rainbow Soccer Cup",
+  "moral": "Kindness and teamwork make every game magical.",
+  "theme_emoji": "⚽",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a rainbow-striped soccer jersey, violet soccer shorts, white and gold soccer boots with small rainbow laces, and a violet headband with a tiny gold star — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} was practising soccer in a big green meadow. The meadow had rainbow-coloured grass and sparkly daisies. A large pink dinosaur walked over and sat down to watch. Then a golden unicorn trotted in from the trees. She had a violet horn and a silver tail. \"Can I join?\" asked the unicorn. This was going to be wonderful.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a rainbow-striped soccer jersey, violet soccer shorts, white and gold soccer boots with small rainbow laces, and a violet headband with a tiny gold star — same child, same face, same exact outfit in every image. Wide establishing shot of a vast magical green meadow with rainbow-tinted grass and sparkly daisies stretching to a bright horizon. {{NAME}} stands small in the centre with a soccer ball at his feet. A large friendly pink dinosaur sits on the sideline watching. A beautiful golden unicorn with a violet horn and silver tail trots in from a grove of glowing trees. Bright cheerful sky above. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The unicorn said her name was Goldie. Goldie had never played soccer. She kept tripping on her hooves. She knocked over the goal with her tail. {{NAME}} watched Goldie's sad, embarrassed face. He knew what she needed. A good friend never laughs when you are learning.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a rainbow-striped soccer jersey, violet soccer shorts, white and gold soccer boots with small rainbow laces, and a violet headband with a tiny gold star — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}}'s face showing a warm, gentle and encouraging smile. Goldie the golden unicorn stands nearby looking embarrassed with drooping head and silver tail curled around a knocked-over goalpost. The large friendly pink dinosaur gives a sympathetic look from just behind. Colourful meadow in the background. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} and the dinosaur set up a smaller goal just for Goldie. They showed her how to tap the ball gently. Goldie tried once. She tried again. On the third try, she flicked the ball with her front hoof. It sailed right into the goal. Her violet horn glowed bright. The meadow sparkled all around.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a rainbow-striped soccer jersey, violet soccer shorts, white and gold soccer boots with small rainbow laces, and a violet headband with a tiny gold star — same child, same face, same exact outfit in every image. Dynamic action shot of Goldie the golden unicorn mid-stride, one front hoof flicking the soccer ball into a small goal. Her violet horn glows brilliantly and sparkles burst from it in all directions. {{NAME}} jumps with both arms raised in celebration. The pink dinosaur claps its little arms together with a wide delighted grin. Bright sparkles and coloured light fill the meadow. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "They played a real match after that. Goldie used her magic horn to light up the ball. It left trails of violet sparkles across the meadow. The pink dinosaur was the goalkeeper. He blocked three big shots with his wide tail. Kindness and teamwork make every game magical. {{NAME}} felt so proud of his team.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a rainbow-striped soccer jersey, violet soccer shorts, white and gold soccer boots with small rainbow laces, and a violet headband with a tiny gold star — same child, same face, same exact outfit in every image. Emotional peak scene of the full match in the magical meadow. Goldie the golden unicorn gallops with the glowing violet-trail soccer ball. {{NAME}} sprints alongside her with a huge grin. The large pink dinosaur stands in goal and uses its wide tail to block a shot dramatically, eyes wide with concentration. Trails of violet light and sparkles streak across the meadow. Dramatic warm light from a golden sky. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "As the stars came out, they lay in the soft meadow grass. Goldie's horn glowed like a little lamp. The pink dinosaur snored softly. Kindness and teamwork make every game magical. {{NAME}} felt warm and happy and sleepy. He closed his eyes. He wondered if Goldie's magic horn could make the ball fly even higher tomorrow.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a rainbow-striped soccer jersey, violet soccer shorts, white and gold soccer boots with small rainbow laces, and a violet headband with a tiny gold star — same child, same face, same exact outfit in every image. Warm cosy resolution scene lying in the soft rainbow meadow grass under a starry night sky. {{NAME}} lies on his back with drowsy half-shut eyes and a contented smile. Goldie the golden unicorn lies beside him, her violet horn casting a gentle warm glow. The large pink dinosaur curls up close, snoring softly. A soccer ball rests in the glowing grass nearby. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

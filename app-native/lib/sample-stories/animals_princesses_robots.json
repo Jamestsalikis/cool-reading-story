@@ -1,0 +1,35 @@
+{
+  "interest": "Animals + Princesses + Robots",
+  "title": "{{NAME}} and the Royal Animal Monitor",
+  "moral": "Technology is most powerful when it serves something living.",
+  "theme_emoji": "🤖",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal teal coat with silver clasps, dark trousers, and polished boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "Princess Theodora ran the largest royal animal sanctuary in the kingdom, and she ran it with complete precision except for one problem: she couldn't be everywhere.\n\nFive hundred acres. Three hundred animals. Twelve keepers.\n\nShe hired {{NAME}} as her technology advisor when she read his paper on animal monitoring systems, which he had written at age ten and posted to a scientific forum for fun.\n\n\"You're ten,\" she said.\n\n\"I know,\" said {{NAME}}. \"I'll be eleven in March.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal teal coat with silver clasps, dark trousers, and polished boots — same child, same face, same exact outfit in every image. Princess Theodora's office, elegant and full of nature maps, {{NAME}} standing before her desk with his portfolio, both of them sizing each other up, the sanctuary visible through the window behind her. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "He built WATCH: a network of gentle environmental monitors spread through the sanctuary, connected to a central hub that Princess Theodora could view from anywhere.\n\nEach monitor tracked: animal locations, health indicators (temperature, movement patterns, feeding behaviour), and environmental conditions.\n\nThe princess tested it the first morning by asking: \"Where is the white elk right now?\"\n\n\"North meadow, third quadrant, feeding normally,\" said the hub.\n\nThe princess walked to the north meadow. There was the elk, exactly as described.\n\n\"Good,\" she said. \"Now show me the pattern of the past week.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal teal coat with silver clasps, dark trousers, and polished boots — same child, same face, same exact outfit in every image. Princess Theodora looking at a glowing map display while {{NAME}} stands beside her explaining the WATCH system, the sanctuary map showing animal positions as small moving dots. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The system saved its first life in the second week: WATCH flagged an anomaly in the movement pattern of the old brown bear, who was circling rather than ranging, a behaviour consistent with injury.\n\n{{NAME}} and the princess found her in the eastern wood with a thorn embedded deep in her right paw, moving in tight circles because straight walking hurt.\n\nRemoval: twenty minutes. Recovery: three days.\n\n\"She would have been in pain for weeks before anyone found her in the old system,\" said Princess Theodora.\n\n\"The data doesn't replace care,\" said {{NAME}}. \"But it tells you where to look.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal teal coat with silver clasps, dark trousers, and polished boots — same child, same face, same exact outfit in every image. {{NAME}} carefully tending to the old brown bear's paw, Princess Theodora holding a light, the bear surprisingly cooperative, the sanctuary forest around them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "Over the first month, WATCH learned the sanctuary's rhythms: which animals were seasonal, which were routine, which showed patterns that needed attention.\n\nPrincess Theodora reviewed it each morning with her breakfast. She started making decisions faster and more precisely, because she always knew the current state of the whole sanctuary.\n\n\"You've given me eyes everywhere,\" she told {{NAME}}.\n\n\"The animals gave you that,\" said {{NAME}}. \"WATCH just reads what they're already doing. I built it to listen, not to tell.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal teal coat with silver clasps, dark trousers, and polished boots — same child, same face, same exact outfit in every image. The princess reviewing WATCH data at her breakfast table, animals visible through the window in the sanctuary grounds, {{NAME}} standing nearby, the system represented as a calm elegant display. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "On his last day before heading home, {{NAME}} walked the full five hundred acres of the sanctuary.\n\nHe took his time. The monitors beeped softly as he passed each one, his presence logged.\n\nHe stopped at the north meadow and watched the white elk for a while.\n\nThe elk looked back, then went back to eating.\n\nHe walked home that evening with his notes and his toolkit and the feeling of having built something that would keep working long after he left.\n\nIn bed, he fell asleep thinking about the elk's one brief look: acknowledged, approved, moved on.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal teal coat with silver clasps, dark trousers, and polished boots — same child, same face, same exact outfit in every image. {{NAME}} sleeping contentedly in the palace guest room, toolkit beside him, the sanctuary peaceful through the window, a deep satisfied rest. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "interest": "Dinosaurs + Fairies + Robots",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Dinosaur Who Needed a Robot Heart",
+  "moral": "Everyone deserves kindness, even if they seem different.",
+  "theme_emoji": "🦖",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright green jacket with copper-coloured buttons, blue trousers, and chunky red boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} walked into a deep green jungle. Big dinosaurs stomped through the trees. Tiny fairies flew high above the ferns. A small copper robot sat on a rock by itself. It looked at the dinosaurs walking past. The robot waved but nobody waved back.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright green jacket with copper-coloured buttons, blue trousers, and chunky red boots — same child, same face, same exact outfit in every image. Wide establishing shot of a lush deep green jungle with enormous ferns and towering trees. {{NAME}} stands small at the jungle's edge looking in. Large friendly dinosaurs stomp through the trees in the background. Tiny fairies flutter high in the canopy. A small copper robot sits alone on a mossy rock in the foreground waving with one arm, looking lonely. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "{{NAME}} went over to the robot. 'Why are you sad?' asked {{NAME}}. 'Nobody will play with me,' said the robot. 'The dinosaurs think I am too strange.' {{NAME}} sat down next to the robot. 'I think you are wonderful,' said {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright green jacket with copper-coloured buttons, blue trousers, and chunky red boots — same child, same face, same exact outfit in every image. Close-up of {{NAME}}'s face showing a warm and caring smile, leaning close to the robot. The small copper robot sits beside {{NAME}} with dim flickering eyes full of sadness. {{NAME}}'s expression is full of genuine kindness. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "A fairy flew down and sat on the robot's head. She waved her wand. A warm golden light glowed inside the robot's chest. It lit up like a little sun. The robot stood up and began to dance a funny jig. The dinosaurs stopped and stared. Then they started to laugh and stomp along.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright green jacket with copper-coloured buttons, blue trousers, and chunky red boots — same child, same face, same exact outfit in every image. Dynamic action shot full of energy. A tiny fairy with glowing wings sits on the small copper robot's head waving a sparkling wand. Golden light shines from the robot's chest. The robot dances a funny jig with arms and legs swinging. {{NAME}} claps and laughs. Two large friendly dinosaurs stomp in time with big grins. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The dinosaurs crowded around the robot. One big green dinosaur lowered its huge head. The robot patted the dinosaur's nose. The dinosaur made a deep happy rumble. Fairies swirled around everyone in loops of glowing light. {{NAME}} laughed with joy.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright green jacket with copper-coloured buttons, blue trousers, and chunky red boots — same child, same face, same exact outfit in every image. Emotional peak scene with warm dramatic golden light. The small copper robot reaches up to pat the enormous lowered nose of a big friendly green dinosaur. Both look completely happy. {{NAME}} stands beside them laughing. Fairies spiral in glowing loops of light all around the group in the jungle clearing. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "The robot, {{NAME}}, and the dinosaurs all rested under a big fern. The fairies made the air glow with soft light. The robot hummed a gentle tune. {{NAME}} curled up in the warm light and smiled. Goodnight, {{NAME}}. Sleep well. Tomorrow, the fairy says she will teach the robot to fly.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright green jacket with copper-coloured buttons, blue trousers, and chunky red boots — same child, same face, same exact outfit in every image. Warm cosy resolution scene bathed in soft golden light. {{NAME}} lies sleepily under a giant fern, eyes half-closed. The small copper robot sits beside {{NAME}} with a glowing warm chest. A large friendly dinosaur curls behind them like a wall. Fairies float in the air above casting a soft gentle glow. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "interest": "Fairies",
+  "gender": "girl",
+  "title": "{{NAME}} and the Fairy Lantern",
+  "moral": "When you help someone find their way home, you find a little magic of your own.",
+  "theme_emoji": "🧚",
+  "word_count": 408,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a kind young girl with wavy blonde hair and soft blue eyes, wearing a pale pink cardigan over a white nightgown, and small cloud-patterned slippers — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} couldn't sleep.\n\nIt wasn't a bad couldn't-sleep — more the gentle, restless kind that meant something was worth noticing.\n\nShe padded downstairs in her cloud slippers and looked out the back door. The garden was silver with moonlight — and under the rosebush, something was glowing.\n\nShe went closer. It was a lantern — no bigger than her fist, shaped like an acorn, glowing the colour of a summer evening. And sitting beside it, wings folded tight, was a very small, very exhausted fairy.",
+      "image_prompt": "{{NAME}}, a kind young girl with wavy blonde hair and soft blue eyes, wearing a pale pink cardigan over a white nightgown, and small cloud-patterned slippers — same child, same face, same exact outfit in every image. Crouching beside a rosebush at night, discovering a tiny acorn-shaped glowing lantern and a small exhausted fairy sitting beside it, both lit by the warm golden glow. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The fairy looked up. She had eyes like tiny amber beads and hair the colour of moonlight.\n\n\"Oh, thank goodness,\" she said. \"A kind one.\"\n\nHer name was Pip. She explained, in a voice like a miniature violin, that the lantern was the light that guided all the fairies home each night. Somehow it had rolled out of the fairy village and come to rest here, and without it, no one could find the way.\n\n\"I'll carry it back,\" said {{NAME}} immediately. \"Where is your village?\"\n\nPip pointed into the deepest part of the garden.",
+      "image_prompt": "{{NAME}}, a kind young girl with wavy blonde hair and soft blue eyes, wearing a pale pink cardigan over a white nightgown, and small cloud-patterned slippers — same child, same face, same exact outfit in every image. Sitting cross-legged on the moonlit grass, a tiny fairy named Pip hovering at eye level, both deep in earnest conversation, the glowing lantern between them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} carried the lantern carefully in both hands. It was warm against her fingers and hummed very softly — almost like it was breathing.\n\nPip flew just ahead, leading her past the rosemary hedge and the old bird bath and the apple tree and into a part of the garden {{NAME}} had somehow never reached before.\n\nThe grass there was different — shorter and softer, glittering faintly, as if someone had scattered tiny pieces of sky into it.",
+      "image_prompt": "{{NAME}}, a kind young girl with wavy blonde hair and soft blue eyes, wearing a pale pink cardigan over a white nightgown, and small cloud-patterned slippers — same child, same face, same exact outfit in every image. Walking through a magical glittering garden at night, carrying a warmly glowing acorn lantern in both hands, a tiny fairy flying just ahead leading the way. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "When the lantern returned to the village, the effect was immediate.\n\nTiny lights blinked on, one by one, all across the miniature rooftops. Fairies began to appear from beneath leaves and behind stones — stretching, yawning, looking around with relief.\n\n\"She brought it back!\" said a small voice. Then a chorus: \"She brought it back!\"\n\n{{NAME}} set the lantern in its place in the centre of the village square. It gave one bright pulse — like a heartbeat — and settled into its steady warm glow.\n\nPip landed on {{NAME}}'s fingertip. \"Thank you,\" she said. Just that. But she meant a great deal more.",
+      "image_prompt": "{{NAME}}, a kind young girl with wavy blonde hair and soft blue eyes, wearing a pale pink cardigan over a white nightgown, and small cloud-patterned slippers — same child, same face, same exact outfit in every image. Gently setting a glowing acorn lantern into the centre of a tiny fairy village lit up with hundreds of tiny lights, fairies emerging joyfully all around, a small fairy on her fingertip. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "Before {{NAME}} turned to go, Pip pressed something into her palm — a star no bigger than a dewdrop, cool and silver.\n\n\"For wishing,\" said Pip. \"One wish. Use it when it matters.\"\n\n{{NAME}} walked back through the moonlit garden. She climbed the stairs slowly. She got into bed and held the tiny star between two fingers.\n\nShe thought for a long time about what to wish for. But the thinking itself felt so warm and good that she fell asleep before she decided.\n\nThe star sat on her pillow, glowing softly all night long.",
+      "image_prompt": "{{NAME}}, a kind young girl with wavy blonde hair and soft blue eyes, wearing a pale pink cardigan over a white nightgown, and small cloud-patterned slippers — same child, same face, same exact outfit in every image. Asleep in a cosy bed, a tiny glowing silver star resting on the pillow beside her cheek, soft moonlight through the window, completely peaceful. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

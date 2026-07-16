@@ -1,0 +1,36 @@
+{
+  "interest": "Dinosaurs + Princesses + Soccer",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Princess Dinosaur Soccer Tournament",
+  "moral": "Playing your best and being kind matters more than winning.",
+  "theme_emoji": "⚽",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright magenta soccer jersey with a gold crown badge, white soccer shorts, and magenta and gold soccer boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} arrived at a grand castle soccer field. The goals were made of gold. The seats were full of dinosaurs wearing tiny crowns. A princess in a soccer kit stood in the centre. She wore a shiny tiara and cleats. She was the captain of the Royal Dinosaur Soccer Team.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright magenta soccer jersey with a gold crown badge, white soccer shorts, and magenta and gold soccer boots — same child, same face, same exact outfit in every image. Wide establishing shot of a grand castle soccer field with golden goal posts. {{NAME}} stands small at the pitch entrance looking in with awe. The stadium seats are filled with friendly dinosaurs wearing tiny gold crowns. At the centre circle, a princess in a pink soccer kit with a tiara stands confidently as team captain. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The princess jogged over. 'We need you on our team,' she said. {{NAME}} felt very excited. But the other team was all big fast dinosaurs. 'They are so speedy,' said {{NAME}}. The princess laughed. 'Speed is not everything,' she said. 'We play with heart.'",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright magenta soccer jersey with a gold crown badge, white soccer shorts, and magenta and gold soccer boots — same child, same face, same exact outfit in every image. Close-up of {{NAME}}'s face showing a nervous but eager expression. The princess in her pink soccer kit and tiara stands beside {{NAME}} with a warm confident smile. In the background, the large rival dinosaur team stretches their powerful legs. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The match started. The dinosaurs on the other team were very fast. But {{NAME}} and the princess were a brilliant team. The princess passed to {{NAME}}. {{NAME}} dribbled through two big dinosaurs. Then {{NAME}} crossed the ball back to the princess. She kicked it perfectly into the goal.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright magenta soccer jersey with a gold crown badge, white soccer shorts, and magenta and gold soccer boots — same child, same face, same exact outfit in every image. Dynamic action shot. {{NAME}} is mid-dribble weaving between two large charging dinosaurs, full of speed and energy. The princess is ahead with her foot drawn back ready to shoot. The soccer ball is in flight from {{NAME}} toward the princess. The golden goal is visible beyond. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "GOAL! The golden goalposts rang like a bell. All the dinosaurs in the stands stomped and roared. Petals rained down from the castle towers. The princess grabbed {{NAME}}'s hand. They ran a lap together around the field. The dinosaur team from the other side clapped too.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright magenta soccer jersey with a gold crown badge, white soccer shorts, and magenta and gold soccer boots — same child, same face, same exact outfit in every image. Emotional peak scene with dramatic light and petals falling from the sky. {{NAME}} and the princess run hand in hand doing a victory lap on the golden field. Dinosaurs in the stands stomp their feet in celebration. Pink and gold petals fall from the castle towers above. Even the rival dinosaur team claps along with smiles. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "After the tournament, {{NAME}} and the princess sat on the soft grass inside the castle walls. A friendly dinosaur lay beside them like a warm hill. The stars came out above the castle towers. {{NAME}} felt tired and happy and proud. Goodnight, {{NAME}}. Sleep well. Tomorrow, the princess has a secret training ground she wants to show only you.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright magenta soccer jersey with a gold crown badge, white soccer shorts, and magenta and gold soccer boots — same child, same face, same exact outfit in every image. Warm cosy resolution scene in soft golden evening light. {{NAME}} sits sleepily in the grass inside the castle walls, eyes half-closed and smiling. The princess in her pink soccer kit sits beside {{NAME}}. A large friendly dinosaur lies behind them both like a warm hill. Stars appear above the tall castle towers against a soft purple sky. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

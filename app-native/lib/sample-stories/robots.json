@@ -1,0 +1,36 @@
+{
+  "interest": "Robots",
+  "gender": "boy",
+  "title": "{{NAME}} and the Robot Who Couldn't Sleep",
+  "moral": "Everyone is a little bit scared sometimes — and a kind friend makes all the difference.",
+  "theme_emoji": "🤖",
+  "word_count": 410,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a thoughtful young boy with straight dark hair and big dark eyes, wearing a navy blue t-shirt with a circuit-board pattern, grey sweatpants, and white sneakers — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} had been collecting parts for months — springs from old pens, gears from broken clocks, copper wire from the drawer in the laundry that nobody ever opened.\n\nOne Saturday afternoon, he clicked the last piece into place and stood back.\n\nThe little robot on his desk whirred. Its chest light blinked blue. Its head turned left, then right. Then it looked straight at {{NAME}} and made a sound exactly like: \"Oh.\"",
+      "image_prompt": "{{NAME}}, a thoughtful young boy with straight dark hair and big dark eyes, wearing a navy blue t-shirt with a circuit-board pattern, grey sweatpants, and white sneakers — same child, same face, same exact outfit in every image. Standing at a cluttered workbench, looking with delight at a small boxy robot with a glowing blue chest light blinking to life. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "{{NAME}} named him Bolt.\n\nBolt spent the day following {{NAME}} around the room, bumping gently into chair legs, beeping at the cat, and studying the bookshelf with great seriousness.\n\nBut when night came, something went wrong.\n\n{{NAME}} switched off his bedroom light — and Bolt's chest light went frantic. Beep beep BEEP. His little arms waved. His wheels spun in tight anxious circles.\n\n\"Oh!\" said {{NAME}}. \"You're scared of the dark.\"",
+      "image_prompt": "{{NAME}}, a thoughtful young boy with straight dark hair and big dark eyes, wearing a navy blue t-shirt with a circuit-board pattern, grey sweatpants, and white sneakers — same child, same face, same exact outfit in every image. Sitting up in bed in a dark room, looking with concern at a small boxy robot on the floor whose chest is flashing rapidly with a panicked red glow. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} sat on the floor beside Bolt and thought carefully.\n\n\"I was scared of the dark once too,\" he said. \"My dad put a little light in the corner and it helped.\"\n\nBolt tilted his head. Beep.\n\n\"Okay,\" said {{NAME}}. \"Let's build you one.\"\n\nThey worked by the light of {{NAME}}'s torch, sorting through his parts box together. Bolt handed pieces over with his tiny claw arms. {{NAME}} soldered and fitted and tested until — a soft golden glow filled the corner of the room.",
+      "image_prompt": "{{NAME}}, a thoughtful young boy with straight dark hair and big dark eyes, wearing a navy blue t-shirt with a circuit-board pattern, grey sweatpants, and white sneakers — same child, same face, same exact outfit in every image. Sitting cross-legged on the floor beside a small robot, both of them surrounded by tiny spare parts and tools, working together by torchlight to build a small glowing nightlight. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "Bolt rolled over to the nightlight and stood very still.\n\nHis chest light slowed. Blue. Blue. Blue. One blink every few seconds — calm and steady.\n\nHe turned back to {{NAME}} and made a new sound. Not a beep this time. Something lower and longer, like a small, satisfied hum.\n\n\"Good,\" said {{NAME}} quietly. \"Now we can both sleep.\"",
+      "image_prompt": "{{NAME}}, a thoughtful young boy with straight dark hair and big dark eyes, wearing a navy blue t-shirt with a circuit-board pattern, grey sweatpants, and white sneakers — same child, same face, same exact outfit in every image. Sitting beside a small robot in a warmly lit bedroom corner, the robot glowing a soft calm blue, both of them looking peaceful and content. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "{{NAME}} climbed into bed. In the corner, Bolt sat perfectly still beside his little light, humming so quietly it was almost like breathing.\n\nThe room was cosy and gold and safe.\n\n{{NAME}} looked at Bolt for a long moment. He had built Bolt to be smart and fast and useful. He hadn't planned on building him a friend.\n\nBut that turned out to be the best part.\n\nHe closed his eyes, and Bolt hummed him all the way to sleep.",
+      "image_prompt": "{{NAME}}, a thoughtful young boy with straight dark hair and big dark eyes, wearing a navy blue t-shirt with a circuit-board pattern, grey sweatpants, and white sneakers — same child, same face, same exact outfit in every image. Sleeping peacefully in bed, a small robot glowing softly golden in the corner of the cosy bedroom, watching over him. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

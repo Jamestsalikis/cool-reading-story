@@ -1,0 +1,35 @@
+{
+  "interest": "Robots + Soccer",
+  "title": "{{NAME}} and the Robot Goalkeeper",
+  "moral": "Building something great is only the beginning, the real work is working together.",
+  "theme_emoji": "🤖",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright yellow soccer jersey, dark blue shorts, and yellow-and-blue cleats — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} built GOALIE for one reason: his football team needed a goalkeeper and nobody wanted to play in goal.\n\nGOALIE was a purpose-built robot with spring-loaded arms, a camera array for tracking the ball's trajectory, and wheels that could cross a penalty area in 0.4 seconds.\n\nFirst training session: GOALIE stopped seventeen consecutive penalty kicks without letting a single one past.\n\nHis teammates stared at it.\n\n\"This is cheating,\" said Marcus.\n\n\"The rules say nothing about robot goalkeepers,\" said {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright yellow soccer jersey, dark blue shorts, and yellow-and-blue cleats — same child, same face, same exact outfit in every image. Football training ground, GOALIE the robot in goal having just stopped a penalty, spring-loaded arms extended, the ball on the ground, {{NAME}}'s teammates staring at the robot in disbelief. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "It was not cheating. {{NAME}} checked. The regulations defined goalkeeper as player between the posts. GOALIE was between the posts.\n\nThe real problem emerged at the first match: GOALIE was perfect at stopping shots it could calculate, but football was not always calculated.\n\nA striker with a strange angled run, an unexpected bounce, a cross that turned into a shot: these broke GOALIE's prediction model because they were unusual.\n\n\"It needs to learn unpredictability,\" {{NAME}} said at half time, two goals down.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright yellow soccer jersey, dark blue shorts, and yellow-and-blue cleats — same child, same face, same exact outfit in every image. Half-time on the pitch, {{NAME}} crouched beside GOALIE with his repair kit, other teammates gathered around, GOALIE's camera eyes looking attentive as {{NAME}} explains the problem. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "He stayed up that night writing a new subroutine: randomised unpredictability weighting. GOALIE would now factor in the unexpected as something more likely than its models suggested.\n\nBut more importantly, he added a communication layer: GOALIE would now signal to defenders via coloured chest lights, showing which direction it predicted the attack would come from.\n\nIn the next training session, GOALIE was more capable than before, and so was the whole defensive line, because they had learned to read the signals.\n\n\"It's not just a goalkeeper,\" said Marcus, surprised. \"It's a system.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright yellow soccer jersey, dark blue shorts, and yellow-and-blue cleats — same child, same face, same exact outfit in every image. Training session, GOALIE in goal with chest light glowing amber pointing left, two defenders shifting position in response, {{NAME}} watching from the sideline with satisfaction. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The championship match: ninety minutes, GOALIE and the defence communicating perfectly, the team understanding how to work with the robot rather than just behind it.\n\nWith five minutes left and the score level, the opposing striker broke through alone. GOALIE's light turned red: direct shot coming, no angle.\n\nBut Marcus charged from midfield and made a last-second tackle.\n\nGOALIE had predicted the shot perfectly. Marcus had used that prediction.\n\nThe team held on for a penalty shootout, which GOALIE won four-zero.\n\n{{NAME}} watched from the sideline and felt full.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright yellow soccer jersey, dark blue shorts, and yellow-and-blue cleats — same child, same face, same exact outfit in every image. Penalty shootout scene, GOALIE having just saved a penalty, arms extended, the kicker's head in his hands, {{NAME}}'s teammates celebrating behind the goal, the championship in balance. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "After the celebrations, {{NAME}} sat alone with GOALIE on the dark pitch while everyone else headed to the changing rooms.\n\nHe ran a hand over GOALIE's chassis.\n\n\"Good match,\" he said.\n\nGOALIE's chest light blinked once: green.\n\n{{NAME}} had programmed green to mean acknowledged. But as he sat there in the dark, the stadium quiet around them, he thought it meant something more like: yes. It was.\n\nHe walked home with the trophy in one hand and a small piece of GOALIE's original blueprint in the other, folded in his pocket.\n\nHe fell asleep still hearing the crowd.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright yellow soccer jersey, dark blue shorts, and yellow-and-blue cleats — same child, same face, same exact outfit in every image. {{NAME}} sitting beside GOALIE on the empty pitch under floodlights, one hand on the robot's chassis, the championship trophy nearby, the quiet stadium around them, warm and content. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

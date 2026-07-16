@@ -1,0 +1,35 @@
+{
+  "interest": "Dinosaurs + Princesses",
+  "title": "{{NAME}} and the Princess Who Rode a Raptor",
+  "moral": "A good ruler earns trust, and trust is built one courageous step at a time.",
+  "theme_emoji": "👑",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep purple tunic with gold trim, dark riding trousers, and tall boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "The palace had a problem.\n\nIn the royal stables, alongside the horses and the ceremonial elk, lived a Velociraptor named Duchess. Duchess had been there since the king was a boy, and nobody knew where she had come from, and nobody had ever managed to ride her.\n\nPrincess Isolde had tried. Six knights had tried. The royal veterinarian had tried and then retired.\n\nNow {{NAME}}, the stable boy's apprentice, watched Duchess pace her enclosure and thought: she's not dangerous. She's bored.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep purple tunic with gold trim, dark riding trousers, and tall boots — same child, same face, same exact outfit in every image. Wide palace stable interior, {{NAME}} leaning on a fence watching a sleek Velociraptor pacing in a large enclosure, the raptor alert and intelligent, straw on the floor, other horses visible in background stalls. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "He began leaving interesting things at the edge of her enclosure. A mirror. A ball. A complicated knot of rope.\n\nDuchess ignored the mirror. She destroyed the ball in four seconds. The rope she spent forty minutes untying, then carried the end piece around for the rest of the day like a prize.\n\n\"She likes puzzles,\" {{NAME}} told Princess Isolde.\n\n\"Can you use that?\" the princess asked, studying Duchess with calculating royal interest.\n\n\"I think so,\" said {{NAME}}. \"But she has to choose to work with us. We can't force it.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep purple tunic with gold trim, dark riding trousers, and tall boots — same child, same face, same exact outfit in every image. {{NAME}} kneeling at the edge of Duchess the Velociraptor's enclosure, placing a complicated rope knot near the fence, the raptor watching with intense intelligent eyes, Princess Isolde standing behind {{NAME}} watching curiously. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The training took three weeks.\n\nFirst: Duchess accepting food from {{NAME}}'s hand. Then from Princess Isolde's hand.\n\nThen: following a rope course through the stable yard for food rewards.\n\nThen: a saddle, no rider, just existing. Duchess wore it for a day with dignified disdain.\n\nThen: {{NAME}} on her back for five minutes, then twenty, then an hour, while Duchess pretended she had decided to do this entirely of her own accord.\n\nThen: Princess Isolde.\n\nDuchess went still. Considered. Then walked forward.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep purple tunic with gold trim, dark riding trousers, and tall boots — same child, same face, same exact outfit in every image. Dynamic training scene in a stable courtyard, {{NAME}} walking beside Duchess the Velociraptor while Princess Isolde rides, the raptor moving with powerful grace, {{NAME}} hand on the raptor's flank guiding her, late afternoon sun casting long shadows. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The first ride outside the palace was at dawn.\n\nDuchess moved like water over uneven ground, absolutely sure-footed, her head up, reading the landscape.\n\nPrincess Isolde sat very still on her back and said nothing for a long time.\n\nThen she said: \"She's magnificent.\"\n\n\"Yes,\" said {{NAME}}, running beside them on foot, slightly out of breath. \"She just needed someone to figure out what she needed.\"\n\nDuchess made a low sound, like a purr crossed with a growl, that they had come to understand meant she was pleased.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep purple tunic with gold trim, dark riding trousers, and tall boots — same child, same face, same exact outfit in every image. Dramatic wide outdoor scene at sunrise, Princess Isolde riding Duchess the Velociraptor across open meadow, {{NAME}} running joyfully beside them, golden light, the raptor moving with breathtaking speed and grace. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "That evening, {{NAME}} locked up the stables and said goodnight to Duchess.\n\nShe pressed the top of her head briefly against his hand, which she had never done before, then turned and settled into her straw with her tail curled around her.\n\n{{NAME}} walked home through the palace grounds under a full moon, thinking about the look on Princess Isolde's face at dawn, and the sound Duchess made when she was pleased, and how the best things took patience.\n\nHe fell asleep almost immediately, and dreamed of open meadows and the sound of something fast and magnificent running.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a deep purple tunic with gold trim, dark riding trousers, and tall boots — same child, same face, same exact outfit in every image. {{NAME}} asleep in a small cosy room, soft moonlight through the window, a contented smile on his face, the room warm and golden. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

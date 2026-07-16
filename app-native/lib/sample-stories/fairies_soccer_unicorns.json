@@ -1,0 +1,35 @@
+{
+  "interest": "Fairies + Soccer + Unicorns",
+  "title": "{{NAME}} and the Meadow Cup",
+  "moral": "The best games are the ones where everyone belongs.",
+  "theme_emoji": "⚽",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a meadow-green jersey with tiny silver stars, white shorts, and green-silver cleats — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "The Meadow Cup had no formal rules when {{NAME}} arrived to referee it.\n\nIt was played every midsummer in the large meadow between the town and Thornwood: humans, fairies, and occasionally a unicorn if one happened to be in the area.\n\nThis year, one happened to be.\n\nThe unicorn was named Wisp and she had been watching human football from the Thornwood for three summers and had, apparently, decided this was the year to participate.\n\n{{NAME}} had never refereed a match with a unicorn before.\n\n\"What's the rule on horns?\" someone asked.\n\n\"Working on it,\" said {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a meadow-green jersey with tiny silver stars, white shorts, and green-silver cleats — same child, same face, same exact outfit in every image. The meadow at midsummer, {{NAME}} as referee, the human and fairy teams arranged, and Wisp the unicorn having just joined one side, everyone looking at {{NAME}} for the rule. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "He drafted the Meadow Cup Special Rules in twenty minutes, on a piece of paper leaned against a fence post.\n\nUnicorn rules: horn may not touch the ball directly. No flight over opposing players. Must remain within the meadow boundary.\n\nFairy rules: no charms. Standard elevation limits.\n\nHuman rules: standard.\n\n\"This is the most creative rulebook I've ever seen,\" said the fairy captain.\n\n\"It's the only rulebook this match has ever had,\" said {{NAME}}. \"You've been playing without rules for six years.\"\n\n\"It worked out,\" she said.\n\n\"This will work out better,\" he said.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a meadow-green jersey with tiny silver stars, white shorts, and green-silver cleats — same child, same face, same exact outfit in every image. {{NAME}} presenting the handwritten Meadow Cup Special Rules, the various players reading it, the unicorn looking at the no-horn rule with mild but accepting displeasure. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The match was the most chaotic and joyful football {{NAME}} had ever seen.\n\nWisp could not use her horn but she could use her nose, which turned out to be an extraordinary ball-control implement, nudging passes at precise angles and trapping the ball with complete confidence.\n\nThe fairies, without charms, played their fastest and most skillful game.\n\nThe humans played as if they'd been freed from seriousness.\n\n{{NAME}} refereed and forgot to whistle half the time because he was too busy watching.\n\n\"You're a terrible referee,\" said someone.\n\n\"Best match I've ever seen,\" said {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a meadow-green jersey with tiny silver stars, white shorts, and green-silver cleats — same child, same face, same exact outfit in every image. The chaotic joyful match in full flow, Wisp using her nose for a perfect pass, fairies in full flight within their limits, humans running freely, {{NAME}} refereeing while clearly delighted. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "There was no final score anyone agreed on.\n\nThree different counters had three different numbers.\n\nEveryone agreed: it didn't matter.\n\nWisp trotted over to {{NAME}} after the final whistle.\n\nShe touched her horn to his clipboard.\n\nThe handwritten rulebook glowed briefly.\n\n\"She's keeping it,\" said the fairy captain.\n\n\"The rules?\"\n\n\"The memory of them. Unicorns remember the structure of fair things. She'll carry it.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a meadow-green jersey with tiny silver stars, white shorts, and green-silver cleats — same child, same face, same exact outfit in every image. Wisp's horn touching the clipboard with a soft gold glow, {{NAME}} watching with quiet wonder, the fairy captain explaining beside him, the meadow full of players from three worlds. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "He walked home through the meadow as the midsummer light faded.\n\nThe fairies had gone back to Thornwood. The humans had gone home. Wisp stood at the meadow's edge, horn faintly glowing, before walking into the trees.\n\n{{NAME}} sat on the fence for a while and watched the meadow return to stillness.\n\nThen he walked home and went to bed and fell asleep before he'd finished thinking the thought he'd started.\n\nIn the meadow, far away, Wisp moved through the Thornwood, carrying the shape of a fair game in her ancient memory.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a meadow-green jersey with tiny silver stars, white shorts, and green-silver cleats — same child, same face, same exact outfit in every image. {{NAME}} asleep in bed, the room soft and golden, a smile on his face, the meadow outside and the evening light fading, completely content. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

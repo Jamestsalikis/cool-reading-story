@@ -1,0 +1,35 @@
+{
+  "interest": "Animals + Unicorns",
+  "title": "{{NAME}} and the Unicorn Who Couldn't Gallop",
+  "moral": "Everyone has a different kind of magic, and yours is exactly right for you.",
+  "theme_emoji": "🦄",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shimmering lilac-white shirt, silver-grey shorts, and rainbow-laced sneakers — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "The unicorn appeared in the meadow at the edge of town just after sunrise, and {{NAME}} was the first one to see her.\n\nShe was smaller than he expected: about the size of a large pony, with a horn that spiralled silver-gold and a mane the colour of clouds just before rain.\n\nShe was also, clearly, limping.\n\n{{NAME}} sat very still at the fence until she looked at him. Then he said quietly: \"I won't come any closer unless you want me to.\"\n\nShe walked straight up and pressed her nose to his palm.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shimmering lilac-white shirt, silver-grey shorts, and rainbow-laced sneakers — same child, same face, same exact outfit in every image. Wide meadow at dawn, {{NAME}} sitting very still on a fence rail, a small unicorn walking toward him with a slight limp, her silver-gold horn catching the first sunlight, morning mist around her hooves. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "Her name was something like a chord of music, three notes his voice couldn't quite make, so he called her Silver.\n\nSilver's problem was her left foreleg. Not injured, he realised on closer inspection. Just differently shaped, turned slightly inward.\n\nShe could walk fine. She could canter if she worked at it. But she couldn't gallop, the thundering earth-shaking gallop that all the other unicorns in her herd could do.\n\nThe animals of the meadow understood. The rabbits never ran past her at full speed. The deer kept their pace when she walked with them.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shimmering lilac-white shirt, silver-grey shorts, and rainbow-laced sneakers — same child, same face, same exact outfit in every image. {{NAME}} kneeling in the meadow, gently examining Silver the unicorn's left foreleg with careful hands, the unicorn's head lowered to watch him, rabbits and deer grazing peacefully nearby. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "\"You don't need to gallop,\" {{NAME}} told her one afternoon. \"Watch what you can do instead.\"\n\nSilver's horn glowed when she was near animals that were ill or frightened. A warm spiral of golden light that moved from the tip of her horn into whatever she touched.\n\nThe lame sparrow she touched: flew by morning.\n\nThe anxious fox cub who had been too scared to eat: ate the same evening.\n\nThe old tortoise with cloudy eyes: blinked, and his gaze cleared.\n\n\"See?\" said {{NAME}}. \"That's not something the other unicorns can do.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shimmering lilac-white shirt, silver-grey shorts, and rainbow-laced sneakers — same child, same face, same exact outfit in every image. Dramatic golden afternoon light, Silver's horn glowing brilliantly as she gently touches a small sparrow perched on {{NAME}}'s outstretched palm, the light spiralling around the bird, woodland animals gathered to watch. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "Word spread. The meadow animals began coming to Silver deliberately: a badger with a sore ear, a squirrel who'd been out of sorts for a week, a very elderly hedgehog who just liked the warmth.\n\nSilver healed what she could and stayed close for the rest.\n\n{{NAME}} watched her one afternoon working through a queue of animals, unhurried and patient.\n\nShe glanced at him. Her horn pulsed once, gently.\n\n\"You're the best healer in the whole meadow,\" he said.\n\nHer ears went up in a way he had come to recognise as happiness.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shimmering lilac-white shirt, silver-grey shorts, and rainbow-laced sneakers — same child, same face, same exact outfit in every image. Sunlit meadow scene, Silver with her horn gently glowing near a queue of small animals, {{NAME}} watching from the fence nearby, the whole meadow bathed in warm late-afternoon gold. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "That evening, as {{NAME}} got ready for bed, he looked out his window at the meadow.\n\nIn the twilight, Silver was walking slowly along the fence line, her horn a soft glowing thread in the dusk.\n\nBehind her, following in a quiet line: rabbits, a fox, two deer, a badger, a squirrel, and the elderly hedgehog.\n\nNot keeping up with her. Walking at her pace. Choosing to.\n\n{{NAME}} watched until they disappeared into the dark, then got into bed feeling full of something he didn't have a word for yet.\n\nOutside, very faint, he heard the meadow settle: grass, and quiet animals, and the soft hum of a silver horn.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a shimmering lilac-white shirt, silver-grey shorts, and rainbow-laced sneakers — same child, same face, same exact outfit in every image. {{NAME}} in bed in a cosy room, looking out the window at the meadow where Silver's horn glows gently in the dusk, small animal silhouettes visible behind her, warm golden bedroom light, peaceful and content. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

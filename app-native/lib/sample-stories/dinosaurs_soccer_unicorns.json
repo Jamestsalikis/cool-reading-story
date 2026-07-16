@@ -1,0 +1,35 @@
+{
+  "interest": "Dinosaurs + Soccer + Unicorns",
+  "title": "{{NAME}} and the Silver Striker",
+  "moral": "Every team is better when everyone brings their true self to the game.",
+  "theme_emoji": "⚽",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver and teal soccer jersey, dark shorts, and teal boots with silver laces — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "The unicorn arrived during pre-season training and stood at the side of the pitch watching with an expression of focused evaluation.\n\n{{NAME}} was practising crosses. His crosses were accurate but lacked pace.\n\nAfter the tenth cross, the unicorn walked onto the pitch, positioned itself in the striker's area, and the next time {{NAME}} crossed, it headed the ball perfectly into the goal with its horn.\n\nThe arc of the ball off the horn: a velocity and curve that was physically extraordinary.\n\n\"I wasn't expecting that,\" said {{NAME}}.\n\nThe unicorn looked at him: obviously.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver and teal soccer jersey, dark shorts, and teal boots with silver laces — same child, same face, same exact outfit in every image. Training pitch, the unicorn heading a crossed ball into the goal with its horn, the ball curving with extraordinary velocity, {{NAME}} watching from where he'd played the cross in pure surprise. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "Her name, as best he could translate, was something like first light. He called her Lumen.\n\nLumen's horn gave the ball a specific spin when she headed it: a spiral trajectory that was almost impossible to read for goalkeepers because the ball moved in three planes simultaneously.\n\nHe could reproduce a version of it with his instep, but Lumen's version was four times more effective.\n\nHe designed training sessions around their partnership: his crosses, her finishes, with a Stegosaurus that had arrived during a temporal event standing in goal because it was available and surprisingly reflexive.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver and teal soccer jersey, dark shorts, and teal boots with silver laces — same child, same face, same exact outfit in every image. Training session, {{NAME}} and Lumen working a cross-and-header combination, the Stegosaurus in goal doing its best with large reflexive movements, an extraordinary training setup. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The matches that season were unlike any {{NAME}} had played.\n\nLumen played in the final third, and opponents simply had no defensive framework for a unicorn striker: no precedent, no training, no rulebook that addressed it directly.\n\nBut what made the partnership extraordinary wasn't the novelty. It was the communication.\n\nLumen would touch her horn briefly to {{NAME}}'s shoulder before each match. In that second, he understood exactly what she was going to do in the first ten minutes.\n\nHe shaped his play around it. They were unstoppable.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver and teal soccer jersey, dark shorts, and teal boots with silver laces — same child, same face, same exact outfit in every image. Pre-match ritual, Lumen touching her horn to {{NAME}}'s shoulder, a brief golden connection, both of them standing before the match knowing exactly what's coming. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The championship final: a team that had scouted them extensively and had a defensive plan specifically for Lumen.\n\nThey double-marked her all game. She touched {{NAME}}'s shoulder before kick-off and showed him the image: use the space they leave.\n\nWith two defenders following Lumen everywhere, {{NAME}} and his other teammates had unprecedented space.\n\nFour goals. Two from Lumen breaking the mark at the right moment. Two from {{NAME}} exploiting the space she created.\n\nChampions.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver and teal soccer jersey, dark shorts, and teal boots with silver laces — same child, same face, same exact outfit in every image. Post-championship celebration, {{NAME}} and Lumen side by side, the trophy raised, the team around them, a moment of complete and shared victory. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "After the season, the temporal displacement resolved and Lumen needed to return to her own era.\n\n{{NAME}} stood at the portal with her.\n\n\"Next season,\" he said.\n\nShe touched her horn to his hand: a specific pulse he had come to understand meant something more than yes. Something closer to: always.\n\nShe went through.\n\nHe walked home carrying the memory of the horn's touch, and in his room that night he picked up his football and held it and thought about the spin she gave it.\n\nHe could still feel it. He always would.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a silver and teal soccer jersey, dark shorts, and teal boots with silver laces — same child, same face, same exact outfit in every image. {{NAME}} lying in bed holding his football, warm golden light, the lingering sense of a remarkable partnership, peaceful and full. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "interest": "Dinosaurs + Fairies",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Dinosaur Garden Full of Fairies",
+  "moral": "Small and big can be the best of friends.",
+  "theme_emoji": "🦖",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a teal t-shirt with a purple dinosaur print, lime green shorts, and orange sneakers — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} found a garden behind the old stone wall. The flowers were huge and bright. Tiny lights floated between the petals. The ground shook just a little. Then a big friendly dinosaur walked in.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a teal t-shirt with a purple dinosaur print, lime green shorts, and orange sneakers — same child, same face, same exact outfit in every image. Wide establishing shot of a magical enclosed garden behind a mossy stone wall, with enormous colourful flowers as tall as trees. {{NAME}} stands small at the garden entrance, eyes wide with wonder. Hundreds of tiny glowing fairy lights float among the flowers. A large friendly orange dinosaur has just stepped through an opening in the far wall, shaking the ground. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The dinosaur was called Rex. Rex loved fairies. But every time he came near, his big feet knocked over the flowers. The fairies had to fly away fast. Rex looked down at his big feet and frowned.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a teal t-shirt with a purple dinosaur print, lime green shorts, and orange sneakers — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}} crouching beside Rex the large orange dinosaur, both looking down at Rex's enormous green feet standing among bent and flattened flowers. Rex's expression is deeply remorseful with droopy eyes. Tiny fairies with glowing wings dart away in blurred streaks in the background. {{NAME}}'s face holds a gentle thoughtful look. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}} had an idea. He asked Rex to sit very still. Then he called out to the fairies. He said, Rex is kind. He will not move. Please come back. The fairies flew toward them slowly.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a teal t-shirt with a purple dinosaur print, lime green shorts, and orange sneakers — same child, same face, same exact outfit in every image. Dynamic action shot of {{NAME}} standing between Rex the seated dinosaur and a crowd of approaching tiny fairies, his arms spread wide in a welcoming gesture and a bright smile on his face. Rex sits perfectly still on the garden floor, looking hopeful. Dozens of tiny fairies with colourful glowing wings hover and float cautiously closer. Flower petals drift in the air. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "One brave fairy landed on Rex's big nose. Rex held very still. He was so happy he had a tiny tear in one eye. More fairies landed on his head and his back. They tickled him a little.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a teal t-shirt with a purple dinosaur print, lime green shorts, and orange sneakers — same child, same face, same exact outfit in every image. Emotional peak scene with warm golden magical light filling the garden. Rex the orange dinosaur is covered in tiny glowing fairies perched on his head, shoulders, and back. One bold fairy stands right on the tip of his huge nose. Rex's eyes glisten with a happy tear and the gentlest smile. {{NAME}} stands beside Rex, hands clasped, face full of joyful relief. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "Rex and the fairies played together every day after that. They looked after each other. Small and big can be the best of friends. Goodnight, {{NAME}}. Sleep tight. One fairy whispered that they were building something magical in the middle of the garden. What could it be?",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a teal t-shirt with a purple dinosaur print, lime green shorts, and orange sneakers — same child, same face, same exact outfit in every image. Warm cosy resolution scene in soft golden and pink evening light. {{NAME}} sits sleepily curled up against Rex the large orange dinosaur's warm side, eyes half-closed. Tiny fairies have built a glowing lantern of flowers nearby and circle it in a slow sleepy dance. The garden glows softly with warm fairy light as the sky above turns deep purple and gold. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

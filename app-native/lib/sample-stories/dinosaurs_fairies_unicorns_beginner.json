@@ -1,0 +1,36 @@
+{
+  "interest": "Dinosaurs + Fairies + Unicorns",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Rainbow Bridge to Dinosaur Land",
+  "moral": "The best adventures happen when you are open to new friends.",
+  "theme_emoji": "🦄",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright sky-blue tunic with silver stars, a shimmery white cape, and silver boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} stood at the edge of a magical forest. A white unicorn waited there. Tiny fairies danced around the unicorn's glowing horn. 'Come with us,' said the unicorn. 'We are going to Dinosaur Land.' A shining rainbow bridge stretched ahead into the misty mountains.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright sky-blue tunic with silver stars, a shimmery white cape, and silver boots — same child, same face, same exact outfit in every image. Wide establishing shot of a magical forest edge. {{NAME}} stands small before a gleaming rainbow bridge that stretches into misty mountains in the distance. A white unicorn with a glowing horn stands at the start of the bridge. Tiny fairies dance in the air around the unicorn. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "{{NAME}} stepped onto the rainbow bridge. It was soft under foot. Colours swirled below. At the end of the bridge, a big friendly dinosaur stood waiting. He had green spots and kind eyes. {{NAME}} felt a little shy. The fairy flew to {{NAME}}'s ear. 'He loves new friends,' she whispered.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright sky-blue tunic with silver stars, a shimmery white cape, and silver boots — same child, same face, same exact outfit in every image. Close-up of {{NAME}}'s face showing shy curiosity, eyes wide and hopeful. At the far end of the rainbow bridge behind {{NAME}}, a large friendly green-spotted dinosaur waits with kind eyes. A tiny fairy hovers beside {{NAME}}'s ear with a reassuring smile. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "{{NAME}}, the unicorn, and the fairies crossed the bridge together. The dinosaur ran forward. He skidded to a stop right in front of {{NAME}}. He bowed his big head. Then he wagged his tail like a happy dog. Everyone laughed. The fairies showered them all in golden sparkles.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright sky-blue tunic with silver stars, a shimmery white cape, and silver boots — same child, same face, same exact outfit in every image. Dynamic action shot full of movement. The large friendly green-spotted dinosaur has skidded to a stop on the rainbow bridge, tail wagging energetically. {{NAME}} laughs with delight. The white unicorn tosses her mane with amusement. Fairies shower golden sparkles over everyone. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The dinosaur led them into Dinosaur Land. It was full of giant trees and bright flowers. Other dinosaurs came to see the newcomers. The unicorn made rainbow lights with her horn. The fairies sang sweet songs. {{NAME}} danced with the dinosaur. It was pure joy.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright sky-blue tunic with silver stars, a shimmery white cape, and silver boots — same child, same face, same exact outfit in every image. Emotional peak scene with dramatic warm colourful light. {{NAME}} and the large green-spotted dinosaur dance together in a clearing of giant trees and bright flowers. The white unicorn shoots rainbow light from her horn across the sky. Fairies sing in the branches above. Other curious friendly dinosaurs watch from the edge of the clearing. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "The dinosaur made a nest of soft leaves for everyone to rest in. The unicorn lay beside {{NAME}}. The fairies nestled in the unicorn's mane. The dinosaur rumbled a low happy sound. {{NAME}} felt completely at home. Goodnight, {{NAME}}. Sleep well. Tomorrow, the dinosaur wants to take you to the hidden waterfall.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young child with brown hair and blue eyes, wearing a bright sky-blue tunic with silver stars, a shimmery white cape, and silver boots — same child, same face, same exact outfit in every image. Warm cosy resolution scene bathed in soft golden light. {{NAME}} lies sleepily in a cosy nest of giant soft leaves, eyes half-closed with a peaceful smile. The white unicorn lies beside {{NAME}}. Two fairies nestle in the unicorn's mane. The large green-spotted dinosaur curls around the nest like a gentle guardian. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

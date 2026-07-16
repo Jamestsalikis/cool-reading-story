@@ -1,0 +1,35 @@
+{
+  "interest": "Animals + Robots + Soccer",
+  "title": "{{NAME}} and the Stadium in the Wild",
+  "moral": "The best stadiums aren't built of concrete, they're built of enthusiasm.",
+  "theme_emoji": "⚽",
+  "word_count": 500,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a vivid green-and-white soccer jersey, black shorts, and green cleats with white laces — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} was building a robot referee for the local junior league when his dog Moss dragged an injured fox into the garage.\n\nThe fox had a sprained leg, was unimpressed by the situation, and needed quiet rest.\n\n{{NAME}} set it up in the corner.\n\nHis robot referee, REF, immediately started monitoring the fox's movements and temperature.\n\n\"That's not what you're for,\" said {{NAME}}.\n\nREF beeped.\n\n\"Fair enough,\" said {{NAME}}.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a vivid green-and-white soccer jersey, black shorts, and green cleats with white laces — same child, same face, same exact outfit in every image. {{NAME}}'s garage workshop, Moss the dog looking proud beside a fox sitting in the corner, REF the robot having rotated its sensors toward the fox with evident interest, {{NAME}} looking mildly exasperated. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The fox, recovering, watched practice sessions from the garage doorway with professional interest.\n\nREF watched everything too, learning the patterns.\n\nBy week two, REF was making observations: \"The fox's assessment of the ball trajectory is consistently more accurate than the players' adjustments.\"\n\n{{NAME}} looked at the fox. The fox looked back.\n\n\"Are you analysing my football?\" {{NAME}} asked.\n\nThe fox licked its nose.\n\n\"REF, can you translate that?\"\n\n\"Insufficient data,\" said REF. \"But its movement prediction accuracy is approximately ninety-two percent. For context: elite human players average sixty-three.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a vivid green-and-white soccer jersey, black shorts, and green cleats with white laces — same child, same face, same exact outfit in every image. The fox watching from the garage doorway as {{NAME}} practices with a ball in the garden, REF tracking data on both of them with its sensors, {{NAME}} looking back and forth between them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "He started including the fox in training.\n\nNot playing exactly: the fox would position itself at the edge of the marked-out pitch and REF would relay its predicted optimal positions to {{NAME}}'s earpiece.\n\nThe fox was always right.\n\nMoss, who had been watching, requested inclusion by sitting on the pitch in the goalkeeper position and refusing to move.\n\nMoss turned out to be an exceptional goalkeeper: low centre of gravity, fast sideways movement, no concept of fear.\n\n\"This is the strangest training session I've ever run,\" said {{NAME}}. \"REF, record everything.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a vivid green-and-white soccer jersey, black shorts, and green cleats with white laces — same child, same face, same exact outfit in every image. Training session, {{NAME}} practising with the fox watching from the sideline and Moss in goal, REF recording data, the whole scene slightly chaotic and enormously productive. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "By the end of the season, with REF calling tactical adjustments based on the fox's positional intelligence and Moss keeping goal with frightening competence, {{NAME}}'s team had the best defensive record in the league.\n\nThe league manager visited to ask about the team's unusual success.\n\n\"Good training methods,\" said {{NAME}}.\n\n\"Any specific methodology?\"\n\n{{NAME}} looked at the fox, who was sitting in its usual position. At Moss, who was guarding the garage. At REF, who was monitoring everything.\n\n\"Animal instinct and mechanical precision,\" he said. \"And a dog who doesn't know the meaning of doubt.\"",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a vivid green-and-white soccer jersey, black shorts, and green cleats with white laces — same child, same face, same exact outfit in every image. {{NAME}} speaking with the league manager, the fox visible in its usual spot, Moss guarding the garage entrance, REF in the background, {{NAME}}'s team in their kit behind him. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "At the end of the year, the fox's leg was fully healed.\n\n{{NAME}} opened the garden gate one morning and the fox sat in the gap for a moment, looking back at him.\n\nThen it was gone.\n\nREF updated its tracking database: \"Subject departed. Training record archived. Prediction accuracy: 91.7% over the season.\"\n\nMoss sat by the gate and watched the space where the fox had been for a long time.\n\nThat evening, {{NAME}} lay in bed listening to the garden.\n\nSomewhere, he was sure, a very clever fox was watching something move and knowing exactly where it would go.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a vivid green-and-white soccer jersey, black shorts, and green cleats with white laces — same child, same face, same exact outfit in every image. {{NAME}} lying in bed, the room golden and quiet, Moss asleep at the foot of the bed, REF charging on the desk, a warm settled feeling of a good year completed. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

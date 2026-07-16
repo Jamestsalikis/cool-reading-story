@@ -1,0 +1,36 @@
+{
+  "interest": "Animals + Dinosaurs + Princesses",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Princess's Lost Crown",
+  "moral": "True friends help each other, no matter what.",
+  "theme_emoji": "👑",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal-blue tunic with a small gold crown pattern, red trousers, and brown boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} lived near a big, shiny castle.\nThe castle had tall pink towers.\nAnimals roamed the green fields nearby.\nA small deer ran up to {{NAME}}.\n\"The princess needs help!\" said the deer.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal-blue tunic with a small gold crown pattern, red trousers, and brown boots — same child, same face, same exact outfit in every image. Wide establishing shot of a grand pink castle with tall glittering towers set against a bright blue sky. {{NAME}} stands small in the foreground of a lush green field, looking toward the castle. A delicate brown deer stands beside him, looking up with wide, urgent eyes. Rolling green hills and colourful wildflowers surround them. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "{{NAME}} ran to the castle gate.\nPrincess Lara stood there, crying a little.\nShe wore a pink dress with gold stars.\n\"My crown fell into the old cave,\" she said.\n{{NAME}}'s eyes went wide. A cave!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal-blue tunic with a small gold crown pattern, red trousers, and brown boots — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}} facing Princess Lara at the tall castle gate. Lara wears a flowing pink dress covered in small gold stars, her dark hair loose, eyes glistening with tears. {{NAME}}'s face shows wide-eyed surprise and readiness to help. The wooden castle gate stands behind them, decorated with flower carvings. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "They ran to the dark cave together.\nInside, a friendly dinosaur was sitting down.\nHe had the crown on his big head!\nHe did not know it was hers.\n{{NAME}} waved his arms and called out loud.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal-blue tunic with a small gold crown pattern, red trousers, and brown boots — same child, same face, same exact outfit in every image. Dynamic action shot inside a wide cave lit by glowing crystals. A large, friendly orange dinosaur sits in the middle of the cave, a sparkling gold crown balanced comically on top of his big head. {{NAME}} stands at the cave entrance waving both arms with a big grin, calling to the dinosaur. Princess Lara peeks in from behind {{NAME}}, eyes wide with surprise. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The dinosaur looked up and blinked.\nHe felt the crown on his head.\nHe began to laugh a big, deep laugh.\nHe gently gave the crown back.\nPrincess Lara held it tight to her chest.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal-blue tunic with a small gold crown pattern, red trousers, and brown boots — same child, same face, same exact outfit in every image. Emotional peak shot inside the glowing cave. The friendly orange dinosaur lowers his large head with a laughing, gentle expression, the crown sliding off into Princess Lara's outstretched hands. Lara clutches the crown to her chest, eyes bright with relief and joy. {{NAME}} stands beside her grinning. Warm amber crystal light fills the cave. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "The princess put her crown back on.\nShe smiled at {{NAME}} and the dinosaur.\n\"Thank you, dear friends,\" she said.\nThe little deer danced in the soft grass.\n{{NAME}} felt proud and happy and sleepy.\nGoodnight, {{NAME}}. Tomorrow the dinosaur wants to show you a secret room in the castle.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a royal-blue tunic with a small gold crown pattern, red trousers, and brown boots — same child, same face, same exact outfit in every image. Warm cosy resolution scene in the golden evening light outside the castle. Princess Lara stands proudly wearing her sparkling crown, one hand resting gently on the friendly orange dinosaur's nose. {{NAME}} sits in the soft green grass beside them, sleepy and smiling. The small deer dances happily in the background. Soft golden sunset light bathes the whole scene. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

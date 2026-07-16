@@ -1,0 +1,36 @@
+{
+  "interest": "Animals + Fairies + Superheroes",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Fairy Superhero Squad",
+  "moral": "Even the smallest person can be a very big hero.",
+  "theme_emoji": "🧚",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright blue superhero suit with a yellow lightning bolt on the chest, a short blue cape, and blue boots — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} flew his toy cape through the park.\nOak trees and rose bushes lined the path.\nA white cat and a brown rabbit watched him.\nThen a tiny glow zoomed past his ear.\nThen another. Then ten more!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright blue superhero suit with a yellow lightning bolt on the chest, a short blue cape, and blue boots — same child, same face, same exact outfit in every image. Wide establishing shot of a sunny park lined with oak trees and red rose bushes. {{NAME}} runs along the path with his blue cape streaming behind him, arms slightly outstretched. A white cat and a brown rabbit sit watching from the grass. Tiny glowing streaks of light, like small shooting stars, zoom past {{NAME}}'s head in multiple directions. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "The glowing lights stopped in front of {{NAME}}.\nThey were tiny fairies! All in little capes.\nEach one had a different bright colour.\n{{NAME}}'s eyes went huge and round.\n\"We need a hero,\" said the red fairy.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright blue superhero suit with a yellow lightning bolt on the chest, a short blue cape, and blue boots — same child, same face, same exact outfit in every image. Close-up of {{NAME}}'s face with eyes enormous and shining, mouth open in a gasp of pure delight. Hovering directly in front of him are six tiny fairies, each wearing a miniature superhero cape in a different bright colour: red, yellow, green, orange, purple, and pink. The red fairy points a tiny finger at {{NAME}} with a serious, heroic expression. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "A mean wind had trapped animals in the big pond.\nA duck and two frogs were stuck on a tiny island.\nThe fairies could not lift them. Too heavy!\n{{NAME}} waded right into the cool water.\nHe lifted the duck up high above the waves.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright blue superhero suit with a yellow lightning bolt on the chest, a short blue cape, and blue boots — same child, same face, same exact outfit in every image. Dynamic action shot. {{NAME}} stands knee-deep in a rippling blue-green pond, lifting a fluffy white duck above his head with both hands. Two green frogs sit on a tiny muddy island nearby, waiting. Six colourful fairies swirl around him in their mini capes, using their wings to help steady him against the wind. The white cat and brown rabbit watch anxiously from the bank. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "Trip after trip, {{NAME}} brought everyone to shore.\nThe fairies flew the frogs in their tiny arms.\nAt last, every animal was safe on the grass.\nThe duck shook her feathers dry.\nThe fairies landed on {{NAME}}'s shoulders.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright blue superhero suit with a yellow lightning bolt on the chest, a short blue cape, and blue boots — same child, same face, same exact outfit in every image. Emotional peak scene on the grassy pond bank. {{NAME}} stands with the rescued duck, two frogs, white cat, and brown rabbit gathered safely around his feet. Six tiny fairies in their colourful capes perch proudly along both his shoulders. Everyone looks up at {{NAME}} with grateful, admiring expressions. Warm bright golden light floods the scene. {{NAME}}'s face glows with pride and happiness. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "The animals shook and ruffled happily.\nThe fairies pinned a tiny star badge on his chest.\n\"You are an official hero,\" said the red fairy.\nThe duck and frogs sat close to {{NAME}}.\nHe felt very proud and very, very sleepy.\nGoodnight, {{NAME}}. Tomorrow the fairies have a new mission, and only you can lead it.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright blue superhero suit with a yellow lightning bolt on the chest, a short blue cape, and blue boots — same child, same face, same exact outfit in every image. Warm cosy resolution scene on the grassy bank in golden evening light. {{NAME}} sits drowsily in the soft grass, a tiny gleaming star badge pinned next to the lightning bolt on his chest. The duck, two frogs, white cat, and brown rabbit are nestled contentedly around him. Six tiny fairies in their colourful capes float gently around him, wings barely moving. Everything glows with warm peaceful golden light. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "interest": "Animals + Superheroes",
+  "reading_level": "beginner",
+  "title": "{{NAME}} and the Animal Superhero Squad",
+  "moral": "Every small act of bravery makes the world a better place.",
+  "theme_emoji": "🦸",
+  "word_count": 300,
+  "character_anchor": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright yellow superhero cape, a red t-shirt with a gold star on the chest, dark blue shorts, and red sneakers — same child, same face, same exact outfit in every image.",
+  "pages": [
+    {
+      "page_number": 1,
+      "content": "{{NAME}} put on his yellow cape. He ran outside to the park. A squirrel wore a tiny green cape. A dog wore a tiny blue cape. A cat wore a tiny red cape. The Animal Superhero Squad was ready!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright yellow superhero cape, a red t-shirt with a gold star on the chest, dark blue shorts, and red sneakers — same child, same face, same exact outfit in every image. Wide establishing shot of a sunny park with tall oak trees and a bright blue sky. {{NAME}} stands small in the centre of the scene with his yellow cape billowing. Beside him, a squirrel in a tiny green cape, a dog in a tiny blue cape, and a cat in a tiny red cape all stand in heroic poses. Sunlight gleams dramatically on everyone. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 2,
+      "content": "Then they saw a problem. A little bird was stuck high up in a tree. The bird was scared. She could not get down. {{NAME}} looked up at the tall tree and thought hard.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright yellow superhero cape, a red t-shirt with a gold star on the chest, dark blue shorts, and red sneakers — same child, same face, same exact outfit in every image. Close-up mid-shot of {{NAME}}'s face tilted upward, eyes full of determined surprise as he spots something high above. His yellow cape flutters at the sides. Above and in the blurred background, a small yellow bird perches on a very high branch, wings trembling and eyes wide with fear. The dog, squirrel, and cat look up too with worried faces. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 3,
+      "content": "The squirrel climbed up the tree. The dog barked gently to keep the bird calm. The cat climbed halfway up. {{NAME}} spread his arms wide and called out. You can do it! Do not be scared!",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright yellow superhero cape, a red t-shirt with a gold star on the chest, dark blue shorts, and red sneakers — same child, same face, same exact outfit in every image. Dynamic action shot of the superhero squad in full rescue mode. The squirrel in a green cape scrambles up the tree trunk, the cat in red is halfway up, and the dog in blue barks encouragingly at the base. {{NAME}} stands below with arms spread wide and a powerful heroic expression, his yellow cape streaming behind him. The little yellow bird at the top blinks hopefully. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 4,
+      "content": "The squirrel reached the bird. He sat beside her. She stopped shaking. Then she took one small jump. She flew right down into {{NAME}}'s hands. The whole squad cheered.",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright yellow superhero cape, a red t-shirt with a gold star on the chest, dark blue shorts, and red sneakers — same child, same face, same exact outfit in every image. Emotional peak scene with golden light bursting through the tree branches. The tiny yellow bird glides down through golden light rays with open wings, just landing gently into {{NAME}}'s cupped hands. {{NAME}}'s face is full of pure relief and joy. The squirrel, cat, and dog celebrate wildly below, capes flying. No text, no words, no letters anywhere in the image."
+    },
+    {
+      "page_number": 5,
+      "content": "The bird flew free and sang a happy song. The Animal Superhero Squad saved the day. Every small act of bravery makes the world a better place. Goodnight, {{NAME}}. Sleep well. Tomorrow there might be a brand new mission waiting. What could it be?",
+      "image_prompt": "Bright children's book cartoon illustration, bold outlines, vivid flat colours. {{NAME}}, a young boy with brown hair and blue eyes, wearing a bright yellow superhero cape, a red t-shirt with a gold star on the chest, dark blue shorts, and red sneakers — same child, same face, same exact outfit in every image. Warm cosy resolution scene bathed in soft golden sunset light in the park. {{NAME}} sits sleepily against the base of the oak tree, cape wrapped around him like a blanket. The dog rests its head on his lap, the squirrel and cat are curled up beside him, and the little yellow bird perches softly on his shoulder. The sky is a gentle pink and orange. No text, no words, no letters anywhere in the image."
+    }
+  ]
+}
