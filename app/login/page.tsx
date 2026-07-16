@@ -2,13 +2,9 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { signIn, signInWithGoogle } from '@/lib/supabase/auth-client';
-import { useRedirectIfAuthenticated } from '@/components/AuthGuard';
+import { signIn, signInWithGoogle } from '@/lib/supabase/actions';
 
 export default function LoginPage() {
-  const router = useRouter();
-  useRedirectIfAuthenticated();
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
@@ -23,9 +19,6 @@ export default function LoginPage() {
     if (result?.error) {
       setError(result.error);
       setLoading(false);
-    } else {
-      // Client auth: navigate ourselves (the old server action redirected).
-      router.replace('/dashboard');
     }
   };
 

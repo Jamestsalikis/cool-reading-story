@@ -4,12 +4,10 @@ import { useState, useEffect } from 'react';
 import { useIsMobile } from '@/lib/useIsMobile';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { createChild } from '@/lib/supabase/child-client';
-import { generateStory } from '@/lib/generation-client';
+import { createChild } from '@/lib/supabase/child-actions';
 import { createClient } from '@/lib/supabase/client';
 import { TRIAL_INTERESTS } from '@/lib/sample-stories/index';
 import { isContentAppropriate } from '@/lib/content-filter';
-import { AuthGuard } from '@/components/AuthGuard';
 
 // Content filter — block inappropriate terms for a children's app
 
@@ -179,7 +177,7 @@ const FOLLOW_UP_QUESTIONS: Record<string, { q: string; placeholder: string }[]> 
   ],
 };
 
-function OnboardingFlow() {
+export default function OnboardingPage() {
   const router = useRouter();
   const [state, setState] = useState<OnboardingState>({
     step: 2,
@@ -305,8 +303,12 @@ function OnboardingFlow() {
 
         // Generate story then go to dashboard — the banner will show "book ready"
         try {
-          const storyRes = await generateStory(result.child.id);
-          const storyData = storyRes.data;
+          const storyRes = await fetch('/api/generate-story', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ child_id: result.child.id }),
+          });
+          const storyData = await storyRes.json();
           const storyId = storyData?.story?.id;
           if (storyId) {
             // Navigate to dashboard with params — DashboardContent will show the book-ready banner
@@ -2162,14 +2164,6 @@ function OnboardingFlow() {
         )}
       </div>
     </div>
-  );
-}
-
-export default function OnboardingPage() {
-  return (
-    <AuthGuard>
-      <OnboardingFlow />
-    </AuthGuard>
   );
 }
 

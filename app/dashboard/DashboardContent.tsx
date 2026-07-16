@@ -7,9 +7,7 @@ import { useRouter } from 'next/navigation';
 import { BookOpen, Users, Settings, Plus, X } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import PaywallModal from '@/components/PaywallModal';
-import { updateChild } from '@/lib/supabase/child-client';
-import { generateStory, generateSequel } from '@/lib/generation-client';
-import { isNativeApp } from '@/lib/iap';
+import { updateChild } from '@/lib/supabase/child-actions';
 import { isContentAppropriate } from '@/lib/content-filter';
 
 const CHILD_PALETTES = [
@@ -145,11 +143,11 @@ function ProductTour({ steps, pendingStoryId, onDone }: {
   }, [step, current.targetId]);
 
   const goNext = () => {
-    if (isLast) onDone(pendingStoryId ? `/story?id=${pendingStoryId}` : undefined);
+    if (isLast) onDone(pendingStoryId ? `/stories/${pendingStoryId}` : undefined);
     else setStep(s => s + 1);
   };
   const goBack = () => setStep(s => s - 1);
-  const skip = () => onDone(pendingStoryId ? `/story?id=${pendingStoryId}` : undefined);
+  const skip = () => onDone(pendingStoryId ? `/stories/${pendingStoryId}` : undefined);
 
   // Tooltip positioning
   let tooltipStyle: React.CSSProperties;
@@ -285,7 +283,7 @@ function BookCard({ story, palette, onContinue, isWriting }: { story: Story; pal
     <div style={{ transform: `rotate(${tilt}deg)`, transition: 'transform 0.2s ease', transformOrigin: 'bottom center' }}
       onMouseEnter={e => (e.currentTarget.style.transform = 'rotate(0deg) scale(1.04)')}
       onMouseLeave={e => (e.currentTarget.style.transform = `rotate(${tilt}deg) scale(1)`)}>
-      <div className="book-wrap" onClick={() => !isWriting && router.push(`/story?id=${story.id}`)}
+      <div className="book-wrap" onClick={() => !isWriting && router.push(`/stories/${story.id}`)}
         style={{ perspective: '900px', cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <div style={{ position: 'relative', width: '140px', height: '196px', transformStyle: 'preserve-3d' }}>
           <div style={{ position: 'absolute', left: 0, top: 0, width: '18px', height: '100%', background: `linear-gradient(90deg, ${palette.spine} 0%, ${palette.cover} 100%)`, borderRadius: '3px 0 0 3px', zIndex: 3, boxShadow: 'inset -2px 0 5px rgba(0,0,0,0.3)' }} />
@@ -356,7 +354,7 @@ function SeriesFan({ volumes, palette, onContinue }: { volumes: Story[]; palette
           const isHovered = hoveredId === vol.id;
           const coverImage = vol.pages?.[0]?.image_url;
           return (
-            <div key={vol.id} onClick={() => router.push(`/story?id=${vol.id}`)} onMouseEnter={() => setHoveredId(vol.id)} onMouseLeave={() => setHoveredId(null)}
+            <div key={vol.id} onClick={() => router.push(`/stories/${vol.id}`)} onMouseEnter={() => setHoveredId(vol.id)} onMouseLeave={() => setHoveredId(null)}
               style={{ position: 'absolute', bottom: 0, left: '50%', width: '120px', height: '168px', cursor: 'pointer', transformOrigin: 'center bottom', transform: `translateX(-50%) rotate(${angles[i]}deg) translateY(${isHovered ? -20 : 0}px)`, transition: 'transform 0.25s cubic-bezier(0.34,1.56,0.64,1)', zIndex: isHovered ? 50 : i + 1, borderRadius: '3px 6px 6px 3px', overflow: 'hidden', boxShadow: isHovered ? '0 16px 36px rgba(0,0,0,0.35)' : '2px 4px 10px rgba(0,0,0,0.2)' }}>
               <div style={{ position: 'absolute', left: 0, top: 0, width: '13px', height: '100%', background: palette.spine, zIndex: 1, boxShadow: 'inset -2px 0 4px rgba(0,0,0,0.25)' }} />
               <div style={{ position: 'absolute', left: '13px', top: 0, width: 'calc(100% - 13px)', height: '100%', background: palette.cover, overflow: 'hidden' }}>
@@ -687,10 +685,10 @@ export default function DashboardPage() {
         if (!subData?.has_seen_tour) {
           setShowTour(true);
           // Pre-generate all 5 page images in background while user reads tour.
-          // Web only: these hit Next.js /api routes. In the native app the
-          // app-generate → generate-story-text → generate-story-images edge-fn
-          // chain produces images server-side, and the reader polls the DB for them.
-          if (!isNativeApp()) void (async () => {
+          // Sequential with 400ms stagger to avoid Replicate rate limits.
+          // generate-image stores poll_url in DB; story page picks it up and goes
+          // straight to polling instead of re-submitting to Replicate.
+          void (async () => {
             // Pre-generate AND fully poll all 5 images in background during tour.
             // generate-image starts the Replicate prediction + saves poll_url to DB.
             // poll-image polls until done, downloads, uploads to Supabase Storage,
@@ -735,7 +733,7 @@ export default function DashboardPage() {
           })();
         } else {
           // Tour already seen - go straight to the story
-          router.push(`/story?id=${storyId}`);
+          router.push(`/stories/${storyId}`);
         }
       });
     }
@@ -832,9 +830,9 @@ export default function DashboardPage() {
     setGeneratingName(child?.name || '');
     setGenerating(`new-${childId}`); setGenerateError(''); setDailyLimitChild(null);
     try {
-      const res = await generateStory(childId);
-      const data = res.data;
-      if (res.status === 402) { setPaywallReason(data.reason as typeof paywallReason); return; }
+      const res = await fetch('/api/generate-story', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ child_id: childId }) });
+      const data = await res.json();
+      if (res.status === 402) { setPaywallReason(data.reason); return; }
       if (res.status === 429) { const child = children.find(c => c.id === childId); setDailyLimitChild(child?.name || 'your child'); return; }
       if (!res.ok) { setGenerateError(data.error || data.message || 'Something went wrong. Please try again.'); return; }
       const storyId = data.story?.id;
@@ -858,9 +856,9 @@ export default function DashboardPage() {
     setGeneratingName(childName);
     setGenerating(`sequel-${storyId}`); setGenerateError(''); setDailyLimitChild(null);
     try {
-      const res = await generateSequel(storyId);
-      const data = res.data;
-      if (res.status === 402) { setPaywallReason(data.reason as typeof paywallReason); return; }
+      const res = await fetch('/api/generate-sequel', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ story_id: storyId }) });
+      const data = await res.json();
+      if (res.status === 402) { setPaywallReason(data.reason); return; }
       if (res.status === 429) { const sr = stories.find(s => s.id === storyId); const chName = sr?.children?.name || 'your child'; setDailyLimitChild(chName); return; }
       if (!res.ok) { setGenerateError(data.error || 'Something went wrong.'); return; }
       const newStoryId = data.story?.id;
@@ -976,7 +974,7 @@ export default function DashboardPage() {
       )}
 
       {/* Top nav */}
-      <nav style={{ position: 'sticky', top: 0, zIndex: 50, background: '#FFF4E6', borderBottom: '2px solid #F0E4D0', padding: 'var(--safe-top) calc(1.5rem + var(--safe-right)) 0 calc(1.5rem + var(--safe-left))', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 'calc(68px + var(--safe-top))', gap: '12px' }}>
+      <nav style={{ position: 'sticky', top: 0, zIndex: 50, background: '#FFF4E6', borderBottom: '2px solid #F0E4D0', padding: '0 1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '68px', gap: '12px' }}>
         <a href="/" style={{ textDecoration: 'none', flexShrink: 0 }}>
           <img src="/mood-3.png" alt="TalePop" style={{ height: '52px', width: 'auto' }} />
         </a>
@@ -1076,7 +1074,7 @@ export default function DashboardPage() {
 
                 {/* Continue reading hero */}
                 {mostRecentStory && (
-                  <div className="continue-card" onClick={() => router.push(`/story?id=${mostRecentStory.id}`)}
+                  <div className="continue-card" onClick={() => router.push(`/stories/${mostRecentStory.id}`)}
                     style={{ borderRadius: '20px', overflow: 'hidden', position: 'relative', height: isMobile ? '180px' : '220px', cursor: 'pointer', boxShadow: '0 8px 32px rgba(0,0,0,0.18)', backgroundImage: 'url(/continue-bg.svg)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
                     {mostRecentCover && <div style={{ position: 'absolute', inset: 0, backgroundImage: `url(${mostRecentCover})`, backgroundSize: 'cover', backgroundPosition: 'center top', opacity: 0.35 }} />}
                     <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(30,10,0,0.82) 0%, rgba(20,6,0,0.55) 45%, rgba(0,0,0,0.08) 100%)' }} />
@@ -1348,7 +1346,7 @@ export default function DashboardPage() {
 
       {/* Mobile bottom nav */}
       {isMobile && (
-        <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, height: 'calc(72px + var(--safe-bottom))', paddingBottom: 'var(--safe-bottom)', background: '#fff', borderTop: '2px solid #F0E4D0', display: 'flex', justifyContent: 'space-around', alignItems: 'center', zIndex: 40 }}>
+        <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, height: '72px', background: '#fff', borderTop: '2px solid #F0E4D0', display: 'flex', justifyContent: 'space-around', alignItems: 'center', zIndex: 40 }}>
           {navItems.map(({ id, label, icon: Icon }) => {
             const active = activeNav === id;
             return (
