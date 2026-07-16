@@ -358,7 +358,8 @@ Deno.serve(async (req: Request) => {
   // 2. Service-role client for all privileged reads/writes.
   const db = createClient(supabaseUrl, serviceRoleKey)
 
-  let body: { mode?: string; child_id?: string; story_id?: string }
+  // deno-lint-ignore no-explicit-any
+  let body: { mode?: string; child_id?: string; story_id?: string; sample_candidate?: any }
   try { body = await req.json() } catch { return json({ error: 'Bad request' }, 400) }
   const mode = body.mode === 'sequel' ? 'sequel' : 'new'
 
@@ -378,6 +379,36 @@ Deno.serve(async (req: Request) => {
 
       const limit = await checkChildDailyLimit(db, user.id, childId, paywall.reason)
       if (limit.blocked) return json({ error: `${child.name} already has a story for today. Each child gets one story per day.` }, 429)
+
+      // Free user's FIRST book → serve the curated sample template (no AI) when
+      // the client supplied a matching one. Gated server-side so the free rule
+      // can't be gamed. Mirrors the web /api/generate-story sample shortcut.
+      const { count: existingCount } = await db.from('stories').select('id', { count: 'exact', head: true }).eq('child_id', childId)
+      const isFirstBook = (existingCount ?? 0) === 0
+      const sample = body.sample_candidate
+      if (paywall.reason === 'free' && isFirstBook && sample && Array.isArray(sample.pages) && sample.pages.length > 0) {
+        // deno-lint-ignore no-explicit-any
+        const pagesForDB = sample.pages.map((p: any) => ({ ...p, image_url: null, poll_url: null }))
+        // deno-lint-ignore no-explicit-any
+        const fullContent = pagesForDB.map((p: any) => p.content).join('\n\n')
+        const { data: story, error: insErr } = await db.from('stories').insert({
+          child_id: childId, parent_id: user.id,
+          title: sample.title, content: fullContent, moral: sample.moral ?? '',
+          theme: sample.theme_emoji ?? '✨', word_count: sample.word_count ?? 0,
+          reading_time_minutes: Math.ceil((sample.word_count || 400) / 150),
+          pages: pagesForDB, input_tokens: 0, output_tokens: 0,
+          character_anchor: sample.character_anchor ?? null, is_sample: true,
+        }).select().single()
+        if (insErr || !story) { console.error('[app-generate] sample insert error:', insErr); return json({ error: 'Story save failed' }, 500) }
+        await decrementStoryCount(db, user.id, 'free', childId)
+        // Fire image generation (service role + replicate token).
+        await fetch(`${supabaseUrl}/functions/v1/generate-story-images`, {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${serviceRoleKey}`, 'apikey': serviceRoleKey, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ story_id: story.id, replicate_token: replicateToken }),
+        }).catch((e) => console.error('[app-generate] image trigger error:', e))
+        return json({ story: { id: story.id, title: sample.title, pages: [] } })
+      }
 
       const { data: prev } = await db.from('stories').select('title').eq('child_id', childId).order('created_at', { ascending: false }).limit(10)
       const previousTitles = (prev || []).map((s: { title: string }) => s.title).filter(Boolean)

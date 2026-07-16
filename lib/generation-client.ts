@@ -9,6 +9,7 @@
 
 import { createClient } from './supabase/client';
 import { isNativeApp } from './iap';
+import { getSampleStoryClient } from './sample-stories/client';
 
 export type GenResult = { ok: boolean; status: number; data: Record<string, unknown> & { story?: { id?: string }; error?: string; reason?: string; message?: string } };
 
@@ -45,10 +46,46 @@ async function callApi(path: string, body: Record<string, unknown>): Promise<Gen
 }
 
 /** Generate a brand-new story for a child. */
-export function generateStory(childId: string): Promise<GenResult> {
-  return isNativeApp()
-    ? callEdge({ mode: 'new', child_id: childId })
-    : callApi('/api/generate-story', { child_id: childId });
+export async function generateStory(childId: string): Promise<GenResult> {
+  if (!isNativeApp()) {
+    // Web keeps the Next.js route (which does its own sample-story shortcut).
+    return callApi('/api/generate-story', { child_id: childId });
+  }
+  // Native: offer a curated sample template as a candidate. The edge function
+  // uses it ONLY for a free user's first book; otherwise it generates with AI.
+  // Server-side gating keeps the "1 free per child" rule tamper-proof.
+  const sampleCandidate = await buildSampleCandidate(childId);
+  return callEdge({ mode: 'new', child_id: childId, sample_candidate: sampleCandidate });
+}
+
+// Pick + personalise a bundled sample story for this child, or null if the
+// child has no trial interest / no matching template.
+async function buildSampleCandidate(childId: string): Promise<unknown | null> {
+  try {
+    const supabase = createClient();
+    const { data: child } = await supabase
+      .from('children')
+      .select('name, gender, interests, reading_level, appearance')
+      .eq('id', childId)
+      .single();
+    if (!child) return null;
+    const app = (child.appearance ?? {}) as Record<string, unknown>;
+    return await getSampleStoryClient(
+      (child.interests ?? []) as string[],
+      {
+        name: child.name,
+        gender: child.gender ?? undefined,
+        hairColour: app.hairColour as string | undefined,
+        eyeColour: app.eyeColour as string | undefined,
+        skinColour: app.skinColour as string | undefined,
+        siblings: app.siblings as { name: string }[] | undefined,
+        friends: app.friends as { name: string }[] | undefined,
+      },
+      (child.reading_level as string) ?? 'intermediate',
+    );
+  } catch {
+    return null; // fall through to AI on any error
+  }
 }
 
 /** Generate the next chapter (sequel) from an existing story. */
