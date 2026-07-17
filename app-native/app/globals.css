@@ -132,3 +132,23 @@ img, video { max-width: 100%; height: auto; }
 .safe-pt { padding-top:    var(--safe-top) !important; }
 .safe-pb { padding-bottom: var(--safe-bottom) !important; }
 .safe-px { padding-left: var(--safe-left) !important; padding-right: var(--safe-right) !important; }
+
+/* ── Native-app feel (app-native only) ──
+   Make the webview stop behaving like a web page: no grey tap-flash, no
+   long-press text selection / iOS callout menu, no rubber-band overscroll. */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+html, body {
+  -webkit-user-select: none;
+  user-select: none;
+  overscroll-behavior: none;
+  touch-action: manipulation; /* removes the 300ms tap delay / double-tap zoom */
+}
+/* Re-enable selection where it's genuinely useful: reading the story + form fields. */
+input, textarea, [contenteditable="true"], .story-text, .story-text * {
+  -webkit-user-select: text;
+  user-select: text;
+  -webkit-touch-callout: default;
+}

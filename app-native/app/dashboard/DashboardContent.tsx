@@ -684,7 +684,9 @@ export default function DashboardPage() {
         setPendingTourStoryId(storyId);
         setPendingTourChildName(decodedName);
         setShowConfetti(true);
-        if (!subData?.has_seen_tour) {
+        // The web-style spotlight tour doesn't align in the native webview, so
+        // skip it in the app — new users go straight to their story instead.
+        if (!isNativeApp() && !subData?.has_seen_tour) {
           setShowTour(true);
           // Pre-generate all 5 page images in background while user reads tour.
           // Web only: these hit Next.js /api routes. In the native app the
