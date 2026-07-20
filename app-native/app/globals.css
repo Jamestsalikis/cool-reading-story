@@ -152,3 +152,21 @@ input, textarea, [contenteditable="true"], .story-text, .story-text * {
   user-select: text;
   -webkit-touch-callout: default;
 }
+
+/* ── Native-style screen transitions (app-native only) ──
+   Each new screen fades + slides in. No fill-mode on purpose: the transform must
+   fully clear when the animation ends, otherwise a lingering transform would
+   re-anchor the reader's position:fixed bars and break them. */
+@keyframes page-enter {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.page-transition {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+  animation: page-enter 0.28s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-transition { animation: none; }
+}
