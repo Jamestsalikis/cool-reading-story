@@ -8,6 +8,12 @@
 // Same return shapes as the old server actions so page call-sites barely change.
 
 import { createClient } from './client';
+import { isNativeApp } from '../iap';
+
+// Custom URL scheme the OAuth flow returns to on native (registered in
+// ios Info.plist + Supabase allowed redirect URLs). The deep-link listener in
+// components/NativeInit.tsx catches it and completes the session.
+export const NATIVE_AUTH_REDIRECT = 'com.talepopstories.app://auth-callback';
 
 // Base URL for auth email / OAuth redirects.
 // Web + local dev: the configured site URL, or the current origin.
@@ -57,13 +63,29 @@ export async function resendVerificationEmail(email: string) {
 
 export async function signInWithGoogle() {
   const supabase = createClient();
+
+  if (isNativeApp()) {
+    // Native: get the Google consent URL without navigating, open it in an
+    // in-app browser, and let the deep-link listener finish the session when
+    // Google redirects back to NATIVE_AUTH_REDIRECT. PKCE code_verifier is
+    // stored by this (singleton) client, so exchangeCodeForSession works.
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: { redirectTo: NATIVE_AUTH_REDIRECT, skipBrowserRedirect: true },
+    });
+    if (error) return { error: error.message };
+    if (!data?.url) return { error: 'Could not start Google sign-in' };
+    const { Browser } = await import('@capacitor/browser');
+    await Browser.open({ url: data.url });
+    return { success: true };
+  }
+
+  // Web: standard redirect to Google's consent screen.
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'google',
     options: { redirectTo: `${redirectBase()}/auth/callback` },
   });
   if (error) return { error: error.message };
-  // On web this navigates to Google's consent screen. (Native uses an in-app
-  // browser + deep-link return, wired up in a later step.)
   if (data?.url && typeof window !== 'undefined') window.location.href = data.url;
   return { success: true };
 }
