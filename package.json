@@ -11,8 +11,14 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.88.0",
+    "@capacitor/android": "^8.4.1",
+    "@capacitor/core": "^8.4.1",
+    "@capacitor/ios": "^8.4.1",
+    "@capacitor/splash-screen": "^8.0.2",
+    "@capacitor/status-bar": "^8.0.3",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.6.1",
+    "@revenuecat/purchases-capacitor": "^13.2.0",
     "@rive-app/react-canvas": "^4.28.3",
     "@stripe/stripe-js": "^9.2.0",
     "@supabase/ssr": "^0.10.2",
@@ -24,13 +30,11 @@
     "resend": "^6.11.0",
     "stripe": "^22.0.1",
     "three": "^0.184.0",
-    "zod": "^3.23.0",
-    "@capacitor/android": "^8.4.1",
-    "@capacitor/core": "^8.4.1",
-    "@capacitor/ios": "^8.4.1",
-    "@revenuecat/purchases-capacitor": "^13.2.0"
+    "zod": "^3.23.0"
   },
   "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
+    "@capacitor/cli": "^8.4.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
@@ -38,8 +42,6 @@
     "eslint": "^9",
     "eslint-config-next": "15.3.6",
     "tailwindcss": "^4",
-    "typescript": "^5",
-    "@capacitor/cli": "^8.4.1",
-    "@capacitor/assets": "^3.0.5"
+    "typescript": "^5"
   }
 }

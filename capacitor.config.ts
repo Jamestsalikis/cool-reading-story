@@ -21,6 +21,15 @@ const config: CapacitorConfig = {
     contentInset: 'never',
   },
   android: {},
+  plugins: {
+    SplashScreen: {
+      // Stay up until the web app has mounted, then NativeInit calls hide()
+      // (avoids a white flash between the launch image and the first screen).
+      launchAutoHide: false,
+      backgroundColor: '#FFF4E6',
+      showSpinner: false,
+    },
+  },
 };
 
 export default config;
