@@ -90,6 +90,51 @@ export async function signInWithGoogle() {
   return { success: true };
 }
 
+// ── Sign in with Apple (native) ──────────────────────────────────────────────
+// Uses the native Apple sheet to get an identity token, then hands it to
+// Supabase. Nonce: we send SHA256(rawNonce) to Apple (goes into the token's
+// nonce claim) and pass the rawNonce to Supabase, which hashes + compares.
+function randomNonce(len = 32): string {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._';
+  const bytes = new Uint8Array(len);
+  crypto.getRandomValues(bytes);
+  return Array.from(bytes, (b) => chars[b % chars.length]).join('');
+}
+async function sha256Hex(input: string): Promise<string> {
+  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(input));
+  return Array.from(new Uint8Array(digest)).map((b) => b.toString(16).padStart(2, '0')).join('');
+}
+
+export async function signInWithApple() {
+  if (!isNativeApp()) return { error: 'Apple sign-in is only available in the app.' };
+  const supabase = createClient();
+  try {
+    const { SignInWithApple } = await import('@capacitor-community/apple-sign-in');
+    const rawNonce = randomNonce();
+    const hashedNonce = await sha256Hex(rawNonce);
+    const res = await SignInWithApple.authorize({
+      clientId: 'com.talepopstories.app', // App ID / bundle id
+      redirectURI: NATIVE_AUTH_REDIRECT,  // required by the plugin; unused for native token flow
+      scopes: 'email name',
+      nonce: hashedNonce,
+    });
+    const idToken = res.response?.identityToken;
+    if (!idToken) return { error: 'Apple sign-in was cancelled.' };
+    const { error } = await supabase.auth.signInWithIdToken({
+      provider: 'apple',
+      token: idToken,
+      nonce: rawNonce,
+    });
+    if (error) return { error: error.message };
+    return { success: true };
+  } catch (e) {
+    const msg = (e as { message?: string })?.message ?? '';
+    // The plugin throws on user cancel — treat that quietly.
+    if (/cancel/i.test(msg)) return { cancelled: true };
+    return { error: msg || 'Apple sign-in failed. Please try again.' };
+  }
+}
+
 export async function signOut() {
   const supabase = createClient();
   await supabase.auth.signOut();

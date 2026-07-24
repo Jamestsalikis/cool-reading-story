@@ -2,14 +2,16 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { signUp, signInWithGoogle, resendVerificationEmail } from '@/lib/supabase/auth-client';
+import { signUp, signInWithGoogle, signInWithApple, resendVerificationEmail } from '@/lib/supabase/auth-client';
 import { useRedirectIfAuthenticated } from '@/components/AuthGuard';
+import { isNativeApp } from '@/lib/iap';
 
 export default function SignupPage() {
   useRedirectIfAuthenticated();
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
+  const [appleLoading, setAppleLoading] = useState(false);
   const [consentChecked, setConsentChecked] = useState(false);
   const [error, setError] = useState('');
   const [successEmail, setSuccessEmail] = useState('');
@@ -30,6 +32,21 @@ export default function SignupPage() {
     } else if (result?.success) {
       setSuccessEmail(result.email || '');
       setLoading(false);
+    }
+  };
+
+  const handleApple = async () => {
+    if (!consentChecked) return;
+    setAppleLoading(true);
+    setError('');
+    const result = await signInWithApple();
+    if (result?.error) {
+      setError(result.error);
+      setAppleLoading(false);
+    } else if (result?.success) {
+      window.location.href = '/';
+    } else {
+      setAppleLoading(false); // cancelled
     }
   };
 
@@ -219,6 +236,28 @@ export default function SignupPage() {
           </svg>
           {googleLoading ? 'Redirecting...' : 'Continue with Google'}
         </button>
+
+        {/* Sign in with Apple — native app only (App Store requires it alongside Google) */}
+        {isNativeApp() && (
+          <button
+            onClick={handleApple}
+            disabled={!consentChecked || appleLoading}
+            style={{
+              width: '100%', padding: '0.875rem',
+              background: consentChecked ? 'black' : '#4B5563',
+              border: 'none', borderRadius: '8px',
+              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem',
+              cursor: consentChecked ? 'pointer' : 'not-allowed',
+              fontWeight: 500, fontSize: '0.9375rem', color: 'white',
+              marginBottom: '1.25rem', opacity: appleLoading ? 0.7 : 1,
+            }}
+          >
+            <svg width="17" height="17" viewBox="0 0 384 512" fill="white" aria-hidden="true">
+              <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+            </svg>
+            {appleLoading ? 'Signing in…' : 'Sign in with Apple'}
+          </button>
+        )}
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
           <div style={{ flex: 1, height: '1px', background: '#E5E7EB' }} />
