@@ -26,14 +26,25 @@ export default function NativeInit() {
         const { App } = await import('@capacitor/app');
         const handle = await App.addListener('appUrlOpen', async ({ url }) => {
           if (!url || !url.includes('auth-callback')) return;
+          const supabase = createClient();
           try {
-            const supabase = createClient();
-            const parsed = new URL(url);
-            const code = parsed.searchParams.get('code');
+            // Regex-extract (URL() can mis-parse a custom scheme like com.x.app://).
+            const code = url.match(/[?&]code=([^&]+)/)?.[1];
             if (code) {
-              await supabase.auth.exchangeCodeForSession(code);
+              await supabase.auth.exchangeCodeForSession(decodeURIComponent(code));
+            } else {
+              // Fallback for implicit flow: tokens in the URL hash.
+              const hash = url.includes('#') ? url.slice(url.indexOf('#') + 1) : '';
+              const params = new URLSearchParams(hash);
+              const access_token = params.get('access_token');
+              const refresh_token = params.get('refresh_token');
+              if (access_token && refresh_token) {
+                await supabase.auth.setSession({ access_token, refresh_token });
+              }
             }
-          } catch { /* fall through */ }
+          } catch (e) {
+            console.error('[auth] OAuth callback failed:', e);
+          }
           try {
             const { Browser } = await import('@capacitor/browser');
             await Browser.close();

@@ -19,8 +19,10 @@ export function createClient(): SupabaseClient {
       auth: {
         persistSession: true,
         autoRefreshToken: true,
-        // Native app: no URL-based session handoff, and localStorage persists
-        // across app launches in the Capacitor webview.
+        // PKCE: OAuth returns a ?code= we exchange in the deep-link handler
+        // (NativeInit). The code_verifier is kept in this client's localStorage.
+        flowType: 'pkce',
+        // We handle the OAuth return URL manually via the appUrlOpen listener.
         detectSessionInUrl: false,
         storage: typeof window !== 'undefined' ? window.localStorage : undefined,
       },
