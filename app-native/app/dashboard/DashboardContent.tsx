@@ -735,8 +735,14 @@ export default function DashboardPage() {
             // Final refresh so all covers are up to date
             fetchData();
           })();
+        } else if (isNativeApp()) {
+          // Native: stay on the dashboard and show the book's "Writing your
+          // story…" state. The writingStoryIds poller below flips it to a
+          // readable book automatically once the text is saved — the user never
+          // has to manually refresh, and they don't land in a not-ready reader.
+          setWritingStoryIds(prev => new Set([...prev, storyId]));
         } else {
-          // Tour already seen - go straight to the story
+          // Web: go straight to the story.
           router.push(`/story?id=${storyId}`);
         }
       });
