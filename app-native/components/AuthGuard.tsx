@@ -8,6 +8,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
+import { initIAP } from '@/lib/iap';
 
 function FullScreenSpinner() {
   return (
@@ -29,8 +30,11 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
 
     supabase.auth.getSession().then(({ data }) => {
       if (!active) return;
-      if (data.session) setStatus('authed');
-      else router.replace('/login');
+      if (data.session) {
+        setStatus('authed');
+        // Tie RevenueCat to this account so purchases map back to the user.
+        void initIAP(data.session.user.id);
+      } else router.replace('/login');
     });
 
     // React to sign-out (or session expiry) while on a protected screen.

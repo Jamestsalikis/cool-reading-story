@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { verifyParent } from '@/lib/parentalGate';
+import { isNativeApp, purchaseSubscription, restorePurchases } from '@/lib/iap';
 
 type Props = {
   reason: 'free_exhausted' | 'monthly_limit' | 'no_subscription' | 'daily_limit';
@@ -9,11 +10,35 @@ type Props = {
 };
 
 export default function PaywallModal({ reason, onClose }: Props) {
-  const [loading, setLoading] = useState<'monthly' | 'annual' | 'extra_book' | null>(null);
+  const [loading, setLoading] = useState<'monthly' | 'annual' | 'extra_book' | 'restore' | null>(null);
+  const [error, setError] = useState('');
 
   const handleCheckout = async (plan: 'monthly' | 'annual' | 'extra_book') => {
     if (!(await verifyParent())) return;
+    setError('');
     setLoading(plan);
+
+    // Native app: subscriptions go through Apple IAP (RevenueCat).
+    if (isNativeApp()) {
+      if (plan === 'extra_book') {
+        setError('Single extra books aren’t available in the app yet — a subscription unlocks a new story every day.');
+        setLoading(null);
+        return;
+      }
+      const result = await purchaseSubscription(plan);
+      if (result.ok) {
+        // The RevenueCat webhook syncs the subscription into your account.
+        // Reload from the entry point so the app re-reads the new status.
+        setTimeout(() => { window.location.href = '/'; }, 1500);
+        return;
+      }
+      if (result.cancelled) { setLoading(null); return; }
+      setError(result.error || 'Purchase failed. Please try again.');
+      setLoading(null);
+      return;
+    }
+
+    // Web: Stripe checkout.
     try {
       const res = await fetch('/api/stripe/checkout', {
         method: 'POST',
@@ -25,6 +50,15 @@ export default function PaywallModal({ reason, onClose }: Props) {
     } catch {
       setLoading(null);
     }
+  };
+
+  const handleRestore = async () => {
+    setError('');
+    setLoading('restore');
+    const result = await restorePurchases();
+    if (result.ok) { window.location.href = '/'; return; }
+    setError(result.error || 'No previous purchases found to restore.');
+    setLoading(null);
   };
 
   // Daily limit — show a simpler modal with 99c option
@@ -66,6 +100,10 @@ export default function PaywallModal({ reason, onClose }: Props) {
           >
             {loading === 'extra_book' ? 'Redirecting...' : 'Get extra book — A$0.99'}
           </button>
+
+          {error && (
+            <p style={{ fontSize: '0.8rem', color: '#B91C1C', textAlign: 'center', marginBottom: '8px' }}>{error}</p>
+          )}
 
           <p style={{ fontSize: '0.75rem', color: '#C8BEAA', textAlign: 'center', marginBottom: '16px' }}>
             One-time payment · Unlocks 1 additional book for today
@@ -200,8 +238,14 @@ export default function PaywallModal({ reason, onClose }: Props) {
           )}
         </div>
 
+        {error && (
+          <p style={{ fontSize: '0.8rem', color: '#B91C1C', textAlign: 'center', marginBottom: '12px' }}>{error}</p>
+        )}
+
         <p style={{ fontSize: '0.75rem', color: '#C8BEAA', textAlign: 'center', marginBottom: '16px' }}>
-          1 book per day included · Extra books A$0.99 each · Cancel anytime · Secure payment via Stripe
+          {isNativeApp()
+            ? '1 story per day included · Cancel anytime in Settings · Payment via the App Store'
+            : '1 book per day included · Extra books A$0.99 each · Cancel anytime · Secure payment via Stripe'}
         </p>
 
         <button
@@ -210,6 +254,16 @@ export default function PaywallModal({ reason, onClose }: Props) {
         >
           Maybe later
         </button>
+
+        {isNativeApp() && (
+          <button
+            onClick={handleRestore}
+            disabled={!!loading}
+            style={{ width: '100%', background: 'none', border: 'none', color: '#C8BEAA', cursor: loading ? 'not-allowed' : 'pointer', fontSize: '0.8rem', padding: '4px' }}
+          >
+            {loading === 'restore' ? 'Restoring…' : 'Restore purchases'}
+          </button>
+        )}
       </div>
     </div>
   );
