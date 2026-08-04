@@ -3,6 +3,21 @@
 import { useState } from 'react';
 import { verifyParent } from '@/lib/parentalGate';
 import { isNativeApp, purchaseSubscription, restorePurchases } from '@/lib/iap';
+import { createClient } from '@/lib/supabase/client';
+
+// After a purchase, wait for the RevenueCat webhook to flip the account to
+// 'subscribed' in Supabase (usually a couple seconds), so the reloaded app
+// reflects the new status. Times out gracefully.
+async function waitForSubscribed(): Promise<void> {
+  const supabase = createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return;
+  for (let i = 0; i < 12; i++) {
+    await new Promise((r) => setTimeout(r, 1500));
+    const { data } = await supabase.from('user_subscriptions').select('status').eq('user_id', user.id).maybeSingle();
+    if (data?.status === 'subscribed') return;
+  }
+}
 
 type Props = {
   reason: 'free_exhausted' | 'monthly_limit' | 'no_subscription' | 'daily_limit';
@@ -27,9 +42,10 @@ export default function PaywallModal({ reason, onClose }: Props) {
       }
       const result = await purchaseSubscription(plan);
       if (result.ok) {
-        // The RevenueCat webhook syncs the subscription into your account.
-        // Reload from the entry point so the app re-reads the new status.
-        setTimeout(() => { window.location.href = '/'; }, 1500);
+        // Wait for the RevenueCat webhook to sync the subscription, then reload
+        // from the entry point so the app re-reads the new status.
+        await waitForSubscribed();
+        window.location.href = '/';
         return;
       }
       if (result.cancelled) { setLoading(null); return; }
