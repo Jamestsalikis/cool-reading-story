@@ -22,12 +22,25 @@
 -- ── 1. [HIGH] Entitlement RPCs must not be client-callable ───────────────────
 -- These SECURITY DEFINER functions mutate paywall counters / grant entitlements.
 -- Only the edge function (service role) should call them.
-revoke execute on function public.grant_extra_book_today(uuid)      from anon, authenticated;
-revoke execute on function public.increment_extra_child_slots(uuid) from anon, authenticated;
-revoke execute on function public.decrement_extra_child_slots(uuid) from anon, authenticated;
-revoke execute on function public.decrement_free_stories(uuid)      from anon, authenticated;
-revoke execute on function public.increment_stories_today(uuid)     from anon, authenticated;
-revoke execute on function public.increment_stories_this_month(uuid) from anon, authenticated;
+-- NOTE: EXECUTE is granted to PUBLIC by default, and anon/authenticated inherit
+-- it via PUBLIC — so `revoke ... from anon, authenticated` alone is a NO-OP.
+-- Must revoke from PUBLIC, then re-grant only to service_role.
+do $$
+declare fn text;
+begin
+  foreach fn in array array[
+    'public.grant_extra_book_today(uuid)',
+    'public.increment_extra_child_slots(uuid)',
+    'public.decrement_extra_child_slots(uuid)',
+    'public.decrement_free_stories(uuid)',
+    'public.increment_stories_today(uuid)',
+    'public.increment_stories_this_month(uuid)'
+  ]
+  loop
+    execute 'revoke execute on function '||fn||' from public, anon, authenticated';
+    execute 'grant execute on function '||fn||' to service_role';
+  end loop;
+end $$;
 
 -- ── 2. [HIGH] user_subscriptions: clients may only write has_seen_tour ───────
 -- Row scoping stays via existing RLS (auth.uid() = user_id). Column privileges
@@ -87,6 +100,11 @@ drop trigger if exists trg_enforce_free_child_limit on public.children;
 create trigger trg_enforce_free_child_limit
   before insert on public.children
   for each row execute function public.enforce_free_child_limit();
+
+-- Trigger-only functions must not be REST-callable (triggers fire regardless of
+-- EXECUTE grants, so revoking from the API roles is safe).
+revoke execute on function public.handle_new_user()          from public, anon, authenticated;
+revoke execute on function public.enforce_free_child_limit() from public, anon, authenticated;
 
 -- ── 6. [LOW] Auth: enable leaked-password protection ─────────────────────────
 -- Not SQL — enable in Supabase Dashboard → Authentication → Policies:
