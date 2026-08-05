@@ -187,17 +187,21 @@ const bookStyles = `
   @media (max-width: 767px) {
     .book-page-layout {
       flex-direction: column;
+      height: 100%;
     }
+    /* Image stays fixed at the top; capped so the text always has room */
     .book-illus-col {
+      flex: 0 0 auto;
       margin-left: 28px;
       width: calc(100% - 28px);
       aspect-ratio: 1 / 1;
+      max-height: 46dvh;
     }
+    /* The ONLY scrollable region — no need to drag the image to read on */
     .book-text-col {
+      flex: 1 1 auto;
+      min-height: 0;
       overflow-y: auto;
-      /* Image height ≈ 75vw (4:3). Top bar ≈52px, nav ≈70px, margins ≈50px */
-      max-height: calc(100svh - 90vw - 150px);
-      min-height: 150px;
       -webkit-overflow-scrolling: touch;
       scroll-behavior: smooth;
     }
@@ -243,12 +247,16 @@ const bookStyles = `
 
   /* ---- LANDSCAPE PHONES (short viewport): force a fit-to-screen open book, override stacked-mobile rules ---- */
   @media (orientation: landscape) and (max-height: 600px) {
-    .no-print { padding-bottom: 54px !important; }
+    /* Minimise the header + footer so the open book gets the full height */
+    .reader-top {
+      padding: 5px calc(14px + var(--safe-right)) 5px calc(14px + var(--safe-left)) !important;
+    }
+    .reader-nav {
+      padding: 6px calc(16px + var(--safe-right)) calc(6px + var(--safe-bottom)) calc(16px + var(--safe-left)) !important;
+    }
     .book-page {
-      flex: none !important;
-      margin: 8px 16px 0 !important;
+      margin: 6px 16px !important;
       max-width: 1000px !important;
-      height: calc(100svh - 108px);
     }
     .book-page-layout {
       flex-direction: row !important;
@@ -260,6 +268,7 @@ const bookStyles = `
       width: auto !important;
       margin-left: 28px !important;
       aspect-ratio: auto !important;
+      max-height: none !important;
       display: flex !important;
       flex-direction: column;
     }
@@ -798,22 +807,22 @@ export function StoryReader({ id }: { id: string }) {
 
       <style>{bookStyles}</style>
 
-      {/* Screen layout */}
-      <div className="no-print" style={{ minHeight: '100vh', background: 'linear-gradient(160deg, #2C1810 0%, #1a0f08 100%)', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '0 0 calc(100px + var(--safe-bottom))' }}>
+      {/* Screen layout — fixed to the viewport; only the text column scrolls */}
+      <div className="no-print" style={{ height: '100dvh', overflow: 'hidden', background: 'linear-gradient(160deg, #2C1810 0%, #1a0f08 100%)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 
         {page.image_url && (
           <div aria-hidden="true" style={{ position: 'fixed', inset: 0, zIndex: 0, backgroundImage: `url(${page.image_url})`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'blur(64px) brightness(0.42) saturate(1.15)', transform: 'scale(1.25)', transition: 'background-image 0.4s ease' }} />
         )}
 
         {/* Top Bar */}
-        <div style={{
+        <div className="reader-top" style={{
+          flexShrink: 0,
           width: '100%',
           padding: 'calc(14px + var(--safe-top)) calc(20px + var(--safe-right)) 14px calc(20px + var(--safe-left))',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          position: 'sticky',
-          top: 0,
+          position: 'relative',
           zIndex: 10,
           background: 'rgba(44,24,16,0.9)',
           backdropFilter: 'blur(8px)',
@@ -839,7 +848,7 @@ export function StoryReader({ id }: { id: string }) {
         {/* Book */}
         <div
           className="book-page book-page-wide"
-          style={{ width: '100%', maxWidth: '640px', margin: '24px 16px 0', flex: 1, touchAction: 'pan-y', position: 'relative', zIndex: 1 }}
+          style={{ width: '100%', maxWidth: '640px', margin: '12px 16px', flex: 1, minHeight: 0, overflow: 'hidden', touchAction: 'pan-y', position: 'relative', zIndex: 1 }}
           onTouchStart={onBookTouchStart}
           onTouchEnd={onBookTouchEnd}
         >
@@ -855,8 +864,8 @@ export function StoryReader({ id }: { id: string }) {
         </div>
 
         {/* Navigation */}
-        <div style={{
-          position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 20,
+        <div className="reader-nav" style={{
+          flexShrink: 0, width: '100%', zIndex: 20,
           background: 'rgba(44,24,16,0.95)', backdropFilter: 'blur(8px)',
           borderTop: '1px solid rgba(255,255,255,0.08)',
           padding: '12px calc(20px + var(--safe-right)) calc(12px + var(--safe-bottom)) calc(20px + var(--safe-left))',
