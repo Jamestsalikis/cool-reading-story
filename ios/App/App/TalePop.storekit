@@ -1,0 +1,71 @@
+{
+  "identifier" : "A1B2C3D4-0000-4000-8000-TALEPOP00001",
+  "nonRenewingSubscriptions" : [],
+  "products" : [],
+  "settings" : {
+    "_askToBuyEnabled" : false,
+    "_billingIssuesEnabled" : false,
+    "_disableDialogs" : false,
+    "_failTransactionsEnabled" : false,
+    "_locale" : "en_AU",
+    "_storefront" : "AUS",
+    "_storeKitErrors" : []
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "21500001",
+      "localizations" : [],
+      "name" : "TalePop Premium",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [],
+          "codeOffers" : [],
+          "displayPrice" : "9.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "21500011",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "1 personalised story every day",
+              "displayName" : "TalePop Monthly",
+              "locale" : "en_AU"
+            }
+          ],
+          "productID" : "talepop_premium_monthly",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Talepop Monthly",
+          "subscriptionGroupID" : "21500001",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : []
+        },
+        {
+          "adHocOffers" : [],
+          "codeOffers" : [],
+          "displayPrice" : "95.90",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "21500012",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "1 personalised story every day, billed yearly",
+              "displayName" : "TalePop Annual",
+              "locale" : "en_AU"
+            }
+          ],
+          "productID" : "talepop_premium_annual",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Talepop Annual",
+          "subscriptionGroupID" : "21500001",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : []
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}

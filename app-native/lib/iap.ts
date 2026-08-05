@@ -9,6 +9,13 @@
  *
  * RevenueCat is configured with appUserID = the Supabase user id, so a purchase
  * maps straight back to the account.
+ *
+ * IMPORTANT: we talk to the RevenueCat Capacitor plugin via the RAW global
+ * (window.Capacitor.Plugins.Purchases), NOT `await import(...)`. In the bundled
+ * static export running under capacitor://localhost, the dynamic import of
+ * '@revenuecat/purchases-capacitor' never resolves (chunk load hangs), which left
+ * the SDK unconfigured and every getOfferings()/purchase spinning forever. The
+ * raw plugin object is registered natively at launch and is always available.
  */
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -26,32 +33,62 @@ export function shouldUseInAppPurchase(countryCode: string | undefined): boolean
 // The RevenueCat entitlement identifier that grants premium.
 const ENTITLEMENT = 'premium';
 
-let configuredFor: string | null = null;
-
-async function rc(): Promise<any> {
-  const mod = await import('@revenuecat/purchases-capacitor');
-  return mod.Purchases;
-}
-
 function platform(): string {
   return (window as any).Capacitor?.getPlatform?.() ?? 'web';
 }
 
-/** Configure RevenueCat once, tied to the Supabase user id. No-op on web. */
+/** The RevenueCat Capacitor plugin, straight off the global bridge (no dynamic import). */
+function rc(): any {
+  const P = (window as any).Capacitor?.Plugins?.Purchases;
+  if (!P) throw new Error('[iap] RevenueCat native plugin not available');
+  return P;
+}
+
+/** Race a promise against a timeout so a hung native call surfaces instead of spinning forever. */
+function withTimeout<T>(p: Promise<T>, ms: number, label: string): Promise<T> {
+  return Promise.race([
+    p,
+    new Promise<T>((_, reject) => setTimeout(() => reject(new Error(`${label} timed out after ${ms}ms`)), ms)),
+  ]);
+}
+
+let configurePromise: Promise<void> | null = null;
+let configuredUser: string | null = null;
+
+/** Configure RevenueCat exactly once (single-flight). Safe to call from anywhere before a store call. */
+function ensureConfigured(appUserID?: string): Promise<void> {
+  if (!isNativeApp()) return Promise.resolve();
+  if (!configurePromise) {
+    configurePromise = (async () => {
+      const Purchases = rc();
+      try { await Purchases.setLogLevel({ level: 'DEBUG' as any }); } catch { /* older plugin */ }
+      const apiKey = platform() === 'ios'
+        ? (process.env.NEXT_PUBLIC_REVENUECAT_IOS_KEY ?? '')
+        : (process.env.NEXT_PUBLIC_REVENUECAT_ANDROID_KEY ?? '');
+      if (!apiKey) throw new Error('[iap] RevenueCat API key missing from bundle');
+      await Purchases.configure(appUserID ? { apiKey, appUserID } : { apiKey });
+      configuredUser = appUserID ?? null;
+      console.log('[iap] RevenueCat configured' + (appUserID ? ' for ' + appUserID : ' (anonymous)'));
+    })();
+  }
+  return configurePromise;
+}
+
+/** Configure RevenueCat and tie it to the Supabase user id. No-op on web. */
 export async function initIAP(supabaseUserId: string): Promise<void> {
-  if (!isNativeApp() || !supabaseUserId || configuredFor === supabaseUserId) return;
+  if (!isNativeApp() || !supabaseUserId) return;
   try {
-    const Purchases = await rc();
-    const apiKey = platform() === 'ios'
-      ? (process.env.NEXT_PUBLIC_REVENUECAT_IOS_KEY ?? '')
-      : (process.env.NEXT_PUBLIC_REVENUECAT_ANDROID_KEY ?? '');
-    if (!apiKey) return;
-    if (configuredFor === null) {
-      await Purchases.configure({ apiKey, appUserID: supabaseUserId });
-    } else {
-      await Purchases.logIn({ appUserID: supabaseUserId });
+    await ensureConfigured(supabaseUserId);
+    // If configure ran anonymously (or for a different user), align the RC identity.
+    if (configuredUser !== supabaseUserId) {
+      try {
+        await rc().logIn({ appUserID: supabaseUserId });
+        configuredUser = supabaseUserId;
+        console.log('[iap] logIn() OK for user ' + supabaseUserId);
+      } catch (e) {
+        console.error('[iap] logIn failed', e);
+      }
     }
-    configuredFor = supabaseUserId;
   } catch (e) {
     console.error('[iap] init failed', e);
   }
@@ -64,16 +101,23 @@ export type PurchaseResult = { ok: boolean; cancelled?: boolean; error?: string 
 export async function purchaseSubscription(plan: Plan): Promise<PurchaseResult> {
   if (!isNativeApp()) return { ok: false, error: 'In-app purchases are only available in the app.' };
   try {
-    const Purchases = await rc();
-    const offerings = await Purchases.getOfferings();
+    await ensureConfigured();
+    const Purchases = rc();
+    console.log('[iap] getOfferings() start');
+    const offerings: any = await withTimeout(Purchases.getOfferings(), 20000, 'getOfferings');
     const current = offerings?.current;
+    console.log('[iap] offerings: current=' + (current?.identifier ?? 'NULL')
+      + ' packages=' + (current?.availablePackages ?? []).map((p: any) => p.identifier + '→' + (p.product?.identifier ?? '?')).join(', '));
     if (!current) return { ok: false, error: 'No subscriptions available right now. Please try again later.' };
     const pkg = plan === 'annual' ? current.annual : current.monthly;
     if (!pkg) return { ok: false, error: `The ${plan} plan is unavailable right now.` };
-    const result = await Purchases.purchasePackage({ aPackage: pkg });
+    console.log('[iap] purchasePackage() ' + pkg.identifier);
+    const result: any = await withTimeout(Purchases.purchasePackage({ aPackage: pkg }), 180000, 'purchasePackage');
     const active = result?.customerInfo?.entitlements?.active ?? {};
+    console.log('[iap] purchase done, active entitlements=' + Object.keys(active).join(','));
     return { ok: !!active[ENTITLEMENT] };
   } catch (e) {
+    console.error('[iap] purchaseSubscription error', e);
     const err = e as any;
     if (err?.userCancelled === true || err?.code === '1' || /cancel/i.test(err?.message ?? '')) {
       return { ok: false, cancelled: true };
@@ -86,8 +130,8 @@ export async function purchaseSubscription(plan: Plan): Promise<PurchaseResult> 
 export async function restorePurchases(): Promise<PurchaseResult> {
   if (!isNativeApp()) return { ok: false, error: 'not native' };
   try {
-    const Purchases = await rc();
-    const info = await Purchases.restorePurchases();
+    await ensureConfigured();
+    const info = await rc().restorePurchases();
     const active = info?.customerInfo?.entitlements?.active ?? {};
     return { ok: !!active[ENTITLEMENT] };
   } catch (e) {
@@ -99,8 +143,8 @@ export async function restorePurchases(): Promise<PurchaseResult> {
 export async function hasActiveEntitlement(): Promise<boolean> {
   if (!isNativeApp()) return false;
   try {
-    const Purchases = await rc();
-    const info = await Purchases.getCustomerInfo();
+    await ensureConfigured();
+    const info = await rc().getCustomerInfo();
     return !!info?.customerInfo?.entitlements?.active?.[ENTITLEMENT];
   } catch {
     return false;

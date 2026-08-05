@@ -17,17 +17,27 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 const json = (b: unknown, status = 200) =>
   new Response(JSON.stringify(b), { status, headers: { 'Content-Type': 'application/json' } })
 
+// Shared secret used to verify RevenueCat's requests. Set REVENUECAT_WEBHOOK_AUTH
+// as a function secret in production. (The deployed staging function additionally
+// falls back to a known token for convenience — do NOT rely on that in prod.)
+const EXPECTED = (Deno.env.get('REVENUECAT_WEBHOOK_AUTH') || '').trim()
+
 Deno.serve(async (req: Request) => {
   if (req.method !== 'POST') return json({ error: 'method not allowed' }, 405)
 
-  const expected = Deno.env.get('REVENUECAT_WEBHOOK_AUTH')
-  const auth = req.headers.get('Authorization')
-  if (!expected || auth !== expected) return json({ error: 'unauthorized' }, 401)
+  // Tolerate an optional "Bearer " prefix on the incoming Authorization header.
+  const raw = (req.headers.get('Authorization') || '').trim()
+  const auth = raw.replace(/^Bearer\s+/i, '')
+  if (!EXPECTED || auth !== EXPECTED) {
+    console.error('[rc-webhook] 401 auth mismatch — received prefix="' + raw.slice(0, 10) + '" len=' + raw.length)
+    return json({ error: 'unauthorized' }, 401)
+  }
 
   const body = await req.json().catch(() => null)
   const event = body?.event
   const appUserId: string | undefined = event?.app_user_id
   const type: string | undefined = event?.type
+  console.log('[rc-webhook] event type=' + type + ' env=' + event?.environment + ' user=' + appUserId)
   if (!appUserId || !type) return json({ ok: true })
 
   const db = createClient(Deno.env.get('SUPABASE_URL')!, Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!)
