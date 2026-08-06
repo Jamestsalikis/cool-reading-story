@@ -77,6 +77,13 @@ export default function PaywallModal({ reason, onClose }: Props) {
     setLoading(null);
   };
 
+  // Open legal pages in the in-app browser (falls back to a new tab on the web).
+  const openLegal = (url: string) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const B = (window as any)?.Capacitor?.Plugins?.Browser;
+    if (B?.open) B.open({ url }); else window.open(url, '_blank');
+  };
+
   // Daily limit — show a simpler modal with 99c option
   if (reason === 'daily_limit') {
     return (
@@ -280,6 +287,25 @@ export default function PaywallModal({ reason, onClose }: Props) {
             {loading === 'restore' ? 'Restoring…' : 'Restore purchases'}
           </button>
         )}
+
+        {/* Apple requires functional Terms of Use (EULA) + Privacy Policy links on the subscription screen. */}
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '12px', marginTop: '14px' }}>
+          <a
+            href="https://www.talepopstories.com/terms"
+            onClick={(e) => { e.preventDefault(); openLegal('https://www.talepopstories.com/terms'); }}
+            style={{ color: '#9B8B7A', textDecoration: 'underline', fontSize: '0.72rem', cursor: 'pointer' }}
+          >
+            Terms of Use
+          </a>
+          <span style={{ color: '#D8CFC0', fontSize: '0.72rem' }}>·</span>
+          <a
+            href="https://www.talepopstories.com/privacy"
+            onClick={(e) => { e.preventDefault(); openLegal('https://www.talepopstories.com/privacy'); }}
+            style={{ color: '#9B8B7A', textDecoration: 'underline', fontSize: '0.72rem', cursor: 'pointer' }}
+          >
+            Privacy Policy
+          </a>
+        </div>
       </div>
     </div>
   );
