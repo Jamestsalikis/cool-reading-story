@@ -163,6 +163,7 @@ const bookStyles = `
   /* Shared layout shell */
   .book-page-layout {
     display: flex;
+    height: 100%;
   }
 
   /* Illustration column */
@@ -227,11 +228,16 @@ const bookStyles = `
     .book-illus-col .illus-wrap {
       flex: 1;
       width: 100%;
-      min-height: 380px;
+      min-height: 0;
     }
-    /* Subtle gutter between image and text — like a page edge */
+    /* Fill the column edge-to-edge (no cream letterbox) on the big screen */
+    .book-illus-col .illus-wrap img {
+      object-fit: cover;
+    }
+    /* Subtle gutter between image and text — like a page edge; scrolls independently */
     .book-text-col {
       flex: 1;
+      min-height: 0;
       overflow-y: auto;
       border-left: 1px solid rgba(116,21,21,0.10);
     }
@@ -239,9 +245,9 @@ const bookStyles = `
     .book-text-inner {
       padding: 28px 28px 32px 24px;
     }
-    /* Wider book for side-by-side */
+    /* Stretch the book to fill the tablet screen */
     .book-page-wide {
-      max-width: 860px !important;
+      max-width: 1240px !important;
     }
   }
 
@@ -479,7 +485,7 @@ export function StoryReader({ id }: { id: string }) {
       const sevenDaysAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
       if (!last || new Date(last).getTime() < sevenDaysAgo) {
         feedbackShown.current = true;
-        setTimeout(() => setShowFeedback(true), 2000); // small delay after landing on last page
+        setTimeout(() => setShowFeedback(true), 20000); // 20s delay after landing on last page
       }
     }
   };
@@ -656,16 +662,26 @@ export function StoryReader({ id }: { id: string }) {
 
   // ---- Illustration element ----
   const illustrationEl = page.image_url ? (
-    <img
-      src={page.image_url}
-      alt={`Page ${currentPage + 1} illustration`}
-      style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
-      onError={(e) => {
-        // Replicate CDN URLs expire — hide the broken image and show placeholder
-        (e.target as HTMLImageElement).style.display = 'none';
-        (e.target as HTMLImageElement).parentElement?.classList.add('show-placeholder');
-      }}
-    />
+    <>
+      {/* Blurred, zoomed copy of the same image fills any letterbox space so there
+          is never an empty cream/black border around the illustration. */}
+      <img
+        src={page.image_url}
+        alt=""
+        aria-hidden="true"
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'blur(24px) saturate(1.1) brightness(0.9)', transform: 'scale(1.2)', display: 'block' }}
+      />
+      <img
+        src={page.image_url}
+        alt={`Page ${currentPage + 1} illustration`}
+        style={{ position: 'relative', width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
+        onError={(e) => {
+          // Replicate CDN URLs expire — hide the broken image and show placeholder
+          (e.target as HTMLImageElement).style.display = 'none';
+          (e.target as HTMLImageElement).parentElement?.classList.add('show-placeholder');
+        }}
+      />
+    </>
   ) : (
     <IllustrationPlaceholder generating={isThisPageGenerating} />
   );
