@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { verifyParent } from '@/lib/parentalGate';
-import { isNativeApp, purchaseSubscription, restorePurchases } from '@/lib/iap';
+import { isNativeApp, purchaseSubscription, purchaseExtraBook, restorePurchases } from '@/lib/iap';
 import { createClient } from '@/lib/supabase/client';
 
 // After a purchase, wait for the RevenueCat webhook to flip the account to
@@ -16,6 +16,28 @@ async function waitForSubscribed(): Promise<void> {
     await new Promise((r) => setTimeout(r, 1500));
     const { data } = await supabase.from('user_subscriptions').select('status').eq('user_id', user.id).maybeSingle();
     if (data?.status === 'subscribed') return;
+  }
+}
+
+// Read the current extra-book credit so we can detect the webhook applying a new one.
+async function getExtraBooksToday(): Promise<number> {
+  const supabase = createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return 0;
+  const { data } = await supabase.from('user_subscriptions').select('extra_books_today').eq('user_id', user.id).maybeSingle();
+  return data?.extra_books_today ?? 0;
+}
+
+// After a 99c purchase, wait for the RevenueCat webhook to credit the extra
+// book in Supabase (usually a couple seconds). Times out gracefully.
+async function waitForExtraBookCredit(before: number): Promise<void> {
+  const supabase = createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return;
+  for (let i = 0; i < 12; i++) {
+    await new Promise((r) => setTimeout(r, 1500));
+    const { data } = await supabase.from('user_subscriptions').select('extra_books_today').eq('user_id', user.id).maybeSingle();
+    if ((data?.extra_books_today ?? 0) > before) return;
   }
 }
 
@@ -36,7 +58,17 @@ export default function PaywallModal({ reason, onClose }: Props) {
     // Native app: subscriptions go through Apple IAP (RevenueCat).
     if (isNativeApp()) {
       if (plan === 'extra_book') {
-        setError('Single extra books aren’t available in the app yet — a subscription unlocks a new story every day.');
+        const before = await getExtraBooksToday();
+        const result = await purchaseExtraBook();
+        if (result.ok) {
+          // Wait for the RevenueCat webhook to credit the book, then reload
+          // from the entry point so the app re-reads the new allowance.
+          await waitForExtraBookCredit(before);
+          window.location.href = '/';
+          return;
+        }
+        if (result.cancelled) { setLoading(null); return; }
+        setError(result.error || 'Purchase failed. Please try again.');
         setLoading(null);
         return;
       }

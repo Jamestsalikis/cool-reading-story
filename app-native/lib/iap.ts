@@ -97,6 +97,39 @@ export async function initIAP(supabaseUserId: string): Promise<void> {
 export type Plan = 'monthly' | 'annual';
 export type PurchaseResult = { ok: boolean; cancelled?: boolean; error?: string };
 
+// One-time 99c extra book (consumable). Must match the App Store Connect
+// product id and the product check in supabase/functions/revenuecat-webhook.
+const EXTRA_BOOK_PRODUCT_ID = 'talepop_extra_book';
+
+/** Buy a single extra book (consumable, 99c one-time purchase). */
+export async function purchaseExtraBook(): Promise<PurchaseResult> {
+  if (!isNativeApp()) return { ok: false, error: 'In-app purchases are only available in the app.' };
+  try {
+    await ensureConfigured();
+    const Purchases = rc();
+    console.log('[iap] getProducts() ' + EXTRA_BOOK_PRODUCT_ID);
+    const res: any = await withTimeout(
+      Purchases.getProducts({ productIdentifiers: [EXTRA_BOOK_PRODUCT_ID], type: 'NON_SUBSCRIPTION' }),
+      20000, 'getProducts',
+    );
+    const product = (res?.products ?? [])[0];
+    if (!product) return { ok: false, error: 'The single book option is unavailable right now. Please try again later.' };
+    console.log('[iap] purchaseStoreProduct() ' + (product.identifier ?? EXTRA_BOOK_PRODUCT_ID));
+    await withTimeout(Purchases.purchaseStoreProduct({ product }), 180000, 'purchaseStoreProduct');
+    // Consumables don't grant an entitlement — the RevenueCat webhook credits
+    // extra_books_today in Supabase. Reaching here without a throw = purchased.
+    console.log('[iap] extra book purchase done');
+    return { ok: true };
+  } catch (e) {
+    console.error('[iap] purchaseExtraBook error', e);
+    const err = e as any;
+    if (err?.userCancelled === true || err?.code === '1' || /cancel/i.test(err?.message ?? '')) {
+      return { ok: false, cancelled: true };
+    }
+    return { ok: false, error: err?.message ?? 'Purchase failed. Please try again.' };
+  }
+}
+
 /** Buy the monthly or annual subscription. */
 export async function purchaseSubscription(plan: Plan): Promise<PurchaseResult> {
   if (!isNativeApp()) return { ok: false, error: 'In-app purchases are only available in the app.' };

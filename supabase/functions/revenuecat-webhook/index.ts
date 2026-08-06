@@ -42,8 +42,27 @@ Deno.serve(async (req: Request) => {
 
   const db = createClient(Deno.env.get('SUPABASE_URL')!, Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!)
 
+  // One-time consumables (the 99c extra book): credit a book for today instead
+  // of touching subscription status. Same RPC the Stripe web webhook uses.
+  const EXTRA_BOOK_PRODUCTS = ['talepop_extra_book']
+  if (type === 'NON_RENEWING_PURCHASE') {
+    const productId: string | undefined = event?.product_id
+    if (productId && EXTRA_BOOK_PRODUCTS.includes(productId)) {
+      const { data: row } = await db.from('user_subscriptions').select('user_id').eq('user_id', appUserId).maybeSingle()
+      if (!row) {
+        await db.from('user_subscriptions').insert({ user_id: appUserId, status: 'free', free_stories_remaining: 0, extra_books_today: 1 })
+      } else {
+        await db.rpc('grant_extra_book_today', { uid: appUserId })
+      }
+      console.log('[rc-webhook] credited extra book for ' + appUserId)
+    } else {
+      console.log('[rc-webhook] NON_RENEWING_PURCHASE for unhandled product ' + productId + ' — ignored')
+    }
+    return json({ ok: true })
+  }
+
   // Types that mean the user currently has access.
-  const ACTIVE = ['INITIAL_PURCHASE', 'RENEWAL', 'UNCANCELLATION', 'PRODUCT_CHANGE', 'NON_RENEWING_PURCHASE', 'SUBSCRIPTION_EXTENDED']
+  const ACTIVE = ['INITIAL_PURCHASE', 'RENEWAL', 'UNCANCELLATION', 'PRODUCT_CHANGE', 'SUBSCRIPTION_EXTENDED']
   // Types that mean access has ended.
   const ENDED = ['EXPIRATION', 'BILLING_ISSUE']
   // NOTE: CANCELLATION = auto-renew turned off but access continues until
