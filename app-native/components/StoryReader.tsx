@@ -401,6 +401,18 @@ export function StoryReader({ id }: { id: string }) {
   const touchStartRef = useRef<{ x: number; y: number } | null>(null);
   const continueAutoStarted = useRef(false);
 
+  // Immersive reading: header/nav auto-hide shortly after opening; tap the page to toggle.
+  const [chromeVisible, setChromeVisible] = useState(true);
+  const chromeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => {
+    chromeTimer.current = setTimeout(() => setChromeVisible(false), 2600);
+    return () => { if (chromeTimer.current) clearTimeout(chromeTimer.current); };
+  }, []);
+  const toggleChrome = () => {
+    if (chromeTimer.current) { clearTimeout(chromeTimer.current); chromeTimer.current = null; }
+    setChromeVisible((v) => !v);
+  };
+
   // Fetch story + poll DB for image updates (server-side edge fn generates them)
   useEffect(() => {
     let interval: ReturnType<typeof setInterval> | null = null;
@@ -760,6 +772,8 @@ export function StoryReader({ id }: { id: string }) {
     const t = e.changedTouches[0];
     const dx = t.clientX - start.x;
     const dy = t.clientY - start.y;
+    // A tap (negligible movement) toggles the reading chrome — immersive mode.
+    if (Math.abs(dx) < 8 && Math.abs(dy) < 8) { toggleChrome(); return; }
     if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
       if (dx < 0 && currentPage < totalPages - 1) goToPage(currentPage + 1);
       else if (dx > 0 && currentPage > 0) goToPage(currentPage - 1);
@@ -818,7 +832,14 @@ export function StoryReader({ id }: { id: string }) {
         <div className="reader-top" style={{
           flexShrink: 0,
           width: '100%',
-          padding: 'calc(14px + var(--safe-top)) calc(20px + var(--safe-right)) 14px calc(20px + var(--safe-left))',
+          paddingTop: chromeVisible ? 'calc(14px + var(--safe-top))' : '0px',
+          paddingBottom: chromeVisible ? '14px' : '0px',
+          paddingLeft: 'calc(20px + var(--safe-left))',
+          paddingRight: 'calc(20px + var(--safe-right))',
+          maxHeight: chromeVisible ? '160px' : '0px',
+          opacity: chromeVisible ? 1 : 0,
+          overflow: 'hidden',
+          transition: 'max-height 0.3s ease, padding 0.3s ease, opacity 0.22s ease',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -868,7 +889,14 @@ export function StoryReader({ id }: { id: string }) {
           flexShrink: 0, width: '100%', zIndex: 20,
           background: 'rgba(44,24,16,0.95)', backdropFilter: 'blur(8px)',
           borderTop: '1px solid rgba(255,255,255,0.08)',
-          padding: '12px calc(20px + var(--safe-right)) calc(12px + var(--safe-bottom)) calc(20px + var(--safe-left))',
+          paddingTop: chromeVisible ? '12px' : '0px',
+          paddingBottom: chromeVisible ? 'calc(12px + var(--safe-bottom))' : '0px',
+          paddingLeft: 'calc(20px + var(--safe-left))',
+          paddingRight: 'calc(20px + var(--safe-right))',
+          maxHeight: chromeVisible ? '160px' : '0px',
+          opacity: chromeVisible ? 1 : 0,
+          overflow: 'hidden',
+          transition: 'max-height 0.3s ease, padding 0.3s ease, opacity 0.22s ease',
           display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px',
         }}>
           <button
