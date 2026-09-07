@@ -797,7 +797,8 @@ export default function Home() {
             <img src="/brand/talepop-wordmark.webp" alt="TalePop" />
           </Link>
           <nav className="nav-links">
-            <a href="#how-it-works">How it works</a>
+            <Link href="/sample-stories">Sample stories</Link>
+            <Link href="/story-ideas">Story ideas</Link>
             <a href="#pricing">Pricing</a>
             <a href="#faq">FAQ</a>
           </nav>
@@ -1029,7 +1030,7 @@ export default function Home() {
               <p className="foot-blurb">Personalised bedtime stories, written and illustrated for one child. Made in Australia by TalePop Pty Ltd.</p>
             </div>
             <div><h4>Product</h4><ul><li><a href="#how-it-works">How it works</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#faq">FAQ</a></li><li><a href="#safety">Safety</a></li><li><Link href="/signup">Start free</Link></li><li><Link href="/login">Sign in</Link></li></ul></div>
-            <div><h4>Company</h4><ul><li><a href="mailto:info@talepopstories.com">info@talepopstories.com</a></li></ul></div>
+            <div><h4>Explore</h4><ul><li><Link href="/sample-stories">Sample stories</Link></li><li><Link href="/story-ideas">Story ideas</Link></li><li><Link href="/about">Our story</Link></li><li><a href="mailto:info@talepopstories.com">Contact</a></li></ul></div>
             <div><h4>Legal</h4><ul><li><Link href="/privacy">Privacy policy</Link></li><li><Link href="/terms">Terms of service</Link></li></ul></div>
           </div>
           <div className="foot-btm">
