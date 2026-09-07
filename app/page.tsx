@@ -898,16 +898,13 @@ export default function Home() {
             {/* 5 -------------------------------------------------- */}
             <section className="beat mid top" data-beat="5">
               <div className="wrap">
+                {/* This beat previously carried a five-star rating and a quote attributed
+                    to a named parent. Neither came from a real, collected review, so both
+                    are out. Drop a genuine quote in here once you have one with the
+                    parent's permission, and the stars can come back with it. */}
                 <div className="qwrap">
-                  <div className="stars" aria-label="Five stars">
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 6.9.9-5 4.8 1.3 6.9L12 17.6 5.8 20.9 7.1 14 2 9.2l6.9-.9L12 2z"/></svg>
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 6.9.9-5 4.8 1.3 6.9L12 17.6 5.8 20.9 7.1 14 2 9.2l6.9-.9L12 2z"/></svg>
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 6.9.9-5 4.8 1.3 6.9L12 17.6 5.8 20.9 7.1 14 2 9.2l6.9-.9L12 2z"/></svg>
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 6.9.9-5 4.8 1.3 6.9L12 17.6 5.8 20.9 7.1 14 2 9.2l6.9-.9L12 2z"/></svg>
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 6.9.9-5 4.8 1.3 6.9L12 17.6 5.8 20.9 7.1 14 2 9.2l6.9-.9L12 2z"/></svg>
-                  </div>
-                  <blockquote>"He stared at his own name on the page and said <b>'Mum, that's actually me.'</b> We've read it fourteen nights in a row."</blockquote>
-                  <p className="byline">Sarah M.<i>Mum of Noah, age 6 &middot; Melbourne</i></p>
+                  <blockquote>The moment worth paying for is the one where they realise the story is about them.</blockquote>
+                  <p className="byline">Why we built TalePop<i>Personalised bedtime stories, one child at a time</i></p>
                 </div>
               </div>
             </section>
