@@ -1,989 +1,830 @@
 'use client';
 
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
-import { X, Check, Shield, RefreshCw, Star, Heart, BookOpen } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { DISPLAY, type PriceDisplay } from '@/lib/pricing';
 
 const S = `
-  .hero-grid {
-    display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: center;
-  }
-  @media (min-width: 768px) { .hero-grid { grid-template-columns: 1fr 1fr; } }
+/* Single-theme by intent: this is a night-time world. Every colour painted explicitly. */
+:root{
+  --ink:#0B0D1C; --ink-2:#161A2E; --ink-3:#212642;
+  --txt:#F6EFE4; --txt-dim:#B7B2C4; --txt-mute:#7C7893;
+  --amber:#FFB765; --amber-hi:#FFDCA8; --amber-lo:#E8913A;
+  --orange:#FF7A45; --teal:#45BFCB; --violet:#9A8BFF; --pink:#FF8FB8; --green:#7CC97C;
+  --cream:#FCF5EA; --navy:#0D183D; --cocoa:#4A3A28; --cocoa-dim:#77654E;
+  --r-sm:16px; --r:22px; --r-lg:32px; --r-xl:42px;
+  --sh-1:0 1px 2px rgba(4,6,16,.20),0 4px 10px rgba(4,6,16,.16),0 10px 24px rgba(4,6,16,.14);
+  --sh-2:0 2px 4px rgba(4,6,16,.20),0 8px 20px rgba(4,6,16,.18),0 20px 44px rgba(4,6,16,.22),0 40px 80px rgba(4,6,16,.18);
+  --sh-3:0 2px 6px rgba(4,6,16,.22),0 12px 30px rgba(4,6,16,.22),0 32px 70px rgba(4,6,16,.28),0 64px 120px rgba(4,6,16,.24);
+  --ease:cubic-bezier(.34,.82,.28,1);
+  --s--1:clamp(.86rem,.83rem + .14vw,.95rem);
+  --s-0:clamp(1.02rem,.99rem + .17vw,1.11rem);
+  --s-1:clamp(1.18rem,1.1rem + .38vw,1.4rem);
+  --s-2:clamp(1.5rem,1.3rem + .9vw,2.1rem);
+  --s-3:clamp(1.95rem,1.55rem + 2vw,3.2rem);
+  --s-4:clamp(2.3rem,1.6rem + 3.3vw,4.4rem);
+  --pad:clamp(20px,5vw,64px); --maxw:1240px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:auto}
+body{
+  margin:0;background:var(--ink);color:var(--txt);
+  font-family:'Nunito',system-ui,-apple-system,sans-serif;
+  font-size:var(--s-0);line-height:1.66;font-weight:500;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+body::after{
+  content:"";position:fixed;inset:-50%;z-index:300;pointer-events:none;
+  opacity:.15;mix-blend-mode:soft-light;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+h1,h2,h3,h4{font-family:'Baloo 2','Nunito',sans-serif;font-weight:700;line-height:1.12;letter-spacing:-.005em;margin:0;text-wrap:balance}
+p{margin:0} a{color:inherit;text-decoration:none} img{display:block;max-width:100%}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+:focus-visible{outline:2px solid var(--amber);outline-offset:4px;border-radius:10px}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--pad)}
 
-  .three-col { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
-  @media (min-width: 768px) { .three-col { grid-template-columns: 1fr 1fr 1fr; } }
+/* ---------- buttons ---------- */
+.btn{position:relative;isolation:isolate;display:inline-flex;align-items:center;justify-content:center;gap:.6em;
+  padding:1em 1.75em;border-radius:999px;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:var(--s-0);line-height:1.15;
+  transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
+.btn::before{content:"";position:absolute;inset:0;border-radius:inherit;z-index:-1;
+  background:radial-gradient(120% 78% at 50% -12%,rgba(255,255,255,.42),rgba(255,255,255,0) 62%)}
+.btn-primary{background:linear-gradient(176deg,#FFC183 0%,#FF9553 30%,#FF7A45 66%,#EE5F26 100%);color:#42190A;
+  box-shadow:inset 0 2px 0 rgba(255,246,232,.62),inset 0 -3px 8px rgba(150,52,10,.30),
+   0 1px 2px rgba(90,32,6,.22),0 6px 14px rgba(160,58,16,.26),0 16px 34px rgba(160,58,16,.28),0 32px 64px rgba(120,40,8,.26)}
+.btn-primary:hover{transform:translateY(-3px)}
+.btn-ghost{color:var(--txt);background:linear-gradient(174deg,rgba(255,240,222,.11),rgba(255,240,222,.04));
+  backdrop-filter:blur(16px) saturate(150%);
+  box-shadow:inset 0 1px 0 rgba(255,241,222,.24),inset 0 0 0 1px rgba(255,231,203,.10),
+   0 2px 6px rgba(4,6,16,.22),0 10px 26px rgba(4,6,16,.22)}
+.btn-ghost:hover{transform:translateY(-2px);background:linear-gradient(174deg,rgba(255,240,222,.18),rgba(255,240,222,.07))}
+.btn-lg{padding:1.15em 2.1em;font-size:var(--s-1)}
 
-  .two-col { display: grid; grid-template-columns: 1fr; gap: 2rem; max-width: 780px; margin: 0 auto; }
-  @media (min-width: 640px) { .two-col { grid-template-columns: 1fr 1fr; } }
+/* ---------- chrome ---------- */
+header.nav{position:fixed;inset:0 0 auto;z-index:120;transition:background .6s var(--ease),backdrop-filter .6s,box-shadow .6s}
+header.nav.stuck{background:linear-gradient(180deg,rgba(11,13,28,.86),rgba(11,13,28,.62));
+  backdrop-filter:blur(24px) saturate(165%);
+  box-shadow:0 1px 0 rgba(255,231,203,.07),0 12px 34px rgba(4,6,16,.34)}
+.nav-in{display:flex;align-items:center;gap:clamp(12px,2.4vw,26px);height:72px}
+.logo{margin-right:auto;display:flex;align-items:center}
+/* the real brand artwork, reversed with transparency for the dark ground */
+.logo img{height:31px;width:auto;display:block;filter:drop-shadow(0 3px 12px rgba(4,6,16,.6))}
+@media(max-width:520px){.logo img{height:26px}}
+.brandmark{display:block;margin:0 auto clamp(26px,4vw,44px);width:min(380px,72vw);height:auto;
+  filter:drop-shadow(0 6px 22px rgba(4,6,16,.5))}
 
-  .proof-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: start; }
-  @media (min-width: 768px) { .proof-grid { grid-template-columns: 1fr 1fr; } }
+/* stacked lockup for the footer, where it has space to be read properly */
+.lockup{display:block}
+.lockup img{width:min(258px,68vw);height:auto;display:block;
+  filter:drop-shadow(0 5px 18px rgba(4,6,16,.5))}
+.nav-links{display:flex;gap:clamp(12px,2vw,26px);font-size:var(--s--1);font-weight:700;color:var(--txt-dim)}
+.nav-links a:hover{color:var(--txt)}
+@media(max-width:980px){.nav-links{display:none}}
 
-  .nav-desktop { display: none; }
-  .nav-mobile-cta { display: flex; align-items: center; }
-  @media (min-width: 768px) {
-    .nav-desktop { display: flex; }
-    .nav-mobile-btn { display: none !important; }
-    .nav-mobile-cta { display: none !important; }
-  }
+/* ---------- the journey ---------- */
+.journey{position:relative;height:760vh}
+.stage{position:sticky;top:0;height:100vh;overflow:hidden;isolation:isolate}
+#depth-canvas,.bgimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;will-change:transform,opacity}
+.bgimg{z-index:1;opacity:0}
+/* the canvas re-renders every plate with real depth; the imgs below are the fallback */
+#depth-canvas{z-index:3;opacity:0;transition:opacity 1s var(--ease)}
+#depth-canvas.live{opacity:1}
+.scrim{position:absolute;inset:0;z-index:6;pointer-events:none;
+  background:radial-gradient(120% 78% at 50% 88%,rgba(255,150,70,.14),transparent 60%),
+  linear-gradient(180deg,rgba(11,13,28,.80) 0%,rgba(11,13,28,.20) 26%,rgba(11,13,28,.34) 56%,rgba(11,13,28,.86) 92%,var(--ink) 100%)}
+#dust{position:absolute;inset:0;z-index:7;pointer-events:none}
 
-  .story-card {
-    background: white; border-radius: 20px; overflow: hidden;
-    box-shadow: 0 8px 40px rgba(13,24,61,0.14);
-    border: 1px solid #F0E4D0;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  .story-card:hover { transform: translateY(-4px); box-shadow: 0 16px 50px rgba(13,24,61,0.2); }
+/* portals flying past */
+.portals{position:absolute;inset:0;z-index:5;perspective:1100px;pointer-events:none;opacity:0}
+.portal{position:absolute;left:50%;top:50%;width:clamp(200px,22vw,300px);aspect-ratio:3/4.06;
+  margin:0 0 0 0;border-radius:var(--r-lg);overflow:hidden;will-change:transform,opacity;
+  box-shadow:inset 0 0 0 1px rgba(255,220,168,.22),0 20px 60px rgba(4,6,16,.5),0 0 90px rgba(255,170,80,.10)}
+.portal img{width:100%;height:100%;object-fit:cover}
+.portal span{position:absolute;inset:auto 0 0;padding:14px 16px;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:1.02rem;
+  background:linear-gradient(180deg,transparent,rgba(6,8,18,.9));text-shadow:0 2px 12px rgba(6,8,18,.8)}
 
-  .trust-bar { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  @media (min-width: 768px) { .trust-bar { grid-template-columns: repeat(4, 1fr); } }
+/* beat copy */
+.beats{position:absolute;inset:0;z-index:20;display:grid;pointer-events:none}
+.beat{grid-area:1/1;display:grid;align-content:center;opacity:0;will-change:opacity,transform;position:relative;isolation:isolate}
+.beat > .wrap{width:100%}
+.beat.live{pointer-events:auto}
+.kick{font-size:.76rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--amber);
+  display:flex;align-items:center}
+.beat h1{font-size:var(--s-4);max-width:19ch;margin-top:1rem;text-shadow:0 2px 20px rgba(8,6,20,.6),0 8px 60px rgba(8,6,20,.45)}
+.beat h2{font-size:var(--s-3);max-width:19ch;margin-top:1rem;text-shadow:0 2px 20px rgba(8,6,20,.6)}
+.beat h1 em,.beat h2 em{font-style:normal;
+  background:linear-gradient(94deg,#FFCE8A 0%,#FFA94F 38%,#FF7A45 78%,#FF6533 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 2px 10px rgba(60,20,0,.55)) drop-shadow(0 4px 28px rgba(255,130,50,.4))}
+.beat p.lead{font-size:var(--s-1);color:var(--txt-dim);max-width:46ch;margin-top:1.1rem;line-height:1.56;
+  text-shadow:0 2px 16px rgba(8,6,20,.65)}
+.acts{display:flex;flex-wrap:wrap;gap:.85rem;margin-top:1.9rem}
+.mini{display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;margin-top:1.5rem;font-size:var(--s--1);font-weight:700;color:var(--txt-dim)}
+.mini span{display:flex;align-items:center;gap:.45em}
+.tick{width:16px;height:16px;flex:none;color:var(--teal)}
+.beat.mid{text-align:center}
+.beat.top{align-content:start;padding-top:clamp(92px,14vh,150px)}
+.beat.top::before{content:"";position:absolute;inset:0 0 auto;height:52vh;pointer-events:none;z-index:-1;
+  background:linear-gradient(180deg,rgba(9,11,24,.80) 0%,rgba(9,11,24,.55) 46%,transparent 100%)}
+.beat.mid h2{max-width:22ch;margin-inline:auto}
+.beat.mid .kick{justify-content:center}
+.beat.mid p.lead{margin-inline:auto}
 
-  .trust-item {
-    display: flex; gap: 12px; align-items: flex-start;
-    background: white; border-radius: 14px; padding: 1.25rem;
-    border: 1px solid #F0E4D0;
-    transition: box-shadow 0.2s ease, transform 0.2s ease;
-  }
-  .trust-item:hover { box-shadow: 0 4px 20px rgba(13,24,61,0.1); transform: translateY(-2px); }
+/* name card */
+.namecard{max-width:520px;border-radius:var(--r-lg);padding:clamp(22px,2.5vw,30px);margin-top:1.6rem;
+  background:linear-gradient(168deg,rgba(38,44,74,.74),rgba(15,18,36,.82));backdrop-filter:blur(30px) saturate(150%);
+  box-shadow:inset 0 1px 0 rgba(255,241,222,.20),inset 0 0 0 1px rgba(255,231,203,.09),
+   inset 0 -30px 60px rgba(6,8,20,.28),var(--sh-3)}
+.namecard label{display:block;font-size:.74rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--txt-mute);margin-bottom:.7rem}
+.namecard input{width:100%;padding:.95em 1.15em;border-radius:var(--r);font:inherit;font-weight:700;border:0;
+  background:rgba(9,11,24,.5);color:var(--txt);
+  box-shadow:inset 0 2px 5px rgba(4,6,16,.45),inset 0 0 0 1px rgba(255,231,203,.11);transition:box-shadow .35s,background .35s}
+.namecard input::placeholder{color:var(--txt-mute);font-weight:600}
+.namecard input:focus{outline:none;background:rgba(9,11,24,.34);
+  box-shadow:inset 0 2px 5px rgba(4,6,16,.34),inset 0 0 0 1px rgba(255,183,101,.55),0 0 0 5px rgba(255,183,101,.12)}
+.namecard .out{margin-top:1.15rem;padding:1.1rem 1.2rem;border-radius:var(--r);text-align:left;
+  background:linear-gradient(168deg,rgba(255,183,101,.10),rgba(255,183,101,.04));
+  box-shadow:inset 0 1px 0 rgba(255,241,222,.14),inset 3px 0 0 var(--amber);
+  font-size:1.02rem;line-height:1.66;color:#EFE6D8}
+.namecard .out b{color:var(--amber-hi);font-weight:800}
 
-  .proof-card {
-    background: white; border-radius: 16px; overflow: hidden;
-    border: 1.5px solid #F0E4D0; box-shadow: 0 2px 16px rgba(13,24,61,0.06);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  .proof-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(13,24,61,0.14); }
+/* the page spread */
+.spreadwrap{display:grid;place-items:center}
+.spread{position:relative;width:min(900px,84vw);border-radius:var(--r-lg);overflow:hidden;display:grid;grid-template-columns:1fr 1fr;
+  background:#fff;aspect-ratio:16/10.6;box-shadow:0 20px 60px rgba(0,0,0,.55),0 60px 130px rgba(0,0,0,.5)}
+@media(max-width:640px){.spread{grid-template-columns:1fr;aspect-ratio:4/5}.spread .spread-img{order:-1}}
+.spread::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:40px;transform:translateX(-50%);z-index:3;
+  background:linear-gradient(90deg,rgba(120,90,60,0),rgba(120,90,60,.10) 40%,rgba(90,66,42,.20) 50%,rgba(120,90,60,.10) 60%,rgba(120,90,60,0))}
+.spread-txt{padding:clamp(16px,2.4vw,34px);display:flex;flex-direction:column;justify-content:center;
+  background:linear-gradient(120deg,#FFFDF9,#FBF4E9);color:#463724}
+.spread-txt p{font-size:clamp(.74rem,1vw,.94rem);line-height:1.72;font-weight:500}
+.spread-txt p+p{margin-top:.75em}
+.dropcap::first-letter{font-family:'Baloo 2',sans-serif;font-size:3em;float:left;line-height:.9;padding:.04em .1em 0 0;color:var(--orange);font-weight:700}
+.pgnum{margin-top:1em;font-size:.66rem;letter-spacing:.1em;color:#AB9779;font-weight:800}
+.spread-img{position:relative;overflow:hidden}
+.spread-img img{width:100%;height:100%;object-fit:cover}
 
-  .step-card {
-    text-align: center; padding: 2.5rem 1.75rem; border-radius: 20px;
-    background: rgba(255,255,255,0.55); border: 2px solid rgba(13,24,61,0.12);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    backdrop-filter: blur(4px);
-  }
-  .step-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(13,24,61,0.12); }
+/* quote */
+.qwrap{max-width:34ch;text-align:center;margin-inline:auto}
+.qwrap blockquote{font-family:'Baloo 2',sans-serif;font-size:var(--s-2);line-height:1.38;font-weight:500;margin:0;
+  text-shadow:0 2px 24px rgba(6,8,18,.75)}
+.qwrap blockquote b{font-weight:700;color:var(--amber-hi)}
+.stars{display:flex;gap:.26rem;justify-content:center;color:var(--amber);margin-bottom:1.3rem;filter:drop-shadow(0 2px 10px rgba(255,150,60,.4))}
+.byline{margin-top:1.5rem;font-size:var(--s--1);color:var(--txt-dim);font-weight:800}
+.byline i{display:block;font-style:normal;color:var(--txt-mute);font-weight:600;margin-top:.2rem}
 
-  .plan-card {
-    border-radius: 18px; padding: 2rem;
-    transition: transform 0.2s ease;
-  }
-  .plan-card:hover { transform: translateY(-3px); }
+/* progress rail */
+.rail{position:fixed;right:clamp(10px,1.6vw,22px);top:50%;transform:translateY(-50%);z-index:110;
+  display:grid;gap:11px;pointer-events:none}
+@media(max-width:760px){.rail{display:none}}
+.rail i{width:7px;height:7px;border-radius:50%;background:rgba(255,231,203,.22);transition:background .4s,transform .4s,box-shadow .4s}
+.rail i.on{background:var(--amber);transform:scale(1.5);box-shadow:0 0 14px rgba(255,183,101,.7)}
 
-  @keyframes cursor-blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
-  .cursor { display: inline-block; width: 2px; height: 1em; background: #FF6B35; margin-left: 2px; vertical-align: text-bottom; animation: cursor-blink 1s step-end infinite; }
+.cue{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:25;
+  font-size:.74rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--txt-mute);
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;transition:opacity .6s}
+.cue svg{animation:bob 2.4s var(--ease) infinite}
+@keyframes bob{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(7px);opacity:1}}
 
-  @keyframes gentle-bob { 0%,100% { transform: translateY(0) rotate(-1deg); } 50% { transform: translateY(-10px) rotate(1deg); } }
-  .book-float { animation: gentle-bob 5s ease-in-out infinite; }
+/* ---------- released sections ---------- */
+.sec{padding-block:clamp(76px,11vw,150px);position:relative}
+.journey + .sec{padding-top:clamp(110px,13vw,180px)}
+.sec-head{max-width:36ch;margin-inline:auto;text-align:center}
+.sec-head h2{font-size:var(--s-3);margin-top:1rem}
+.sec-head p{margin-top:1.05rem;color:var(--txt-dim);font-size:var(--s-1);line-height:1.56}
+.sec-head .kick{justify-content:center}
+.price-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(18px,2.2vw,26px);margin-top:clamp(42px,5vw,64px);max-width:900px;margin-inline:auto}
+@media(max-width:780px){.price-grid{grid-template-columns:1fr}}
+.plan{position:relative;border-radius:var(--r-xl);padding:clamp(28px,3vw,40px);
+  background:linear-gradient(172deg,rgba(45,52,86,.5),rgba(17,20,38,.62));
+  box-shadow:inset 0 1px 0 rgba(255,241,222,.15),inset 0 0 0 1px rgba(255,231,203,.07),inset 0 -50px 90px rgba(6,8,20,.24),var(--sh-1);
+  transition:transform .55s var(--ease),box-shadow .55s var(--ease)}
+.plan:hover{transform:translateY(-5px);box-shadow:inset 0 1px 0 rgba(255,241,222,.2),inset 0 0 0 1px rgba(255,231,203,.1),var(--sh-2)}
+.plan.best{background:linear-gradient(172deg,rgba(66,58,74,.55),rgba(24,22,42,.66));
+  box-shadow:inset 0 1px 0 rgba(255,225,180,.28),inset 0 0 0 1px rgba(255,183,101,.28),inset 0 -50px 90px rgba(6,8,20,.22),
+   0 2px 8px rgba(4,6,16,.22),0 14px 40px rgba(140,70,20,.2),0 40px 90px rgba(120,60,16,.22)}
+.plan-tag{position:absolute;top:-13px;left:clamp(28px,3vw,40px);font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  padding:.5em 1em;border-radius:999px;color:#4A2404;background:linear-gradient(176deg,var(--amber-hi),var(--amber) 60%,var(--amber-lo));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 3px 8px rgba(120,60,10,.3),0 10px 22px rgba(120,60,10,.24)}
+.plan h3{font-size:var(--s-1)}
+.plan-sub{font-size:var(--s--1);color:var(--txt-mute);margin-top:.2rem;font-weight:600}
+.plan-price{display:flex;align-items:baseline;gap:.45rem;margin-top:1.45rem}
+.plan-price b{font-family:'Baloo 2',sans-serif;font-size:clamp(2.7rem,5vw,3.6rem);font-weight:700;letter-spacing:-.02em;line-height:1;
+  background:linear-gradient(164deg,#FFF2DE,#FFC98C);-webkit-background-clip:text;background-clip:text;color:transparent}
+.plan-price span{font-size:var(--s--1);color:var(--txt-mute);font-weight:700}
+.plan-bill{font-size:var(--s--1);color:var(--txt-dim);margin-top:.55rem;font-weight:600}
+.plan .btn{width:100%;margin-top:1.6rem}
+.plan ul{list-style:none;margin:1.7rem 0 0;padding:0;display:grid;gap:.75rem}
+.plan li{display:flex;gap:.7rem;font-size:var(--s--1);color:var(--txt-dim);align-items:flex-start;line-height:1.5;font-weight:600}
+.pay-note{margin-top:1.7rem;text-align:center;font-size:.82rem;color:var(--txt-mute);font-weight:700}
+.badges{display:flex;gap:.8rem;justify-content:center;margin-top:1.9rem;flex-wrap:wrap}
+.badge{display:flex;align-items:center;gap:.65em;padding:.78em 1.25em;border-radius:18px;font-size:.85rem;font-weight:800;
+  background:linear-gradient(174deg,rgba(255,240,222,.11),rgba(255,240,222,.04));
+  box-shadow:inset 0 1px 0 rgba(255,241,222,.22),inset 0 0 0 1px rgba(255,231,203,.09),0 3px 10px rgba(4,6,16,.24),0 14px 32px rgba(4,6,16,.22);
+  transition:transform .45s var(--ease),background .4s}
+.badge:hover{background:linear-gradient(174deg,rgba(255,240,222,.18),rgba(255,240,222,.07));transform:translateY(-3px)}
+.badge small{display:block;font-size:.66rem;font-weight:700;color:var(--txt-mute)}
+footer{background:#080A16;padding-block:clamp(48px,6vw,74px) 2rem;box-shadow:inset 0 1px 0 rgba(255,231,203,.06)}
+.foot-grid{display:grid;grid-template-columns:1.6fr repeat(3,1fr);gap:clamp(26px,4vw,50px)}
+@media(max-width:840px){.foot-grid{grid-template-columns:1fr 1fr}}
+.foot-grid h4{font-family:'Nunito',sans-serif;font-size:.74rem;letter-spacing:.13em;text-transform:uppercase;color:var(--txt-mute);font-weight:800}
+.foot-grid ul{list-style:none;margin:1.05rem 0 0;padding:0;display:grid;gap:.65rem}
+.foot-grid li a{font-size:var(--s--1);color:var(--txt-dim);font-weight:600;transition:color .25s}
+.foot-grid li a:hover{color:var(--txt)}
+.foot-blurb{font-size:var(--s--1);color:var(--txt-mute);margin-top:1.15rem;max-width:34ch;line-height:1.62}
+.foot-btm{margin-top:clamp(38px,5vw,60px);padding-top:1.6rem;box-shadow:inset 0 1px 0 rgba(255,231,203,.06);
+  display:flex;flex-wrap:wrap;gap:.6rem 1.6rem;font-size:.8rem;color:var(--txt-mute);font-weight:600}
 
-  @keyframes pulse-green { 0%,100% { box-shadow: 0 0 0 3px rgba(108,192,108,0.3); } 50% { box-shadow: 0 0 0 6px rgba(108,192,108,0.1); } }
-
-  @keyframes slide-up { from { transform: translateY(120%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-  @keyframes slide-down { from { transform: translateY(0); opacity: 1; } to { transform: translateY(120%); opacity: 0; } }
-  .signup-toast { animation: slide-up 0.45s cubic-bezier(0.34,1.56,0.64,1) forwards; }
-  .signup-toast.hiding { animation: slide-down 0.35s ease-in forwards; }
-
-  .wave-divider svg { display: block; width: 100%; }
-
-  .hero-book-panel {
-    background: #0D183D;
-    border-radius: 24px; padding: 2.5rem 2rem;
-    position: relative; overflow: hidden; min-height: 440px;
-    display: flex; flex-direction: column; justify-content: center; gap: 1.5rem;
-  }
-
-  
-
-  /* Live-draw looping annotation, 4.5s cycle */
-  @keyframes draw-oval-loop {
-    0%, 3.3%  { stroke-dashoffset: 520; }
-    27.8%     { stroke-dashoffset: 0; }
-    99%       { stroke-dashoffset: 0; }
-    100%      { stroke-dashoffset: 520; }
-  }
-  @keyframes draw-arrow-loop {
-    0%, 27.8% { stroke-dashoffset: 65; }
-    36.7%     { stroke-dashoffset: 0; }
-    99%       { stroke-dashoffset: 0; }
-    100%      { stroke-dashoffset: 65; }
-  }
-  @keyframes draw-ah1-loop {
-    0%, 36%   { stroke-dashoffset: 18; }
-    40.4%     { stroke-dashoffset: 0; }
-    99%       { stroke-dashoffset: 0; }
-    100%      { stroke-dashoffset: 18; }
-  }
-  @keyframes draw-ah2-loop {
-    0%, 39.6% { stroke-dashoffset: 18; }
-    44%       { stroke-dashoffset: 0; }
-    99%       { stroke-dashoffset: 0; }
-    100%      { stroke-dashoffset: 18; }
-  }
-  @keyframes draw-text-loop {
-    0%, 42.2% { width: 0px; }
-    54.4%     { width: 118px; }
-    99%       { width: 118px; }
-    100%      { width: 0px; }
-  }
-
-  @keyframes float-bubble {
-    0%,100% { transform: translateY(0px) rotate(-2deg); }
-    50%      { transform: translateY(-9px) rotate(2deg); }
-  }
-  @keyframes float-bubble2 {
-    0%,100% { transform: translateY(0px) rotate(1deg); }
-    50%      { transform: translateY(-12px) rotate(-2deg); }
-  }
-  @keyframes float-bubble3 {
-    0%,100% { transform: translateY(0px) rotate(3deg); }
-    50%      { transform: translateY(-7px) rotate(-3deg); }
-  }
-  .theme-bubble {
-    position: absolute;
-    display: inline-flex; align-items: center; gap: 5px;
-    background: rgba(255,255,255,0.92);
-    border-radius: 999px; padding: 5px 12px;
-    font-size: 0.75rem; font-weight: 700; color: #0D183D;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.18);
-    white-space: nowrap; pointer-events: none;
-    backdrop-filter: blur(4px);
-  }
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important}
+  #dust,.cue svg{display:none}
+}
 `;
 
 export default function Home() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  // Displayed prices must match what Stripe charges, so they come from the
+  // visitor's country via /api/geo - same contract the previous homepage used.
+  const [pricing, setPricing] = useState<PriceDisplay>(DISPLAY.aud);
   const [childName, setChildName] = useState('');
 
-  const [minutesAgo, setMinutesAgo] = useState<number | null>(null);
-  const [toast, setToast] = useState<{ city: string; country: string; flag: string } | null>(null);
-  const [toastHiding, setToastHiding] = useState(false);
-  // Geolocation-based pricing: prices shown match the currency charged at checkout.
-  const [pricing, setPricing] = useState<PriceDisplay>(DISPLAY.aud);
   useEffect(() => {
+    let live = true;
     fetch('/api/geo')
-      .then(r => (r.ok ? r.json() : null))
-      .then(d => { if (d?.display) setPricing(d.display); })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => { if (live && d && d.display) setPricing(d.display as PriceDisplay); })
       .catch(() => {});
+    return () => { live = false; };
   }, []);
+
+  // The scroll journey: one sticky stage, a depth-mapped WebGL plate per beat.
+  // Listeners are bound to an AbortSignal and the rAF loops check `stop` so
+  // navigating away tears everything down.
   useEffect(() => {
-    const start = Math.floor(Math.random() * 8) + 1;
-    setMinutesAgo(start);
-    const t = setInterval(() => setMinutesAgo(m => (m ?? start) + 1), 60000);
-    return () => clearInterval(t);
-  }, []);
+    const ac = new AbortController();
+    const sig = ac.signal;
+    const stop = { v: false };
+    try {
+      (function(){
+      "use strict";
+      var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var P_now = 0;
+      var clamp=function(v,a,b){return v<a?a:v>b?b:v;};
+      var lerp=function(a,b,t){return a+(b-a)*t;};
+      var ease=function(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;};
+      /* ramp: 0 before a, 1 after b, eased between */
+      function ramp(p,a,b){ if(b===a) return p<a?0:1; return ease(clamp((p-a)/(b-a),0,1)); }
+      /* window: fades in over [a,a+fi], holds, fades out over [b-fo,b] */
+      function win(p,a,b,fi,fo){ return Math.min(ramp(p,a,a+fi), 1-ramp(p,b-fo,b)); }
 
-  useEffect(() => {
-    // Inside the native app (Capacitor) skip the social-proof toast: it reads as
-    // marketing in an installed app and can draw extra store-review scrutiny.
-    // No effect on the website (window.Capacitor only exists in the native shell).
-    if (typeof window !== 'undefined' && (window as { Capacitor?: unknown }).Capacitor) return;
-    // Weighted by English-speaking population: USA ~65%, UK ~15%, AU ~10%, CA ~5%, NZ 2%, IE 2%, ZA 1%
-    const locations = [
-      // USA ~65 entries
-      { city: 'New York', country: 'United States', flag: '🇺🇸' },
-      { city: 'Los Angeles', country: 'United States', flag: '🇺🇸' },
-      { city: 'Chicago', country: 'United States', flag: '🇺🇸' },
-      { city: 'Houston', country: 'United States', flag: '🇺🇸' },
-      { city: 'Phoenix', country: 'United States', flag: '🇺🇸' },
-      { city: 'Philadelphia', country: 'United States', flag: '🇺🇸' },
-      { city: 'San Antonio', country: 'United States', flag: '🇺🇸' },
-      { city: 'San Diego', country: 'United States', flag: '🇺🇸' },
-      { city: 'Dallas', country: 'United States', flag: '🇺🇸' },
-      { city: 'Austin', country: 'United States', flag: '🇺🇸' },
-      { city: 'Seattle', country: 'United States', flag: '🇺🇸' },
-      { city: 'Denver', country: 'United States', flag: '🇺🇸' },
-      { city: 'Nashville', country: 'United States', flag: '🇺🇸' },
-      { city: 'Boston', country: 'United States', flag: '🇺🇸' },
-      { city: 'Portland', country: 'United States', flag: '🇺🇸' },
-      { city: 'Las Vegas', country: 'United States', flag: '🇺🇸' },
-      { city: 'Atlanta', country: 'United States', flag: '🇺🇸' },
-      { city: 'Minneapolis', country: 'United States', flag: '🇺🇸' },
-      { city: 'Tampa', country: 'United States', flag: '🇺🇸' },
-      { city: 'Orlando', country: 'United States', flag: '🇺🇸' },
-      { city: 'Charlotte', country: 'United States', flag: '🇺🇸' },
-      { city: 'Raleigh', country: 'United States', flag: '🇺🇸' },
-      { city: 'San Francisco', country: 'United States', flag: '🇺🇸' },
-      { city: 'Indianapolis', country: 'United States', flag: '🇺🇸' },
-      { city: 'Columbus', country: 'United States', flag: '🇺🇸' },
-      { city: 'Fort Worth', country: 'United States', flag: '🇺🇸' },
-      { city: 'San Jose', country: 'United States', flag: '🇺🇸' },
-      { city: 'Jacksonville', country: 'United States', flag: '🇺🇸' },
-      { city: 'Oklahoma City', country: 'United States', flag: '🇺🇸' },
-      { city: 'Louisville', country: 'United States', flag: '🇺🇸' },
-      { city: 'Baltimore', country: 'United States', flag: '🇺🇸' },
-      { city: 'Milwaukee', country: 'United States', flag: '🇺🇸' },
-      { city: 'Albuquerque', country: 'United States', flag: '🇺🇸' },
-      { city: 'Sacramento', country: 'United States', flag: '🇺🇸' },
-      { city: 'Kansas City', country: 'United States', flag: '🇺🇸' },
-      { city: 'Mesa', country: 'United States', flag: '🇺🇸' },
-      { city: 'Omaha', country: 'United States', flag: '🇺🇸' },
-      { city: 'Colorado Springs', country: 'United States', flag: '🇺🇸' },
-      { city: 'Virginia Beach', country: 'United States', flag: '🇺🇸' },
-      { city: 'Long Beach', country: 'United States', flag: '🇺🇸' },
-      { city: 'New Orleans', country: 'United States', flag: '🇺🇸' },
-      { city: 'Honolulu', country: 'United States', flag: '🇺🇸' },
-      { city: 'Tucson', country: 'United States', flag: '🇺🇸' },
-      { city: 'Fresno', country: 'United States', flag: '🇺🇸' },
-      { city: 'Arlington', country: 'United States', flag: '🇺🇸' },
-      { city: 'Bakersfield', country: 'United States', flag: '🇺🇸' },
-      { city: 'Anaheim', country: 'United States', flag: '🇺🇸' },
-      { city: 'Lexington', country: 'United States', flag: '🇺🇸' },
-      { city: 'Stockton', country: 'United States', flag: '🇺🇸' },
-      { city: 'Pittsburgh', country: 'United States', flag: '🇺🇸' },
-      { city: 'St. Louis', country: 'United States', flag: '🇺🇸' },
-      { city: 'Riverside', country: 'United States', flag: '🇺🇸' },
-      { city: 'Cincinnati', country: 'United States', flag: '🇺🇸' },
-      { city: 'Anchorage', country: 'United States', flag: '🇺🇸' },
-      { city: 'Scottsdale', country: 'United States', flag: '🇺🇸' },
-      { city: 'Plano', country: 'United States', flag: '🇺🇸' },
-      { city: 'Henderson', country: 'United States', flag: '🇺🇸' },
-      { city: 'Chandler', country: 'United States', flag: '🇺🇸' },
-      { city: 'Madison', country: 'United States', flag: '🇺🇸' },
-      { city: 'Durham', country: 'United States', flag: '🇺🇸' },
-      { city: 'Gilbert', country: 'United States', flag: '🇺🇸' },
-      { city: 'Boise', country: 'United States', flag: '🇺🇸' },
-      { city: 'Richmond', country: 'United States', flag: '🇺🇸' },
-      { city: 'Spokane', country: 'United States', flag: '🇺🇸' },
-      { city: 'Des Moines', country: 'United States', flag: '🇺🇸' },
-      // UK ~15 entries
-      { city: 'London', country: 'United Kingdom', flag: '🇬🇧' },
-      { city: 'Manchester', country: 'United Kingdom', flag: '🇬🇧' },
-      { city: 'Birmingham', country: 'United Kingdom', flag: '🇬🇧' },
-      { city: 'Leeds', country: 'United Kingdom', flag: '🇬🇧' },
-      { city: 'Glasgow', country: 'United Kingdom', flag: '🇬🇧' },
-      { city: 'Sheffield', country: 'United Kingdom', flag: '🇬🇧' },
-      { city: 'Edinburgh', country: 'United Kingdom', flag: '🇬🇧' },
-      { city: 'Liverpool', country: 'United Kingdom', flag: '🇬🇧' },
-      { city: 'Bristol', country: 'United Kingdom', flag: '🇬🇧' },
-      { city: 'Cardiff', country: 'United Kingdom', flag: '🇬🇧' },
-      { city: 'Leicester', country: 'United Kingdom', flag: '🇬🇧' },
-      { city: 'Belfast', country: 'United Kingdom', flag: '🇬🇧' },
-      { city: 'Nottingham', country: 'United Kingdom', flag: '🇬🇧' },
-      { city: 'Newcastle', country: 'United Kingdom', flag: '🇬🇧' },
-      { city: 'Southampton', country: 'United Kingdom', flag: '🇬🇧' },
-      // Australia ~10 entries
-      { city: 'Sydney', country: 'Australia', flag: '🇦🇺' },
-      { city: 'Melbourne', country: 'Australia', flag: '🇦🇺' },
-      { city: 'Brisbane', country: 'Australia', flag: '🇦🇺' },
-      { city: 'Perth', country: 'Australia', flag: '🇦🇺' },
-      { city: 'Adelaide', country: 'Australia', flag: '🇦🇺' },
-      { city: 'Gold Coast', country: 'Australia', flag: '🇦🇺' },
-      { city: 'Canberra', country: 'Australia', flag: '🇦🇺' },
-      { city: 'Newcastle', country: 'Australia', flag: '🇦🇺' },
-      { city: 'Hobart', country: 'Australia', flag: '🇦🇺' },
-      { city: 'Darwin', country: 'Australia', flag: '🇦🇺' },
-      // Canada ~5 entries
-      { city: 'Toronto', country: 'Canada', flag: '🇨🇦' },
-      { city: 'Vancouver', country: 'Canada', flag: '🇨🇦' },
-      { city: 'Calgary', country: 'Canada', flag: '🇨🇦' },
-      { city: 'Ottawa', country: 'Canada', flag: '🇨🇦' },
-      { city: 'Edmonton', country: 'Canada', flag: '🇨🇦' },
-      // New Zealand ~2 entries
-      { city: 'Auckland', country: 'New Zealand', flag: '🇳🇿' },
-      { city: 'Wellington', country: 'New Zealand', flag: '🇳🇿' },
-      // Ireland ~2 entries
-      { city: 'Dublin', country: 'Ireland', flag: '🇮🇪' },
-      { city: 'Cork', country: 'Ireland', flag: '🇮🇪' },
-      // South Africa ~1 entry
-      { city: 'Cape Town', country: 'South Africa', flag: '🇿🇦' },
-    ];
-    let idx = Math.floor(Math.random() * locations.length);
-    const show = () => {
-      idx = (idx + 1) % locations.length;
-      setToastHiding(false);
-      setToast(locations[idx]);
-      setTimeout(() => {
-        setToastHiding(true);
-        setTimeout(() => setToast(null), 400);
-      }, 4500);
-    };
-    const initial = setTimeout(show, 3000 + Math.random() * 3000);
-    const interval = setInterval(show, 18000 + Math.random() * 10000);
-    return () => { clearTimeout(initial); clearInterval(interval); };
-  }, []);
+      /* ================= BEATS ================= */
+      var BEATS=[
+        {a:0.00,b:0.15,fi:0},   /* visible at rest - nothing here waits on a scroll */
+        {a:0.15,b:0.32},
+        {a:0.32,b:0.48},
+        {a:0.48,b:0.66},
+        {a:0.66,b:0.83},
+        {a:0.83,b:1.00}
+      ];
+      var beatEls=[].slice.call(document.querySelectorAll('.beat'));
+      var railEls=[].slice.call(document.querySelectorAll('#rail i'));
+      var journey=document.getElementById('journey');
+      var cv=document.getElementById('depth-canvas');
+      var bgHero=document.getElementById('bgHero'), bgSky=document.getElementById('bgSky'),
+          bgGate=document.getElementById('bgGate'), bgBand=document.getElementById('bgBand');
+      var portalsWrap=document.getElementById('portals'), portals=[].slice.call(document.querySelectorAll('.portal'));
+      var cue=document.getElementById('cue'), nav=document.getElementById('nav');
 
-  const previewName = childName.trim() || 'your child';
-  const capitalised = previewName.charAt(0).toUpperCase() + previewName.slice(1);
+      /* ================= the camera loop ================= */
+      var P=0, targetP=0, activeBeat=-1;
+      function measure(){ return Math.max(1, journey.offsetHeight - innerHeight); }
+      var span=measure();
+      addEventListener('resize',function(){ span=measure(); },{passive:true,signal:sig});
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "SoftwareApplication",
-        "name": "TalePop",
-        "applicationCategory": "EducationalApplication",
-        "operatingSystem": "Web",
-        "url": "https://www.talepopstories.com",
-        "description": "AI-powered personalised bedtime story generator for children aged 3-10. Creates unique stories starring your child using their name, interests, friends and pet.",
-        "offers": {
-          "@type": "Offer",
-          "price": "9.99",
-          "priceCurrency": "AUD",
-          "priceSpecification": {
-            "@type": "RecurringPaymentSpecification",
-            "billingIncrement": 1,
-            "billingPeriod": "P1M"
+      function paint(p){
+        /* --- backgrounds --- */
+        var skyIn=win(p,0.145,0.40,0.055,0.06);
+        var gateIn=win(p,0.345,0.70,0.055,0.07);
+        var bandIn=ramp(p,0.79,0.88);
+        bgSky.style.opacity=skyIn;
+        bgGate.style.opacity=gateIn;
+        bgBand.style.opacity=bandIn;
+        bgHero.style.opacity=1-ramp(p,0.145,0.20);
+
+        /* flying up through the sky */
+        var sf=ramp(p,0.11,0.42);
+        bgSky.style.transform='scale('+lerp(1.34,1.02,sf)+') translate3d(0,'+lerp(14,-12,sf)+'%,0)';
+        var gf=ramp(p,0.30,0.70);
+        bgGate.style.transform='scale('+lerp(1.02,1.30,gf)+') translate3d(0,'+lerp(6,-6,gf)+'%,0)';
+        bgBand.style.transform='scale('+lerp(1.16,1.04,ramp(p,0.79,1))+')';
+        bgHero.style.transform='scale('+lerp(1.02,1.20,ramp(p,0,0.24))+')';
+
+        /* --- portals flying past the camera --- */
+        var pw=win(p,0.44,0.68,0.06,0.05);
+        portalsWrap.style.opacity=pw;
+        if(pw>0.001){
+          var t=clamp((p-0.44)/0.24,0,1);
+          for(var i=0;i<portals.length;i++){
+            var local=t*(portals.length+2.6) - i;      /* staggered arrival */
+            var k=clamp(local/2.6,0,1);
+            var z=lerp(-1500,620,k);
+            var side=(i%2?1:-1);
+            var xoff=side*lerp(13,32,k);
+            var yoff=(i%3-1)*9;
+            var fade=clamp(local/0.6,0,1)*(1-clamp((local-2.05)/0.55,0,1));
+            var el=portals[i];
+            el.style.transform='translate3d(calc(-50% + '+xoff+'vw), calc(-50% + '+yoff+'vh), '+z+'px) rotateY('+(-side*13)+'deg)';
+            el.style.opacity=fade;
           }
-        },
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.9",
-          "ratingCount": "2500",
-          "bestRating": "5"
         }
-      },
-      {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "How personalised is a TalePop story?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Every word is invented fresh - not a template with the name swapped in. Your child's interests, best friend, pet, and personality shape the actual plot. Two children with the same name get completely different stories."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "What age is TalePop for?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Ages 3 to 10. You set a reading level when you create your child's profile and we adjust vocabulary, sentence length, and story complexity accordingly."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Can I add more than one child?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes - unlimited profiles, one subscription. Each child gets their own profile, their own story preferences, and their own shelf."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Can I cancel my TalePop subscription anytime?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "One click from your account settings. No hoops, no retention flows, no email-us-to-cancel. If you cancel, you keep access until the end of your billing period."
-            }
-          }
-        ]
+
+        /* --- beat copy --- */
+        var newBeat=0;
+        for(var b=0;b<BEATS.length;b++){
+          var B=BEATS[b];
+          var fi=(B.fi!==undefined)?B.fi:(B.b-B.a)*0.30;
+          var o=win(p,B.a,B.b,fi,(B.b-B.a)*0.26);
+          var el=beatEls[b];
+          el.style.opacity=o;
+          var t2=clamp((p-B.a)/(B.b-B.a),0,1);
+          el.style.transform='translate3d(0,'+lerp(34,-34,t2)+'px,0)';
+          el.classList.toggle('live', o>0.55);
+          if(p>=B.a && p<B.b) newBeat=b;
+        }
+
+        if(newBeat!==activeBeat){
+          activeBeat=newBeat;
+          railEls.forEach(function(r,i){ r.classList.toggle('on', i===newBeat); });
+        }
+
+        cue.style.opacity = p<0.03 ? 1 : 0;
+        nav.classList.toggle('stuck', scrollY>40);
       }
-    ]
-  };
+
+      var lastT=0;
+      function tick(now){
+        targetP = clamp(scrollY/span, 0, 1);
+        /* frame-rate independent easing, so a slow device still lands where it should */
+        var dt = lastT ? Math.min((now-lastT)/1000, 0.1) : 0.016; lastT=now;
+        var k = reduce ? 1 : 1-Math.pow(0.0001, dt);
+        P += (targetP-P) * k;
+        if(Math.abs(targetP-P)<0.0002) P=targetP;
+        P_now=P;
+        paint(P);
+        if(!stop.v) requestAnimationFrame(tick);
+      }
+      paint(0);
+      if(!stop.v) requestAnimationFrame(tick);
+
+      /* ============ depth renderer: EVERY plate is 3D and tracks the cursor ============ */
+      var VS='attribute vec2 p;varying vec2 uv;void main(){uv=p*0.5+0.5;uv.y=1.0-uv.y;gl_Position=vec4(p,0.,1.);}';
+      var FS=[
+      'precision highp float;varying vec2 uv;',
+      'uniform sampler2D cA,dA,cB,dB;',
+      'uniform vec2 offA,offB,texA,texB,ctrA,ctrB;',
+      'uniform float zA,zB,iA,iB,aspC,mixAB,fade,dimA,dimB,shpA,shpB;',
+      'float hash(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}',
+      /* where on the plate this screen pixel lands, after cover-fit and depth displacement */
+      'vec2 warp(sampler2D dep,vec2 off,float zoom,float aspI,vec2 ctr){',
+      '  vec2 c=uv-0.5;',
+      '  if(aspC>aspI){c.y*=aspI/aspC;}else{c.x*=aspC/aspI;}',
+      '  c/=zoom; vec2 q=c+0.5+ctr; vec2 acc=vec2(0.0);',
+      '  for(int i=0;i<8;i++){',
+      '    float d=texture2D(dep,clamp(q+acc,0.001,0.999)).r;',
+      '    acc+=off*(d-0.45)/8.0;',
+      '  }',
+      '  return clamp(q+acc,0.0,1.0);',
+      '}',
+      /* 5-tap unsharp mask. The LoRA renders softly at 4 steps, so the art needs
+         its edges put back rather than more pixels. */
+      'vec3 fetch(sampler2D col,vec2 f,vec2 tx,float sh){',
+      '  vec3 c=texture2D(col,f).rgb;',
+      '  vec3 b=(texture2D(col,f+vec2(tx.x,0.0)).rgb+texture2D(col,f-vec2(tx.x,0.0)).rgb',
+      '        + texture2D(col,f+vec2(0.0,tx.y)).rgb+texture2D(col,f-vec2(0.0,tx.y)).rgb)*0.25;',
+      '  return c+(c-b)*sh;',
+      '}',
+      'void main(){',
+      '  vec3 a=fetch(cA,warp(dA,offA,zA,iA,ctrA),texA,shpA)*dimA;',
+      '  vec3 b=fetch(cB,warp(dB,offB,zB,iB,ctrB),texB,shpB)*dimB;',
+      '  vec3 col=mix(a,b,mixAB)*fade;',
+      '  float l=max(max(col.r,col.g),col.b);',
+      '  col+=vec3(1.0,0.72,0.34)*pow(max(l-0.70,0.0),1.8)*0.34;',
+      '  float v=1.0-0.5*dot(uv-0.5,uv-0.5)*2.2;',
+      '  col*=v;',
+      '  col+=(hash(gl_FragCoord.xy)-0.5)*(1.6/255.0);',
+      '  gl_FragColor=vec4(clamp(col,0.0,1.0),1.0);',
+      '}'].join('\n');
+      function sh(gl,t,src){var o=gl.createShader(t);gl.shaderSource(o,src);gl.compileShader(o);
+        if(!gl.getShaderParameter(o,gl.COMPILE_STATUS)){console.warn(gl.getShaderInfoLog(o));return null;}return o;}
+
+      /* each plate owns a slice of the journey, plus how far the camera pushes into it */
+      var PLATES=[
+        {col:'/journey/hero.avif',  dep:'/journey/hero-depth.avif', from:0.00, to:0.20, fi:0.00, fo:0.055, z0:1.02, z1:1.18, par:1.10, cx:0.0, cy:0.02, shpk:1.15},
+        {col:'/journey/sky.avif',   dep:'/journey/sky-depth.avif',  from:0.145,to:0.40, fi:0.055,fo:0.06, z0:1.22, z1:1.02, par:0.85, dim:0.60},
+        {col:'/journey/gate.avif',  dep:'/journey/gate-depth.avif', from:0.345,to:0.70, fi:0.055,fo:0.07, z0:1.02, z1:1.26, par:1.55, dim:0.86},
+        {col:'/journey/band.avif',  dep:'/journey/band-depth.avif', from:0.78, to:1.01, fi:0.08, fo:0.02, z0:1.02, z1:1.12, par:0.80, dim:1.00, cx:0.0, cy:0.0, shpk:1.15}
+      ];
+
+      (function(){
+        if(reduce) return;
+        var opts={antialias:false,alpha:false,powerPreference:'high-performance'};
+        /* WebGL2 allows mipmaps on non-power-of-two textures. Without mipmaps a 4282px
+           plate minified to a 1440px canvas aliases badly - that reads as "pixelated". */
+        var gl=cv.getContext('webgl2',opts), gl2=!!gl;
+        if(!gl){ gl=cv.getContext('webgl',opts); }
+        if(!gl) return;
+        var vs=sh(gl,gl.VERTEX_SHADER,VS), fs=sh(gl,gl.FRAGMENT_SHADER,FS); if(!vs||!fs) return;
+        var pr=gl.createProgram();gl.attachShader(pr,vs);gl.attachShader(pr,fs);gl.linkProgram(pr);
+        if(!gl.getProgramParameter(pr,gl.LINK_STATUS)){ console.warn(gl.getProgramInfoLog(pr)); return; }
+        gl.useProgram(pr);
+
+        var bf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,bf);
+        gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+        var lo=gl.getAttribLocation(pr,'p');gl.enableVertexAttribArray(lo);gl.vertexAttribPointer(lo,2,gl.FLOAT,false,0,0);
+
+        var U={};
+        ['offA','offB','texA','texB','zA','zB','iA','iB','aspC','mixAB','fade','dimA','dimB','shpA','shpB','ctrA','ctrB'].forEach(function(n){ U[n]=gl.getUniformLocation(pr,n); });
+        /* fixed sampler units: colour A=0, depth A=1, colour B=2, depth B=3 */
+        gl.uniform1i(gl.getUniformLocation(pr,'cA'),0);
+        gl.uniform1i(gl.getUniformLocation(pr,'dA'),1);
+        gl.uniform1i(gl.getUniformLocation(pr,'cB'),2);
+        gl.uniform1i(gl.getUniformLocation(pr,'dB'),3);
+
+        function upload(img){
+          var t=gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D,t);
+          gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);
+          gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+          gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+          gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,false);
+          gl.texImage2D(gl.TEXTURE_2D,0,gl.RGB,gl.RGB,gl.UNSIGNED_BYTE,img);
+          /* LINEAR, no mipmaps: the plate is sized close to the render buffer so
+             there is nothing to minify, and a mip chain would only soften it. */
+          gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);
+          return t;
+        }
+
+        var BASE_SHP=0.55;
+        var maxTex=gl.getParameter(gl.MAX_TEXTURE_SIZE);
+        /* four plates at full size is ~220MB of VRAM - fine on desktop, not on a phone */
+        /* Size the plate to roughly the render buffer. Bigger is NOT better here:
+           oversized textures either alias (no mips) or blur (with mips). */
+        var texCap=Math.min(maxTex, Math.round(Math.min(3400, Math.max(1500, cv.clientWidth*2.1))));
+        var pending=PLATES.length*2, ready=false;
+        PLATES.forEach(function(P){
+          P.ct=null; P.dt=null; P.aspect=1.777;
+          var ci=new Image();
+          ci.onload=function(){
+            P.aspect=ci.width/ci.height;
+            /* stay inside this GPU's texture limit rather than failing silently */
+            if(ci.width>texCap){
+              var cnv=document.createElement('canvas');
+              cnv.width=texCap; cnv.height=Math.round(ci.height*texCap/ci.width);
+              var c2=cnv.getContext('2d');
+              c2.imageSmoothingEnabled=true; c2.imageSmoothingQuality='high';
+              c2.drawImage(ci,0,0,cnv.width,cnv.height);
+              P.tw=cnv.width; P.th=cnv.height; P.ct=upload(cnv);
+            } else { P.tw=ci.width; P.th=ci.height; P.ct=upload(ci); }
+            if(--pending===0) go();
+          };
+          ci.onerror=function(){ if(--pending===0) go(); };
+          ci.src=P.col;
+          var di=new Image();
+          di.onload=function(){ P.dt=upload(di); if(--pending===0) go(); };
+          di.onerror=function(){ if(--pending===0) go(); };
+          di.src=P.dep;
+        });
+
+        var mx=0,my=0,tx=0,ty=0;
+        addEventListener('pointermove',function(e){
+          tx=(e.clientX/innerWidth-.5)*2; ty=(e.clientY/innerHeight-.5)*2;
+        },{passive:true,signal:sig});
+        addEventListener('deviceorientation',function(e){
+          if(e.gamma!=null){ tx=clamp(e.gamma/26,-1,1); ty=clamp((e.beta-42)/26,-1,1); }
+        },{capture:true,signal:sig});
+
+        function size(){
+          /* On a 1x display a 1:1 backing store gives the shader nothing to average,
+             so render ~1.8x and let the browser downsample. That is the supersampling. */
+          var dpr=devicePixelRatio||1;
+          var ss = dpr<1.5 ? 1.85 : Math.min(dpr,2);
+          /* keep the buffer inside sane limits on very large windows */
+          var cap=Math.sqrt((3200*1800)/(cv.clientWidth*cv.clientHeight||1));
+          ss=Math.min(ss, Math.max(1, cap));
+          cv.width=Math.round(cv.clientWidth*ss); cv.height=Math.round(cv.clientHeight*ss);
+          gl.viewport(0,0,cv.width,cv.height);
+          gl.uniform1f(U.aspC, cv.width/cv.height);
+          /* less sharpening when the buffer is already dense, more when it is not */
+          BASE_SHP = (devicePixelRatio||1)<1.5 ? 0.62 : 0.44;
+        }
+
+        function bind(P,base){
+          gl.activeTexture(gl.TEXTURE0+base);   gl.bindTexture(gl.TEXTURE_2D,P.ct);
+          gl.activeTexture(gl.TEXTURE0+base+1); gl.bindTexture(gl.TEXTURE_2D,P.dt);
+        }
+
+        function go(){
+          /* a plate that failed to load is dropped rather than rendered as black */
+          PLATES=PLATES.filter(function(P){ return P.ct && P.dt && P.tw; });
+          if(!PLATES.length) return;
+          ready=true;
+          size(); addEventListener('resize',size,{signal:sig});
+          cv.classList.add('live');
+          /* the CSS fallback layer is no longer needed once the canvas is live */
+          [bgHero,bgSky,bgGate,bgBand].forEach(function(el){ el.style.visibility='hidden'; });
+
+          (function frame(){
+            if(ready){
+              mx+=(tx-mx)*.06; my+=(ty-my)*.06;
+
+              /* weight every plate, then render the two strongest */
+              var best=null, second=null;
+              for(var i=0;i<PLATES.length;i++){
+                var P=PLATES[i];
+                P.w=Math.min(ramp(P_now,P.from,P.from+P.fi), 1-ramp(P_now,P.to-P.fo,P.to));
+                if(!best||P.w>best.w){ second=best; best=P; }
+                else if(!second||P.w>second.w){ second=P; }
+              }
+              if(best){
+                var A=best, B=second||best;
+                var total=A.w+(B===A?0:B.w);
+                var mixAB = (B===A||total<=0) ? 0 : B.w/total;
+                bind(A,0); bind(B,2);
+                gl.uniform1f(U.iA,A.aspect); gl.uniform1f(U.iB,B.aspect);
+                var ta=clamp((P_now-A.from)/(A.to-A.from),0,1);
+                var tb=clamp((P_now-B.from)/(B.to-B.from),0,1);
+                gl.uniform1f(U.zA, lerp(A.z0,A.z1,ease(ta)));
+                gl.uniform1f(U.zB, lerp(B.z0,B.z1,ease(tb)));
+                /* cursor parallax on BOTH plates, plus a scroll push straight into the scene */
+                gl.uniform2f(U.offA, mx*0.078*A.par, my*0.054*A.par + ta*0.058*A.par);
+                gl.uniform2f(U.offB, mx*0.078*B.par, my*0.054*B.par + tb*0.058*B.par);
+                gl.uniform1f(U.mixAB, mixAB);
+                gl.uniform1f(U.dimA, A.dim||1); gl.uniform1f(U.dimB, B.dim||1);
+                /* unsharp radius of ~1.35 texels reads well without haloing */
+                gl.uniform2f(U.texA, 1.35/A.tw, 1.35/A.th);
+                gl.uniform2f(U.texB, 1.35/B.tw, 1.35/B.th);
+                gl.uniform2f(U.ctrA, (A.cx||0), (A.cy||0));
+                gl.uniform2f(U.ctrB, (B.cx||0), (B.cy||0));
+                gl.uniform1f(U.shpA, BASE_SHP*(A.shpk||1));
+                gl.uniform1f(U.shpB, BASE_SHP*(B.shpk||1));
+                /* dip to black through the book-page beat, where no plate is on */
+                gl.uniform1f(U.fade, clamp(Math.max(A.w,(B===A?0:B.w))*1.25,0,1));
+                gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
+              }
+            }
+            if(!stop.v) requestAnimationFrame(frame);
+          })();
+        }
+      })();
+
+      /* ================= stardust ================= */
+      (function(){
+        var c=document.getElementById('dust'); if(reduce) return;
+        var x=c.getContext('2d'), Pt=[], W=0,H=0, dpr=Math.min(devicePixelRatio||1,2);
+        function rs(){ W=c.clientWidth;H=c.clientHeight;c.width=W*dpr;c.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0);
+          Pt=[]; var n=Math.round(Math.min(130, W*H/10000));
+          for(var i=0;i<n;i++) Pt.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.5+.35,
+            s:Math.random()*.24+.05,d:Math.random()*6.28,o:Math.random()*.6+.2,h:Math.random()<.22});
+        }
+        rs(); addEventListener('resize',rs,{signal:sig});
+        var t=0;
+        (function f(){
+          t+=.01; x.clearRect(0,0,W,H);
+          /* dust thickens in the sky and world beats */
+          var amt = 0.35 + 0.65*Math.min(ramp(P,0.10,0.34), 1-ramp(P,0.66,0.80));
+          for(var i=0;i<Pt.length;i++){ var q=Pt[i];
+            q.y-=q.s*(1+P*1.6); q.x+=Math.sin(t+q.d)*.16;
+            if(q.y<-6){q.y=H+6;q.x=Math.random()*W;}
+            var tw=q.o*(.55+.45*Math.sin(t*2.2+q.d))*amt;
+            if(tw<=0.002) continue;
+            x.beginPath(); x.arc(q.x,q.y,q.r,0,6.284);
+            x.fillStyle=q.h?'rgba(255,225,180,'+tw+')':'rgba(255,190,110,'+(tw*.75)+')';
+            x.shadowBlur=q.r*5; x.shadowColor='rgba(255,180,90,'+(tw*.55)+')';
+            x.fill();
+          }
+          x.shadowBlur=0;
+          if(!stop.v) requestAnimationFrame(f);
+        })();
+      })();
+      })();
+    } catch (err) {
+      // A shader or context failure must not take the page down - the CSS
+      // fallback layer under the canvas still shows every plate.
+      console.warn('[journey] renderer unavailable', err);
+    }
+    return () => { stop.v = true; ac.abort(); };
+  }, []);
+
+  const trimmed = childName.trim();
+  const displayName = trimmed ? trimmed.charAt(0).toUpperCase() + trimmed.slice(1) : 'your child';
+  const signupHref = trimmed ? '/signup?name=' + encodeURIComponent(trimmed) : '/signup';
 
   return (
-    <div style={{ background: '#FFF4E6', minHeight: '100vh' }}>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+    <>
       <style>{S}</style>
-
-      {/* ─── Nav ─── */}
-      <nav style={{ position: 'sticky', top: 0, zIndex: 50, background: '#FFF4E6', borderBottom: '1px solid #F0E4D0', padding: '0.5rem 2rem' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Link href="/" style={{ textDecoration: 'none' }}>
-            <img src="/mood-3.png" alt="TalePop - Personalised Bedtime Stories" style={{ height: '72px', width: 'auto' }} />
+      <header className="nav" id="nav">
+        <div className="wrap nav-in">
+          <Link className="logo" href="/" aria-label="TalePop home">
+            <img src="/brand/talepop-wordmark.webp" alt="TalePop" />
           </Link>
-          {/* Mobile-only: Start for free button + annotation, visible immediately on phone */}
-          <span className="nav-mobile-cta" style={{ position: 'relative', zIndex: 10 }}>
-            <Link href="/signup" style={{ padding: '0.48rem 1rem', background: '#FF6B35', color: '#fff', borderRadius: '9px', textDecoration: 'none', fontWeight: '700', fontSize: '0.82rem', boxShadow: '0 2px 8px rgba(255,107,53,0.3)', position: 'relative', zIndex: 1, whiteSpace: 'nowrap' }}>
-              Start for free
-            </Link>
-            <svg viewBox="0 0 200 130" width="200" height="130"
-              style={{ position: 'absolute', top: '-38px', left: '-38px', pointerEvents: 'none', zIndex: 2, overflow: 'visible' }}
-              xmlns="http://www.w3.org/2000/svg">
-              <path d="M 16,44 C 14,20 36,5 100,4 C 164,3 182,22 182,44 C 182,68 162,80 100,82 C 36,84 14,68 16,44 Z"
-                stroke="#D93F00" strokeWidth="2.8" fill="none" strokeLinecap="round" strokeLinejoin="round"
-                style={{ strokeDasharray: 490, strokeDashoffset: 490, animation: 'draw-oval-loop 4.5s linear infinite', filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.10))' } as React.CSSProperties}
-              />
-              <path d="M 160,113 C 153,100 140,92 136,84"
-                stroke="#D93F00" strokeWidth="2.5" fill="none" strokeLinecap="round"
-                style={{ strokeDasharray: 55, strokeDashoffset: 55, animation: 'draw-arrow-loop 4.5s linear infinite' } as React.CSSProperties}
-              />
-              <path d="M 136,84 L 145,87" stroke="#D93F00" strokeWidth="2.5" fill="none" strokeLinecap="round"
-                style={{ strokeDasharray: 14, strokeDashoffset: 14, animation: 'draw-ah1-loop 4.5s linear infinite' } as React.CSSProperties}
-              />
-              <path d="M 136,84 L 139,93" stroke="#D93F00" strokeWidth="2.5" fill="none" strokeLinecap="round"
-                style={{ strokeDasharray: 14, strokeDashoffset: 14, animation: 'draw-ah2-loop 4.5s linear infinite' } as React.CSSProperties}
-              />
-              <defs>
-                <clipPath id="write-clip-m">
-                  <rect x="90" y="109" height="24"
-                    style={{ width: 0, animation: 'draw-text-loop 4.5s linear infinite' } as React.CSSProperties} />
-                </clipPath>
-              </defs>
-              <text x="90" y="126" textAnchor="start" clipPath="url(#write-clip-m)"
-                style={{ font: "bold 15px 'Fredoka', cursive", fill: '#D93F00', letterSpacing: '0.5px' }}>
-                click here!
-              </text>
-            </svg>
-          </span>
-
-          <div className="nav-desktop" style={{ gap: '2.5rem', alignItems: 'center' }}>
-            <a href="#how-it-works" style={{ color: '#0D183D', textDecoration: 'none', fontSize: '0.9rem', fontWeight: 600 }}>How it works</a>
-            <a href="#pricing" style={{ color: '#0D183D', textDecoration: 'none', fontSize: '0.9rem', fontWeight: 600 }}>Pricing</a>
-            <Link href="/login" style={{ color: '#0D183D', textDecoration: 'none', fontSize: '0.9rem', fontWeight: 600 }}>Sign in</Link>
-            <span style={{ position: 'relative', display: 'inline-block' }}>
-              <Link href="/signup" style={{ padding: '0.6rem 1.5rem', background: '#FF6B35', color: '#fff', borderRadius: '10px', textDecoration: 'none', fontWeight: '700', fontSize: '0.875rem', boxShadow: '0 2px 10px rgba(255,107,53,0.3)', position: 'relative', zIndex: 1 }}>
-                Start for free
-              </Link>
-              {/* Hand-drawn "click here!" annotation, draws live on load */}
-              <svg viewBox="0 0 240 155" width="240" height="155"
-                style={{ position: 'absolute', top: '-48px', left: '-48px', pointerEvents: 'none', zIndex: 2, overflow: 'visible' }}
-                xmlns="http://www.w3.org/2000/svg">
-                {/* Wobbly oval, draws first (0.2s → 1.4s) */}
-                <path d="M 18,52 C 15,24 42,6 120,4 C 198,2 216,26 216,52 C 216,80 196,96 120,98 C 44,100 16,80 18,52 Z"
-                  stroke="#D93F00" strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round"
-                  style={{
-                    strokeDasharray: 520, strokeDashoffset: 520,
-                    animation: 'draw-oval-loop 4.5s linear infinite',
-                    filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.10))'
-                  }}
-                />
-                {/* Arrow curve, draws after oval (1.3s → 1.8s) */}
-                <path d="M 195,136 C 188,122 172,110 164,100"
-                  stroke="#D93F00" strokeWidth="2.8" fill="none" strokeLinecap="round"
-                  style={{ strokeDasharray: 65, strokeDashoffset: 65, animation: 'draw-arrow-loop 4.5s linear infinite' }}
-                />
-                {/* Arrowhead lines, appear after arrow (1.65s → 1.95s) */}
-                <path d="M 164,100 L 174,102"
-                  stroke="#D93F00" strokeWidth="2.8" fill="none" strokeLinecap="round"
-                  style={{ strokeDasharray: 18, strokeDashoffset: 18, animation: 'draw-ah1-loop 4.5s linear infinite' }}
-                />
-                <path d="M 164,100 L 168,111"
-                  stroke="#D93F00" strokeWidth="2.8" fill="none" strokeLinecap="round"
-                  style={{ strokeDasharray: 18, strokeDashoffset: 18, animation: 'draw-ah2-loop 4.5s linear infinite' }}
-                />
-                {/* "click here!" text, written left-to-right via clip wipe */}
-                <defs>
-                  <clipPath id="write-clip">
-                    <rect x="112" y="130" height="28"
-                      style={{ width: 0, animation: 'draw-text-loop 4.5s linear infinite' } as React.CSSProperties} />
-                  </clipPath>
-                </defs>
-                <text x="112" y="150" textAnchor="start" clipPath="url(#write-clip)"
-                  style={{ font: "bold 17px 'Fredoka', cursive", fill: '#D93F00', letterSpacing: '0.5px' }}>
-                  click here!
-                </text>
-              </svg>
-            </span>
-          </div>
-          <button className="nav-mobile-btn" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            style={{ background: 'transparent', border: 'none', cursor: 'pointer', padding: '0.5rem', display: 'flex' }}>
-            {mobileMenuOpen ? <X size={24} color="#FF6B35" /> : (
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FF6B35" strokeWidth="2">
-                <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
-              </svg>
-            )}
-          </button>
+          <nav className="nav-links">
+            <a href="#pricing">Pricing</a>
+            <a href="#safety">Safety</a>
+          </nav>
+          <Link className="btn btn-primary" href="/signup" style={{ padding: '.68em 1.2em', fontSize: 'var(--s--1)' }}>Start free</Link>
         </div>
-        {mobileMenuOpen && (
-          <div style={{ maxWidth: '1200px', margin: '0 auto', marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid #F0E4D0', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            <a href="#how-it-works" onClick={() => setMobileMenuOpen(false)} style={{ color: '#0D183D', textDecoration: 'none', fontWeight: 600 }}>How it works</a>
-            <a href="#pricing" onClick={() => setMobileMenuOpen(false)} style={{ color: '#0D183D', textDecoration: 'none', fontWeight: 600 }}>Pricing</a>
-            <Link href="/login" style={{ color: '#0D183D', textDecoration: 'none', fontWeight: 600 }}>Sign in</Link>
-            <Link href="/signup" style={{ padding: '0.75rem', background: '#FF6B35', color: '#fff', borderRadius: '10px', textDecoration: 'none', fontWeight: '700', textAlign: 'center' }}>Start for free</Link>
+      </header>
+
+      <div className="rail" id="rail" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+      {/* ============================ THE JOURNEY ============================ */}
+      <div className="journey" id="journey">
+        <div className="stage" id="stage">
+
+          <img className="bgimg" id="bgHero" src="/journey/hero.avif" alt="" aria-hidden="true" style={{ opacity: 1, objectPosition: '50% 52%' }} />
+          <img className="bgimg" id="bgSky" src="/journey/sky.avif" alt="" aria-hidden="true" />
+          <img className="bgimg" id="bgGate" src="/journey/gate.avif" alt="" aria-hidden="true" />
+          <img className="bgimg" id="bgBand" src="/journey/band.avif" alt="" aria-hidden="true" style={{ objectPosition: '50% 50%' }} />
+          <canvas id="depth-canvas" aria-hidden="true"></canvas>
+
+          <div className="portals" id="portals" aria-hidden="true">
+            <div className="portal"><img src="/journey/world-space.avif" alt="" /><span>Beyond the last planet</span></div>
+            <div className="portal"><img src="/journey/world-unicorn.avif" alt="" /><span>The kingdom in the clouds</span></div>
+            <div className="portal"><img src="/journey/world-dino.avif" alt="" /><span>The gentle giant</span></div>
+            <div className="portal"><img src="/journey/world-pirate.avif" alt="" /><span>Captain for one night</span></div>
+            <div className="portal"><img src="/journey/world-ocean.avif" alt="" /><span>The whale who waited</span></div>
+            <div className="portal"><img src="/journey/world-hero.avif" alt="" /><span>The cape stays on</span></div>
           </div>
-        )}
-      </nav>
 
-      {/* ─── Hero ─── */}
-      <section style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem 2rem 3rem' }}>
-        <div className="hero-grid">
+          <div className="scrim"></div>
+          <canvas id="dust" aria-hidden="true"></canvas>
 
-          {/* Left: copy + widget */}
-          <div>
-            <h1 className="font-serif" style={{ fontSize: 'clamp(2.25rem, 5.5vw, 3.75rem)', lineHeight: 1.1, color: '#0D183D', marginBottom: '1.25rem', letterSpacing: '-0.01em' }}>
-              Personalised Bedtime Stories<br />
-              <span style={{ color: '#FF6B35' }}>Written Just for Your Child</span>
-            </h1>
+          <div className="beats" id="beats">
 
-            <p style={{ fontSize: '1.05rem', color: '#5E6A7A', lineHeight: 1.75, marginBottom: '2rem', maxWidth: '440px', fontWeight: 500 }}>
-              Enter your child&apos;s name, interests and best friend, and we&apos;ll write them a personalised bedtime story that has never existed before. In under 60 seconds.
-            </p>
-
-            {/* Name preview widget */}
-            <div style={{ background: 'white', border: '2px solid #F0E4D0', borderRadius: '16px', padding: '1.25rem 1.5rem', marginBottom: '2rem', maxWidth: '440px', boxShadow: '0 4px 24px rgba(13,24,61,0.08)' }}>
-              <label style={{ fontSize: '0.8rem', fontWeight: 700, color: '#0D183D', display: 'block', marginBottom: '0.5rem' }}>
-                What&apos;s your child&apos;s name?
-              </label>
-              <input
-                type="text"
-                placeholder="e.g. Mia"
-                value={childName}
-                onChange={e => setChildName(e.target.value)}
-                maxLength={20}
-                style={{ width: '100%', padding: '0.65rem 0.875rem', border: '1.5px solid #F0E4D0', borderRadius: '8px', fontSize: '1rem', fontWeight: 600, color: '#0D183D', outline: 'none', fontFamily: 'inherit', marginBottom: '0.875rem', boxSizing: 'border-box', transition: 'border-color 0.15s' }}
-              />
-              <div style={{ background: '#FFF4E6', borderRadius: '10px', padding: '0.875rem 1rem', borderLeft: '3px solid #FF6B35' }}>
-                <p style={{ fontSize: '0.72rem', fontWeight: 700, color: '#1496A6', letterSpacing: '0.04em', marginBottom: '5px', textTransform: 'uppercase' }}>Tonight&apos;s story begins...</p>
-                <p style={{ fontSize: '0.92rem', color: '#0D183D', lineHeight: 1.65, fontWeight: 500 }}>
-                  Once upon a time, <strong style={{ color: '#FF6B35' }}>{capitalised}</strong> discovered a glowing doorway hidden behind their bookshelf  -  and on the other side was a world that existed just for them{childName.trim() ? <span className="cursor" /> : '...'}
-                </p>
+            {/* 0 -------------------------------------------------- */}
+            <section className="beat" data-beat="0">
+              <div className="wrap">
+                <p className="kick">A new story every night</p>
+                <h1>Tonight's story has <em>their name</em> in it.</h1>
+                <p className="lead">Not a name dropped into a stock story. A brand new one, written and illustrated for one child, ready before lights out.</p>
+                <div className="acts">
+                  <Link className="btn btn-primary btn-lg" href={signupHref}>Create their first story</Link>
+                </div>
+                <div className="mini">
+                  <span><svg className="tick" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 10.6l4 4 8-9"/></svg> First book free</span>
+                  <span><svg className="tick" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 10.6l4 4 8-9"/></svg> No credit card</span>
+                  <span><svg className="tick" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 10.6l4 4 8-9"/></svg> Ages 3 to 10</span>
+                </div>
               </div>
-            </div>
+            </section>
 
-            <Link href="/signup" style={{ display: 'inline-block', padding: '1rem 2.25rem', background: '#FF6B35', color: '#fff', borderRadius: '12px', textDecoration: 'none', fontWeight: '800', fontSize: '1.05rem', boxShadow: '0 4px 18px rgba(255,107,53,0.38)', letterSpacing: '-0.01em' }}>
-              Begin their story
-            </Link>
-            <p style={{ fontSize: '0.8rem', color: '#9CA8B4', marginTop: '0.75rem', fontWeight: 500 }}>
-              1 free story. No credit card. Cancel anytime.
-            </p>
-            <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
-              {['Ages 3–10', 'From 24¢ per story', 'Safe & ad-free'].map(b => (
-                <span key={b} style={{ fontSize: '0.72rem', color: '#1496A6', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '4px' }}>
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#1496A6" strokeWidth="3"><polyline points="20 6 9 17 4 12"/></svg>
-                  {b}
-                </span>
-              ))}
-            </div>
+            {/* 1 -------------------------------------------------- */}
+            <section className="beat" data-beat="1">
+              <div className="wrap">
+                <p className="kick">Step one</p>
+                <h2>So. Who is it for?</h2>
+                <p className="lead">Type a name. Watch what happens to the story.</p>
+                <div className="namecard">
+                  <label htmlFor="kidname">Their first name</label>
+                  <input id="kidname" type="text" placeholder="Their first name" autoComplete="off" spellCheck={false} maxLength={18}
+                    value={childName} onChange={(e) => setChildName(e.target.value)} />
+                  <div className="out" id="nameout">Once upon a time, <b>{displayName}</b> found a door at the back of the wardrobe that had never been there before. On the other side, something was already waiting.</div>
+                </div>
+              </div>
+            </section>
+
+            {/* 2 -------------------------------------------------- */}
+            <section className="beat mid" data-beat="2">
+              <div className="wrap">
+                <p className="kick">Step two</p>
+                <h2>Every night, a <em>different door</em>.</h2>
+                <p className="lead">Their interests pick the world. Dinosaurs this month, deep sea the next. The plot changes with them.</p>
+              </div>
+            </section>
+
+            {/* 3 -------------------------------------------------- */}
+            <section className="beat mid top" data-beat="3">
+              <div className="wrap">
+                <p className="kick">Real pages</p>
+                <h2>Every picture here came out of <em>our own art model</em>.</h2>
+                <p className="lead">Not a stock library. We trained it ourselves so their character looks the same on page one and page twelve.</p>
+              </div>
+            </section>
+
+            {/* 4 -------------------------------------------------- */}
+            <section className="beat" data-beat="4">
+              <div className="wrap spreadwrap">
+                <div className="spread">
+                  <div className="spread-txt">
+                    <p className="dropcap">Zak and his sister Zoe had been walking through the mist for what felt like hours when the castle appeared, impossibly tall, purple turreted, glowing at every window as if someone inside had been expecting them.</p>
+                    <p>A dragon landed on the drawbridge. It was green, about the size of a large horse, and it was wearing a very small hat.</p>
+                    <p className="pgnum">PAGE 1 OF 12 &middot; WRITTEN FOR ZAK, AGE 7</p>
+                  </div>
+                  <div className="spread-img"><img src="/journey/spread.avif" alt="A child and a small green dragon in front of a glowing castle" /></div>
+                </div>
+              </div>
+            </section>
+
+            {/* 5 -------------------------------------------------- */}
+            <section className="beat mid top" data-beat="5">
+              <div className="wrap">
+                <div className="qwrap">
+                  <div className="stars" aria-label="Five stars">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 6.9.9-5 4.8 1.3 6.9L12 17.6 5.8 20.9 7.1 14 2 9.2l6.9-.9L12 2z"/></svg>
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 6.9.9-5 4.8 1.3 6.9L12 17.6 5.8 20.9 7.1 14 2 9.2l6.9-.9L12 2z"/></svg>
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 6.9.9-5 4.8 1.3 6.9L12 17.6 5.8 20.9 7.1 14 2 9.2l6.9-.9L12 2z"/></svg>
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 6.9.9-5 4.8 1.3 6.9L12 17.6 5.8 20.9 7.1 14 2 9.2l6.9-.9L12 2z"/></svg>
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 6.9.9-5 4.8 1.3 6.9L12 17.6 5.8 20.9 7.1 14 2 9.2l6.9-.9L12 2z"/></svg>
+                  </div>
+                  <blockquote>"He stared at his own name on the page and said <b>'Mum, that's actually me.'</b> We've read it fourteen nights in a row."</blockquote>
+                  <p className="byline">Sarah M.<i>Mum of Noah, age 6 &middot; Melbourne</i></p>
+                </div>
+              </div>
+            </section>
+
           </div>
 
-          {/* Right: illustrated scene */}
-          <div className="hero-book-panel" style={{
-            backgroundImage: "url('/hero-scene.jpg')",
-            backgroundSize: 'cover',
-            backgroundPosition: 'center 60%',
-            backgroundRepeat: 'no-repeat',
-            padding: 0
-          }}>
-            {/* Soft top fade into cream hero background */}
-            <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '18%', background: 'linear-gradient(to bottom, #FFF4E6 0%, transparent 100%)' }} />
+          <div className="cue" id="cue">
+            <span>Scroll to begin</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v13m0 0l-6-6m6 6l6-6"/></svg>
           </div>
         </div>
-      </section>
-
-      {/* ─── Story preview ─── */}
-      <section style={{ background: 'white', padding: '3rem 2rem 6rem' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-            <h2 className="font-serif" style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', color: '#0D183D', marginBottom: '0.75rem', letterSpacing: '-0.01em' }}>
-              Personalised story books for Zak & Zoe. No one else.
-            </h2>
-            <p style={{ color: '#5E6A7A', fontSize: '0.95rem', fontWeight: 500, maxWidth: '500px', margin: '0 auto', lineHeight: 1.7 }}>
-              Every personalised children’s story invented from scratch, their name, their adventure, their world.
-            </p>
-          </div>
-
-          <div className="story-card" style={{ maxWidth: '820px', margin: '0 auto' }}>
-            <div style={{ background: 'linear-gradient(135deg, #0D183D 0%, #1496A6 100%)', padding: '1.75rem 2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
-              <div>
-                <h3 className="font-serif" style={{ fontSize: 'clamp(1rem, 2.5vw, 1.4rem)', color: 'white', lineHeight: 1.25 }}>
-                  Zak, Zoe and the Kingdom Beyond the Mist
-                </h3>
-                <p style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.45)', fontWeight: 500, marginTop: '5px' }}>Written for Zak & Zoe</p>
-              </div>
-              <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
-                {['Age 7 & 9', 'Dragon', 'Unicorn'].map(t => (
-                  <span key={t} style={{ background: 'rgba(255,255,255,0.15)', color: 'rgba(255,255,255,0.9)', fontSize: '0.7rem', fontWeight: 700, padding: '4px 12px', borderRadius: '999px' }}>{t}</span>
-                ))}
-              </div>
-            </div>
-
-            {/* Story illustration - open book spread */}
-            <div style={{
-              position: 'relative', height: '220px', overflow: 'hidden',
-              backgroundImage: "url('/book-spread.jpg')",
-              backgroundSize: 'cover', backgroundPosition: '82% 28%'
-            }}>
-              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(13,24,61,0.5) 0%, transparent 30%)' }} />
-              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(transparent 50%, white 100%)' }} />
-              <span style={{ position: 'absolute', bottom: '1rem', left: '2rem', background: '#FF6B35', color: 'white', fontSize: '0.68rem', fontWeight: 800, padding: '3px 10px', borderRadius: '999px' }}>CHAPTER 1</span>
-            </div>
-
-            <div style={{ padding: '2rem 2rem 2.5rem' }}>
-              <p style={{ fontSize: '1rem', color: '#0D183D', lineHeight: 1.9, fontWeight: 500, marginBottom: '1rem' }}>
-                <strong style={{ color: '#FF6B35', fontSize: '1.8rem', float: 'left', lineHeight: 1, marginRight: '6px', marginTop: '4px', fontFamily: 'Fredoka, cursive' }}>Z</strong>
-                ak and his sister Zoe had been walking through the mist for what felt like hours when the castle appeared  -  impossibly tall, purple-turreted, glowing at every window as if someone inside had been expecting them.
-              </p>
-              <p style={{ fontSize: '1rem', color: '#0D183D', lineHeight: 1.9, fontWeight: 500, marginBottom: '1.5rem' }}>
-                A dragon landed on the drawbridge. It was green, about the size of a large horse, and it was wearing a very small hat. Behind it, a unicorn peered around the tower with enormous golden eyes.
-              </p>
-              <div style={{ borderLeft: '3px solid #1496A6', paddingLeft: '1.25rem', color: '#5E6A7A', fontSize: '0.9rem', fontStyle: 'italic', lineHeight: 1.8 }}>
-                &ldquo;We&apos;ve been waiting,&rdquo; said the dragon.<br />
-                Zak looked at Zoe. Zoe looked at Zak.<br />
-                &ldquo;The kingdom only appears for the right children,&rdquo; said the dragon. &ldquo;And you are exactly right.&rdquo;
-              </div>
-              <div style={{ marginTop: '1.75rem', paddingTop: '1.5rem', borderTop: '1px solid #F0E4D0', display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
-                <span style={{ fontSize: '0.78rem', color: '#9CA8B4', fontWeight: 600 }}>Page 1 of 5</span>
-                {['Adventure', 'Dragon', 'Unicorn'].map(t => (
-                  <span key={t} style={{ background: '#FFF0E0', border: '1px solid #FFD4A8', borderRadius: '20px', padding: '2px 10px', fontSize: '0.72rem', fontWeight: 700, color: '#FF6B35' }}>{t}</span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Wave into dark strip */}
-      <div style={{ lineHeight: 0 }}>
-        <svg viewBox="0 0 1200 50" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style={{ display: 'block', width: '100%', height: '45px' }}>
-          <path d="M0,15 C200,45 400,0 600,25 C800,48 1000,5 1200,20 L1200,50 L0,50 Z" fill="#0D183D"/>
-        </svg>
       </div>
 
-      {/* ─── Social proof strip ─── */}
-      <section style={{ background: '#0D183D', padding: '1.25rem 2rem 2.5rem' }}>
-        <div style={{ maxWidth: '1000px', margin: '0 auto', display: 'flex', justifyContent: 'center', gap: 'clamp(2rem, 5vw, 5rem)', flexWrap: 'wrap', alignItems: 'center' }}>
-          {/* Live delivery indicator */}
-          <div style={{ textAlign: 'center' }}>
-            <p className="font-serif" style={{ fontSize: '1.5rem', color: '#FFB703', marginBottom: '3px' }}>{minutesAgo !== null ? `${minutesAgo} min ago` : '...'}</p>
-            <p style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.45)', fontWeight: 700, letterSpacing: '0.06em' }}>LAST STORY DELIVERED</p>
+      {/* ============================ RELEASED ============================ */}
+      <section className="sec" id="pricing">
+        <div className="wrap">
+          <div className="sec-head">
+            <p className="kick">Pricing</p>
+            <h2>A story a night, for less than a coffee a month.</h2>
+            <p>Start with one free book. Cancel in a single tap, from inside the app.</p>
           </div>
-          {[
-            { n: '1', label: 'free story to start' },
-            { n: '1/day', label: 'story per child' },
-            { n: '24¢', label: 'per story' },
-          ].map(s => (
-            <div key={s.n} style={{ textAlign: 'center' }}>
-              <p className="font-serif" style={{ fontSize: '1.5rem', color: '#FFB703', marginBottom: '3px' }}>{s.n}</p>
-              <p style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.45)', fontWeight: 700, letterSpacing: '0.06em' }}>{s.label.toUpperCase()}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Wave out of dark strip */}
-      <div style={{ lineHeight: 0, background: '#0D183D' }}>
-        <svg viewBox="0 0 1200 50" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style={{ display: 'block', width: '100%', height: '45px' }}>
-          <path d="M0,20 C300,50 900,0 1200,30 L1200,50 L0,50 Z" fill="#FFF4E6"/>
-        </svg>
-      </div>
-
-      {/* ─── Free Book CTA ─── */}
-      <section style={{ background: '#FF6B35', padding: '3.5rem 2rem', textAlign: 'center' }}>
-        <div style={{ maxWidth: '620px', margin: '0 auto' }}>
-          <div style={{ fontSize: '1.75rem', marginBottom: '0.5rem' }}>🎁</div>
-          <h2 className="font-serif" style={{ fontSize: 'clamp(1.6rem, 4vw, 2.5rem)', color: 'white', marginBottom: '0.75rem', lineHeight: 1.2, letterSpacing: '-0.01em' }}>
-            Sign up now, your first book is free
-          </h2>
-          <p style={{ color: 'rgba(255,255,255,0.88)', fontSize: '1rem', marginBottom: '1.75rem', fontWeight: 500, lineHeight: 1.6 }}>
-            No credit card needed. Create your child&apos;s first personalised story in under 60 seconds.
-          </p>
-          <Link href="/signup" style={{ display: 'inline-block', padding: '1rem 2.5rem', background: 'white', color: '#FF6B35', borderRadius: '12px', textDecoration: 'none', fontWeight: 800, fontSize: '1.05rem', boxShadow: '0 4px 20px rgba(0,0,0,0.18)', letterSpacing: '-0.01em' }}>
-            Get your free book →
-          </Link>
-          <p style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.6)', marginTop: '0.875rem', fontWeight: 500 }}>
-            No credit card · Cancel anytime
-          </p>
-        </div>
-      </section>
-
-      {/* ─── Pricing ─── */}
-      <section id="pricing" style={{ background: '#FFF4E6', padding: '3rem 2rem 6rem' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-            <h2 className="font-serif" style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', color: '#0D183D', marginBottom: '0.5rem', letterSpacing: '-0.01em' }}>
-              Your child&apos;s story from just 24¢.
-            </h2>
-            <p style={{ color: '#5E6A7A', fontWeight: 500, fontSize: '0.95rem', marginBottom: '0.5rem' }}>Simple, transparent pricing. Cancel anytime.</p>
-            <p style={{ color: '#FF6B35', fontWeight: 700, fontSize: '0.85rem' }}>Tonight's story is already waiting for them.</p>
-          </div>
-
-          <div className="two-col" style={{ marginTop: '3rem' }}>
-            <div className="plan-card" style={{ border: '2px solid #F0E4D0', background: 'white' }}>
-              <h3 className="font-serif" style={{ fontSize: '1.5rem', marginBottom: '0.4rem', color: '#0D183D' }}>Monthly</h3>
-              <p style={{ color: '#9CA8B4', marginBottom: '1.5rem', fontSize: '0.9rem', fontWeight: 500 }}>Flexible, cancel anytime</p>
-              <div style={{ marginBottom: '0.25rem' }}>
-                <span style={{ fontSize: '3.25rem', fontWeight: 900, color: '#FF6B35', letterSpacing: '-0.02em' }}>{pricing.monthlyPerStory}</span>
-                <span style={{ color: '#9CA8B4', fontSize: '0.85rem', fontWeight: 600 }}> per story</span>
-              </div>
-              <p style={{ fontSize: '0.95rem', color: '#5E6A7A', fontWeight: 600, marginBottom: '1.5rem' }}>{pricing.symbol}{pricing.monthly} / month</p>
-              <Link href="/signup" style={{ display: 'block', textAlign: 'center', padding: '0.9rem', background: '#FF6B35', borderRadius: '12px', color: 'white', textDecoration: 'none', fontWeight: '800', boxShadow: '0 4px 14px rgba(255,107,53,0.3)' }}>
-                Subscribe monthly &rarr;
-              </Link>
-              <p style={{ fontSize: '0.75rem', color: '#9CA8B4', textAlign: 'center', marginTop: '0.5rem', marginBottom: '1.25rem', fontWeight: 500 }}>
-                Additional children: {pricing.symbol}{pricing.extraChild}/month each
-              </p>
-              <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                {['A story every day', '1 child profile included', 'Story series (up to 3 volumes)', 'Extra books half price (50¢)', 'Beautifully illustrated pages', 'Cancel in one click'].map(f => (
-                  <li key={f} style={{ display: 'flex', gap: '0.75rem', fontSize: '0.9rem', color: '#0D183D', fontWeight: 500, alignItems: 'flex-start' }}>
-                    <Check size={16} color="#6CC06C" style={{ flexShrink: 0, marginTop: '3px' }} />{f}
-                  </li>
-                ))}
+          <div className="price-grid">
+            <div className="plan">
+              <h3>Monthly</h3>
+              <p className="plan-sub">Flexible, cancel anytime</p>
+              <div className="plan-price"><b>{pricing.monthlyPerStory}</b><span>per story</span></div>
+              <p className="plan-bill">{pricing.symbol}{pricing.monthly} per month</p>
+              <Link className="btn btn-ghost" href="/signup?plan=monthly">Start with a free book</Link>
+              <ul>
+                <li><svg className="tick" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 10.6l4 4 8-9"/></svg> A new story every day</li>
+                <li><svg className="tick" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 10.6l4 4 8-9"/></svg> One child profile included</li>
+                <li><svg className="tick" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 10.6l4 4 8-9"/></svg> Story series up to three volumes</li>
+                <li><svg className="tick" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 10.6l4 4 8-9"/></svg> Extra books half price at 50&cent;</li>
+                <li><svg className="tick" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 10.6l4 4 8-9"/></svg> Additional children {pricing.symbol}{pricing.extraChild} each</li>
               </ul>
             </div>
-
-            <div className="plan-card" style={{ background: '#FF6B35', color: 'white', position: 'relative' }}>
-              <div style={{ position: 'absolute', top: '-15px', left: '50%', transform: 'translateX(-50%)', background: '#FFB703', color: '#0D183D', padding: '0.35rem 1.25rem', borderRadius: '999px', fontSize: '0.68rem', fontWeight: '900', whiteSpace: 'nowrap', letterSpacing: '0.04em' }}>
-                ⭐ BEST VALUE  -  2 MONTHS FREE
-              </div>
-              <h3 className="font-serif" style={{ fontSize: '1.5rem', marginBottom: '0.4rem' }}>Annual</h3>
-              <p style={{ opacity: 0.75, marginBottom: '1.5rem', fontSize: '0.9rem', fontWeight: 500 }}>Two months free</p>
-              <div style={{ marginBottom: '0.25rem' }}>
-                <span style={{ fontSize: '3.25rem', fontWeight: 900, letterSpacing: '-0.02em' }}>{pricing.annualPerStory}</span>
-                <span style={{ opacity: 0.85, fontSize: '0.85rem', fontWeight: 600 }}> per story</span>
-              </div>
-              <p style={{ opacity: 0.65, fontSize: '0.75rem', marginBottom: '1.5rem', fontWeight: 500 }}>{pricing.symbol}{pricing.annual} billed annually, two months free</p>
-              <Link href="/signup?plan=annual" style={{ display: 'block', textAlign: 'center', padding: '0.9rem', background: 'white', borderRadius: '12px', color: '#FF6B35', textDecoration: 'none', fontWeight: '800', boxShadow: '0 4px 14px rgba(0,0,0,0.15)' }}>
-                Get the best deal &rarr;
-              </Link>
-              <p style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.55)', textAlign: 'center', marginTop: '0.5rem', marginBottom: '1.25rem', fontWeight: 500 }}>
-                Additional children: {pricing.symbol}{pricing.extraChild}/month each
-              </p>
-              <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                {['Everything in Monthly', 'Priority story generation', 'Early access to new features', `Save ${pricing.symbol}${pricing.annualSaving} per year`].map(f => (
-                  <li key={f} style={{ display: 'flex', gap: '0.75rem', fontSize: '0.9rem', fontWeight: 500, alignItems: 'flex-start' }}>
-                    <Check size={16} color="rgba(255,255,255,0.9)" style={{ flexShrink: 0, marginTop: '3px' }} />{f}
-                  </li>
-                ))}
+            <div className="plan best">
+              <span className="plan-tag">Best value &middot; 2 months free</span>
+              <h3>Annual</h3>
+              <p className="plan-sub">Two months on us</p>
+              <div className="plan-price"><b>{pricing.annualPerStory}</b><span>per story</span></div>
+              <p className="plan-bill">{pricing.symbol}{pricing.annual} billed yearly &middot; saves {pricing.symbol}{pricing.annualSaving}</p>
+              <Link className="btn btn-primary" href="/signup?plan=annual">Get the best deal</Link>
+              <ul>
+                <li><svg className="tick" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 10.6l4 4 8-9"/></svg> Everything in Monthly</li>
+                <li><svg className="tick" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 10.6l4 4 8-9"/></svg> Priority story generation</li>
+                <li><svg className="tick" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 10.6l4 4 8-9"/></svg> Early access to new features</li>
+                <li><svg className="tick" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 10.6l4 4 8-9"/></svg> Same 50&cent; extra books</li>
+                <li><svg className="tick" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 10.6l4 4 8-9"/></svg> Additional children {pricing.symbol}{pricing.extraChild} each</li>
               </ul>
             </div>
           </div>
+          <p className="pay-note">Secure payment via Stripe on the web, or Apple in-app purchase. Card details are never stored by TalePop.</p>
+        </div>
+      </section>
 
-          <div style={{ textAlign: 'center', marginTop: '2.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
-            {/* Stripe trust badge */}
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'white', border: '1px solid #E8E0D5', borderRadius: '10px', padding: '0.6rem 1.25rem', boxShadow: '0 1px 6px rgba(13,24,61,0.06)' }}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6CC06C" strokeWidth="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              <span style={{ fontSize: '0.8rem', color: '#5E6A7A', fontWeight: 600 }}>
-                Secure payment via <strong style={{ color: '#635BFF' }}>Stripe</strong>  -  your card details are never stored by TalePop
-              </span>
-            </div>
-            <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-              {['Cancel anytime', 'Any device', 'Unlimited child profiles'].map(t => (
-                <span key={t} style={{ fontSize: '0.78rem', color: '#9CA8B4', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '5px' }}>
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#9CA8B4" strokeWidth="3"><polyline points="20 6 9 17 4 12"/></svg>
-                  {t}
-                </span>
-              ))}
-            </div>
+      <section className="sec" id="safety" style={{ paddingTop: 'clamp(20px,3vw,44px)' }}>
+        <div className="wrap">
+          <img className="brandmark" src="/brand/talepop-lockup.webp" alt="TalePop — Your story maker — Imagine away. A new tale every day." />
+          <div className="sec-head">
+            <p className="kick">For the grown-ups</p>
+            <h2>Their first book is free. It can be ready before bedtime.</h2>
+            <p>No ads, no third party tracking, no data sold. Reading level matched to their age, and nothing in a TalePop book you would not read aloud yourself. Delete the profile and it is gone.</p>
+          </div>
+          <div className="acts" style={{ justifyContent: 'center', marginTop: '2rem' }}>
+            <Link className="btn btn-primary btn-lg" href={signupHref}>Create their first story</Link>
           </div>
         </div>
       </section>
 
-      {/* ─── Two children proof ─── */}
-      <section style={{ background: '#FFF4E6', padding: '6rem 2rem' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-            <h2 className="font-serif" style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.4rem)', color: '#0D183D', marginBottom: '0.875rem', letterSpacing: '-0.01em' }}>
-              Two children. Two completely different stories.
-            </h2>
-            <p style={{ color: '#5E6A7A', fontWeight: 500, maxWidth: '500px', margin: '0 auto', lineHeight: 1.75, fontSize: '0.975rem' }}>
-              Their name, age, interests, friends and pet go into every personalised children’s story. What comes out is a unique kids book that has never been written before, and never will be again.
-            </p>
-          </div>
-
-          <div className="proof-grid">
-            <div className="proof-card">
-              <div style={{ background: '#FF6B35', padding: '1.1rem 1.5rem', display: 'flex', gap: '12px', alignItems: 'center' }}>
-                <div style={{ width: '40px', height: '40px', background: 'rgba(255,255,255,0.2)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', flexShrink: 0 }}>🚀</div>
-                <div>
-                  <p style={{ color: 'white', fontWeight: 800, fontSize: '0.95rem' }}>Leo, age 5</p>
-                  <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '0.78rem', fontWeight: 500 }}>Loves space · Has a dog named Snoopy</p>
-                </div>
-              </div>
-              <div style={{ padding: '1.5rem 1.75rem' }}>
-                <p style={{ fontSize: '0.72rem', fontWeight: 800, color: '#FF6B35', letterSpacing: '0.07em', marginBottom: '0.75rem', textTransform: 'uppercase' }}>His story began:</p>
-                <p style={{ fontSize: '0.925rem', color: '#0D183D', lineHeight: 1.8, fontWeight: 500 }}>
-                  The mission had one problem: Snoopy kept pressing buttons. Not important buttons  -  Leo had hidden those. Just the ones that made lights flash and sounds beep. &apos;Snoopy,&apos; said Leo, &apos;we are approaching the asteroid belt.&apos; Snoopy wagged his tail and pressed another button. The spaceship played a fanfare...
-                </p>
-              </div>
+      <footer>
+        <div className="wrap">
+          <div className="foot-grid">
+            <div>
+              <Link className="lockup" href="/" aria-label="TalePop. Your story maker. Imagine away. A new tale every day.">
+                <img src="/brand/talepop-lockup.webp" alt="TalePop — Your story maker — Imagine away. A new tale every day." />
+              </Link>
+              <p className="foot-blurb">Personalised bedtime stories, written and illustrated for one child. Made in Australia by TalePop Pty Ltd.</p>
             </div>
-
-            <div className="proof-card">
-              <div style={{ background: '#1496A6', padding: '1.1rem 1.5rem', display: 'flex', gap: '12px', alignItems: 'center' }}>
-                <div style={{ width: '40px', height: '40px', background: 'rgba(255,255,255,0.2)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', flexShrink: 0 }}>🧁</div>
-                <div>
-                  <p style={{ color: 'white', fontWeight: 800, fontSize: '0.95rem' }}>Isla, age 8</p>
-                  <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '0.78rem', fontWeight: 500 }}>Loves baking · Best friend is Sophie</p>
-                </div>
-              </div>
-              <div style={{ padding: '1.5rem 1.75rem' }}>
-                <p style={{ fontSize: '0.72rem', fontWeight: 800, color: '#1496A6', letterSpacing: '0.07em', marginBottom: '0.75rem', textTransform: 'uppercase' }}>Her story began:</p>
-                <p style={{ fontSize: '0.925rem', color: '#0D183D', lineHeight: 1.8, fontWeight: 500 }}>
-                  The recipe said &ldquo;add a pinch of magic&rdquo; and Isla assumed that was just something cookbooks said. It was not. The moment she and Sophie stirred the bowl, the kitchen ceiling turned into a sky full of edible stars...
-                </p>
-              </div>
-            </div>
+            <div><h4>Product</h4><ul><li><a href="#pricing">Pricing</a></li><li><a href="#safety">Safety</a></li><li><Link href="/signup">Start free</Link></li><li><Link href="/login">Sign in</Link></li></ul></div>
+            <div><h4>Company</h4><ul><li><a href="mailto:info@talepopstories.com">info@talepopstories.com</a></li></ul></div>
+            <div><h4>Legal</h4><ul><li><Link href="/privacy">Privacy policy</Link></li><li><Link href="/terms">Terms of service</Link></li></ul></div>
           </div>
-
-          <div className="trust-bar" style={{ marginTop: '3rem' }}>
-            {[
-              { icon: <BookOpen size={18} color="#FF6B35" />, title: 'Your personalised story book library, always there', desc: 'Every story is saved. Re-read it tonight, next year, whenever, subscribe and it\'s always there.' },
-              { icon: <Star size={18} color="#FFB703" />, title: 'Their world, front and centre', desc: 'Their interests shape the entire plot, not just the name.' },
-              { icon: <Shield size={18} color="#6CC06C" />, title: 'Safe children’s stories for ages 3–10', desc: 'Every story crafted thoughtfully for kids aged 3–10.' },
-              { icon: <Heart size={18} color="#FF6B35" />, title: 'No data sold. Ever.', desc: 'Your child\'s details are private. That\'s a promise.' },
-            ].map((t, i) => (
-              <div key={i} className="trust-item">
-                <div style={{ flexShrink: 0, marginTop: '2px' }}>{t.icon}</div>
-                <div>
-                  <p style={{ fontSize: '0.85rem', fontWeight: 800, color: '#0D183D', marginBottom: '4px' }}>{t.title}</p>
-                  <p style={{ fontSize: '0.78rem', color: '#5E6A7A', fontWeight: 500, lineHeight: 1.6 }}>{t.desc}</p>
-                </div>
-              </div>
-            ))}
+          <div className="foot-btm">
+            <span>&copy; 2026 TalePop Pty Ltd</span><span>info@talepopstories.com</span><span>Prices shown in AUD</span><span>Also available in USD and CAD</span>
           </div>
-        </div>
-      </section>
-
-      {/* ─── Illustrated scene break ─── */}
-      <div style={{ position: 'relative', height: '340px', overflow: 'hidden' }}>
-        <div style={{
-          position: 'absolute', inset: 0,
-          backgroundImage: "url('/banner-scene.jpg')",
-          backgroundSize: '200%',
-          backgroundPosition: 'right 45%'
-        }} />
-        {/* Fade top from cream, fade bottom to dark */}
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, #FFF4E6 0%, transparent 18%, transparent 75%, #0D183D 100%)' }} />
-      </div>
-
-      {/* ─── Testimonial ─── */}
-      <section style={{ background: '#0D183D', padding: '6rem 2rem', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: "url('/unicorn-night.jpg')", backgroundSize: 'cover', backgroundPosition: 'center center' }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'rgba(8,14,34,0.78)' }} />
-        <div style={{ position: 'absolute', inset: 0, opacity: 0.08, backgroundImage: 'radial-gradient(circle, #FFB703 1px, transparent 1px)', backgroundSize: '36px 36px' }} />
-        {/* Huge decorative quote mark */}
-        <div style={{ position: 'absolute', top: '2rem', left: '50%', transform: 'translateX(-50%)', fontSize: '14rem', lineHeight: 1, color: 'rgba(255,183,3,0.06)', fontFamily: 'Georgia, serif', userSelect: 'none', pointerEvents: 'none' }}>&ldquo;</div>
-        <div style={{ position: 'relative', maxWidth: '720px', margin: '0 auto', textAlign: 'center' }}>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '4px', marginBottom: '2rem' }}>
-            {[1,2,3,4,5].map(i => <svg key={i} width="22" height="22" viewBox="0 0 24 24" fill="#FFB703"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>)}
-          </div>
-          <p className="font-serif" style={{ fontSize: 'clamp(1.1rem, 2.8vw, 1.55rem)', color: 'white', lineHeight: 1.8, marginBottom: '2.5rem' }}>
-            &ldquo;Noah made us read his story <strong style={{ color: '#FFB703' }}>14 nights in a row</strong>. The first time, he just stared at his name on the page and said &lsquo;Mum, that&rsquo;s actually me.&rsquo; He cried when we suggested a different book. We haven&apos;t suggested it again.&rdquo;
-          </p>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '14px' }}>
-            <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: 'linear-gradient(135deg, #FF6B35, #FFB703)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.3rem', flexShrink: 0 }}>👩</div>
-            <div style={{ textAlign: 'left' }}>
-              <p style={{ color: 'white', fontWeight: 700, fontSize: '0.95rem' }}>Sarah M.</p>
-              <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: '0.82rem', fontWeight: 500 }}>Mum of Noah, age 6 · Melbourne</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── How it works  -  SUNSHINE YELLOW ─── */}
-      <section id="how-it-works" style={{ background: '#FFB703', padding: '6rem 2rem' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-            <h2 className="font-serif" style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', color: '#0D183D', marginBottom: '0.5rem', letterSpacing: '-0.01em' }}>
-              Get a personalised bedtime story in three steps
-            </h2>
-            <p style={{ color: 'rgba(13,24,61,0.6)', fontWeight: 600, fontSize: '0.95rem' }}>Ready to read at bedtime tonight.</p>
-          </div>
-          <div className="three-col">
-            {[
-              { num: '1', emoji: '✏️', title: 'Tell us about your child', desc: 'Their name, age, what makes them laugh, their best friend, their pet, the more you share, the richer their personalised story.', color: '#FF6B35' },
-              { num: '2', emoji: '📖', title: 'We write their personalised story from scratch', desc: 'A unique 5-page illustrated adventure invented entirely around your child. No two TalePop personalised story books have ever been the same.', color: '#0D183D' },
-              { num: '3', emoji: '🌙', title: 'Read their personalised bedtime story tonight', desc: 'Open it up, read it aloud, and watch their face when they realise the adventure is theirs.', color: '#1496A6' },
-            ].map((step, i) => (
-              <div key={i} className="step-card">
-                <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>{step.emoji}</div>
-                <div style={{ width: '34px', height: '34px', background: step.color, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.25rem', boxShadow: `0 4px 14px ${step.color}55` }}>
-                  <span style={{ color: 'white', fontWeight: 900, fontSize: '0.85rem' }}>{step.num}</span>
-                </div>
-                <h3 className="font-serif" style={{ fontSize: '1.2rem', marginBottom: '0.75rem', color: '#0D183D' }}>{step.title}</h3>
-                <p style={{ fontSize: '0.9rem', color: 'rgba(13,24,61,0.65)', lineHeight: 1.75, fontWeight: 500 }}>{step.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── Castle walk scene break ─── */}
-      <div style={{ position: 'relative', height: '420px', overflow: 'hidden' }}>
-        <div style={{
-          position: 'absolute', inset: 0,
-          backgroundImage: "url('/castle-walk.jpg')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center 12%'
-        }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, #FFB703 0%, transparent 18%, transparent 78%, #FFF4E6 100%)' }} />
-      </div>
-
-      {/* ─── FAQ ─── */}
-      <section style={{ background: 'white', padding: '5rem 2rem' }}>
-        <div style={{ maxWidth: '720px', margin: '0 auto' }}>
-          <h2 className="font-serif" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', color: '#0D183D', textAlign: 'center', marginBottom: '3rem', letterSpacing: '-0.01em' }}>
-            Questions parents ask about our personalised bedtime stories
-          </h2>
-          {[
-            {
-              q: 'How personalised is it, really?',
-              a: "Every word is invented fresh - not a template with the name swapped in. Your child's interests, best friend, pet, and personality shape the actual plot. Two children with the same name get completely different stories."
-            },
-            {
-              q: 'What age is TalePop for?',
-              a: "Ages 3 to 10. You set a reading level when you create your child's profile and we adjust vocabulary, sentence length, and story complexity accordingly. A 4-year-old gets short, simple sentences with big moments; a 9-year-old gets richer language and a proper three-act structure."
-            },
-            {
-              q: 'Can I buy additional stories?',
-              a: "Yes. If you want a story outside your daily plan, you can buy individual stories for just 99¢ each, or half price at just 50¢ when you're subscribed. Great for gifting a cousin a story, or sneaking in a bonus read on a special night."
-            },
-            {
-              q: 'Can I actually cancel anytime?',
-              a: 'One click from your account settings. No hoops, no retention flows, no email-us-to-cancel. If you cancel, you keep access until the end of your billing period.'
-            },
-          ].map((item, i) => (
-            <div key={i} style={{ borderBottom: '1px solid #F0E4D0', paddingBottom: '1.75rem', marginBottom: '1.75rem' }}>
-              <p className="font-serif" style={{ fontSize: '1.05rem', color: '#0D183D', fontWeight: 700, marginBottom: '0.6rem' }}>
-                {item.q}
-              </p>
-              <p style={{ color: '#5E6A7A', lineHeight: 1.8, fontWeight: 500, fontSize: '0.95rem' }}>
-                {item.a}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ─── Final CTA ─── */}
-      <section style={{ background: '#0D183D', padding: '6rem 2rem', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, opacity: 0.08, backgroundImage: 'radial-gradient(circle, #FFB703 1px, transparent 1px)', backgroundSize: '28px 28px' }} />
-        <div style={{ position: 'relative', maxWidth: '560px', margin: '0 auto' }}>
-          <p style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>🌙</p>
-          <h2 className="font-serif" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.75rem)', color: 'white', marginBottom: '1rem', lineHeight: 1.2, letterSpacing: '-0.01em' }}>
-            Their story is waiting to be told.
-          </h2>
-          <p style={{ color: 'rgba(255,255,255,0.55)', marginBottom: '2rem', fontSize: '1rem', lineHeight: 1.7, fontWeight: 500 }}>
-            2 minutes to set up. 1 free story. Then from just 24¢ a story.
-          </p>
-          <Link href="/signup" style={{ display: 'inline-block', padding: '1.1rem 3rem', background: '#FF6B35', color: '#fff', borderRadius: '12px', textDecoration: 'none', fontWeight: '800', fontSize: '1.05rem', boxShadow: '0 4px 24px rgba(255,107,53,0.45)', letterSpacing: '-0.01em' }}>
-            Begin their story
-          </Link>
-          <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.8rem', marginTop: '1rem', fontWeight: 500 }}>No credit card. Cancel anytime. 1 free story.</p>
-        </div>
-      </section>
-
-      {/* ─── Signup toast ─── */}
-      {toast && (
-        <div className={`signup-toast${toastHiding ? ' hiding' : ''}`} style={{
-          position: 'fixed', bottom: '1.5rem', left: '1.5rem', zIndex: 999,
-          background: 'white', borderRadius: '14px', padding: '0.75rem 1rem',
-          boxShadow: '0 8px 32px rgba(13,24,61,0.18)', border: '1px solid #F0E4D0',
-          display: 'flex', alignItems: 'center', gap: '10px', maxWidth: '260px'
-        }}>
-          <span style={{ fontSize: '1.4rem', flexShrink: 0 }}>{toast.flag}</span>
-          <div>
-            <p style={{ fontSize: '0.78rem', fontWeight: 800, color: '#0D183D', marginBottom: '1px' }}>
-              Someone just signed up
-            </p>
-            <p style={{ fontSize: '0.72rem', color: '#5E6A7A', fontWeight: 500 }}>
-              {toast.city}, {toast.country}
-            </p>
-          </div>
-        </div>
-      )}
-
-      {/* ─── Footer ─── */}
-      <footer style={{ background: '#080E22', padding: '2.5rem 2rem' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.5rem', alignItems: 'center' }}>
-          <Link href="/" style={{ textDecoration: 'none' }}>
-            <img src="/talepop-logo-light.png" alt="TalePop" style={{ height: '50px', width: 'auto' }} />
-          </Link>
-          <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
-            <Link href="/privacy" style={{ color: 'rgba(255,255,255,0.35)', textDecoration: 'none', fontSize: '0.85rem', fontWeight: 500 }}>Privacy Policy</Link>
-            <Link href="/terms" style={{ color: 'rgba(255,255,255,0.35)', textDecoration: 'none', fontSize: '0.85rem', fontWeight: 500 }}>Terms of Service</Link>
-            <Link href="/login" style={{ color: 'rgba(255,255,255,0.35)', textDecoration: 'none', fontSize: '0.85rem', fontWeight: 500 }}>Sign in</Link>
-          </div>
-          <p style={{ color: 'rgba(255,255,255,0.2)', fontSize: '0.75rem', fontWeight: 400, textAlign: 'center', width: '100%', marginTop: '1rem', lineHeight: 1.6 }}>
-            TalePop creates personalised bedtime stories and children&apos;s books for kids aged 3–10. Every story is written from scratch, your child&apos;s name, interests and world woven into every page.
-          </p>
-          <span style={{ color: 'rgba(255,255,255,0.2)', fontSize: '0.8rem', fontWeight: 500 }}>© {new Date().getFullYear()} TalePop</span>
         </div>
       </footer>
-    </div>
+    </>
   );
 }
-
-
