@@ -122,8 +122,13 @@ a.card:hover{transform:translateY(-3px);transition:transform .2s}
 footer{border-top:1px solid rgba(255,231,203,.08);padding-block:clamp(38px,5vw,64px);
   font-size:var(--s--1)}
 .foot-grid{display:grid;grid-template-columns:1.6fr repeat(3,1fr);gap:clamp(24px,4vw,48px)}
+.foot-grid>*{min-width:0}
 @media(max-width:840px){.foot-grid{grid-template-columns:1fr 1fr}}
-footer .lockup img{max-width:220px}
+/* Two columns cannot fit the 220px logo beside a links column on a narrow
+   phone: it pushed the Legal column off-screen. One column below 560px. */
+@media(max-width:560px){.foot-grid{grid-template-columns:1fr}}
+footer .lockup img{max-width:min(220px,60vw)}
+footer li a{overflow-wrap:anywhere}
 .foot-blurb{color:var(--txt-mute);margin-top:1rem;max-width:34ch;line-height:1.7}
 footer h4{font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;color:var(--txt-mute);
   margin-bottom:1rem;font-family:'Baloo 2',sans-serif}
