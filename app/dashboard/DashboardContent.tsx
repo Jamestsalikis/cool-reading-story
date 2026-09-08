@@ -10,15 +10,23 @@ import PaywallModal from '@/components/PaywallModal';
 import { updateChild } from '@/lib/supabase/child-actions';
 import { isContentAppropriate } from '@/lib/content-filter';
 
+/* `light` was a pale tint used as a background with `cover` as the text on it.
+   On the dark theme that becomes a translucent tint of the same hue, which keeps
+   each child's colour identity. Every `cover` value clears AA as text on the dark
+   card (4.87 to 7.76), so the text colour is unchanged. */
 const CHILD_PALETTES = [
-  { cover: '#FF6B35', spine: '#CC4B1A', light: '#FFF0E6', emoji: '🦁' },
-  { cover: '#8E7BFF', spine: '#5c48e0', light: '#F0EEFF', emoji: '🦊' },
-  { cover: '#1496A6', spine: '#0c6a77', light: '#E6F6F8', emoji: '🐬' },
-  { cover: '#E8A020', spine: '#b87a10', light: '#FFF6E0', emoji: '🦋' },
-  { cover: '#6CC06C', spine: '#4a9a4a', light: '#EEF8EE', emoji: '🐸' },
+  { cover: '#FF6B35', spine: '#CC4B1A', light: 'rgba(255,107,53,0.16)', emoji: '🦁' },
+  { cover: '#8E7BFF', spine: '#5c48e0', light: 'rgba(142,123,255,0.18)', emoji: '🦊' },
+  { cover: '#1496A6', spine: '#0c6a77', light: 'rgba(20,150,166,0.20)', emoji: '🐬' },
+  { cover: '#E8A020', spine: '#b87a10', light: 'rgba(232,160,32,0.18)', emoji: '🦋' },
+  { cover: '#6CC06C', spine: '#4a9a4a', light: 'rgba(108,192,108,0.18)', emoji: '🐸' },
 ];
 
 const pageStyles = `
+  /* globals.css still paints body cream for the pages that have not been
+     converted yet, which showed through on mobile overscroll. This style tag
+     only exists while the dashboard is mounted, so it does not leak. */
+  body { background: #0B0D1C; }
   .book-cover-panel {
     transition: transform 0.55s cubic-bezier(0.4,0,0.2,1), box-shadow 0.55s ease;
   }
@@ -29,7 +37,7 @@ const pageStyles = `
   .book-read-hint { opacity:0; transition: opacity 0.2s ease 0.3s; }
   .book-wrap:hover .book-read-hint { opacity:1; }
   .top-nav-tab { transition: all 0.15s ease; border-radius: 999px; border: none; cursor: pointer; display: flex; align-items: center; gap: 6px; padding: 8px 18px; font-weight: 600; font-size: 0.875rem; }
-  .top-nav-tab:hover { background: rgba(13,24,61,0.08) !important; }
+  .top-nav-tab:hover { background: rgba(255,231,203,0.12) !important; }
   .continue-card { transition: transform 0.2s ease, box-shadow 0.2s ease; }
   .continue-card:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,0,0,0.18) !important; }
   @keyframes writingDot {
@@ -209,7 +217,7 @@ function ProductTour({ steps, pendingStoryId, onDone }: {
       <div style={{
         ...tooltipStyle,
         zIndex: 601,
-        background: '#fff',
+        background: '#161A2E',
         borderRadius: '16px',
         padding: '22px 22px 18px',
         boxShadow: '0 24px 64px rgba(0,0,0,0.45)',
@@ -219,15 +227,15 @@ function ProductTour({ steps, pendingStoryId, onDone }: {
 
         {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '10px' }}>
-          <h3 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.15rem', color: '#0D183D', lineHeight: 1.25, flex: 1, paddingRight: '8px' }}>
+          <h3 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.15rem', color: '#F6EFE4', lineHeight: 1.25, flex: 1, paddingRight: '8px' }}>
             {current.title}
           </h3>
-          <button onClick={skip} title="Skip tour" style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#C0C8D4', fontSize: '1.2rem', lineHeight: 1, padding: 0, flexShrink: 0, marginTop: '1px' }}>
+          <button onClick={skip} title="Skip tour" style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#B7B2C4', fontSize: '1.2rem', lineHeight: 1, padding: 0, flexShrink: 0, marginTop: '1px' }}>
             <X size={16} />
           </button>
         </div>
 
-        <p style={{ fontSize: '0.875rem', color: '#5E6A7A', lineHeight: 1.6, marginBottom: '18px' }}>
+        <p style={{ fontSize: '0.875rem', color: '#B7B2C4', lineHeight: 1.6, marginBottom: '18px' }}>
           {current.body}
         </p>
 
@@ -240,7 +248,7 @@ function ProductTour({ steps, pendingStoryId, onDone }: {
                 width: i === step ? '18px' : '6px',
                 height: '6px',
                 borderRadius: '3px',
-                background: i === step ? '#FF6B35' : '#E5E7EB',
+                background: i === step ? '#FF6B35' : 'rgba(255,231,203,0.14)',
                 transition: 'all 0.25s ease',
               }} />
             ))}
@@ -250,15 +258,15 @@ function ProductTour({ steps, pendingStoryId, onDone }: {
           <div style={{ display: 'flex', gap: '8px' }}>
             {step > 0 && (
               <button onClick={goBack} style={{
-                padding: '0.5rem 1rem', border: '1.5px solid #F0E4D0', borderRadius: '8px',
-                background: '#fff', color: '#5E6A7A', cursor: 'pointer', fontSize: '0.8rem', fontWeight: '600',
+                padding: '0.5rem 1rem', border: '1.5px solid rgba(255,231,203,0.13)', borderRadius: '8px',
+                background: '#161A2E', color: '#B7B2C4', cursor: 'pointer', fontSize: '0.8rem', fontWeight: '600',
               }}>
                 Back
               </button>
             )}
             <button onClick={goNext} style={{
               padding: '0.5rem 1.3rem', border: 'none', borderRadius: '8px',
-              background: '#FF6B35', color: '#fff', cursor: 'pointer', fontSize: '0.82rem', fontWeight: '700',
+              background: 'linear-gradient(180deg,#FFDCA8,#E8913A)', color: '#3A1B06', cursor: 'pointer', fontSize: '0.82rem', fontWeight: '700',
               boxShadow: '0 3px 10px rgba(255,107,53,0.35)',
             }}>
               {isLast ? (pendingStoryId ? 'Read my story →' : 'Done ✓') : 'Next →'}
@@ -287,11 +295,11 @@ function BookCard({ story, palette, onContinue, isWriting }: { story: Story; pal
         style={{ perspective: '900px', cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <div style={{ position: 'relative', width: '140px', height: '196px', transformStyle: 'preserve-3d' }}>
           <div style={{ position: 'absolute', left: 0, top: 0, width: '18px', height: '100%', background: `linear-gradient(90deg, ${palette.spine} 0%, ${palette.cover} 100%)`, borderRadius: '3px 0 0 3px', zIndex: 3, boxShadow: 'inset -2px 0 5px rgba(0,0,0,0.3)' }} />
-          {[4, 2].map(o => <div key={o} style={{ position: 'absolute', left: `${18+o}px`, top: `${o*.4}px`, width: `calc(100% - ${18+o}px)`, height: `calc(100% - ${o*.8}px)`, background: '#FFF0E6', borderRadius: '0 3px 3px 0' }} />)}
-          <div style={{ position: 'absolute', left: '18px', top: 0, width: 'calc(100% - 18px)', height: '100%', borderRadius: '0 6px 6px 0', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '16px 12px', gap: '8px', overflow: 'hidden', background: '#FFF8F0' }}>
+          {[4, 2].map(o => <div key={o} style={{ position: 'absolute', left: `${18+o}px`, top: `${o*.4}px`, width: `calc(100% - ${18+o}px)`, height: `calc(100% - ${o*.8}px)`, background: 'rgba(255,183,101,0.10)', borderRadius: '0 3px 3px 0' }} />)}
+          <div style={{ position: 'absolute', left: '18px', top: 0, width: 'calc(100% - 18px)', height: '100%', borderRadius: '0 6px 6px 0', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '16px 12px', gap: '8px', overflow: 'hidden', background: '#161A2E' }}>
             {coverImage && <div style={{ position: 'absolute', inset: 0, backgroundImage: `url(${coverImage})`, backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.2 }} />}
             <div style={{ position: 'relative', zIndex: 1, width: '40px', height: '2px', background: palette.cover, borderRadius: '1px', opacity: 0.4 }} />
-            <p style={{ position: 'relative', zIndex: 1, fontSize: '0.72rem', fontFamily: 'Fredoka, cursive', textAlign: 'center', color: '#0D183D', lineHeight: 1.45 }}>{story.title}</p>
+            <p style={{ position: 'relative', zIndex: 1, fontSize: '0.72rem', fontFamily: 'Fredoka, cursive', textAlign: 'center', color: '#F6EFE4', lineHeight: 1.45 }}>{story.title}</p>
             <div className="book-read-hint" style={{ position: 'relative', zIndex: 1, fontSize: '0.68rem', fontWeight: '700', color: palette.cover, letterSpacing: '0.06em', textTransform: 'uppercase' }}>Read</div>
           </div>
           <div className="book-cover-panel" style={{ position: 'absolute', left: '18px', top: 0, width: 'calc(100% - 18px)', height: '100%', background: palette.cover, borderRadius: '0 6px 6px 0', transformOrigin: 'left center', backfaceVisibility: 'hidden', zIndex: 2, overflow: 'hidden', boxShadow: '3px 3px 14px rgba(0,0,0,0.22)' }}>
@@ -328,7 +336,7 @@ function BookCard({ story, palette, onContinue, isWriting }: { story: Story; pal
       </div>
       {onContinue && (
         <button id="tour-next-chapter" onClick={e => { e.stopPropagation(); onContinue(); }}
-          style={{ marginTop: '6px', padding: '0.4rem 1rem', borderRadius: '20px', border: 'none', background: '#FF6B35', color: '#fff', fontWeight: '700', fontSize: '0.72rem', cursor: 'pointer', boxShadow: '0 2px 8px rgba(255,107,53,0.35)' }}>
+          style={{ marginTop: '6px', padding: '0.4rem 1rem', borderRadius: '20px', border: 'none', background: 'linear-gradient(180deg,#FFDCA8,#E8913A)', color: '#3A1B06', fontWeight: '700', fontSize: '0.72rem', cursor: 'pointer', boxShadow: '0 2px 8px rgba(255,107,53,0.35)' }}>
           Next chapter →
         </button>
       )}
@@ -379,10 +387,10 @@ function SeriesFan({ volumes, palette, onContinue }: { volumes: Story[]; palette
           );
         })}
       </div>
-      <p style={{ fontSize: '0.68rem', color: '#5E6A7A', textAlign: 'center', maxWidth: `${containerW}px` }}>{seriesTitleDisplay} · {n} {n === 1 ? 'vol' : 'vols'}</p>
+      <p style={{ fontSize: '0.68rem', color: '#B7B2C4', textAlign: 'center', maxWidth: `${containerW}px` }}>{seriesTitleDisplay} · {n} {n === 1 ? 'vol' : 'vols'}</p>
       {onContinue && n < 4 && (
         <button onClick={e => { e.stopPropagation(); onContinue(); }}
-          style={{ marginTop: '6px', padding: '0.4rem 1rem', borderRadius: '20px', border: 'none', background: '#FF6B35', color: '#fff', fontWeight: '700', fontSize: '0.72rem', cursor: 'pointer', boxShadow: '0 2px 8px rgba(255,107,53,0.35)' }}>
+          style={{ marginTop: '6px', padding: '0.4rem 1rem', borderRadius: '20px', border: 'none', background: 'linear-gradient(180deg,#FFDCA8,#E8913A)', color: '#3A1B06', fontWeight: '700', fontSize: '0.72rem', cursor: 'pointer', boxShadow: '0 2px 8px rgba(255,107,53,0.35)' }}>
           Next chapter →
         </button>
       )}
@@ -466,29 +474,29 @@ function EditChildModal({ child, palette, onClose, onSaved }: { child: ChildReco
     }
     onSaved(); onClose();
   };
-  const inp: React.CSSProperties = { width: '100%', padding: '0.6rem 0.875rem', border: '1.5px solid #F0E4D0', borderRadius: '8px', fontSize: '0.9rem', outline: 'none', background: '#fff' };
-  const chip = (active: boolean): React.CSSProperties => ({ cursor: 'pointer', borderRadius: '8px', fontWeight: '500', fontSize: '0.8rem', padding: '0.4rem 0.8rem', border: `1.5px solid ${active ? palette.cover : '#F0E4D0'}`, background: active ? palette.cover : '#fff', color: active ? '#fff' : '#0D183D' });
+  const inp: React.CSSProperties = { width: '100%', padding: '0.6rem 0.875rem', border: '1.5px solid rgba(255,231,203,0.13)', borderRadius: '8px', fontSize: '0.9rem', outline: 'none', background: '#161A2E' };
+  const chip = (active: boolean): React.CSSProperties => ({ cursor: 'pointer', borderRadius: '8px', fontWeight: '500', fontSize: '0.8rem', padding: '0.4rem 0.8rem', border: `1.5px solid ${active ? palette.cover : 'rgba(255,231,203,0.13)'}`, background: active ? palette.cover : '#fff', color: active ? '#fff' : '#F6EFE4' });
   return (
     <div style={{ position: 'fixed', inset: 0, zIndex: 1000, background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(3px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
-      <div style={{ background: '#FFFEF9', borderRadius: '16px', padding: '28px', maxWidth: '560px', width: '100%', maxHeight: '85vh', overflowY: 'auto', boxShadow: '0 24px 60px rgba(0,0,0,0.2)' }}>
+      <div style={{ background: '#161A2E', borderRadius: '16px', padding: '28px', maxWidth: '560px', width: '100%', maxHeight: '85vh', overflowY: 'auto', boxShadow: '0 24px 60px rgba(0,0,0,0.2)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-          <h2 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.3rem', color: '#0D183D' }}>Edit {child.name}&apos;s profile</h2>
-          <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#5E6A7A' }}><X size={20} /></button>
+          <h2 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.3rem', color: '#F6EFE4' }}>Edit {child.name}&apos;s profile</h2>
+          <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#B7B2C4' }}><X size={20} /></button>
         </div>
-        {error && <div style={{ background: '#FEE2E2', borderRadius: '8px', padding: '10px', marginBottom: '16px', fontSize: '0.85rem', color: '#991B1B' }}>{error}</div>}
+        {error && <div style={{ background: 'rgba(120,32,26,0.42)', borderRadius: '8px', padding: '10px', marginBottom: '16px', fontSize: '0.85rem', color: '#FFC9C0' }}>{error}</div>}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '6px' }}>Name</label><input style={inp} value={name} onChange={e => setName(e.target.value)} /></div>
-          <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '6px' }}>Age</label>
+          <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#B7B2C4', display: 'block', marginBottom: '6px' }}>Name</label><input style={inp} value={name} onChange={e => setName(e.target.value)} /></div>
+          <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#B7B2C4', display: 'block', marginBottom: '6px' }}>Age</label>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <button onClick={() => setAge(a => Math.max(3, a - 1))} style={{ width: '36px', height: '36px', border: '1.5px solid #F0E4D0', borderRadius: '8px', background: '#fff', cursor: 'pointer', fontSize: '1.1rem' }}>-</button>
+              <button onClick={() => setAge(a => Math.max(3, a - 1))} style={{ width: '36px', height: '36px', border: '1.5px solid rgba(255,231,203,0.13)', borderRadius: '8px', background: '#161A2E', cursor: 'pointer', fontSize: '1.1rem' }}>-</button>
               <span style={{ fontSize: '1.2rem', fontWeight: '600', minWidth: '30px', textAlign: 'center' }}>{age}</span>
-              <button onClick={() => setAge(a => Math.min(12, a + 1))} style={{ width: '36px', height: '36px', border: '1.5px solid #F0E4D0', borderRadius: '8px', background: '#fff', cursor: 'pointer', fontSize: '1.1rem' }}>+</button>
+              <button onClick={() => setAge(a => Math.min(12, a + 1))} style={{ width: '36px', height: '36px', border: '1.5px solid rgba(255,231,203,0.13)', borderRadius: '8px', background: '#161A2E', cursor: 'pointer', fontSize: '1.1rem' }}>+</button>
             </div>
           </div>
-          <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '6px' }}>Gender</label><div style={{ display: 'flex', gap: '8px' }}>{['Boy','Girl','Skip'].map(g => <button key={g} onClick={() => setGender(g)} style={chip(gender === g)}>{g}</button>)}</div></div>
+          <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#B7B2C4', display: 'block', marginBottom: '6px' }}>Gender</label><div style={{ display: 'flex', gap: '8px' }}>{['Boy','Girl','Skip'].map(g => <button key={g} onClick={() => setGender(g)} style={chip(gender === g)}>{g}</button>)}</div></div>
           <div>
-            <label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '4px' }}>Interests</label>
-            <p style={{ fontSize: '0.75rem', color: interests.length >= 5 ? '#FF6B35' : '#9CA3AF', marginBottom: '8px' }}>{interests.length}/5 selected{interests.length >= 5 ? '. Remove one to add another' : ''}</p>
+            <label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#B7B2C4', display: 'block', marginBottom: '4px' }}>Interests</label>
+            <p style={{ fontSize: '0.75rem', color: interests.length >= 5 ? '#FF6B35' : '#B7B2C4', marginBottom: '8px' }}>{interests.length}/5 selected{interests.length >= 5 ? '. Remove one to add another' : ''}</p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '10px' }}>
               {INTERESTS.map(i => <button key={i} onClick={() => toggleInterest(i)} style={chip(interests.includes(i))} disabled={!interests.includes(i) && interests.length >= 5}>{i}</button>)}
               {interests.filter(i => !INTERESTS.includes(i)).map(i => (
@@ -515,24 +523,24 @@ function EditChildModal({ child, palette, onClose, onSaved }: { child: ChildReco
             )}
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-            <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '8px' }}>Skin colour</label>
+            <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#B7B2C4', display: 'block', marginBottom: '8px' }}>Skin colour</label>
               <div style={{ display: 'flex', gap: '10px' }}>
                 {([{ label: 'White', hex: '#F5D5B5' }, { label: 'Tanned', hex: '#C8956C' }, { label: 'Semi Brown', hex: '#8D5524' }, { label: 'Brown', hex: '#4A2512' }] as {label:string;hex:string}[]).map(({ label, hex }) => (
                   <button key={label} type="button" title={label}
                     onClick={() => setSkinColour(skinColour === label ? '' : label)}
-                    style={{ width: '32px', height: '32px', borderRadius: '50%', background: hex, border: skinColour === label ? '3px solid #FF6B35' : '3px solid transparent', outline: skinColour === label ? '2px solid #FF6B35' : '2px solid #E0CDB8', outlineOffset: '2px', cursor: 'pointer', flexShrink: 0 }}
+                    style={{ width: '32px', height: '32px', borderRadius: '50%', background: hex, border: skinColour === label ? '3px solid #FF6B35' : '3px solid transparent', outline: skinColour === label ? '2px solid #FF6B35' : '2px solid rgba(255,231,203,0.28)', outlineOffset: '2px', cursor: 'pointer', flexShrink: 0 }}
                   />
                 ))}
               </div>
             </div>
-            <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '6px' }}>Hair colour</label><input style={inp} value={hairColour} onChange={e => setHairColour(e.target.value)} placeholder="e.g. Brown" /></div>
-            <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '6px' }}>Eye colour</label><input style={inp} value={eyeColour} onChange={e => setEyeColour(e.target.value)} placeholder="e.g. Blue" /></div>
+            <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#B7B2C4', display: 'block', marginBottom: '6px' }}>Hair colour</label><input style={inp} value={hairColour} onChange={e => setHairColour(e.target.value)} placeholder="e.g. Brown" /></div>
+            <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#B7B2C4', display: 'block', marginBottom: '6px' }}>Eye colour</label><input style={inp} value={eyeColour} onChange={e => setEyeColour(e.target.value)} placeholder="e.g. Blue" /></div>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-            <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '6px' }}>City</label><input style={inp} value={city} onChange={e => setCity(e.target.value)} placeholder="e.g. Sydney" /></div>
-            <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '6px' }}>Country</label><input style={inp} value={country} onChange={e => setCountry(e.target.value)} placeholder="e.g. Australia" /></div>
+            <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#B7B2C4', display: 'block', marginBottom: '6px' }}>City</label><input style={inp} value={city} onChange={e => setCity(e.target.value)} placeholder="e.g. Sydney" /></div>
+            <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#B7B2C4', display: 'block', marginBottom: '6px' }}>Country</label><input style={inp} value={country} onChange={e => setCountry(e.target.value)} placeholder="e.g. Australia" /></div>
           </div>
-          <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '8px' }}>Reading level</label>
+          <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#B7B2C4', display: 'block', marginBottom: '8px' }}>Reading level</label>
             <div style={{ display: 'flex', gap: '8px' }}>
               {[{id:'simple',label:'Simple',sub:'3-5'},{id:'medium',label:'Medium',sub:'6-8'},{id:'imaginative',label:'Imaginative',sub:'9-12'}].map(o => (
                 <button key={o.id} onClick={() => setReadingLevel(o.id)} style={{ ...chip(readingLevel === o.id), display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '8px 14px' }}><span>{o.label}</span><span style={{ fontSize: '0.68rem', opacity: 0.75 }}>{o.sub}</span></button>
@@ -541,31 +549,31 @@ function EditChildModal({ child, palette, onClose, onSaved }: { child: ChildReco
           </div>
           {/* Siblings */}
           <div>
-            <label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '8px' }}>Siblings <span style={{ fontWeight: 400, color: '#9CA3AF' }}>(optional)</span></label>
+            <label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#B7B2C4', display: 'block', marginBottom: '8px' }}>Siblings <span style={{ fontWeight: 400, color: '#B7B2C4' }}>(optional)</span></label>
             {siblings.map((s, i) => (
               <div key={i} style={{ display: 'flex', gap: '8px', marginBottom: '8px', alignItems: 'center' }}>
                 <input style={{ ...inp, flex: 1 }} placeholder="Name" value={s.name} onChange={e => { const u = [...siblings]; u[i] = { ...u[i], name: e.target.value }; setSiblings(u); }} />
                 <input style={{ ...inp, flex: 1 }} placeholder="Nickname (optional)" value={s.nickname} onChange={e => { const u = [...siblings]; u[i] = { ...u[i], nickname: e.target.value }; setSiblings(u); }} />
-                <button onClick={() => setSiblings(siblings.filter((_, idx) => idx !== i))} style={{ background: 'none', border: '1.5px solid #F0E4D0', borderRadius: '8px', padding: '0.5rem 0.7rem', cursor: 'pointer', color: '#5E6A7A', fontSize: '1rem', flexShrink: 0 }}>×</button>
+                <button onClick={() => setSiblings(siblings.filter((_, idx) => idx !== i))} style={{ background: 'none', border: '1.5px solid rgba(255,231,203,0.13)', borderRadius: '8px', padding: '0.5rem 0.7rem', cursor: 'pointer', color: '#B7B2C4', fontSize: '1rem', flexShrink: 0 }}>×</button>
               </div>
             ))}
             <button onClick={() => setSiblings([...siblings, { name: '', nickname: '' }])} style={{ fontSize: '0.82rem', color: palette.cover, background: 'none', border: `1.5px dashed ${palette.cover}`, borderRadius: '8px', padding: '0.45rem 1rem', cursor: 'pointer', fontWeight: '600' }}>+ Add sibling</button>
           </div>
           {/* Best friends */}
           <div>
-            <label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '8px' }}>Best friends <span style={{ fontWeight: 400, color: '#9CA3AF' }}>(optional)</span></label>
+            <label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#B7B2C4', display: 'block', marginBottom: '8px' }}>Best friends <span style={{ fontWeight: 400, color: '#B7B2C4' }}>(optional)</span></label>
             {friends.map((f, i) => (
               <div key={i} style={{ display: 'flex', gap: '8px', marginBottom: '8px', alignItems: 'center' }}>
                 <input style={{ ...inp, flex: 1 }} placeholder="Name" value={f.name} onChange={e => { const u = [...friends]; u[i] = { ...u[i], name: e.target.value }; setFriends(u); }} />
                 <input style={{ ...inp, flex: 1 }} placeholder="Nickname (optional)" value={f.nickname} onChange={e => { const u = [...friends]; u[i] = { ...u[i], nickname: e.target.value }; setFriends(u); }} />
-                <button onClick={() => setFriends(friends.filter((_, idx) => idx !== i))} style={{ background: 'none', border: '1.5px solid #F0E4D0', borderRadius: '8px', padding: '0.5rem 0.7rem', cursor: 'pointer', color: '#5E6A7A', fontSize: '1rem', flexShrink: 0 }}>×</button>
+                <button onClick={() => setFriends(friends.filter((_, idx) => idx !== i))} style={{ background: 'none', border: '1.5px solid rgba(255,231,203,0.13)', borderRadius: '8px', padding: '0.5rem 0.7rem', cursor: 'pointer', color: '#B7B2C4', fontSize: '1rem', flexShrink: 0 }}>×</button>
               </div>
             ))}
             <button onClick={() => setFriends([...friends, { name: '', nickname: '' }])} style={{ fontSize: '0.82rem', color: palette.cover, background: 'none', border: `1.5px dashed ${palette.cover}`, borderRadius: '8px', padding: '0.45rem 1rem', cursor: 'pointer', fontWeight: '600' }}>+ Add friend</button>
           </div>
           {/* Pet */}
           <div>
-            <label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '8px' }}>Pet <span style={{ fontWeight: 400, color: '#9CA3AF' }}>(optional)</span></label>
+            <label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#B7B2C4', display: 'block', marginBottom: '8px' }}>Pet <span style={{ fontWeight: 400, color: '#B7B2C4' }}>(optional)</span></label>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
               <input style={inp} placeholder="Pet name (e.g. Biscuit)" value={petName} onChange={e => setPetName(e.target.value)} />
               <input style={inp} placeholder="Pet type (e.g. Dog)" value={petType} onChange={e => setPetType(e.target.value)} />
@@ -574,13 +582,13 @@ function EditChildModal({ child, palette, onClose, onSaved }: { child: ChildReco
           {/* Follow-up Q&A */}
           {followUpAnswers.length > 0 && (
             <div>
-              <label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '8px' }}>
-                Story details <span style={{ fontWeight: 400, color: '#9CA3AF' }}>(shapes future stories)</span>
+              <label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#B7B2C4', display: 'block', marginBottom: '8px' }}>
+                Story details <span style={{ fontWeight: 400, color: '#B7B2C4' }}>(shapes future stories)</span>
               </label>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 {followUpAnswers.map((qa, i) => (
                   <div key={i}>
-                    <label style={{ fontSize: '0.75rem', fontWeight: '600', color: '#5E6A7A', display: 'block', marginBottom: '4px' }}>{qa.question}</label>
+                    <label style={{ fontSize: '0.75rem', fontWeight: '600', color: '#B7B2C4', display: 'block', marginBottom: '4px' }}>{qa.question}</label>
                     <textarea
                       value={qa.answer}
                       onChange={e => {
@@ -598,7 +606,7 @@ function EditChildModal({ child, palette, onClose, onSaved }: { child: ChildReco
           )}
         </div>
         <div style={{ display: 'flex', gap: '10px', marginTop: '24px' }}>
-          <button onClick={onClose} style={{ flex: 1, padding: '0.7rem', border: '1.5px solid #F0E4D0', borderRadius: '8px', background: '#fff', color: '#5E6A7A', cursor: 'pointer', fontWeight: '600' }}>Cancel</button>
+          <button onClick={onClose} style={{ flex: 1, padding: '0.7rem', border: '1.5px solid rgba(255,231,203,0.13)', borderRadius: '8px', background: '#161A2E', color: '#B7B2C4', cursor: 'pointer', fontWeight: '600' }}>Cancel</button>
           <button onClick={handleSave} disabled={saving} style={{ flex: 2, padding: '0.7rem', border: 'none', borderRadius: '8px', background: palette.cover, color: '#fff', cursor: saving ? 'not-allowed' : 'pointer', fontWeight: '600', opacity: saving ? 0.7 : 1 }}>{saving ? 'Saving...' : 'Save changes'}</button>
         </div>
       </div>
@@ -931,7 +939,7 @@ export default function DashboardPage() {
   const mostRecentPalette = CHILD_PALETTES[Math.max(0, mostRecentChildIndex) % CHILD_PALETTES.length];
 
   return (
-    <div style={{ minHeight: '100vh', background: '#FFF4E6' }}>
+    <div style={{ minHeight: '100vh', background: '#0B0D1C' }}>
       <style>{pageStyles}</style>
 
       {showConfetti && <Confetti onDone={() => setShowConfetti(false)} />}
@@ -974,12 +982,12 @@ export default function DashboardPage() {
       )}
 
       {/* Top nav */}
-      <nav style={{ position: 'sticky', top: 0, zIndex: 50, background: '#FFF4E6', borderBottom: '2px solid #F0E4D0', padding: '0 1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '68px', gap: '12px' }}>
+      <nav style={{ position: 'sticky', top: 0, zIndex: 50, background: '#0B0D1C', borderBottom: '2px solid rgba(255,231,203,0.13)', padding: '0 1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '68px', gap: '12px' }}>
         <a href="/" style={{ textDecoration: 'none', flexShrink: 0 }}>
-          <img src="/mood-3.png" alt="TalePop" style={{ height: '52px', width: 'auto' }} />
+          <img src="/brand/talepop-wordmark.webp" alt="TalePop" style={{ height: '34px', width: 'auto' }} />
         </a>
         {!isMobile && (
-          <div style={{ display: 'flex', gap: '2px', background: 'rgba(13,24,61,0.06)', borderRadius: '999px', padding: '4px' }}>
+          <div style={{ display: 'flex', gap: '2px', background: 'rgba(255,231,203,0.07)', borderRadius: '999px', padding: '4px' }}>
             {navItems.map(({ id, label, icon: Icon }) => {
               const active = activeNav === id;
               return (
@@ -988,7 +996,7 @@ export default function DashboardPage() {
                   id={`tour-${id}-nav`}
                   className="top-nav-tab"
                   onClick={() => setActiveNav(id)}
-                  style={{ background: active ? '#0D183D' : 'transparent', color: active ? '#fff' : '#5E6A7A' }}
+                  style={{ background: active ? 'linear-gradient(180deg,#FFDCA8,#E8913A)' : 'transparent', color: active ? '#3A1B06' : '#B7B2C4' }}
                 >
                   <Icon size={15} />{label}
                 </button>
@@ -998,11 +1006,11 @@ export default function DashboardPage() {
         )}
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
           {sub && !isMobile && sub.status !== 'subscribed' && freeStoriesRemaining > 0 && !isAdmin && (
-            <span style={{ fontSize: '0.75rem', fontWeight: '700', padding: '4px 12px', borderRadius: '999px', background: '#FFF0E6', color: '#FF6B35' }}>
+            <span style={{ fontSize: '0.75rem', fontWeight: '700', padding: '4px 12px', borderRadius: '999px', background: 'rgba(255,183,101,0.10)', color: '#FF6B35' }}>
               {freeStoriesRemaining} free {freeStoriesRemaining === 1 ? 'story' : 'stories'} left
             </span>
           )}
-          <button onClick={async () => { await supabase.auth.signOut(); window.location.href = '/'; }} style={{ fontSize: '0.8rem', fontWeight: '600', color: '#5E6A7A', background: 'white', border: '1.5px solid #F0E4D0', borderRadius: '8px', padding: '6px 14px', cursor: 'pointer' }}>
+          <button onClick={async () => { await supabase.auth.signOut(); window.location.href = '/'; }} style={{ fontSize: '0.8rem', fontWeight: '600', color: '#B7B2C4', background: '#161A2E', border: '1.5px solid rgba(255,231,203,0.13)', borderRadius: '8px', padding: '6px 14px', cursor: 'pointer' }}>
             Sign out
           </button>
         </div>
@@ -1013,28 +1021,28 @@ export default function DashboardPage() {
 
         {!loading && children.length > 0 && activeNav === 'stories' && (
           <div style={{ marginBottom: '32px' }}>
-            <h2 style={{ fontFamily: 'Fredoka, cursive', fontSize: 'clamp(1.6rem, 4vw, 2.4rem)', color: '#0D183D', fontWeight: '400', marginBottom: '6px' }}>
+            <h2 style={{ fontFamily: 'Fredoka, cursive', fontSize: 'clamp(1.6rem, 4vw, 2.4rem)', color: '#F6EFE4', fontWeight: '400', marginBottom: '6px' }}>
               {timeGreeting}, {firstChild?.name}! {hour >= 18 ? '🌙' : hour >= 12 ? '☀️' : '🌟'}
             </h2>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
-              <p style={{ color: '#5E6A7A', fontSize: '0.95rem' }}>
+              <p style={{ color: '#B7B2C4', fontSize: '0.95rem' }}>
                 {stories.length === 0 ? 'Your library is waiting for its first story.' : `${stories.length} ${stories.length === 1 ? 'book' : 'books'} in the library`}
               </p>
               {sub && sub.status === 'subscribed' && (
                 <>
-                  <span style={{ color: '#D1D5DB', fontSize: '0.8rem' }}>·</span>
-                  <span style={{ fontSize: '0.75rem', fontWeight: '600', padding: '3px 10px', borderRadius: '20px', background: childrenAvailableToday > 0 ? '#F0FDF4' : '#F9FAFB', color: childrenAvailableToday > 0 ? '#15803D' : '#9CA8B4', border: `1px solid ${childrenAvailableToday > 0 ? '#BBF7D0' : '#E5E7EB'}` }}>
+                  <span style={{ color: '#B7B2C4', fontSize: '0.8rem' }}>·</span>
+                  <span style={{ fontSize: '0.75rem', fontWeight: '600', padding: '3px 10px', borderRadius: '20px', background: childrenAvailableToday > 0 ? 'rgba(108,192,108,0.16)' : 'rgba(255,231,203,0.06)', color: childrenAvailableToday > 0 ? '#8FE6A6' : '#B7B2C4', border: `1px solid ${childrenAvailableToday > 0 ? 'rgba(108,192,108,0.34)' : 'rgba(255,231,203,0.14)'}` }}>
                     {childrenAvailableToday}/{children.length} {children.length === 1 ? 'child' : 'children'} available today
                   </span>
-                  <span style={{ fontSize: '0.75rem', fontWeight: '600', padding: '3px 10px', borderRadius: '20px', background: '#F5F3FF', color: '#6D28D9', border: '1px solid #DDD6FE' }}>
+                  <span style={{ fontSize: '0.75rem', fontWeight: '600', padding: '3px 10px', borderRadius: '20px', background: 'rgba(142,123,255,0.16)', color: '#B9AFFF', border: '1px solid rgba(142,123,255,0.34)' }}>
                     1 story per child · resets midnight
                   </span>
                 </>
               )}
               {sub && sub.status !== 'subscribed' && freeStoriesRemaining > 0 && !isAdmin && (
                 <>
-                  <span style={{ color: '#D1D5DB', fontSize: '0.8rem' }}>·</span>
-                  <span style={{ fontSize: '0.75rem', fontWeight: '600', padding: '3px 10px', borderRadius: '20px', background: '#FFF7ED', color: '#C2410C', border: '1px solid #FED7AA' }}>
+                  <span style={{ color: '#B7B2C4', fontSize: '0.8rem' }}>·</span>
+                  <span style={{ fontSize: '0.75rem', fontWeight: '600', padding: '3px 10px', borderRadius: '20px', background: 'rgba(255,183,101,0.10)', color: '#FFDCA8', border: '1px solid rgba(255,183,101,0.30)' }}>
                     {freeStoriesRemaining} free {freeStoriesRemaining === 1 ? 'story' : 'stories'} left
                   </span>
                 </>
@@ -1046,28 +1054,28 @@ export default function DashboardPage() {
         {activeNav === 'stories' && (
           <>
             {dailyLimitChild && (
-              <div style={{ background: '#FFF7ED', border: '1px solid #FED7AA', borderRadius: '10px', padding: '14px 18px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ background: 'rgba(255,183,101,0.10)', border: '1px solid rgba(255,183,101,0.30)', borderRadius: '10px', padding: '14px 18px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <span style={{ fontSize: '1.4rem' }}>🌙</span>
                 <div>
-                  <div style={{ fontWeight: '700', fontSize: '0.9rem', color: '#92400E', marginBottom: '2px' }}>{dailyLimitChild}&apos;s story for today is done!</div>
-                  <div style={{ fontSize: '0.82rem', color: '#B45309' }}>Each child gets one new story per day. A fresh story unlocks at midnight — or grab an extra one now for 99¢.</div>
+                  <div style={{ fontWeight: '700', fontSize: '0.9rem', color: '#FFDCA8', marginBottom: '2px' }}>{dailyLimitChild}&apos;s story for today is done!</div>
+                  <div style={{ fontSize: '0.82rem', color: '#FFDCA8' }}>Each child gets one new story per day. A fresh story unlocks at midnight — or grab an extra one now for 99¢.</div>
                 </div>
-                <button onClick={() => setDailyLimitChild(null)} style={{ marginLeft: 'auto', background: 'none', border: 'none', cursor: 'pointer', color: '#B45309', fontSize: '1.1rem', padding: '4px', flexShrink: 0 }}>✕</button>
+                <button onClick={() => setDailyLimitChild(null)} style={{ marginLeft: 'auto', background: 'none', border: 'none', cursor: 'pointer', color: '#FFDCA8', fontSize: '1.1rem', padding: '4px', flexShrink: 0 }}>✕</button>
               </div>
             )}
-            {generateError && <div style={{ background: '#FEE2E2', borderRadius: '10px', padding: '12px 16px', marginBottom: '24px', fontSize: '0.875rem', color: '#991B1B' }}>{generateError}</div>}
+            {generateError && <div style={{ background: 'rgba(120,32,26,0.42)', borderRadius: '10px', padding: '12px 16px', marginBottom: '24px', fontSize: '0.875rem', color: '#FFC9C0' }}>{generateError}</div>}
 
             {loading ? (
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '16px', padding: '80px 0' }}>
                 <div style={{ fontSize: '3rem', animation: 'writing-pulse 1.2s ease-in-out infinite' }}>📚</div>
-                <p style={{ color: '#5E6A7A', fontFamily: 'Fredoka, cursive', fontSize: '1.1rem' }}>Loading your library...</p>
+                <p style={{ color: '#B7B2C4', fontFamily: 'Fredoka, cursive', fontSize: '1.1rem' }}>Loading your library...</p>
               </div>
             ) : children.length === 0 ? (
               <div style={{ maxWidth: '420px', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', margin: '60px auto 0' }}>
                 <div style={{ fontSize: '5rem', marginBottom: '16px', animation: 'writing-pulse 2s ease-in-out infinite' }}>📖</div>
-                <h3 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.6rem', color: '#0D183D', marginBottom: '8px' }}>Your library is empty!</h3>
-                <p style={{ color: '#5E6A7A', marginBottom: '24px', lineHeight: 1.6 }}>Let&apos;s create a child&apos;s profile and write their very first story.</p>
-                <Link href="/onboarding" style={{ display: 'inline-block', padding: '0.85rem 2rem', background: '#FF6B35', color: '#fff', borderRadius: '12px', textDecoration: 'none', fontWeight: '700', fontSize: '1rem', boxShadow: '0 4px 16px rgba(255,107,53,0.35)' }}>Let&apos;s get started!</Link>
+                <h3 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.6rem', color: '#F6EFE4', marginBottom: '8px' }}>Your library is empty!</h3>
+                <p style={{ color: '#B7B2C4', marginBottom: '24px', lineHeight: 1.6 }}>Let&apos;s create a child&apos;s profile and write their very first story.</p>
+                <Link href="/onboarding" style={{ display: 'inline-block', padding: '0.85rem 2rem', background: 'linear-gradient(180deg,#FFDCA8,#E8913A)', color: '#3A1B06', borderRadius: '12px', textDecoration: 'none', fontWeight: '700', fontSize: '1rem', boxShadow: '0 4px 16px rgba(255,107,53,0.35)' }}>Let&apos;s get started!</Link>
               </div>
             ) : (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
@@ -1085,7 +1093,7 @@ export default function DashboardPage() {
                       <p style={{ fontFamily: 'Fredoka, cursive', fontSize: 'clamp(1.1rem, 3vw, 1.5rem)', color: '#fff', marginBottom: '14px', lineHeight: 1.2, maxWidth: '400px', textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}>
                         {mostRecentStory.title}
                       </p>
-                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: '#FF6B35', color: '#fff', padding: '0.5rem 1.25rem', borderRadius: '10px', fontWeight: '700', fontSize: '0.875rem', boxShadow: '0 2px 12px rgba(255,107,53,0.5)' }}>
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'linear-gradient(180deg,#FFDCA8,#E8913A)', color: '#3A1B06', padding: '0.5rem 1.25rem', borderRadius: '10px', fontWeight: '700', fontSize: '0.875rem', boxShadow: '0 2px 12px rgba(255,107,53,0.5)' }}>
                         Keep reading →
                       </span>
                     </div>
@@ -1107,11 +1115,11 @@ export default function DashboardPage() {
                         <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
                           <span style={{ fontSize: '2.2rem', lineHeight: 1 }}>{palette.emoji}</span>
                           <div>
-                            <h3 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.3rem', color: '#0D183D', fontWeight: '400', marginBottom: '2px' }}>{child.name}&apos;s Library</h3>
+                            <h3 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.3rem', color: '#F6EFE4', fontWeight: '400', marginBottom: '2px' }}>{child.name}&apos;s Library</h3>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <p style={{ fontSize: '0.78rem', color: '#5E6A7A' }}>{storiesByChild(child.id).length} {storiesByChild(child.id).length === 1 ? 'story' : 'stories'}</p>
+                            <p style={{ fontSize: '0.78rem', color: '#B7B2C4' }}>{storiesByChild(child.id).length} {storiesByChild(child.id).length === 1 ? 'story' : 'stories'}</p>
                             {sub?.status === 'subscribed' && (
-                              <span style={{ fontSize: '0.68rem', fontWeight: '700', padding: '2px 8px', borderRadius: '20px', background: childStoriesUsedToday.has(child.name) ? '#F3F4F6' : '#F0FDF4', color: childStoriesUsedToday.has(child.name) ? '#9CA8B4' : '#15803D', border: `1px solid ${childStoriesUsedToday.has(child.name) ? '#E5E7EB' : '#BBF7D0'}` }}>
+                              <span style={{ fontSize: '0.68rem', fontWeight: '700', padding: '2px 8px', borderRadius: '20px', background: childStoriesUsedToday.has(child.name) ? 'rgba(255,231,203,0.06)' : 'rgba(108,192,108,0.16)', color: childStoriesUsedToday.has(child.name) ? '#B7B2C4' : '#8FE6A6', border: `1px solid ${childStoriesUsedToday.has(child.name) ? 'rgba(255,231,203,0.14)' : 'rgba(108,192,108,0.34)'}` }}>
                                 {childStoriesUsedToday.has(child.name) ? '✓ Story used today' : '⚡ Story ready'}
                               </span>
                             )}
@@ -1121,7 +1129,7 @@ export default function DashboardPage() {
                         <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
                           {sub?.status === 'subscribed' && childStoriesUsedToday.has(child.name) ? (
                             <button onClick={handleBuyExtraBook} disabled={!!generating}
-                              style={{ padding: '0.6rem 1.2rem', borderRadius: '10px', border: '2px solid #FF6B35', background: '#FF6B35', color: '#fff', cursor: generating ? 'not-allowed' : 'pointer', fontWeight: '700', fontSize: '0.85rem', opacity: generating ? 0.6 : 1, display: 'flex', alignItems: 'center', gap: '6px' }}>
+                              style={{ padding: '0.6rem 1.2rem', borderRadius: '10px', border: 'none', background: 'linear-gradient(180deg,#FFDCA8,#E8913A)', color: '#3A1B06', cursor: generating ? 'not-allowed' : 'pointer', fontWeight: '700', fontSize: '0.85rem', opacity: generating ? 0.6 : 1, display: 'flex', alignItems: 'center', gap: '6px' }}>
                               <Plus size={14} /> Extra story
                             </button>
                           ) : (
@@ -1129,7 +1137,7 @@ export default function DashboardPage() {
                               id={childIndex === 0 ? 'tour-new-story' : undefined}
                               onClick={() => handleGenerateStory(child.id)}
                               disabled={!!generating}
-                              style={{ padding: '0.6rem 1.2rem', borderRadius: '10px', border: `2px solid ${palette.cover}`, background: 'white', color: palette.cover, cursor: generating ? 'not-allowed' : 'pointer', fontWeight: '700', fontSize: '0.85rem', opacity: generating ? 0.6 : 1, display: 'flex', alignItems: 'center', gap: '6px' }}
+                              style={{ padding: '0.6rem 1.2rem', borderRadius: '10px', border: `2px solid ${palette.cover}`, background: '#161A2E', color: palette.cover, cursor: generating ? 'not-allowed' : 'pointer', fontWeight: '700', fontSize: '0.85rem', opacity: generating ? 0.6 : 1, display: 'flex', alignItems: 'center', gap: '6px' }}
                             >
                               <Plus size={14} /> New story
                             </button>
@@ -1138,11 +1146,11 @@ export default function DashboardPage() {
                       </div>
 
                       {shelf.length === 0 ? (
-                        <div style={{ textAlign: 'center', padding: '40px 20px', color: '#9CA8B4', fontSize: '0.9rem' }}>
+                        <div style={{ textAlign: 'center', padding: '40px 20px', color: '#B7B2C4', fontSize: '0.9rem' }}>
                           No stories yet. Hit &quot;New story&quot; to write the first one!
                         </div>
                       ) : (
-                        <div style={{ background: `linear-gradient(to bottom, ${palette.light}88, ${palette.light}22)`, borderRadius: '16px 16px 0 0', padding: '24px 24px 0' }} id={childIndex === 0 ? 'tour-shelf' : undefined}>
+                        <div style={{ background: `linear-gradient(to bottom, ${palette.light}, transparent)`, borderRadius: '16px 16px 0 0', padding: '24px 24px 0' }} id={childIndex === 0 ? 'tour-shelf' : undefined}>
                           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '32px 20px', alignItems: 'flex-end', paddingBottom: '20px' }}>
                             {shelf.map(item =>
                               item.type === 'single'
@@ -1166,13 +1174,13 @@ export default function DashboardPage() {
         {activeNav === 'children' && (
           <div style={{ maxWidth: '560px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '28px' }}>
-              <h3 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.4rem', color: '#0D183D', fontWeight: '400' }}>Children</h3>
+              <h3 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.4rem', color: '#F6EFE4', fontWeight: '400' }}>Children</h3>
               {(() => {
                 const extraSlots = sub?.extra_child_slots ?? 0;
                 const hasSlot = isAdmin || children.length < 1 + extraSlots;
                 if (hasSlot) {
                   return (
-                    <Link href="/onboarding" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '0.55rem 1.1rem', background: '#0D183D', color: '#fff', borderRadius: '8px', textDecoration: 'none', fontWeight: '600', fontSize: '0.8rem' }}>
+                    <Link href="/onboarding" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '0.55rem 1.1rem', background: 'linear-gradient(180deg,#FFDCA8,#E8913A)', color: '#3A1B06', borderRadius: '8px', textDecoration: 'none', fontWeight: '600', fontSize: '0.8rem' }}>
                       <Plus size={14} /> Add child
                     </Link>
                   );
@@ -1185,27 +1193,27 @@ export default function DashboardPage() {
                       const data = await res.json();
                       if (data.url) window.location.href = data.url;
                     }}
-                    style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '0.55rem 1.1rem', background: '#0D183D', color: '#fff', borderRadius: '8px', border: 'none', cursor: 'pointer', fontWeight: '600', fontSize: '0.8rem' }}
+                    style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '0.55rem 1.1rem', background: 'linear-gradient(180deg,#FFDCA8,#E8913A)', color: '#3A1B06', borderRadius: '8px', border: 'none', cursor: 'pointer', fontWeight: '600', fontSize: '0.8rem' }}
                   >
                     <Plus size={14} /> Add child <span style={{ fontSize: '0.7rem', opacity: 0.75, marginLeft: '2px' }}>$3.99/mo</span>
                   </button>
                 );
               })()}
             </div>
-            {children.length === 0 ? <p style={{ color: '#5E6A7A' }}>No children added yet.</p> : (
+            {children.length === 0 ? <p style={{ color: '#B7B2C4' }}>No children added yet.</p> : (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 {children.map((child, i) => {
                   const palette = CHILD_PALETTES[i % CHILD_PALETTES.length];
                   return (
-                    <div key={child.id} style={{ background: '#fff', border: '1px solid #F0E4D0', borderRadius: '12px', padding: '20px', borderLeft: `4px solid ${palette.cover}` }}>
+                    <div key={child.id} style={{ background: '#161A2E', border: '1px solid rgba(255,231,203,0.13)', borderRadius: '12px', padding: '20px', borderLeft: `4px solid ${palette.cover}` }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '4px' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                           <span style={{ fontSize: '1.5rem' }}>{palette.emoji}</span>
-                          <h4 style={{ fontFamily: 'Fredoka, cursive', fontWeight: '600', color: '#0D183D' }}>{child.name}</h4>
+                          <h4 style={{ fontFamily: 'Fredoka, cursive', fontWeight: '600', color: '#F6EFE4' }}>{child.name}</h4>
                         </div>
                         <button onClick={() => setEditingChild(child as ChildRecord)} style={{ fontSize: '0.75rem', fontWeight: '600', color: palette.cover, background: palette.light, border: 'none', borderRadius: '6px', padding: '4px 12px', cursor: 'pointer' }}>Edit</button>
                       </div>
-                      <p style={{ color: '#5E6A7A', fontSize: '0.875rem', marginBottom: child.interests?.length ? '12px' : 0, paddingLeft: '34px' }}>Age {child.age}</p>
+                      <p style={{ color: '#B7B2C4', fontSize: '0.875rem', marginBottom: child.interests?.length ? '12px' : 0, paddingLeft: '34px' }}>Age {child.age}</p>
                       {child.interests?.length > 0 && (
                         <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', paddingLeft: '34px' }}>
                           {child.interests.slice(0, 6).map(interest => (
@@ -1225,52 +1233,52 @@ export default function DashboardPage() {
           <div style={{ maxWidth: '480px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
 
             <div>
-              <h3 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.4rem', color: '#0D183D', fontWeight: '400', marginBottom: '16px' }}>Account</h3>
-              <div style={{ background: '#fff', border: '1px solid #F0E4D0', borderRadius: '12px', padding: '20px', marginBottom: '12px' }}>
-                <p style={{ fontSize: '0.72rem', color: '#5E6A7A', marginBottom: '4px', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Signed in as</p>
-                <p style={{ fontWeight: '600', color: '#0D183D', fontSize: '0.95rem' }}>{userEmail || (firstChild?.name ? `${firstChild.name}'s family` : 'Your account')}</p>
+              <h3 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.4rem', color: '#F6EFE4', fontWeight: '400', marginBottom: '16px' }}>Account</h3>
+              <div style={{ background: '#161A2E', border: '1px solid rgba(255,231,203,0.13)', borderRadius: '12px', padding: '20px', marginBottom: '12px' }}>
+                <p style={{ fontSize: '0.72rem', color: '#B7B2C4', marginBottom: '4px', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Signed in as</p>
+                <p style={{ fontWeight: '600', color: '#F6EFE4', fontSize: '0.95rem' }}>{userEmail || (firstChild?.name ? `${firstChild.name}'s family` : 'Your account')}</p>
               </div>
               <div style={{ display: 'flex', gap: '10px', marginBottom: '12px' }}>
                 <button onClick={() => { setAccountSection(accountSection === 'email' ? null : 'email'); setAccountMsg(null); }}
-                  style={{ flex: 1, padding: '0.65rem', borderRadius: '10px', border: '1.5px solid #F0E4D0', background: accountSection === 'email' ? '#FFF0E6' : '#fff', color: '#0D183D', cursor: 'pointer', fontWeight: '600', fontSize: '0.82rem' }}>
+                  style={{ flex: 1, padding: '0.65rem', borderRadius: '10px', border: '1.5px solid rgba(255,231,203,0.13)', background: accountSection === 'email' ? 'rgba(255,183,101,0.10)' : '#fff', color: '#F6EFE4', cursor: 'pointer', fontWeight: '600', fontSize: '0.82rem' }}>
                   Change email
                 </button>
                 <button onClick={() => { setAccountSection(accountSection === 'password' ? null : 'password'); setAccountMsg(null); }}
-                  style={{ flex: 1, padding: '0.65rem', borderRadius: '10px', border: '1.5px solid #F0E4D0', background: accountSection === 'password' ? '#FFF0E6' : '#fff', color: '#0D183D', cursor: 'pointer', fontWeight: '600', fontSize: '0.82rem' }}>
+                  style={{ flex: 1, padding: '0.65rem', borderRadius: '10px', border: '1.5px solid rgba(255,231,203,0.13)', background: accountSection === 'password' ? 'rgba(255,183,101,0.10)' : '#fff', color: '#F6EFE4', cursor: 'pointer', fontWeight: '600', fontSize: '0.82rem' }}>
                   Change password
                 </button>
               </div>
               {accountSection && (
-                <div style={{ background: '#FFF8F3', border: '1.5px solid #F0E4D0', borderRadius: '12px', padding: '16px', marginBottom: '12px' }}>
+                <div style={{ background: '#161A2E', border: '1.5px solid rgba(255,231,203,0.13)', borderRadius: '12px', padding: '16px', marginBottom: '12px' }}>
                   {accountSection === 'email' ? (
                     <>
-                      <p style={{ fontSize: '0.82rem', color: '#5E6A7A', marginBottom: '10px' }}>Enter a new email address. We&apos;ll send a confirmation link.</p>
+                      <p style={{ fontSize: '0.82rem', color: '#B7B2C4', marginBottom: '10px' }}>Enter a new email address. We&apos;ll send a confirmation link.</p>
                       <input type="email" placeholder="New email address" value={newEmail} onChange={e => setNewEmail(e.target.value)}
-                        style={{ width: '100%', padding: '0.65rem 0.9rem', borderRadius: '8px', border: '1.5px solid #F0E4D0', fontSize: '0.875rem', outline: 'none', boxSizing: 'border-box' as const, marginBottom: '10px' }} />
+                        style={{ width: '100%', padding: '0.65rem 0.9rem', borderRadius: '8px', border: '1.5px solid rgba(255,231,203,0.13)', fontSize: '0.875rem', outline: 'none', boxSizing: 'border-box' as const, marginBottom: '10px' }} />
                       <button disabled={accountLoading || !newEmail} onClick={async () => {
                         setAccountLoading(true); setAccountMsg(null);
                         const { error } = await supabase.auth.updateUser({ email: newEmail });
                         setAccountLoading(false);
                         setAccountMsg(error ? { ok: false, text: error.message } : { ok: true, text: 'Confirmation sent. Check your new inbox.' });
                         if (!error) setNewEmail('');
-                      }} style={{ width: '100%', padding: '0.65rem', borderRadius: '8px', border: 'none', background: '#FF6B35', color: '#fff', fontWeight: '700', fontSize: '0.875rem', cursor: 'pointer', opacity: accountLoading || !newEmail ? 0.5 : 1 }}>
+                      }} style={{ width: '100%', padding: '0.65rem', borderRadius: '8px', border: 'none', background: 'linear-gradient(180deg,#FFDCA8,#E8913A)', color: '#3A1B06', fontWeight: '700', fontSize: '0.875rem', cursor: 'pointer', opacity: accountLoading || !newEmail ? 0.5 : 1 }}>
                         {accountLoading ? 'Sending…' : 'Send confirmation'}
                       </button>
                     </>
                   ) : (
                     <>
-                      <p style={{ fontSize: '0.82rem', color: '#5E6A7A', marginBottom: '10px' }}>Choose a new password (minimum 8 characters).</p>
+                      <p style={{ fontSize: '0.82rem', color: '#B7B2C4', marginBottom: '10px' }}>Choose a new password (minimum 8 characters).</p>
                       <input type="password" placeholder="New password" value={newPassword} onChange={e => setNewPassword(e.target.value)}
-                        style={{ width: '100%', padding: '0.65rem 0.9rem', borderRadius: '8px', border: '1.5px solid #F0E4D0', fontSize: '0.875rem', outline: 'none', boxSizing: 'border-box' as const, marginBottom: '8px' }} />
+                        style={{ width: '100%', padding: '0.65rem 0.9rem', borderRadius: '8px', border: '1.5px solid rgba(255,231,203,0.13)', fontSize: '0.875rem', outline: 'none', boxSizing: 'border-box' as const, marginBottom: '8px' }} />
                       <input type="password" placeholder="Confirm password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)}
-                        style={{ width: '100%', padding: '0.65rem 0.9rem', borderRadius: '8px', border: '1.5px solid #F0E4D0', fontSize: '0.875rem', outline: 'none', boxSizing: 'border-box' as const, marginBottom: '10px' }} />
+                        style={{ width: '100%', padding: '0.65rem 0.9rem', borderRadius: '8px', border: '1.5px solid rgba(255,231,203,0.13)', fontSize: '0.875rem', outline: 'none', boxSizing: 'border-box' as const, marginBottom: '10px' }} />
                       <button disabled={accountLoading || newPassword.length < 8 || newPassword !== confirmPassword} onClick={async () => {
                         setAccountLoading(true); setAccountMsg(null);
                         const { error } = await supabase.auth.updateUser({ password: newPassword });
                         setAccountLoading(false);
                         setAccountMsg(error ? { ok: false, text: error.message } : { ok: true, text: 'Password updated successfully.' });
                         if (!error) { setNewPassword(''); setConfirmPassword(''); setAccountSection(null); }
-                      }} style={{ width: '100%', padding: '0.65rem', borderRadius: '8px', border: 'none', background: '#FF6B35', color: '#fff', fontWeight: '700', fontSize: '0.875rem', cursor: 'pointer', opacity: (accountLoading || newPassword.length < 8 || newPassword !== confirmPassword) ? 0.5 : 1 }}>
+                      }} style={{ width: '100%', padding: '0.65rem', borderRadius: '8px', border: 'none', background: 'linear-gradient(180deg,#FFDCA8,#E8913A)', color: '#3A1B06', fontWeight: '700', fontSize: '0.875rem', cursor: 'pointer', opacity: (accountLoading || newPassword.length < 8 || newPassword !== confirmPassword) ? 0.5 : 1 }}>
                         {accountLoading ? 'Updating…' : 'Update password'}
                       </button>
                     </>
@@ -1281,41 +1289,41 @@ export default function DashboardPage() {
                 </div>
               )}
               <button onClick={async () => { await supabase.auth.signOut(); window.location.href = '/'; }}
-                style={{ width: '100%', padding: '0.7rem', borderRadius: '10px', border: '1.5px solid #F0E4D0', background: '#fff', color: '#FF6B35', cursor: 'pointer', fontWeight: '600', fontSize: '0.875rem' }}>
+                style={{ width: '100%', padding: '0.7rem', borderRadius: '10px', border: '1.5px solid rgba(255,231,203,0.13)', background: '#161A2E', color: '#FF6B35', cursor: 'pointer', fontWeight: '600', fontSize: '0.875rem' }}>
                 Sign out
               </button>
             </div>
 
             {/* Subscription */}
             <div>
-              <h3 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.4rem', color: '#0D183D', fontWeight: '400', marginBottom: '16px' }}>Subscription</h3>
-              <div style={{ background: '#fff', border: '1px solid #F0E4D0', borderRadius: '12px', padding: '20px', marginBottom: '12px' }}>
+              <h3 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.4rem', color: '#F6EFE4', fontWeight: '400', marginBottom: '16px' }}>Subscription</h3>
+              <div style={{ background: '#161A2E', border: '1px solid rgba(255,231,203,0.13)', borderRadius: '12px', padding: '20px', marginBottom: '12px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: sub?.status === 'subscribed' ? '12px' : '0' }}>
-                  <p style={{ fontWeight: '600', color: '#0D183D', fontSize: '0.95rem' }}>Current plan</p>
-                  <span style={{ fontSize: '0.75rem', fontWeight: '700', padding: '3px 10px', borderRadius: '20px', background: isAdmin ? '#EDE9FE' : sub?.status === 'subscribed' ? '#E6F4EC' : '#FFF0E6', color: isAdmin ? '#6D28D9' : sub?.status === 'subscribed' ? '#1a7a4a' : '#FF6B35' }}>
+                  <p style={{ fontWeight: '600', color: '#F6EFE4', fontSize: '0.95rem' }}>Current plan</p>
+                  <span style={{ fontSize: '0.75rem', fontWeight: '700', padding: '3px 10px', borderRadius: '20px', background: isAdmin ? 'rgba(142,123,255,0.20)' : sub?.status === 'subscribed' ? 'rgba(69,191,203,0.16)' : 'rgba(255,183,101,0.10)', color: isAdmin ? '#B9AFFF' : sub?.status === 'subscribed' ? '#1a7a4a' : '#FF6B35' }}>
                     {isAdmin ? 'Admin' : sub?.status === 'subscribed' ? 'Active' : 'Free'}
                   </span>
                 </div>
                 {sub?.status === 'subscribed' && (
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <p style={{ color: '#5E6A7A', fontSize: '0.875rem' }}>Children on plan</p>
-                    <span style={{ fontWeight: '700', color: '#0D183D' }}>{children.length}</span>
+                    <p style={{ color: '#B7B2C4', fontSize: '0.875rem' }}>Children on plan</p>
+                    <span style={{ fontWeight: '700', color: '#F6EFE4' }}>{children.length}</span>
                   </div>
                 )}
                 {!sub?.status && !isAdmin && (
-                  <p style={{ color: '#5E6A7A', fontSize: '0.875rem', marginTop: '8px' }}>
+                  <p style={{ color: '#B7B2C4', fontSize: '0.875rem', marginTop: '8px' }}>
                     {freeStoriesRemaining} free {freeStoriesRemaining === 1 ? 'story' : 'stories'} remaining. Subscribe for a new story every night.
                   </p>
                 )}
               </div>
               {sub?.status === 'subscribed' || isAdmin ? (
                 <button onClick={async () => { if (!(await verifyParent())) return; const res = await fetch('/api/stripe/portal', { method: 'POST' }); const d = await res.json(); if (d.url) window.location.href = d.url; }}
-                  style={{ width: '100%', padding: '0.7rem', borderRadius: '10px', border: '1.5px solid #FF6B35', background: '#fff', color: '#FF6B35', cursor: 'pointer', fontWeight: '600', fontSize: '0.875rem' }}>
+                  style={{ width: '100%', padding: '0.7rem', borderRadius: '10px', border: '1.5px solid #FF6B35', background: '#161A2E', color: '#FF6B35', cursor: 'pointer', fontWeight: '600', fontSize: '0.875rem' }}>
                   Manage billing
                 </button>
               ) : isAdmin ? null : (
                 <button onClick={() => setPaywallReason('free_exhausted')}
-                  style={{ width: '100%', padding: '0.7rem', borderRadius: '10px', border: 'none', background: '#FF6B35', color: '#fff', cursor: 'pointer', fontWeight: '600', fontSize: '0.875rem' }}>
+                  style={{ width: '100%', padding: '0.7rem', borderRadius: '10px', border: 'none', background: 'linear-gradient(180deg,#FFDCA8,#E8913A)', color: '#3A1B06', cursor: 'pointer', fontWeight: '600', fontSize: '0.875rem' }}>
                   Subscribe - from A$9.99/month
                 </button>
               )}
@@ -1323,9 +1331,9 @@ export default function DashboardPage() {
 
             {/* Referral */}
             <div>
-              <h3 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.4rem', color: '#0D183D', fontWeight: '400', marginBottom: '8px' }}>Refer a friend 🎁</h3>
-              <p style={{ fontSize: '0.82rem', color: '#5E6A7A', marginBottom: '12px' }}>Share your code. Your friend gets <strong>10% off</strong> their first month.</p>
-              <div style={{ background: '#fff', border: '1.5px solid #F0E4D0', borderRadius: '12px', padding: '16px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
+              <h3 style={{ fontFamily: 'Fredoka, cursive', fontSize: '1.4rem', color: '#F6EFE4', fontWeight: '400', marginBottom: '8px' }}>Refer a friend 🎁</h3>
+              <p style={{ fontSize: '0.82rem', color: '#B7B2C4', marginBottom: '12px' }}>Share your code. Your friend gets <strong>10% off</strong> their first month.</p>
+              <div style={{ background: '#161A2E', border: '1.5px solid rgba(255,231,203,0.13)', borderRadius: '12px', padding: '16px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
                 <span style={{ fontFamily: 'monospace', fontSize: '1.15rem', fontWeight: '800', letterSpacing: '0.12em', color: '#FF6B35' }}>
                   {userId ? `TALE-${userId.replace(/-/g,'').slice(0,8).toUpperCase()}` : 'N/A'}
                 </span>
@@ -1346,11 +1354,11 @@ export default function DashboardPage() {
 
       {/* Mobile bottom nav */}
       {isMobile && (
-        <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, height: '72px', background: '#fff', borderTop: '2px solid #F0E4D0', display: 'flex', justifyContent: 'space-around', alignItems: 'center', zIndex: 40 }}>
+        <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, height: '72px', background: '#161A2E', borderTop: '2px solid rgba(255,231,203,0.13)', display: 'flex', justifyContent: 'space-around', alignItems: 'center', zIndex: 40 }}>
           {navItems.map(({ id, label, icon: Icon }) => {
             const active = activeNav === id;
             return (
-              <button key={id} id={`tour-${id}-nav-mobile`} onClick={() => setActiveNav(id)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '3px', border: 'none', background: 'none', cursor: 'pointer', color: active ? '#FF6B35' : '#9CA8B4', padding: '8px 12px', flex: 1 }}>
+              <button key={id} id={`tour-${id}-nav-mobile`} onClick={() => setActiveNav(id)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '3px', border: 'none', background: 'none', cursor: 'pointer', color: active ? '#FF6B35' : '#B7B2C4', padding: '8px 12px', flex: 1 }}>
                 <Icon size={22} />
                 <span style={{ fontSize: '0.6rem', fontWeight: active ? '700' : '500', letterSpacing: '0.04em', textTransform: 'uppercase' }}>{label}</span>
               </button>
