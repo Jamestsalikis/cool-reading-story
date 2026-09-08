@@ -366,9 +366,9 @@ export default function OnboardingPage() {
 
   const inputStyle: React.CSSProperties = {
     width: '100%', padding: '0.65rem 0.875rem',
-    border: '1.5px solid #F0E4D0', borderRadius: '8px',
+    border: '1.5px solid rgba(255,231,203,0.16)', borderRadius: '8px',
     fontSize: '0.95rem', outline: 'none',
-    backgroundColor: '#fff', color: '#0D183D',
+    backgroundColor: 'rgba(8,10,22,0.55)', color: '#F6EFE4',
   };
 
   const chipBase: React.CSSProperties = {
@@ -379,25 +379,40 @@ export default function OnboardingPage() {
 
   const chip = (active: boolean): React.CSSProperties => ({
     ...chipBase,
-    border: `1.5px solid ${active ? '#FF6B35' : '#F0E4D0'}`,
-    backgroundColor: active ? '#FF6B35' : '#fff',
-    color: active ? '#fff' : '#0D183D',
+    border: `1.5px solid ${active ? 'transparent' : 'rgba(255,231,203,0.16)'}`,
+    background: active
+      ? 'linear-gradient(180deg,#FFDCA8,#E8913A)'
+      : 'rgba(255,231,203,0.06)',
+    color: active ? '#3A1B06' : '#F6EFE4',
   });
 
-  const labelStyle: React.CSSProperties = { display: 'block', marginBottom: '8px', fontWeight: '500', color: '#0D183D', fontSize: '0.9rem' };
-  const optionalLabel: React.CSSProperties = { ...labelStyle, color: '#5E6A7A' };
+  const labelStyle: React.CSSProperties = { display: 'block', marginBottom: '8px', fontWeight: '500', color: '#F6EFE4', fontSize: '0.9rem' };
+  const optionalLabel: React.CSSProperties = { ...labelStyle, color: '#B7B2C4' };
 
   const TOTAL_STEPS = 4; // steps 2–5 = 4 visible dots
   const ProgressDots = () => (
     <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', marginBottom: '40px' }}>
       {[2, 3, 4, 5].map((s) => (
-        <div key={s} style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: state.step >= s ? '#FF6B35' : '#F0E4D0', transition: 'background-color 0.3s' }} />
+        <div key={s} style={{ width: '10px', height: '10px', borderRadius: '50%', background: state.step >= s ? 'linear-gradient(180deg,#FFDCA8,#E8913A)' : 'rgba(255,231,203,0.16)', transition: 'background-color 0.3s' }} />
       ))}
     </div>
   );
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#FFF4E6', padding: '32px 20px' }}>
+    <div style={{ minHeight: '100vh', backgroundColor: '#0B0D1C', padding: '32px 20px' }}>
+      <style>{`
+        body { background: #0B0D1C; color: #F6EFE4; }
+        /* globals.css paints .btn-brand as white on the flat brand orange:
+           2.84. The reader still relies on that rule, so it is overridden here
+           for the duration of onboarding instead of edited at source. */
+        .btn-brand { background: linear-gradient(180deg,#FFDCA8,#E8913A) !important;
+          color: #3A1B06 !important;
+          box-shadow: 0 2px 6px rgba(232,145,58,.34), 0 12px 30px rgba(232,145,58,.26); }
+        .btn-brand:hover { background: linear-gradient(180deg,#FFE4BC,#F09B41) !important; }
+        input::placeholder, textarea::placeholder { color: #7C7893; }
+        input:-webkit-autofill { -webkit-text-fill-color: #F6EFE4;
+          -webkit-box-shadow: 0 0 0 1000px #14172a inset; }
+      `}</style>
       <div style={{ maxWidth: '600px', margin: '0 auto' }}>
 
 
@@ -405,22 +420,22 @@ export default function OnboardingPage() {
         {state.step === 2 && (
           <div>
             <ProgressDots />
-            <h1 className="font-serif" style={{ fontSize: '2rem', marginBottom: '8px', color: '#0D183D' }}>Tell us about your child</h1>
-            <p style={{ color: '#5E6A7A', marginBottom: '32px', fontSize: '0.95rem' }}>This is how they'll appear as the hero of every story</p>
+            <h1 className="font-serif" style={{ fontSize: '2rem', marginBottom: '8px', color: '#F6EFE4' }}>Tell us about your child</h1>
+            <p style={{ color: '#B7B2C4', marginBottom: '32px', fontSize: '0.95rem' }}>This is how they'll appear as the hero of every story</p>
 
             <div style={{ marginBottom: '24px' }}>
-              <label style={labelStyle}>Child's name <span style={{ color: '#FF6B35' }}>*</span></label>
-              <input type="text" style={{ ...inputStyle, borderColor: nameError ? '#991B1B' : '#F0E4D0' }} placeholder="e.g. Leo" value={state.name}
+              <label style={labelStyle}>Child's name <span style={{ color: '#FFB765' }}>*</span></label>
+              <input type="text" style={{ ...inputStyle, borderColor: nameError ? 'rgba(255,138,122,0.70)' : 'rgba(255,231,203,0.18)' }} placeholder="e.g. Leo" value={state.name}
                 onChange={(e) => { setState({ ...state, name: e.target.value }); setNameError(''); }} />
-              {nameError && <p style={{ color: '#991B1B', fontSize: '0.8rem', marginTop: '6px' }}>{nameError}</p>}
+              {nameError && <p style={{ color: '#FFC9C0', fontSize: '0.8rem', marginTop: '6px' }}>{nameError}</p>}
             </div>
 
             <div style={{ marginBottom: '24px' }}>
-              <label style={labelStyle}>Age <span style={{ color: '#FF6B35' }}>*</span></label>
+              <label style={labelStyle}>Age <span style={{ color: '#FFB765' }}>*</span></label>
               <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                <button onClick={() => setState({ ...state, age: Math.max(3, state.age - 1) })} style={{ width: '44px', height: '44px', borderRadius: '8px', border: '1.5px solid #F0E4D0', backgroundColor: '#fff', cursor: 'pointer', fontSize: '1.25rem' }}>−</button>
+                <button onClick={() => setState({ ...state, age: Math.max(3, state.age - 1) })} style={{ width: '44px', height: '44px', borderRadius: '8px', border: '1.5px solid rgba(255,231,203,0.16)', background: 'rgba(255,231,203,0.06)', color: '#F6EFE4', cursor: 'pointer', fontSize: '1.25rem' }}>−</button>
                 <span style={{ fontSize: '1.5rem', fontWeight: '600', minWidth: '40px', textAlign: 'center' }}>{state.age}</span>
-                <button onClick={() => setState({ ...state, age: Math.min(12, state.age + 1) })} style={{ width: '44px', height: '44px', borderRadius: '8px', border: '1.5px solid #F0E4D0', backgroundColor: '#fff', cursor: 'pointer', fontSize: '1.25rem' }}>+</button>
+                <button onClick={() => setState({ ...state, age: Math.min(12, state.age + 1) })} style={{ width: '44px', height: '44px', borderRadius: '8px', border: '1.5px solid rgba(255,231,203,0.16)', background: 'rgba(255,231,203,0.06)', color: '#F6EFE4', cursor: 'pointer', fontSize: '1.25rem' }}>+</button>
               </div>
             </div>
 
@@ -435,7 +450,7 @@ export default function OnboardingPage() {
 
             <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
               <button onClick={handleNext} className="btn-brand" style={{ flex: 1, padding: '0.75rem 1.75rem' }}>Next step</button>
-              <Link href="/dashboard" style={{ color: '#FF6B35', textDecoration: 'none', fontWeight: '500' }}>Back</Link>
+              <Link href="/dashboard" style={{ color: '#FFB765', textDecoration: 'none', fontWeight: '500' }}>Back</Link>
             </div>
           </div>
         )}
@@ -444,8 +459,8 @@ export default function OnboardingPage() {
         {state.step === 3 && (
           <div>
             <ProgressDots />
-            <h1 className="font-serif" style={{ fontSize: '2rem', marginBottom: '8px', color: '#0D183D' }}>What does {state.name || 'your child'} love?</h1>
-            <p style={{ color: (isFreeUser ? state.interests.length >= 3 : state.interests.length >= 5) ? '#FF6B35' : '#5E6A7A', marginBottom: '32px', fontSize: '0.95rem' }}>
+            <h1 className="font-serif" style={{ fontSize: '2rem', marginBottom: '8px', color: '#F6EFE4' }}>What does {state.name || 'your child'} love?</h1>
+            <p style={{ color: (isFreeUser ? state.interests.length >= 3 : state.interests.length >= 5) ? '#FFB765' : '#B7B2C4', marginBottom: '32px', fontSize: '0.95rem' }}>
               {(isFreeUser ? state.interests.length >= 3 : state.interests.length >= 5) ? 'Maximum reached. Remove one to swap.' : `Pick 1 to ${isFreeUser ? 3 : 5} interests — these shape every story`}
             </p>
 
@@ -520,7 +535,7 @@ export default function OnboardingPage() {
               .it-star { animation: it-star-blink 2s ease-in-out infinite; }
             `}</style>
             {isFreeUser && (
-              <div style={{ background: '#FFFBEB', border: '1px solid #D97706', borderRadius: '10px', padding: '0.75rem 1rem', marginBottom: '12px', fontSize: '0.8125rem', color: '#92400E', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <div style={{ background: 'rgba(232,145,58,0.14)', border: '1px solid rgba(255,183,101,0.42)', borderRadius: '10px', padding: '0.75rem 1rem', marginBottom: '12px', fontSize: '0.8125rem', color: '#FFDCA8', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <span><strong>Free trial:</strong> Choose from 8 sample interests. Subscribe to unlock all 27 themes and personalise your story fully.</span>
               </div>
             )}
@@ -1790,7 +1805,7 @@ export default function OnboardingPage() {
                         ? `0 8px 24px ${option.sh}, 0 2px 4px rgba(0,0,0,0.08)`
                         : darkBg
                           ? '0 4px 20px rgba(0,0,0,0.45), 0 0 0 1.5px rgba(255,255,255,0.08)'
-                          : '0 2px 10px rgba(0,0,0,0.07), 0 0 0 1.5px #F0E4D0',
+                          : '0 2px 10px rgba(0,0,0,0.07), 0 0 0 1.5px rgba(255,231,203,0.18)',
                     }}
                   >
                     <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }} viewBox="0 0 80 60" preserveAspectRatio="xMidYMid slice">
@@ -1831,7 +1846,7 @@ export default function OnboardingPage() {
                         }}>{option.label}</span>
                       </div>
                     )}
-                    <span style={{ position: 'relative', zIndex: 1, fontSize: '0.75rem', fontWeight: '800', lineHeight: 1.2, textAlign: 'center', color: (active || !!darkBg) ? 'rgba(255,255,255,1)' : '#0D183D', letterSpacing: '0.03em', textShadow: (active || !!darkBg) ? '0 1px 4px rgba(0,0,0,0.7), 0 0 8px rgba(0,0,0,0.4)' : '0 1px 3px rgba(255,255,255,0.9)' }}>
+                    <span style={{ position: 'relative', zIndex: 1, fontSize: '0.75rem', fontWeight: '800', lineHeight: 1.2, textAlign: 'center', color: (active || !!darkBg) ? 'rgba(255,255,255,1)' : '#F6EFE4', letterSpacing: '0.03em', textShadow: (active || !!darkBg) ? '0 1px 4px rgba(0,0,0,0.7), 0 0 8px rgba(0,0,0,0.4)' : '0 1px 3px rgba(255,255,255,0.9)' }}>
                       {option.label}
                     </span>
                   </button>
@@ -1840,9 +1855,9 @@ export default function OnboardingPage() {
             </div>
 
             {/* Premium upsell */}
-            <div style={{ display: 'flex', alignItems: 'center', background: 'linear-gradient(135deg, #FFF4E6 0%, #FFF0E0 100%)', border: '1.5px solid #FFD4A8', borderRadius: '12px', padding: '12px 16px', marginBottom: '16px' }}>
-              <p style={{ margin: 0, fontSize: '0.82rem', color: '#5E3A0A', lineHeight: 1.4 }}>
-                <strong style={{ color: '#C85A00' }}>Premium</strong> unlocks up to 5 interests, all locked tiles, and custom themes.
+            <div style={{ display: 'flex', alignItems: 'center', background: 'linear-gradient(135deg, rgba(255,183,101,0.14) 0%, rgba(232,145,58,0.08) 100%)', border: '1.5px solid rgba(255,183,101,0.34)', borderRadius: '12px', padding: '12px 16px', marginBottom: '16px' }}>
+              <p style={{ margin: 0, fontSize: '0.82rem', color: '#E8D9C4', lineHeight: 1.4 }}>
+                <strong style={{ color: '#FFC98A' }}>Premium</strong> unlocks up to 5 interests, all locked tiles, and custom themes.
               </p>
             </div>
 
@@ -1853,9 +1868,9 @@ export default function OnboardingPage() {
               return customAdded.length > 0 ? (
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '12px' }}>
                   {customAdded.map(interest => (
-                    <span key={interest} style={{ display: 'flex', alignItems: 'center', gap: '6px', background: '#FFF0E6', border: '1.5px solid #FF6B35', borderRadius: '8px', padding: '0.4rem 0.8rem', fontSize: '0.85rem', color: '#FF6B35', fontWeight: '600' }}>
+                    <span key={interest} style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(255,183,101,0.12)', border: '1.5px solid rgba(255,183,101,0.44)', borderRadius: '8px', padding: '0.4rem 0.8rem', fontSize: '0.85rem', color: '#FFC98A', fontWeight: '600' }}>
                       {interest}
-                      <button onClick={() => handleInterestToggle(interest)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#FF6B35', padding: 0, fontSize: '1rem', lineHeight: 1, display: 'flex', alignItems: 'center' }}>×</button>
+                      <button onClick={() => handleInterestToggle(interest)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#FFB765', padding: 0, fontSize: '1rem', lineHeight: 1, display: 'flex', alignItems: 'center' }}>×</button>
                     </span>
                   ))}
                 </div>
@@ -1864,14 +1879,14 @@ export default function OnboardingPage() {
 
             {/* Add custom interest input */}
             {interestError && (
-              <p style={{ color: '#DC2626', fontSize: '0.8rem', marginBottom: '8px', fontWeight: '500' }}>{interestError}</p>
+              <p style={{ color: '#FFC9C0', fontSize: '0.8rem', marginBottom: '8px', fontWeight: '500' }}>{interestError}</p>
             )}
             {isFreeUser ? (
               <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
                 <div style={{ flex: 1, position: 'relative' }}>
                   <input
                     type="text" disabled
-                    style={{ ...inputStyle, width: '100%', opacity: 0.55, cursor: 'not-allowed', backgroundColor: '#F2F4F8', paddingRight: '40px', boxSizing: 'border-box' }}
+                    style={{ ...inputStyle, width: '100%', opacity: 0.55, cursor: 'not-allowed', backgroundColor: 'rgba(255,231,203,0.05)', paddingRight: '40px', boxSizing: 'border-box' }}
                     placeholder="Subscribe to add your own interest" />
                   <span style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', fontSize: '1rem', pointerEvents: 'none' }}>🔒</span>
                 </div>
@@ -1888,7 +1903,7 @@ export default function OnboardingPage() {
             )}
 
             {state.interests.length === 0 && (
-              <p style={{ color: '#FF6B35', marginBottom: '12px', fontSize: '0.875rem', fontWeight: '500' }}>Select at least 1 interest</p>
+              <p style={{ color: '#FFB765', marginBottom: '12px', fontSize: '0.875rem', fontWeight: '500' }}>Select at least 1 interest</p>
             )}
 
             {isFreeUser ? (
@@ -1905,7 +1920,7 @@ export default function OnboardingPage() {
                   }}>
                   Next step
                 </button>
-                <button onClick={handleBack} style={{ background: 'none', border: 'none', color: '#FF6B35', cursor: 'pointer', fontWeight: '500', padding: 0 }}>Back</button>
+                <button onClick={handleBack} style={{ background: 'none', border: 'none', color: '#FFB765', cursor: 'pointer', fontWeight: '500', padding: 0 }}>Back</button>
               </div>
             ) : (
               /* Subscribers: normal single next button */
@@ -1914,7 +1929,7 @@ export default function OnboardingPage() {
                   style={{ flex: 1, padding: '0.75rem 1.75rem', opacity: state.interests.length < 1 ? 0.5 : 1, cursor: state.interests.length < 1 ? 'not-allowed' : 'pointer' }}>
                   Next step
                 </button>
-                <button onClick={handleBack} style={{ background: 'none', border: 'none', color: '#FF6B35', cursor: 'pointer', fontWeight: '500', padding: 0 }}>Back</button>
+                <button onClick={handleBack} style={{ background: 'none', border: 'none', color: '#FFB765', cursor: 'pointer', fontWeight: '500', padding: 0 }}>Back</button>
               </div>
             )}
           </div>
@@ -1924,26 +1939,26 @@ export default function OnboardingPage() {
         {state.step === 4 && (
           <div>
             <ProgressDots />
-            <h1 className="font-serif" style={{ fontSize: '2rem', marginBottom: '8px', color: '#0D183D' }}>Let's get specific!</h1>
-            <p style={{ color: '#5E6A7A', marginBottom: '32px', fontSize: '0.95rem' }}>
+            <h1 className="font-serif" style={{ fontSize: '2rem', marginBottom: '8px', color: '#F6EFE4' }}>Let's get specific!</h1>
+            <p style={{ color: '#B7B2C4', marginBottom: '32px', fontSize: '0.95rem' }}>
               These details make {state.name || 'your child'}'s story feel like it was written just for them. Skip any you don't know.
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
               {followUpSections.map(({ interest, emoji, questions }) => (
-                <div key={interest} style={{ borderLeft: '3px solid #F0E4D0', paddingLeft: '16px' }}>
+                <div key={interest} style={{ borderLeft: '3px solid rgba(255,231,203,0.18)', paddingLeft: '16px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
                     <span style={{
                       display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
                       width: '32px', height: '32px', borderRadius: '8px',
-                      background: '#FFF0E6', fontSize: '1.15rem', flexShrink: 0,
+                      background: 'rgba(255,183,101,0.12)', fontSize: '1.15rem', flexShrink: 0,
                     }}>{emoji}</span>
-                    <p style={{ fontWeight: '600', color: '#0D183D', margin: 0, fontSize: '0.95rem' }}>{interest}</p>
+                    <p style={{ fontWeight: '600', color: '#F6EFE4', margin: 0, fontSize: '0.95rem' }}>{interest}</p>
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                     {questions.map(({ q, placeholder }) => (
                       <div key={q}>
-                        <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.875rem', color: '#4A3728' }}>{q}</label>
+                        <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.875rem', color: '#B7B2C4' }}>{q}</label>
                         <input
                           type="text"
                           style={inputStyle}
@@ -1959,14 +1974,14 @@ export default function OnboardingPage() {
 
               {/* Custom interests (no questions defined) */}
               {state.interests.filter(i => !FOLLOW_UP_QUESTIONS[i]).length > 0 && (
-                <div style={{ borderLeft: '3px solid #F0E4D0', paddingLeft: '16px' }}>
+                <div style={{ borderLeft: '3px solid rgba(255,231,203,0.18)', paddingLeft: '16px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '14px' }}>
-                    <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '32px', height: '32px', borderRadius: '8px', background: '#FFF0E6', fontSize: '0.85rem', flexShrink: 0, fontWeight: '700', color: '#FF6B35' }}>+</span>
-                    <p style={{ fontWeight: '600', color: '#0D183D', margin: 0, fontSize: '0.95rem' }}>Other interests</p>
+                    <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '32px', height: '32px', borderRadius: '8px', background: 'rgba(255,183,101,0.12)', fontSize: '0.85rem', flexShrink: 0, fontWeight: '700', color: '#FFC98A' }}>+</span>
+                    <p style={{ fontWeight: '600', color: '#F6EFE4', margin: 0, fontSize: '0.95rem' }}>Other interests</p>
                   </div>
                   {state.interests.filter(i => !FOLLOW_UP_QUESTIONS[i]).map((interest) => (
                     <div key={interest} style={{ marginBottom: '12px' }}>
-                      <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.875rem', color: '#4A3728' }}>
+                      <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.875rem', color: '#B7B2C4' }}>
                         Tell us more about their love of {interest}
                       </label>
                       <input
@@ -1984,7 +1999,7 @@ export default function OnboardingPage() {
 
             <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginTop: '32px' }}>
               <button onClick={handleNext} className="btn-brand" style={{ flex: 1, padding: '0.75rem 1.75rem' }}>Next step</button>
-              <button onClick={handleBack} style={{ background: 'none', border: 'none', color: '#FF6B35', cursor: 'pointer', fontWeight: '500', padding: 0 }}>Back</button>
+              <button onClick={handleBack} style={{ background: 'none', border: 'none', color: '#FFB765', cursor: 'pointer', fontWeight: '500', padding: 0 }}>Back</button>
             </div>
           </div>
         )}
@@ -1993,14 +2008,14 @@ export default function OnboardingPage() {
         {state.step === 5 && (
           <div>
             <ProgressDots />
-            <h1 className="font-serif" style={{ fontSize: '2rem', marginBottom: '8px', color: '#0D183D' }}>Almost there!</h1>
-            <p style={{ color: '#5E6A7A', marginBottom: '28px', fontSize: '0.95rem' }}>
+            <h1 className="font-serif" style={{ fontSize: '2rem', marginBottom: '8px', color: '#F6EFE4' }}>Almost there!</h1>
+            <p style={{ color: '#B7B2C4', marginBottom: '28px', fontSize: '0.95rem' }}>
               A few more details to make {state.name || 'their'} stories feel truly personal
             </p>
 
             {/* Appearance */}
             <div style={{ marginBottom: '24px' }}>
-              <p style={{ ...labelStyle, marginBottom: '12px' }}>Appearance <span style={{ color: '#5E6A7A', fontWeight: '400', fontSize: '0.8rem' }}>(optional)</span></p>
+              <p style={{ ...labelStyle, marginBottom: '12px' }}>Appearance <span style={{ color: '#B7B2C4', fontWeight: '400', fontSize: '0.8rem' }}>(optional)</span></p>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                 <div>
                   <label style={optionalLabel}>Skin colour</label>
@@ -2015,8 +2030,8 @@ export default function OnboardingPage() {
                         onClick={() => setState({ ...state, skinColour: state.skinColour === label ? '' : label })}
                         style={{
                           width: '32px', height: '32px', borderRadius: '50%',
-                          background: hex, border: state.skinColour === label ? '3px solid #FF6B35' : '3px solid transparent',
-                          outline: state.skinColour === label ? '2px solid #FF6B35' : '2px solid #E0CDB8',
+                          background: hex, border: state.skinColour === label ? '3px solid #FFB765' : '3px solid transparent',
+                          outline: state.skinColour === label ? '2px solid #FFB765' : '2px solid rgba(255,231,203,0.28)',
                           outlineOffset: '2px', cursor: 'pointer', flexShrink: 0,
                         }}
                       />
@@ -2036,7 +2051,7 @@ export default function OnboardingPage() {
 
             {/* Location */}
             <div style={{ marginBottom: '24px' }}>
-              <p style={{ ...labelStyle, marginBottom: '12px' }}>Where do they live? <span style={{ color: '#5E6A7A', fontWeight: '400', fontSize: '0.8rem' }}>(optional)</span></p>
+              <p style={{ ...labelStyle, marginBottom: '12px' }}>Where do they live? <span style={{ color: '#B7B2C4', fontWeight: '400', fontSize: '0.8rem' }}>(optional)</span></p>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                 <div>
                   <label style={optionalLabel}>City</label>
@@ -2051,7 +2066,7 @@ export default function OnboardingPage() {
 
             {/* Family */}
             <div style={{ marginBottom: '24px' }}>
-              <p style={{ ...labelStyle, marginBottom: '12px' }}>Family <span style={{ color: '#5E6A7A', fontWeight: '400', fontSize: '0.8rem' }}>(optional)</span></p>
+              <p style={{ ...labelStyle, marginBottom: '12px' }}>Family <span style={{ color: '#B7B2C4', fontWeight: '400', fontSize: '0.8rem' }}>(optional)</span></p>
               {state.siblings.length > 0 && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '10px' }}>
                   {state.siblings.map((s, i) => (
@@ -2066,20 +2081,20 @@ export default function OnboardingPage() {
                       <input type="text" style={inputStyle} placeholder="Hair colour" value={s.hairColour || ''}
                         onChange={(e) => { const u = [...state.siblings]; u[i] = { ...u[i], hairColour: e.target.value }; setState({ ...state, siblings: u }); }} />
                       <button onClick={() => setState({ ...state, siblings: state.siblings.filter((_, idx) => idx !== i) })}
-                        style={{ background: 'none', border: '1.5px solid #F0E4D0', borderRadius: '8px', width: '36px', height: '36px', cursor: 'pointer', color: '#5E6A7A', fontSize: '1rem', flexShrink: 0 }}>×</button>
+                        style={{ background: 'none', border: '1.5px solid rgba(255,231,203,0.18)', borderRadius: '8px', width: '36px', height: '36px', cursor: 'pointer', color: '#B7B2C4', fontSize: '1rem', flexShrink: 0 }}>×</button>
                     </div>
                   ))}
                 </div>
               )}
               <button onClick={() => setState({ ...state, siblings: [...state.siblings, { name: '', nickname: 'Brother', hairColour: '' }] })}
-                style={{ ...chipBase, border: '1.5px dashed #F0E4D0', backgroundColor: 'transparent', color: '#5E6A7A', width: '100%' }}>
+                style={{ ...chipBase, border: '1.5px dashed rgba(255,231,203,0.18)', backgroundColor: 'transparent', color: '#B7B2C4', width: '100%' }}>
                 + Add family member
               </button>
             </div>
 
             {/* Best friends */}
             <div style={{ marginBottom: '24px' }}>
-              <p style={{ ...labelStyle, marginBottom: '12px' }}>Best friends <span style={{ color: '#5E6A7A', fontWeight: '400', fontSize: '0.8rem' }}>(optional)</span></p>
+              <p style={{ ...labelStyle, marginBottom: '12px' }}>Best friends <span style={{ color: '#B7B2C4', fontWeight: '400', fontSize: '0.8rem' }}>(optional)</span></p>
               {state.friends.length > 0 && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '10px' }}>
                   {state.friends.map((f, i) => (
@@ -2091,20 +2106,20 @@ export default function OnboardingPage() {
                       <input type="text" style={inputStyle} placeholder="Hair colour" value={f.hairColour || ''}
                         onChange={(e) => { const u = [...state.friends]; u[i] = { ...u[i], hairColour: e.target.value }; setState({ ...state, friends: u }); }} />
                       <button onClick={() => setState({ ...state, friends: state.friends.filter((_, idx) => idx !== i) })}
-                        style={{ background: 'none', border: '1.5px solid #F0E4D0', borderRadius: '8px', width: '36px', height: '36px', cursor: 'pointer', color: '#5E6A7A', fontSize: '1rem', flexShrink: 0 }}>×</button>
+                        style={{ background: 'none', border: '1.5px solid rgba(255,231,203,0.18)', borderRadius: '8px', width: '36px', height: '36px', cursor: 'pointer', color: '#B7B2C4', fontSize: '1rem', flexShrink: 0 }}>×</button>
                     </div>
                   ))}
                 </div>
               )}
               <button onClick={() => setState({ ...state, friends: [...state.friends, { name: '', nickname: '', hairColour: '' }] })}
-                style={{ ...chipBase, border: '1.5px dashed #F0E4D0', backgroundColor: 'transparent', color: '#5E6A7A', width: '100%' }}>
+                style={{ ...chipBase, border: '1.5px dashed rgba(255,231,203,0.18)', backgroundColor: 'transparent', color: '#B7B2C4', width: '100%' }}>
                 + Add friend
               </button>
             </div>
 
             {/* Pets */}
             <div style={{ marginBottom: '24px' }}>
-              <p style={{ ...labelStyle, marginBottom: '12px' }}>Pets <span style={{ color: '#5E6A7A', fontWeight: '400', fontSize: '0.8rem' }}>(optional)</span></p>
+              <p style={{ ...labelStyle, marginBottom: '12px' }}>Pets <span style={{ color: '#B7B2C4', fontWeight: '400', fontSize: '0.8rem' }}>(optional)</span></p>
               {state.pets.length > 0 && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '10px' }}>
                   {state.pets.map((p, i) => (
@@ -2116,13 +2131,13 @@ export default function OnboardingPage() {
                       <input type="text" style={inputStyle} placeholder="Colour / look" value={p.colour || ''}
                         onChange={(e) => { const u = [...state.pets]; u[i] = { ...u[i], colour: e.target.value }; setState({ ...state, pets: u }); }} />
                       <button onClick={() => setState({ ...state, pets: state.pets.filter((_, idx) => idx !== i) })}
-                        style={{ background: 'none', border: '1.5px solid #F0E4D0', borderRadius: '8px', width: '36px', height: '36px', cursor: 'pointer', color: '#5E6A7A', fontSize: '1rem', flexShrink: 0 }}>×</button>
+                        style={{ background: 'none', border: '1.5px solid rgba(255,231,203,0.18)', borderRadius: '8px', width: '36px', height: '36px', cursor: 'pointer', color: '#B7B2C4', fontSize: '1rem', flexShrink: 0 }}>×</button>
                     </div>
                   ))}
                 </div>
               )}
               <button onClick={() => setState({ ...state, pets: [...state.pets, { name: '', type: '', colour: '' }] })}
-                style={{ ...chipBase, border: '1.5px dashed #F0E4D0', backgroundColor: 'transparent', color: '#5E6A7A', width: '100%' }}>
+                style={{ ...chipBase, border: '1.5px dashed rgba(255,231,203,0.18)', backgroundColor: 'transparent', color: '#B7B2C4', width: '100%' }}>
                 + Add pet
               </button>
             </div>
@@ -2149,7 +2164,7 @@ export default function OnboardingPage() {
             </div>
 
             {submitError && (
-              <div style={{ color: '#991B1B', fontSize: '0.875rem', marginBottom: '16px', padding: '12px', background: '#FEE2E2', borderRadius: '8px' }}>{submitError}</div>
+              <div style={{ color: '#FFC9C0', fontSize: '0.875rem', marginBottom: '16px', padding: '12px', background: 'rgba(120,32,26,0.42)', boxShadow: 'inset 0 0 0 1px rgba(255,138,122,0.30)', borderRadius: '8px' }}>{submitError}</div>
             )}
 
             <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
@@ -2158,7 +2173,7 @@ export default function OnboardingPage() {
                 {submitting ? (isFreeUser ? 'Generating your story...' : 'Creating profile...') : (isFreeUser ? 'Generate my free story' : `Create ${state.name || 'profile'}`)}
               </button>
               <button onClick={handleBack} disabled={submitting}
-                style={{ background: 'none', border: 'none', color: '#FF6B35', cursor: 'pointer', fontWeight: '500', padding: 0 }}>Back</button>
+                style={{ background: 'none', border: 'none', color: '#FFB765', cursor: 'pointer', fontWeight: '500', padding: 0 }}>Back</button>
             </div>
           </div>
         )}
