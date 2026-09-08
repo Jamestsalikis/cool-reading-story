@@ -68,8 +68,8 @@ export default function SampleStoriesPage() {
       <div className="wrap">
         <div className="grid grid-3">
           {SAMPLE_STORIES.map((s) => (
-            <Link className="card" href={`/sample-stories/${s.slug}`} key={s.slug}>
-              <div className="card-img">
+            <Link className="tp-card" href={`/sample-stories/${s.slug}`} key={s.slug}>
+              <div className="tp-card-img">
                 <img src={s.image} alt={s.alt} loading="lazy" decoding="async" width={1200} height={1500} />
               </div>
               <h3>{s.title}</h3>
