@@ -171,8 +171,8 @@ export function SiteFooter() {
               <img src="/brand/talepop-lockup.webp" alt="TalePop, your story maker" />
             </Link>
             <p className="foot-blurb">
-              Personalised bedtime stories, written and illustrated for one child. Made in
-              Australia by TalePop Pty Ltd.
+              Personalised bedtime stories, written and illustrated for one child. A new story
+              every night, built around what they love.
             </p>
           </div>
           <div>
