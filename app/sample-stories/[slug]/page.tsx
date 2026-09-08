@@ -133,7 +133,7 @@ export default async function SampleStoryPage({
 
         <div className="grid grid-2" style={{ maxWidth: '68ch', marginInline: 'auto' }}>
           {others.map((s) => (
-            <Link className="card" href={`/sample-stories/${s.slug}`} key={s.slug}>
+            <Link className="tp-card" href={`/sample-stories/${s.slug}`} key={s.slug}>
               <div className="emoji">{s.emoji}</div>
               <h3>{s.title}</h3>
               <p>
