@@ -26,7 +26,7 @@ const pageStyles = `
   /* globals.css still paints body cream for the pages that have not been
      converted yet, which showed through on mobile overscroll. This style tag
      only exists while the dashboard is mounted, so it does not leak. */
-  body { background: #0B0D1C; }
+  body { background: #0B0D1C; color: #F6EFE4; }
   .book-cover-panel {
     transition: transform 0.55s cubic-bezier(0.4,0,0.2,1), box-shadow 0.55s ease;
   }
@@ -315,15 +315,16 @@ function BookCard({ story, palette, onContinue, isWriting }: { story: Story; pal
             ) : coverImage ? (
               <>
                 <div style={{ position: 'absolute', inset: 0, backgroundImage: `url(${coverImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
-                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.05) 55%, transparent 100%)' }} />
-                <div style={{ position: 'absolute', top: '8px', right: '7px', background: 'rgba(0,0,0,0.55)', color: '#fff', fontSize: '0.58rem', fontWeight: '800', padding: '2px 7px', borderRadius: '8px', zIndex: 1 }}>VOL {vol || 1}</div>
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.78) 34%, rgba(0,0,0,0.14) 66%, transparent 100%)' }} />
+                <div style={{ position: 'absolute', top: '8px', right: '7px', background: 'rgba(0,0,0,0.72)', color: '#fff', fontSize: '0.58rem', fontWeight: '800', padding: '2px 7px', borderRadius: '8px', zIndex: 1 }}>VOL {vol || 1}</div>
                 <p style={{ position: 'absolute', bottom: '22px', left: '8px', right: '8px', fontSize: '0.7rem', fontFamily: 'Fredoka, cursive', color: '#fff', lineHeight: 1.35, textShadow: '0 1px 4px rgba(0,0,0,0.7)', zIndex: 1 }}>{story.title}</p>
                 <p style={{ position: 'absolute', bottom: '8px', left: '8px', right: '8px', fontSize: '0.55rem', color: 'rgba(255,255,255,0.65)', zIndex: 1, letterSpacing: '0.03em' }}>{new Date(story.created_at).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })}</p>
               </>
             ) : (
               <>
                 <div style={{ position: 'absolute', inset: 0, backgroundImage: pattern }} />
-                <div style={{ position: 'absolute', top: '10px', right: '8px', background: 'rgba(255,255,255,0.2)', color: 'rgba(255,255,255,0.9)', fontSize: '0.6rem', fontWeight: '800', padding: '2px 7px', borderRadius: '10px' }}>VOL {vol || 1}</div>
+                <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.40)' }} />
+                <div style={{ position: 'absolute', top: '10px', right: '8px', background: 'rgba(0,0,0,0.55)', color: '#fff', fontSize: '0.6rem', fontWeight: '800', padding: '2px 7px', borderRadius: '10px' }}>VOL {vol || 1}</div>
                 <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '16px 12px', gap: '8px' }}>
                   <div style={{ width: '28px', height: '28px', border: '1.5px solid rgba(255,255,255,0.3)', borderRadius: '3px', transform: 'rotate(45deg)' }} />
                   <p style={{ fontSize: '0.75rem', fontFamily: 'Fredoka, cursive', textAlign: 'center', color: 'rgba(255,255,255,0.95)', lineHeight: 1.4 }}>{story.title}</p>
@@ -369,12 +370,15 @@ function SeriesFan({ volumes, palette, onContinue }: { volumes: Story[]; palette
                 {coverImage ? (
                   <>
                     <div style={{ position: 'absolute', inset: 0, backgroundImage: `url(${coverImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
-                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 55%)' }} />
+                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.78) 34%, rgba(0,0,0,0.14) 66%, transparent 100%)' }} />
                   </>
                 ) : (
-                  <div style={{ position: 'absolute', inset: 0, backgroundImage: pattern }} />
+                  <>
+                    <div style={{ position: 'absolute', inset: 0, backgroundImage: pattern }} />
+                    <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.40)' }} />
+                  </>
                 )}
-                <div style={{ position: 'absolute', top: '6px', right: '5px', background: 'rgba(0,0,0,0.45)', color: '#fff', fontSize: '0.5rem', fontWeight: '800', padding: '1px 5px', borderRadius: '6px', zIndex: 2 }}>VOL {vol.volume_number}</div>
+                <div style={{ position: 'absolute', top: '6px', right: '5px', background: 'rgba(0,0,0,0.72)', color: '#fff', fontSize: '0.5rem', fontWeight: '800', padding: '1px 5px', borderRadius: '6px', zIndex: 2 }}>VOL {vol.volume_number}</div>
                 {!coverImage && (
                   <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '10px 8px' }}>
                     <p style={{ fontSize: '0.56rem', fontFamily: 'Fredoka, cursive', color: 'rgba(255,255,255,0.9)', textAlign: 'center', lineHeight: 1.3 }}>{vol.title.length > 36 ? vol.title.slice(0, 34) + '…' : vol.title}</p>
@@ -1030,7 +1034,6 @@ export default function DashboardPage() {
               </p>
               {sub && sub.status === 'subscribed' && (
                 <>
-                  <span style={{ color: '#B7B2C4', fontSize: '0.8rem' }}>·</span>
                   <span style={{ fontSize: '0.75rem', fontWeight: '600', padding: '3px 10px', borderRadius: '20px', background: childrenAvailableToday > 0 ? 'rgba(108,192,108,0.16)' : 'rgba(255,231,203,0.06)', color: childrenAvailableToday > 0 ? '#8FE6A6' : '#B7B2C4', border: `1px solid ${childrenAvailableToday > 0 ? 'rgba(108,192,108,0.34)' : 'rgba(255,231,203,0.14)'}` }}>
                     {childrenAvailableToday}/{children.length} {children.length === 1 ? 'child' : 'children'} available today
                   </span>
@@ -1041,7 +1044,6 @@ export default function DashboardPage() {
               )}
               {sub && sub.status !== 'subscribed' && freeStoriesRemaining > 0 && !isAdmin && (
                 <>
-                  <span style={{ color: '#B7B2C4', fontSize: '0.8rem' }}>·</span>
                   <span style={{ fontSize: '0.75rem', fontWeight: '600', padding: '3px 10px', borderRadius: '20px', background: 'rgba(255,183,101,0.10)', color: '#FFDCA8', border: '1px solid rgba(255,183,101,0.30)' }}>
                     {freeStoriesRemaining} free {freeStoriesRemaining === 1 ? 'story' : 'stories'} left
                   </span>
@@ -1160,7 +1162,7 @@ export default function DashboardPage() {
                                   : <SeriesFan key={item.seriesId} volumes={item.volumes} palette={palette} onContinue={item.volumes.length < 4 && !generating ? () => handleContinueStory(item.volumes[item.volumes.length - 1].id) : undefined} />
                             )}
                           </div>
-                          <div style={{ height: '14px', background: 'linear-gradient(to bottom, #D4974E 0%, #A87240 50%, #8B5E30 100%)', borderRadius: '0 0 4px 4px', boxShadow: 'inset 0 2px 4px rgba(255,255,255,0.12), 0 5px 12px rgba(0,0,0,0.2)' }} />
+                          <div style={{ height: '14px', background: 'linear-gradient(to bottom, #8A5F33 0%, #5E3F22 55%, #432C17 100%)', borderRadius: '0 0 4px 4px', boxShadow: 'inset 0 1px 0 rgba(255,222,180,0.14), 0 6px 16px rgba(0,0,0,0.34)' }} />
                         </div>
                       )}
                     </div>
