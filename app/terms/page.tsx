@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { SUB_CSS, SiteHeader, SiteFooter } from '@/components/SiteChrome';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -10,12 +11,12 @@ export const metadata: Metadata = {
 const updated = '13 May 2026';
 
 /* ─── Brand tokens ─────────────────────────────────────── */
-const navy   = '#0D183D';
-const orange = '#FF6B35';
-const cream  = '#FFF4E6';
-const border = '#F0E4D0';
-const muted  = '#5E6A7A';
-const body   = '#4A3728';
+const navy   = '#F6EFE4';                    // was the heading colour on cream
+const orange = '#FFB765';                    // 11.2 on the dark ground, vs 4.6 for the flat brand orange
+const border = 'rgba(255,231,203,0.16)';
+const muted  = '#7C7893';
+const body   = '#B7B2C4';
+const pageBg = '#0B0D1C';
 
 /* ─── Layout components ─────────────────────────────────── */
 function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
@@ -39,25 +40,6 @@ function Section({ id, title, children }: { id: string; title: string; children:
   );
 }
 
-function Footer() {
-  return (
-    <footer style={{
-      backgroundColor: navy,
-      color: 'white',
-      textAlign: 'center',
-      padding: '32px 24px',
-      fontSize: '0.875rem',
-      marginTop: '64px',
-    }}>
-      <p style={{ margin: '0 0 8px' }}>
-        <Link href="/privacy" style={{ color: cream, textDecoration: 'none', marginRight: '16px' }}>Privacy Policy</Link>
-        <Link href="/terms" style={{ color: cream, textDecoration: 'none', marginRight: '16px' }}>Terms of Service</Link>
-        <a href="mailto:info@talepopstories.com" style={{ color: cream, textDecoration: 'none' }}>info@talepopstories.com</a>
-      </p>
-      <p style={{ margin: 0, color: muted }}>© {new Date().getFullYear()} TalePop. All rights reserved.</p>
-    </footer>
-  );
-}
 
 /* ─── Shared prose helpers ───────────────────────────────── */
 function P({ children }: { children: React.ReactNode }) {
@@ -77,9 +59,12 @@ function Li({ children }: { children: React.ReactNode }) {
 }
 
 function InfoBox({ children, variant = 'orange' }: { children: React.ReactNode; variant?: 'orange' | 'green' | 'navy' }) {
-  const bg = variant === 'orange' ? '#FFF0E8' : variant === 'green' ? '#ECFDF5' : '#EEF2FF';
-  const borderColor = variant === 'orange' ? orange : variant === 'green' ? '#10B981' : navy;
-  const textColor = variant === 'orange' ? '#92400E' : variant === 'green' ? '#065F46' : navy;
+  const bg = variant === 'orange' ? 'rgba(255,183,101,0.12)'
+    : variant === 'green' ? 'rgba(69,191,203,0.12)' : 'rgba(142,123,255,0.12)';
+  const borderColor = variant === 'orange' ? 'rgba(255,183,101,0.42)'
+    : variant === 'green' ? 'rgba(69,191,203,0.34)' : 'rgba(185,175,255,0.34)';
+  const textColor = variant === 'orange' ? '#FFDCA8'
+    : variant === 'green' ? '#BFEFE6' : '#D8D2FF';
   return (
     <div style={{
       backgroundColor: bg,
@@ -99,16 +84,16 @@ function InfoBox({ children, variant = 'orange' }: { children: React.ReactNode; 
 function AutoRenewalBox() {
   return (
     <div style={{
-      backgroundColor: '#FEF3C7',
-      border: `2px solid #D97706`,
+      backgroundColor: 'rgba(232,145,58,0.16)',
+      border: `2px solid rgba(255,183,101,0.55)`,
       borderRadius: '10px',
       padding: '16px 20px',
       marginBottom: '24px',
     }}>
-      <p style={{ margin: '0 0 6px', fontWeight: 700, color: '#92400E', fontSize: '0.95rem' }}>
+      <p style={{ margin: '0 0 6px', fontWeight: 700, color: '#FFDCA8', fontSize: '0.95rem' }}>
         AUTOMATIC RENEWAL NOTICE
       </p>
-      <p style={{ margin: 0, color: '#78350F', fontSize: '0.9rem', lineHeight: '1.65' }}>
+      <p style={{ margin: 0, color: '#E8D9C4', fontSize: '0.9rem', lineHeight: '1.65' }}>
         Your subscription will automatically renew at the end of each billing period (monthly or annually)
         and your payment method will be charged the applicable fee unless you cancel before the renewal date.
         You can cancel at any time through your account settings page. No cancellation fee applies.
@@ -120,32 +105,15 @@ function AutoRenewalBox() {
 /* ─── Page ───────────────────────────────────────────────── */
 export default function TermsOfServicePage() {
   return (
-    <div style={{ backgroundColor: cream, minHeight: '100vh', fontFamily: "'Nunito', system-ui, sans-serif" }}>
+    <div style={{ backgroundColor: pageBg, minHeight: '100vh', fontFamily: "'Nunito', system-ui, sans-serif" }}>
+      <style>{SUB_CSS}</style>
 
-      {/* ── Nav ── */}
-      <nav style={{
-        backgroundColor: navy,
-        padding: '16px 24px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-      }}>
-        <Link href="/" style={{
-          fontFamily: "'Fredoka', 'Arial Rounded MT Bold', cursive",
-          fontSize: '1.5rem',
-          color: orange,
-          textDecoration: 'none',
-          fontWeight: 600,
-        }}>
-          TalePop
-        </Link>
-        <Link href="/" style={{ color: cream, textDecoration: 'none', fontSize: '0.875rem' }}>← Back to home</Link>
-      </nav>
+      <SiteHeader />
 
       {/* ── Banner 1: Beta / Research Preview ── */}
       <div style={{
-        backgroundColor: orange,
-        color: 'white',
+        background: 'linear-gradient(180deg,#FFDCA8,#E8913A)',
+        color: '#3A1B06',
         padding: '12px 24px',
         textAlign: 'center',
         fontWeight: 700,
@@ -156,11 +124,11 @@ export default function TermsOfServicePage() {
 
       {/* ── Banner 2: Jurisdiction notice ── */}
       <div style={{
-        backgroundColor: '#ECFDF5',
-        borderBottom: '1.5px solid #A7F3D0',
+        background: 'rgba(69,191,203,0.12)',
+        borderBottom: '1.5px solid rgba(69,191,203,0.30)',
         padding: '12px 24px',
         textAlign: 'center',
-        color: '#065F46',
+        color: '#BFEFE6',
         fontSize: '0.875rem',
       }}>
         TalePop is available to users in <strong>Australia</strong>, <strong>Canada</strong>, and the{' '}
@@ -644,7 +612,7 @@ export default function TermsOfServicePage() {
 
       </main>
 
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }
