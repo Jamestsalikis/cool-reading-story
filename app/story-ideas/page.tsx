@@ -114,7 +114,7 @@ export default function StoryIdeasPage() {
         <div className="grid grid-3">
           {INTERESTS.map((it) =>
             it.sample ? (
-              <Link className="card" href={`/sample-stories/${it.sample}`} key={it.name}>
+              <Link className="tp-card" href={`/sample-stories/${it.sample}`} key={it.name}>
                 <div className="emoji">{it.emoji}</div>
                 <h3>{it.name}</h3>
                 <p>{it.line}</p>
@@ -123,7 +123,7 @@ export default function StoryIdeasPage() {
                 </p>
               </Link>
             ) : (
-              <div className="card" key={it.name}>
+              <div className="tp-card" key={it.name}>
                 <div className="emoji">{it.emoji}</div>
                 <h3>{it.name}</h3>
                 <p>{it.line}</p>
