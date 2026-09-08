@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { SUB_CSS, SiteHeader, SiteFooter } from '@/components/SiteChrome';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -9,12 +10,14 @@ export const metadata: Metadata = {
 
 const updated = '13 May 2026';
 
-const navy   = '#0D183D';
-const orange = '#FF6B35';
-const cream  = '#FFF4E6';
-const border = '#F0E4D0';
-const muted  = '#5E6A7A';
-const body   = '#4A3728';
+const navy   = '#F6EFE4';                    // was the heading colour on cream
+const orange = '#FFB765';                    // 11.2 on the dark ground, vs 4.6 for the flat brand orange
+const border = 'rgba(255,231,203,0.16)';
+const muted  = '#7C7893';
+const body   = '#B7B2C4';
+const pageBg = '#0B0D1C';
+const rowTint = 'rgba(255,231,203,0.045)';   // the striped-table shade
+const thBg   = 'rgba(255,231,203,0.10)';
 
 function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
   return (
@@ -31,18 +34,6 @@ function Section({ id, title, children }: { id: string; title: string; children:
   );
 }
 
-function Footer() {
-  return (
-    <footer style={{ backgroundColor: navy, color: 'white', textAlign: 'center', padding: '32px 24px', fontSize: '0.875rem', marginTop: '64px' }}>
-      <p style={{ margin: '0 0 8px' }}>
-        <Link href="/privacy" style={{ color: cream, textDecoration: 'none', marginRight: '16px' }}>Privacy Policy</Link>
-        <Link href="/terms" style={{ color: cream, textDecoration: 'none', marginRight: '16px' }}>Terms of Service</Link>
-        <a href="mailto:info@talepopstories.com" style={{ color: cream, textDecoration: 'none' }}>info@talepopstories.com</a>
-      </p>
-      <p style={{ margin: 0, color: muted }}>© {new Date().getFullYear()} TalePop. All rights reserved.</p>
-    </footer>
-  );
-}
 
 function P({ children }: { children: React.ReactNode }) {
   return <p style={{ margin: '0 0 14px' }}>{children}</p>;
@@ -61,25 +52,21 @@ function Table({ children }: { children: React.ReactNode }) {
   );
 }
 function Th({ children }: { children: React.ReactNode }) {
-  return <th style={{ backgroundColor: navy, color: 'white', padding: '10px 12px', textAlign: 'left', fontWeight: 600, fontSize: '0.875rem' }}>{children}</th>;
+  return <th style={{ backgroundColor: thBg, color: '#F6EFE4', padding: '10px 12px', textAlign: 'left', fontWeight: 600, fontSize: '0.875rem' }}>{children}</th>;
 }
 function Td({ children }: { children: React.ReactNode }) {
   return <td style={{ padding: '10px 12px', borderBottom: `1px solid ${border}`, verticalAlign: 'top' }}>{children}</td>;
 }
 function Tr({ children, shade }: { children: React.ReactNode; shade?: boolean }) {
-  return <tr style={{ backgroundColor: shade ? cream : 'white' }}>{children}</tr>;
+  return <tr style={{ backgroundColor: shade ? rowTint : 'transparent' }}>{children}</tr>;
 }
 
 export default function PrivacyPolicyPage() {
   return (
-    <div style={{ backgroundColor: cream, minHeight: '100vh', fontFamily: "'Nunito', system-ui, sans-serif" }}>
+    <div style={{ backgroundColor: pageBg, minHeight: '100vh', fontFamily: "'Nunito', system-ui, sans-serif" }}>
+      <style>{SUB_CSS}</style>
 
-      <nav style={{ backgroundColor: navy, padding: '16px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <Link href="/" style={{ fontFamily: "'Fredoka', 'Arial Rounded MT Bold', cursive", fontSize: '1.5rem', color: orange, textDecoration: 'none', fontWeight: 600 }}>
-          TalePop
-        </Link>
-        <Link href="/" style={{ color: cream, textDecoration: 'none', fontSize: '0.875rem' }}>← Back to home</Link>
-      </nav>
+      <SiteHeader />
 
       <main style={{ maxWidth: '820px', margin: '0 auto', padding: '48px 24px' }}>
 
@@ -721,7 +708,7 @@ export default function PrivacyPolicyPage() {
         </Section>
 
       </main>
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }
