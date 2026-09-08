@@ -603,9 +603,9 @@ export default function StoryPage() {
 
   if (!story) {
     return (
-      <div style={{ minHeight: '100vh', backgroundColor: '#FAF7F0', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '16px' }}>
-        <p style={{ color: '#6B5E4E' }}>Story not found.</p>
-        <Link href="/dashboard" className="btn-brand">Back to dashboard</Link>
+      <div style={{ minHeight: '100vh', background: 'linear-gradient(160deg, #2C1810 0%, #1a0f08 100%)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '16px', padding: '0 24px', textAlign: 'center' }}>
+        <p style={{ color: '#E7DCCB' }}>Story not found.</p>
+        <Link href="/dashboard" style={{ background: 'linear-gradient(180deg,#FFDCA8,#E8913A)', color: '#3A1B06', fontWeight: 700, padding: '0.75rem 1.75rem', borderRadius: '999px', textDecoration: 'none' }}>Back to dashboard</Link>
       </div>
     );
   }
@@ -623,9 +623,9 @@ export default function StoryPage() {
   const page = pages[currentPage] ?? pages[0];
   if (!page) {
     return (
-      <div style={{ minHeight: '100vh', backgroundColor: '#FAF7F0', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '16px' }}>
-        <p style={{ color: '#6B5E4E' }}>This story is still being written. Please check back in a moment.</p>
-        <a href="/dashboard" style={{ color: '#741515', textDecoration: 'underline', fontSize: '0.9rem' }}>Back to dashboard</a>
+      <div style={{ minHeight: '100vh', background: 'linear-gradient(160deg, #2C1810 0%, #1a0f08 100%)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '16px', padding: '0 24px', textAlign: 'center' }}>
+        <p style={{ color: '#E7DCCB' }}>This story is still being written. Please check back in a moment.</p>
+        <a href="/dashboard" style={{ color: '#FFB765', textDecoration: 'underline', fontSize: '0.9rem' }}>Back to dashboard</a>
       </div>
     );
   }
