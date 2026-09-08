@@ -1027,7 +1027,7 @@ export default function Home() {
               <Link className="lockup" href="/" aria-label="TalePop. Your story maker. Imagine away. A new tale every day.">
                 <img src="/brand/talepop-lockup.webp" alt="TalePop — Your story maker — Imagine away. A new tale every day." />
               </Link>
-              <p className="foot-blurb">Personalised bedtime stories, written and illustrated for one child. Made in Australia by TalePop Pty Ltd.</p>
+              <p className="foot-blurb">Personalised bedtime stories, written and illustrated for one child. A new story every night, built around what they love.</p>
             </div>
             <div><h4>Product</h4><ul><li><a href="#how-it-works">How it works</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#faq">FAQ</a></li><li><a href="#safety">Safety</a></li><li><Link href="/signup">Start free</Link></li><li><Link href="/login">Sign in</Link></li></ul></div>
             <div><h4>Explore</h4><ul><li><Link href="/sample-stories">Sample stories</Link></li><li><Link href="/story-ideas">Story ideas</Link></li><li><Link href="/about">Our story</Link></li><li><a href="mailto:info@talepopstories.com">Contact</a></li></ul></div>
