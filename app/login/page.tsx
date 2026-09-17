@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { signIn, signInWithGoogle } from '@/lib/supabase/actions';
 import { AuthShell, GoogleMark } from '@/components/AuthShell';
 
@@ -10,6 +10,19 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
   const [error, setError] = useState('');
+
+  /**
+   * /auth/callback sends failures here as ?error=auth_error and nothing read
+   * it, so a failed Google sign-in dropped you on an empty form with no
+   * explanation and looked like a dead button. Read from the URL in an effect
+   * rather than useSearchParams so the page stays statically rendered.
+   */
+  useEffect(() => {
+    const p = new URLSearchParams(window.location.search);
+    if (p.get('error') === 'auth_error') {
+      setError('We could not complete that sign-in. Please try again, or use your email and password below.');
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

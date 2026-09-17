@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { signUp, signInWithGoogle, resendVerificationEmail } from '@/lib/supabase/actions';
 import { AuthShell, GoogleMark } from '@/components/AuthShell';
 
@@ -16,9 +16,28 @@ export default function SignupPage() {
   const [resendSent, setResendSent] = useState(false);
   const [resendError, setResendError] = useState('');
   const [resendCooldown, setResendCooldown] = useState(0);
+  const [consentPrompt, setConsentPrompt] = useState(false);
+  const consentRef = useRef<HTMLLabelElement>(null);
+
+  /**
+   * Both buttons used to be `disabled` until the consent box was ticked. A
+   * disabled button gives the not-allowed cursor and nothing else, so it reads
+   * as a broken button rather than an unmet requirement, and the grey hint
+   * explaining it sat above the OR divider while the checkbox is below the
+   * password field. Now the buttons stay live and a click that cannot proceed
+   * says why and takes you to the checkbox.
+   */
+  const requireConsent = () => {
+    if (consentChecked) return true;
+    setConsentPrompt(true);
+    consentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    consentRef.current?.querySelector('input')?.focus();
+    return false;
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!requireConsent()) return;
     setLoading(true);
     setError('');
     const formData = new FormData(e.currentTarget);
@@ -33,7 +52,7 @@ export default function SignupPage() {
   };
 
   const handleGoogle = async () => {
-    if (!consentChecked) return;
+    if (!requireConsent()) return;
     setGoogleLoading(true);
     setError('');
     await signInWithGoogle();
@@ -131,14 +150,14 @@ export default function SignupPage() {
         type="button"
         className="a-btn a-oauth"
         onClick={handleGoogle}
-        disabled={!consentChecked || googleLoading}
+        disabled={googleLoading}
       >
         <GoogleMark />
         {googleLoading ? 'Redirecting...' : 'Continue with Google'}
       </button>
-      {!consentChecked && (
-        <p style={{ fontSize: '.8rem', color: 'var(--txt-mute)', textAlign: 'center', margin: '.7rem 0 0' }}>
-          Tick the confirmation below to continue.
+      {consentPrompt && !consentChecked && (
+        <p style={{ fontSize: '.85rem', color: 'var(--amber)', textAlign: 'center', margin: '.7rem 0 0', fontWeight: 700 }}>
+          Please tick the confirmation below first.
         </p>
       )}
 
@@ -185,12 +204,19 @@ export default function SignupPage() {
           />
         </div>
 
-        <label className="a-consent" htmlFor="consent">
+        <label
+          className={`a-consent${consentPrompt && !consentChecked ? ' a-consent-wanted' : ''}`}
+          htmlFor="consent"
+          ref={consentRef}
+        >
           <input
             type="checkbox"
             id="consent"
             checked={consentChecked}
-            onChange={(e) => setConsentChecked(e.target.checked)}
+            onChange={(e) => {
+              setConsentChecked(e.target.checked);
+              if (e.target.checked) setConsentPrompt(false);
+            }}
           />
           <span>
             I confirm I am <strong>18 years of age or older</strong> and am the parent or legal
@@ -202,7 +228,7 @@ export default function SignupPage() {
 
         {error && <div className="a-error">{error}</div>}
 
-        <button type="submit" className="a-btn a-primary" disabled={loading || !consentChecked}>
+        <button type="submit" className="a-btn a-primary" disabled={loading}>
           {loading ? 'Creating account...' : 'Next Step'}
         </button>
       </form>
