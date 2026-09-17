@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { MobileNav } from './MobileNav';
 
 /**
  * Shared chrome for the marketing sub-pages (about, interests, sample stories).
@@ -152,11 +153,23 @@ export function SiteHeader() {
           <Link className="hide-sm" href="/sample-stories">Sample stories</Link>
           <Link className="hide-sm" href="/story-ideas">Story ideas</Link>
           <Link className="hide-sm" href="/about">About</Link>
-          <Link href="/#pricing">Pricing</Link>
+          <Link className="hide-sm" href="/#pricing">Pricing</Link>
+          {/* the site before the redesign had Sign in in the header; returning
+              customers had no way back in once it was dropped */}
+          <Link className="hide-sm" href="/login">Sign in</Link>
           <Link className="btn btn-primary" href="/signup" style={{ padding: '.6em 1.15em', fontSize: 'var(--s--1)' }}>
             Start free
           </Link>
         </nav>
+        <MobileNav
+          items={[
+            { href: '/sample-stories', label: 'Sample stories' },
+            { href: '/story-ideas', label: 'Story ideas' },
+            { href: '/about', label: 'About' },
+            { href: '/#pricing', label: 'Pricing' },
+          ]}
+          showCta={false}
+        />
       </div>
     </header>
   );

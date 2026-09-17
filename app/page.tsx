@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { MobileNav } from '@/components/MobileNav';
 import { useEffect, useState } from 'react';
 import { DISPLAY, type PriceDisplay } from '@/lib/pricing';
 
@@ -801,8 +802,19 @@ export default function Home() {
             <Link href="/story-ideas">Story ideas</Link>
             <a href="#pricing">Pricing</a>
             <a href="#faq">FAQ</a>
+            <Link href="/login">Sign in</Link>
           </nav>
           <Link className="btn btn-primary" href="/signup" style={{ padding: '.68em 1.2em', fontSize: 'var(--s--1)' }}>Start free</Link>
+          <MobileNav
+            items={[
+              { href: '/sample-stories', label: 'Sample stories' },
+              { href: '/story-ideas', label: 'Story ideas' },
+              { href: '/about', label: 'About' },
+              { href: '/#pricing', label: 'Pricing' },
+              { href: '/#faq', label: 'FAQ' },
+            ]}
+            showBelow={980}
+          />
         </div>
       </header>
 
