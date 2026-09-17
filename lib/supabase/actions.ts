@@ -2,7 +2,26 @@
 
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { headers } from 'next/headers';
 import { createClient } from './server';
+
+/**
+ * The origin the request actually came in on.
+ *
+ * These three flows used NEXT_PUBLIC_SITE_URL, which is pinned to the
+ * production domain, so on any preview deployment Google sign-in and the
+ * signup confirmation link sent the user to the live site instead of back to
+ * the deployment they were on. That made previews impossible to sign in to.
+ * Falls back to the env var if the headers are somehow absent.
+ */
+async function requestOrigin() {
+  const h = await headers();
+  const origin = h.get('origin');
+  if (origin) return origin;
+  const host = h.get('x-forwarded-host') ?? h.get('host');
+  if (host) return `${h.get('x-forwarded-proto') ?? 'https'}://${host}`;
+  return process.env.NEXT_PUBLIC_SITE_URL ?? '';
+}
 
 export async function signIn(formData: FormData) {
   const supabase = await createClient();
@@ -32,7 +51,7 @@ export async function signUp(formData: FormData) {
     email,
     password,
     options: {
-      emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback?next=/onboarding`,
+      emailRedirectTo: `${await requestOrigin()}/auth/callback?next=/onboarding`,
     },
   });
 
@@ -50,7 +69,7 @@ export async function resendVerificationEmail(email: string) {
     type: 'signup',
     email,
     options: {
-      emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback?next=/onboarding`,
+      emailRedirectTo: `${await requestOrigin()}/auth/callback?next=/onboarding`,
     },
   });
 
@@ -71,7 +90,7 @@ export async function signInWithGoogle() {
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'google',
     options: {
-      redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`,
+      redirectTo: `${await requestOrigin()}/auth/callback`,
     },
   });
 
