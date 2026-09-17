@@ -86,6 +86,11 @@ body{margin:0;background:var(--ink);color:var(--txt);
   padding:.95rem 1rem;margin-bottom:1.3rem;cursor:pointer;
   background:rgba(8,10,22,.42);box-shadow:inset 0 0 0 1px rgba(255,231,203,.13)}
 .a-consent:hover{box-shadow:inset 0 0 0 1px rgba(255,231,203,.22)}
+/* shown when someone tries to continue before ticking, so the unmet
+   requirement is visible rather than expressed only as a dead button */
+.a-consent-wanted{box-shadow:inset 0 0 0 2px var(--amber);animation:a-nudge .5s ease}
+@keyframes a-nudge{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+@media(prefers-reduced-motion:reduce){.a-consent-wanted{animation:none}}
 .a-consent input{width:20px;height:20px;margin:1px 0 0;flex-shrink:0;
   accent-color:var(--amber-lo);cursor:pointer}
 .a-consent span{font-size:.85rem;line-height:1.6;color:var(--txt-dim)}
