@@ -858,6 +858,26 @@ export default function Home() {
                   <span><svg className="tick" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 10.6l4 4 8-9"/></svg> No credit card</span>
                   <span><svg className="tick" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 10.6l4 4 8-9"/></svg> Ages 3 to 10</span>
                 </div>
+                {/* App store download badges */}
+                <div style={{ marginTop: '1.75rem', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+                  <span style={{ fontSize: '0.8rem', fontWeight: 600, opacity: 0.68, letterSpacing: '0.02em' }}>Prefer the app? Download it free</span>
+                  <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                    <a href="https://apps.apple.com/app/id6789373130" target="_blank" rel="noopener noreferrer" aria-label="Download TalePop on the App Store" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem', background: '#000', color: '#fff', border: '1px solid rgba(255,255,255,0.18)', borderRadius: '12px', padding: '0.55rem 1.05rem', textDecoration: 'none' }}>
+                      <svg width="22" height="22" viewBox="0 0 384 512" fill="#fff" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+                      <span style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.15, textAlign: 'left' }}>
+                        <span style={{ fontSize: '0.6rem', fontWeight: 500 }}>Download on the</span>
+                        <span style={{ fontSize: '1.05rem', fontWeight: 600, letterSpacing: '-0.01em' }}>App Store</span>
+                      </span>
+                    </a>
+                    <a href="https://play.google.com/store/apps/details?id=com.talepopstories.app" target="_blank" rel="noopener noreferrer" aria-label="Get TalePop on Google Play" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem', background: '#000', color: '#fff', border: '1px solid rgba(255,255,255,0.18)', borderRadius: '12px', padding: '0.55rem 1.05rem', textDecoration: 'none' }}>
+                      <svg width="20" height="22" viewBox="0 0 512 512" aria-hidden="true"><polygon fill="#00D2FF" points="45,30 265,256 45,482"/><polygon fill="#00F076" points="45,30 355,200 265,256"/><polygon fill="#FF3D44" points="45,482 355,312 265,256"/><polygon fill="#FFC900" points="265,256 355,200 455,256 355,312"/></svg>
+                      <span style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.15, textAlign: 'left' }}>
+                        <span style={{ fontSize: '0.6rem', fontWeight: 500 }}>GET IT ON</span>
+                        <span style={{ fontSize: '1.05rem', fontWeight: 600, letterSpacing: '-0.01em' }}>Google Play</span>
+                      </span>
+                    </a>
+                  </div>
+                </div>
               </div>
             </section>
 
