@@ -478,8 +478,8 @@ function EditChildModal({ child, palette, onClose, onSaved }: { child: ChildReco
     }
     onSaved(); onClose();
   };
-  const inp: React.CSSProperties = { width: '100%', padding: '0.6rem 0.875rem', border: '1.5px solid rgba(255,231,203,0.13)', borderRadius: '8px', fontSize: '0.9rem', outline: 'none', background: '#161A2E' };
-  const chip = (active: boolean): React.CSSProperties => ({ cursor: 'pointer', borderRadius: '8px', fontWeight: '500', fontSize: '0.8rem', padding: '0.4rem 0.8rem', border: `1.5px solid ${active ? palette.cover : 'rgba(255,231,203,0.13)'}`, background: active ? palette.cover : '#fff', color: active ? '#fff' : '#F6EFE4' });
+  const inp: React.CSSProperties = { width: '100%', padding: '0.6rem 0.875rem', border: '1.5px solid rgba(255,231,203,0.13)', borderRadius: '8px', fontSize: '0.9rem', outline: 'none', background: '#161A2E', color: '#F6EFE4' };
+  const chip = (active: boolean): React.CSSProperties => ({ cursor: 'pointer', borderRadius: '8px', fontWeight: '500', fontSize: '0.8rem', padding: '0.4rem 0.8rem', border: `1.5px solid ${active ? palette.cover : 'rgba(255,231,203,0.16)'}`, background: active ? palette.cover : 'rgba(255,231,203,0.06)', color: active ? '#fff' : '#F6EFE4' });
   return (
     <div style={{ position: 'fixed', inset: 0, zIndex: 1000, background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(3px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
       <div style={{ background: '#161A2E', borderRadius: '16px', padding: '28px', maxWidth: '560px', width: '100%', maxHeight: '85vh', overflowY: 'auto', boxShadow: '0 24px 60px rgba(0,0,0,0.2)' }}>
@@ -492,9 +492,9 @@ function EditChildModal({ child, palette, onClose, onSaved }: { child: ChildReco
           <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#B7B2C4', display: 'block', marginBottom: '6px' }}>Name</label><input style={inp} value={name} onChange={e => setName(e.target.value)} /></div>
           <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#B7B2C4', display: 'block', marginBottom: '6px' }}>Age</label>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <button onClick={() => setAge(a => Math.max(3, a - 1))} style={{ width: '36px', height: '36px', border: '1.5px solid rgba(255,231,203,0.13)', borderRadius: '8px', background: '#161A2E', cursor: 'pointer', fontSize: '1.1rem' }}>-</button>
-              <span style={{ fontSize: '1.2rem', fontWeight: '600', minWidth: '30px', textAlign: 'center' }}>{age}</span>
-              <button onClick={() => setAge(a => Math.min(12, a + 1))} style={{ width: '36px', height: '36px', border: '1.5px solid rgba(255,231,203,0.13)', borderRadius: '8px', background: '#161A2E', cursor: 'pointer', fontSize: '1.1rem' }}>+</button>
+              <button onClick={() => setAge(a => Math.max(3, a - 1))} style={{ width: '36px', height: '36px', border: '1.5px solid rgba(255,231,203,0.13)', borderRadius: '8px', background: '#161A2E', color: '#F6EFE4', cursor: 'pointer', fontSize: '1.1rem' }}>-</button>
+              <span style={{ fontSize: '1.2rem', fontWeight: '600', minWidth: '30px', textAlign: 'center', color: '#F6EFE4' }}>{age}</span>
+              <button onClick={() => setAge(a => Math.min(12, a + 1))} style={{ width: '36px', height: '36px', border: '1.5px solid rgba(255,231,203,0.13)', borderRadius: '8px', background: '#161A2E', color: '#F6EFE4', cursor: 'pointer', fontSize: '1.1rem' }}>+</button>
             </div>
           </div>
           <div><label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#B7B2C4', display: 'block', marginBottom: '6px' }}>Gender</label><div style={{ display: 'flex', gap: '8px' }}>{['Boy','Girl','Skip'].map(g => <button key={g} onClick={() => setGender(g)} style={chip(gender === g)}>{g}</button>)}</div></div>
@@ -502,7 +502,7 @@ function EditChildModal({ child, palette, onClose, onSaved }: { child: ChildReco
             <label style={{ fontSize: '0.8rem', fontWeight: '600', color: '#B7B2C4', display: 'block', marginBottom: '4px' }}>Interests</label>
             <p style={{ fontSize: '0.75rem', color: interests.length >= 5 ? '#FF6B35' : '#B7B2C4', marginBottom: '8px' }}>{interests.length}/5 selected{interests.length >= 5 ? '. Remove one to add another' : ''}</p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '10px' }}>
-              {INTERESTS.map(i => <button key={i} onClick={() => toggleInterest(i)} style={chip(interests.includes(i))} disabled={!interests.includes(i) && interests.length >= 5}>{i}</button>)}
+              {INTERESTS.map(i => <button key={i} onClick={() => toggleInterest(i)} style={{ ...chip(interests.includes(i)), opacity: !interests.includes(i) && interests.length >= 5 ? 0.45 : 1, cursor: !interests.includes(i) && interests.length >= 5 ? 'not-allowed' : 'pointer' }} disabled={!interests.includes(i) && interests.length >= 5}>{i}</button>)}
               {interests.filter(i => !INTERESTS.includes(i)).map(i => (
                 <button key={i} onClick={() => toggleInterest(i)} style={{ ...chip(true), display: 'flex', alignItems: 'center', gap: '4px' }}>
                   {i} <span style={{ fontSize: '0.9rem', lineHeight: 1 }}>×</span>
@@ -1242,11 +1242,11 @@ export default function DashboardPage() {
               </div>
               <div style={{ display: 'flex', gap: '10px', marginBottom: '12px' }}>
                 <button onClick={() => { setAccountSection(accountSection === 'email' ? null : 'email'); setAccountMsg(null); }}
-                  style={{ flex: 1, padding: '0.65rem', borderRadius: '10px', border: '1.5px solid rgba(255,231,203,0.13)', background: accountSection === 'email' ? 'rgba(255,183,101,0.10)' : '#fff', color: '#F6EFE4', cursor: 'pointer', fontWeight: '600', fontSize: '0.82rem' }}>
+                  style={{ flex: 1, padding: '0.65rem', borderRadius: '10px', border: '1.5px solid rgba(255,231,203,0.13)', background: accountSection === 'email' ? 'rgba(255,183,101,0.10)' : 'rgba(255,231,203,0.06)', color: '#F6EFE4', cursor: 'pointer', fontWeight: '600', fontSize: '0.82rem' }}>
                   Change email
                 </button>
                 <button onClick={() => { setAccountSection(accountSection === 'password' ? null : 'password'); setAccountMsg(null); }}
-                  style={{ flex: 1, padding: '0.65rem', borderRadius: '10px', border: '1.5px solid rgba(255,231,203,0.13)', background: accountSection === 'password' ? 'rgba(255,183,101,0.10)' : '#fff', color: '#F6EFE4', cursor: 'pointer', fontWeight: '600', fontSize: '0.82rem' }}>
+                  style={{ flex: 1, padding: '0.65rem', borderRadius: '10px', border: '1.5px solid rgba(255,231,203,0.13)', background: accountSection === 'password' ? 'rgba(255,183,101,0.10)' : 'rgba(255,231,203,0.06)', color: '#F6EFE4', cursor: 'pointer', fontWeight: '600', fontSize: '0.82rem' }}>
                   Change password
                 </button>
               </div>
