@@ -28,8 +28,7 @@ export function currencyFromLocale(locale?: string | null): Currency {
   return 'aud';
 }
 
-// Display strings for the landing page. AUD shows "A$" so it is clear which
-// dollar it is (amounts unchanged); CAD and USD still show a plain "$" to match the
+// Display strings for the landing page. Symbol kept as "$" to match the
 // existing design; the differing numbers do the work.
 export interface PriceDisplay {
   symbol: string;
@@ -42,7 +41,7 @@ export interface PriceDisplay {
 }
 
 export const DISPLAY: Record<Currency, PriceDisplay> = {
-  aud: { symbol: 'A$', monthly: '9.99', annual: '99', extraChild: '3.99', monthlyPerStory: '33¢', annualPerStory: '24¢', annualSaving: '20.88' },
+  aud: { symbol: '$', monthly: '9.99', annual: '99', extraChild: '3.99', monthlyPerStory: '33¢', annualPerStory: '24¢', annualSaving: '20.88' },
   cad: { symbol: '$', monthly: '9.99', annual: '99', extraChild: '3.99', monthlyPerStory: '33¢', annualPerStory: '24¢', annualSaving: '20.88' },
   usd: { symbol: '$', monthly: '6.99', annual: '69', extraChild: '3.99', monthlyPerStory: '23¢', annualPerStory: '19¢', annualSaving: '14.88' },
 };
