@@ -1242,11 +1242,11 @@ export default function DashboardPage() {
               </div>
               <div style={{ display: 'flex', gap: '10px', marginBottom: '12px' }}>
                 <button onClick={() => { setAccountSection(accountSection === 'email' ? null : 'email'); setAccountMsg(null); }}
-                  style={{ flex: 1, padding: '0.65rem', borderRadius: '10px', border: '1.5px solid rgba(255,231,203,0.13)', background: accountSection === 'email' ? 'rgba(255,183,101,0.10)' : 'rgba(255,231,203,0.06)', color: '#F6EFE4', cursor: 'pointer', fontWeight: '600', fontSize: '0.82rem' }}>
+                  style={{ flex: 1, padding: '0.65rem', borderRadius: '10px', border: '1.5px solid rgba(255,231,203,0.13)', background: accountSection === 'email' ? 'rgba(255,183,101,0.16)' : '#212642', color: '#F6EFE4', WebkitAppearance: 'none', appearance: 'none', cursor: 'pointer', fontWeight: '600', fontSize: '0.82rem' }}>
                   Change email
                 </button>
                 <button onClick={() => { setAccountSection(accountSection === 'password' ? null : 'password'); setAccountMsg(null); }}
-                  style={{ flex: 1, padding: '0.65rem', borderRadius: '10px', border: '1.5px solid rgba(255,231,203,0.13)', background: accountSection === 'password' ? 'rgba(255,183,101,0.10)' : 'rgba(255,231,203,0.06)', color: '#F6EFE4', cursor: 'pointer', fontWeight: '600', fontSize: '0.82rem' }}>
+                  style={{ flex: 1, padding: '0.65rem', borderRadius: '10px', border: '1.5px solid rgba(255,231,203,0.13)', background: accountSection === 'password' ? 'rgba(255,183,101,0.16)' : '#212642', color: '#F6EFE4', WebkitAppearance: 'none', appearance: 'none', cursor: 'pointer', fontWeight: '600', fontSize: '0.82rem' }}>
                   Change password
                 </button>
               </div>
@@ -1256,7 +1256,7 @@ export default function DashboardPage() {
                     <>
                       <p style={{ fontSize: '0.82rem', color: '#B7B2C4', marginBottom: '10px' }}>Enter a new email address. We&apos;ll send a confirmation link.</p>
                       <input type="email" placeholder="New email address" value={newEmail} onChange={e => setNewEmail(e.target.value)}
-                        style={{ width: '100%', padding: '0.65rem 0.9rem', borderRadius: '8px', border: '1.5px solid rgba(255,231,203,0.13)', fontSize: '0.875rem', outline: 'none', boxSizing: 'border-box' as const, marginBottom: '10px' }} />
+                        style={{ width: '100%', padding: '0.65rem 0.9rem', borderRadius: '8px', border: '1.5px solid rgba(255,231,203,0.13)', fontSize: '0.875rem', outline: 'none', boxSizing: 'border-box' as const, background: '#0F1224', color: '#F6EFE4', colorScheme: 'dark', marginBottom: '10px' }} />
                       <button disabled={accountLoading || !newEmail} onClick={async () => {
                         setAccountLoading(true); setAccountMsg(null);
                         const { error } = await supabase.auth.updateUser({ email: newEmail });
@@ -1271,9 +1271,9 @@ export default function DashboardPage() {
                     <>
                       <p style={{ fontSize: '0.82rem', color: '#B7B2C4', marginBottom: '10px' }}>Choose a new password (minimum 8 characters).</p>
                       <input type="password" placeholder="New password" value={newPassword} onChange={e => setNewPassword(e.target.value)}
-                        style={{ width: '100%', padding: '0.65rem 0.9rem', borderRadius: '8px', border: '1.5px solid rgba(255,231,203,0.13)', fontSize: '0.875rem', outline: 'none', boxSizing: 'border-box' as const, marginBottom: '8px' }} />
+                        style={{ width: '100%', padding: '0.65rem 0.9rem', borderRadius: '8px', border: '1.5px solid rgba(255,231,203,0.13)', fontSize: '0.875rem', outline: 'none', boxSizing: 'border-box' as const, background: '#0F1224', color: '#F6EFE4', colorScheme: 'dark', marginBottom: '8px' }} />
                       <input type="password" placeholder="Confirm password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)}
-                        style={{ width: '100%', padding: '0.65rem 0.9rem', borderRadius: '8px', border: '1.5px solid rgba(255,231,203,0.13)', fontSize: '0.875rem', outline: 'none', boxSizing: 'border-box' as const, marginBottom: '10px' }} />
+                        style={{ width: '100%', padding: '0.65rem 0.9rem', borderRadius: '8px', border: '1.5px solid rgba(255,231,203,0.13)', fontSize: '0.875rem', outline: 'none', boxSizing: 'border-box' as const, background: '#0F1224', color: '#F6EFE4', colorScheme: 'dark', marginBottom: '10px' }} />
                       <button disabled={accountLoading || newPassword.length < 8 || newPassword !== confirmPassword} onClick={async () => {
                         setAccountLoading(true); setAccountMsg(null);
                         const { error } = await supabase.auth.updateUser({ password: newPassword });
@@ -1286,7 +1286,7 @@ export default function DashboardPage() {
                     </>
                   )}
                   {accountMsg && (
-                    <p style={{ marginTop: '10px', fontSize: '0.82rem', fontWeight: '600', color: accountMsg.ok ? '#1a7a4a' : '#cc2200' }}>{accountMsg.text}</p>
+                    <p style={{ marginTop: '10px', fontSize: '0.82rem', fontWeight: '600', color: accountMsg.ok ? '#7CC97C' : '#FF8A7A' }}>{accountMsg.text}</p>
                   )}
                 </div>
               )}
