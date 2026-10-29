@@ -85,7 +85,10 @@ header.nav.stuck{background:linear-gradient(180deg,rgba(11,13,28,.86),rgba(11,13
 
 /* ---------- the journey ---------- */
 .journey{position:relative;height:760vh}
-.stage{position:sticky;top:0;height:100vh;overflow:hidden;isolation:isolate}
+/* svh = the visible height with the browser toolbars showing (iOS Safari, Chrome Android,
+   foldables). Plain 100vh is taller than the visible area there, which pushed the hero
+   under the toolbar and under the fixed header. 100vh stays as the fallback. */
+.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;isolation:isolate}
 #depth-canvas,.bgimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;will-change:transform,opacity}
 .bgimg{z-index:1;opacity:0}
 /* the canvas re-renders every plate with real depth; the imgs below are the fallback */
@@ -186,6 +189,35 @@ header.nav.stuck{background:linear-gradient(180deg,rgba(11,13,28,.86),rgba(11,13
   font-size:.74rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--txt-mute);
   display:flex;flex-direction:column;align-items:center;gap:.5rem;transition:opacity .6s}
 .cue svg{animation:bob 2.4s var(--ease) infinite}
+/* hero (beat 0): keep it inside the box between the fixed header and the scroll cue, so the
+   kicker never sits on the logo and the store badges never sit under "Scroll to begin" */
+.hero-beat{padding-top:calc(72px + env(safe-area-inset-top,0px));padding-bottom:calc(86px + env(safe-area-inset-bottom,0px));
+  align-content:center;align-content:safe center}
+.hero-beat > .wrap{display:flex;flex-direction:column;align-items:flex-start}
+.hero-beat .store-badges{margin-top:1.75rem;display:flex;flex-direction:column;gap:.6rem}
+.hero-beat .store-badges > div{display:flex;gap:.75rem;flex-wrap:wrap}
+.cue{bottom:calc(22px + env(safe-area-inset-bottom,0px))}
+/* phones and narrow foldable screens: App Store badge straight under the main button */
+@media(max-width:760px){
+  .hero-beat .store-badges{order:4;margin-top:1.1rem}
+  .hero-beat .mini{order:5}
+  .hero-beat .store-badges > span{display:none}
+}
+/* shorter screens (most phones, folded screens, small laptops): tighten the hero so it fits */
+@media(max-height:900px){
+  .hero-beat h1{font-size:min(var(--s-4),max(1.9rem,6.4svh))}
+  .hero-beat p.lead{font-size:min(var(--s-1),max(1rem,2.4svh));margin-top:.8rem;line-height:1.5}
+  .hero-beat .acts{margin-top:1.25rem}
+  .hero-beat .btn-lg{padding:1em 1.8em;font-size:var(--s-0)}
+  .hero-beat .mini{margin-top:1rem}
+  .hero-beat .store-badges{margin-top:1.1rem}
+}
+@media(max-height:700px){
+  .hero-beat{padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))}
+  .hero-beat h1{margin-top:.6rem}
+  .hero-beat .mini{margin-top:.75rem;gap:.3rem 1.1rem}
+  .cue{display:none}
+}
 @keyframes bob{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(7px);opacity:1}}
 
 /* ---------- released sections ---------- */
@@ -481,7 +513,8 @@ export default function Home() {
           var el=beatEls[b];
           el.style.opacity=o;
           var t2=clamp((p-B.a)/(B.b-B.a),0,1);
-          el.style.transform='translate3d(0,'+lerp(34,-34,t2)+'px,0)';
+          /* the hero starts at rest (no 34px drop) so it lines up with its safe box */
+          el.style.transform='translate3d(0,'+lerp(b===0?0:34,-34,t2)+'px,0)';
           el.classList.toggle('live', o>0.55);
           if(p>=B.a && p<B.b) newBeat=b;
         }
@@ -845,7 +878,7 @@ export default function Home() {
           <div className="beats" id="beats">
 
             {/* 0 -------------------------------------------------- */}
-            <section className="beat" data-beat="0">
+            <section className="beat hero-beat" data-beat="0">
               <div className="wrap">
                 <p className="kick">A new story every night</p>
                 <h1>Tonight's <em>personalised bedtime story</em> has their name in it.</h1>
@@ -859,9 +892,9 @@ export default function Home() {
                   <span><svg className="tick" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 10.6l4 4 8-9"/></svg> Ages 3 to 10</span>
                 </div>
                 {/* App store download badges */}
-                <div style={{ marginTop: '1.75rem', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+                <div className="store-badges">
                   <span style={{ fontSize: '0.8rem', fontWeight: 600, opacity: 0.68, letterSpacing: '0.02em' }}>Prefer the app? Download it free</span>
-                  <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                  <div>
                     <a href="https://apps.apple.com/app/id6789373130" target="_blank" rel="noopener noreferrer" aria-label="Download TalePop on the App Store" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem', background: '#000', color: '#fff', border: '1px solid rgba(255,255,255,0.18)', borderRadius: '12px', padding: '0.55rem 1.05rem', textDecoration: 'none' }}>
                       <svg width="22" height="22" viewBox="0 0 384 512" fill="#fff" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
                       <span style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.15, textAlign: 'left' }}>
