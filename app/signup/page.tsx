@@ -1,9 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { signUp, signInWithGoogle, resendVerificationEmail } from '@/lib/supabase/actions';
 import { AuthShell, GoogleMark } from '@/components/AuthShell';
+import { InAppNotice, useInAppBrowser } from '@/components/InAppNotice';
+import { getAttribution } from '@/lib/attribution';
+import { track } from '@/lib/pixel';
 
 export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -18,6 +21,9 @@ export default function SignupPage() {
   const [resendCooldown, setResendCooldown] = useState(0);
   const [consentPrompt, setConsentPrompt] = useState(false);
   const consentRef = useRef<HTMLLabelElement>(null);
+  const inApp = useInAppBrowser();
+  const [attribution, setAttribution] = useState('');
+  useEffect(() => { setAttribution(JSON.stringify(getAttribution())); }, []);
 
   /**
    * Both buttons used to be `disabled` until the consent box was ticked. A
@@ -46,6 +52,8 @@ export default function SignupPage() {
       setError(result.error);
       setLoading(false);
     } else if (result?.success) {
+      // Account created (email still to be verified): this is the signup ads optimise for.
+      track('CompleteRegistration', { content_name: 'signup', status: true, method: 'email' });
       setSuccessEmail(result.email || '');
       setLoading(false);
     }
@@ -146,28 +154,38 @@ export default function SignupPage() {
       <h1 className="a-h1">Begin their story</h1>
       <p className="a-sub">Their first personalised story book is free.</p>
 
-      <button
-        type="button"
-        className="a-btn a-oauth"
-        onClick={handleGoogle}
-        disabled={googleLoading}
-      >
-        <GoogleMark />
-        {googleLoading ? 'Redirecting...' : 'Continue with Google'}
-      </button>
-      {consentPrompt && !consentChecked && (
-        <p style={{ fontSize: '.85rem', color: 'var(--amber)', textAlign: 'center', margin: '.7rem 0 0', fontWeight: 700 }}>
-          Please tick the confirmation below first.
-        </p>
+      {inApp.name ? (
+        /* Google blocks OAuth in Instagram / Facebook in-app browsers, so offer
+           email signup, the real browser, or the app instead */
+        <InAppNotice name={inApp.name} android={inApp.android} action="sign up" />
+      ) : (
+        <>
+          <button
+            type="button"
+            className="a-btn a-oauth"
+            onClick={handleGoogle}
+            disabled={googleLoading}
+          >
+            <GoogleMark />
+            {googleLoading ? 'Redirecting...' : 'Continue with Google'}
+          </button>
+          {consentPrompt && !consentChecked && (
+            <p style={{ fontSize: '.85rem', color: 'var(--amber)', textAlign: 'center', margin: '.7rem 0 0', fontWeight: 700 }}>
+              Please tick the confirmation below first.
+            </p>
+          )}
+
+          <div className="a-or">
+            <i />
+            <span>OR</span>
+            <i />
+          </div>
+        </>
       )}
 
-      <div className="a-or">
-        <i />
-        <span>OR</span>
-        <i />
-      </div>
-
       <form onSubmit={handleSubmit}>
+        {/* first-touch UTMs / fbclid / fbp / fbc, saved to the user's metadata */}
+        <input type="hidden" name="attribution" value={attribution} />
         <div className="a-field">
           <label className="a-label" htmlFor="signup-email">
             Email address

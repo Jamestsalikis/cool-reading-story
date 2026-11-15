@@ -4,11 +4,13 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { signIn, signInWithGoogle } from '@/lib/supabase/actions';
 import { AuthShell, GoogleMark } from '@/components/AuthShell';
+import { InAppNotice, useInAppBrowser } from '@/components/InAppNotice';
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
+  const inApp = useInAppBrowser();
   const [error, setError] = useState('');
 
   /**
@@ -50,16 +52,23 @@ export default function LoginPage() {
 
       {error && <div className="a-error">{error}</div>}
 
-      <button type="button" className="a-btn a-oauth" onClick={handleGoogle} disabled={googleLoading}>
-        <GoogleMark />
-        {googleLoading ? 'Redirecting...' : 'Continue with Google'}
-      </button>
+      {inApp.name ? (
+        /* Google blocks OAuth in Instagram / Facebook in-app browsers */
+        <InAppNotice name={inApp.name} android={inApp.android} action="sign in" />
+      ) : (
+        <>
+          <button type="button" className="a-btn a-oauth" onClick={handleGoogle} disabled={googleLoading}>
+            <GoogleMark />
+            {googleLoading ? 'Redirecting...' : 'Continue with Google'}
+          </button>
 
-      <div className="a-or">
-        <i />
-        <span>OR</span>
-        <i />
-      </div>
+          <div className="a-or">
+            <i />
+            <span>OR</span>
+            <i />
+          </div>
+        </>
+      )}
 
       <form onSubmit={handleSubmit}>
         <div className="a-field">

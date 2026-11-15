@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { MobileNav } from '@/components/MobileNav';
+import { StoreButtons } from '@/components/StoreButtons';
 import { useEffect, useState } from 'react';
 import { DISPLAY, type PriceDisplay } from '@/lib/pricing';
 
@@ -85,7 +86,10 @@ header.nav.stuck{background:linear-gradient(180deg,rgba(11,13,28,.86),rgba(11,13
 
 /* ---------- the journey ---------- */
 .journey{position:relative;height:760vh}
-.stage{position:sticky;top:0;height:100vh;overflow:hidden;isolation:isolate}
+/* svh = the visible height with the browser toolbars showing (iOS Safari, Chrome Android,
+   Instagram and Facebook in-app browsers). Plain 100vh is taller than what you can see
+   there, which pushed the hero's buttons under the toolbar. 100vh stays as the fallback. */
+.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;isolation:isolate}
 #depth-canvas,.bgimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;will-change:transform,opacity}
 .bgimg{z-index:1;opacity:0}
 /* the canvas re-renders every plate with real depth; the imgs below are the fallback */
@@ -186,6 +190,53 @@ header.nav.stuck{background:linear-gradient(180deg,rgba(11,13,28,.86),rgba(11,13
   font-size:.74rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--txt-mute);
   display:flex;flex-direction:column;align-items:center;gap:.5rem;transition:opacity .6s}
 .cue svg{animation:bob 2.4s var(--ease) infinite}
+/* ---------- hero (beat 0) ----------
+   Kept inside the box between the fixed header and the bottom edge, so the kicker never
+   sits under the logo and the store buttons never sit under "Scroll to begin". */
+.hero-beat{padding-top:calc(72px + env(safe-area-inset-top,0px));padding-bottom:calc(86px + env(safe-area-inset-bottom,0px));
+  align-content:center;align-content:safe center}
+.hero-beat > .wrap{display:flex;flex-direction:column;align-items:flex-start}
+.hero-stores{margin-top:1.75rem;display:flex;flex-direction:column;gap:.6rem}
+.hero-stores-label{font-size:.8rem;font-weight:700;opacity:.72;letter-spacing:.02em}
+.hero-web-mob{display:none}
+.cue{bottom:calc(22px + env(safe-area-inset-bottom,0px))}
+/* Phones: the App Store and Google Play buttons are THE call to action, straight under
+   the headline. Web signup drops to a secondary text link under them. */
+@media(max-width:760px){
+  .hero-beat{padding-top:calc(76px + env(safe-area-inset-top,0px));padding-bottom:calc(20px + env(safe-area-inset-bottom,0px));align-content:start}
+  .hero-beat h1{font-size:clamp(1.75rem,8.2vw,2.5rem);max-width:none;margin-top:.55rem;line-height:1.14}
+  .hero-beat p.lead{font-size:1rem;margin-top:.7rem;line-height:1.45;
+    display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .hero-beat .hero-stores{order:3;margin-top:1.1rem;width:100%}
+  .hero-beat .hero-stores-label{display:none}
+  .hero-beat .acts{display:none}
+  .hero-web-mob{display:block;order:4;margin-top:.85rem;font-weight:800;font-size:1rem;color:var(--amber-hi);
+    text-decoration:underline;text-underline-offset:3px;text-shadow:0 2px 12px rgba(8,6,20,.8)}
+  .hero-beat .mini{order:5;margin-top:.8rem;gap:.25rem 1rem;font-size:.85rem}
+  .cue{display:none}
+}
+/* short phone screens and in-app browsers (Instagram is about 600 to 680px tall) */
+@media(max-width:760px) and (max-height:720px){
+  .hero-beat p.lead{display:none}
+  .hero-beat h1{font-size:clamp(1.6rem,7.4vw,2.1rem)}
+  .hero-beat .hero-stores{margin-top:1rem}
+}
+@media(max-width:760px) and (max-height:560px){
+  .hero-beat .kick{display:none}
+  .hero-beat .mini{display:none}
+}
+/* shorter laptop and tablet screens: tighten so everything fits */
+@media(min-width:761px) and (max-height:900px){
+  .hero-beat h1{font-size:min(var(--s-4),max(1.9rem,6.4svh))}
+  .hero-beat p.lead{font-size:min(var(--s-1),max(1rem,2.4svh));margin-top:.8rem;line-height:1.5}
+  .hero-beat .acts{margin-top:1.25rem}
+  .hero-beat .mini{margin-top:1rem}
+  .hero-beat .hero-stores{margin-top:1.1rem}
+}
+@media(min-width:761px) and (max-height:700px){
+  .hero-beat{padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))}
+  .cue{display:none}
+}
 @keyframes bob{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(7px);opacity:1}}
 
 /* ---------- released sections ---------- */
@@ -481,7 +532,8 @@ export default function Home() {
           var el=beatEls[b];
           el.style.opacity=o;
           var t2=clamp((p-B.a)/(B.b-B.a),0,1);
-          el.style.transform='translate3d(0,'+lerp(34,-34,t2)+'px,0)';
+          /* the hero starts at rest (no 34px drop) so it lines up with its safe box */
+          el.style.transform='translate3d(0,'+lerp(b===0?0:34,-34,t2)+'px,0)';
           el.classList.toggle('live', o>0.55);
           if(p>=B.a && p<B.b) newBeat=b;
         }
@@ -845,7 +897,7 @@ export default function Home() {
           <div className="beats" id="beats">
 
             {/* 0 -------------------------------------------------- */}
-            <section className="beat" data-beat="0">
+            <section className="beat hero-beat" data-beat="0">
               <div className="wrap">
                 <p className="kick">A new story every night</p>
                 <h1>Tonight's <em>personalised bedtime story</em> has their name in it.</h1>
@@ -853,30 +905,16 @@ export default function Home() {
                 <div className="acts">
                   <Link className="btn btn-primary btn-lg" href={signupHref}>Create their first story</Link>
                 </div>
+                {/* App Store and Google Play: secondary on desktop, the main buttons on phones */}
+                <div className="hero-stores">
+                  <span className="hero-stores-label">Prefer the app? Download it free</span>
+                  <StoreButtons placement="home_hero" size="lg" />
+                </div>
+                <Link className="hero-web-mob" href={signupHref}>Or start free on the web</Link>
                 <div className="mini">
                   <span><svg className="tick" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 10.6l4 4 8-9"/></svg> First book free</span>
                   <span><svg className="tick" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 10.6l4 4 8-9"/></svg> No credit card</span>
                   <span><svg className="tick" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 10.6l4 4 8-9"/></svg> Ages 3 to 10</span>
-                </div>
-                {/* App store download badges */}
-                <div style={{ marginTop: '1.75rem', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-                  <span style={{ fontSize: '0.8rem', fontWeight: 600, opacity: 0.68, letterSpacing: '0.02em' }}>Prefer the app? Download it free</span>
-                  <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                    <a href="https://apps.apple.com/app/id6789373130" target="_blank" rel="noopener noreferrer" aria-label="Download TalePop on the App Store" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem', background: '#000', color: '#fff', border: '1px solid rgba(255,255,255,0.18)', borderRadius: '12px', padding: '0.55rem 1.05rem', textDecoration: 'none' }}>
-                      <svg width="22" height="22" viewBox="0 0 384 512" fill="#fff" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
-                      <span style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.15, textAlign: 'left' }}>
-                        <span style={{ fontSize: '0.6rem', fontWeight: 500 }}>Download on the</span>
-                        <span style={{ fontSize: '1.05rem', fontWeight: 600, letterSpacing: '-0.01em' }}>App Store</span>
-                      </span>
-                    </a>
-                    <a href="https://play.google.com/store/apps/details?id=com.talepopstories.app" target="_blank" rel="noopener noreferrer" aria-label="Get TalePop on Google Play" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem', background: '#000', color: '#fff', border: '1px solid rgba(255,255,255,0.18)', borderRadius: '12px', padding: '0.55rem 1.05rem', textDecoration: 'none' }}>
-                      <svg width="20" height="22" viewBox="0 0 512 512" aria-hidden="true"><polygon fill="#00D2FF" points="45,30 265,256 45,482"/><polygon fill="#00F076" points="45,30 355,200 265,256"/><polygon fill="#FF3D44" points="45,482 355,312 265,256"/><polygon fill="#FFC900" points="265,256 355,200 455,256 355,312"/></svg>
-                      <span style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.15, textAlign: 'left' }}>
-                        <span style={{ fontSize: '0.6rem', fontWeight: 500 }}>GET IT ON</span>
-                        <span style={{ fontSize: '1.05rem', fontWeight: 600, letterSpacing: '-0.01em' }}>Google Play</span>
-                      </span>
-                    </a>
-                  </div>
                 </div>
               </div>
             </section>

@@ -4,6 +4,7 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { headers } from 'next/headers';
 import { createClient } from './server';
+import { sanitizeAttribution } from '@/lib/attribution';
 
 /**
  * The origin the request actually came in on.
@@ -47,11 +48,17 @@ export async function signUp(formData: FormData) {
   const email = formData.get('email') as string;
   const password = formData.get('password') as string;
 
+  // Ad attribution (first-touch UTMs, fbclid, Meta fbp/fbc) goes into the
+  // user's user_metadata.attribution, so no database schema change is needed.
+  let attribution = null;
+  try { attribution = sanitizeAttribution(JSON.parse(String(formData.get('attribution') || 'null'))); } catch { /* ignore */ }
+
   const { error } = await supabase.auth.signUp({
     email,
     password,
     options: {
       emailRedirectTo: `${await requestOrigin()}/auth/callback?next=/onboarding`,
+      ...(attribution ? { data: { attribution, signup_method: 'email' } } : {}),
     },
   });
 
